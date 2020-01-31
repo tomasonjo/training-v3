@@ -1,0 +1,31 @@
+// Retrieving nodes filtered by a property value
+
+// tag::single[]
+MATCH (variable {propertyKey: propertyValue})
+RETURN variable
+// end::single[]
+
+// tag::with-label[]
+MATCH (variable:Label {propertyKey: propertyValue})
+RETURN variable
+// end::with-label[]
+
+// tag::multi[]
+MATCH (variable {propertyKey1: propertyValue1, propertyKey2: propertyValue2})
+RETURN variable
+// end::multi[]
+
+// tag::multi-with-label[]
+MATCH (variable:Label {propertyKey: propertyValue, propertyKey2: propertyValue2})
+RETURN variable
+// end::multi-with-label[]
+
+// tag::person[]
+MATCH (p:Person {born: 1970})
+RETURN p
+// end::person[]
+
+// tag::movie[]
+MATCH (m:Movie {released: 2003, tagline: 'Free your mind'})
+RETURN m
+// end::movie[]

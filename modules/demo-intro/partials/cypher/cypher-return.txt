@@ -1,0 +1,26 @@
+// Returning property values
+
+// tag::single[]
+MATCH (variable {prop1: value})
+RETURN variable.prop2
+// end::single[]
+
+// tag::with-label[]
+MATCH (variable:Label {prop1: value})
+RETURN variable.prop2
+// end::with-label[]
+
+// tag::with-label-and-filters[]
+MATCH (variable:Label {prop1: value, prop2: value})
+RETURN variable.prop3
+// end::with-label-and-filters[]
+
+// tag::multi[]
+MATCH (variable {prop1:value})
+RETURN variable.prop2, variable.prop3
+// end::multi[]
+
+// tag::person[]
+MATCH (p:Person {born: 1965})
+RETURN p.name, p.born
+// end::person[]
