@@ -1,0 +1,11 @@
+// Aliases
+
+// tag::single[]
+MATCH (variable:Label {propertyKey1: propertyValue1})
+RETURN variable.propertyKey2 AS alias2
+// end::single[]
+
+// tag::person[]
+MATCH (p:Person {born: 1965})
+RETURN p.name AS name, p.born AS `birth year`
+// end::person[]

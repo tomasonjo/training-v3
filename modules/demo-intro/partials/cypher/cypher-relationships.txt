@@ -1,0 +1,97 @@
+// tag::syntax[]
+()          // a node
+()--()      // 2 nodes have some type of relationship
+()-->()     // the first node has a relationship to the second node
+()<--()     // the second node has a relationship to the first node
+// end::syntax[]
+
+// tag::single[]
+MATCH (node1)-[:REL_TYPE]->(node2)
+RETURN node1, node2
+// end::single[]
+
+// tag::multi[]
+MATCH (node1)-[:REL_TYPEA \| :REL_TYPEB]->(node2)
+RETURN node1, node2
+// end::multi[]
+
+// tag::person-single[]
+MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'The Matrix'})
+RETURN p, rel, m
+// end::person-single[]
+
+// tag::dont[]
+MATCH (p)-[rel:ACTED_IN]->(m {title:'The Matrix'})
+RETURN p,m
+// end::dont[]
+
+// tag::person-multi[]
+MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN\|:DIRECTED]->(m:Movie)
+RETURN p.name, m.title
+// end::person-multi[]
+
+// tag::anonymous-node[]
+MATCH (p:Person)-[:ACTED_IN]->(:Movie {title: 'The Matrix'})
+RETURN p.name
+// end::anonymous-node[]
+
+// tag::anonymous-relationship-1[]
+MATCH (p:Person)-->(m:Movie {title: 'The Matrix'})
+RETURN p, m
+// end::anonymous-relationship-1[]
+
+// tag::anonymous-relationship-2[]
+MATCH (p:Person)--(m:Movie {title: 'The Matrix'})
+RETURN p, m
+// end::anonymous-relationship-2[]
+
+// tag::anonymous-relationship-3[]
+MATCH (m:Movie)<--(p:Person {name: 'Keanu Reeves'})
+RETURN p, m
+// end::anonymous-relationship-3[]
+
+// tag::return-type[]
+MATCH (p:Person)-[rel]->(:Movie {title:'The Matrix'})
+RETURN p.name, type(rel)
+// end::return-type[]
+
+// tag::properties[]
+MATCH (p:Person)-[:REVIEWED {rating: 65}]->(:Movie {title: 'The Da Vinci Code'})
+RETURN p.name
+// end::properties[]
+
+// tag::pattern[]
+MATCH  (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
+RETURN p
+// end::pattern[]
+
+// tag::pattern-reverse[]
+MATCH  (p:Person)<-[:FOLLOWS]-(:Person {name:'Angela Scope'})
+RETURN p
+// end::pattern-reverse[]
+
+// tag::any-direction[]
+MATCH  (p1:Person)-[:FOLLOWS]-(p2:Person {name:'Angela Scope'})
+RETURN p1, p2
+// end::any-direction[]
+
+// tag::traversing[]
+MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
+RETURN p
+// end::traversing[]
+
+// tag::traversing-including[]
+MATCH  path = (:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
+RETURN path
+// end::traversing-including[]
+
+// tag::direction[]
+MATCH  (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
+RETURN a.name, m.title, d.name
+// end::direction[]
+
+// tag::best-practices[]
+MATCH (:Person {name: 'Diane Keaton'})-[movRel:ACTED_IN]->
+(:Movie {title:"Something's Gotta Give"})
+RETURN movRel.roles
+// end::best-practices[]
