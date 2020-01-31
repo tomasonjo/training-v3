@@ -1,4 +1,11 @@
 rootProject.name = 'neo4j-training'
 
 include 'demo'
-project(':demo').projectDir = file('modules/demo-intro')
+project(':demo').projectDir = file('modules/demo')
+
+
+include 'demo-intro'
+project(':demo-intro').projectDir = file('modules/demo-intro')
+
+include '4.0-intro-neo4j'
+project(':4.0-intro-neo4j').projectDir = file('modules/4.0-intro-neo4j')

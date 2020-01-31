@@ -76,6 +76,10 @@ If you want to force Gradle to execute a task again, you can remove the `build` 
 
 Once the `build` directory is removed, type the task you want to execute.
 
+You can also clean a particular directory:
+
+ $ ./gradlew :demo:clean
+
 == Development mode/environment
 
 When converting the online training, you can define the property "env" to "dev" to avoid loading analytics and token validation code in the HTML pages:
@@ -137,3 +141,22 @@ project(':browser').projectDir = file('modules/browser-guides')
 ----
 
 Now we can execute tasks on this new module, for instance: `./gradlew :browser:convert`
+
+
+== Viewing slides locally
+
+1. In a terminal window, navigate to the folder where the slides HTML resides, for example:
+
+cd modules/demo/build/slides
+
+2. Start the Web server:
+
+python -m SimpleHTTPServer 8080
+
+3. View the slides in a Web Browser by going to localhost:8080
+
+[square]
+* `ESC` to see summary slides
+* Page down/Page up to move from slide to slide
+* Option + Click to zoom in/zoom out
+* S to open speaker notes in a different window
