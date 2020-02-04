@@ -1,0 +1,19 @@
+{
+  "name": "training-v3",
+  "version": "1.0.0",
+  "description": "= Neo4j Training Material :uri-livereload-webstore: https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=fr :uri-livereload: http://livereload.com/ :uri-gradle-wrapper: https://docs.gradle.org/current/userguide/gradle_wrapper.html :uri-java-download: https://www.java.com/fr/download/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neo4j-contrib/training-v3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neo4j-contrib/training-v3/issues"
+  },
+  "homepage": "https://github.com/neo4j-contrib/training-v3#readme"
+}
