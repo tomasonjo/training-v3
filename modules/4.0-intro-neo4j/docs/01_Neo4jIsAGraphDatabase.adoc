@@ -420,7 +420,7 @@ For example, here is the _Exploring a Conference_ graphgist that has a descripti
 --
 [.is-half.right]
 --
-[.thumb]
+
 image::{imagedir}/graphgists2.png[Graphgists2,width=500,align=center]
 --
 [.notes]
@@ -430,10 +430,10 @@ We recommend that you take our training course, _Graph Data Modeling for Neo4j_,
 --
 
 //[#module-1.quiz]
-[.section-title.purple]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 1
 
 [.statement]
@@ -465,7 +465,7 @@ Select the correct answers.
 Reminder: Click next twice to reveal the  two correct answers.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -497,7 +497,7 @@ Select the correct answer.
 Reminder: Click next to reveal the correct answer.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 3
 
 [.statement]
@@ -529,7 +529,7 @@ Select the correct answers.
 Reminder: Click next twice to reveal both correct answers.
 --
 
-[.title.green]
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

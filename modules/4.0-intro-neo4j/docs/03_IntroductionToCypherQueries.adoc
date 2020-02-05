@@ -302,7 +302,7 @@ When nodes are displayed as table values, the node labels and ids are not shown,
 
 image::{imagedir}/PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 
-[.title.gold]
+[.title.has-gold-background.has-team-background]
 === *Exercise 1: Retrieving nodes* 
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -531,7 +531,7 @@ The result returned is:
 
 image::{imagedir}/UsingAliases.png[UsingAliases,width=800,align=center]
 
-[.title.gold]
+[.title.has-gold-background.has-team-background]
 === *Exercise 2: Filtering queries using property values*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -1032,8 +1032,7 @@ RETURN  path
 
 The result returned is:
 
-[.thumb]
-image::{imagedir}/ReturnPath.png[ReturnPath,width=700]
+image::{imagedir}/ReturnPath.png[ReturnPath,width=700,align=center]
 
 ==== Returning multiple paths
 
@@ -1115,17 +1114,17 @@ RETURN movRel.roles
 
 We recommend that you follow the https://neo4j.com/docs/cypher-manual/current/styleguide/[Cypher Style Guide^] when writing your Cypher statements.
 
-[.title.gold]
+[.title.has-gold-background.has-team-background]
 === *Exercise 3: Filtering queries using relationships*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 3.
 
 //[#module-4.quiz]
-[.section-title.purple]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 1
 
 [.statement]
@@ -1162,7 +1161,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -1203,7 +1202,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 3
 
 [.statement]
@@ -1236,7 +1235,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.green]
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

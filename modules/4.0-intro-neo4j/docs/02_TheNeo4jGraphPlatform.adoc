@@ -219,7 +219,6 @@ endif::backend-pdf[]
 The Neo4j Sandbox is way that you can begin development with Neo4j.
 It is a free, temporary, and cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser. The database in a Sandbox may be blank or it may be pre-populated. It is started automatically for you when you create the Sandbox.
 
-[.thumb]
 image::{imagedir}/BlankSandbox.png[BlankSandbox,width=600,align=center]
 
 [.notes]
@@ -332,7 +331,7 @@ You typically install graph applications from your Neo4j Desktop environment fro
 
 image::{imagedir}/GraphApps.png[GraphApps,width=600,align=center]
 
-=== Some No4j graph applications
+=== Some Neo4j graph applications
 
 [.notes]
 --
@@ -398,7 +397,7 @@ Just as in the Neo4j Browser application, you can save frequently-used Cypher co
 In addition, when using the Web browser interface to Neo4j Browser, you can use Browser Sync to keep your favorites in the Cloud.
 --
 
-[.section-title.green]
+[.section-title.has-green-background.has-team-background]
 === *Guided Exercise: Getting Started with Neo4j Browser*
 
 [.notes]
@@ -557,10 +556,10 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 *Note:* In Neo4j Desktop which is used by developers, you have the create, start, and stop administrative functionality.
 
 //[#module-2.quiz]
-[.section-title.purple]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 1
 
 [.statment]
@@ -590,7 +589,7 @@ Select the correct answers.
 Reminder: Click next four times to reveal the  four correct answers.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -620,7 +619,7 @@ Select the correct answers.
 Reminder: Click next three times to reveal the  three correct answers.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 3
 
 [.statement]
@@ -650,7 +649,7 @@ Select the correct answers.
 Reminder: Click next three times to reveal the  three correct answers.
 --
 
-[.title.green]
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

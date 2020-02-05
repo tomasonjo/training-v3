@@ -431,7 +431,7 @@ endif::[]
 [.statement]
 There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses. You can learn more about these syntax elements in the _Neo4j Cypher Manual_ and the _Cypher Refcard_.
 
-[.title.gold]
+[.title.has-green-background.has-team-background]
 === *Exercise 4: Filtering queries using the `WHERE` clause*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -439,10 +439,10 @@ and follow the instructions for Exercise 4.
 
 
 //[#module-5.quiz]
-[.section-title.purple]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 1
 
 [.statement]
@@ -489,7 +489,7 @@ Select the correct answers.
 Reminder: Click next three times to reveal the  three correct answers.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -538,7 +538,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 3
 
 [.statement]
@@ -584,7 +584,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.green]
+[.title.has-green-background.has-puzzle-backround]
 == Summary
 
 You should now be able to write Cypher `WHERE` clauses to test:

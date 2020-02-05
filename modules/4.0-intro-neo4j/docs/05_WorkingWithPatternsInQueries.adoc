@@ -600,17 +600,17 @@ ifndef::backend-revealjs[]
 Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_ value is returned for the movie part of the query, as well as the relationship.
 endif::[]
 
-[.title.gold]
+[.title.has-gold-background.has-team-background]
 === *Exercise 5: Working with patterns in queries*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 5.
 
 //[#module-5.quiz]
-[.section-title.purple]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 1
 
 [.statement]
@@ -660,7 +660,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -710,7 +710,7 @@ Select the correct answers.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.purple]
+[.title.has-purple-background]
 === Question 3
 
 [.statement]
@@ -748,7 +748,7 @@ Select the correct answers.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.green]
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:
