@@ -54,24 +54,27 @@ When you return results as values, Cypher automatically returns the values group
 For example, with this query:
 
 // duplicate content
-ifdef::background-revealjs[]
+ifdef::backend-revealjs[]
 Notice that the rows are grouped by the value of m.title.
 In this example three people review the movie, The Replacements, and they are grouped together in the rows returned.
 How Cypher groups values returned by default will depend on the number of nodes of each type in the graph.
 This graph has more _Person_ nodes than _Movie_ nodes so the grouping is done based upon the movie titles.
 endif::[]
 --
+
 [source,cypher]
 ----
 MATCH (p:Person)-[:REVIEWED]->(m:Movie)
 RETURN  p.name, m.title
 ----
 
+ifndef::backend-revealjs[]
 Returns the following:
+endif::[]
 
 image::{imagedir}/DefaultGrouping.png[DefaultGrouping,width=800,align=center]
 
-ifndef::background-revealjs[]
+ifndef::backend-revealjs[]
 Notice that the rows are grouped by the value of m.title.
 In this example three people review the movie, The Replacements, and they are grouped together in the rows returned.
 How Cypher groups values returned by default will depend on the number of nodes of each type in the graph.
@@ -89,7 +92,7 @@ When you aggregate in a Cypher query, this means that the query must process all
 Here is an example:
 
 // duplicate content
-ifdef::background-revealjs[]
+ifdef::backend-revealjs[]
 The query engine processed all nodes and relationships in the pattern so that it could perform a count of all movies for a particular actor/director pair in the graph.
 Then the results returned grouped the results by the name of the director.
 
@@ -107,11 +110,13 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, d.name, count(m)
 ----
 
+ifndef::backend-revealjs[]
 With this result returned:
+endif::[]
 
 image::{imagedir}/AggregationWithCountm.png[AggregationWithCountm,width=800,align=center]
 
-ifndef::background-revealjs[]
+ifndef::backend-revealjs[]
 The query engine processed all nodes and relationships in the pattern so that it could perform a count of all movies for a particular actor/director pair in the graph.
 Then the results returned grouped the results by the name of the director.
 
@@ -132,7 +137,7 @@ The value can be a property value, a node, a relationship, or a path.
 Here is an example where we collect the list of movie titles that _Tom Cruise_ acted in:
 
 //duplicate content
-ifdef::background-revealjs[]
+ifdef::backend-revealjs[]
 Notice that the list is defined in square brackets and each element of the list is separated by a comma.
 This list contains a set of strings.
 endif::[]
@@ -145,11 +150,13 @@ WHERE p.name ='Tom Cruise'
 RETURN collect(m.title) AS `movies for Tom Cruise`
 ----
 
+ifndef::backend-revealjs[]
 Here is the result returned:
+endif::[]
 
 image::{imagedir}/TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=800,align=center]
 
-ifndef::background-revealjs[]
+ifndef::backend-revealjs[]
 Notice that the list is defined in square brackets and each element of the list is separated by a comma.
 This list contains a set of strings.
 endif::[]
@@ -172,6 +179,7 @@ RETURN collect(m) AS `movies for Tom Cruise`
 
 [.is-half.left]
 --
+[.statement]
 Here is the result returned viewed as a graph. It is the same as simply returning _m_:
 
 image::{imagedir}/TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=800,align=center]
@@ -179,6 +187,7 @@ image::{imagedir}/TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=8
 
 [.is-half.right]
 --
+[.statement]
 Here is the return returned viewed as a table. Each node is an object in the list returned:
 
 image::{imagedir}/TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=800,align=center]
@@ -204,10 +213,13 @@ endif::[]
 [source,cypher]
 ----
 MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
-RETURN actor.name, director.name, count(m) AS collaborations, collect(m.title) AS movies
+RETURN actor.name, director.name,
+       count(m) AS collaborations, collect(m.title) AS movies
 ----
 
+ifndef::backend-revealjs[]
 Here is the result returned:
+endif::[]
 
 image::{imagedir}/ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900,align=center]
 
@@ -231,7 +243,8 @@ Here is an alternative to using `count()' that returns the same results, but wit
 [source,cypher]
 ----
 MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
-RETURN actor.name, director.name, size(collect(m)) AS collaborations, collect(m.title) AS movies
+RETURN actor.name, director.name, size(collect(m)) AS collaborations,
+       collect(m.title) AS movies
 ----
 
 === Working with Cypher data
@@ -247,14 +260,14 @@ ifdef::backend::revealjs[]
 You have also learned that the `collect()` function can create lists of values or objects where a list is comma-separated and you can use the `IN` keyword to search for a value in a list.
 Next, you will learn more about working with lists and dates in Cypher.
 endif::[]
-
 --
 
 image::{imagedir}/MovieNodeinTable.png[MovieNodeinTable,width=400,align=center]
 
+[.statement]
 Here we see that the Movie nodes have three properties, two of them are of type String while the other is of type Integer.
 
-ifndef::backend::revealjs[]
+ifndef::backend-revealjs[]
 You have also learned that the `collect()` function can create lists of values or objects where a list is comma-separated and you can use the `IN` keyword to search for a value in a list. 
 Next, you will learn more about working with lists and dates in Cypher.
 endif::[]
@@ -271,6 +284,7 @@ Notice that when viewing nodes in table view, each node is shown with {} notatio
 endif::[]
 --
 
+[.statement]
 Here we return the cast list for every movie, as well as the size of the cast:
 
 [source,cypher]
@@ -279,9 +293,11 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a) as cast, size(collect(a)) as castSize
 ----
 
+ifndef::backend-revealjs[]
 Here is the result returned:
+endif::[]
 
-image::{imagedir}/CastList1.png[CastList1,width=900,align=center]
+image::{imagedir}/CastList1.png[CastList1,width=600,align=center]
 
 ifndef::backend-revealjs[]
 Notice that when viewing nodes in table view, each node is shown with {} notation and key value pairs. This structure is called a Map in Cypher,
@@ -297,7 +313,9 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a.name) as cast, size(collect(a.name)) as castSize
 ----
 
+ifndef::backend-revealjs[]
 Here is the result returned:
+endif::[]
 
 image::{imagedir}/CastList2.png[CastList2,width=900,align=center]
 
@@ -320,10 +338,13 @@ endif::[]
 [source,cypher]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
-RETURN m.title, collect(a.name)[0] as `A cast member`, size(collect(a.name)) as castSize
+RETURN m.title, collect(a.name)[0] as `A cast member`,
+       size(collect(a.name)) as castSize
 ----
 
+ifndef::backend-revealjs[]
 Here is the result returned:
+endif::[]
 
 image::{imagedir}/CastList3.png[CastList3,width=900,align=center]
 
@@ -346,10 +367,13 @@ Using this map, we can return the value for one of its elements:
 
 [source,cypher]
 ----
-RETURN {Jan: 31, Feb: 28, Mar: 31, Apr: 30 , May: 31, Jun: 30 , Jul: 31, Aug: 31, Sep: 30, Oct: 31, Nov: 30, Dec: 31}['Feb'] AS DaysInFeb
+RETURN {Jan: 31, Feb: 28, Mar: 31, Apr: 30 , May: 31, Jun: 30 ,
+       Jul: 31, Aug: 31, Sep: 30, Oct: 31, Nov: 30, Dec: 31}['Feb'] AS DaysInFeb
 ----
 
+ifndef::backend-revealjs[]
 Here is the result:
+endif::[]
 
 image::{imagedir}/DaysInFeb.png[DaysInFeb,width=900,align=center]
 
@@ -361,9 +385,10 @@ Here we use the key, `'Feb'` to access it's value. Notice that this statement is
 We are returning a value that is not retrieved from the graph.
 --
 
+[.statement]
 A node in the graph, when returned in Neo4j Browser is a map, when displayed as table rows. For example, a Movie node:
 
-image::{imagedir}/NodeIsMap.png[NodeIsMap,width=900,align=center]
+image::{imagedir}/NodeIsMap.png[NodeIsMap,width=400,align=center]
 
 ==== Map projections
 
@@ -387,9 +412,10 @@ WHERE m.title CONTAINS 'Matrix'
 RETURN m { .title, .released } AS movie
 ----
 
+[.statement]
 Here is what is returned, the movie node data with only the title and released values:
 
-image::{imagedir}/MapProjection.png[MapProjection,width=900,align=center]
+image::{imagedir}/MapProjection.png[MapProjection,width=700,align=center]
 
 ifndef::backend-revealjs[]
 You can learn more about Map projections in the _Cypher Reference Manual_.
@@ -420,7 +446,8 @@ Since both date() and datetime() store their values as strings, you can use func
 
 [source,cypher]
 ----
-RETURN date().day, date().year, datetime().year, datetime().hour, datetime().minute
+RETURN date().day, date().year, datetime().year, datetime().hour,
+       datetime().minute
 ----
 
 image::{imagedir}/DateTime2.png[DateTime2,width=900,align=center]
@@ -435,7 +462,9 @@ To extract a month, year, or time from a timestamp, you would do the following:
 
 [source,cypher]
 ----
-RETURN datetime({epochmillis:timestamp()}).day, datetime({epochmillis:timestamp()}).year, datetime({epochmillis:timestamp()}).month
+RETURN datetime({epochmillis:timestamp()}).day,
+       datetime({epochmillis:timestamp()}).year,
+       datetime({epochmillis:timestamp()}).month
 ----
 
 image::{imagedir}/DateTime3.png[DateTime3,width=900,align=center]
@@ -496,7 +525,7 @@ Select the correct answers.
 
 [X] collect()
 
-Reminder: Click next  twice to reveal the  two correct answer.
+Reminder: Click next  twice to reveal the  two correct answers.
 --
 
 [.title.has-purple-background]

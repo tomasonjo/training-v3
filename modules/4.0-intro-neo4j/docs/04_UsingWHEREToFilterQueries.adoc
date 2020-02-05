@@ -247,7 +247,7 @@ Note that the comparison of strings is case-sensitive.
 There are a number of string-related functions you can use to further test strings. 
 For example, if you want to test a value, regardless of its case, you could call the `toLower()` function to convert the string to lower case before it is compared.
 
-//duplicate content from below
+//duplicate content
 ifdef::backend-revealjs[]
 See the _String functions_ section of the _Neo4j Cypher Manual_ for more information.
 It is sometimes useful to use the built-in string functions to modify the data that is returned in the query in the RETURN clause.

@@ -98,7 +98,7 @@ image::{imagedir}/AWaterMoleculeAsAGraph.png[AWaterMoleculeAsAGraph,width=200,al
 
 [.notes]
 --
-//duplicate content from above
+//duplicate content
 ifdef::backend-revealjs[]
 But if graphs are an abstract mathematical tool, why do we care about them?
 
@@ -144,7 +144,7 @@ image::{imagedir}/GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=ce
 
 [.notes]
 --
-//duplicate content from above
+//duplicate content
 ifdef::backend-revealjs[]
 We say this not because nodes contain more data than relationships--although they usually do--but because it is perfectly acceptable to have nodes without any relationships.
 Conversely,  is is [.underline]#not# possible to have a relationship without any nodes.
@@ -174,7 +174,7 @@ image::{imagedir}/GraphConcepts-Relationships.png[GraphConcepts-Relationships,wi
 
 [.notes]
 --
-//duplicate content from above
+//duplicate content
 ifdef::backend-revealjs[]
 Relationships are the links between nodes.
 In their simplest form, relationships need not contain any information other than which two nodes they link.
