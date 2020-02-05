@@ -115,20 +115,32 @@ RETURN p
 image::AngelaFollowers.png[width=600,align=center,role=border]
 --
 
-[.section-title.green]
-== Section title (green)
+[.section-title]
+== Section title (default: green + node)
 
-[.section-title.gold]
+[.section-title.has-green-background.has-team-background]
+== Section title (green + team)
+
+[.section-title.has-gold-background]
 == Section title (gold)
 
-[.section-title.purple]
+[.section-title.has-gold-background.has-team-background]
+== Section title (gold + team)
+
+[.section-title.has-purple-background]
 == Section title (purple)
 
-[.title.green]
+[.section-title.has-purple-background.has-puzzle-background]
+== Section title (purple + puzzle)
+
+[.title]
+== Title (default: green + puzzle)
+
+[.title.has-green-background]
 == Title (green)
 
-[.title.gold]
-== Title (gold): Subtitle
+[.title.has-gold-background.has-team-background]
+== Title (gold + team): Subtitle
 
 In Neo4j Browser:
 
@@ -136,8 +148,8 @@ kbd:[:play intro-neo4j-exercises]
 
 Then follow instructions for Exercise 1.
 
-[.title.purple]
-== Title (purple)
+[.title.has-purple-background.has-node-background]
+== Title (purple + node)
 
 [.half.left.green,transition="fade-in fade-out"]
 == !
