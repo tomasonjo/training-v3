@@ -207,13 +207,13 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=600,align=center]
+image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=400,align=center]
 
 ifndef::backend-revealjs[]
 And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
 endif::[]
 
-image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=center]
+image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=500,align=center]
 
 [.title.has-gold-background.has-team-background]
 === *Exercise 11: Deleting nodes and relationships*
@@ -332,6 +332,7 @@ You should now be able to write Cypher statements to:
 * Delete a relationship
 * Delete a node and its relationships
 
+////
 == Grade Quiz and Continue 
 
 ++++
@@ -350,3 +351,4 @@ $( document ).ready(function() {
 ++++
 
 endif::backend-html5[]
+////

@@ -61,7 +61,8 @@ body {
 }
 
 .reveal h2 {
-  font-size: 1.6em;
+  /* was 1.6 */
+  font-size: 1.3em;
 }
 
 .reveal h3 {
@@ -69,7 +70,8 @@ body {
 }
 
 .reveal h4 {
-  font-size: 1em;
+  /* was 1 */
+  font-size: 1.3em;
 }
 
 .reveal h1 {
