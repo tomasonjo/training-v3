@@ -103,7 +103,7 @@ subprojects {
         'revealjs_center': 'false',
         'revealjs_width': '1280',
         'revealjs_height': '720',
-        'revealjs_margin': '0.1',
+        'revealjs_margin': '0.05',
         'revealjs_fragmentinurl': 'true',
         'revealjs_slidenumber': 'c',
         'revealjs_minscale': '0.2',
