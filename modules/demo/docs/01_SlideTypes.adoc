@@ -49,6 +49,10 @@ Press kbd:[s] to open the speaker notes view.
 Being a declarative language, Cypher focuses on the clarity of expressing *what* to retrieve from a graph, not on *how* to retrieve it.
 You can think of Cypher as mapping English language sentence structure to patterns in a graph.
 --
+== Side menu
+
+You can open a side menu for faster navigation. +
+Press kbd:[m] to open the menu.
 
 == Cypher syntax highlighting
 
