@@ -1,4 +1,3 @@
-
 = Introduction to Cypher
 :presenter: Neo Technology
 :twitter: neo4j
@@ -201,14 +200,6 @@ As part of query, you can return nodes or data from the nodes using the `RETURN`
 The `RETURN` clause must be the last clause of a query to the graph.
 Later in this training, you will learn how to use `MATCH` to select nodes and data for updating the graph. 
 First, you will learn how to simply return nodes.
-
-//duplicate content
-ifdef::backend-revealjs[]
-Notice that the Cypher keywords `MATCH` and `RETURN` are upper-case.
-This coding convention is described in the _Cypher Style Guide_ and will be used in this training.
-This `MATCH` clause returns all nodes in the graph, where the optional _Label_ is used to return a subgraph if the graph contains nodes of different types.
-The _variable_ must be specified here, otherwise the query will have nothing to return.
-endif::[]
 --
 
 Here are simplified syntax examples for a query:
@@ -225,12 +216,13 @@ MATCH (variable:Label)
 RETURN variable
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice that the Cypher keywords `MATCH` and `RETURN` are upper-case. 
 This coding convention is described in the _Cypher Style Guide_ and will be used in this training. 
 This `MATCH` clause returns all nodes in the graph, where the optional _Label_ is used to return a subgraph if the graph contains nodes of different types. 
 The _variable_ must be specified here, otherwise the query will have nothing to return.
-endif::[]
+--
 
 ===  Example `MATCH` and `RETURN`
 
@@ -252,10 +244,11 @@ MATCH (p:Person) 	// returns all Person nodes in the graph
 RETURN p
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 When we execute the Cypher statement, `MATCH (p:Person) RETURN p`, the graph engine returns all nodes with the label _Person_.
-The default view of the returned nodes are the nodes that were referenced by the variable _p_. 
-endif::[]
+The default view of the returned nodes are the nodes that were referenced by the variable _p_.
+--
 
 [.is-half.left]
 --
@@ -278,12 +271,6 @@ When you specify a pattern for a `MATCH` clause, you should always specify a nod
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-When we execute the Cypher statement, `MATCH (p:Person) RETURN p`, the graph engine returns all nodes with the label _Person_.
-The default view of the returned nodes are the nodes that were referenced by the variable _p_.
-endif::[]
-
 One thing to notice in this example is that some of the displayed nodes are connected by the _FOLLOWS_ relationship.
 The visualization shows the relationship between these nodes because he have specified *Connect result nodes* in our Neo4j Browser settings.
 Some of the Person nodes represent people who reviewed Movies and as such, they follow each other.
@@ -314,12 +301,6 @@ A property is identified by its property key.
 Recall that nodes are used to represent the entities of your business model.  
 A property is defined for a node and not for a type of node. 
 All nodes of the same type need not have the same properties.
-
-//duplicate content
-ifdef::backend-revealjs[]
-Properties can be used to filter queries  so that a subset of the graph is retrieved.
-In addition, with the `RETURN` clause, you can return property values from the retrieved nodes, rather than the nodes.
-endif::[]
 --
 
 For example, in the _Movie_ graph, all _Movie_ nodes have both _title_  and _released_ properties.  
@@ -327,10 +308,11 @@ However, it is not a requirement that every _Movie_ node has a property, _taglin
 
 image::{imagedir}/MovieProperties.png[MovieProperties,width=600,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Properties can be used to filter queries  so that a subset of the graph is retrieved. 
-In addition, with the `RETURN` clause, you can return property values from the retrieved nodes, rather than the nodes. 
-endif::[]
+In addition, with the `RETURN` clause, you can return property values from the retrieved nodes, rather than the nodes.
+--
 
 ==== Examining property keys
 
@@ -400,9 +382,10 @@ image::{imagedir}/MatchPersonBorn1970.png[MatchPersonBorn1970,width=600, align=c
 
 ==== Example: Filtering query by multiple properties
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is an example where we specify two property values for the query.
-endif::[]
+--
 
 [source,cypher]
 ----
@@ -418,11 +401,6 @@ image::{imagedir}/TwoPropertiesForFilter.png[TwoPropertiesForFilter,width=700,al
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-Here is an example where we specify two property values for the query.
-endif::[]
-
 As it turns out, there is only one movie with the _tagline_, _Free your mind_ in the _Movie_ database, but if we had specified a different year, the query would not have returned a value because when you specify properties, both properties must match.
 --
 
@@ -621,25 +599,22 @@ In the _Movie_ graph, we see these relationships between the nodes:
 
 Here we see that this graph has a total of 6 relationship types between the nodes. Some _Person_ nodes are connected to other _Person_ nodes using the _FOLLOWS_ relationship type. 
 All of the other relationships in this graph are from _Person_ nodes to _Movie_ nodes.
-
-//duplicate content
-ifdef::backend-revealjs[]
-The relationship types can also be viewed by selecting the arrow to the right in the relationship type row.
-endif::[]
 --
 
 image::{imagedir}/call_db.schema-relationships.png[call_db.schema-relationships,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 The relationship types can also be viewed by selecting the arrow to the right in the relationship type row.
-endif::[]
+--
 
 ==== Using a relationship in a query
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is an example where we retrieve the _Person_ nodes that have the _ACTED_IN_ relationship to the _Movie_, _The Matrix_. 
 In other words, show me the actors that acted in _The Matrix_.
-endif::[]
+--
 
 [source,cypher]
 ----
@@ -655,12 +630,6 @@ image::{imagedir}/ActorsInMatrix.png[ActorsInMatrix,width=800,align=center]
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-Here is an example where we retrieve the _Person_ nodes that have the _ACTED_IN_ relationship to the _Movie_, _The Matrix_.
-In other words, show me the actors that acted in _The Matrix_.
-endif::[]
-
 For this query, we are using the variable _p_ to represent the _Person_ nodes during the query, the variable _m_ to represent the _Movie_ node retrieved, and the variable _rel_ to represent the relationship for the relationship type, _ACTED_IN_.
 We return a graph with the _Person_ nodes, the _Movie_ node and their _ACTED_IN_ relationships.
 --
@@ -678,9 +647,10 @@ RETURN p,m
 
 ==== Querying by multiple relationships
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is another example where we want to know the movies that _Tom Hanks_ acted in and directed:
-endif::[]
+--
 
 [source,cypher]
 ----
@@ -696,11 +666,6 @@ image::{imagedir}/TomHanksActedDirected.png[TomHanksActedDirected,width=700,alig
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-Here is another example where we want to know the movies that _Tom Hanks_ acted in and directed:
-endif::[]
-
 Notice that there are multiple rows returned for the movie, _That Thing You Do_. This is because _Tom Hanks_ acted in and directed that movie.
 --
 
@@ -912,11 +877,6 @@ In this case the query engine found the Angela Scope node as the anchor and then
 [.notes]
 --
 We can also find out what _Person_ nodes are connected by the _FOLLOWS_ relationship in either direction by removing the directional arrow from the pattern.
-
-//duplicate content
-ifdef::backend-revealjs[]
-In this case the Angela Scope node is the anchor and the query engine traverses all _FOLLOWS_ relationships both in and out of the Angela Scope Node.
-endif::[]
 --
 
 [source,cypher]
@@ -933,9 +893,10 @@ We also return the Angela Scope node so that we can see the relationships in the
 image::{imagedir}/AngelaFromTo.png[AngelaFromTo,width=700,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 In this case the Angela Scope node is the anchor and the query engine traverses all _FOLLOWS_ relationships both in and out of the Angela Scope Node.
-endif::[]
+--
 
 [.is-half.right]
 --
@@ -984,11 +945,6 @@ image::{imagedir}/FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQue
 --
 This query could also be modified to return each person along the matched path by specifying variables for the nodes and returning them.
 For example:
-
-//duplicate content
-ifdef::backend-revealjs[]
-For this query, although the query engine traverses the path from _Jessica Thompson_ to _James Thompson_, it finds that the _James Thompson_ node does not match the entire path specified.
-endif::[]
 --
 
 [source,cypher]
@@ -997,9 +953,10 @@ MATCH  (p:Person)-[:FOLLOWS]->(p2:Person)-[:FOLLOWS]->(p3:Person {name:'Jessica 
 RETURN p.name, p2.name, p3.name
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 For this query, although the query engine traverses the path from _Jessica Thompson_ to _James Thompson_, it finds that the _James Thompson_ node does not match the entire path specified.
-endif::[]
+--
 
 ifndef::backend-revealjs[]
 The result returned is:
@@ -1014,12 +971,6 @@ image::{imagedir}/NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFo
 As you gain more experience with Cypher, you will see how patterns in your queries enable you to focus on the relationships in the graph.
 For example, suppose we want to retrieve all unique relationships between an actor, a movie, and a director.
 This query will return many unique rows of information that provide this pattern in the graph:
-
-//duplicate content
-ifdef::backend-revealjs[]
-In this query, notice that there are multiple records returned for a movie, each with its set of values for the actor and director.
-Each row is unique since the focal point of the query is the actor/director for a particular movie.
-endif::[]
 --
 
 [source,cypher]
@@ -1034,10 +985,11 @@ endif::[]
 
 image::{imagedir}/TraversalInTwoDirections.png[TraversalInTwoDirections,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 In this query, notice that there are multiple records returned for a movie, each with its set of values for the actor and director.
 Each row is unique since the focal point of the query is the actor/director for a particular movie.
-endif::[]
+--
 
 ==== Returning paths
 
@@ -1061,11 +1013,6 @@ image::{imagedir}/ReturnPath.png[ReturnPath,width=700,align=center]
 --
 Here is another example where multiple paths are returned.
 The query is to return all paths from actors to a movie that was directed by Ron Howard
-
-//duplicate content
-ifdef::backend-revealjs[]
-Multiple paths are returned. Even if we set Neo4j Browser to not connect result nodes, the nodes are shown as connected in the visualization because we are returning paths, not nodes:
-endif::[]
 --
 
 [source,cypher]
@@ -1074,9 +1021,10 @@ MATCH  path = (:Person)-[:ACTED_IN]->(:Movie)<-[:DIRECTED]-(:Person {name:'Ron H
 RETURN  path
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Multiple paths are returned. Even if we set Neo4j Browser to not connect result nodes, the nodes are shown as connected in the visualization because we are returning paths, not nodes:
-endif::[]
+--
 
 image::{imagedir}/ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=700,align=center]
 
