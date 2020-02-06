@@ -119,6 +119,9 @@ subprojects {
         'revealjs_maxscale': '2'
     }
 
+    plugins 'denehyg/menu.js'
+    pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
+
     baseDirFollowsSourceDir()
     sourceDir file("${projectDir}/docs")
     outputDir file("${projectDir}/build/slides")
@@ -141,7 +144,6 @@ subprojects {
         into 'images'
       }
     }
-    plugins 'denehyg/menu.js'
   }
 
   task convertOnlinePdf(type: AsciidoctorPdfTask) {
