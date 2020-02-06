@@ -315,6 +315,10 @@ body {
     font-size: 18px;
 }
 
+.reveal .slides > section {
+  padding: 10px 0 20px 0px;
+}
+
 .reveal .slides section {
     text-align: start;
 }
