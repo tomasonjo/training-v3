@@ -241,6 +241,12 @@ endif::[]
 You can add properties to a relationship, just as you add properties to a node. You use the `SET` clause to do so.
 
 Here is the simplified syntax for adding properties to a relationship referenced by the variable r:
+
+//duplicate content
+ifdef::backend-revealjs[]
+If the property does not exist, it is added to the relationship. If the property exists, its value is updated for the relationship.
+When specify the JSON-style object for assignment to the relationship using `=`, the object must include all of the properties for the relationship, just as you need to do for nodes. If you use `+=`, you can add or update properties, just as you do for nodes.
+endif::[]
 --
 
 //[source,big,cypher]
@@ -267,9 +273,10 @@ SET r = {propertyName1: value1, propertyName2: value2}
 SET r += {propertyName1: value1, propertyName2: value2}
 ----
 
-[.statement]
+ifndef::backend-revealjs[]
 If the property does not exist, it is added to the relationship. If the property exists, its value is updated for the relationship. 
 When specify the JSON-style object for assignment to the relationship using `=`, the object must include all of the properties for the relationship, just as you need to do for nodes. If you use `+=`, you can add or update properties, just as you do for nodes.
+endif::[]
 
 === Example: Adding properties to a relationship
 
@@ -402,6 +409,7 @@ CREATE (a)-[rel:ACTED_IN]-(m)
 [.statement]
 Select the correct answer.
 //[%interactive]
+
 [none.answers]
 - ◻️  [.answer]#CREATE should be replaced with CREATE RELATIONSHIP.#
 - ◻️  [.answer]#You cannot specify a variable for a relationship.#
@@ -433,6 +441,7 @@ Select the correct answer.
 
 Reminder: Click next to reveal the correct answer.
 --
+
 [.title.has-purple-background]
 === Question 2
 
@@ -538,7 +547,7 @@ You should now be able to write Cypher statements to:
 * Add properties to a relationship.
 * Remove properties from a relationship.
 
-////
+
 == Grade Quiz and Continue 
 
 ++++
@@ -557,4 +566,4 @@ $( document ).ready(function() {
 ++++
 
 endif::backend-html5[]
-////
+

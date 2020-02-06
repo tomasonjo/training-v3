@@ -15,21 +15,26 @@
 :nextsecttitle: Merging Data
 :nextsect: 12
 :experimental:
-:imagedir: ../img
+:imagedir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
 
+////
 ifdef::backend-html5[]
 
 include::scripts.txt[]
 
 endif::backend-html5[]
+////
 
 == About this module
 
+[.notes]
+--
 You have just learned how to create nodes, relationships, and properties for them.
 Next, you will learn how to delete nodes and relationships in the graph.
+--
 
 At the end of this module, you should be able to write Cypher statements to:
 [square]
@@ -41,13 +46,27 @@ At the end of this module, you should be able to write Cypher statements to:
 
 == Deleting nodes
 
+[.notes]
+--
 Suppose you have created a _Person_ node for Jane Doe:
+
+//duplicate content
+ifdef::backend-revealjs[]
+You can delete a node provided:
+
+. You can obtain a reference to it (typically using `MATCH`)
+. The node has no relationships
+
+So if you accidentally created multiple nodes in the graph, you can retrieve them with a `MATCH` clause and delete them.
+endif::[]
+--
 
 [source,cypher]
 ----
 CREATE (p:Person {name: 'Jane Doe'})
 ----
 
+[.statement]
 You delete this node as follows:
 
 [source,cypher]
@@ -57,23 +76,29 @@ WHERE p.name = 'Jane Doe'
 DELETE p
 ----
 
+ifndef::backend-revealjs[]
 Here is the result:
+endif::[]
 
-[.thumb]
-image::{imagedir}/DeleteJaneDoe.png[DeleteJaneDoe,width=800]
+image::{imagedir}/DeleteJaneDoe.png[DeleteJaneDoe,width=800,align=center]
 
+ifndef::backend-revealjs[]
 You can delete a node provided:
 
 . You can obtain a reference to it (typically using `MATCH`)
 . The node has no relationships
 
 So if you accidentally created multiple nodes in the graph, you can retrieve them with a `MATCH` clause and delete them.
+endif::[]
 
 == Deleting relationships
 
+[.notes]
+--
 In our graph, the Katie Holms node already has an _:ACTED_IN_ relationship with the Batman Begins movie.
 Perhaps we were over zealous with the creation of relationships between nodes.
 For example, what if we had this code where relationships were created:
+--
 
 [source,cypher]
 ----
@@ -86,14 +111,22 @@ MATCH (a)-[rel]-()
 RETURN type(rel)
 ----
 
+ifndef::backend-revealjs[]
 Here is the result of executing this code:
-[.thumb]
-image::{imagedir}/TooManyRels.png[TooManyRels,width=800]
+endif::[]
 
+image::{imagedir}/TooManyRels.png[TooManyRels,width=800,align=center]
+
+[.statement]
 We see that there are now three relationships from Katie Holmes and Batman Begins.
 
+=== Finding and deleting relationships
+
+[.notes]
+--
 Provided you have a reference to a relationship, you can delete it.
 So for example, we can find the relationships that we want to delete and then delete them as follows:
+--
 
 [source,cypher]
 ----
@@ -103,11 +136,18 @@ DELETE rel
 RETURN a, m
 ----
 
+ifndef::backend-revealjs[]
 Here is the result of executing this code:
-[.thumb]
-image::{imagedir}/DeleteRels.png[DeleteRels,width=800]
+endif::[]
 
+image::{imagedir}/DeleteRels.png[DeleteRels,width=800,align=center]
+
+==== Confirming deletion
+
+[.notes]
+--
 You can confirm that there is only one relationship associated with the Katie Holmes node as follows:
+--
 
 [source,cypher]
 ----
@@ -116,16 +156,21 @@ WHERE a.name = 'Katie Holmes'
 RETURN count(rel) AS `Number of Katie Holmes relationships:`
 ----
 
+ifndef::backend-revealjs[]
 Here is the result of executing this code:
-[.thumb]
-image::{imagedir}/KatieRels.png[KatieRels,width=800]
+endif::[]
+
+image::{imagedir}/KatieRels.png[KatieRels,width=800,align=center]
 
 == Deleting nodes and relationships
 
+[.notes]
+--
 The most efficient way to delete a node and its corresponding relationships is to specify `DETACH DELETE`.  
 When you specify `DETACH DELETE` for a node, the relationships to and from the node are deleted, then the node is deleted.
 
 If were were to attempt to delete the _Liam Neeson_ node without first deleting its relationships:
+--
 
 [source,cypher]
 ----
@@ -134,12 +179,22 @@ WHERE p.name = 'Liam Neeson'
 DELETE p
 ----
 
+[.statement]
 We would see this error:
 
-[.thumb]
-image::{imagedir}/LiamNeesonDeleteError.png[LiamNeesonDeleteError,width=800]
+image::{imagedir}/LiamNeesonDeleteError.png[LiamNeesonDeleteError,width=800,align=center]
 
+=== Using `DETACH DELETE`
+
+[.notes]
+--
 Here we delete the _Liam Neeson_ node [underline]#and# its relationships to any other nodes:
+
+//duplicate content
+ifdef::backend-revealjs[]
+And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
+endif::[]
+--
 
 [source,cypher]
 ----
@@ -148,62 +203,126 @@ WHERE p.name = 'Liam Neeson'
 DETACH DELETE  p
 ----
 
+ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
+endif::[]
 
-[.thumb]
-image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=600]
+image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=600,align=center]
 
+ifndef::backend-revealjs[]
 And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
+endif::[]
 
-[.thumb]
-image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700]
+image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=center]
 
-
+[.title.has-gold-background.has-team-background]
 === *Exercise 11: Deleting nodes and relationships*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 11.
 
 
-[#module-6.quiz]
+//[#module-6.quiz]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
+
+[.title.has-purple-background]
 === Question 1
 
+[.statement]
+You can delete a node with the `DELETE` clause.
+What must you do before executing the `DELETE` clause?
+
+[.statement]
+Select the correct answers.
+//[%interactive]
+[none.answers]
+- ◻️  [.fragment.check.ok]#✔️# [.answer]#Get a reference to the node.#
+- ◻️  [.fragment.check.ok]#✔️# [.answer]#Ensure the node has no relationships.#
+- ◻️  [.answer]#Remove all labels from the node.#
+- ◻️  [.answer]#Remove all properties from the node#
+
+[.notes]
+--
 You can delete a node with the `DELETE` clause.
 What must you do before executing the `DELETE` clause?
 
 Select the correct answers.
-[%interactive]
 
-- [ ] [.required-answer]#Get a reference to the node.#
-- [ ] [.required-answer]#Ensure the node has no relationships.#
-- [ ] [.false-answer]#Remove all labels from the node.#
-- [ ] [.false-answer]#Remove all properties from the node#
+[X] Get a reference to the node.
 
+[X] Ensure the node has no relationships.
 
+[ ] Remove all labels from the node.
+
+[ ] Remove all properties from the node
+
+Reminder: Click next twice to reveal the two correct answers.
+--
+
+[.title.has-purple-background]
 === Question 2
 
+[.statement]
+What happens if you attempt to delete a node using `DELETE`, and the node has existing relationships?
+
+[.statement]
+Select the correct answers.
+//[%interactive]
+[none.answers]
+- ◻️  [.fragment.check.ok]#✔️# [.answer]#You receive a client error.#
+- ◻️  [.answer]#The node is deleted.#
+- ◻️  [.answer]#The node's relationships are deleted.#
+- ◻️  [.fragment.check.ok]#✔️# [.answer]#Nothing is changed in the graph.#
+
+[.notes]
+--
 What happens if you attempt to delete a node using `DELETE`, and the node has existing relationships?
 
 Select the correct answers.
-[%interactive]
 
-- [ ] [.required-answer]#You receive a client error.#
-- [ ] [.false-answer]#The node is deleted.#
-- [ ] [.false-answer]#The node's relationships are deleted.#
-- [ ] [.required-answer]#Nothing is changed in the graph.#
+[X] You receive a client error.
 
+[ ] The node is deleted.
+
+[ ] The node's relationships are deleted.
+
+[X] Nothing is changed in the graph.
+
+Reminder: Click next twice to reveal the two correct answers.
+--
+
+[.title.has-purple-background]
 === Question 3
 
+[.statement]
+Suppose you retrieve a node, _n_ in the graph that is related to other nodes. What Cypher clause do you write to delete this node and its relationships in the graph?
+
+[.statement]
+Select the correct answer.
+
+//[%interactive]
+[none.answers]
+- ◻️  [.answer]#DELETE n#
+- ◻️  [.answer]#DELETE n WITH RELATIONSHIPS#
+- ◻️  [.answer]#REMOVE n#
+- ◻️  [.fragment.check.ok]#✔️# [.answer]#DETACH DELETE n#
+
+[.notes]
+--
 Suppose you retrieve a node, _n_ in the graph that is related to other nodes. What Cypher clause do you write to delete this node and its relationships in the graph?
 
 Select the correct answer.
-[%interactive]
-- [ ] [.false-answer]#DELETE n#
-- [ ] [.false-answer]#DELETE n WITH RELATIONSHIPS#
-- [ ] [.false-answer]#REMOVE n#
-- [ ] [.required-answer]#DETACH DELETE n#
 
+[ ] DELETE n
+[ ] DELETE n WITH RELATIONSHIPS
+[ ] REMOVE n
+[X] DETACH DELETE n
+
+Reminder: Click next to reveal the correct answer.
+--
+
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:
@@ -212,7 +331,6 @@ You should now be able to write Cypher statements to:
 * Delete a node
 * Delete a relationship
 * Delete a node and its relationships
-
 
 == Grade Quiz and Continue 
 
