@@ -8,7 +8,7 @@ class RevealJsSpeakerNotesAggregatorTreeProcessor < Extensions::TreeProcessor; u
       document.find_by({context: :section}).each do |section|
         notes_blocks = section.blocks.select { |block| block.context == :open && block.roles.include?('notes') }
         next if notes_blocks.empty?
-        agg_notes_block = Block.new(section, :open, {source: source, attributes: {role: 'notes'}})
+        agg_notes_block = Block.new(section, :open, {attributes: {role: 'notes'}})
         notes_blocks.each do |notes_block|
           section.blocks.delete(notes_block)
           agg_notes_block << notes_block
