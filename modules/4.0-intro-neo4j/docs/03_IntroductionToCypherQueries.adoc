@@ -124,7 +124,7 @@ A node can have zero or more labels.
 
 Here are simplified syntax examples for specifying a node:
 
-[source]
+[source.big,cypher]
 ----
 ()
 (variable)

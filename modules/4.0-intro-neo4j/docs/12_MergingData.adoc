@@ -133,7 +133,7 @@ This node has values for _name_ and _born_. Notice also that the label for the n
 endif::[]
 --
 
-[source]
+[source.big,cypher]
 ----
 MERGE (variable:Label{nodeProperties})
 RETURN variable
@@ -252,7 +252,7 @@ image::{imagedir}/OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=
 
 Here is the syntax for the `MERGE` clause for creating relationships:
 
-[source]
+[source.big,cypher]
 ----
 MERGE (variable1:Label1 {nodeProperties1})-[:REL_TYPE]->
 (variable2:Label2 {nodeProperties2})

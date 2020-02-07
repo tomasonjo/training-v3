@@ -242,6 +242,12 @@ By assembling the simple abstractions of nodes and relationships into connected 
 Data scientists can use the relationships in a data model to help enterprises make important business decisions.
 --
 
+=== Neo4j is a native graph database
+
+In this video, you will see the benefits of using the native graph database, Neo4j.
+
+video::GM9bB4ytGao[youtube,width=560,height=315,pdfwidth=100%]
+
 === Querying a graph is intuitive in Cypher
 
 [.notes]

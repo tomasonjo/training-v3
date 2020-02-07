@@ -61,14 +61,12 @@ endif::[]
 [.statement]
 Here is the simplified syntax for creating a relationship between two nodes referenced by the variables x and y:
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 CREATE (x)-[:REL_TYPE]->(y) 
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 CREATE (x)<-[:REL_TYPE]-(y)
 ----
@@ -249,26 +247,22 @@ When specify the JSON-style object for assignment to the relationship using `=`,
 endif::[]
 --
 
-//[source,big,cypher]
-[source]
+[source,big,cypher]
 ----
 SET r.propertyName = value
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET r.propertyName1 = value1 , r.propertyName2 = value2
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET r = {propertyName1: value1, propertyName2: value2}
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET r += {propertyName1: value1, propertyName2: value2}
 ----

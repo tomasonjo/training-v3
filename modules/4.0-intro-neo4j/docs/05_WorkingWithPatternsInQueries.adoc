@@ -400,9 +400,8 @@ Here are simplified syntax examples for how varying length patterns are specifie
 [.statement]
 Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_ and beyond:
 
-// ELAINE: problems is that font is too big; using source for now
-//[source.big,cypher]
-[source]
+
+[source.big,cypher]
 ----
 (nodeA)-[:RELTYPE*]->(nodeB)
 ----
@@ -410,8 +409,7 @@ Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_
 [.statement]
 Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_ or from _nodeB_ to _nodeA_ and beyond. This is usually a very expensive query so you should place limits on how many nodes are retrieved:
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 (nodeA)-[:RELTYPE*]-(nodeB)
 ----
@@ -419,8 +417,7 @@ Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_
 [.statement]
 Retrieve the paths of length 3 with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_:
 
-//[source.big, cypher]
-[source]
+[source.big, cypher]
 ----
 (node1)-[:RELTYPE*3]->(node2)
 ----
@@ -428,8 +425,7 @@ Retrieve the paths of length 3 with the relationship, _:RELTYPE_ from _nodeA_ to
 [.statement]
 Retrieve the paths of lengths 1, 2, or 3 with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_, _nodeB_ to _nodeC_, as well as, _nodeC_ to _nodeD) (up to three hops):
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 (node1)-[:RELTYPE*1..3]->(node2)
 ----

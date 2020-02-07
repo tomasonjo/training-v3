@@ -63,8 +63,7 @@ endif::[]
 
 Here is the simplified syntax for creating a node:
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 CREATE (optionalVariable optionalLabels {optionalProperties})
 ----
@@ -283,8 +282,7 @@ If you attempt to remove a label from a node for which the label does not exist,
 endif::[]
 --
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 // remove the label from the node referenced by the variable x
 REMOVE x:Label
@@ -294,8 +292,7 @@ ifndef::backend-revealjs[]
 Here is the simplified syntax for removing multiple labels from a node:
 endif::[]
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 // remove the two labels from the node referenced by the variable x
 REMOVE x:Label1, x:Label2
@@ -343,26 +340,22 @@ When specify the JSON-style object for assignment (using `=`) of the property va
 endif::[]
 --
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET x.propertyName = value
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET x.propertyName1 = value1	, x.propertyName2 = value2 
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET x = {propertyName1: value1, propertyName2: value2}
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET x += {propertyName1: value1, propertyName2: value2}
 ----
@@ -502,14 +495,12 @@ There are two ways that you can remove a property from a node. One way is to use
 Here are simplified syntax examples for removing properties from a node referenced by the variable x:
 --
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 REMOVE x.propertyName
 ----
 
-//[source.big,cypher]
-[source]
+[source.big,cypher]
 ----
 SET x.propertyName = null
 ----
