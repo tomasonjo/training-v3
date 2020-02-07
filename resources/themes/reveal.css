@@ -820,7 +820,7 @@ kbd:not(.keyseq) {
 }
 
 .reveal .listingblock.big pre code {
-  font-size: 1.5em;
+  font-size: 1.0em;
 }
 
 /* unused, style is now by default */
