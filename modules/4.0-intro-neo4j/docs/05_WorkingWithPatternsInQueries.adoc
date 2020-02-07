@@ -90,28 +90,14 @@ You can specify multiple patterns in a `MATCH` clause.
 
 Suppose we want to write queries that focus on movies released in the year 2000.
 Here are the nodes and relationships for these movies:
-
-ifdef::backend-revealjs[]
-This `MATCH` clause includes a pattern  specified by two paths separated by a comma:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-It returns a _Person_ nodes for people who acted in these three movies and using that same movie node,m, it retrieves the _Person_ node who is the director for that movie, m.
-endif::[]
-
-// duplicate content
-ifdef::backend-revealjs[]
-It returns 15 rows, one for each actor with the associated movie title and name of the director for that particular movie.
-When multiple patterns are specified in a `MATCH` clause, no relationship is traversed more than one time.
-endif::[]
 --
 
 image::{imagedir}/Movies2000.png[Movies2000,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 This `MATCH` clause includes a pattern  specified by two paths separated by a comma:
-endif::[]
+--
 
 [.is-half.left]
 --
@@ -123,10 +109,12 @@ WHERE m.released = 2000
 RETURN a.name, m.title, d.name
 ----
 --
-ifndef::backend-revealjs[]
-It returns a _Person_ nodes for people who acted in these three movies and using that same movie node,m, it retrieves the _Person_ node who is the director for that movie, m.
 
-endif::[]
+[.notes]
+--
+It returns a _Person_ nodes for people who acted in these three movies and using that same movie node,m, it retrieves the _Person_ node who is the director for that movie, m.
+--
+
 ifndef::backend-revealjs[]
 Here is the result of executing this query:
 endif::[]
@@ -136,10 +124,11 @@ endif::[]
 image::{imagedir}/Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=600,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 It returns 15 rows, one for each actor with the associated movie title and name of the director for that particular movie.
 When multiple patterns are specified in a `MATCH` clause, no relationship is traversed more than one time.
-endif::[]
+--
 
 === Specifying a single pattern
 
@@ -169,14 +158,6 @@ Here are some examples of specifying two paths in a `MATCH` clause.
 In the first example, we want the actors that worked with _Keanu Reeves_ to meet _Hugo Weaving_, who has worked with _Keanu Reeves_. 
 Here we retrieve the actors who acted in the same movies as _Keanu Reeves_, but not when _Hugo Weaving_ acted in the same movie. 
 To do this, we specify two paths for the `MATCH`:
-
-//duplicate content
-ifdef::backend-revealjs[]
-When you perform this type of query, you may see a warning in the query edit pane stating that the pattern represents a cartesian product and may require a lot of resources to perform the query.
-You should only perform these types of queries if you know the data well and the implications of doing the query.
-
-If you click the warning symbol in the top left corner, it produces an explanation result pane.
-endif::[]
 --
 
 [.is-half.left]
@@ -192,12 +173,13 @@ RETURN n.name
 ----
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 When you perform this type of query, you may see a warning in the query edit pane stating that the pattern represents a cartesian product and may require a lot of resources to perform the query. 
 You should only perform these types of queries if you know the data well and the implications of doing the query.
 
 If you click the warning symbol in the top left corner, it produces an explanation result pane.
-endif::[]
+--
 
 [.is-half.right]
 --
@@ -243,15 +225,6 @@ In some cases, however, you can only retrieve the nodes, relationships, or paths
 
 Here is an example query where multiple MATCH clauses are used:
 
-//duplicate content
-ifdef::backend-revealjs[]
-The first `MATCH` clause retrieves Val Kilmer pointing to the movie, Top Gun using the _ACTED_IN_ relationship.
-The anchor of this `MATCH` clause is the Val Kilmer _Person_ node.
-The second `MATCH clause retrieves all _Person_ nodes that have the _ACTED_IN_ relationship with the movie, Top Gun.
-The anchor of the `MATCH` clause is the Top Gun _Movie_node.
-
-When the query engine traverses the graph for these `MATCH` clauses, we see that the _ACTED_IN_ relationship is traversed twice.
-endif::[]
 --
 
 [.is-half.left]
@@ -264,14 +237,17 @@ WHERE valKilmer.name = 'Val Kilmer'
 RETURN m.title as movie , actor.name
 ----
 --
-ifndef::backend-revealjs[]
+
+[.notes]
+--
 The first `MATCH` clause retrieves Val Kilmer pointing to the movie, Top Gun using the _ACTED_IN_ relationship.
 The anchor of this `MATCH` clause is the Val Kilmer _Person_ node.
 The second `MATCH clause retrieves all _Person_ nodes that have the _ACTED_IN_ relationship with the movie, Top Gun.
 The anchor of the `MATCH` clause is the Top Gun _Movie_node.
 
 When the query engine traverses the graph for these `MATCH` clauses, we see that the _ACTED_IN_ relationship is traversed twice.
-endif::[]
+--
+
 
 [.is-half.right]
 --
@@ -289,23 +265,6 @@ image::{imagedir}/ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMa
 [.notes]
 --
 Here is the same example where multiple patterns are specified in a single `MATCH` clause:
-
-//duplicate content
-ifdef::backend-revealjs[]
-The `MATCH` clause retrieves the Val Kilmer node and uses the _ACTED_IN_ relationship to retrieve the Top Gun node, then it uses the movie node to retrieve all actors.
-With this scenario, the _ACTED_IN_ relationship is only traversed once.
-We already know the _Person_ node for Val Kilmer so we need not return it.
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-The result returned is smaller because it does not include the Val Kilmer node.
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-A best practice is to traverse as few nodes as possible so in this example, using multiple `MATCH` patterns is best.
-endif::[]
 --
 
 [.is-half.left]
@@ -319,26 +278,29 @@ RETURN m.title as movie , actor.name
 ----
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 The `MATCH` clause retrieves the Val Kilmer node and uses the _ACTED_IN_ relationship to retrieve the Top Gun node, then it uses the movie node to retrieve all actors.
 With this scenario, the _ACTED_IN_ relationship is only traversed once.
 We already know the _Person_ node for Val Kilmer so we need not return it.
-endif::[]
+--
 
 [.is.half.right]
 --
 image::{imagedir}/ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSingleMatchTraversal,width=400,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 The result returned is smaller because it does not include the Val Kilmer node.
-endif::[]
+--
 
 image::{imagedir}/ValKilmerCoActorsSingleMatch.png[ValKilmerCoActorsSingleMatch,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 A best practice is to traverse as few nodes as possible so in this example, using multiple `MATCH` patterns is best.
-endif::[]
+--
 
 === Specifying varying length paths
 
@@ -347,17 +309,6 @@ endif::[]
 Any graph that represents social networking, trees, or hierarchies will most likely have multiple paths of varying lengths. 
 Think of the _connected_ relationship in _LinkedIn_ and how connections are made by people connected to more people.  
 The _Movie_ database for this training does not have much depth of relationships, but it does have the _:FOLLOWS_ relationship that you learned about earlier:
-
-//duplicate content
-ifdef::backend-revealjs[]
-You write a `MATCH` clause where  you want to find all of the followers of the followers of a _Person_ by specifying a numeric value for the number of hops in the path.
-Here is an example where we want to retrieve all _Person_ nodes that are exactly two hops away:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-If we had specified `[:FOLLOWS*]` rather than `[:FOLLOWS*2]`, the query would return all _Person_ nodes that are in the `:FOLLOWS` path from _Paul Blythe_.
-endif::[]
 --
 
 [.is-half.left]
@@ -365,10 +316,11 @@ endif::[]
 image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 You write a `MATCH` clause where  you want to find all of the followers of the followers of a _Person_ by specifying a numeric value for the number of hops in the path. 
 Here is an example where we want to retrieve all _Person_ nodes that are exactly two hops away:
-endif::[]
+--
 
 [.is-half.right]
 --
@@ -386,9 +338,10 @@ endif::[]
 image::{imagedir}/TwoHopRelationship.png[TwoHopRelationship,width=700,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 If we had specified `[:FOLLOWS*]` rather than `[:FOLLOWS*2]`, the query would return all _Person_ nodes that are in the `:FOLLOWS` path from _Paul Blythe_.
-endif::[]
+--
 
 ==== Varying length patterns syntax
 
@@ -437,24 +390,6 @@ Retrieve the paths of lengths 1, 2, or 3 with the relationship, _:RELTYPE_ from 
 A built-in function that you may find useful in a graph that has many ways of traversing the graph to get to the same node is the `shortestPath()` function. Using the shortest path between two nodes improves the performance of the query.
 
 In this example, we want to discover a shortest path between the movies _The Matrix_ and _A Few Good Men_. In our `MATCH` clause, we set the variable _p_ to the result of calling `shortestPath()`, and then return _p_. In the call to `shortestPath()`, notice that we specify `*` for the relationship. This means any relationship; for the traversal.
-
-//duplicate content
-ifdef::backend-revealjs[]
-When you specify this `MATCH` clause to use the `shortestPath()' function as shown here with an _unbounded_ varying length, you will see this warning:
-endif::[]
-
-//duplicate content
-ifndef::backend-revealjs[]
-You should heed the warning, especially for large graphs.
-You can also read the _Graph Algorithms_ documentation about the shortest path algorithm, which performs even better than the one that is build into Cypher.
-endif::[]
-
-//duplicate content
-ifndef::backend-revealjs[]
-Notice that the graph engine has traversed many types of relationships to get to the end node.
-
-When you use `ShortestPath()`, you can specify a upper limits for the shortest path. In addition, you should aim to provide the patterns for the from an to nodes that execute efficiently. For example, use labels and indexes.
-endif::[]
 --
 
 [.is-half.left]
@@ -468,29 +403,32 @@ RETURN  p
 ----
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 When you specify this `MATCH` clause to use the `shortestPath()' function as shown here with an _unbounded_ varying length, you will see this warning:
-endif::[]
+--
 
 [.is-half.right]
 --
 image::{imagedir}/ShortestPathWarning.png[ShortestPathWarning,width=600,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 You should heed the warning, especially for large graphs.
 You can also read the _Graph Algorithms_ documentation about the shortest path algorithm, which performs even better than the one that is build into Cypher.
 
 Here is the result returned:
-endif::[]
+--
 
 image::{imagedir}/ShortestPath1.png[ShortestPath1,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice that the graph engine has traversed many types of relationships to get to the end node.
 
 When you use `ShortestPath()`, you can specify a upper limits for the shortest path. In addition, you should aim to provide the patterns for the from an to nodes that execute efficiently. For example, use labels and indexes.
-endif::[]
+--
 
 === Returning a subgraph
 
@@ -499,24 +437,6 @@ endif::[]
 In using `shortestPath()`, the return type is a path. A subgraph is essentially as set of paths derived from your `MATCH` clause.
 
 For example, here is an example where we want a subgraph of all nodes connected to the movie, The Replacements:
-
-//duplicate content
-ifdef::backend-revealjs[]
-If in Neo4j Browser where have unset *Connect result nodes*, the result is visualized as a graph because the query has returned a set of paths which are a subgraph.
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-If you view the result as text, you will see that it is simply a set of rows where a movie is connected to a person:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-Some actor relationships have data for the roles property or summary property of the relationship. Note that in this text, the name of the relationship is not shown, but is it in the graph visualization.
-Later in this course, you will learn more about working with lists, which is what this data represents.
-
-The APOC library is very useful if you want to query the graph to obtain subgraphs.
-endif::[]
 --
 
 [source,cypher]
@@ -526,11 +446,12 @@ WHERE m.title = 'The Replacements'
 RETURN paths
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 If in Neo4j Browser where have unset *Connect result nodes*, the result is visualized as a graph because the query has returned a set of paths which are a subgraph.
 
 Here is the result of this query:
-endif::[]
+--
 
 [.is-half.left]
 --
@@ -539,19 +460,22 @@ image::{imagedir}/Subgraph1.png[Subgraph1,width=800,align=center]
 
 [.is-half.right]
 --
-ifndef::backend-revealjs[]
+
+[.notes]
+--
 If you view the result as text, you will see that it is simply a set of rows where a movie is connected to a person:
-endif::[]
+--
 
 image::{imagedir}/Subgraph2.png[Subgraph2,width=800,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Some actor relationships have data for the roles property or summary property of the relationship. Note that in this text, the name of the relationship is not shown, but is it in the graph visualization.
 Later in this course, you will learn more about working with lists, which is what this data represents.
 
 The APOC library is very useful if you want to query the graph to obtain subgraphs.
-endif::[]
+--
 
 === Specifying optional pattern matching
 
@@ -560,17 +484,6 @@ endif::[]
 `OPTIONAL MATCH` matches patterns with your graph, just like `MATCH` does.
 The difference is that if no matches are found, `OPTIONAL MATCH` will use NULLs for missing parts of the pattern.
 `OPTIONAL MATCH` could be considered the Cypher equivalent of the outer join in SQL.
-
-//duplicate content
-ifdef::backend-revealjs[]
-Here is an example where we query the graph for all people whose name starts with _James_.
-The `OPTIONAL MATCH` is specified to include people who have reviewed movies:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_ value is returned for the movie part of the query, as well as the relationship.
-endif::[]
 --
 
 [.is-half.left]
@@ -580,10 +493,11 @@ Here is a subgraph of our movies graph with all people named James and their rel
 image::{imagedir}/TheJames.png[TheJames,width=800,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is an example where we query the graph for all people whose name starts with _James_.  
 The `OPTIONAL MATCH` is specified to include people who have reviewed movies: 
-endif::[]
+--
 
 [.is-half.right]
 --
@@ -602,9 +516,10 @@ endif::[]
 image::{imagedir}/OptionalMatch.png[OptionalMatch,width=800,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_ value is returned for the movie part of the query, as well as the relationship.
-endif::[]
+--
 
 [.title.has-gold-background.has-team-background]
 === *Exercise 5: Working with patterns in queries*

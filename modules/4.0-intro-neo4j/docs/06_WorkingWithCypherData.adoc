@@ -52,14 +52,6 @@ At the end of this module, you should be able to write Cypher statements to:
 When you return results as values, Cypher automatically returns the values grouped by a common value.
 
 For example, with this query:
-
-// duplicate content
-ifdef::backend-revealjs[]
-Notice that the rows are grouped by the value of m.title.
-In this example three people review the movie, The Replacements, and they are grouped together in the rows returned.
-How Cypher groups values returned by default will depend on the number of nodes of each type in the graph.
-This graph has more _Person_ nodes than _Movie_ nodes so the grouping is done based upon the movie titles.
-endif::[]
 --
 
 [source,cypher]
@@ -74,12 +66,13 @@ endif::[]
 
 image::{imagedir}/DefaultGrouping.png[DefaultGrouping,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice that the rows are grouped by the value of m.title.
 In this example three people review the movie, The Replacements, and they are grouped together in the rows returned.
 How Cypher groups values returned by default will depend on the number of nodes of each type in the graph.
 This graph has more _Person_ nodes than _Movie_ nodes so the grouping is done based upon the movie titles.
-endif::[]
+--
 
 ==== Using `count()` to aggregate
 
@@ -90,18 +83,6 @@ Cypher has a `count()` function that you can use to perform a count of nodes, re
 When you aggregate in a Cypher query, this means that the query must process all patterns in the MATCH clause to complete the aggregation to either return results or perform the next part of the query.
 
 Here is an example:
-
-// duplicate content
-ifdef::backend-revealjs[]
-The query engine processed all nodes and relationships in the pattern so that it could perform a count of all movies for a particular actor/director pair in the graph.
-Then the results returned grouped the results by the name of the director.
-
-Aggregation in Cypher is different from aggregation in SQL. In Cypher, you need not specify a grouping key. As soon as an aggregation function is used, all non-aggregated result columns become grouping keys.
-The grouping is implicitly done, based upon the fields in the `RETURN` clause.
-
-For example, in the Cypher statement shown above, all rows returned with the same values for _a.name_ and _d.name_ are counted and only returned once.
-That is, there are exactly four movies that Lana Washowski directed with Hugo Weaving acting in.
-endif::[]
 --
 
 [source,cypher]
@@ -116,7 +97,8 @@ endif::[]
 
 image::{imagedir}/AggregationWithCountm.png[AggregationWithCountm,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 The query engine processed all nodes and relationships in the pattern so that it could perform a count of all movies for a particular actor/director pair in the graph.
 Then the results returned grouped the results by the name of the director.
 
@@ -125,7 +107,7 @@ The grouping is implicitly done, based upon the fields in the `RETURN` clause.
 
 For example, in the Cypher statement shown above, all rows returned with the same values for _a.name_ and _d.name_ are counted and only returned once.
 That is, there are exactly four movies that Lana Washowski directed with Hugo Weaving acting in.
-endif::[]
+--
 
 ==== Collecting results
 
@@ -135,12 +117,6 @@ Cypher has a built-in function, `collect()` that enables you to aggregate a valu
 The value can be a property value, a node, a relationship, or a path.
 
 Here is an example where we collect the list of movie titles that _Tom Cruise_ acted in:
-
-//duplicate content
-ifdef::backend-revealjs[]
-Notice that the list is defined in square brackets and each element of the list is separated by a comma.
-This list contains a set of strings.
-endif::[]
 --
 
 [source,cypher]
@@ -156,10 +132,11 @@ endif::[]
 
 image::{imagedir}/TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice that the list is defined in square brackets and each element of the list is separated by a comma.
 This list contains a set of strings.
-endif::[]
+--
 
 ==== Collecting nodes
 
@@ -203,11 +180,6 @@ If you specify `count(*)`, the graph engine calculates the number of rows retrie
 When you use `count()`, the graph engine does an implicit group by based upon the aggregation.
 
 Here is an example where we count the paths retrieved where an actor and director collaborated in a movie and the `count()` function is used to count the number of paths found for each actor/director collaboration.
-
-//duplicate content
-ifdef::backend-revealjs[]
-Notice here that the _director.name_ value is a grouping key for the results returned.
-endif::[]
 --
 
 [source,cypher]
@@ -223,9 +195,10 @@ endif::[]
 
 image::{imagedir}/ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice here that the _director.name_ value is a grouping key for the results returned.
-endif::[]
+--
 
 ==== Using `collect()` and `size()`
 
@@ -254,12 +227,6 @@ RETURN actor.name, director.name, size(collect(m)) AS collaborations,
 Thus far, you have specified both string and numeric types in your Cypher queries. 
 You have also learned that nodes and relationships can have properties, whose values are structured like JSON objects when returned in the Neo4j Browser UI.
 For example:
-
-//duplicate content
-ifdef::backend::revealjs[]
-You have also learned that the `collect()` function can create lists of values or objects where a list is comma-separated and you can use the `IN` keyword to search for a value in a list.
-Next, you will learn more about working with lists and dates in Cypher.
-endif::[]
 --
 
 image::{imagedir}/MovieNodeinTable.png[MovieNodeinTable,width=400,align=center]
@@ -276,12 +243,7 @@ endif::[]
 
 [.notes]
 --
-There are many built-in Cypher functions that you can use to build or access elements in lists.  
-
-//duplicate content
-ifdef::backend-revealjs[]
-Notice that when viewing nodes in table view, each node is shown with {} notation and key value pairs. This structure is called a Map in Cypher,
-endif::[]
+There are many built-in Cypher functions that you can use to build or access elements in lists.
 --
 
 [.statement]
@@ -299,9 +261,10 @@ endif::[]
 
 image::{imagedir}/CastList1.png[CastList1,width=600,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice that when viewing nodes in table view, each node is shown with {} notation and key value pairs. This structure is called a Map in Cypher,
-endif::[]
+--
 
 ==== Using strings in lists
 
@@ -326,13 +289,6 @@ image::{imagedir}/CastList2.png[CastList2,width=900,align=center]
 You can access particular elements of the list using the `[index-value]` notation where a list begins with index 0.
 
 In this example we return the first cast member for each movie.
-
-//duplicate content
-ifdef::backend-revealjs[]
-In this result we return the first cast member (indexed by 0) of each list for every movie.
-
-You can read more about working with lists in the _List Functions_ section of the _Neo4j Cypher Manual_.
-endif::[]
 --
 
 [source,cypher]
@@ -348,11 +304,12 @@ endif::[]
 
 image::{imagedir}/CastList3.png[CastList3,width=900,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 In this result we return the first cast member (indexed by 0) of each list for every movie.
 
 You can read more about working with lists in the _List Functions_ section of the _Neo4j Cypher Manual_.
-endif::[]
+--
 
 ==== Working with maps
 
@@ -398,11 +355,6 @@ Map projections are when you can use retrieved nodes to create or return some of
 A _Movie_ node can have the properties, title, released, and tagline.
 Suppose we want to return the _Movie_ node information, but without the tagline property?
 You can do so as follows using Map projections:
-
-// duplicate content
-ifdef::backend-revealjs[]
-You can learn more about Map projections in the _Cypher Reference Manual_.
-endif::[]
 --
 
 [source,cypher]
@@ -417,9 +369,10 @@ Here is what is returned, the movie node data with only the title and released v
 
 image::{imagedir}/MapProjection.png[MapProjection,width=700,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 You can learn more about Map projections in the _Cypher Reference Manual_.
-endif::[]
+--
 
 ==== Working with dates
 

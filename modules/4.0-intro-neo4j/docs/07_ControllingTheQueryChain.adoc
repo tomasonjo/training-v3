@@ -79,13 +79,6 @@ Here is an example where we start the query processing by retrieving all actors 
 During the query processing, want to only return actors that have 2 or 3 movies.
 All other actors and the aggregated results are filtered out. This type of query is a replacement for SQL's "HAVING" clause.
 The `WITH` clause does the counting and collecting, and the intermediate result is used in the subsequent `WHERE` clause to test.
-
-//duplicate content
-ifdef::backend-revealjs[]
-When you use the `WITH` clause, you specify the variables from the previous part of the query you want to pass on to the next part of the query.
-In this example, the variable _a_ is specified to be passed on in the query, but _m_ is not. Since _m_ is not specified to be passed on, _m_ will not be available later in the query.
-Notice that for the `RETURN` clause, _a_, _numMovies_, and _movies_ are available for use.
-endif::[]
 --
 
 [source,cypher]
@@ -102,11 +95,12 @@ endif::[]
 
 image::{imagedir}/ActorsWith2or3Movies.png[ActorsWith2or3Movies,width=700,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 When you use the `WITH` clause, you specify the variables from the previous part of the query you want to pass on to the next part of the query. 
 In this example, the variable _a_ is specified to be passed on in the query, but _m_ is not. Since _m_ is not specified to be passed on, _m_ will not be available later in the query. 
 Notice that for the `RETURN` clause, _a_, _numMovies_, and _movies_ are available for use.
-endif::[]
+--
 
 ifndef::backend-revealjs[]
 [NOTE]
@@ -126,14 +120,6 @@ You have learned to create lists of nodes during a query using the `collect()` f
 If you have collected a subset of nodes in a query, you can use `UNWIND` to return the rows for a collection.
 
 Here is an example:
-
-//duplicate content
-ifdef::backend-revealjs[]
-The query retrieves all people who acted in movies. During the query, for each movie, the list of actors are collected, as well as the count of actors.
-The `WITH` clause makes the variables _actors_, _actorCount_, and _m_ available for the rest of the query processing.
-The UNWIND clause turns the list of actors into rows of actors.
-Then the query returns the title of the movie, the actor count, and the actor name for each row of the actors collection.
-endif::[]
 --
 [source,cypher]
 ----
@@ -144,12 +130,13 @@ UNWIND actors AS actor
 RETURN m.title, actorCount, actor.name
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 The query retrieves all people who acted in movies. During the query, for each movie, the list of actors are collected, as well as the count of actors.
 The `WITH` clause makes the variables _actors_, _actorCount_, and _m_ available for the rest of the query processing.
 The UNWIND clause turns the list of actors into rows of actors.
 Then the query returns the title of the movie, the actor count, and the actor name for each row of the actors collection.
-endif::[]
+--
 
 ifndef::backend-revealjs[]
 Here is the result returned:
@@ -166,12 +153,6 @@ You find that you use `WITH` and `UNWIND` frequently when you are importing data
 --
 Here is an example where we retrieve all movies reviewed by a person.
 For a particular movie found, we want the list of directors of the movie so we do a second query, a subquery as follows:
-
-//duplicate content
-ifdef::backend-revealjs[]
-For the second `MATCH` clause, we use the found movie nodes, _m_.
-The `RETURN` clause has access to the movie, rating by that reviewer, the name of the reviewer, and the collection of director names for that movie.
-endif::[]
 --
 
 [source,cypher]
@@ -182,10 +163,11 @@ MATCH (m)<-[:DIRECTED]-(d:Person)
 RETURN m.title, rv.rating, r.name, collect(d.name)
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 For the second `MATCH` clause, we use the found movie nodes, _m_.
 The `RETURN` clause has access to the movie, rating by that reviewer, the name of the reviewer, and the collection of director names for that movie.
-endif::[]
+--
 
 ifndef::backend-revealjs[]
 Here is the result returned:
@@ -198,13 +180,6 @@ image::{imagedir}/WITH2MATCHES.png[WITH2MATCHES,width=800,align=center]
 [.notes]
 --
 Here is another example where we want to find all actors who have acted in at least five movies, and find (optionally) the movies they directed and return the person and those movies.
-
-//duplicate content
-ifdef::backend-revealjs[]
-In this example, we first retrieve all people, but then specify a pattern in the `WITH` clause where we calculate the number of `:ACTED_IN` relationships retrieved using the `size()` function.
-If this value is greater than five, we then also retrieve the `:DIRECTED` paths to return the name of the person and the title of the movie they directed. In the result, we see that these actors acted in more than five movies, but _Tom Hanks_ is the only actor who directed a movie and thus the only person to have a value for the movie.
-Notice here that _m_ only refers to movies that were directed by _p_.
-endif::[]
 --
 
 [source,cypher]
@@ -222,11 +197,12 @@ endif::[]
 
 image::{imagedir}/PopularActorsWithAtLeast5Movies.png[PopularActorsWithAtLeast5Movies,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 In this example, we first retrieve all people, but then specify a pattern in the `WITH` clause where we calculate the number of `:ACTED_IN` relationships retrieved using the `size()` function.
 If this value is greater than five, we then also retrieve the `:DIRECTED` paths to return the name of the person and the title of the movie they directed. In the result, we see that these actors acted in more than five movies, but _Tom Hanks_ is the only actor who directed a movie and thus the only person to have a value for the movie.
 Notice here that _m_ only refers to movies that were directed by _p_.
-endif::[]
+--
 
 === Performing subqueries with `CALL`
 

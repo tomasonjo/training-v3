@@ -119,18 +119,6 @@ You use the simple `MERGE` clause to:
 [.notes]
 --
 Here is the simplified syntax for the `MERGE` clause for creating a node:
-
-//duplicate content
-ifdef::backend-revealjs[]
-If there is an existing node with  _Label_ and _nodeProperties_  found in the graph, no node is created.
-If, however the node is not found in the graph, then the node is created.
-
-When you specify _nodeProperties_ for `MERGE`, you should only use properties that satisfy some sort of uniqueness constraint.
-You will learn about uniqueness constraints later in this course.
-
-Here is what we currently have in the graph for the _Person_, _Michael Caine_.
-This node has values for _name_ and _born_. Notice also that the label for the node is _Person_.
-endif::[]
 --
 
 [source.big,cypher]
@@ -139,7 +127,8 @@ MERGE (variable:Label{nodeProperties})
 RETURN variable
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 If there is an existing node with  _Label_ and _nodeProperties_  found in the graph, no node is created.
 If, however the node is not found in the graph, then the node is created.
 
@@ -148,7 +137,7 @@ You will learn about uniqueness constraints later in this course.
 
 Here is what we currently have in the graph for the _Person_, _Michael Caine_. 
 This node has values for _name_ and _born_. Notice also that the label for the node is _Person_.
-endif::[]
+--
 
 [source,cypher]
 ----
@@ -164,12 +153,6 @@ image::{imagedir}/MichaelCaine.png[MichaelCaine,width=600,align=center]
 [.notes]
 --
 In this example, we use `MERGE` to find a node with the _Actor_ label with the key property _name_ of _Michael Caine_, and we set the _born_ property to _1933_. Our data model has never used the label, _Actor_ so this is a new entity type in our graph.
-
-//duplicate content
-ifdef::backend-revealjs[]
-Here is the result of running this Cypher example.
-We do not find a node with the label _Actor_ so the graph engine creates one.
-endif::[]
 --
 
 [source,cypher]
@@ -179,10 +162,11 @@ SET a.born = 1933
 RETURN a
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is the result of running this Cypher example.
 We do not find a node with the label _Actor_ so the graph engine creates one.
-endif::[]
+--
 
 image::{imagedir}/MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=600,align=center]
 
@@ -203,30 +187,18 @@ A best practice when using `MERGE` is to only specify properties that have uniqu
 If we were to repeat this `MERGE` clause, no additional _Actor_ nodes would be created in the graph.
 
 At this point, however, we have two _Michael Caine_ nodes in the graph, one of type _Person_, and one of type _Actor_:
-
-//duplicate content
-ifdef::backend-revealjs[]
-Be mindful that node labels and the properties for a node are significant when merging nodes.
-
-If we were to run `MERGE` code again:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-We would find that the Michael Caine node with the label Actor is not created.
-The `MERGE` found this node in the graph and did not create a new one.
-endif::[]
 --
 [.is-half.left]
 --
 image::{imagedir}/TwoMichaelCaines.png[TwoMichaelCaines,width=800,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Be mindful that node labels and the properties for a node are significant when merging nodes.
 
 If we were to run `MERGE` code again:
-endif::[]
+--
 
 [.is-half.right]
 --
@@ -240,10 +212,11 @@ WHERE p.name = 'Michael Caine'
 RETURN p
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 We would find that the Michael Caine node with the label Actor is not created.
 The `MERGE` found this node in the graph and did not create a new one.
-endif::[]
+--
 
 image::{imagedir}/OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=center]
 --
@@ -312,6 +285,7 @@ Note:
 endif::[]
 Although, you can leave out the direction of the relationship being created with the `MERGE`, in which case a left-to-right arrow will be assumed, a best practice is to always specify the direction of the relationship. However, if you have  bidirectional relationships and you want to avoid creating duplicate relationships, you [.underline]#must# leave off the arrow.
 --
+
 == Specifying creation behavior when merging
 
 [.notes]
@@ -319,13 +293,6 @@ Although, you can leave out the direction of the relationship being created with
 You can use the `MERGE` clause, along with `ON CREATE` to assign specific values to a node being created as a result of an attempt to merge.
 
 Here is an example where create a new node, specifying property values for the new node:
-
-//duplicate content
-ifdef::backendrevealjs[]
-We know that there are no existing _Sir Michael Caine_ _Person_ nodes. When the `MERGE` executes, it will not find any matching nodes so it will create one and will execute the `ON CREATE` clause where we set the _birthplace_ and _born_ property values.
-
-Here is the result of executing this code:
-endif::[]
 --
 
 [source,cypher]
@@ -336,12 +303,13 @@ ON CREATE SET a.birthPlace = 'London',
 RETURN a
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 We know that there are no existing _Sir Michael Caine_ _Person_ nodes.
 When the `MERGE` executes, it will not find any matching nodes so it will create one and will execute the `ON CREATE` clause where we set the _birthplace_ and _born_ property values.
 
 Here is the result of executing this code:
-endif::[]
+--
 
 image::{imagedir}/CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=800,align=center]
 
@@ -368,12 +336,6 @@ image::{imagedir}/AllMichaelCaines.png[AllMichaelCaines,width=600,align=center]
 --
 You can also specify an `ON MATCH` clause during merge processing.
 If the exact node is found, you can update its properties or labels. Here is an example:
-
-//duplicate content
-ifdef::backend-revealjs[]
-And here we see that only the exiting node with the name, Sir Michael Caine is updated with the new _birthPlace_.
-Furthermore, no new node is created for Sir Michael Caine.
-endif::[]
 --
 
 [source,cypher]
@@ -384,10 +346,11 @@ ON CREATE SET a.born = 1934,
 ON MATCH SET a.birthPlace = 'UK'
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 And here we see that only the exiting node with the name, Sir Michael Caine is updated with the new _birthPlace_.
 Furthermore, no new node is created for Sir Michael Caine.
-endif::[]
+--
 
 image::{imagedir}/UpdateToUK.png[UpdateToUK,width=400,align=center]
 
@@ -398,18 +361,6 @@ image::{imagedir}/UpdateToUK.png[UpdateToUK,width=400,align=center]
 Using `MERGE` to create relationships is expensive and you should only do it when you need to ensure that a relationship is unique and you are [underline]#not# sure if it already exists.
 
 In this example, we use the `MATCH` clause to find all _Person_ nodes that represent _Michael Caine_ and we find the movie, _Batman Begins_ that we want to connect to all of these nodes. We already have a connection between one of the _Person_ nodes and the _Movie_ node. We do not want this relationship to be duplicated. This is where we can use `MERGE` as follows:
-
-//duplicate content
-ifdef::backend-revealjs[]
-Here is the result of executing this Cypher statement. It went through all the nodes and added the relationship to the nodes that didn't already have the relationship.
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-You must be aware of the  behavior of the `MERGE` clause and how it will automatically create nodes and relationships.
-`MERGE` tries to find a full pattern and if it doesn't find it, it creates that full pattern.
-That's why in most cases you should first `MERGE` your nodes and then your relationship afterwards.
-endif::[]
 --
 
 [source,cypher]
@@ -420,17 +371,19 @@ MERGE (p)-[:ACTED_IN]->(m)
 RETURN p, m
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is the result of executing this Cypher statement. It went through all the nodes and added the relationship to the nodes that didn't already have the relationship.
-endif::[]
+--
 
 image::{imagedir}/MergeRelationships.png[MergeRelationships,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 You must be aware of the  behavior of the `MERGE` clause and how it will automatically create nodes and relationships.
 `MERGE` tries to find a full pattern and if it doesn't find it, it creates that full pattern.
 That's why in most cases you should first `MERGE` your nodes and then your relationship afterwards.
-endif::[]
+--
 
 === Use MERGE carefully
 

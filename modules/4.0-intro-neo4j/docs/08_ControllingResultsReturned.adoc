@@ -226,12 +226,6 @@ image::{imagedir}/Limit.png[Limit,width=600,align=center]
 Furthermore, you can use the `LIMIT` keyword with the `WITH` clause to limit intermediate results.
 A best practice is to limit the number of rows processed before they are collected.
 Here is an example where we want to limit the number of actors collected in this query by the number 6:
-
-//duplicate content
-ifndef::backend-revealjs[]
-At most 6 nodes that are in the pattern of the `MATCH` clause are retrieved. Two rows are returned.
-Notice that the Keanu Reeves value is returned in the second row because that node represents the upper limit of the number of _Person_ nodes retrieved in this query pattern.
-endif::[]
 --
 
 [source,cypher]
@@ -247,10 +241,11 @@ endif::[]
 
 image::{imagedir}/Limit2.png[Limit2,width=600,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 At most 6 nodes that are in the pattern of the `MATCH` clause are retrieved. Two rows are returned.
 Notice that the Keanu Reeves value is returned in the second row because that node represents the upper limit of the number of _Person_ nodes retrieved in this query pattern.
-endif::[]
+--
 
 === Another example using `LIMIT`
 

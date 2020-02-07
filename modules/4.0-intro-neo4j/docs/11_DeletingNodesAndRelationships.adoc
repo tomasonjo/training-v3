@@ -49,16 +49,6 @@ At the end of this module, you should be able to write Cypher statements to:
 [.notes]
 --
 Suppose you have created a _Person_ node for Jane Doe:
-
-//duplicate content
-ifdef::backend-revealjs[]
-You can delete a node provided:
-
-. You can obtain a reference to it (typically using `MATCH`)
-. The node has no relationships
-
-So if you accidentally created multiple nodes in the graph, you can retrieve them with a `MATCH` clause and delete them.
-endif::[]
 --
 
 [source,cypher]
@@ -82,14 +72,15 @@ endif::[]
 
 image::{imagedir}/DeleteJaneDoe.png[DeleteJaneDoe,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 You can delete a node provided:
 
 . You can obtain a reference to it (typically using `MATCH`)
 . The node has no relationships
 
 So if you accidentally created multiple nodes in the graph, you can retrieve them with a `MATCH` clause and delete them.
-endif::[]
+--
 
 == Deleting relationships
 
@@ -189,11 +180,6 @@ image::{imagedir}/LiamNeesonDeleteError.png[LiamNeesonDeleteError,width=800,alig
 [.notes]
 --
 Here we delete the _Liam Neeson_ node [underline]#and# its relationships to any other nodes:
-
-//duplicate content
-ifdef::backend-revealjs[]
-And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
-endif::[]
 --
 
 [source,cypher]
@@ -209,9 +195,10 @@ endif::[]
 
 image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=400,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
-endif::[]
+--
 
 image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=500,align=center]
 

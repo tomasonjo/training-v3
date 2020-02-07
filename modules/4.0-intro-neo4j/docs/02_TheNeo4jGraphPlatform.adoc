@@ -414,31 +414,14 @@ Show the students the basics of using Neo4j Browser and have them do the same on
 . Show hot to minimize a window.
 . Show how to pin a window.
 --
-ifdef::backend-html5[]
+
 Follow along with this video to become familiar with common tasks in Neo4j Browser.
 
-//*NEED TO UPDATE THIS VIDEO for 4.0*
+video::oHo-lQ79zf0[youtube,width=560,height=315,pdfwidth=100%]
 
 [NOTE]
 Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
 
-// Note: Videos should always use &rel=0 to prevent suggested videos displaying at the end
-++++
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rQTximyaETA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-++++
-endif::backend-html5[]
-
-ifdef::backend-pdf[]
-
-Follow along with with this video (or instructor) to become familiar with common tasks in Neo4j Browser.
-
-You will use Neo4j Browser to populate the Movies database that is used for training as well as syncing your settings and scripts to the cloud.
-
-// Need Youtube URL here for embedding in PDF
-
-*Note*: Before you perform these tasks, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
-
-endif::backend-pdf[]
 
 === Neo4j Bloom
 

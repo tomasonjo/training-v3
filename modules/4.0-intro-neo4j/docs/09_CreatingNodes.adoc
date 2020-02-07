@@ -52,13 +52,6 @@ Recall that a node is an element of a graph representing a domain entity that ha
 
 When you create a node, you can add it to the graph without connecting it to another node.
 In virtually all cases, the nodes that you create in a graph will be connected to other nodes and you will learn about creating these connections (relationships) in the next lesson of this training.
-
-//duplicate content
-ifdef::backend-revealjs[]
-If you plan on referencing the newly created node, you must provide a variable. Whether you provide labels or properties at node creation time is optional. In most cases, you will want to provide some label and property values for a node when created. This will enable you to later retrieve the node. Provided you have a reference to the node (for example, using a `MATCH` clause), you can always add, update, or remove labels and properties at a later time.
-
-Next, you will see some examples of creating a single node in Cypher:
-endif::[]
 --
 
 Here is the simplified syntax for creating a node:
@@ -68,11 +61,12 @@ Here is the simplified syntax for creating a node:
 CREATE (optionalVariable optionalLabels {optionalProperties})
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 If you plan on referencing the newly created node, you must provide a variable. Whether you provide labels or properties at node creation time is optional. In most cases, you will want to provide some label and property values for a node when created. This will enable you to later retrieve the node. Provided you have a reference to the node (for example, using a `MATCH` clause), you can always add, update, or remove labels and properties at a later time.
 
 Next, you will see some examples of creating a single node in Cypher:
-endif::[]
+--
 
 === Example #1
 
@@ -120,19 +114,6 @@ RETURN m.title
 [.notes]
 --
 Here is what you see in Neo4j Browser when you create a node for the movie, _Batman Begins_ where we use the variable, _m_ to return its _title_ property value:
-
-//duplicate content
-ifdef::backend-revealjs[]
-Here is the node when we retrieve it. It is the only node in the graph with both a label of _Action_ so to retrieve it from the graph is straightforward where we only specify the node labels.
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-When the graph engine creates a node, it automatically assigns a read-only, unique ID to the node.
-Here we see that the _id_ of the node is _171_. This is not a property of a node, but rather an internal value.
-
-After you have created a node, you can add more properties or labels to it and most importantly, connect it to another node.
-endif::[]
 --
 
 [.is-half.left]
@@ -141,9 +122,10 @@ endif::[]
 image::{imagedir}/CreateBatmanBegins.png[CreateBatmanBegins,width=600,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is the node when we retrieve it. It is the only node in the graph with both a label of _Action_ so to retrieve it from the graph is straightforward where we only specify the node labels.
-endif::[]
+--
 
 [is-half.right]
 --
@@ -151,12 +133,13 @@ endif::[]
 image::{imagedir}/RetrieveBatmanBegins.png[RetrieveBatmanBegins,width=400,align=center]
 --
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 When the graph engine creates a node, it automatically assigns a read-only, unique ID to the node.  
 Here we see that the _id_ of the node is _171_. This is not a property of a node, but rather an internal value.
 
 After you have created a node, you can add more properties or labels to it and most importantly, connect it to another node.
-endif::[]
+--
 
 == Creating multiple nodes
 
@@ -164,12 +147,7 @@ endif::[]
 --
 You can create multiple nodes by simply separating the nodes specified with commas, or by specifying multiple `CREATE` statements.
 
-Here is an example, where we create some _Person_ nodes that will represent some of the people associated with the movie _Batman Begins_: 
-
-//duplicate content
-ifndef::backend-revealjs[]
-You will learn about merging data later in this course. Constraints are configured globally for a graph and are also covered later in this course.
-endif::[]
+Here is an example, where we create some _Person_ nodes that will represent some of the people associated with the movie _Batman Begins_:
 --
 
 [.is-two-thirds.left]
@@ -202,9 +180,10 @@ image::{imagedir}/CreateMultiplePersonNodes.png[CreateMultiplePersonNodes,width=
 [.statement]
 -- You can add constraints to your graph.
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 You will learn about merging data later in this course. Constraints are configured globally for a graph and are also covered later in this course.
-endif::[]
+--
 
 == Adding labels to a node
 
@@ -233,16 +212,6 @@ If you attempt to add a label to a node for which the label already exists, the 
 [.notes]
 --
 Here is an example where we add the _Fantasy_ label to the node that has a labels, _Movie_ and _Action_:
-
-// duplicate content
-ifdef::backend-revealjs[]
-Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-Notice here that we call the built-in function, `labels()` that returns the set of labels for the node.
-endif::[]
 --
 
 [source,cypher]
@@ -253,15 +222,17 @@ SET m:Fantasy
 RETURN labels(m)
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
-endif::[]
+--
 
 image::{imagedir}/SetFantasyLabel.png[SetFantasyLabel,width=700,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Notice here that we call the built-in function, `labels()` that returns the set of labels for the node.
-endif::[]
+--
 
 == Removing labels from a node
 
@@ -270,16 +241,6 @@ endif::[]
 Perhaps your data model has changed or the underlying data for a node has changed so that the label for a node is no longer useful or valid. 
 
 Here is the simplified syntax for removing a label from a node:
-
-//dupliate content
-ifdef::backend-revealjs[]
-Here is the simplified syntax for removing multiple labels from a node:
-endif::[]
-
-//duplicate content
-ifdef::backend-revealjs[]
-If you attempt to remove a label from a node for which the label does not exist, the `SET` processing is ignored.
-endif::[]
 --
 
 [source.big,cypher]
@@ -288,9 +249,10 @@ endif::[]
 REMOVE x:Label
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Here is the simplified syntax for removing multiple labels from a node:
-endif::[]
+--
 
 [source.big,cypher]
 ----
@@ -298,9 +260,10 @@ endif::[]
 REMOVE x:Label1, x:Label2
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 If you attempt to remove a label from a node for which the label does not exist, the `SET` processing is ignored.
-endif::[]
+--
 
 == Example: Removing labels from a node
 
@@ -328,16 +291,6 @@ image::{imagedir}/RemoveActionLabel.png[RemoveActionLabel,width=600,align=center
 After you have created a node and have a reference to the node, you can add properties to the node, again using the `SET` keyword. 
 
 Here are simplified syntax examples for adding properties to a node referenced by the variable x:
-
-//duplicate content
-ifdef::backend-revealjs[]
-If the property does not exist, it is added to the node. If the property exists, its value is updated. If the value specified is `null`, the property is removed.
-
-Note that the type of data for a property is not enforced.
-That is, you can assign a string value to a property that was once a numeric value and visa versa.
-
-When specify the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if the _propertyNnameX_ exists for the node. If the _propertyNameX_ does not exist for the node, then the property is added to the node.
-endif::[]
 --
 
 [source.big,cypher]
@@ -360,14 +313,15 @@ SET x = {propertyName1: value1, propertyName2: value2}
 SET x += {propertyName1: value1, propertyName2: value2}
 ----
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 If the property does not exist, it is added to the node. If the property exists, its value is updated. If the value specified is `null`, the property is removed. 
 
 Note that the type of data for a property is not enforced.  
 That is, you can assign a string value to a property that was once a numeric value and visa versa.
 
 When specify the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if the _propertyNnameX_ exists for the node. If the _propertyNameX_ does not exist for the node, then the property is added to the node.
-endif::[]
+--
 
 == Example: Adding properties to a node
 
@@ -394,13 +348,6 @@ image::{imagedir}/AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,
 [.notes]
 --
 Here is another example where we set the property values to the movie node using the JSON-style object containing the property keys and values. Note that [.underline]#all# properties must be included in the object.
-
-//duplicate content
-ifdef::backend-revealjs[]
-Note that when you add a property to a node for the first time in the graph, the property key is added to the graph.
-So for example, in the previous example, we added the _videoFormat_ and _grossMillions_ property keys to the graph as they have never been used before for a node in the graph.
-Once a property key is added to the graph, it is [.underline]#never# removed.
-endif::[]
 --
 
 [source,cypher]
@@ -421,11 +368,12 @@ endif::[]
 
 image::{imagedir}/SetPropertiesObject.png[SetPropertiesObject,width=800,align=center]
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Note that when you add a property to a node for the first time in the graph, the property key is added to the graph.
 So for example, in the previous example, we added the _videoFormat_ and _grossMillions_ property keys to the graph as they have never been used before for a node in the graph.
 Once a property key is added to the graph, it is [.underline]#never# removed.
-endif::[]
+--
 
 == Viewing property keys
 
