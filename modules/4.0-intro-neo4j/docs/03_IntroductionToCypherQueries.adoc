@@ -262,13 +262,7 @@ image::{imagedir}/PersonNodes-graph.png[PersonNodes-graph,width=700, align=cente
 
 [.is-half.right]
 --
-ifdef::backend-revealjs[]
-Note:
-endif::[]
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
-[.statement]
 When you specify a pattern for a `MATCH` clause, you should always specify a node label if possible. In doing so, the graph engine uses an index to retrieve the nodes which will perform better than not using a label for the `MATCH`.
 --
 

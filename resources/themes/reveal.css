@@ -979,6 +979,15 @@ span.fragment.check {
   background-color: transparent;
 }
 
+/* admonition */
+.reveal .admonitionblock {
+  font-size: 0.7em;
+}
+
+.reveal .admonitionblock .title {
+  font-weight: bold;
+}
+
 /* hljs */
 .hljs {
   color: #333333;
