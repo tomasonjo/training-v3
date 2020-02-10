@@ -407,6 +407,11 @@ body {
   width: 75%;
 }
 
+.is-full {
+  width: 100%;
+  clear: both;
+}
+
 .left {
   float: left;
 }
