@@ -211,9 +211,11 @@ WHERE p.name='Jack Nicholson' AND exists(m.tagline)
 RETURN m.title, m.tagline
 ----
 
+ifndef::backend-revealjs[]
 Here is the result:
+endif::[]
 
-image::{imagedir}/JackNicholsonMoviesWithTaglines.png[JackNicholsonMoviesWithTaglines,width=900,align=center]
+image::{imagedir}/JackNicholsonMoviesWithTaglines.png[JackNicholsonMoviesWithTaglines,width=1100,align=center]
 
 ==== Testing strings
 
@@ -314,7 +316,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/WroteMovies.png[WroteMovies,width=800,align=center]
+image::{imagedir}/WroteMovies.png[WroteMovies,width=700,align=center]
 
 ====  Example: Testing with patterns - 2
 
@@ -351,7 +353,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/ExistsPattern.png[ExistsPattern,width=700,align=center]
+image::{imagedir}/ExistsPattern.png[ExistsPattern,width=650,align=center]
 
 ==== Testing with list values
 
@@ -403,7 +405,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/UsingINRoles.png[UsingINRoles,width=600,align=center]
+image::{imagedir}/UsingINRoles.png[UsingINRoles,width=800,align=center]
 
 ifndef::backend-revealjs[]
 Later in this course, you will learn how to create lists from your queries by aggregating data in the graph.
@@ -412,7 +414,8 @@ endif::[]
 
 [NOTE]
 [.statement]
-There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses. You can learn more about these syntax elements in the _Neo4j Cypher Manual_ and the _Cypher Refcard_.
+There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses.
+You can learn more about these syntax elements in the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] and the https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard].
 
 [.title.has-green-background.has-team-background]
 === *Exercise 4: Filtering queries using the `WHERE` clause*
@@ -564,7 +567,7 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.has-green-background.has-puzzle-backround]
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher `WHERE` clauses to test:

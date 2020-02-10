@@ -246,6 +246,7 @@ Data scientists can use the relationships in a data model to help enterprises ma
 
 In this video, you will see the benefits of using the native graph database, Neo4j.
 
+[.center]
 video::GM9bB4ytGao[youtube,width=560,height=315,pdfwidth=100%]
 
 === Querying a graph is intuitive in Cypher
@@ -255,8 +256,7 @@ video::GM9bB4ytGao[youtube,width=560,height=315,pdfwidth=100%]
 If you have ever tried to write a SQL statement with a large number of JOINs, you know that you quickly lose sight of what the query actually does, due to all tables that are required to connect the data.
 --
 
-[.is-half.left]
---
+[.statement]
 For example, in an organizational domain, here is what a SQL statement that lists the employees in the IT Department would look like:
 
 [source]
@@ -268,10 +268,8 @@ LEFT JOIN Department
   ON Department.Id = Person_Department.DepartmentId
 WHERE Department.name = "IT Department"
 ----
---
 
-[.is-half.right]
---
+[.statement]
 In contrast, Cypher syntax stays clean and focused on domain concepts since queries are expressed visually:
 
 [source,cypher]
@@ -280,7 +278,7 @@ MATCH (p:Person)<-[:EMPLOYEE]-(d:Department)
 WHERE d.name = "IT Department"
 RETURN p.name
 ----
---
+
 
 === Use cases for graph databases
 
@@ -404,6 +402,7 @@ As you learn Cypher in this course, you will explore all of these node and relat
 
 [.is-half.left]
 --
+[.statement]
 As a developer just learning Neo4j and Cypher, you will use the very simple Movies graph data model.
 If, however, you are curious about how other developers have created graph data models for Neo4j, you can explore the https://neo4j.com/graphgists/[graphgists page].
 --
@@ -422,6 +421,7 @@ You can explore this site to see how other applications have modeled their data 
 
 [.is-half.left]
 --
+[.statement]
 For example, here is the _Exploring a Conference_ graphgist that has a description of the model, how to load the sample data, and how to query the data.
 --
 [.is-half.right]

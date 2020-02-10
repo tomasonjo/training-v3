@@ -51,8 +51,6 @@ ifndef::backend-revealjs[]
 Here is the query to do this:
 endif::[]
 
-[.is-half.left]
---
 [source,cypher]
 ----
 MATCH (follower:Person)-[:FOLLOWS]->(reviewer:Person)-[:REVIEWED]->(m:Movie)
@@ -64,7 +62,9 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/TheReplacements.png[TheReplacements,width=800,align=center]
+[.is-half.right]
+--
+image::{imagedir}/TheReplacements.png[TheReplacements,width=1000,align=center]
 --
 
 [.notes]
@@ -76,9 +76,9 @@ Then it found all _Person_ nodes who follow the people who reviewed the movie, P
 In all, six relationships were traversed.
 --
 
-[.is-half.right]
+[.is-half.left]
 --
-image::{imagedir}/TheReplacementsTraversal.png[TheReplacementsTraversal,width=400,align=center]
+image::{imagedir}/TheReplacementsTraversal.png[TheReplacementsTraversal,width=600,align=center]
 --
 
 === Specifying multiple `MATCH` patterns
@@ -121,7 +121,7 @@ endif::[]
 
 [.is-half.right]
 --
-image::{imagedir}/Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=600,align=center]
+image::{imagedir}/Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=400,align=center]
 --
 
 [.notes]
@@ -160,8 +160,7 @@ Here we retrieve the actors who acted in the same movies as _Keanu Reeves_, but 
 To do this, we specify two paths for the `MATCH`:
 --
 
-[.is-half.left]
---
+
 [source,cypher]
 ----
 MATCH (keanu:Person)-[:ACTED_IN]->(movie:Movie)<-[:ACTED_IN]-(n:Person),
@@ -171,7 +170,7 @@ WHERE keanu.name='Keanu Reeves' AND
 AND NOT (hugo)-[:ACTED_IN]->(movie)
 RETURN n.name
 ----
---
+
 
 [.notes]
 --
@@ -181,7 +180,7 @@ You should only perform these types of queries if you know the data well and the
 If you click the warning symbol in the top left corner, it produces an explanation result pane.
 --
 
-[.is-half.right]
+[.is-half.left]
 --
 image::{imagedir}/CartesianProductWarning.png[CartesianProductWarning,width=600,align=center]
 --
@@ -190,7 +189,10 @@ ifndef::backend-revealjs[]
 Here is the result of executing this query:
 endif::[]
 
+[.is-half.right]
+--
 image::{imagedir}/KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
+--
 
 ==== Example: Two `MATCH` patterns required
 
@@ -227,8 +229,7 @@ Here is an example query where multiple MATCH clauses are used:
 
 --
 
-[.is-half.left]
---
+
 [source,cypher]
 ----
 MATCH (valKilmer:Person)-[:ACTED_IN]->(m:Movie)
@@ -236,7 +237,7 @@ MATCH (actor:Person)-[:ACTED_IN]->(m)
 WHERE valKilmer.name = 'Val Kilmer'
 RETURN m.title as movie , actor.name
 ----
---
+
 
 [.notes]
 --
@@ -248,8 +249,7 @@ The anchor of the `MATCH` clause is the Top Gun _Movie_node.
 When the query engine traverses the graph for these `MATCH` clauses, we see that the _ACTED_IN_ relationship is traversed twice.
 --
 
-
-[.is-half.right]
+[.is-half.left]
 --
 image::{imagedir}/ValKilmerCoActorsMultipleMatchTraversal.png[ValKilmerCoActorsMultipleMatchTraversal,width=400,align=center]
 --
@@ -258,7 +258,10 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
+[.is-half.right]
+--
 image::{imagedir}/ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMatch,width=600,align=center]
+--
 
 ==== Traversal: Multiple patterns in a `MATCH` clause
 
@@ -267,8 +270,6 @@ image::{imagedir}/ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMa
 Here is the same example where multiple patterns are specified in a single `MATCH` clause:
 --
 
-[.is-half.left]
---
 [source,cypher]
 ----
 MATCH (valKilmer:Person)-[:ACTED_IN]->(m:Movie),
@@ -276,7 +277,7 @@ MATCH (valKilmer:Person)-[:ACTED_IN]->(m:Movie),
 WHERE valKilmer.name = 'Val Kilmer'
 RETURN m.title as movie , actor.name
 ----
---
+
 
 [.notes]
 --
@@ -285,7 +286,7 @@ With this scenario, the _ACTED_IN_ relationship is only traversed once.
 We already know the _Person_ node for Val Kilmer so we need not return it.
 --
 
-[.is.half.right]
+[.is-half.left]
 --
 image::{imagedir}/ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSingleMatchTraversal,width=400,align=center]
 --
@@ -295,8 +296,10 @@ image::{imagedir}/ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSin
 The result returned is smaller because it does not include the Val Kilmer node.
 --
 
+[.is-half.right]
+--
 image::{imagedir}/ValKilmerCoActorsSingleMatch.png[ValKilmerCoActorsSingleMatch,width=800,align=center]
-
+--
 [.notes]
 --
 A best practice is to traverse as few nodes as possible so in this example, using multiple `MATCH` patterns is best.
@@ -311,7 +314,7 @@ Think of the _connected_ relationship in _LinkedIn_ and how connections are made
 The _Movie_ database for this training does not have much depth of relationships, but it does have the _:FOLLOWS_ relationship that you learned about earlier:
 --
 
-[.is-half.left]
+[.is-one-third.left]
 --
 image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 --
@@ -322,7 +325,7 @@ You write a `MATCH` clause where  you want to find all of the followers of the f
 Here is an example where we want to retrieve all _Person_ nodes that are exactly two hops away:
 --
 
-[.is-half.right]
+[.is-two-thirds.right]
 --
 [source,cypher]
 ----
@@ -392,8 +395,6 @@ A built-in function that you may find useful in a graph that has many ways of tr
 In this example, we want to discover a shortest path between the movies _The Matrix_ and _A Few Good Men_. In our `MATCH` clause, we set the variable _p_ to the result of calling `shortestPath()`, and then return _p_. In the call to `shortestPath()`, notice that we specify `*` for the relationship. This means any relationship; for the traversal.
 --
 
-[.is-half.left]
---
 [source,cypher]
 ----
 MATCH p = shortestPath((m1:Movie)-[*]-(m2:Movie))
@@ -401,14 +402,14 @@ WHERE m1.title = 'A Few Good Men' AND
       m2.title = 'The Matrix'
 RETURN  p
 ----
---
+
 
 [.notes]
 --
 When you specify this `MATCH` clause to use the `shortestPath()' function as shown here with an _unbounded_ varying length, you will see this warning:
 --
 
-[.is-half.right]
+[.is-half.left]
 --
 image::{imagedir}/ShortestPathWarning.png[ShortestPathWarning,width=600,align=center]
 --
@@ -421,7 +422,10 @@ You can also read the _Graph Algorithms_ documentation about the shortest path a
 Here is the result returned:
 --
 
-image::{imagedir}/ShortestPath1.png[ShortestPath1,width=800,align=center]
+[.is-half.right]
+--
+image::{imagedir}/ShortestPath1.png[ShortestPath1,width=500,align=center]
+--
 
 [.notes]
 --
@@ -453,12 +457,9 @@ If in Neo4j Browser where have unset *Connect result nodes*, the result is visua
 Here is the result of this query:
 --
 
-[.is-half.left]
+[.is-one-third.left]
 --
 image::{imagedir}/Subgraph1.png[Subgraph1,width=800,align=center]
---
-
-[.is-half.right]
 --
 
 [.notes]
@@ -466,6 +467,8 @@ image::{imagedir}/Subgraph1.png[Subgraph1,width=800,align=center]
 If you view the result as text, you will see that it is simply a set of rows where a movie is connected to a person:
 --
 
+[.is-two-thirds.right]
+--
 image::{imagedir}/Subgraph2.png[Subgraph2,width=800,align=center]
 --
 
@@ -486,8 +489,9 @@ The difference is that if no matches are found, `OPTIONAL MATCH` will use NULLs 
 `OPTIONAL MATCH` could be considered the Cypher equivalent of the outer join in SQL.
 --
 
-[.is-half.left]
+[.is-one-third.left]
 --
+[.statement]
 Here is a subgraph of our movies graph with all people named James and their relationships:
 
 image::{imagedir}/TheJames.png[TheJames,width=800,align=center]
@@ -499,7 +503,7 @@ Here is an example where we query the graph for all people whose name starts wit
 The `OPTIONAL MATCH` is specified to include people who have reviewed movies: 
 --
 
-[.is-half.right]
+[.is-two-thirds.right]
 --
 [source,cypher]
 ----
@@ -595,7 +599,7 @@ RETURN a.name, m.title, m.released, w.name
 ----
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 //[%interactive]
 [none.answers]
 - ◻️  [.answer]#The second line should be: (m2:Movie)<-[:WROTE]-(w:Person)#
@@ -616,7 +620,7 @@ WHERE m.released > 2005
 RETURN a.name, m.title, m.released, w.name
 ----
 
-Select the correct answers.
+Select the correct answer.
 
 [ ] The second line should be: (m2:Movie)<-[:WROTE]-(w:Person)
 
@@ -638,7 +642,7 @@ Like in Facebook, there can be a long path of connections between people.
 What Cypher `MATCH` clause would you use to find all people in this graph that are two to four hops away from each other?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 //[%interactive]
 [none.answers]
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#`MATCH (p:Person)-[:IS_FRIENDS_WITH*2..4]->(p2.Person)`#
@@ -653,7 +657,7 @@ A _Person_ node can have a _IS_FRIENDS_WITH_ relationship with any other _Person
 Like in Facebook, there can be a long path of connections between people.
 What Cypher `MATCH` clause would you use to find all people in this graph that are two to four hops away from each other?
 
-Select the correct answers.
+Select the correct answer.
 
 [X] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2..4]->(p2.Person)`
 

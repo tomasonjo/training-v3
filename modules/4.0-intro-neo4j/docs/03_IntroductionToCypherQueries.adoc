@@ -143,11 +143,20 @@ Notice that a node must have the parentheses. The labels and the variable for a 
 
 [source.center,cypher]
 ----
-()					// anonymous node not be referenced later in the query
-(p)					// variable p, a reference to a node used later
-(:Person)			// anonymous node of type Person
-(p:Person)			// p, a reference to a node of type Person
-(p:Actor:Director)	// p, a reference to a node of types Actor and Director
+// anonymous node not be referenced later in the query
+()
+
+// variable p, a reference to a node used later
+(p)
+
+// anonymous node of type Person
+(:Person)
+
+// p, a reference to a node of type Person
+(p:Person)
+
+// p, a reference to a node of types Actor and Director
+(p:Actor:Director)
 ----
 
 [.notes]
@@ -540,10 +549,10 @@ Here is how Cypher uses ASCII art to specify path used for a query:
 
 [source.big, cypher]
 ----
-()		// a node
-()--()	    // 2 nodes have some type of relationship
-()-->()	    // the first node has a relationship to the second node
-()<--()	    // the second node has a relationship to the first node
+()          // a node
+()--()      // 2 nodes have some type of relationship
+()-->()     // the first node has a relationship to the second node
+()<--()     // the second node has a relationship to the first node
 ----
 
 ==== Syntax: Querying using relationships
@@ -773,7 +782,8 @@ The movie, _The Da Vinci Code_ has two people that reviewed it, _Jessica Thompso
 Each relationship has properties that further describe the relationship using the _summary_ and _rating_ properties.
 --
 
-image::{imagedir}/REVIEWEDProperties.png[ReviewedProperties,width=700,align=center]
+[.center]
+image::{imagedir}/REVIEWEDProperties.png[ReviewedProperties,width=900,align=center]
 
 ==== Retrieving properties for relationships
 
@@ -806,7 +816,7 @@ How a graph is traversed for a query depends on what directions are defined for 
 Here is an example of where the _FOLLOWS_ relationship is used in the _Movie_ graph.
 Notice that this relationship is directional.
 
-image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=500,align=center]
+image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 
 === Using patterns for queries
 
@@ -906,7 +916,7 @@ MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thom
 RETURN p
 ----
 
-[.is-half.left]
+[.is-half.right]
 --
 ifndef::backend-revealjs[]
 The result returned is:
@@ -923,9 +933,9 @@ It finds two, but then it must traverse more to find the next FOLLOWS relationsh
 It finds only one node, _Paul Blythe_ that matches the query.
 --
 
-[.is-half.right]
+[.is-half.left]
 --
-image::{imagedir}/FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,width=400,align=center]
+image::{imagedir}/FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,width=300,align=center]
 --
 
 ==== Variation on the traversal
@@ -951,7 +961,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFollowersOfJessicaFollowers,width=800,allign=center]
+image::{imagedir}/NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFollowersOfJessicaFollowers,width=1000,align=center]
 
 ==== Using patterns to focus the query
 
@@ -972,7 +982,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/TraversalInTwoDirections.png[TraversalInTwoDirections,width=800,align=center]
+image::{imagedir}/TraversalInTwoDirections.png[TraversalInTwoDirections,width=1100,align=center]
 
 [.notes]
 --
@@ -994,7 +1004,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/ReturnPath.png[ReturnPath,width=700,align=center]
+image::{imagedir}/ReturnPath.png[ReturnPath,width=1100,align=center]
 
 ==== Returning multiple paths
 
@@ -1015,7 +1025,7 @@ RETURN  path
 Multiple paths are returned. Even if we set Neo4j Browser to not connect result nodes, the nodes are shown as connected in the visualization because we are returning paths, not nodes:
 --
 
-image::{imagedir}/ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=700,align=center]
+image::{imagedir}/ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=800,align=center]
 
 
 [NOTE]

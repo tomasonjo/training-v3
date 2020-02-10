@@ -39,7 +39,7 @@ At the end of this module, you should be able to:
 
 The Neo4j Graph Platform includes components that enable you to develop your graph-enabled application.
 
-image::{imagedir}/Neo4jPlatform.png[Neo4jPlatform,width=700,align=center]
+image::{imagedir}/Neo4jPlatform.png[Neo4jPlatform,width=1000,align=center]
 
 [.notes]
 --
@@ -133,7 +133,7 @@ This is how index-free adjacency operates.
 By contrast, a traditional RDBMS cannot do this.
 It must use a central index.
 
-image::{imagedir}/IFA-2.png[IFA-2,width=300,align=center]
+image::{imagedir}/IFA-2.png[IFA-2,width=800,align=center]
 
 [.statement]
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
@@ -162,18 +162,26 @@ Since Neo4j is a native graph database (i.e. it has a graph as its core data mod
 
 === Neo4j DBMS: ACID (Atomic, Consistent, Isolated, Durable)
 
-image::{imagedir}/ACID.png[ACID,width=400,align=center]
+image::{imagedir}/ACID.png[ACID,width=800,align=center]
 
+[.statement]
 Transactionality is very important for robust applications that require an ACID (atomicity, consistency, isolation, and durability) guarantees for their data.
 If a relationship between nodes is created, not only is the relationship created, but the nodes are updated as connected. 
 All of these updates to the database must [.underline]#all# succeed or fail.
 
 === Neo4j DBMS: Clusters
 
-image::{imagedir}/Clustering.png[Clustering,width=400,align=center]
+[.is-two-thirds.left]
+--
+image::{imagedir}/Clustering.png[Clustering,width=600,align=center]
+--
 
+[.is-one-third.right]
+--
+[.statement]
 Neo4j supports clusters that provide high availablity, scalability for read access to the data, and failover which is important to many enterprises.
 Neo4j clusters are only available with Neo4j Enterprise Edition.
+--
 
 === Neo4j DBMS: Graph engine
 
@@ -182,7 +190,7 @@ The graph engine has been improved with every release of Neo4j to provide the mo
 
 == Neo4j Aura
 
-image::{imagedir}/Aura.png[Aura,width=400,align=center]
+image::{imagedir}/Aura.png[Aura,width=700,align=center]
 
 Neo4j Aura is the simplest way to run the Neo4j DBMS in the cloud.
 
@@ -329,7 +337,7 @@ Some graph applications are supported by Neo4j and some are not, so you must be 
 You typically install graph applications from your Neo4j Desktop environment from https://install.graphapp.io/.
 --
 
-image::{imagedir}/GraphApps.png[GraphApps,width=600,align=center]
+image::{imagedir}/GraphApps.png[GraphApps,width=900,align=center]
 
 === Some Neo4j graph applications
 
@@ -381,7 +389,7 @@ You typically use it to access a database that is running locally, but you can u
 [.statement]
 If you save your frequently-used Cypher code in *favorites*, you can download them so you can use them elsewhere (like in your application code).
 
-image::{imagedir}/Neo4jBrowser.png[Neo4jBrowser,width=600,align=center]
+image::{imagedir}/Neo4jBrowser.png[Neo4jBrowser,width=700,align=center]
 
 
 ==== 2. Use Neo4j Browser Web browser interface
@@ -389,7 +397,7 @@ image::{imagedir}/Neo4jBrowser.png[Neo4jBrowser,width=600,align=center]
 [.statement]
 You can use the Web interface to access to access a local Neo4j DBMS, or a database in Neo4j Aura or Neo4j Sandbox.
 
-image::{imagedir}/WebNeo4jBrowser.png[WebNeo4jBrowser,width=600,align=center]
+image::{imagedir}/WebNeo4jBrowser.png[WebNeo4jBrowser,width=700,align=center]
 
 [.notes]
 --
@@ -397,7 +405,7 @@ Just as in the Neo4j Browser application, you can save frequently-used Cypher co
 In addition, when using the Web browser interface to Neo4j Browser, you can use Browser Sync to keep your favorites in the Cloud.
 --
 
-[.section-title.has-green-background.has-team-background]
+[.title.has-green-background.has-team-background]
 === *Guided Exercise: Getting Started with Neo4j Browser*
 
 [.notes]
@@ -415,8 +423,10 @@ Show the students the basics of using Neo4j Browser and have them do the same on
 . Show how to pin a window.
 --
 
+[.statement]
 Follow along with this video to become familiar with common tasks in Neo4j Browser.
 
+[.center]
 video::oHo-lQ79zf0[youtube,width=560,height=315,pdfwidth=100%]
 
 [NOTE]
@@ -425,13 +435,14 @@ Before you perform the tasks shown in this video, you must have either created a
 
 === Neo4j Bloom
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Neo4j Bloom is a Neo4j-supported graph application where you can experience:
-endif::[]
+--
 
 [.is-half.left]
 --
-[square]
+[square.statement]
 * Visual presentation of your graph data tangibly reveals non-obvious connections.
 * Easy-to-understand visualizations explain data connectedness to every colleague.
 * Codeless search tools let you quickly explore your data without technical expertise.
@@ -442,6 +453,7 @@ endif::[]
 --
 image::{imagedir}/Bloom.png[Bloom,width=600,align=center]
 
+[.statement]
 Visit the https://neo4j.com/bloom/[Bloom page] to learn more about Neo4j Bloom.
 --
 
@@ -452,12 +464,17 @@ Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that
 
 == cypher-shell
 
-image::{imagedir}/cypher-shell.png[cypher-shell,width=600,align=center]
+[.is-two-thirds.left]
+--
+image::{imagedir}/cypher-shell.png[cypher-shell,width=800,align=center]
+--
 
+[.is-one-third.right]
+--
 [.statement]
 cypher-shell is part of the Neo4j installation and is located in the *bin* directory.
 It is a command-line tool that you can use to connect to a Neo4j DBMS instance and run Cypher statements against the database.
-
+--
 [.notes]
 --
 It is useful if you want to create scripts that automatically run against the database(s).
@@ -487,11 +504,11 @@ GraphQL is an open-source query language for querying parts of a graph. It is no
 A very popular library for graph visualization is neoviz.js, another project in Neo4j Labs.
 --
 
-image::{imagedir}/Plugins.png[Plugins,width=600,align=center]
+image::{imagedir}/Plugins.png[Plugins,width=900,align=center]
 
 == Drivers and language support
 
-image::{imagedir}/Drivers.png[Drivers,width=600,align=center]
+image::{imagedir}/Drivers.png[Drivers,width=900,align=center]
 
 [.notes]
 --
@@ -544,7 +561,7 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 
 === Question 1
 
-[.statment]
+[.statement]
 What are some of the benefits provided by the Neo4j DBMS?
 
 [.statement]

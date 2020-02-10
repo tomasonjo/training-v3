@@ -130,7 +130,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=800,align=center]
+image::{imagedir}/TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=1000,align=center]
 
 [.notes]
 --
@@ -165,7 +165,7 @@ image::{imagedir}/TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=8
 [.is-half.right]
 --
 [.statement]
-Here is the return returned viewed as a table. Each node is an object in the list returned:
+Here is the result returned viewed as a table. Each node is an object in the list returned:
 
 image::{imagedir}/TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=800,align=center]
 --
@@ -259,7 +259,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/CastList1.png[CastList1,width=600,align=center]
+image::{imagedir}/CastList1.png[CastList1,width=650,align=center]
 
 [.notes]
 --
@@ -268,6 +268,7 @@ Notice that when viewing nodes in table view, each node is shown with {} notatio
 
 ==== Using strings in lists
 
+[.statement]
 We can adjust this query slightly so that the list contains the names, rather than the entire set of  _Person_ node properties.
 
 [source,cypher]
@@ -420,7 +421,7 @@ RETURN datetime({epochmillis:timestamp()}).day,
        datetime({epochmillis:timestamp()}).month
 ----
 
-image::{imagedir}/DateTime3.png[DateTime3,width=900,align=center]
+image::{imagedir}/DateTime3.png[DateTime3,width=1200,align=center]
 
 ==== Type and data conversions
 
@@ -437,7 +438,7 @@ Here are some of the built-in conversion functions:
 * toUpper( )
 * toString()
 
-Consult the _Neo4j Cypher Manual_ for more information about the built-in functions available for working with data of all types.
+Consult the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
 
 [.title.has-gold-background.has-team-background]
 === *Exercise 6: Working with Cypher data*
