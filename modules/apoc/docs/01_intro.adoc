@@ -1,0 +1,160 @@
+
+= APOC for Analytics and Operations
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:neo4j-version: 4.0
+:currentyear: 2020
+:doctype: book
+:nextsecttitle: The Neo4j Graph Platform
+:nextsect: 2
+:currsect: 1
+:prevsecttitle: About this Course
+:prevsect: 0
+:toc: left
+:toclevels: 4
+:experimental:
+:imagedir: ../images
+//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/v4.0-intro-neo4j/img
+:manual: http://neo4j.com/docs/developer-manual/current
+:manual-cypher: {manual}/cypher
+
+
+== About this module
+
+[.notes]
+--
+Neo4j enables developers to create applications that are best architected as graph-powered systems that are built upon the rich connectedness of data.
+--
+
+At the end of this training, you should be able to:
+[square]
+* Thing 1
+* Thing 2
+* Thing 3
+
+
+== Agenda
+
+[opts="header"]
+|===
+| Module | Time
+| User-defined functions & procedures in Neo4j |15'
+| APOC History, installation, documentation| 15'
+| Utility functions |20'
+|Data integration| 20'
+|Cypher execution |20'	
+2+| 	BREAK 
+|Path expansion | 30'
+|Graph refactoring | 15'
+|TTL & triggers|  20'
+|Virtual nodes & relationships + graph grouping | 20'
+| Questions, outlook, contribution | 10'
+|===
+
+== How do we learn APOC? 
+
+
+* Massively hands-on, lots of exercises
+* Help each other!
+* Ask questions as they arise.
+* Datasets: Movie graph, StackOverflow
+* Have the APOC docs open
+* Bring your own "How do I?"
+
+== Questions for you
+
+Have you:
+
+* Used built-in procedures in Neo4j?
+* Installed and used APOC?
+* Used other procedure libraries? 
+    ** Graph Algorithms, GraphAware NLP, Spatial?
+* Written your own procedures/functions?
+* Deployed your procedures/functions to production?
+* Contributed to APOC or other procedure libraries?
+
+== Extending Neo4j
+
+User-defined procedures let you write custom code that:
+
+* Is written in any JVM language
+* Accesses the Neo4j Java API
+* Is deployed to the database server
+* Accessed by applications via Cypher
+
+== Neo4j developer surface
+
+|===
+| 2000-2010 | 0.x | Embedded Java API
+| 2010-2014 | 1.x | REST
+| 2014-2015 | 2.x | Cypher over HTTP
+| 2016 |3.0.x|Bolt, Official language drivers, User-defined procedures
+|2016|3.1.x|User-defined functions
+|2017|3.2.x| User-defined aggregation functions
+
+|===
+
+
+[.section-title.has-green-background.has-puzzle-background]
+== Getting started with Neo4j Desktop
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Install Neo4j Desktop
+
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Create & start  a new 4.0 database with the movies graph
+
+[.section-title.has-green-background.has-puzzle-background]
+== Usage
+
+== Procedures - Usage
+
+[source,cypher]
+----
+CALL db.labels()
+----
+
+[opts="header"]
+|===
+| label
+| "Movie"
+| "Person"
+|===
+
+== Procedures - Usage
+
+.Shortcut for non-arg procedures
+[source,cypher]
+----
+CALL db.labels;
+----
+
+.Arguments in parentheses
+[source,cypher]
+----
+CALL db.labels();
+----
+
+.Deal with results
+[source,cypher]
+----
+CALL db.labels() YIELD label RETURN count(label);
+----
+
+.Filter results
+[source,cypher]
+----
+CALL db.labels() YIELD label WHERE label START WITH 'db.' RETURN *;
+----
+
+== Listing procedures
+
+[source,cypher]
+----
+CALL dbms.procedures()
+YIELD name, signature, description
+WHERE name STARTS WITH "db."
+RETURN name, signature
+----
