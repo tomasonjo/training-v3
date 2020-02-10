@@ -76,12 +76,19 @@ Have you:
 
 == Extending Neo4j
 
+[.is-half.left]
+--
 User-defined procedures let you write custom code that:
 
 * Is written in any JVM language
 * Accesses the Neo4j Java API
 * Is deployed to the database server
 * Accessed by applications via Cypher
+--
+
+[.is-half.right]
+image::{imagedir}/extending-neo4j.png[Extending Neo4j]
+
 
 == Neo4j developer surface
 
@@ -158,3 +165,29 @@ YIELD name, signature, description
 WHERE name STARTS WITH "db."
 RETURN name, signature
 ----
+
+[.section-title.has-green-background.has-puzzle-background]
+== Built-in procedures & functions
+
+== Built-in procedures
+
+[.is-half.left]
+--
+* database
+* clustering
+* security
+* monitoring
+* schema
+* indexing
+* configuration
+--
+
+[.is-half.right]
+image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
+
+
+Reference: https://neo4j.com/docs/operations-manual/current/reference/procedures/
+
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: How many procedures exist per group?
