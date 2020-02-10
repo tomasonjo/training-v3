@@ -141,7 +141,7 @@ Notice that a node must have the parentheses. The labels and the variable for a 
 
 ==== Examples specifying nodes
 
-[source,cypher]
+[source.center,cypher]
 ----
 ()					// anonymous node not be referenced later in the query
 (p)					// variable p, a reference to a node used later
@@ -233,7 +233,7 @@ ifndef::backend-revealjs[]
 Here are example queries to the _Movie_ database:
 endif::[]
 
-[source.fit,cypher]
+[source.center,cypher]
 ----
 MATCH (n) 			// returns all nodes in the graph
 RETURN n
@@ -477,7 +477,7 @@ If you want to customize the headings for a table containing property values, yo
 Here is the simplified syntax for specifying an alias for a property value:
 --
 
-[source.big,cypher]
+[source,cypher]
 ----
 MATCH (variable:Label {propertyKey1: propertyValue1})
 RETURN variable.propertyKey2 AS alias2
@@ -1019,10 +1019,13 @@ image::{imagedir}/ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=700,align=
 
 
 [NOTE]
+[.statement]
 A best practice is to specify direction in your `MATCH` statements. This will optimize queries, especially for larger graphs.
 
+[.notes]
+--
 Later in this course, you will learn other ways to query data and how to control the results returned.
-endif::[]
+--
 
 === Cypher style recommendations
 
@@ -1077,7 +1080,7 @@ and follow the instructions for Exercise 3.
 [.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.has-purple-background]
+
 === Question 1
 
 [.statement]
@@ -1114,7 +1117,6 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -1155,7 +1157,6 @@ Select the correct answer.
 Reminder: Click next  to reveal the  correct answer.
 --
 
-[.title.has-purple-background]
 === Question 3
 
 [.statement]

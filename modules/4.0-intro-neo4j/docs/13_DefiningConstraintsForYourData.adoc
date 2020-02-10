@@ -386,7 +386,6 @@ and follow the instructions for Exercise 13.
 [.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.has-purple-background]
 === Question 1
 
 [.statement]
@@ -417,7 +416,7 @@ Select the correct answers.
 
 Reminder: Click next twice to reveal the two correct answers.
 --
-[.title.has-purple-background]
+
 === Question 2
 
 [.statement]
@@ -449,7 +448,6 @@ Select the correct answers.
 Reminder: Click next twice to reveal the two correct answers.
 --
 
-[.title.has-purple-background]
 === Question 3
 
 [.statement]

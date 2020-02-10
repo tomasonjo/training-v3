@@ -193,7 +193,6 @@ image::{imagedir}/ETLTool.png[ETLTool,width=1000,align=center]
 [.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.has-purple-background]
 === Question 1
 
 [.statement]
@@ -225,7 +224,7 @@ Select the correct answers.
 
 Reminder: Click next three times to reveal the three correct answers.
 --
-[.title.has-purple-background]
+
 === Question 2
 
 [.statement]
@@ -257,7 +256,6 @@ Select the correct answers.
 Reminder: Click next three times to reveal the three correct answers.
 --
 
-[.title.has-purple-background]
 === Question 3
 
 [.statement]

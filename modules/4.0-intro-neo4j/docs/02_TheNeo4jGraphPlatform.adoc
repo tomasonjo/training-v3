@@ -542,7 +542,6 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 [.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
-[.title.has-purple-background]
 === Question 1
 
 [.statment]
@@ -572,7 +571,6 @@ Select the correct answers.
 Reminder: Click next four times to reveal the  four correct answers.
 --
 
-[.title.has-purple-background]
 === Question 2
 
 [.statement]
@@ -602,7 +600,6 @@ Select the correct answers.
 Reminder: Click next three times to reveal the  three correct answers.
 --
 
-[.title.has-purple-background]
 === Question 3
 
 [.statement]
