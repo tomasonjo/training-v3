@@ -102,13 +102,7 @@ In this example, the variable _a_ is specified to be passed on in the query, but
 Notice that for the `RETURN` clause, _a_, _numMovies_, and _movies_ are available for use.
 --
 
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 You have to name all expressions with an alias in a `WITH` that are existing variables.
 

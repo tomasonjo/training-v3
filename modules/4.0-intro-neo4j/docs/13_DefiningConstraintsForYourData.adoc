@@ -71,6 +71,7 @@ Constraints and node keys that enforce uniqueness are related to indexes which y
 --
 
 [NOTE]
+[.statement]
 Existence constraints and node keys are only available in Enterprise Edition of Neo4j.
 
 == Ensuring that a property value for a node is unique

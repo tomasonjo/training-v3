@@ -255,6 +255,7 @@ The default view of the returned nodes are the nodes that were referenced by the
 
 [.is-half.left]
 --
+[.statement]
 The result returned is:
 
 image::{imagedir}/PersonNodes-graph.png[PersonNodes-graph,width=700, align=center]
@@ -373,6 +374,7 @@ MATCH (p:Person {born: 1970})
 RETURN p
 ----
 
+[.statement]
 The result returned is:
 
 image::{imagedir}/MatchPersonBorn1970.png[MatchPersonBorn1970,width=600, align=center]
@@ -481,13 +483,7 @@ MATCH (variable:Label {propertyKey1: propertyValue1})
 RETURN variable.propertyKey2 AS alias2
 ----
 
-ifdef::backend-revealjs[]
-Note:
-endif::[]
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
-[.statement]
 If you want a heading to contain a space between strings, you must specify the alias with the back tick _`_ character, rather than a single or double quote character. In fact, you can specify any variable, label, relationship type, or property key with a space also by using the back tick _`_ character.
 
 ==== Example: Specifying an alias
@@ -687,12 +683,8 @@ endif::[]
 
 image::{imagedir}/AnonymousMovieNode.png[AnonymousMovieNode,width=800,align=center]
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-Note:
-endif::[]
 A best practice is to place named nodes (those with variables) before anonymous nodes in a `MATCH` clause.
 
 ==== Using an anonymous relationship for a query
@@ -1025,15 +1017,10 @@ Multiple paths are returned. Even if we set Neo4j Browser to not connect result 
 
 image::{imagedir}/ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=700,align=center]
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-Note:
-endif::[]
 A best practice is to specify direction in your `MATCH` statements. This will optimize queries, especially for larger graphs.
 
-ifndef::backend-revealjs[]
 Later in this course, you will learn other ways to query data and how to control the results returned.
 endif::[]
 

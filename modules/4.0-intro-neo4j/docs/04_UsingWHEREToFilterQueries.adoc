@@ -256,12 +256,8 @@ WHERE toLower(p.name) STARTS WITH 'michael'
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-Note:
-endif::[]
 In this example where we are converting a property to lower case, if an index has been created for this property, it will not be used at runtime.
 
 [.notes]
@@ -292,12 +288,8 @@ endif::[]
 
 image::{imagedir}/MatchTomsRegex.png[MatchTomsRegex,width=800,align=center]
 
-ifdef::backend-revealjs[]
-Note:
-endif::[]
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
 [.statement]
 If you specify a regular expression. The index will never be used. In addition, the property value must fully match the regular expression.
 
@@ -417,13 +409,8 @@ ifndef::backend-revealjs[]
 Later in this course, you will learn how to create lists from your queries by aggregating data in the graph.
 endif::[]
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses. You can learn more about these syntax elements in the _Neo4j Cypher Manual_ and the _Cypher Refcard_.
 

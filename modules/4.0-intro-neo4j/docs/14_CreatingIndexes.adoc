@@ -76,14 +76,10 @@ Composite indexes are used only for equality checks and list membership.
 --
 In this course, we introduce the basics of Neo4j b-tree indexes, but you should consult the Neo4j _Operations Manual_ for more details about creating and maintaining indexes.
 
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-Note:
-endif::[]
 Because index maintenance incurs additional overhead when nodes are created, Neo4j recommends that for large graphs, indexes are created after the data has been loaded into the graph.
 --
+
 === Indexes for range searches
 
 [.notes]
@@ -165,12 +161,8 @@ image::{imagedir}/TwoStatements.png[TwoStatements,width=900,align=center]
 
 [.notes]
 --
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-Note:
-endif::[]
 Notice that in the above Cypher statements we use the semi-colon `;` to separate Cypher statements.
 In general, you need not end a Cypher statement with a semi-colon, but if you want to execute multiple Cypher statements, you must separate them. You have already used the semi-colon to separate Cypher statements when you loaded the _Movie_ database in the training exercises.
 --

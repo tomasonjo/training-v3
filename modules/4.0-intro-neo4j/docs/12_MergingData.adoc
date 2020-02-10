@@ -89,13 +89,8 @@ Node creation behaviors:
 *Relationship*: If the relationship exists, a duplicate relationship is created.
 endif::[]
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 You should never create duplicate nodes or relationships in a graph.
 
@@ -170,13 +165,8 @@ We do not find a node with the label _Actor_ so the graph engine creates one.
 
 image::{imagedir}/MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=600,align=center]
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 A best practice when using `MERGE` is to only specify properties that have unique values and unique labels.
 
@@ -277,12 +267,9 @@ image::{imagedir}/MergeToCreateRel.png[MergeToCreateRel,width=800,align=center]
 Since the relationship between the _Person_ node and the _Movie_ node already exists, it is not created.
 The relationship between the _Actor_ node and the _Movie_ node is created with this merge.
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifndef::backend-revealjs[]
-Note:
-endif::[]
+[.statement]
 Although, you can leave out the direction of the relationship being created with the `MERGE`, in which case a left-to-right arrow will be assumed, a best practice is to always specify the direction of the relationship. However, if you have  bidirectional relationships and you want to avoid creating duplicate relationships, you [.underline]#must# leave off the arrow.
 --
 

@@ -119,13 +119,8 @@ In addition to CSV, APOC procedures can be used to read other formats such as XM
 * Optionally using a Neo4j Cluster.
 * No limit to size of data to import.
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 You can also use APOC's jdbc connection features to access a live RDBMS.
 This type of connection is not covered in this course.

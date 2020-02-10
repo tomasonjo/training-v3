@@ -133,13 +133,7 @@ endif::[]
 
 image::{imagedir}/CreateTwoRelationships.png[CreateTwoRelationships,width=700,align=center]
 
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 When you create relationships based upon a `MATCH` clause, you must be certain that only a single node is returned for the `MATCH`, otherwise multiple relationships will be created.
 
@@ -195,12 +189,9 @@ We then set two properties for the _Person_ node.
 
 You might use code like this when you are creating a script to load many actors and relate them to a movie.
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-Note:
-endif::[]
+[.statement]
 What you must be careful of, however is that when you create the node, it is not a duplicate node.
 In addition, you must ensure that there is always only one _:ACTED_IN_ relationship created between two nodes.
 Later in this course, you will learn how automatically eliminate duplication of nodes and relationships.
@@ -305,13 +296,7 @@ SET rel.roles = ['Bruce Wayne','Batman']
 RETURN a, rel, m
 ----
 
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 The best way to prevent duplication of relationships is to use the `MERGE` clause, rather than the `CREATE` clause.
 You will learn about merging data later in this course.

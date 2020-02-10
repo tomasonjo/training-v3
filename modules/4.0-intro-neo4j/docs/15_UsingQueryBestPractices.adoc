@@ -91,9 +91,7 @@ You can set the value of a single parameter in the query editor pane as shown in
 :param actorName => 'Tom Hanks'
 ----
 
-ifndef::backend-revealjs[]
 [NOTE]
-endif::[]
 [.statement]
 You can even specify a Cypher expression to the right of `+=>+` to set the value of the parameter.
 
@@ -378,13 +376,8 @@ on the left.
 
 image::{imagedir}/ListQueries4.png[ListQueries4,width=1000,align=center]
 
-ifndef::backend-revealjs[]
+
 [NOTE]
-endif::[]
-ifdef::backend-revealjs[]
-[.statement]
-Note:
-endif::[]
 [.statement]
 The `:queries` command is only available in the Enterprise Edition of Neo4j.
 
