@@ -346,7 +346,7 @@ image::{imagedir}/TwoHopRelationship.png[TwoHopRelationship,width=700,align=cent
 If we had specified `[:FOLLOWS*]` rather than `[:FOLLOWS*2]`, the query would return all _Person_ nodes that are in the `:FOLLOWS` path from _Paul Blythe_.
 --
 
-==== Varying length patterns syntax
+==== Syntax: Varying length patterns
 
 [.notes]
 --
@@ -530,6 +530,10 @@ Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 5.
+
+[NOTE]
+This exercise has 6 steps.
+Estimated time to complete: 30 minutes.
 
 //[#module-5.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

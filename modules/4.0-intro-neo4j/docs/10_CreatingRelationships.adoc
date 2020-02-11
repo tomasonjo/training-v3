@@ -44,14 +44,13 @@ At the end of this module, you should be able to write Cypher statements to:
 * Add properties to a relationship.
 * Remove properties from a relationship.
 
-== Creating relationships
+== Syntax: Creating relationships
 
 [.notes]
 --
 As you have learned in the previous lessons, when you query the graph, you often query using connections between nodes (pattern). The connections capture the semantic relationships and context of the nodes in the graph.
 --
 
-[.statement]
 Here is the simplified syntax for creating a relationship between two nodes referenced by the variables x and y:
 
 [source.big,cypher]
@@ -92,8 +91,10 @@ Before you run this Cypher code, you may see a warning in Neo4j Browser that you
 You will see this warning if you have no unique constraint on the lookup keys.
 --
 
+[.is-half.left]
+--
 image::{imagedir}/CartesianBeforeCreateRelationship.png[CartesianBeforeCreateRelationship,width=700,align=center]
-
+--
 [.notes]
 --
 You will learn about uniqueness constraints later in the next module.
@@ -106,7 +107,10 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
+[.is-half.right]
+--
 image::{imagedir}/CreateActedInRelationship.png[CreateActedInRelationship,width=600,align=center]
+--
 
 === Creating multiple relationships
 
@@ -156,7 +160,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this code:
 endif::[]
 
-image::{imagedir}/KatieHolmsRoles.png[KatieHolmsRoles,width=700,align=center]
+image::{imagedir}/KatieHolmsRoles.png[KatieHolmsRoles,width=900,align=center]
 
 == Creating nodes and relationships together
 
@@ -179,7 +183,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-image::{imagedir}/CreateNodeAndRelationship.png[CreateNodeAndRelationship,width=700,align=center]
+image::{imagedir}/CreateNodeAndRelationship.png[CreateNodeAndRelationship,width=1000,align=center]
 
 [.notes]
 --
@@ -197,7 +201,7 @@ In addition, you must ensure that there is always only one _:ACTED_IN_ relations
 Later in this course, you will learn how automatically eliminate duplication of nodes and relationships.
 --
 
-== Adding properties to relationships
+== Syntax: Adding properties to relationships
 
 [.notes]
 --
@@ -252,7 +256,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-image::{imagedir}/AddRelationshipWithRoles.png[AddRelationshipWithRoles,width=600,align=center]
+image::{imagedir}/AddRelationshipWithRoles.png[AddRelationshipWithRoles,width=1000,align=center]
 
 [.notes]
 --
@@ -274,7 +278,6 @@ CREATE (a)-[:ACTED_IN {roles: ['Bruce Wayne', 'Batman']}]->(m)
 RETURN a, m
 ----
 
-[.statement]
 By default, the graph engine will create a relationship between two nodes, even if one already exists.
 This could be dangerous so in your code make sure that if you use `CREATE` to create a relationship, it does not already exist.
 
@@ -322,7 +325,7 @@ RETURN a, rel, m
 [.statement]
 Here is the result returned. An alternative to `REMOVE rel.roles` would be `SET rel.roles = null`.
 
-image::{imagedir}/RemoveRoles.png[RemoveRoles,width=700,align=center]
+image::{imagedir}/RemoveRoles.png[RemoveRoles,width=1000,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 10: Creating relationships*
@@ -330,6 +333,9 @@ image::{imagedir}/RemoveRoles.png[RemoveRoles,width=700,align=center]
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 10.
 
+[NOTE]
+This exercise has 13 steps.
+Estimated time to complete: 45 minutes.
 
 //[#module-6.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

@@ -54,7 +54,7 @@ image::{imagedir}/SevenBridges.png[SevenBridges,width=700,align=center]
 --
 Konigsberg, Prussia (now Kaliningrad, Russia) is a city spanning the Pregel River.
 It includes two large islands, which are connected to one another and to the river banks by seven bridges.
-A map of this arrangement is pictured here:
+A map of this arrangement is pictured here.
 
 The Seven Bridges problem is this: Is there any possible route through the city that crosses every bridge exactly once?
 Some pen-and-paper experimentation will quickly suggest that there is no such route.

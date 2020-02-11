@@ -193,14 +193,20 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=400,align=center]
+[.is-half.left]
+--
+image::{imagedir}/DeleteLiamNeeson.png[DeleteLiamNeeson,width=600,align=center]
+--
 
 [.notes]
 --
 And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
 --
 
-image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=500,align=center]
+[.is-half.right]
+--
+image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=center]
+--
 
 [.title.has-gold-background.has-team-background]
 === *Exercise 11: Deleting nodes and relationships*
@@ -208,6 +214,9 @@ image::{imagedir}/BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 11.
 
+[NOTE]
+This exercise has 6 steps.
+Estimated time to complete: 15 minutes.
 
 //[#module-6.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

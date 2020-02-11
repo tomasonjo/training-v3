@@ -67,7 +67,6 @@ With an application that uses these drivers, you can control:
 * How large a transaction will be (batching).
 * How much concurrent processing you want to implement (parallel processing).
 
-[.statement]
 You can read more about specific drivers in the https://neo4j.com/developer/language-guides/[Developer pages for Neo4j Drivers]
 
 == Synchronous or asynchronous access?
@@ -212,13 +211,16 @@ JDBC = [url:"jdbc:postgresql://db-examples.cmlvojdj5cci.us-east-1.rds.amazonaws.
 NEO4J=[url:"bolt://localhost:7687", user:"neo4j",pass:"training-helps"];
 
 // see https://neo4j.com/docs/api/java-driver/current/
-GraphDatabase.driver(NEO4J.url, AuthTokens.basic(NEO4J.user, NEO4J.pass)).withCloseable{ neo4j ->
-DriverManager.getConnection(JDBC.url, JDBC.user, JDBC.pass).withCloseable { rdbms ->
+GraphDatabase.driver(NEO4J.url, AuthTokens.basic(NEO4J.user,
+                     NEO4J.pass)).withCloseable{ neo4j ->
+                     DriverManager.getConnection(JDBC.url,
+                            JDBC.user, JDBC.pass).withCloseable
+                            { rdbms ->
+                     stmt = rdbms.prepareStatement("SELECT * FROM ${table}");
 
-stmt = rdbms.prepareStatement("SELECT * FROM ${table}");
-
-neo4j.session(SessionConfig.builder().withDatabase("products").build()).withCloseable{ session ->
-  session.writeTransaction { tx ->
+neo4j.session(
+      SessionConfig.builder().withDatabase("products").build()).withCloseable{
+      session -> session.writeTransaction { tx ->
    stmt.executeQuery().withCloseable{ rs ->
      meta = rs.getMetaData();
      cols = meta.getColumnCount();
@@ -228,7 +230,8 @@ neo4j.session(SessionConfig.builder().withDatabase("products").build()).withClos
            params[meta.getColumnName(i+1)]=rs.getObject(i+1);
         }
         println(params);
-        tx.run("CREATE (n:${table}) SET n += \$props", Values.value([props:params])).consume();
+        tx.run("CREATE (n:${table}) SET n += \$props",
+               Values.value([props:params])).consume();
      }
    }
 }}}}
@@ -244,6 +247,10 @@ This code uses a synchronous programming model to create each node in the graph.
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 19.
+
+[NOTE]
+This exercise has 5 steps.
+Estimated time to complete: 15 minutes.
 
 //[#module-7.quiz]
 [.section-title.has-purple-background.has-puzzle-background]
@@ -288,7 +295,7 @@ Reminder: Click next five times to reveal the five correct answers.
 What programming languages support asynchronous calls to Neo4j:
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 //[%interactive]
 [none.answers]
 - ◻️  [.answer]#JavaScript#
@@ -300,7 +307,7 @@ Select the correct answer.
 --
 What programming languages support asynchronous calls to Neo4j:
 
-Select the correct answer.
+Select the correct answers.
 
 [ ] JavaScript
 
@@ -319,7 +326,7 @@ Reminder: Click next twice to reveal the two correct answers.
 What programming languages support synchronous calls to Neo4j:
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 //[%interactive]
 [none.answers]
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#JavaScript#
@@ -331,7 +338,7 @@ Select the correct answer.
 --
 What programming languages support synchronous calls to Neo4j:
 
-Select the correct answer.
+Select the correct answers.
 
 [X] JavaScript
 

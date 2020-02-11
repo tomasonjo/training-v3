@@ -44,7 +44,7 @@ At the end of this module, you should be able to write Cypher statements to:
 * Add and remove node properties.
 * Update node properties.
 
-== Creating nodes
+== Syntax: Creating nodes
 
 [.notes]
 --
@@ -70,7 +70,6 @@ Next, you will see some examples of creating a single node in Cypher:
 
 === Example #1
 
-[.statement]
 Add a node to the graph of type _Movie_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the label _Movie_ can also be retrieved which will contain this node:
 
 [source,cypher]
@@ -80,7 +79,6 @@ CREATE (:Movie {title: 'Batman Begins'})
 
 === Example #2
 
-[.statement]
 Add a node with two labels to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node:
 
 [source,cypher]
@@ -90,7 +88,6 @@ CREATE (:Movie:Action {title: 'Batman Begins'})
 
 === Example #3
 
-[.statement]
 Add a node to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. The variable _m_ can be used for later processing after the `CREATE` clause:
 
 [source,cypher]
@@ -100,7 +97,6 @@ CREATE (m:Movie:Action {title: 'Batman Begins'})
 
 === Example #4
 
-[.statement]
 Add a node to the graph of types_Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. Here we return the title of the node:
 
 [source,cypher]
@@ -171,21 +167,21 @@ endif::[]
 image::{imagedir}/CreateMultiplePersonNodes.png[CreateMultiplePersonNodes,width=400,align=center]
 --
 
-[.statement]
-*Note*: The graph engine will create a node with the same properties of a node that already exists. You can prevent this from happening in one of two ways:
+[NOTE]
+--
+The graph engine will create a node with the same properties of a node that already exists. You can prevent this from happening in one of two ways:
 
-[.statement]
--- You can use `MERGE` rather than `CREATE` when creating the node.
+* You can use `MERGE` rather than `CREATE` when creating the node.
 
-[.statement]
--- You can add constraints to your graph.
+* You can add constraints to your graph.
+--
 
 [.notes]
 --
 You will learn about merging data later in this course. Constraints are configured globally for a graph and are also covered later in this course.
 --
 
-== Adding labels to a node
+== Syntax: Adding labels to a node
 
 [.notes]
 --
@@ -204,7 +200,6 @@ SET x:Label         // adding one label to node referenced by the variable x
 SET x:Label1:Label2	// adding two labels to node referenced by the variable x
 ----
 
-[.statement]
 If you attempt to add a label to a node for which the label already exists, the `SET` processing is ignored.
 
 === Example: Adding labels to a node
@@ -227,14 +222,14 @@ RETURN labels(m)
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
 --
 
-image::{imagedir}/SetFantasyLabel.png[SetFantasyLabel,width=700,align=center]
+image::{imagedir}/SetFantasyLabel.png[SetFantasyLabel,width=800,align=center]
 
 [.notes]
 --
 Notice here that we call the built-in function, `labels()` that returns the set of labels for the node.
 --
 
-== Removing labels from a node
+== Syntax: Removing labels from a node
 
 [.notes]
 --
@@ -282,9 +277,9 @@ RETURN labels(m)
 [.statement]
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
 
-image::{imagedir}/RemoveActionLabel.png[RemoveActionLabel,width=600,align=center]
+image::{imagedir}/RemoveActionLabel.png[RemoveActionLabel,width=700,align=center]
 
-== Adding properties to a node
+== Syntax: Adding properties to a node
 
 [.notes]
 --
@@ -341,7 +336,7 @@ RETURN m
 [.statement]
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
 
-image::{imagedir}/AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,width=600,align=center]
+image::{imagedir}/AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,width=800,align=center]
 
 == Example 2: Adding properties to node
 
@@ -410,7 +405,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/PropertyKeysBatmanBegins.png[PropertyKeysBatmanBegins,width=700,align=center]
+image::{imagedir}/PropertyKeysBatmanBegins.png[PropertyKeysBatmanBegins,width=800,align=center]
 
 == Updating properties - JSON-style
 
@@ -432,9 +427,9 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/AddAndUpdateProperties.png[AddAndUpdateProperties,width=800,align=center]
+image::{imagedir}/AddAndUpdateProperties.png[AddAndUpdateProperties,width=900,align=center]
 
-== Removing properties from a node
+== Syntax: Removing properties from a node
 
 [.notes]
 --
@@ -475,13 +470,17 @@ RETURN m
 [.statement]
 Assuming that we have previously created the node for the movie with the these properties, here is the result of running this Cypher statement where we remove each property a different way. One way we remove the property using the `SET` clause to set the property to null. And in another way, we use the `REMOVE` clause.
 
-image::{imagedir}/RemoveProperties.png[RemoveProperties,width=500,align=center]
+image::{imagedir}/RemoveProperties.png[RemoveProperties,width=800,align=center]
 
 [.title.has-gold-background.has-team-background]
 === *Exercise 9: Creating nodes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 9.
+
+[NOTE]
+This exercise has 18 steps.
+Estimated time to complete: 45 minutes.
 
 
 //[#module-6.quiz]

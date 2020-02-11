@@ -129,9 +129,9 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/CreateSingle-propertyIndex.png[CreateSingle-propertyIndex,width=600,align=center]
+image::{imagedir}/CreateSingle-propertyIndex.png[CreateSingle-propertyIndex,width=1000,align=center]
 
-== Creating a composite indexes
+== Creating composite indexes
 
 [.notes]
 --
@@ -157,7 +157,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/TwoStatements.png[TwoStatements,width=900,align=center]
+image::{imagedir}/TwoStatements.png[TwoStatements,width=1200,align=center]
 
 [.notes]
 --
@@ -183,7 +183,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/CreateCompositeIndex.png[CreateCompositeIndex,width=500,align=center]
+image::{imagedir}/CreateCompositeIndex.png[CreateCompositeIndex,width=1000,align=center]
 
 == Creating full-text schema indexes
 
@@ -244,7 +244,7 @@ ifndef::backend-revealjs[]
 And here we see our newly-created full-text schema index:
 endif::[]
 
-image::{imagedir}/CreateFullTextIndex2.png[CreateFullTextIndex2,width=900,align=center]
+image::{imagedir}/CreateFullTextIndex2.png[CreateFullTextIndex2,width=1300,align=center]
 
 [.notes]
 --
@@ -340,7 +340,7 @@ ifndef::backend-revealjs[]
 Here is what is returned:
 endif::[]
 
-image::{imagedir}/ManagingIndexes1.png[ManagingIndexes1,width=900,align=center]
+image::{imagedir}/ManagingIndexes1.png[ManagingIndexes1,width=1300,align=center]
 
 === Dropping an index
 
@@ -392,13 +392,17 @@ ifndef::backend-revealjs[]
 Here is what is returned:
 endif::[]
 
-image::{imagedir}/ManagingIndexes4.png[ManagingIndexes4,width=900,align=center]
+image::{imagedir}/ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 14: Creating indexes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 14.
+
+[NOTE]
+This exercise has 7 steps.
+Estimated time to complete: 30 minutes.
 
 //[#module-7.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

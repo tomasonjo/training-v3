@@ -109,7 +109,7 @@ You use the simple `MERGE` clause to:
 * Create a unique relationship between two nodes.
 * Create a unique node and relationship in the context of another node.
 
-=== Using `MERGE` to create nodes
+=== Syntax: Using `MERGE` to create nodes
 
 [.notes]
 --
@@ -141,7 +141,7 @@ WHERE p.name = 'Michael Caine'
 RETURN p
 ----
 
-image::{imagedir}/MichaelCaine.png[MichaelCaine,width=600,align=center]
+image::{imagedir}/MichaelCaine.png[MichaelCaine,width=900,align=center]
 
 === Example: Using `MERGE`
 
@@ -163,7 +163,7 @@ Here is the result of running this Cypher example.
 We do not find a node with the label _Actor_ so the graph engine creates one.
 --
 
-image::{imagedir}/MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=600,align=center]
+image::{imagedir}/MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=800,align=center]
 
 
 [NOTE]
@@ -178,6 +178,7 @@ If we were to repeat this `MERGE` clause, no additional _Actor_ nodes would be c
 
 At this point, however, we have two _Michael Caine_ nodes in the graph, one of type _Person_, and one of type _Actor_:
 --
+
 [.is-half.left]
 --
 image::{imagedir}/TwoMichaelCaines.png[TwoMichaelCaines,width=800,align=center]
@@ -202,16 +203,16 @@ WHERE p.name = 'Michael Caine'
 RETURN p
 ----
 
+image::{imagedir}/OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=center]
+--
+
 [.notes]
 --
 We would find that the Michael Caine node with the label Actor is not created.
 The `MERGE` found this node in the graph and did not create a new one.
 --
 
-image::{imagedir}/OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=center]
---
-
-== Using `MERGE` to create relationships
+== Syntax: Using `MERGE` to create relationships
 
 Here is the syntax for the `MERGE` clause for creating relationships:
 
@@ -260,7 +261,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this code:
 endif::[]
 
-image::{imagedir}/MergeToCreateRel.png[MergeToCreateRel,width=800,align=center]
+image::{imagedir}/MergeToCreateRel.png[MergeToCreateRel,width=1000,align=center]
 
 [.notes]
 --
@@ -298,7 +299,7 @@ When the `MERGE` executes, it will not find any matching nodes so it will create
 Here is the result of executing this code:
 --
 
-image::{imagedir}/CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=800,align=center]
+image::{imagedir}/CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=1000,align=center]
 
 == Verifying the merge
 
@@ -363,7 +364,7 @@ RETURN p, m
 Here is the result of executing this Cypher statement. It went through all the nodes and added the relationship to the nodes that didn't already have the relationship.
 --
 
-image::{imagedir}/MergeRelationships.png[MergeRelationships,width=800,align=center]
+image::{imagedir}/MergeRelationships.png[MergeRelationships,width=1000,align=center]
 
 [.notes]
 --
@@ -389,6 +390,10 @@ MERGE (fromDate:Date {year: 2018})<-[:IN_YEAR]-(toDate:Date {month: 'January'})
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 12.
+
+[NOTE]
+This exercise has 16 steps.
+Estimated time to complete: 60 minutes.
 
 //[#module-6.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

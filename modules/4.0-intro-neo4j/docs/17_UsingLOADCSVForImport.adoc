@@ -106,7 +106,7 @@ Including headers in the CSV file reduces syncing issues, but if the size of the
 
 Here are examples of CSV files with and without headers:
 
-image::{imagedir}/WithWithoutHeaders.png[WithWithoutHeaders,width=900,align=center]
+image::{imagedir}/WithWithoutHeaders.png[WithWithoutHeaders,width=1400,align=center]
 
 [.notes]
 --
@@ -126,7 +126,7 @@ This enables you to have CSV files that correspond to a relational table where a
 [.statement]
 Here is an example where we have normalized data for people, roles, and movies:
 
-image::{imagedir}/NormalizedData.png[NormalizedData,width=1000,align=center]
+image::{imagedir}/NormalizedData.png[NormalizedData,width=1400,align=center]
 
 [.notes]
 --
@@ -140,7 +140,7 @@ This is the data that could be used to create the _:ACTED_IN_ relationship that 
 [.statement]
 Here is an example where we have denormalized data for the same type of data:
 
-image::{imagedir}/DenormalizedData.png[DenormalizedData,width=900,align=center]
+image::{imagedir}/DenormalizedData.png[DenormalizedData,width=1400,align=center]
 
 [.notes]
 --
@@ -159,7 +159,7 @@ In most cases, the ID can be used as a unique property for each node.
 If the IDs in your CSV file are not unique for the same entity (node), you will have problems when you load the data and try to create relationships between existing nodes.
 --
 
-image::{imagedir}/UniqueIDs.png[UniqueIDs,width=900,align=center]
+image::{imagedir}/UniqueIDs.png[UniqueIDs,width=1300,align=center]
 
 == Is the data clean?
 
@@ -248,7 +248,7 @@ If you want numeric data, then you must transform it with functions such as:
 [.statement]
 For example, we want to transform these field values to numbers as shown here:
 
-image::{imagedir}/TransformMovieData1.png[TransformMovieData1,width=600,align=center]
+image::{imagedir}/TransformMovieData1.png[TransformMovieData1,width=850,align=center]
 
 === Preview the data transformation
 
@@ -266,7 +266,7 @@ RETURN toFloat(line.avgVote), line.genres, toInteger(line.movieId),
        line.title, toInteger(line.releaseYear) LIMIT 10
 ----
 
-image::{imagedir}/TransformMovieData2.png[TransformMovieData2,width=800,align=center]
+image::{imagedir}/TransformMovieData2.png[TransformMovieData2,width=1100,align=center]
 
 === Transforming lists
 
@@ -293,7 +293,7 @@ RETURN toFloat(line.avgVote), split(coalesce(line.genres,""), ":"),
 If all fields have data, then `split()` alone will work. If, however, some fields may have no values and you want an empty list created for the property, then you should use `split()` together with `coalesce()`.
 --
 
-image::{imagedir}/TransformMovieData3.png[TransformMovieData3,width=900,align=center]
+image::{imagedir}/TransformMovieData3.png[TransformMovieData3,width=1000,align=center]
 
 [.title.has-green-background.has-team-background]
 == Guided Exercise: Creating a new database
@@ -536,6 +536,10 @@ These indexes are not unique indexes.
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 16.
+
+[NOTE]
+This exercise has 9 steps.
+Estimated time to complete: 45 minutes.
 
 //[#module-7.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

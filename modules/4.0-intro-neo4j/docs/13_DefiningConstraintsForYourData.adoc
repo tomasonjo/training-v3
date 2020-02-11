@@ -192,11 +192,10 @@ CREATE CONSTRAINT ExistsREVIEWEDRating
        ON ()-[rel:REVIEWED]-() ASSERT exists(rel.rating)
 ----
 
-[.statement]
 Notice that when you create the constraint on a relationship, you need not specify the direction of the relationship.
 With the result:
 
-image::{imagedir}/CreateRatingExistenceConstraint.png[CreateRatingExistenceConstraint,width=600,align=center]
+image::{imagedir}/CreateRatingExistenceConstraint.png[CreateRatingExistenceConstraint,width=900,align=center]
 
 === Attempting to add relationship without property
 
@@ -216,7 +215,7 @@ MERGE (p)-[:REVIEWED {summary: 'Great movie!'}]->(m)
 [.statement]
 We see this error:
 
-image::{imagedir}/ExistenceConstraintFailed.png[ExistenceConstraintFailed,width=800,align=center]
+image::{imagedir}/ExistenceConstraintFailed.png[ExistenceConstraintFailed,width=1000,align=center]
 
 === Attempting to remove property from relationship
 
@@ -240,7 +239,6 @@ image::{imagedir}/ExistenceConstraintFailed2.png[ExistenceConstraintFailed2,widt
 
 == Retrieving  constraints defined for the graph
 
-[.statement]
 You can query for the set of constraints defined in the graph as follows:
 
 [source,cypher]
@@ -252,7 +250,7 @@ ifndef::backend-revealjs[]
 And here is what is returned from the graph:
 endif::[]
 
-image::{imagedir}/call_db_constraints.png[call_db_constraints,width=600,align=center]
+image::{imagedir}/call_db_constraints.png[call_db_constraints,width=1000,align=center]
 
 == Dropping constraints
 
@@ -296,7 +294,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement on our _Movie_ graph:
 endif::[]
 
-image::{imagedir}/NodeKeyCreationFailed.png[NodeKeyCreationFailed,width=800,align=center]
+image::{imagedir}/NodeKeyCreationFailed.png[NodeKeyCreationFailed,width=1000,align=center]
 
 [.notes]
 --
@@ -381,6 +379,9 @@ image::{imagedir}/CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,wi
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 13.
 
+[NOTE]
+This exercise has 14 steps.
+Estimated time to complete: 45 minutes.
 
 //[#module-6.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

@@ -120,7 +120,7 @@ image::{imagedir}/NodeLabels.png[width=300,align=center]
 You can filter the types of nodes that you are querying, by specifying a *label* for a node.
 A node can have zero or more labels.
 
-==== Syntax for specifying nodes
+==== Syntax: Specifying nodes
 
 Here are simplified syntax examples for specifying a node:
 
@@ -190,7 +190,7 @@ The relationships between nodes are also displayed, which you will learn about l
 
 image::{imagedir}/call_db.schema.visualization.png[call_db.schema.visualization,width=700,align=center]
 
-=== Using MATCH to retrieve nodes
+=== Syntax: Using MATCH to retrieve nodes
 
 //ifdef::backend-html5[]
 
@@ -298,6 +298,10 @@ image::{imagedir}/PersonNodes-table.png[PersonNodes-table,width=700,align=center
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 1.
+
+[NOTE]
+This exercise has 4 steps.
+Estimated time to complete: 10 minutes.
 
 === Properties
 
@@ -519,6 +523,10 @@ image::{imagedir}/UsingAliases.png[UsingAliases,width=800,align=center]
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 2.
+
+[NOTE]
+This exercise has 6 steps.
+Estimated time to complete: 15 minutes.
 
 === Relationships
 
@@ -1085,6 +1093,10 @@ We recommend that you follow the https://neo4j.com/docs/cypher-manual/current/st
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 3.
+
+[NOTE]
+This exercise has 5 steps.
+Estimated time to complete: 15 minutes.
 
 //[#module-4.quiz]
 [.section-title.has-purple-background.has-puzzle-background]
