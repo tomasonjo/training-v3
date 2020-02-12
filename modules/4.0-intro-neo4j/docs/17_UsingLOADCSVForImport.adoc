@@ -1,5 +1,4 @@
 = Using LOAD CSV for Import
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -256,7 +255,8 @@ image::{imagedir}/TransformMovieData1.png[TransformMovieData1,width=850,align=ce
 --
 You can preview the transformations you will make by returning their values:
 --
-
+[%unbreakable]
+--
 [source,cypher]
 ----
 LOAD CSV WITH HEADERS
@@ -267,6 +267,7 @@ RETURN toFloat(line.avgVote), line.genres, toInteger(line.movieId),
 ----
 
 image::{imagedir}/TransformMovieData2.png[TransformMovieData2,width=1100,align=center]
+--
 
 === Transforming lists
 
@@ -296,7 +297,7 @@ If all fields have data, then `split()` alone will work. If, however, some field
 image::{imagedir}/TransformMovieData3.png[TransformMovieData3,width=1000,align=center]
 
 [.title.has-green-background.has-team-background]
-== Guided Exercise: Creating a new database
+== *Guided Exercise: Creating a new database*
 
 [.notes]
 --

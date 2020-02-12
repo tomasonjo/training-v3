@@ -1,6 +1,5 @@
 
 = Creating Relationships
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -492,8 +491,11 @@ CREATE (a)-[rel:ACTED_IN {roles: ['The Villain','Joe']}]-(m)
 Select the correct answer.
 
 [ ] None
+
 [ ] One
+
 [ ] Two
+
 [X] Three
 endif::[]
 ifdef::backend-revealjs[]

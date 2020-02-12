@@ -1,5 +1,4 @@
 = Defining Constraints for your Data
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -163,6 +162,8 @@ image::{imagedir}/NoTaglineSomething.png[NoTaglineSomething,width=600,align=cent
 Here is an example for adding the existence constraint to the _tagline_ property of all _Movie_ nodes in the graph:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 CREATE CONSTRAINT ExistsMovieTagline ON (m:Movie) ASSERT exists(m.tagline)
@@ -173,6 +174,7 @@ Here is the result of running this Cypher statement:
 endif::[]
 
 image::{imagedir}/ConstraintExistTaglineFailure.png[ConstraintExistTaglineFailure,width=800,align=center]
+--
 
 [.notes]
 --
@@ -204,6 +206,8 @@ image::{imagedir}/CreateRatingExistenceConstraint.png[CreateRatingExistenceConst
 So after creating this constraint, if we attempt to create a _:REVIEWED_ relationship without setting the _rating_ property: 
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person), (m:Movie)
@@ -216,6 +220,7 @@ MERGE (p)-[:REVIEWED {summary: 'Great movie!'}]->(m)
 We see this error:
 
 image::{imagedir}/ExistenceConstraintFailed.png[ExistenceConstraintFailed,width=1000,align=center]
+--
 
 === Attempting to remove property from relationship
 
@@ -224,6 +229,8 @@ image::{imagedir}/ExistenceConstraintFailed.png[ExistenceConstraintFailed,width=
 You will also see this error if you attempt to remove a property from a node or relationship where the existence constraint has been created in the graph.
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[rel:REVIEWED]-(m:Movie)
@@ -236,6 +243,7 @@ Here is the result:
 endif::[]
 
 image::{imagedir}/ExistenceConstraintFailed2.png[ExistenceConstraintFailed2,width=800,align=center]
+--
 
 == Retrieving  constraints defined for the graph
 
@@ -358,7 +366,8 @@ Additionally, every node must contain the properties of the node key.
 --
 
 === Testing the node key - removing data
-
+[%unbreakable]
+--
 [.statement]
 If you attempt to remove a property that is used for a node key:
 
@@ -372,6 +381,7 @@ REMOVE p.born
 You will see this error:
 
 image::{imagedir}/CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,width=800,align=center]
+--
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 13: Defining constraints on your data*

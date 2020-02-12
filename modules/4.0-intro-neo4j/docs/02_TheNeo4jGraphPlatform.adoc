@@ -270,7 +270,7 @@ It includes an application called  Neo4j Browser which is the UI you used to acc
 
 //NEED TO REDO THIS WITH A 4.0 local database*
 
-image::{imagedir}/Neo4jDesktop.png[Neo4jDesktop,width=600,align=center]
+image::{imagedir}/Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
 
 [.statement]
 The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
@@ -356,7 +356,7 @@ Here are [.underline]#some# of the graph applications you can use:
 * *Graph Algos Playground*: Run graph algorithms and generate code for them.
 
 
-=== Neo4j Browser
+== Neo4j Browser
 
 [.notes]
 --
@@ -406,10 +406,11 @@ In addition, when using the Web browser interface to Neo4j Browser, you can use 
 --
 
 [.title.has-green-background.has-team-background]
-=== *Guided Exercise: Getting Started with Neo4j Browser*
+== *Guided Exercise: Getting Started with Neo4j Browser*
 
 [.notes]
 --
+ifdef::backend-revealjs[]
 Show the students the basics of using Neo4j Browser and have them do the same on their systems:
 
 . Show the various panes, including the left panel for database information and apps available.
@@ -421,6 +422,7 @@ Show the students the basics of using Neo4j Browser and have them do the same on
 . Show how to display the entire query pane with ESC.
 . Show hot to minimize a window.
 . Show how to pin a window.
+endif::[]
 --
 
 [.statement]
@@ -433,7 +435,7 @@ video::oHo-lQ79zf0[youtube,width=560,height=315,pdfwidth=100%]
 Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
 
 
-=== Neo4j Bloom
+== Neo4j Bloom
 
 [.notes]
 --

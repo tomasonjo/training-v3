@@ -1,5 +1,4 @@
 = Using Indexes
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -234,17 +233,19 @@ image::{imagedir}/CreateFullTextIndex1.png[CreateFullTextIndex1,width=900,align=
 After creating a full-text schema index, you can always get of listing of all existing indexes:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 CALL db.index.fulltext.createNodeIndex(
      'MovieTitlePersonName',['Movie', 'Person'], ['title', 'name'])
 ----
 
-ifndef::backend-revealjs[]
+[.statement]
 And here we see our newly-created full-text schema index:
-endif::[]
 
 image::{imagedir}/CreateFullTextIndex2.png[CreateFullTextIndex2,width=1300,align=center]
+--
 
 [.notes]
 --
@@ -289,6 +290,8 @@ When a full-text schema index is used, it calculates a "hit score" that represen
 Here is an example:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 CALL db.index.fulltext.queryNodes(
@@ -300,6 +303,7 @@ RETURN node.title, score
 The nodes returned have a Lucene score based upon how much of _Matrix_ was part of the _title_:
 
 image::{imagedir}/UseFullTextIndex2.png[UseFullTextIndex2,width=900,align=center]
+--
 
 === Example: Searching on a particular property
 
@@ -367,6 +371,8 @@ image::{imagedir}/ManagingIndexes2.png[ManagingIndexes2,width=900,align=center]
 To drop a full-text schema index, you must call the procedure. Here we drop the index that we created earlier:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 CALL db.index.fulltext.drop('MovieTitlePersonName')
@@ -377,6 +383,7 @@ With the result:
 endif::[]
 
 image::{imagedir}/ManagingIndexes3.png[ManagingIndexes3,width=900,align=center]
+--
 
 === Confirming dropped indexes
 

@@ -1,6 +1,4 @@
-
 = Controlling Results Returned
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -9,7 +7,7 @@
 :doctype: book
 :toc: left
 :toclevels: 3
-:prevsecttitle: Working with Patterns in Queries
+:prevsecttitle: Controlling the Query Chain
 :prevsect: 7
 :currsect: 8
 :nextsecttitle: Creating Nodes
@@ -98,6 +96,8 @@ You can also specify `DISTINCT` when collecting elements for a list.
 Here is another query where we collect the names of people who acted in, directed, or wrote movies released in 2003.
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[:ACTED_IN | DIRECTED | WROTE]->(m:Movie)
@@ -110,6 +110,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/DuplicationInCollection.png[DuplicationInCollection,width=800,align=center]
+--
 
 === Eliminating duplication in lists
 
@@ -118,6 +119,8 @@ image::{imagedir}/DuplicationInCollection.png[DuplicationInCollection,width=800,
 We can eliminate the duplication by specifying the `DISTINCT` keyword when collecting the results:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[:ACTED_IN | DIRECTED | WROTE]->(m:Movie)
@@ -130,6 +133,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/NoDuplicationInCollection.png[NoDuplicationInCollection,width=800,align=center]
+--
 
 === Using WITH and DISTINCT to eliminate duplication
 
@@ -138,6 +142,8 @@ image::{imagedir}/NoDuplicationInCollection.png[NoDuplicationInCollection,width=
 Another way that you can avoid duplication is to use `WITH` and `DISTINCT` together as follows:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[:DIRECTED | ACTED_IN]->(m:Movie)
@@ -151,6 +157,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/NoDuplication2.png[NoDuplication2,width=800,align=center]
+--
 
 == Ordering results
 
@@ -162,6 +169,8 @@ Ascending order is the default.
 In this example, we specify that the release date of the movies for _Tom Hanks_ will be returned in descending order.
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[:DIRECTED | ACTED_IN]->(m:Movie)
@@ -174,6 +183,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/Ordering.png[Ordering,width=800,align=center]
+--
 
 === Ordering multiple results
 
@@ -183,6 +193,8 @@ Note that you can provide multiple sort expressions and the result will be sorte
 Here we want the rows to be sorted by the release date, descending, and then by title:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[:DIRECTED | ACTED_IN]->(m:Movie)
@@ -194,6 +206,7 @@ image::{imagedir}/Ordering2.png[Ordering2,width=400,align=center]
 
 [.statement]
 There is no limit to the number of properties you can order by.
+--
 
 == Limiting the number of results
 
@@ -207,6 +220,8 @@ Suppose you want to see the titles of the ten most recently released movies.
 You could do so as follows where you limit the number of results using the `LIMIT` keyword as follows:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (m:Movie)
@@ -218,6 +233,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/Limit.png[Limit,width=600,align=center]
+--
 
 == Limiting number of intermediate results
 
@@ -228,6 +244,8 @@ A best practice is to limit the number of rows processed before they are collect
 Here is an example where we want to limit the number of actors collected in this query by the number 6:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
@@ -240,6 +258,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/Limit2.png[Limit2,width=600,align=center]
+--
 
 [.notes]
 --
@@ -256,6 +275,8 @@ Suppose we want to retrieve five movies and for each movie, return the :ACTED_IN
 Here is one way to perform this query:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (m:Movie)
@@ -269,6 +290,7 @@ image::{imagedir}/Limit3.png[Limit3,width=600,align=center]
 
 [.statement]
 Note that this display in Neo4j Browser is with *Connect result nodes* unchecked.
+--
 
 === Alternative to `LIMIT`
 

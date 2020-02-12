@@ -1,5 +1,4 @@
 = Using an Application for Import
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com

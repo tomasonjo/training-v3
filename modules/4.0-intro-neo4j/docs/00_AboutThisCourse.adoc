@@ -1,4 +1,4 @@
-= Introduction to Neo4j: About This Course
+= Introduction to Neo4j 4.0
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -26,6 +26,7 @@
 
 == About this course
 
+
 This course introduces you to graph databases and how to use Neo4j and Cypher to query and update a Neo4j database.
 
 [.notes]
@@ -50,6 +51,9 @@ If you complete all lessons, you will receive a _Certificate of Completion_.
 If you perform the hands-on exercises, this course will take you approximately 16 hours to complete.
 endif::[]
 
+
+This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+
 ifndef::backend-revealjs[]
 == Lesson Overview
 
@@ -70,6 +74,7 @@ endif::[]
 . Controlling the Query Chain
 . Controlling Results Returned
 . Creating Nodes
+
 ifdef::backend-revealjs[]
 == Day 2: Lessons
 endif::[]

@@ -1,5 +1,4 @@
 = Introduction to Neo4j: Summary
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com

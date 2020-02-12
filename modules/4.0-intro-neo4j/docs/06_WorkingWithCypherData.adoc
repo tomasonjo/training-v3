@@ -164,6 +164,8 @@ image::{imagedir}/TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=8
 
 [.is-half.right]
 --
+
+
 [.statement]
 Here is the result returned viewed as a table. Each node is an object in the list returned:
 
@@ -246,6 +248,8 @@ endif::[]
 There are many built-in Cypher functions that you can use to build or access elements in lists.
 --
 
+[%unbreakable]
+--
 [.statement]
 Here we return the cast list for every movie, as well as the size of the cast:
 
@@ -260,6 +264,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/CastList1.png[CastList1,width=650,align=center]
+--
 
 [.notes]
 --
@@ -268,6 +273,8 @@ Notice that when viewing nodes in table view, each node is shown with {} notatio
 
 ==== Using strings in lists
 
+[%unbreakable]
+--
 [.statement]
 We can adjust this query slightly so that the list contains the names, rather than the entire set of  _Person_ node properties.
 
@@ -282,6 +289,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/CastList2.png[CastList2,width=900,align=center]
+--
 
 ==== Accessing elements of the list
 
@@ -292,6 +300,8 @@ You can access particular elements of the list using the `[index-value]` notatio
 In this example we return the first cast member for each movie.
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
@@ -304,6 +314,7 @@ Here is the result returned:
 endif::[]
 
 image::{imagedir}/CastList3.png[CastList3,width=900,align=center]
+--
 
 [.notes]
 --
@@ -343,10 +354,13 @@ Here we use the key, `'Feb'` to access it's value. Notice that this statement is
 We are returning a value that is not retrieved from the graph.
 --
 
+[%unbreakable]
+--
 [.statement]
 A node in the graph, when returned in Neo4j Browser is a map, when displayed as table rows. For example, a Movie node:
 
 image::{imagedir}/NodeIsMap.png[NodeIsMap,width=400,align=center]
+--
 
 ==== Map projections
 
@@ -358,6 +372,8 @@ Suppose we want to return the _Movie_ node information, but without the tagline 
 You can do so as follows using Map projections:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (m:Movie)
@@ -369,6 +385,7 @@ RETURN m { .title, .released } AS movie
 Here is what is returned, the movie node data with only the title and released values:
 
 image::{imagedir}/MapProjection.png[MapProjection,width=700,align=center]
+--
 
 [.notes]
 --
@@ -398,6 +415,8 @@ image::{imagedir}/DateTime.png[DateTime,width=900,align=center]
 Since both date() and datetime() store their values as strings, you can use functions such as day, year, time to extract the values that you need:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 RETURN date().day, date().year, datetime().year, datetime().hour,
@@ -405,6 +424,7 @@ RETURN date().day, date().year, datetime().year, datetime().hour,
 ----
 
 image::{imagedir}/DateTime2.png[DateTime2,width=900,align=center]
+--
 
 ==== Working with `timestamp()`
 
@@ -414,6 +434,8 @@ Working with timestamp() is different as its value is a long integer that repres
 To extract a month, year, or time from a timestamp, you would do the following:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 RETURN datetime({epochmillis:timestamp()}).day,
@@ -422,6 +444,7 @@ RETURN datetime({epochmillis:timestamp()}).day,
 ----
 
 image::{imagedir}/DateTime3.png[DateTime3,width=1200,align=center]
+--
 
 ==== Type and data conversions
 
@@ -441,7 +464,7 @@ Here are some of the built-in conversion functions:
 Consult the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
 
 [.title.has-gold-background.has-team-background]
-=== *Exercise 6: Working with Cypher data*
+== *Exercise 6: Working with Cypher data*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 6.

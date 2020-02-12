@@ -303,6 +303,8 @@ Sometimes during a query, you may want to perform additional filtering using the
 You can specify a `NOT` specifier on a pattern in a `WHERE` clause.
 --
 
+[%unbreakable]
+--
 [.statement]
 Here is an example where we want to return all _Person_ nodes of people who wrote movies:
 
@@ -317,9 +319,12 @@ Here is the result:
 endif::[]
 
 image::{imagedir}/WroteMovies.png[WroteMovies,width=700,align=center]
+--
 
 ====  Example: Testing with patterns - 2
 
+[%unbreakable]
+--
 [.statement]
 Next, we modify this query to exclude people who directed that particular movie:
 
@@ -335,9 +340,12 @@ Here is the result:
 endif::[]
 
 image::{imagedir}/WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=800, align=center]
+--
 
 ==== Example: Testing with patterns - 3
 
+[%unbreakable]
+--
 [.statement]
 Here is another example where we want to find _Gene Hackman_ and the movies that he acted in with another person who also directed the movie.
 
@@ -354,6 +362,7 @@ Here is the result:
 endif::[]
 
 image::{imagedir}/ExistsPattern.png[ExistsPattern,width=650,align=center]
+--
 
 ==== Testing with list values
 
@@ -368,6 +377,8 @@ You can place either numeric or string values in the list, but typically, elemen
 If you are testing with a property of a string type, then all the elements of the list should be strings. 
 --
 
+[%unbreakable]
+--
 [.statement]
 In this example, we only want to retrieve _Person_ nodes of people born in 1965 or 1970:
 
@@ -383,6 +394,7 @@ Here is the result:
 endif::[]
 
 image::{imagedir}/UsingIN.png[UsingIN,width=800,align=center]
+--
 
 ==== Testing list values in the graph
 
@@ -394,6 +406,8 @@ We know that the _:ACTED_IN_ relationship has a property, _roles_ that contains 
 Here is the query we write to return the name of the actor who played _Neo_ in the movie _The Matrix_:
 --
 
+[%unbreakable]
+--
 [source,cypher]
 ----
 MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
@@ -416,9 +430,10 @@ endif::[]
 [.statement]
 There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses.
 You can learn more about these syntax elements in the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] and the https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard].
+--
 
 [.title.has-green-background.has-team-background]
-=== *Exercise 4: Filtering queries using the `WHERE` clause*
+== *Exercise 4: Filtering queries using the `WHERE` clause*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 4.

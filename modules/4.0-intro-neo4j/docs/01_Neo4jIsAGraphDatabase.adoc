@@ -76,13 +76,13 @@ Based on the above observations, the problem has no solution, because all four o
 
 === Anything can be a graph
 
-// do not show up in slides at all
-ifndef::backend-revealjs[]
+[.notes]
+--
 But if graphs are an abstract mathematical tool, why do we care about them?
 
 We care because any dataset can be represented as a graph.
 Any structure or concept, no matter how simple or complex, can be broken down into a set constituent parts that have some relationship to one another.
-endif::[]
+--
 
 [.is-half.left]
 --
@@ -100,14 +100,6 @@ image::{imagedir}/AWaterMoleculeAsAGraph.png[AWaterMoleculeAsAGraph,width=200,al
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-But if graphs are an abstract mathematical tool, why do we care about them?
-
-We care because any dataset can be represented as a graph.
-Any structure or concept, no matter how simple or complex, can be broken down into a set constituent parts that have some relationship to one another.
-endif::[]
-
 And, as Euler showed, there are some clear benefits to representing data in this way.
 We will discuss many of these as we go.
 But mainly, graphs are uniquely useful when answering a question that  involves following a path along a chain of related items.
@@ -133,10 +125,11 @@ image::{imagedir}/GraphComponents.png[GraphComponents,width=400,align=center]
 First, let’s define a node in Neo4j.
 Nodes are the main objects of a graph.
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 We say this not because nodes contain more data than relationships--although they usually do--but because it is perfectly acceptable to have nodes without any relationships.
 Conversely,  is is [.underline]#not# possible to have a relationship without any nodes.
-endif::[]
+--
 
 Here we see that each node has a different color, perhaps to differentiate its type from another node.
 For example, the blue node represents a person and that person node has a name of Jane.
@@ -146,12 +139,6 @@ image::{imagedir}/GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=ce
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-We say this not because nodes contain more data than relationships--although they usually do--but because it is perfectly acceptable to have nodes without any relationships.
-Conversely,  is is [.underline]#not# possible to have a relationship without any nodes.
-endif::[]
-
 Mathematically, a node is defined as “a point where two or more edges (relationships) meet.”
 This is not at all intuitive!
 However, it provides important insight into how graphs are used.
@@ -162,27 +149,19 @@ Relationships are those links.
 
 ==== Relationships
 
-ifndef::backend-revealjs[]
+[.notes]
+--
 Next, let’s define a relationship in Neo4j.
-endif::[]
 
-ifndef::backend-revealjs[]
 Relationships are the links between nodes.
 In their simplest form, relationships need not contain any information other than which two nodes they link.
 But they can (and in Neo4j always do) contain much more.
-endif::[]
+--
 
 image::{imagedir}/GraphConcepts-Relationships.png[GraphConcepts-Relationships,width=400,align=center]
 
 [.notes]
 --
-//duplicate content
-ifdef::backend-revealjs[]
-Relationships are the links between nodes.
-In their simplest form, relationships need not contain any information other than which two nodes they link.
-But they can (and in Neo4j always do) contain much more.
-endif::[]
-
 For example, relationships can include a direction.
 "Jane owns a car" is a very different relationship than "A car owns Jane", and the direction of the relationship between Jane and her car captures this.
 Relationship directions are required in Neo4j.

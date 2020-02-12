@@ -1,5 +1,4 @@
 = Using neo4j-admin for Import
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -138,6 +137,9 @@ The ID(crime-ref) is used to store a reference to the node that is created so th
 
 === CSV file for nodes: PrimaryType
 
+[%unbreakable]
+--
+
 [.statement]
 Here is a portion of the *primaryTypes.csv* file for loading these nodes:
 
@@ -151,6 +153,7 @@ THEFT
 CRIM SEXUAL ASSAULT
 BURGLARY
 ----
+--
 
 [.notes]
 --
@@ -343,7 +346,7 @@ Select the correct answers.
 
 [ ] The products.csv file must have the label name in the corresponding _USE_LABEL_ column.
 
-[ ] The products.csv file must have the label name in corresponding the _:LABEL_ column.
+[X] The products.csv file must have the label name in corresponding the _:LABEL_ column.
 endif::[]
 ifdef::backend-revealjs[]
 

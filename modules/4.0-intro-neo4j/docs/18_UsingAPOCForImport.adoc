@@ -1,6 +1,5 @@
 
 = Using APOC for Import
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -378,7 +377,8 @@ Next, you must determine what data from the JSON file  you will use to create th
 
 Here we have made a selection for the data we want to create in the graph and we write the code to return it:
 --
-
+[%unbreakable]
+--
 [source,cypher]
 ----
 WITH "https://api.stackexchange.com/2.2/search?page=1&pagesize=5&order=asc&sort=creation&tagged=neo4j&site=stackoverflow&filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS uri
@@ -393,6 +393,7 @@ Here is the result:
 endif::[]
 
 image::{imagedir}/SOQuestionData.png[SOQuestionData,width=1300,align=center]
+--
 
 === Creating the graph from JSON
 

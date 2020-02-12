@@ -1,5 +1,4 @@
 = Overview of Importing Data into Neo4j
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com

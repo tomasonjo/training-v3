@@ -526,7 +526,7 @@ Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_
 --
 
 [.title.has-gold-background.has-team-background]
-=== *Exercise 5: Working with patterns in queries*
+== *Exercise 5: Working with patterns in queries*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 5.

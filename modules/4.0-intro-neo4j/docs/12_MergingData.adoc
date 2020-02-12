@@ -1,6 +1,5 @@
 
 = Merging Data
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
@@ -386,7 +385,7 @@ MERGE (fromDate:Date {year: 2018})<-[:IN_YEAR]-(toDate:Date {month: 'January'})
 ----
 
 [.title.has-gold-background.has-team-background]
-=== *Exercise 12: Merging data in the graph*
+== *Exercise 12: Merging data in the graph*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 12.
@@ -438,8 +437,11 @@ RETURN p
 Select the correct answer.
 
 [ ] The _Person_ label exists in the graph.
+
 [ ] The _Person_ label does not exist in the graph.
+
 [X] The value for name is unique.
+
 [ ] The value for born is unique.
 endif::[]
 ifdef::backend-revealjs[]
@@ -450,7 +452,7 @@ endif::[]
 
 === Question 2
 
-ifndef::backend-html5[]
+ifndef::backend-pdf[]
 [.statement]
 Given this `MERGE` clause.
 Suppose that the _p_ and _m_ nodes exist in the graph.
@@ -489,8 +491,11 @@ MERGE (p)-[:ACTED_IN]->(m)
 Select the correct answers.
 
 [ ] If the `:ACTED_IN` relationship exists, it deletes it and recreates it.
+
 [X] If the `:ACTED_IN` relationship exists, it does nothing.
+
 [X] If the `:ACTED_IN` relationship does not exist, it creates it.
+
 [ ] If the `:ACTED_IN` relationship does not exist, it creates another one.
 endif::[]
 ifdef::backend-revealjs[]
@@ -540,8 +545,11 @@ MERGE (p)-[rel:ACTED_IN]->(m)
 Select the correct answers.
 
 [X] Use the default behavior. The relationship will be created if it doesn't exist.
+
 [X] Specify `ON CREATE` to perform additional processing when the relationship is created.
+
 [X] Specify `ON MATCH` to perform additional processing when the relationship is not created.
+
 [ ] Specify `ON DELETE` to perform additional processing when the relationship is deleted.
 endif::[]
 ifdef::backend-revealjs[]

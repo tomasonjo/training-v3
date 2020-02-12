@@ -1,5 +1,4 @@
 = Using Query Best Practices
-
 :presenter: Neo Technology
 :twitter: neo4j
 :email: info@neotechnology.com
