@@ -1105,6 +1105,7 @@ Estimated time to complete: 15 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you have a graph that contains nodes representing customers and other business entities for your application.
 The node label in the database for a customer is _Customer_. Each _Customer_ node has a property named _email_ that contains the customer's email address.
@@ -1119,9 +1120,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#`MATCH (c:Customer) RETURN c.email`#
 - ◻️  [.answer]#`MATCH (Customer) RETURN email`#
 - ◻️  [.answer]#`MATCH (c) RETURN Customer.email`#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you have a graph that contains nodes representing customers and other business entities for your application.
 The node label in the database for a customer is _Customer_. Each _Customer_ node has a property named _email_ that contains the customer's email address.
 What Cypher query do you execute to return the email addresses for all customers in the graph?
@@ -1136,11 +1139,16 @@ Select the correct answer.
 
 [ ] `MATCH (c) RETURN Customer.email`
 
+endif::[]
+ifdef::backend-revealjs[]
+
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you have a graph that contains _Customer_ and _Product_ nodes. A _Customer_ node can have a _BOUGHT_ relationship with a _Product_ node.
 _Customer_ nodes can have other relationships with _Product_ nodes.
@@ -1151,15 +1159,16 @@ What Cypher query do you execute to return all of the products (by name) bought 
 [.statement]
 Select the correct answer.
 //[%interactive]
-
 [none.answers]
-- ◻️  [.answer]#`pass:[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]`#
-- ◻️  [.answer]#`pass:[MATCH (:Customer 'ABCCO')-[:BOUGHT\]->(p:Product) RETURN p.productName]`#
-- ◻️  [.answer]#`pass:[MATCH (p:Product)<-[:BOUGHT_BY\]-(:Customer 'ABCCO') RETURN p.productName]`#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#`pass:[MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT\]->(p:Product) RETURN p.productName]`#
+- ◻️  [.answer]#`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`#
+- ◻️  [.answer]#`MATCH (:Customer 'ABCCO')-[:BOUGHT\]->(p:Product) RETURN p.productName`#
+- ◻️  [.answer]#`[MATCH (p:Product)<-[:BOUGHT_BY\]-(:Customer 'ABCCO') RETURN p.productName`#
+- ◻️  [.fragment.check.ok]#✔️# [.answer]#`[MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT\]->(p:Product) RETURN p.productName`#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you have a graph that contains _Customer_ and _Product_ nodes. A _Customer_ node can have a _BOUGHT_ relationship with a _Product_ node.
 _Customer_ nodes can have other relationships with _Product_ nodes.
 A _Customer_ node has a property named _customerName_.
@@ -1168,19 +1177,24 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 Select the correct answer.
 
-[ ] `pass:[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]`
+[ ] `MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
 
-[ ] `pass:[MATCH (:Customer 'ABCCO')-[:BOUGHT\]->(p:Product) RETURN p.productName]`
+[ ] `MATCH (:Customer 'ABCCO')-[:BOUGHT\]->(p:Product) RETURN p.productName`
 
-[ ] `pass:[MATCH (p:Product)<-[:BOUGHT_BY\]-(:Customer 'ABCCO') RETURN p.productName]`
+[ ] `MATCH (p:Product)<-[:BOUGHT_BY\]-(:Customer 'ABCCO') RETURN p.productName`
 
-[X] `pass:[MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT\]->(p:Product) RETURN p.productName]`
+[X] `MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT\]->(p:Product) RETURN p.productName`
+
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 When [.underline]#must# you use a variable in a MATCH clause?
 
@@ -1194,8 +1208,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#When you want to use the node or relationship to return a value.#
 - ◻️  [.answer]#When the query involves 2 types of nodes.#
 
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
+
 When [.underline]#must# you use a variable in a MATCH clause?
 
 Select the correct answer.
@@ -1208,7 +1225,11 @@ Select the correct answer.
 
 [ ] When the query involves 2 types of nodes.
 
+endif::[]
+ifdef::backend-revealjs[]
+
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

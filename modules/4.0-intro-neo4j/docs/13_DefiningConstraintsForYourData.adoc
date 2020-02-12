@@ -389,6 +389,7 @@ Estimated time to complete: 45 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What are some of the constraints you can create for the data in your graph?
 
@@ -400,9 +401,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Property value for a node with a given label is unique.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Property for a node with a given label must exist.#
 - ◻️  [.answer]#Property value for a relationship is unique.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What are some of the constraints you can create for the data in your graph?
 
 Select the correct answers.
@@ -414,12 +417,16 @@ Select the correct answers.
 [X] Property for a node with a given label must exist.
 
 [ ] Property value for a relationship is unique.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What types of uniqueness constraints can you define for a graph?
 
@@ -431,9 +438,11 @@ Select the correct answers.
 - ◻️  [.answer]#unique values for a property of a relationship#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#unique values for a set of properties of a node#
 - ◻️  [.answer]#unique values for a set of properties of a relationship#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What types of uniqueness constraints can you define for a graph?
 
 Select the correct answers.
@@ -445,12 +454,16 @@ Select the correct answers.
 [X] unique values for a set of properties of a node
 
 [ ] unique values for a set of properties of a relationship
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 How many properties can be defined for a NODE KEY constraint?
 
@@ -462,9 +475,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#1#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#2#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#unlimited#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 How many properties can be defined for a NODE KEY constraint?
 
 Select the correct answers.
@@ -476,8 +491,11 @@ Select the correct answers.
 [X] 2
 
 [X] unlimited
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the three correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

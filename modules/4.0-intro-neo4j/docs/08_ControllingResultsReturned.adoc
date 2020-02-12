@@ -328,6 +328,7 @@ Estimated time to complete: 20 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 This code returns the titles of all movies that have been reviewed.
 Multiple people can review a movie.
@@ -353,9 +354,11 @@ Select the correct answers.
 - ◻️  [.answer]#MATCH ()-[:REVIEWED]->(m:Movie)
                       WITH UNIQUE m
                       RETURN  m.title#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 This code returns the titles of all movies that have been reviewed.
 Multiple people can review a movie.
 How can you change this code so that a movie title will only be returned once?
@@ -381,12 +384,16 @@ Select the correct answers.
 [ ] MATCH ()-[:REVIEWED]->(m:Movie)
     WITH UNIQUE m
     RETURN  m.title
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 How many property values can you order in the returned result?
 
@@ -398,9 +405,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#As many as you need to#
 - ◻️  [.answer]#Two#
 - ◻️  [.answer]#Three#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 How many property values can you order in the returned result?
 
 Select the correct answer.
@@ -412,12 +421,16 @@ Select the correct answer.
 [ ] Two
 
 [ ] Three
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 We want to retrieve the names of the five oldest actors in our dataset. What code will do this?
 
@@ -435,9 +448,11 @@ Select the correct answers.
                          RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#MATCH (p:Person)
                          RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 We want to retrieve the names of the five oldest actors in our dataset. What code will do this?
 
 Select the correct answers.
@@ -455,8 +470,11 @@ Select the correct answers.
 
 [X] MATCH (p:Person)
     RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the three correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

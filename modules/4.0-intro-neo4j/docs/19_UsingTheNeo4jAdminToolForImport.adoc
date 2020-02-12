@@ -264,6 +264,7 @@ Estimated time to complete: 20 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Before you will import data using neo4j-admin, what is one thing you must do?
 
@@ -275,9 +276,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Ensure the database does not exist.#
 - ◻️  [.answer]#Create the constraints in the database.#
 - ◻️  [.answer]#Create the indexes in the database.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Before you will import data using neo4j-admin, what is one thing you must do?
 
 Select the correct answer.
@@ -289,12 +292,16 @@ Select the correct answer.
 [ ] Create the constraints in the database.
 
 [ ] Create the indexes in the database.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose that part of the import command that you issue to neo4j-admin looks like this:
 
@@ -314,9 +321,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#The products_header.csv file must have a field, _:LABEL_.#
 - ◻️  [.answer]#The products.csv file must have the label name in the corresponding _USE_LABEL_ column.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#The products.csv file must have the label name in corresponding the _:LABEL_ column.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose that part of the import command that you issue to neo4j-admin looks like this:
 
  [source]
@@ -335,11 +344,15 @@ Select the correct answers.
 [ ] The products.csv file must have the label name in the corresponding _USE_LABEL_ column.
 
 [ ] The products.csv file must have the label name in corresponding the _:LABEL_ column.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you want to import data using six node CSV files and eight relationship CSV files.
 How many times must you execute the import process using neo4j-admin?
@@ -353,9 +366,11 @@ Select the correct answer.
 - ◻️  [.answer]#6#
 - ◻️  [.answer]#8#
 - ◻️  [.answer]#14#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you want to import data using six node CSV files and eight relationship CSV files.
 How many times must you execute the import process using neo4j-admin?
 
@@ -368,8 +383,11 @@ Select the correct answer.
 [ ] 8
 
 [ ] 14
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

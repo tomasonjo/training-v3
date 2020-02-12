@@ -343,6 +343,7 @@ Estimated time to complete: 45 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose our graph has a _Person_ node for Tom Jones and a _Movie_ node for the movie Life is Wonderful.
 We want to connect these two nodes with the _ACTED_IN_ relationship.
@@ -364,9 +365,11 @@ Select the correct answer.
 - ◻️  [.answer]#You cannot specify a variable for a relationship.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Direction must be specified when you create the relationship.#
 - ◻️  [.answer]#You cannot return the variable, _rel_.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose our graph has a _Person_ node for Tom Jones and a _Movie_ node for the movie Life is Wonderful.
 We want to connect these two nodes with the _ACTED_IN_ relationship.
 What is wrong with this code?
@@ -387,12 +390,16 @@ Select the correct answer.
 [X] Direction must be specified when you create the relationship.
 
 [ ] You cannot return the variable, _rel_.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 Given this code, what Cypher clause do you use to add the roles property to the relationship?
 
@@ -412,9 +419,11 @@ Select the correct answer.
 - ◻️  [.answer]#`CREATE PROPERTY`#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#`SET`#
 - ◻️  [.answer]#`SET PROPERTY`#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Given this code, what Cypher clause do you use to add the roles property to the relationship?
 
 [source,cypher]
@@ -434,12 +443,16 @@ Select the correct answer.
 [X] `SET`
 
 [ ] `SET PROPERTY`
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 Assuming the nodes are successfully retrieved, how many relationships are created?
 
@@ -460,9 +473,11 @@ Select the correct answer.
 - ◻️  [.answer]#One#
 - ◻️  [.answer]#Two#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Three#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Assuming the nodes are successfully retrieved, how many relationships are created?
 
 [source,cypher]
@@ -480,8 +495,11 @@ Select the correct answer.
 [ ] One
 [ ] Two
 [X] Three
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 [.title.has-green-background.has-puzzle-background]
 == Summary
@@ -494,6 +512,7 @@ You should now be able to write Cypher statements to:
 * Add properties to a relationship.
 * Remove properties from a relationship.
 
+////
 
 == Grade Quiz and Continue 
 
@@ -514,3 +533,4 @@ $( document ).ready(function() {
 
 endif::backend-html5[]
 
+////

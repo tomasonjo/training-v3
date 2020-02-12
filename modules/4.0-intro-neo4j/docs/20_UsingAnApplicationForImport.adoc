@@ -258,6 +258,7 @@ Estimated time to complete: 15 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What supported drivers can you use to write a Neo4j application?
 
@@ -270,9 +271,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Python#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Go#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#C##
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What supported drivers can you use to write a Neo4j application?
 
 Select the correct answers.
@@ -286,11 +289,15 @@ Select the correct answers.
 [X] Go
 
 [X] C#
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next five times to reveal the five correct answers.
+endif::[]
 --
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What programming languages support asynchronous calls to Neo4j:
 
@@ -302,9 +309,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Java#
 - ◻️  [.answer]#Python#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#C##
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What programming languages support asynchronous calls to Neo4j:
 
 Select the correct answers.
@@ -316,12 +325,16 @@ Select the correct answers.
 [ ] Python
 
 [X] C#
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 What programming languages support synchronous calls to Neo4j:
 
@@ -333,9 +346,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Java#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Python#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#C##
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What programming languages support synchronous calls to Neo4j:
 
 Select the correct answers.
@@ -347,8 +362,11 @@ Select the correct answers.
 [X] Python
 
 [X] C#
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next four times to reveal the four correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

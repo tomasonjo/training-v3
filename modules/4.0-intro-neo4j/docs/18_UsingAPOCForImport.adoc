@@ -444,6 +444,7 @@ Estimated time to complete: 20 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What APOC procedure can you use to batch transactions when a lot of data needs to be processed?
 
@@ -455,9 +456,11 @@ Select the correct answer.
 - ◻️  [.answer]#`apoc.transaction.batch()`.#
 - ◻️  [.answer]#`apoc.iterate()`.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#`apoc.periodic.iterate()`.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What APOC procedure can you use to batch transactions when a lot of data needs to be processed?
 
 Select the correct answer.
@@ -469,12 +472,16 @@ Select the correct answer.
 [ ] `apoc.iterate()`.
 
 [X] `apoc.periodic.iterate()`.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 The procedure `apoc.do.when()` is used for:
 
@@ -486,9 +493,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Executing Cypher code when a condition is true and alternate Cypher code when the condition is false.#
 - ◻️  [.answer]#An alternative to the MERGE clause.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Profiling the execution of a query.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 The procedure `apoc.do.when()` is used for:
 
 Select the correct answers.
@@ -500,12 +509,16 @@ Select the correct answers.
 [ ] An alternative to the MERGE clause.
 
 [X] Profiling the execution of a query.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 What does `CALL apoc.schema.assert({},{},true)` do?
 
@@ -517,9 +530,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Drops all indexes in the graph.#
 - ◻️  [.answer]#Removes all relationships in the graph.#
 - ◻️  [.answer]#Removes all nodes in the graph.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What does `CALL apoc.schema.assert({},{},true)` do?
 
 Select the correct answers.
@@ -531,8 +546,11 @@ Select the correct answers.
 [ ] Removes all relationships in the graph.
 
 [ ] Removes all nodes in the graph.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

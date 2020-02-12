@@ -243,6 +243,7 @@ Estimated time to complete: 20 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Given this code snippet, what variables can you use in the `RETURN` clause?
 
@@ -262,9 +263,11 @@ Select the correct answers.
 - ◻️  [.answer]#r#
 - ◻️  [.answer]#m#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#numMovies#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Given this code snippet, what variables can you use in the `RETURN` clause?
 
 [source,cypher]
@@ -284,12 +287,16 @@ Select the correct answers.
 [ ] m
 
 [X] numMovies
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What clauses enable you to perform subqueries?
 
@@ -301,9 +308,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#WITH#
 - ◻️  [.answer]#QUERY#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#CALL#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What clauses enable you to perform subqueries?
 
 Select the correct answers.
@@ -315,12 +324,16 @@ Select the correct answers.
 [ ] QUERY
 
 [X] CALL
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 Given this Cypher query, what Cypher clause do you use here to turn the list of movies into rows?
 
@@ -340,9 +353,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#UNWIND#
 - ◻️  [.answer]#ROWS#
 - ◻️  [.answer]#SELECT#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Given this Cypher query, what Cypher clause do you use here to turn the list of movies into rows?
 
 [source,cypher]
@@ -362,8 +377,11 @@ Select the correct answer.
 [ ] ROWS
 
 [ ] SELECT
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

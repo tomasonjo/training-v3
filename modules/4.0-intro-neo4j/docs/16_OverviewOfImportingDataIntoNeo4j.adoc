@@ -195,6 +195,7 @@ image::{imagedir}/ETLTool.png[ETLTool,width=1000,align=center]
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you want to import data into a Neo4j Database from files that were created from an RDBMS.
 What format is required to load the data using existing Neo4j tooling?
@@ -206,9 +207,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#JSON#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#XML#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#CSV#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you want to import data into a Neo4j Database from files that were created from an RDBMS.
 What format is required to load the data using existing Neo4j tooling?
 
@@ -221,12 +224,16 @@ Select the correct answers.
 [X] XML
 
 [X] CSV
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the three correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What tooling is available for importing data from a live RDBMS?
 
@@ -238,9 +245,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Cypher using APOC jdbc procedures#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Java application using both jdbc and Neo4j drivers#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Neo4j ETL Tool#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What tooling is available for importing data from a live RDBMS?
 
 Select the correct answers.
@@ -252,12 +261,16 @@ Select the correct answers.
 [X] Java application using both jdbc and Neo4j drivers
 
 [X] Neo4j ETL Tool
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the three correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 What is the fastest way to import data into a Neo4j database?
 
@@ -269,9 +282,11 @@ Select the correct answer.
 - ◻️  [.answer]#Neo4j ETL Tool#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#neo4j-admin import tool#
 - ◻️  [.answer]#Cypher's LOAD CSV#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What is the fastest way to import data into a Neo4j database?
 
 Select the correct answer.
@@ -283,8 +298,11 @@ Select the correct answer.
 [X] neo4j-admin import tool
 
 [ ] Cypher's LOAD CSV
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

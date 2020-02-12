@@ -456,6 +456,7 @@ Estimated time to complete: 20 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What functions below aggregate results:
 
@@ -467,9 +468,11 @@ Select the correct answers.
 - ◻️  [.answer]#size()#
 - ◻️  [.answer]#map()#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#collect()#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What functions below aggregate results:
 
 Select the correct answers.
@@ -481,12 +484,16 @@ Select the correct answers.
 [ ] map()
 
 [X] collect()
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  twice to reveal the  two correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What construct best represents a node in the graph?
 
@@ -498,10 +505,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#map#
 - ◻️  [.answer]#JSON object#
 - ◻️  [.answer]#blob#
-
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What construct best represents a node in the graph?
 
 Select the correct answer.
@@ -513,12 +521,16 @@ Select the correct answer.
 [ ] JSON object
 
 [ ] blob
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 Which date/time related function returns a long integer value?
 
@@ -530,9 +542,11 @@ Select the correct answer.
 - ◻️  [.answer]#datetime()#
 - ◻️  [.answer]#time()#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#timestamp()#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Which date/time related function returns a long integer value?
 
 Select the correct answer.
@@ -544,8 +558,11 @@ Select the correct answer.
 [ ] time()
 
 [X] timestamp()
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

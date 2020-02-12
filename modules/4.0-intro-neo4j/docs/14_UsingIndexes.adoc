@@ -1,4 +1,4 @@
-= Creating Indexes
+= Using Indexes
 
 :presenter: Neo Technology
 :twitter: neo4j
@@ -410,6 +410,7 @@ Estimated time to complete: 30 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What Cypher code below will create a unique index on the _name_ property of the Person node?
 
@@ -421,9 +422,11 @@ Select the correct answer.
 - ◻️  [.answer]#`CREATE INDEX PersonNameIndex FOR (p:Person) ON (p.name) ASSERT p.name IS UNIQUE`#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#`CREATE CONSTRAINT PersonNameConstraint ON (p:Person) ASSERT p.name IS UNIQUE`#
 - ◻️  [.answer]#`CALL db.index.full-text.createNodeIndex('PersonName',['Person'], ['name'])``#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What Cypher code below will create a unique index on the _name_ property of the Person node?
 
 Select the correct answer.
@@ -435,12 +438,16 @@ Select the correct answer.
 [X] `CREATE CONSTRAINT PersonNameConstraint ON (p:Person) ASSERT p.name IS UNIQUE`
 
 [ ] `CALL db.index.full-text.createNodeIndex('PersonName',['Person'], ['name'])``
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What makes creating a full-text schema index different from creating a property index?
 
@@ -452,9 +459,11 @@ Select the correct answers.
 - ◻️  [.answer]#Full-text schema indexes can check for uniqueness.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Full-text schema indexes can use multiple types of nodes for the index.#
 - ◻️  [.answer]#Full-text schema indexes can be used to ensure the existence of a property.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What makes creating a full-text schema index different from creating a property index?
 
 Select the correct answers.
@@ -466,12 +475,16 @@ Select the correct answers.
 [X] Full-text schema indexes can use multiple types of nodes for the index.
 
 [ ] Full-text schema indexes can be used to ensure the existence of a property.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 What is the difference between a node key and a composite index?
 
@@ -483,9 +496,11 @@ Select the correct answer.
 - ◻️  [.answer]#A composite index can use relationship properties.#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#A composite index does not enforce uniqueness.#
 - ◻️  [.answer]#A composite index can enforce existence.#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What is the difference between a node key and a composite index?
 
 Select the correct answer.
@@ -497,8 +512,11 @@ Select the correct answer.
 [X] A composite index does not enforce uniqueness.
 
 [ ] A composite index can enforce existence.
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

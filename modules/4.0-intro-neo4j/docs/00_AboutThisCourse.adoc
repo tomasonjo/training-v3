@@ -70,17 +70,15 @@ endif::[]
 . Controlling the Query Chain
 . Controlling Results Returned
 . Creating Nodes
-. Creating Relationships
-
 ifdef::backend-revealjs[]
 == Day 2: Lessons
 endif::[]
-
-[.small,start=11]
+[.small,start=10]
+. Creating Relationships
 . Deleting Nodes and Relationships
 . Merging Data in the Graph
 . Defining Constraints for your Data
-. Creating Indexes
+. Using Indexes
 . Using Query Best Practices
 . Overview of Importing Data into Neo4j
 . Using LOAD CSV for Import

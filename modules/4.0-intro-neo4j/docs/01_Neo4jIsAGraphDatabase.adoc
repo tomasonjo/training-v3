@@ -70,7 +70,9 @@ Euler observed the following:
 *Thus, for the problem to be solvable, every land mass (except the start and end) must be touched by an even number of bridges.
 
 Based on the above observations, the problem has no solution, because all four of the land masses are touched by an odd number of bridges.
+
 --
+
 
 === Anything can be a graph
 
@@ -205,7 +207,6 @@ In Neo4j traversal is optimized since that is how one performs queries in the gr
 
 --
 
-//[.statement]
 During traversal of a Neo4j graph, nodes may be visited more than once, but a relationship is only traversed once.
 This is called a path in Neo4j.
 
@@ -225,9 +226,7 @@ In this example, although the "2" node is visited multiple times, no relationshi
 
 === What is a graph database?
 
-
 image::{imagedir}/GraphDatabaseInEnterprise.png[GraphDatabaseInEnterprise,width=800,align=center]
-
 
 A graph database is an online database management system with Create, Read, Update, and Delete (CRUD) operations working on a graph data model.
 
@@ -256,6 +255,8 @@ video::GM9bB4ytGao[youtube,width=560,height=315,pdfwidth=100%]
 If you have ever tried to write a SQL statement with a large number of JOINs, you know that you quickly lose sight of what the query actually does, due to all tables that are required to connect the data.
 --
 
+[%unbreakable]
+--
 [.statement]
 For example, in an organizational domain, here is what a SQL statement that lists the employees in the IT Department would look like:
 
@@ -278,7 +279,7 @@ MATCH (p:Person)<-[:EMPLOYEE]-(d:Department)
 WHERE d.name = "IT Department"
 RETURN p.name
 ----
-
+--
 
 === Use cases for graph databases
 
@@ -441,6 +442,7 @@ We recommend that you take our training course, _Graph Data Modeling for Neo4j_,
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What elements make up a graph?
 
@@ -453,8 +455,12 @@ Select the correct answers.
 - ◻️  [.answer]#documents#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#relationships#
 
+endif::[]
+
 [.notes]
 --
+
+ifndef::backend-html5[]
 What elements make up a graph?
 
 Select the correct answers.
@@ -467,11 +473,15 @@ Select the correct answers.
 
 [X] relationships
 
+endif::[]
+ifdef::backend-revealjs[]
 Reminder: Click next twice to reveal the  two correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 From a data scientist perspective, which element is key for analyzing the data in the graph?
 
@@ -484,8 +494,12 @@ Select the correct answer.
 - ◻️   [.fragment.check.ok]#✔️# [.answer]#relationship#
 - ◻️   [.answer]#join#
 
+endif::[]
+
 [.notes]
 --
+ifndef::backend-html5[]
+
 From a data scientist perspective, which element is key for analyzing the data in the graph?
 
 Select the correct answer.
@@ -498,11 +512,15 @@ Select the correct answer.
 
 [ ] join
 
+endif::[]
+ifdef::backend-revealjs[]
 Reminder: Click next to reveal the correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 In Neo4j, you can attach properties to the following elements in the graph?
 
@@ -515,8 +533,11 @@ Select the correct answers.
 - ◻️   [.fragment.check.ok]#✔️# [.answer]#relationship#
 - ◻️   [.answer]#direction#
 
+endif::[]
+
 [.notes]
 --
+ifndef::backend-html5[]
 In Neo4j, you can attach properties to the following elements in the graph?
 
 Select the correct answers.
@@ -528,8 +549,11 @@ Select the correct answers.
 [X] relationship
 
 [ ] direction
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal both correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

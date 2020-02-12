@@ -541,6 +541,7 @@ Estimated time to complete: 30 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Given this Cypher query:
 
@@ -561,9 +562,11 @@ Select the correct answer.
 - ◻️  [.answer]#The first _Person_ node with a _REVIEWED_ relationship#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#_Movie_ node for the movie, The Replacements#
 - ◻️  [.answer]#The first _Movie_ node in the alphabetical list of movies in the graph#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Given this Cypher query:
 
 [source,cypher]
@@ -585,11 +588,15 @@ Select the correct answer.
 
 [ ] The first _Movie_ node in the alphabetical list of movies in the graph
 
+endif::[]
+ifdef::backend-revealjs[]
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 We want a query that returns a list of people who acted in movies released later than 2005 and for those movies, also return title and released year of the movie, as well as the name of the writer.
 How can you correct this query?
@@ -610,9 +617,11 @@ Select the correct answer.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#Add a comma after the first pattern in the MATCH clause#
 - ◻️  [.answer]#The second line should be: (m2:Movie)<-[:WROTE]-(a)#
 - ◻️  [.answer]#Add a MATCH clause at the beginning of the second line#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 We want a query that returns a list of people who acted in movies released later than 2005 and for those movies, also return title and released year of the movie, as well as the name of the writer.
 How can you correct this query?
 
@@ -633,12 +642,16 @@ Select the correct answer.
 [ ] The second line should be: (m2:Movie)<-[:WROTE]-(a)
 
 [ ] Add a MATCH clause at the beginning of the second line
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you have a graph of _Person_ nodes representing a social network graph.
 A _Person_ node can have a _IS_FRIENDS_WITH_ relationship with any other _Person_ node.
@@ -653,9 +666,11 @@ Select the correct answer.
 - ◻️  [.answer]#`MATCH (p:Person)-[:IS_FRIENDS_WITH*2-4]->(p2.Person)`#
 - ◻️  [.answer]#`MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2.Person)`#
 - ◻️  [.answer]#`MATCH (p:Person)-[:IS_FRIENDS_WITH,2,4]->(p2.Person)`#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you have a graph of _Person_ nodes representing a social network graph.
 A _Person_ node can have a _IS_FRIENDS_WITH_ relationship with any other _Person_ node.
 Like in Facebook, there can be a long path of connections between people.
@@ -670,8 +685,11 @@ Select the correct answer.
 [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2.Person)`
 
 [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2,4]->(p2.Person)`
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

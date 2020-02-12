@@ -561,6 +561,7 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What are some of the benefits provided by the Neo4j DBMS?
 
@@ -574,8 +575,10 @@ Select the correct answers.
 - ◻️ [.fragment.check.ok]#✔️# [.answer]#Index-free adjacency#
 - ◻️ [.fragment.check.ok]#✔️# [.answer]#Optimized graph engine#
 
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
 What are some of the benefits provided by the Neo4j DBMS?
 
 Select the correct answers.
@@ -584,12 +587,16 @@ Select the correct answers.
  [X] ACID
  [X] Index-free adjacency
  [X] Optimized graph engine
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next four times to reveal the  four correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 What libraries are available in Neo4j Desktop for developing your application?
 
@@ -603,8 +610,10 @@ Select the correct answers.
 - ◻️ [.fragment.check.ok]#✔️# [.answer]#Graph Algorithms#
 - ◻️ [.fragment.check.ok]#✔️# [.answer]#GraphQL#
 
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
 What libraries are available in Neo4j Desktop for developing your application?
 
 Select the correct answers.
@@ -613,12 +622,16 @@ Select the correct answers.
  [ ] JGraph
  [X] Graph Algorithms
  [X] GraphQL
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the  three correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 What are some of the language drivers that come with Neo4j out of the box?
 
@@ -632,8 +645,10 @@ Select the correct answers.
 - ◻️ [.fragment.check.ok]#✔️# [.answer]#Python#
 - ◻️ [.fragment.check.ok]#✔️# [.answer]#JavaScript#
 
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
 What are some of the language drivers that come with Neo4j out of the box?
 
 Select the correct answers.
@@ -642,8 +657,11 @@ Select the correct answers.
  [ ] Ruby
  [X] Python
  [X] JavaScript
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the  three correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

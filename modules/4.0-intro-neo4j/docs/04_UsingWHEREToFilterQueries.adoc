@@ -433,6 +433,7 @@ Estimated time to complete: 45 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you want to add a `WHERE` clause at the end of this statement to filter the results retrieved.
 
@@ -453,8 +454,10 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#m#
 - ◻️  [.answer]#PRODUCED#
 
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you want to add a `WHERE` clause at the end of this statement to filter the results retrieved.
 
 [source,cypher]
@@ -473,12 +476,16 @@ Select the correct answers.
 [X] m
 
 [ ] PRODUCED
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the  three correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you want to retrieve all movies that have a _released_ property value that is 2000, 2002, 2004, 2006, or 2008.  Here is an incomplete Cypher example to return the _title_ property values of all movies released in these years.
 What keyword do you specify for XX?
@@ -499,8 +506,10 @@ Select the correct answer.
 - ◻️  [.answer]#IS#
 - ◻️  [.answer]#EQUALS#
 
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you want to retrieve all movies that have a _released_ property value that is 2000, 2002, 2004, 2006, or 2008.  Here is an incomplete Cypher example to return the _title_ property values of all movies released in these years.
 What keyword do you specify for XX?
 
@@ -521,12 +530,16 @@ Select the correct answer.
 [ ] IS
 
 [ ] EQUALS
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 We want a query that returns the names of any people who both acted in and wrote the same movie.
 What query will retrieve this data?
@@ -545,9 +558,10 @@ Select the correct answer.
                          RETURN p.name, m.title#
 - ◻️  [.answer]#MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)
                       RETURN p.name, m.title#
-
+endif::[]
 [.notes]
 --
+ifndef::backend-html5[]
 We want a query that returns the names of any people who both acted in and wrote the same movie.
 What query will retrieve this data?
 
@@ -566,8 +580,11 @@ Select the correct answer.
 
 [ ] MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)
           RETURN p.name, m.title
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next  to reveal the  correct answer.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]

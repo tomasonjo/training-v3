@@ -489,6 +489,7 @@ Estimated time to complete: 45 minutes.
 
 === Question 1
 
+ifndef::backend-pdf[]
 [.statement]
 What Cypher clauses can you use to create a node? 
 
@@ -500,9 +501,11 @@ Select the correct answers.
 - ◻️  [.answer]#CREATE NODE#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#MERGE#
 - ◻️  [.answer]#ADD#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 What Cypher clauses can you use to create a node?
 
 Select the correct answers.
@@ -514,12 +517,16 @@ Select the correct answers.
 [X] MERGE
 
 [ ] ADD
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 2
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose that you have retrieved a node, _s_ with a property, _color_.
 What Cypher clause do you add here to delete the _color_ property from this node?
@@ -539,9 +546,11 @@ Select the correct answers.
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#SET s.color=null#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#REMOVE s.color#
 - ◻️  [.answer]#SET s.color=?#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose that you have retrieved a node, _s_ with a property, _color_.
 What Cypher clause do you add here to delete the _color_ property from this node?
 
@@ -561,12 +570,16 @@ Select the correct answers.
 [X] REMOVE s.color
 
 [ ] SET s.color=?
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next twice to reveal the two correct answers.
+endif::[]
 --
 
 === Question 3
 
+ifndef::backend-pdf[]
 [.statement]
 Suppose you have this _Person_ node in the graph: "name": "Joe Cool", "birthYear": 1985.
 What properties have values after executing this code?
@@ -587,9 +600,11 @@ Select the correct answers.
 - ◻️  [.answer]#birthYear#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#salary n#
 - ◻️  [.fragment.check.ok]#✔️# [.answer]#department#
+endif::[]
 
 [.notes]
 --
+ifndef::backend-html5[]
 Suppose you have this _Person_ node in the graph: "name": "Joe Cool", "birthYear": 1985.
 What properties have values after executing this code?
 
@@ -610,8 +625,11 @@ Select the correct answers.
 [X] salary n
 
 [X] department
+endif::[]
+ifdef::backend-revealjs[]
 
 Reminder: Click next three times to reveal the three correct answers.
+endif::[]
 --
 
 [.title.has-green-background.has-puzzle-background]
