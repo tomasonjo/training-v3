@@ -215,7 +215,7 @@ and follow the instructions for Exercise 11.
 
 [NOTE]
 This exercise has 6 steps.
-Estimated time to complete: 15 minutes.
+Estimated time to complete: 10 minutes.
 
 //[#module-6.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

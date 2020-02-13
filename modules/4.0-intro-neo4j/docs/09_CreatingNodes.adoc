@@ -478,7 +478,7 @@ and follow the instructions for Exercise 9.
 
 [NOTE]
 This exercise has 18 steps.
-Estimated time to complete: 45 minutes.
+Estimated time to complete: 30 minutes.
 
 
 //[#module-6.quiz]

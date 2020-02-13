@@ -249,7 +249,7 @@ and follow the instructions for Exercise 19.
 
 [NOTE]
 This exercise has 5 steps.
-Estimated time to complete: 15 minutes.
+Estimated time to complete: 10 minutes.
 
 //[#module-7.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

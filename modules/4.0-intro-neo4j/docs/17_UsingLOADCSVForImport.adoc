@@ -540,7 +540,7 @@ and follow the instructions for Exercise 16.
 
 [NOTE]
 This exercise has 9 steps.
-Estimated time to complete: 45 minutes.
+Estimated time to complete: 30 minutes.
 
 //[#module-7.quiz]
 [.section-title.has-purple-background.has-puzzle-background]

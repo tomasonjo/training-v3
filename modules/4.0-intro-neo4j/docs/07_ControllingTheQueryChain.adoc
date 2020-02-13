@@ -236,7 +236,7 @@ and follow the instructions for Exercise 7.
 
 [NOTE]
 This exercise has 5 steps.
-Estimated time to complete: 20 minutes.
+Estimated time to complete: 15 minutes.
 
 //[#module-5.quiz]
 [.section-title.has-purple-background.has-puzzle-background]
