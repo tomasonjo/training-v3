@@ -70,6 +70,7 @@ Optimized for being read by humans, Cypher's construct uses English prose and ic
 
 image::{imagedir}/AsciiArt.png[AsciiArt,width=600,align=center]
 
+
 ==== Cypher to express what to retrieve not how
 
 [%unbreakable]
@@ -526,12 +527,15 @@ If you want a heading to contain a space between strings, you must specify the a
 
 === Example: Specifying an alias
 
+
 [.notes]
 --
 Here we specify aliases for the returned property values:
 --
+
 [%unbreakable]
 --
+
 [source,cypher]
 ----
 MATCH (p:Person {born: 1965})
