@@ -179,7 +179,7 @@ image::{imagedir}/Clustering.png[Clustering,width=600,align=center]
 [.is-one-third.right]
 --
 [.statement]
-Neo4j supports clusters that provide high availablity, scalability for read access to the data, and failover which is important to many enterprises.
+Neo4j supports clusters that provide high availability, scalability for read access to the data, and failover which is important to many enterprises.
 Neo4j clusters are only available with Neo4j Enterprise Edition.
 --
 

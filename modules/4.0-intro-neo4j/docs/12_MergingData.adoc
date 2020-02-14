@@ -381,7 +381,8 @@ For example:
 
 [source,cypher]
 ----
-MERGE (fromDate:Date {year: 2018})<-[:IN_YEAR]-(toDate:Date {month: 'January'})
+MATCH (fromDate:Date {year: 2018})
+MERGE (toDate:Date {month: 'January'})-[:IN_YEAR]->(fromDate)
 ----
 
 [.title.has-gold-background.has-team-background]

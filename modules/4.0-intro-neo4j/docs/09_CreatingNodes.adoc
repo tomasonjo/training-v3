@@ -95,7 +95,7 @@ CREATE (m:Movie:Action {title: 'Batman Begins'})
 
 === Example #4
 
-Add a node to the graph of types_Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. Here we return the title of the node:
+Add a node to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. Here we return the title of the node:
 
 [source,cypher]
 ----
@@ -255,7 +255,7 @@ REMOVE x:Label1, x:Label2
 
 [.notes]
 --
-If you attempt to remove a label from a node for which the label does not exist, the `SET` processing is ignored.
+If you attempt to remove a label from a node for which the label does not exist, it is ignored.
 --
 
 == Example: Removing labels from a node
