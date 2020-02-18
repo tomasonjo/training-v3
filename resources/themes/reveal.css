@@ -1031,3 +1031,16 @@ span.fragment.check {
 .reveal .small {
   font-size: 0.75em;
 }
+
+/* print */
+@media print {
+  .slide-background::after {
+    position: absolute;
+  }
+  .slide-background.title::after,
+  .slide-background.has-puzzle-background::after,
+  .slide-background.has-team-background::after {
+    position: absolute;
+  }
+}
+
