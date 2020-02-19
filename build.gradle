@@ -69,11 +69,11 @@ subprojects {
   task convertOnlineHtml(type: AsciidoctorTask) {
     dependsOn asciidoctorGemsPrepare
 
-    inputs.dir "${rootProject.projectDir}/resources/templates"
+    inputs.dir "${rootProject.projectDir}/resources/templates/developer"
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
-      options template_dirs: ["${rootProject.projectDir}/resources/templates"]
+      options template_dirs: ["${rootProject.projectDir}/resources/templates/developer"]
       attributes 'imagesdir': 'images'
     }
 
