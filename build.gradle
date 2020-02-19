@@ -15,8 +15,6 @@ plugins {
   id 'org.kordamp.gradle.livereload' version '0.2.1' apply false
 }
 
-
-
 subprojects {
 
   apply plugin: 'org.asciidoctor.jvm.gems'
@@ -83,7 +81,8 @@ subprojects {
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/developer"]
-      attributes 'imagesdir': 'images'
+      attributes 'imagesdir': 'images',
+        'sectanchors': ''
     }
 
     baseDir file("${projectDir}/docs")
