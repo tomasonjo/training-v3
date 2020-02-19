@@ -280,7 +280,7 @@ You can read more about how customers are using Neo4j https://neo4j.com/use-case
 === The Neo4j property graph model
 
 A graph is composed of two elements: *nodes* and *relationships*.
-Neo4j allows you identify nodes and relationships and add properties to them to further define the data in the graph.
+Neo4j allows you to identify nodes and relationships and add properties to them to further define the data in the graph.
 
 ==== Nodes
 
