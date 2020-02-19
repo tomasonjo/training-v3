@@ -34,12 +34,13 @@
 <article id="content" role="main">
   <div class="content-wrapper">
     <div class="dev-menu-nav large-2 hide-for-medium-only hide-for-small-only columns">
-      <h3 class="dev-nav-header"><strong>Developer Guides</strong></h3>
+      <h3 class="dev-nav-header"><strong>Online Course</strong></h3>
       <ul style="padding-top: 0;" class="side-nav">
         <% @attributes.select {|k,_| k.start_with?('module_toc_link_') }.each_key do |toc_link_attr| %>
           <% toc_title_attr = "module_toc_title_#{toc_link_attr.sub 'module_toc_link_', ''}" %>
           <a href="<%= attr toc_link_attr %>">
             <dl class="menu-list">
+              <!-- fixme: add active on dd element when the page is active -->
               <dd class="accordion-dev-nav"><%= attr toc_title_attr %></dd>
             </dl>
           </a>
@@ -71,10 +72,6 @@
     </div>
     <div class="guide-section-content large-8 columns">
       <h1 class="entry-title"><%= attr 'doctitle' %></h1>
-      <%= attr 'module_toc_0_key' %>
-      <%= attr 'module_toc_0_value' %>
-      <%= attr 'module_toc_1_key' %>
-      <%= attr 'module_toc_1_value' %>
       <%= content %>
     </div>
     <div class="guide-toc large-2 hide-for-medium-only hide-for-small-only columns">
@@ -84,19 +81,11 @@
             <h3>Contents</h3>
             <div id="nav" class="toc content active">
               <ul class="sectlevel1">
-                <li class="active"><a href="#neo4j-feedback">Feedback &amp; Questions</a></li>
-                <li><a href="#browser-sync">Neo4j Browser Sync</a></li>
-                <li><a href="#browser-guides">Built-in Guides</a></li>
-                <li><a href="#browser-styling">Styling Neo4j Browser Visualization</a></li>
-                <li><a href="#browser-commands">Useful Commands and Keyboard Shortcuts</a></li>
-                <li><a href="#browser-tips">Query and Command-Line Tips</a></li>
-                <li><a href="#browser-metadata">Graph Metadata</a></li>
-                <li><a href="#browser-favorites">Setting Favorites</a></li>
-                <li><a href="#browser-config">Configuration</a></li>
-                <li><a href="#browser-rest">Executing REST requests</a></li>
-                <li><a href="#browser-resources">Resources</a></li>
+                <%  document.find_by({context: :section}) {|section| section.level == 1 }.each do |section| %>
+                  <!-- fixme: highlighting the active section during scroll does not work properly in developer.js -->
+                  <li><a href="#<%= section.id %>"><%= section.title %></a></li>
+                <% end %>
               </ul>
-
             </div>
           </dd>
         </dl>
