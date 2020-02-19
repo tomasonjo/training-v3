@@ -893,47 +893,52 @@ kbd:not(.keyseq) {
   padding: .2rem .4rem;
 }
 
-.reveal div.ulist.answers,
 .reveal div.ulist.none {
   padding-left: 0;
 }
 
-.reveal ul.answers, ul.none, ol.none, ul.no-bullet, ol.no-bullet, ol.unnumbered, ul.unstyled, ol.unstyled {
+.reveal ul.none, ol.none, ul.no-bullet, ol.no-bullet, ol.unnumbered, ul.unstyled, ol.unstyled {
   list-style-type: none
-}
-
-.reveal ul.answers {
-  margin-left: .625em
 }
 
 .reveal ul.none {
   margin-left: 0;
 }
 
-.reveal ul.answers li > p:first-child > .fa-square-o:first-child, ul.answers li > p:first-child > .fa-check-square-o:first-child {
+/* quiz */
+.reveal .checklist.answers {
+  padding-left: 0;
+}
+
+.reveal .checklist.answers li > p:first-child > .fa-square-o:first-child, .checklist.answers li > p:first-child > .fa-check-square-o:first-child {
   width: 1.25em;
   font-size: .8em;
   position: relative;
   bottom: .125em
 }
 
-.reveal ul.answers li > p:first-child > input[type="checkbox"]:first-child {
+.reveal .checklist.answers li > p:first-child > input[type="checkbox"]:first-child {
   margin-right: .25em
 }
 
-.reveal .ulist.answers code {
+.reveal .checklist.answers > ul {
+  margin-left: 0;
+  list-style-type: none;
+}
+
+.reveal .checklist.answers code {
   font-size: 0.55em;
   line-height: 1.5em;
   border: 4px solid transparent;
   margin-left: 0.5rem;
 }
 
-.reveal .ulist.answers li p {
+.reveal .checklist.answers li p {
   display: flex;
   align-items: center;
 }
 
-.reveal .ulist.answers li p .answer {
+.reveal .checklist.answers li p span.text {
   font-size: .8em;
   margin-left: 0.5rem;
   border: 4px solid transparent;
@@ -949,12 +954,7 @@ span.underline {
   text-decoration: underline;
 }
 
-.reveal ul span.fragment.ok.visible + span.answer {
-  border: 4px solid #75ac3c;
-  font-weight: 600;
-}
-
-.reveal ul span.fragment.ok.visible + code {
+.reveal ul span.fragment.ok.visible + span.text {
   border: 4px solid #75ac3c;
   font-weight: 600;
 }
