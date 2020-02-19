@@ -1,4 +1,3 @@
-
 = Neo4j is a Graph Database
 :presenter: Neo Technology
 :twitter: neo4j
@@ -18,12 +17,7 @@
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/v4.0-intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
-
-//ifdef::backend-html5[]
-
-//include::scripts.txt[]
-
-//endif::backend-html5[]
+:revealjs_totaltime: 1800
 
 == About this module
 
@@ -428,11 +422,11 @@ What elements make up a graph?
 [.statement]
 Select the correct answers.
 //[.interactive]
-[none.answers]
-- ◻️  [.answer]#tuples#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#nodes#
-- ◻️  [.answer]#documents#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#relationships#
+[.answers]
+- [ ] tuples
+- [x] nodes
+- [ ] documents
+- [x] relationships
 
 endif::[]
 
@@ -444,17 +438,12 @@ What elements make up a graph?
 
 Select the correct answers.
 
+[%hardbreaks]
 [ ] tuples
-
-[X] nodes
-
+[x] nodes
 [ ] documents
+[x] relationships
 
-[X] relationships
-
-endif::[]
-ifdef::backend-revealjs[]
-Reminder: Click next twice to reveal the  two correct answers.
 endif::[]
 --
 
@@ -467,11 +456,11 @@ From a data scientist perspective, which element is key for analyzing the data i
 [.statement]
 Select the correct answer.
 //[.interactive]
-[none.answers]
-- ◻️   [.answer]#node#
-- ◻️   [.answer]#property#
-- ◻️   [.fragment.check.ok]#✔️# [.answer]#relationship#
-- ◻️   [.answer]#join#
+[.answers]
+- [ ] node
+- [ ] property
+- [x] relationship
+- [ ] join
 
 endif::[]
 
@@ -483,17 +472,12 @@ From a data scientist perspective, which element is key for analyzing the data i
 
 Select the correct answer.
 
+[%hardbreaks]
 [ ] node
-
 [ ] property
-
-[X] relationship
-
+[x] relationship
 [ ] join
 
-endif::[]
-ifdef::backend-revealjs[]
-Reminder: Click next to reveal the correct answer.
 endif::[]
 --
 
@@ -506,11 +490,11 @@ In Neo4j, you can attach properties to the following elements in the graph?
 [.statement]
 Select the correct answers.
 //[.interactive]
-[none.answers]
-- ◻️   [.answer]#label#
-- ◻️   [.fragment.check.ok]#✔️# [.answer]#node#
-- ◻️   [.fragment.check.ok]#✔️# [.answer]#relationship#
-- ◻️   [.answer]#direction#
+[.answers]
+- [ ] label
+- [x] node
+- [x] relationship
+- [ ] direction
 
 endif::[]
 
@@ -521,17 +505,11 @@ In Neo4j, you can attach properties to the following elements in the graph?
 
 Select the correct answers.
 
+[%hardbreaks]
 [ ] label
-
-[X] node
-
-[X] relationship
-
+[x] node
+[x] relationship
 [ ] direction
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal both correct answers.
 endif::[]
 --
 
