@@ -342,7 +342,6 @@ Estimated time to complete: 45 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose our graph has a _Person_ node for Tom Jones and a _Movie_ node for the movie Life is Wonderful.
 We want to connect these two nodes with the _ACTED_IN_ relationship.
@@ -358,47 +357,14 @@ CREATE (a)-[rel:ACTED_IN]-(m)
 [.statement]
 Select the correct answer.
 //[%interactive]
-
-[none.answers]
-- ◻️  [.answer]#CREATE should be replaced with CREATE RELATIONSHIP.#
-- ◻️  [.answer]#You cannot specify a variable for a relationship.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Direction must be specified when you create the relationship.#
-- ◻️  [.answer]#You cannot return the variable, _rel_.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Suppose our graph has a _Person_ node for Tom Jones and a _Movie_ node for the movie Life is Wonderful.
-We want to connect these two nodes with the _ACTED_IN_ relationship.
-What is wrong with this code?
-
-[source,cypher]
-----
-MATCH (a:Person), (m:Movie)
-WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'
-CREATE (a)-[rel:ACTED_IN]-(m)
-----
-
-Select the correct answer.
-
-[ ] CREATE should be replaced with CREATE RELATIONSHIP.
-
-[ ] You cannot specify a variable for a relationship.
-
-[X] Direction must be specified when you create the relationship.
-
-[ ] You cannot return the variable, _rel_.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] `CREATE` should be replaced with `CREATE RELATIONSHIP`.
+- [ ] You cannot specify a variable for a relationship.
+- [x] Direction must be specified when you create the relationship.
+- [ ] You cannot return the variable, _rel_.
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 Given this code, what Cypher clause do you use to add the roles property to the relationship?
 
@@ -413,45 +379,14 @@ CREATE (p)-[r:ACTED_IN]->(m)
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#`CREATE`#
-- ◻️  [.answer]#`CREATE PROPERTY`#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#`SET`#
-- ◻️  [.answer]#`SET PROPERTY`#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Given this code, what Cypher clause do you use to add the roles property to the relationship?
-
-[source,cypher]
-----
-CREATE (p:Person {name: 'Jack Brown'})
-CREATE (m:Movie {title: 'The Goods'})
-CREATE (p)-[r:ACTED_IN]->(m)
-?? r = {roles: ['The Villain']}
-----
-
-Select the correct answer.
-
-[ ] `CREATE`
-
-[ ] `CREATE PROPERTY`
-
-[X] `SET`
-
-[ ] `SET PROPERTY`
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] `CREATE`
+- [ ] `CREATE PROPERTY`
+- [x] `SET`
+- [ ] `SET PROPERTY`
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Assuming the nodes are successfully retrieved, how many relationships are created?
 
@@ -467,42 +402,12 @@ CREATE (a)-[rel:ACTED_IN {roles: ['The Villain','Joe']}]-(m)
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#None#
-- ◻️  [.answer]#One#
-- ◻️  [.answer]#Two#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Three#
-endif::[]
+[.answers]
+- [ ] None
+- [ ] One
+- [ ] Two
+- [x] Three
 
-[.notes]
---
-ifndef::backend-html5[]
-Assuming the nodes are successfully retrieved, how many relationships are created?
-
-[source,cypher]
-----
-MATCH (a:Person), (m:Movie)
-WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'
-CREATE (a)-[rel:ACTED_IN]-(m)
-CREATE (a)-[rel:ACTED_IN {roles: ['The Villain']}]-(m)
-CREATE (a)-[rel:ACTED_IN {roles: ['The Villain','Joe']}]-(m)
-----
-
-Select the correct answer.
-
-[ ] None
-
-[ ] One
-
-[ ] Two
-
-[X] Three
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
 [.title.has-green-background.has-puzzle-background]
 == Summary
 

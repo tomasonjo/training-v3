@@ -445,114 +445,45 @@ Estimated time to complete: 15 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 What APOC procedure can you use to batch transactions when a lot of data needs to be processed?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#`apoc.batch()`.#
-- ◻️  [.answer]#`apoc.transaction.batch()`.#
-- ◻️  [.answer]#`apoc.iterate()`.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#`apoc.periodic.iterate()`.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What APOC procedure can you use to batch transactions when a lot of data needs to be processed?
-
-Select the correct answer.
-
-[ ] `apoc.batch()`.
-
-[ ] `apoc.transaction.batch()`.
-
-[ ] `apoc.iterate()`.
-
-[X] `apoc.periodic.iterate()`.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] `apoc.batch()`
+- [ ] `apoc.transaction.batch()`
+- [ ] `apoc.iterate()`
+- [x] `apoc.periodic.iterate()`
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 The procedure `apoc.do.when()` is used for:
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#Scheduling when a load should occur.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Executing Cypher code when a condition is true and alternate Cypher code when the condition is false.#
-- ◻️  [.answer]#An alternative to the MERGE clause.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Profiling the execution of a query.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-The procedure `apoc.do.when()` is used for:
-
-Select the correct answers.
-
-[ ] Scheduling when a load should occur.
-
-[X] Executing Cypher code when a condition is true and alternate Cypher code when the condition is false.
-
-[ ] An alternative to the MERGE clause.
-
-[X] Profiling the execution of a query.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [ ] Scheduling when a load should occur.
+- [x] Executing Cypher code when a condition is true and alternate Cypher code when the condition is false.
+- [ ] An alternative to the `MERGE` clause.
+- [x] Profiling the execution of a query.
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 What does `CALL apoc.schema.assert({},{},true)` do?
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Drops all constraints in the graph.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Drops all indexes in the graph.#
-- ◻️  [.answer]#Removes all relationships in the graph.#
-- ◻️  [.answer]#Removes all nodes in the graph.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What does `CALL apoc.schema.assert({},{},true)` do?
-
-Select the correct answers.
-
-[X] Drops all constraints in the graph.
-
-[X] Drops all indexes in the graph.
-
-[ ] Removes all relationships in the graph.
-
-[ ] Removes all nodes in the graph.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [x] Drops all constraints in the graph.
+- [x] Drops all indexes in the graph.
+- [ ] Removes all relationships in the graph.
+- [ ] Removes all nodes in the graph.
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

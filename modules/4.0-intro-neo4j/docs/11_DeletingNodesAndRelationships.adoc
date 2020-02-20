@@ -223,7 +223,6 @@ Estimated time to complete: 10 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 You can delete a node with the `DELETE` clause.
 What must you do before executing the `DELETE` clause?
@@ -231,75 +230,28 @@ What must you do before executing the `DELETE` clause?
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Get a reference to the node.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Ensure the node has no relationships.#
-- ◻️  [.answer]#Remove all labels from the node.#
-- ◻️  [.answer]#Remove all properties from the node#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-You can delete a node with the `DELETE` clause.
-What must you do before executing the `DELETE` clause?
-
-Select the correct answers.
-
-[X] Get a reference to the node.
-
-[X] Ensure the node has no relationships.
-
-[ ] Remove all labels from the node.
-
-[ ] Remove all properties from the node
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [x] Get a reference to the node.
+- [x] Ensure the node has no relationships.
+- [ ] Remove all labels from the node.
+- [ ] Remove all properties from the node
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 What happens if you attempt to delete a node using `DELETE`, and the node has existing relationships?
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#You receive a client error.#
-- ◻️  [.answer]#The node is deleted.#
-- ◻️  [.answer]#The node's relationships are deleted.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Nothing is changed in the graph.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What happens if you attempt to delete a node using `DELETE`, and the node has existing relationships?
-
-Select the correct answers.
-
-[X] You receive a client error.
-
-[ ] The node is deleted.
-
-[ ] The node's relationships are deleted.
-
-[X] Nothing is changed in the graph.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [x] You receive a client error.
+- [ ] The node is deleted.
+- [ ] The node's relationships are deleted.
+- [x] Nothing is changed in the graph.
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose you retrieve a node, _n_ in the graph that is related to other nodes. What Cypher clause do you write to delete this node and its relationships in the graph?
 
@@ -307,33 +259,11 @@ Suppose you retrieve a node, _n_ in the graph that is related to other nodes. Wh
 Select the correct answer.
 
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#DELETE n#
-- ◻️  [.answer]#DELETE n WITH RELATIONSHIPS#
-- ◻️  [.answer]#REMOVE n#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#DETACH DELETE n#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Suppose you retrieve a node, _n_ in the graph that is related to other nodes. What Cypher clause do you write to delete this node and its relationships in the graph?
-
-Select the correct answer.
-
-[ ] DELETE n
-
-[ ] DELETE n WITH RELATIONSHIPS
-
-[ ] REMOVE n
-
-[X] DETACH DELETE n
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] `DELETE n`
+- [ ] `DELETE n WITH RELATIONSHIPS`
+- [ ] `REMOVE n`
+- [x] `DETACH DELETE n`
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

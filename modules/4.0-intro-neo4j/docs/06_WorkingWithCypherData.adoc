@@ -479,114 +479,45 @@ Estimated time to complete: 15 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 What functions below aggregate results:
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#count()#
-- ◻️  [.answer]#size()#
-- ◻️  [.answer]#map()#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#collect()#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What functions below aggregate results:
-
-Select the correct answers.
-
-[X] count()
-
-[ ] size()
-
-[ ] map()
-
-[X] collect()
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next  twice to reveal the  two correct answers.
-endif::[]
---
+[.answers]
+- [x] `count()`
+- [ ] `size()`
+- [ ] `map()`
+- [x] `collect()`
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 What construct best represents a node in the graph?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#list#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#map#
-- ◻️  [.answer]#JSON object#
-- ◻️  [.answer]#blob#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What construct best represents a node in the graph?
-
-Select the correct answer.
-
-[ ] list
-
-[X] map
-
-[ ] JSON object
-
-[ ] blob
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next  to reveal the  correct answer.
-endif::[]
---
+[.answers]
+- [ ] list
+- [x] map
+- [ ] JSON object
+- [ ] blob
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Which date/time related function returns a long integer value?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#date()#
-- ◻️  [.answer]#datetime()#
-- ◻️  [.answer]#time()#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#timestamp()#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Which date/time related function returns a long integer value?
-
-Select the correct answer.
-
-[ ] date()
-
-[ ] datetime()
-
-[ ] time()
-
-[X] timestamp()
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next  to reveal the  correct answer.
-endif::[]
---
+[.answers]
+- [ ] `date()`
+- [ ] `datetime()`
+- [ ] `time()`
+- [x] `timestamp()`
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

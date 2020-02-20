@@ -548,114 +548,45 @@ Estimated time to complete: 30 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 When you execute `LOAD CSV` what unit of data is read from the data source?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#A field.#
-- ◻️  [.answer]#All field values for a single field.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#A row.#
-- ◻️  [.answer]#A table.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-When you execute `LOAD CSV` what unit of data is read from the data source?
-
-Select the correct answer.
-
-[ ] A field.
-
-[ ] All field values for a single field.
-
-[X] A row.
-
-[ ] A table.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] A field
+- [ ] All field values for a single field
+- [x] A row
+- [ ] A table
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 What should you add to the graph before you import using LOAD CSV?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#Indexes for all important queries.#
-- ◻️  [.answer]#Schema containing the names node labels that will be created.#
-- ◻️  [.answer]#Schema containing the types that will be assigned to properties during the load.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Uniqueness constraints.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What should you add to the graph before you import using LOAD CSV?
-
-Select the correct answer.
-
-[ ] Indexes for all important queries.
-
-[ ] Schema containing the names node labels that will be created.
-
-[ ] Schema containing the types that will be assigned to properties during the load.
-
-[X] Uniqueness constraints.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] Indexes for all important queries
+- [ ] Schema containing the names node labels that will be created
+- [ ] Schema containing the types that will be assigned to properties during the load
+- [x] Uniqueness constraints
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 In general, what is the maximum rows you can process using LOAD CSV?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#1K#
-- ◻️  [.answer]#10K#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#100K#
-- ◻️  [.answer]#1M#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-In general, what is the maximum rows you can process using LOAD CSV?
-
-Select the correct answer.
-
-[ ] 1K
-
-[ ] 10K
-
-[X] 100K
-
-[ ] 1M
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] 1K
+- [ ] 10K
+- [x] 100K
+- [ ] 1M
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

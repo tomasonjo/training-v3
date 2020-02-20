@@ -194,115 +194,45 @@ image::{imagedir}/ETLTool.png[ETLTool,width=1000,align=center]
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose you want to import data into a Neo4j Database from files that were created from an RDBMS.
 What format is required to load the data using existing Neo4j tooling?
 
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#RDF#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#JSON#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#XML#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#CSV#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Suppose you want to import data into a Neo4j Database from files that were created from an RDBMS.
-What format is required to load the data using existing Neo4j tooling?
-
-Select the correct answers.
-
-[ ] RDF
-
-[X] JSON
-
-[X] XML
-
-[X] CSV
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the three correct answers.
-endif::[]
---
+[.answers]
+- [ ] RDF
+- [x] JSON
+- [x] XML
+- [x] CSV
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 What tooling is available for importing data from a live RDBMS?
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#Cypher using LOAD CSV#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Cypher using APOC jdbc procedures#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Java application using both jdbc and Neo4j drivers#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Neo4j ETL Tool#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What tooling is available for importing data from a live RDBMS?
-
-Select the correct answers.
-
-[ ] Cypher using LOAD CSV
-
-[X] Cypher using APOC jdbc procedures
-
-[X] Java application using both jdbc and Neo4j drivers
-
-[X] Neo4j ETL Tool
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the three correct answers.
-endif::[]
---
+[.answers]
+- [ ] Cypher using `LOAD CSV`
+- [x] Cypher using APOC jdbc procedures
+- [x] Java application using both jdbc and Neo4j drivers
+- [x] Neo4j ETL Tool
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 What is the fastest way to import data into a Neo4j database?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#Cypher + APOC procedures#
-- ◻️  [.answer]#Neo4j ETL Tool#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#neo4j-admin import tool#
-- ◻️  [.answer]#Cypher's LOAD CSV#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What is the fastest way to import data into a Neo4j database?
-
-Select the correct answer.
-
-[ ] Cypher + APOC procedures
-
-[ ] Neo4j ETL Tool
-
-[X] neo4j-admin import tool
-
-[ ] Cypher's LOAD CSV
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] Cypher + APOC procedures
+- [ ] Neo4j ETL Tool
+- [x] neo4j-admin import tool
+- [ ] Cypher's `LOAD CSV`
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

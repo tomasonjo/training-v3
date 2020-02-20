@@ -415,7 +415,7 @@ We recommend that you take our training course, _Graph Data Modeling for Neo4j_,
 
 === Question 1
 
-ifndef::backend-pdf[]
+//ifndef::backend-pdf[]
 [.statement]
 What elements make up a graph?
 
@@ -428,28 +428,8 @@ Select the correct answers.
 - [ ] documents
 - [x] relationships
 
-endif::[]
-
-[.notes]
---
-
-ifndef::backend-html5[]
-What elements make up a graph?
-
-Select the correct answers.
-
-[%hardbreaks]
-[ ] tuples
-[x] nodes
-[ ] documents
-[x] relationships
-
-endif::[]
---
-
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 From a data scientist perspective, which element is key for analyzing the data in the graph?
 
@@ -462,28 +442,8 @@ Select the correct answer.
 - [x] relationship
 - [ ] join
 
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-
-From a data scientist perspective, which element is key for analyzing the data in the graph?
-
-Select the correct answer.
-
-[%hardbreaks]
-[ ] node
-[ ] property
-[x] relationship
-[ ] join
-
-endif::[]
---
-
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 In Neo4j, you can attach properties to the following elements in the graph?
 
@@ -495,23 +455,6 @@ Select the correct answers.
 - [x] node
 - [x] relationship
 - [ ] direction
-
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-In Neo4j, you can attach properties to the following elements in the graph?
-
-Select the correct answers.
-
-[%hardbreaks]
-[ ] label
-[x] node
-[x] relationship
-[ ] direction
-endif::[]
---
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

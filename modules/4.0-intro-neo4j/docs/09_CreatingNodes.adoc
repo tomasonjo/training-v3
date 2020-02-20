@@ -487,44 +487,20 @@ Estimated time to complete: 30 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 What Cypher clauses can you use to create a node? 
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#CREATE#
-- ◻️  [.answer]#CREATE NODE#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#MERGE#
-- ◻️  [.answer]#ADD#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What Cypher clauses can you use to create a node?
-
-Select the correct answers.
-
-[X] CREATE
-
-[ ] CREATE NODE
-
-[X] MERGE
-
-[ ] ADD
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [x] `CREATE`
+- [ ] `CREATE NODE`
+- [x] `MERGE`
+- [ ] `ADD`
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose that you have retrieved a node, _s_ with a property, _color_.
 What Cypher clause do you add here to delete the _color_ property from this node?
@@ -539,45 +515,14 @@ RETURN s
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#DELETE s.color#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#SET s.color=null#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#REMOVE s.color#
-- ◻️  [.answer]#SET s.color=?#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Suppose that you have retrieved a node, _s_ with a property, _color_.
-What Cypher clause do you add here to delete the _color_ property from this node?
-
-[source,cypher]
-----
-MATCH (s:Shape {location: [20,30]})
-???
-RETURN s
-----
-
-Select the correct answers.
-
-[ ] DELETE s.color
-
-[X] SET s.color=null
-
-[X] REMOVE s.color
-
-[ ] SET s.color=?
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [ ] `DELETE s.color`
+- [x] `SET s.color=null`
+- [x] `REMOVE s.color`
+- [ ] `SET s.color=?`
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose you have this _Person_ node in the graph: "name": "Joe Cool", "birthYear": 1985.
 What properties have values after executing this code?
@@ -593,42 +538,11 @@ REMOVE p.birthYear
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#name n#
-- ◻️  [.answer]#birthYear#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#salary n#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#department#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Suppose you have this _Person_ node in the graph: "name": "Joe Cool", "birthYear": 1985.
-What properties have values after executing this code?
-
-[source,cypher]
------
-MATCH (p:Person) WHERE p.name = 'Joe Cool'
-SET  p += { salary: 130000,
-            department: 'Engineering'}
-REMOVE p.birthYear
------
-
-Select the correct answers.
-
-[X] name n
-
-[ ] birthYear
-
-[X] salary n
-
-[X] department
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the three correct answers.
-endif::[]
---
+[.answers]
+- [x] name
+- [ ] birthYear
+- [x] salary
+- [x] department
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

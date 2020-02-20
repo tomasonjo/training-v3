@@ -593,6 +593,114 @@ The two main tools used that are part of the Neo4j installation (located in the 
 * *neo4j* used to start, stop and retrieve the status of the Neo4j DBMS instance.
 * *neo4j-admin* used to create, copy, remove, backup, restore and perform other administrative tasks.
 
+[.section-title.has-purple-background.has-puzzle-background]
+== Check your understanding
+
+=== Question 1
+
+ifndef::backend-pdf[]
+[.statement]
+What are some of the benefits provided by the Neo4j DBMS?
+
+[.statement]
+Select the correct answers.
+
+//[%interactive]
+[none.answers]
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#Clustering#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#ACID#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#Index-free adjacency#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#Optimized graph engine#
+
+endif::[]
+[.notes]
+--
+ifndef::backend-html5[]
+What are some of the benefits provided by the Neo4j DBMS?
+
+Select the correct answers.
+
+ [X] Clustering
+ [X] ACID
+ [X] Index-free adjacency
+ [X] Optimized graph engine
+endif::[]
+ifdef::backend-revealjs[]
+
+Reminder: Click next four times to reveal the  four correct answers.
+endif::[]
+--
+
+=== Question 2
+
+ifndef::backend-pdf[]
+[.statement]
+What libraries are available in Neo4j Desktop for developing your application?
+
+[.statement]
+Select the correct answers.
+
+//[%interactive]
+[none.answers]
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#APOC#
+- ◻️ [.answer]#JGraph#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#Graph Algorithms#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#GraphQL#
+
+endif::[]
+[.notes]
+--
+ifndef::backend-html5[]
+What libraries are available in Neo4j Desktop for developing your application?
+
+Select the correct answers.
+
+ [X] APOC
+ [ ] JGraph
+ [X] Graph Algorithms
+ [X] GraphQL
+endif::[]
+ifdef::backend-revealjs[]
+
+Reminder: Click next three times to reveal the  three correct answers.
+endif::[]
+--
+
+=== Question 3
+
+ifndef::backend-pdf[]
+[.statement]
+What are some of the language drivers that come with Neo4j out of the box?
+
+[.statement]
+Select the correct answers.
+
+//[%interactive]
+[none.answers]
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#Java#
+- ◻️ [.answer]#Ruby#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#Python#
+- ◻️ [.fragment.check.ok]#✔️# [.answer]#JavaScript#
+
+endif::[]
+[.notes]
+--
+ifndef::backend-html5[]
+What are some of the language drivers that come with Neo4j out of the box?
+
+Select the correct answers.
+
+ [X] Java
+ [ ] Ruby
+ [X] Python
+ [X] JavaScript
+endif::[]
+ifdef::backend-revealjs[]
+
+Reminder: Click next three times to reveal the  three correct answers.
+endif::[]
+--
+
 [.title.has-green-background.has-puzzle-background]
 == Summary
 

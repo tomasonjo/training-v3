@@ -401,7 +401,6 @@ Estimated time to complete: 45 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 Given this `MERGE` clause, what is the most important thing you should make sure of?
 
@@ -416,44 +415,14 @@ RETURN p
 Select the correct answer.
 
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#The _Person_ label exists in the graph.#
-- ◻️  [.answer]#The _Person_ label does not exist in the graph.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#The value for name is unique.#
-- ◻️  [.answer]#The value for born is unique.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Given this `MERGE` clause, what is the most important thing you should make sure of?
-
-[source,cypher]
-----
-MERGE (p:Person {name: 'Jane Doe'})
-SET p.born = 1990
-RETURN p
-----
-
-Select the correct answer.
-
-[ ] The _Person_ label exists in the graph.
-
-[ ] The _Person_ label does not exist in the graph.
-
-[X] The value for name is unique.
-
-[ ] The value for born is unique.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] The _Person_ label exists in the graph.
+- [ ] The _Person_ label does not exist in the graph.
+- [x] The value for name is unique.
+- [ ] The value for born is unique.
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 Given this `MERGE` clause.
 Suppose that the _p_ and _m_ nodes exist in the graph.
@@ -469,45 +438,14 @@ MERGE (p)-[:ACTED_IN]->(m)
 Select the correct answers.
 
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#If the `:ACTED_IN` relationship exists, it deletes it and recreates it.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#If the `:ACTED_IN` relationship exists, it does nothing.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#If the `:ACTED_IN` relationship does not exist, it creates it.#
-- ◻️  [.answer]#If the `:ACTED_IN` relationship does not exist, it creates another one.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Given this `MERGE` clause.
-Suppose that the _p_ and _m_ nodes exist in the graph.
-What does this code do?
-
-[source,cypher]
-----
-MATCH (p {name: 'Jane Doe'}),(m:Movie {title:'The Good One'})
-MERGE (p)-[:ACTED_IN]->(m)
-----
-
-Select the correct answers.
-
-[ ] If the `:ACTED_IN` relationship exists, it deletes it and recreates it.
-
-[X] If the `:ACTED_IN` relationship exists, it does nothing.
-
-[X] If the `:ACTED_IN` relationship does not exist, it creates it.
-
-[ ] If the `:ACTED_IN` relationship does not exist, it creates another one.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [ ] If the _:ACTED_IN_ relationship exists, it deletes it and recreates it.
+- [x] If the _:ACTED_IN_ relationship exists, it does nothing.
+- [x] If the _:ACTED_IN_ relationship does not exist, it creates it.
+- [ ] If the _:ACTED_IN_ relationship does not exist, it creates another one.
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Given this `MERGE` clause.
 Suppose that the _p_ and _m_ nodes exist in the graph, but you do not know whether the relationship exists.
@@ -523,41 +461,11 @@ MERGE (p)-[rel:ACTED_IN]->(m)
 Select the correct answers.
 //[%interactive]
 
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Use the default behavior. The relationship will be created if it doesn't exist.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Specify `ON CREATE` to perform additional processing when the relationship is created.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#Specify `ON MATCH` to perform additional processing when the relationship is not created.#
-- ◻️  [.answer]#Specify `ON DELETE` to perform additional processing when the relationship is deleted.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Given this `MERGE` clause.
-Suppose that the _p_ and _m_ nodes exist in the graph, but you do not know whether the relationship exists.
-What are your options to process this `MERGE` clause?
-
-[source,cypher]
-----
-MATCH (p {name: 'Jane Doe'}),(m:Movie {title:'The Good One'})
-MERGE (p)-[rel:ACTED_IN]->(m)
-----
-
-Select the correct answers.
-
-[X] Use the default behavior. The relationship will be created if it doesn't exist.
-
-[X] Specify `ON CREATE` to perform additional processing when the relationship is created.
-
-[X] Specify `ON MATCH` to perform additional processing when the relationship is not created.
-
-[ ] Specify `ON DELETE` to perform additional processing when the relationship is deleted.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the three correct answers.
-endif::[]
---
+[.answers]
+- [x] Use the default behavior. The relationship will be created if it doesn't exist.
+- [x] Specify `ON CREATE` to perform additional processing when the relationship is created.
+- [x] Specify `ON MATCH` to perform additional processing when the relationship is not created.
+- [ ] Specify `ON DELETE` to perform additional processing when the relationship is deleted.
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

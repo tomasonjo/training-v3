@@ -448,7 +448,6 @@ Estimated time to complete: 30 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose you want to add a `WHERE` clause at the end of this statement to filter the results retrieved.
 
@@ -463,44 +462,14 @@ What variables, can you test in the `WHERE` clause?
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#p#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#rel#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#m#
-- ◻️  [.answer]#PRODUCED#
-
-endif::[]
-[.notes]
---
-ifndef::backend-html5[]
-Suppose you want to add a `WHERE` clause at the end of this statement to filter the results retrieved.
-
-[source,cypher]
-----
-MATCH (p:Person)-[rel]->(m:Movie)<-[:PRODUCED]-(:Person)
-----
-
-What variables, can you test in the `WHERE` clause:
-
-Select the correct answers.
-
-[X] p
-
-[X] rel
-
-[X] m
-
-[ ] PRODUCED
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the  three correct answers.
-endif::[]
---
+[.answers]
+- [x] p
+- [x] rel
+- [x] m
+- [ ] PRODUCED
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose you want to retrieve all movies that have a _released_ property value that is 2000, 2002, 2004, 2006, or 2008.  Here is an incomplete Cypher example to return the _title_ property values of all movies released in these years.
 What keyword do you specify for XX?
@@ -515,46 +484,15 @@ RETURN m.title
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#CONTAINS#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#IN#
-- ◻️  [.answer]#IS#
-- ◻️  [.answer]#EQUALS#
+[.answers]
+- [ ] `CONTAINS`
+- [x] `IN`
+- [ ] `IS`
+- [ ] `EQUALS`
 
-endif::[]
-[.notes]
---
-ifndef::backend-html5[]
-Suppose you want to retrieve all movies that have a _released_ property value that is 2000, 2002, 2004, 2006, or 2008.  Here is an incomplete Cypher example to return the _title_ property values of all movies released in these years.
-What keyword do you specify for XX?
-
-[source,cypher]
-----
-MATCH (m:Movie)
-WHERE m.released XX [2000, 2002, 2004, 2006, 2008]
-RETURN m.title
-----
-
-
-Select the correct answer.
-
-[ ] CONTAINS
-
-[X] IN
-
-[ ] IS
-
-[ ] EQUALS
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next  to reveal the  correct answer.
-endif::[]
---
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 We want a query that returns the names of any people who both acted in and wrote the same movie.
 What query will retrieve this data?
@@ -562,45 +500,17 @@ What query will retrieve this data?
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#MATCH (p:Person)
-                      WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m)
-                      RETURN p.name, m.title#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
-                         WHERE  (p)-[:WROTE]-(m)
-                         RETURN p.name, m.title#
-- ◻️  [.answer]#MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie)
-                         RETURN p.name, m.title#
-- ◻️  [.answer]#MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)
-                      RETURN p.name, m.title#
-endif::[]
-[.notes]
---
-ifndef::backend-html5[]
-We want a query that returns the names of any people who both acted in and wrote the same movie.
-What query will retrieve this data?
-
-Select the correct answer.
-
-[ ] MATCH (p:Person)
-          WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m)
-          RETURN p.name, m.title
-
-[X] MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
-          WHERE  (p)-[:WROTE]-(m)
-          RETURN p.name, m.title
-
-[ ] MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie)
-          RETURN p.name, m.title
-
-[ ] MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)
-          RETURN p.name, m.title
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next  to reveal the  correct answer.
-endif::[]
---
+[.answers]
+- [ ] `MATCH (p:Person)`
+       `WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m)`
+       `RETURN p.name, m.title`
+- [x] `MATCH (p:Person)-[:ACTED_IN]->(m:Movie)`
+       `WHERE  (p)-[:WROTE]-(m)`
+       `RETURN p.name, m.title`
+- [ ] `MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie)`
+       `RETURN p.name, m.title`
+- [ ] `MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)`
+       `RETURN p.name, m.title`
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

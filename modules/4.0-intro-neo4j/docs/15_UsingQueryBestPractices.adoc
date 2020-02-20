@@ -422,81 +422,34 @@ Estimated time to complete: 30 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 What Cypher keyword can you use to prefix any Cypher statement to examine how many db hits occurred when the statement executed?
 
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#ANALYZE#
-- ◻️  [.answer]#EXPLAIN#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#PROFILE#
-- ◻️  [.answer]#MONITOR#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What Cypher keyword can you use to prefix any Cypher statement to examine how many db hits occurred when the statement executed?
-
-Select the correct answer.
-
-[ ] ANALYZE
-
-[ ] EXPLAIN
-
-[X] PROFILE
-
-[ ] MONITOR
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] `ANALYZE`
+- [ ] `EXPLAIN`
+- [x] `PROFILE`
+- [ ] `MONITOR`
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 What commands do you use to set values for parameters in your Neo4j Browser session?
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#:set param#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#:param#
-- ◻️  [.answer]#:set params#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#:params#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What commands do you use to set values for parameters in your Neo4j Browser session?
-
-Select the correct answers.
-
-[ ] :set param
-
-[X] :param
-
-[ ] :set params
-
-[X] :params
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
+[.answers]
+- [ ] :set param
+- [x] :param
+- [ ] :set params
+- [x] :params
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Suppose you are executing  queries in Neo4j Browser Session A and monitoring them in Neo4j Browser Session B with the `:queries` command.
 What are some ways that you can kill a query?
@@ -504,34 +457,11 @@ What are some ways that you can kill a query?
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#You can close the result pane in Session A, if the query can be seen in Session B.#
-- ◻️  [.answer]#You can close the result pane in Session A, if the query can no longer be seen in Session B.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#You can kill any running query seen in Session B.#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#You can close the Neo4j Browser that is running Session A.#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Suppose you are executing  queries in Neo4j Browser Session A and monitoring them in Neo4j Browser Session B with the `:queries` command.
-What are some ways that you can kill a query?
-
-Select the correct answers.
-
-[X] You can close the result pane in Session A, if the query can be seen in Session B.
-
-[ ] You can close the result pane in Session A, if the query can no longer be seen in Session B.
-
-[X] You can kill any running query seen in Session B.
-
-[X] You can close the Neo4j Browser that is running Session A.
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the three correct answers.
-endif::[]
---
+[.answers]
+- [x] You can close the result pane in Session A, if the query can be seen in Session B.
+- [ ] You can close the result pane in Session A, if the query can no longer be seen in Session B.
+- [x] You can kill any running query seen in Session B.
+- [x] You can close the Neo4j Browser that is running Session A.
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

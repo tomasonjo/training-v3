@@ -244,7 +244,6 @@ Estimated time to complete: 15 minutes.
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 Given this code snippet, what variables can you use in the `RETURN` clause?
 
@@ -259,82 +258,29 @@ RETURN ??
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#a#
-- ◻️  [.answer]#r#
-- ◻️  [.answer]#m#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#numMovies#
-endif::[]
+[.answers]
+- [x] a
+- [ ] r
+- [ ] m
+- [x] numMovies
 
-[.notes]
---
-ifndef::backend-html5[]
-Given this code snippet, what variables can you use in the `RETURN` clause?
-
-[source,cypher]
-----
-MATCH (a:Person)-[r:ACTED_IN]->(m:Movie)
-WITH  a, count(a) AS numMovies
-WHERE 1 < numMovies < 4
-RETURN ??
-----
-
-Select the correct answers.
-
-[X] a
-
-[ ] r
-
-[ ] m
-
-[X] numMovies
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the two correct answers.
-endif::[]
---
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
 What clauses enable you to perform subqueries?
 
 [.statement]
 Select the correct answers.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#SUBMATCH#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#WITH#
-- ◻️  [.answer]#QUERY#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#CALL#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-What clauses enable you to perform subqueries?
-
-Select the correct answers.
-
-[ ] SUBMATCH
-
-[X] WITH
-
-[ ] QUERY
-
-[X] CALL
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next twice to reveal the correct answers.
-endif::[]
---
+[.answers]
+- [ ] `SUBMATCH`
+- [x] `WITH`
+- [ ] `QUERY`
+- [x] `CALL`
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
 Given this Cypher query, what Cypher clause do you use here to turn the list of movies into rows?
 
@@ -349,41 +295,11 @@ RETURN p.name, movieCount, movie.title
 [.statement]
 Select the correct answer.
 //[%interactive]
-[none.answers]
-- ◻️  [.answer]#ELEMENTS#
-- ◻️  [.fragment.check.ok]#✔️# [.answer]#UNWIND#
-- ◻️  [.answer]#ROWS#
-- ◻️  [.answer]#SELECT#
-endif::[]
-
-[.notes]
---
-ifndef::backend-html5[]
-Given this Cypher query, what Cypher clause do you use here to turn the list of movies into rows?
-
-[source,cypher]
-----
-MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
-WITH collect(m) AS movies,count(m) AS movieCount, p
-?? movies AS movie
-RETURN p.name, movieCount, movie.title
-----
-
-Select the correct answer.
-
-[ ] ELEMENTS
-
-[X] UNWIND
-
-[ ] ROWS
-
-[ ] SELECT
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next to reveal the correct answer.
-endif::[]
---
+[.answers]
+- [ ] `ELEMENTS`
+- [x] `UNWIND`
+- [ ] `ROWS`
+- [ ] `SELECT`
 
 [.title.has-green-background.has-puzzle-background]
 == Summary
