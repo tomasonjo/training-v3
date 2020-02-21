@@ -13,6 +13,7 @@ dependencies {
   implementation("com.amazonaws:aws-java-sdk-s3:1.11.714")
   implementation("com.squareup.okhttp3:okhttp:4.4.0")
   implementation("org.yaml:snakeyaml:1.25")
+  implementation("com.beust:klaxon:5.0.1")
   implementation(gradleApi())
 }
 

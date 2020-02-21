@@ -3,7 +3,7 @@ require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
 include Asciidoctor
 
 class DocumentInfoPostProcessor < Extensions::Postprocessor; use_dsl
-  def process(document, _)
+  def process(document, output)
     if document.backend == 'html5'
       if (outfile = document.attr 'outfile')
         require 'yaml'
@@ -26,7 +26,7 @@ class DocumentInfoPostProcessor < Extensions::Postprocessor; use_dsl
         File.open("#{outputdir}/#{filename}.yml", "w") { |file| file.write(info.to_yaml) }
       end
     end
-    document
+    output
   end
 end
 

@@ -3,7 +3,8 @@ import com.neo4j.gradle.s3.S3UploadTask
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import com.neo4j.gradle.wordpress.WordPressPlugin
-import com.neo4j.gradle.wordpress.WordPressUploadTask
+import com.neo4j.gradle.wordpress.WordPressUploadPostTask
+import com.neo4j.gradle.wordpress.WordPressUploadPageTask
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.asciidoctor.gradle.jvm.pdf.AsciidoctorPdfTask
 import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
@@ -42,9 +43,10 @@ subprojects {
   }
 
   wordpress {
-    username = project.hasProperty('wordpress-username') ? project.property('wordpress-username') : 'admin'
+    username = project.hasProperty('wordpress-username') ? project.property('wordpress-username') : 'neo'
     password = project.hasProperty('wordpress-password') ? project.property('wordpress-password') : ''
     host = project.hasProperty('wordpress-host') ? project.property('wordpress-host') : 'localhost'
+    scheme = 'http'
   }
 
   asciidoctorj {
@@ -226,10 +228,18 @@ subprojects {
     destination = "multiple-files"
   }
 
-  task wordPressUpload(type: WordPressUploadTask) {
+  task wordPressUploadPost(type: WordPressUploadPostTask) {
     dependsOn convertOnlineHtml
-    source = tasks.getByPath('convertOnlineHtml').outputs.files
-    postType = "developer"
+    source = convertOnlineHtml.outputs.files
+    postType = "twin4j"
+    postStatus = "publish"
+  }
+
+  task wordPressUploadPage(type: WordPressUploadPageTask) {
+    dependsOn convertOnlineHtml
+    source = convertOnlineHtml.outputs.files
+    pageType = "developer"
+    pageStatus = "publish"
   }
 
   task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
