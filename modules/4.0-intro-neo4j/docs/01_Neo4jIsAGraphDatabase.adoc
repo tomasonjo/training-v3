@@ -1,9 +1,4 @@
 = Neo4j is a Graph Database
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:neo4j-version: 4.0
-:currentyear: 2020
 :doctype: book
 :nextsecttitle: The Neo4j Graph Platform
 :nextsect: 2

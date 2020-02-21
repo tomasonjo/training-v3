@@ -1,9 +1,4 @@
 = Introduction to Neo4j 4.0
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:neo4j-version: 4.0
-:currentyear: 2020
 :doctype: book
 :nextsecttitle: Neo4j is a Graph Database
 :nextsect: 1

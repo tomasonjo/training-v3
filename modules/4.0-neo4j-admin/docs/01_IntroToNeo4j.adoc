@@ -1,10 +1,5 @@
 
 = Introduction to Neo4j
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:neo4j-version: 4.0
-:currentyear: 2020
 :doctype: book
 :nextsecttitle: Neo4j Administration Overview
 :nextsect: 2
@@ -598,7 +593,6 @@ The two main tools used that are part of the Neo4j installation (located in the 
 
 === Question 1
 
-ifndef::backend-pdf[]
 [.statement]
 What are some of the benefits provided by the Neo4j DBMS?
 
@@ -606,100 +600,41 @@ What are some of the benefits provided by the Neo4j DBMS?
 Select the correct answers.
 
 //[%interactive]
-[none.answers]
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#Clustering#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#ACID#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#Index-free adjacency#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#Optimized graph engine#
-
-endif::[]
-[.notes]
---
-ifndef::backend-html5[]
-What are some of the benefits provided by the Neo4j DBMS?
-
-Select the correct answers.
-
- [X] Clustering
- [X] ACID
- [X] Index-free adjacency
- [X] Optimized graph engine
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next four times to reveal the  four correct answers.
-endif::[]
---
+[.answers]
+- [x] Clustering
+- [x] ACID
+- [x] Index-free adjacency
+- [x] Optimized graph engine
 
 === Question 2
 
-ifndef::backend-pdf[]
 [.statement]
-What libraries are available in Neo4j Desktop for developing your application?
+As an administrator, what language do you use to retrieve data from a Neo4j database?
 
 [.statement]
 Select the correct answers.
 
 //[%interactive]
-[none.answers]
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#APOC#
-- ◻️ [.answer]#JGraph#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#Graph Algorithms#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#GraphQL#
-
-endif::[]
-[.notes]
---
-ifndef::backend-html5[]
-What libraries are available in Neo4j Desktop for developing your application?
-
-Select the correct answers.
-
- [X] APOC
- [ ] JGraph
- [X] Graph Algorithms
- [X] GraphQL
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the  three correct answers.
-endif::[]
---
+[.answers]
+- [x] Cypher
+- [ ] SQL
+- [ ] APOC
+- [ ] GraphQL
 
 === Question 3
 
-ifndef::backend-pdf[]
 [.statement]
-What are some of the language drivers that come with Neo4j out of the box?
+What are some of the language drivers that come with Neo4j out of the box that developers might use?
 
 [.statement]
 Select the correct answers.
 
 //[%interactive]
-[none.answers]
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#Java#
-- ◻️ [.answer]#Ruby#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#Python#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#JavaScript#
-
-endif::[]
-[.notes]
---
-ifndef::backend-html5[]
-What are some of the language drivers that come with Neo4j out of the box?
-
-Select the correct answers.
-
- [X] Java
- [ ] Ruby
- [X] Python
- [X] JavaScript
-endif::[]
-ifdef::backend-revealjs[]
-
-Reminder: Click next three times to reveal the  three correct answers.
-endif::[]
---
+[.answers]
+- [x] Java
+- [ ] Ruby
+- [x] Python
+- [x] JavaScript
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

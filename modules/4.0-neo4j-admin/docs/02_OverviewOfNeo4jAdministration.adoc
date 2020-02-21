@@ -1,10 +1,5 @@
 
 = Overview of Neo4j Administration
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:neo4j-version: 4.0
-:currentyear: 2020
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -30,8 +25,11 @@ endif::backend-html5[]
 
 == About this module
 
+[.notes]
+--
 As a Neo4j database administrator, you will be responsible for ensuring that the deployed Neo4j application runs to meet the needs of its users.
 This includes ensuring that the Neo4j software is up-to-date and configured properly, monitoring the use of Neo4j, performing life cycle activities such as backups, and managing multiple Neo4j instances.
+--
 
 At the end of this module, you should be able to:
 [square]
@@ -42,6 +40,8 @@ At the end of this module, you should be able to:
 
 == Common application architectures with Neo4j
 
+[.notes]
+--
 Neo4j can be used in a range of different application architectures.
 It is a transactional, real-time store for highly connected data.
 
@@ -50,12 +50,16 @@ Currently the drivers for .NET, Java, JavaScript, Python, and Go are officially 
 There are also  a set of other language drivers written by the Neo4j community.
 
 A Neo4j client can only access a single database at a time.
+--
 
 image::{imagedir}/bolt-diagram.png[bolt-diagram,width=400,align=center]
 
-=== Extending Neo4j
+== Extending Neo4j
+[.notes]
+--
 Some applications use Neo4j out-of-the-box, and others extend it with additional functionality from libraries that provide specialized procedures.
 Examples of these libraries include:
+--
 
 [square]
 * Neo4j-supported procedures:
@@ -64,6 +68,8 @@ Examples of these libraries include:
 * Community-supported procedures, for example the Awesome Procedures of Cypher (APOC).
 * Custom-developed procedures for your application.
 
+[.notes]
+--
 Regardless of which library your application requires, you must ensure that Neo4j is configured to know how to access these libraries.
 
 Your application will include at least one Neo4j user database, but it could include multiple user databases that are accessed by different parts of the application.
@@ -71,54 +77,76 @@ A Neo4j instance can support multiple active user databases.
 
 Many deployed applications use Causal Clustering which you will learn about later in this training.
 Causal Clustering is an architecture which provides data safety and performance for critical systems that could be distributed all over the world.
+--
+
+[NOTE]
+Multiple user databases and Causal Clustering are not available in Community Edition.
 
 === Example architecture #1: Using Neo4j as the primary database
 
+[.notes]
+--
 Some applications are developed using data that is stored in a single graph.
 They can be developed using any language for which there is a driver that can connect to Neo4j.
 
 Each application (Neo4j client) communicates with Neo4j to access the graph using the Bolt or HTTP protocol.
 Neo4j-supported and some community drivers use the Bolt protocol.
 The clients can be JVMs, .NET resources, a Web server, all of which can be accessed by an end-user.
+--
 
 image::{imagedir}/Neo4jServerClients.png[Neo4jClients,width=600,align=center]
 
+[.statement]
 As a Neo4j database administrator, you are responsible for the availability and consistency of the Neo4j databases used by the clients.
 
 === Example architecture #2: Integrating Neo4j with other databases
 
+[.notes]
+--
 Neo4j is often used in combination with other data sources  (https://en.wikipedia.org/wiki/Polyglot_persistence[polyglot persistence]), such as relational or NoSQL databases.
 Data can be fetched from the different systems in order to be manipulated by an application and subsequently written back to Neo4j.
 Other solutions can involve loading of data from a number of databases into Neo4j in order to efficiently do connected data analysis on the combined data set.
+--
 
 image::{imagedir}/Polyglot.png[Polyglot,width=700,align=center]
 
 === Microservices
 
+[.notes]
+--
 With cloud-hosted microservices, the implementation chosen for the microservice is one that performs best for the type of transaction.
 In a cloud-based microservice architecture, there may be a number of services that Neo4j can provide to the end-users.
+--
 
 image::{imagedir}/Microservices.png[Microservices,width=600,align=center]
 
+[.statement]
 As a Neo4j database administrator, you are responsible for the availability and consistency of the Neo4j database(s), and for making the data accessible by applications.
 Application developers are responsible for the logic in transferring and manipulating data between the databases.
 
 === Example architecture #3: Using Neo4j Causal Clustering 
 
+[.statement]
 Causal Clustering is used in production environments where high throughput, continuous availability, and reliability are important factors.
-This feature is available with Neo4j Enterprise Edition.
 
+[.notes]
+--
 With Causal Clusters, you configure multiple Neo4j instances that communicate with each other about updates to the database(s).
 Causal Clusters are used when data needs to reside in multiple physical locations, or if you want to implement a high availability architecture where access to data will not be affected if a Neo4j instance goes down.
+--
 
 image::{imagedir}/ClustersHighLevel.png[ClustersHighLevel,width=700,align=center]
 
 === Distributed servers in a cluster
 
+[.notes]
+--
 A common use for Neo4j is when different data is required in a set of geographic locations. For example, an  online retailer may have different data in the US and Europe. Some data could be shared between different geographically located data centers, but the most heavily updated data needs to physically reside closer to the end-user applications. Neo4j Causal Clusters can be configured to span geographic locations.
+--
 
 image::{imagedir}/ClustersHighLevelDistributed.png[ClustersHighLevelDistributed,width=800,align=center]
 
+[.statement]
 As a Neo4j database administrator, you will be responsible for configuring and monitoring Causal Clusters.
 You will work with architects to determine the appropriate configuration of the Causal Cluster, taking into account aspects such as: uptime requirements, performance requirements, and redundancy required in order to handle events of Neo4j instance failure or data center failure.
 
@@ -132,12 +160,19 @@ Some decisions you may need to make are:
 * How to route requests in order to obtain optimal performance.
 * Which servers to use as backup servers.
 
+[.notes]
+--
 We will cover the configuration, management and monitoring of Causal Clusters in depth later in this training.
+--
 
 === Example architecture #4: Using Neo4j standalone for graph analytics 
 
+[.notes]
+--
 A common use case for Neo4j is for data scientists analyze complex patterns in connected data.
 Neo4j Bloom, or some other data visualization tool, may be used as the front-end.
+--
+
 The following are two common patterns this use case:
 
 . Neo4j is used to find and analyze connections in data from other data sources. To cater for this, the Neo4j database is loaded with data from several sources. As a Neo4j database administrator, you will ensure that the Neo4j database used for this purpose is kept up-to-date and that the data is secure and appropriately backed up.
@@ -147,16 +182,23 @@ image::{imagedir}/DataAnalytics.png[DataAnalytics,width=300,align=center]
 
 === Example architecture #5: Neo4j integrated with compute-heavy solutions
 
+[.notes]
+--
 Some enterprises need to consolidate large amounts of data for analysis. The data can come from data lakes, NoSQL databases, document stores, relational, all of which is analyzed and placed into a Neo4j database for analytics.
 A common  architecture for streaming and analyzing data for consolidation is Apache Spark.
+--
 
 image::{imagedir}/GraphCompute.png[GraphCompute,width=800,align=center]
 
+[.statement]
 As a Neo4j database administrator, you will work with architects to ensure that the Neo4j database in this type of environment is properly configured and available to the computational engines that will write to the graph.
 
 == Neo4j versions
 
 All supported versions of Neo4j are available on the https://neo4j.com/download-center/#releases[Neo4j  download page].
+
+[.notes]
+--
 On the same page, you can also find pre-releases of the next release. These offer an opportunity to explore coming features.
 However, it is important to note that functionality in preview releases can be changed without notice.
 Additionally, the preview releases are not certified for production use.
@@ -164,14 +206,18 @@ Additionally, the preview releases are not certified for production use.
 _General Availability_ releases are our certified releases.
 They include all features and functionalities intended for that version and supported for production deployments.
 Production deployments should only use _General Availability_ releases.
+--
 
 [WARNING]
 Data migration between non _General Availability_ versions is unsupported.
 
 == Neo4j Editions
 
+[.notes]
+--
 There are two versions of Neo4j to choose from: Community Edition and Enterprise Edition.
 The version you use will depend on the features you require, the nature of your application that uses Neo4j, and the level of professional support you would like to receive from Neo4j.
+--
 
 A full comparison between the Community and Enterprise Editions for the current release of Neo4j can be found at https://neo4j.com/docs/operations-manual/4.0/introduction/#editions[Compare Community and Enterprise Editions].
 
@@ -179,16 +225,23 @@ A full comparison between the Community and Enterprise Editions for the current 
 
 The Community Edition is a full functioning version of Neo4j suitable for single database deployments.
 It has full support for key Neo4j features, such as ACID compliance, Cypher, and access via the binary protocol and HTTP APIs.
+
+[.notes]
+--
 It is ideal for smaller internal or do-it-yourself projects that do not require high levels of scaling or professional services and support.
 The Community Edition is free to download and use and is available from the https://neo4j.com/download-center/#releases[Neo4j  download page] or from the https://github.com/neo4j/neo4j[Neo4j GitHub repository].
+--
 
 === Enterprise Edition
 
 The Enterprise Edition extends the functionality of the Community Edition to include key features for performance and scalability such as a clustering architecture for high availability and online backup functionality.
+[.notes]
+--
 It is the right choice for production systems with availability requirements or needs for scaling up or out.
 Enterprise Edition requires a license from Neo4j.
 You can download Neo4j Enterprise Edition from the  https://neo4j.com/download-center/#releases[Neo4j download page].
 When you install Neo4j Enterprise Enterprise, you have a 30-day evaluation license and it is expected that beyond the 30-day evaluation period, you will purchase a license that entitles you to technical support.
+--
 
 [NOTE]
 Neo4j Desktop includes Enterprise Edition so you can fully develop and test an application prior to production.
@@ -197,12 +250,19 @@ However, you cannot use Neo4j Desktop for production purposes.
 == Installing Neo4j
 
 After you have determined which Edition and version of Neo4j you will install for your application, you should follow the steps outlined in the https://neo4j.com/docs/operations-manual/4.0/installation/[Neo4j Operations Manual].
+[.notes]
+--
 The instructions include actions that must be taken before installing Neo4j.
+--
 
 == Upgrading Neo4j
 
+[.notes]
+--
 The procedure for upgrading your Neo4j installation will depend upon what release you are upgrading from and to.
 If you are upgrading to a major release, the upgrade may include a data migration step.
+--
+
 The https://neo4j.com/docs/migration-guide/4.0/[Neo4j 4.0 Migration Guide] provides instructions for upgrading a Neo4j installation to 4.0.
 
 == Supported software and hardware
@@ -217,6 +277,7 @@ To install and use Neo4j, the system(s) that host Neo4j Enterprise Edition have 
 * Disk
 * Filesystem
 
+[.statement]
 You should consult the https://neo4j.com/docs/operations-manual/4.0/installation/requirements/[System Requirements] to learn more.
 
 == Neo4j deployment options
@@ -225,8 +286,11 @@ Early in the development of an application, a decision will be made whether to d
 
 === Server mode deployments
 
+[.notes]
+--
 This is the most common deployment, and it is recommended for all on-site deployments that do not require embedded mode.
 In this architecture, Neo4j runs as a database server and can be accessed through binary and http APIs for data querying and updating.
+--
 
 image::{imagedir}/ClientServerDeployment.png[ClientServerDeployment,width=600,align=center]
 
@@ -245,12 +309,18 @@ image::{imagedir}/ClientServerDeployment.png[ClientServerDeployment,width=600,al
 When deployed as a server, you should expect to perform many common administration, configuration, and troubleshooting tasks as you would for any database deployment.
 Neo4j provides utilities and tools for enabling these capabilities, which you will learn about later in this training.
 
+[.notes]
+--
 This training will primarily emphasize the production decisions and administrative tasks associated with a server mode deployment.
+--
 
 === Embedded deployments
 
+[.notes]
+--
 This architecture is more common in OEM setups, where Neo4j runs integrated as part of a third party product. When Neo4j is embedded directly into an application, you get all the functionality of the database directly accessible through the Java APIs used by the application code.
 This makes it very easy to directly work with the database and get lightning fast performance.
+--
 
 image::{imagedir}/EmbeddedDeployment.png[EmbeddedDeployment,width=300,align=center]
 
@@ -263,8 +333,11 @@ image::{imagedir}/EmbeddedDeployment.png[EmbeddedDeployment,width=300,align=cent
 ==== For the Neo4j  administrator
 
 Your hands-on administration work with Neo4j is very minimal with embedded deployments.
-Most of the core administration tasks, such as initiating backups, monitoring, and configuration should be built into the application that is embedding Neo4j.
 
+[.notes]
+--
+Most of the core administration tasks, such as initiating backups, monitoring, and configuration should be built into the application that is embedding Neo4j.
+--
 === Neo4j in the Cloud
 
 Neo4j has been successfully hosted in these environments:
@@ -276,11 +349,17 @@ Neo4j has been successfully hosted in these environments:
 * Microsoft Azure
 * Kubernetes
 
+[.notes]
+--
 To learn more about Neo4j Cloud deployments see the https://neo4j.com/developer/guide-cloud-deployment/[Developer Guide to Cloud Deployment] that is updated regularly.
+--
 
 == Administrative tasks for Neo4j
 
+[.notes]
+--
 In this training, you will learn how to perform these common administrative tasks for a server mode deployment:
+--
 
 [square]
 * Managing a Neo4j database 
@@ -291,19 +370,27 @@ In this training, you will learn how to perform these common administrative task
 * Managing Causal Clusters
 * Managing database security
 
-
-== *Exercise 1: Setting up Neo4j Enterprise Edition for this course*
+[.title.has-gold-background.has-team-background]
+== *Exercise 1: Setting up Neo4j Enterprise Edition EC2 instance for this course*
 
 We are using Neo4j Enterprise Edition for the hands-on exercises in this training, as some Neo4j features are not included in Community Edition.
 The OS that we will use for this training is Debian.
+In your real application environment, the location of files for managing Neo4j and the terminal commands will be different.
 Neo4j Enterprise Edition is available for download with a 30-day evaluation license.
 
-*Before you begin*
+ifndef::backend-revealjs[]
+=== Before you begin
+endif::[]
 
+[.notes]
+--
 Ensure that you have been provided with an EC2 instance (IP address) to use by your instructor.
 You will use this EC2 instance throughout this course.
+Follow the steps below, depending on your OS.
+--
 
-*Exercise steps (OS X and Linux):*
+ifndef::backend-revealjs[]
+=== Exercise steps (OS X and Linux):
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Change permissions on the private key file as follows:
@@ -324,29 +411,50 @@ yes
 . You should now be logged in to the EC2 instance.
 . Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.
 
-
 *Hint*: Confirm that files have been installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
 
-*Exercise steps (Windows):*
+image::{imagedir}/OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
+
+=== Exercise steps (Windows):
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Download https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[PuTTY].
 . Install PuTTY by running the install executable using these guidelines:
     Use defaults everywhere but change it so that it creates a desktop shortcut.
 
- Open a terminal window on your system.
-. Enter the following in the terminal window:
+image::{imagedir}/PuTTYInstallOptions.png[PuTTYInstallOptions,width=500,align=center]
 
-----
-ssh -i neo4j-training.pem ubuntu@<IP address>
-yes
-----
 [start=4]
-. You should now be logged in to the EC2 instance.
+. Open PuTTY.
+.. In *Category* panel, select *SSH*.
+.. Enter the location where you downloaded the private key.
+
+image::{imagedir}/ConfigurePEMPuTTY.png[ConfigurePEMPuTTY,width=400,align=center]
+
+[start=5]
+. Continue in PuttY as follows:
+.. In *Category* panel, expand *SSH* and click *Auth*.
+.. Enter the IP address of the EC2 instance you will be using.
+.. In the *Saved Session* field, enter a memorable name.
+.. Click *Save*. This will enable you to reuse these configuration settings whenever you want to connect to the EC2 instance.
+
+image::{imagedir}/PuTTYSavedSession.png[PuTTYSavedSession,width=500,align=center]
+
+[start=6]
+. Connect to the EC2 instance by clicking *Open*.
+
+image::{imagedir}/OpenEC2FromPuTTY.png[OpenEC2FromPuTTY,width=400,align=center]
+
+[start=7]
+. You should now have a terminal window for the EC2 instance. Enter *ubuntu* to log in.
+
+image::{imagedir}/EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
+
+[start=8]
 . Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.
 
-
 *Hint*: Confirm that files have been installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
+endif::[]
 
 == References
 
@@ -355,40 +463,51 @@ You should consult the https://neo4j.com/docs/operations-manual/3.5/installation
 The https://neo4j.com/docs/java-reference/3.5/tutorials-java-embedded/[Java Developer Manual ] covers using embedded mode for Neo4j and is intended for developers.
 
 //[#module-2.quiz]
+[.section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 === Question 1
 
+[.statement]
 Suppose your organization has two applications that require Neo4j. Each application uses a different Neo4j database and the clients access the database in server mode. For these two databases, how many Neo4j installations are required?
 
+[.statement]
 Select the correct answer.
-[%interactive]
-- [ ] [.required-answer]#one, that will service two databases.#
-- [ ] [.false-answer]#two, one Neo4j installation for each database.#
-- [ ] [.false-answer]#two, one Core Server, and one Read Replica  Server.#
-- [ ] [.false-answer]#three, two Core Servers, and one Read Replica Server.#
+//[%interactive]
+[.answers]
+- [x] One, that will service two databases.
+- [ ] Two, one Neo4j installation for each database.
+- [ ] Two, one Core Server, and one Read Replica  Server.
+- [ ] Three, two Core Servers, and one Read Replica Server.
 
 === Question 2
 
+[.statement]
 Which features below are available [.underline]#only# in the Enterprise Edition of Neo4j?
 
+[.statement]
 Select the correct answers.
-[%interactive]
-- [ ] [.false-answer]#ACID transactions#
-- [ ] [.required-answer]#Causal Clusters#
-- [ ] [.false-answer]#Bolt protocol#
-- [ ] [.required-answer]#Online backups#
+//[%interactive]
+[.answers]
+- [ ] ACID transactions
+- [x] Causal Clusters
+- [x] Multiple user databases
+- [x] Online backups
 
 === Question 3
 
+[.statement]
 What type of process [.underline]#must# Neo4j run in?
 
+[.statement]
 Select the correct answer.
-[%interactive]
-- [ ] [.false-answer]#Daemon#
-- [ ] [.required-answer]#JVM#
-- [ ] [.false-answer]#Docker Container#
-- [ ] [.false-answer]#Kubernetes#
+//[%interactive]
+[.answers]
+- [ ] Daemon
+- [x] JVM
+- [ ] Docker Container
+- [ ] Kubernetes
 
+[.title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

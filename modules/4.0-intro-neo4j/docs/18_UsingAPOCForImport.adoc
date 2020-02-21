@@ -1,10 +1,5 @@
 
 = Using APOC for Import
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:neo4j-version: 4.0
-:currentyear: 2020
 :doctype: book
 :toc: left
 :toclevels: 3
