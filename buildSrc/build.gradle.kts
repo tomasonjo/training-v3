@@ -11,6 +11,8 @@ repositories {
 dependencies {
   implementation("org.asciidoctor:asciidoctorj:2.2.0")
   implementation("com.amazonaws:aws-java-sdk-s3:1.11.714")
+  implementation("com.squareup.okhttp3:okhttp:4.4.0")
+  implementation("org.yaml:snakeyaml:1.25")
   implementation(gradleApi())
 }
 
@@ -23,6 +25,10 @@ gradlePlugin {
     create("asciidoctorTableOfContents") {
       id = "com.neo4j.gradle.asciidoctor.AsciidoctorTableOfContentsPlugin"
       implementationClass = "com.neo4j.gradle.asciidoctor.AsciidoctorTableOfContentsPlugin"
+    }
+    create("wordpress") {
+      id = "com.neo4j.gradle.wordpress.WordPressPlugin"
+      implementationClass = "com.neo4j.gradle.wordpress.WordPressPlugin"
     }
   }
 }

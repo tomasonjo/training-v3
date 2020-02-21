@@ -1,6 +1,8 @@
 = Neo4j Slide Types
 :experimental:
 :imagesdir: ../images
+// wordpress
+:slug: neo4j-slide-types
 
 == Title
 
