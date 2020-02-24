@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 3
 :experimental:
-:imagedir: ../../images
+:imagesdir: ../../images
 
 
 == *Exercise 1: Setting up Neo4j Enterprise Edition EC2 instance for this course*
@@ -44,7 +44,7 @@ yes
 
 *Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
 
-image::{imagedir}/OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
+image::OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
 
 === Exercise steps (Windows):
 
@@ -53,14 +53,14 @@ image::{imagedir}/OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,alig
 . Install PuTTY by running the install executable using these guidelines:
     Use defaults everywhere but change it so that it creates a desktop shortcut.
 
-image::{imagedir}/PuTTYInstallOptions.png[PuTTYInstallOptions,width=500,align=center]
+image::PuTTYInstallOptions.png[PuTTYInstallOptions,width=500,align=center]
 
 [start=4]
 . Open PuTTY.
 .. In *Category* panel, select *SSH*.
 .. Enter the location where you downloaded the private key.
 
-image::{imagedir}/ConfigurePEMPuTTY.png[ConfigurePEMPuTTY,width=400,align=center]
+image::ConfigurePEMPuTTY.png[ConfigurePEMPuTTY,width=400,align=center]
 
 [start=5]
 . Continue in PuttY as follows:
@@ -69,17 +69,17 @@ image::{imagedir}/ConfigurePEMPuTTY.png[ConfigurePEMPuTTY,width=400,align=center
 .. In the *Saved Session* field, enter a memorable name.
 .. Click *Save*. This will enable you to reuse these configuration settings whenever you want to connect to the EC2 instance.
 
-image::{imagedir}/PuTTYSavedSession.png[PuTTYSavedSession,width=500,align=center]
+image::PuTTYSavedSession.png[PuTTYSavedSession,width=500,align=center]
 
 [start=6]
 . Connect to the EC2 instance by clicking *Open*.
 
-image::{imagedir}/OpenEC2FromPuTTY.png[OpenEC2FromPuTTY,width=400,align=center]
+image::OpenEC2FromPuTTY.png[OpenEC2FromPuTTY,width=400,align=center]
 
 [start=7]
 . You should now have a terminal window for the EC2 instance. Enter *ubuntu* to log in.
 
-image::{imagedir}/EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
+image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
 [start=8]
 . Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.

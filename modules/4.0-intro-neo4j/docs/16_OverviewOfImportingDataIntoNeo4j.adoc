@@ -7,7 +7,7 @@
 :nextsecttitle: Using LOAD CSV for Import
 :nextsect: 17
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -44,7 +44,7 @@ Which option you choose depends on:
 
 === Options for importing data into Neo4j
 
-image::{imagedir}/ImportOptions.png[ImportOptions,width=1300,align=center]
+image::ImportOptions.png[ImportOptions,width=1300,align=center]
 
 === Prepare for the import
 
@@ -77,7 +77,7 @@ You extract the CSV data from the RDBMS, and using the graph data model, write C
 Cypher has a LOAD CSV clause that you can use to read CSV data as rows and use the rows to create nodes and relationships in the graph.
 --
 
-image::{imagedir}/LOADCSVWorkflow.png[LOADCSVWorkflow,width=1000,align=center]
+image::LOADCSVWorkflow.png[LOADCSVWorkflow,width=1000,align=center]
 
 [.notes]
 --
@@ -128,7 +128,7 @@ These languages enable you to write code that is transactional, supports batchin
 If you are comfortable with these languages, then you can use them to import the data into your graph.
 --
 
-image::{imagedir}/DriverWorkflow.png[DriverWorkflow,width=1000,align=center]
+image::DriverWorkflow.png[DriverWorkflow,width=1000,align=center]
 
 === Requirement for using Drivers via Bolt
 
@@ -152,7 +152,7 @@ Using the admin import tool is a very common way of performing an initial load o
 Then as the application evolves, the graph data model might change.
 --
 
-image::{imagedir}/adminToolWorkflow.png[adminToolWorkflow,width=1000,align=center]
+image::adminToolWorkflow.png[adminToolWorkflow,width=1000,align=center]
 
 === Requirements for using the neo4j-admin import tool
 
@@ -172,7 +172,7 @@ Using the ETL tool, although convenient, may not be suitable for all types of lo
 That is, the ETL tool is a "generic" load tool.
 --
 
-image::{imagedir}/ETLTool.png[ETLTool,width=1000,align=center]
+image::ETLTool.png[ETLTool,width=1000,align=center]
 
 === Requirements for using the ETL Tool
 

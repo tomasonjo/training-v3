@@ -9,7 +9,7 @@
 :nextsecttitle: Merging Data
 :nextsect: 13
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -135,7 +135,7 @@ WHERE p.name = 'Michael Caine'
 RETURN p
 ----
 
-image::{imagedir}/MichaelCaine.png[MichaelCaine,width=900,align=center]
+image::MichaelCaine.png[MichaelCaine,width=900,align=center]
 
 === Example: Using `MERGE`
 
@@ -157,7 +157,7 @@ Here is the result of running this Cypher example.
 We do not find a node with the label _Actor_ so the graph engine creates one.
 --
 
-image::{imagedir}/MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=800,align=center]
+image::MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=800,align=center]
 
 
 [NOTE]
@@ -175,7 +175,7 @@ At this point, however, we have two _Michael Caine_ nodes in the graph, one of t
 
 [.is-half.left]
 --
-image::{imagedir}/TwoMichaelCaines.png[TwoMichaelCaines,width=800,align=center]
+image::TwoMichaelCaines.png[TwoMichaelCaines,width=800,align=center]
 --
 
 [.notes]
@@ -197,7 +197,7 @@ WHERE p.name = 'Michael Caine'
 RETURN p
 ----
 
-image::{imagedir}/OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=center]
+image::OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=center]
 --
 
 [.notes]
@@ -237,7 +237,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/MichaelCainesAndOneRel.png[MichaelCainesAndOneRel,width=600,align=center]
+image::MichaelCainesAndOneRel.png[MichaelCainesAndOneRel,width=600,align=center]
 
 === Example: Using `MERGE`
 
@@ -255,7 +255,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this code:
 endif::[]
 
-image::{imagedir}/MergeToCreateRel.png[MergeToCreateRel,width=1000,align=center]
+image::MergeToCreateRel.png[MergeToCreateRel,width=1000,align=center]
 
 [.notes]
 --
@@ -293,7 +293,7 @@ When the `MERGE` executes, it will not find any matching nodes so it will create
 Here is the result of executing this code:
 --
 
-image::{imagedir}/CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=1000,align=center]
+image::CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=1000,align=center]
 
 == Verifying the merge
 
@@ -310,7 +310,7 @@ RETURN p, m
 [.statement]
 The most recently created node has the _name_ value of _Sir Michael Caine_.
 
-image::{imagedir}/AllMichaelCaines.png[AllMichaelCaines,width=600,align=center]
+image::AllMichaelCaines.png[AllMichaelCaines,width=600,align=center]
 
 == Specifying update behavior when merging
 
@@ -334,7 +334,7 @@ And here we see that only the exiting node with the name, Sir Michael Caine is u
 Furthermore, no new node is created for Sir Michael Caine.
 --
 
-image::{imagedir}/UpdateToUK.png[UpdateToUK,width=400,align=center]
+image::UpdateToUK.png[UpdateToUK,width=400,align=center]
 
 === Using `MERGE` to create relationships
 
@@ -358,7 +358,7 @@ RETURN p, m
 Here is the result of executing this Cypher statement. It went through all the nodes and added the relationship to the nodes that didn't already have the relationship.
 --
 
-image::{imagedir}/MergeRelationships.png[MergeRelationships,width=1000,align=center]
+image::MergeRelationships.png[MergeRelationships,width=1000,align=center]
 
 [.notes]
 --

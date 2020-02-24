@@ -8,7 +8,7 @@
 :nextsecttitle: Overview of Importing Data into Neo4j
 :nextsect: 16
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -92,7 +92,7 @@ You can even specify a Cypher expression to the right of `+=>+` to set the value
 [.statememnt]
 Here is the result of executing the `:param` command:
 
-image::{imagedir}/SetActorNameParameter.png[SetActorNameParameter,width=600,align=center]
+image::SetActorNameParameter.png[SetActorNameParameter,width=600,align=center]
 
 [.notes]
 --
@@ -109,7 +109,7 @@ After the _actorName_ parameter is set, you can run the query that uses the para
 
 [.is-half.left]
 --
-image::{imagedir}/UseParameter.png[UseParameter,width=800,align=center]
+image::UseParameter.png[UseParameter,width=800,align=center]
 --
 
 [.notes]
@@ -122,7 +122,7 @@ Subsequently, you need only change the value of the parameter and not the Cypher
 [.statement]
 After we have changed the _actorName_ parameter to 'Tom Cruise', we get a different result with the same Cypher query:
 
-image::{imagedir}/TomCruiseParameter.png[TomCruiseParameter,width=800,align=center]
+image::TomCruiseParameter.png[TomCruiseParameter,width=800,align=center]
 --
 
 === Setting multiple parameters
@@ -141,7 +141,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/SetAllParameters.png[SetAllParameters,width=500,align=center]
+image::SetAllParameters.png[SetAllParameters,width=500,align=center]
 
 === Using multiple parameters
 
@@ -159,7 +159,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/TomCruiseAndTopGun.png[TomCruiseAndTopGun,width=1000,align=center]
+image::TomCruiseAndTopGun.png[TomCruiseAndTopGun,width=1000,align=center]
 
 [.notes]
 --
@@ -170,7 +170,7 @@ If you want to remove an existing parameter from your session, you do by by usin
 
 If you want to view the current parameters and their values, simply type `:params`:
 
-image::{imagedir}/ViewParams.png[ViewParams,width=500,align=center]
+image::ViewParams.png[ViewParams,width=500,align=center]
 
 == Analyzing queries
 
@@ -211,7 +211,7 @@ We have set the _actorName_ and _year_ parameters for our session:
 [.statement]
 Here are the parameter settings:
 
-image::{imagedir}/ActorYearParams.png[ActorYearParams,width=500,align=center]
+image::ActorYearParams.png[ActorYearParams,width=500,align=center]
 
 ==== Example: Using `EXPLAIN`
 
@@ -233,7 +233,7 @@ RETURN p.name, m.title, m.released
 Here is the query plan returned:
 --
 
-image::{imagedir}/EXPLAIN.png[EXPLAIN,width=1200,align=center]
+image::EXPLAIN.png[EXPLAIN,width=1200,align=center]
 
 [.notes]
 --
@@ -252,7 +252,7 @@ With `EXPLAIN`, the query does not run, the graph engine simply produces the que
 Here is the query plan with its steps expanded:
 --
 
-image::{imagedir}/EXPLAIN2.png[EXPLAIN2,width=1100,align=center]
+image::EXPLAIN2.png[EXPLAIN2,width=1100,align=center]
 
 [.notes]
 --
@@ -270,7 +270,7 @@ For a better metric for analyzing how the Cypher statement will run, you use the
 Here is the result returned using `PROFILE` for the previous Cypher statement:
 --
 
-image::{imagedir}/PROFILE1.png[PROFILE1,width=1300,align=center]
+image::PROFILE1.png[PROFILE1,width=1300,align=center]
 
 [.notes]
 --
@@ -287,7 +287,7 @@ The elapsed milliseconds is affected, not only by your query, but also whether t
 For example, if we were to change the Cypher statement so that the node labels are not specified, we see these metrics when we profile:
 --
 
-image::{imagedir}/PROFILE2.png[PROFILE2,width=1300,align=center]
+image::PROFILE2.png[PROFILE2,width=1300,align=center]
 
 [.notes]
 --
@@ -319,7 +319,7 @@ If the query executes for a long time, you can kill the query by simply closing 
 Here we kill the first running query by closing the result pane in Neo4j Browser:
 --
 
-image::{imagedir}/ROGUE1.png[ROGUE1,width=600,align=center]
+image::ROGUE1.png[ROGUE1,width=600,align=center]
 
 [.notes]
 --
@@ -330,7 +330,7 @@ All you can do at this point is to close Neo4j Browser.
 Here we kill the second running query:
 --
 
-image::{imagedir}/ROGUE2.png[ROGUE2,width=600,align=center]
+image::ROGUE2.png[ROGUE2,width=600,align=center]
 
 === Example: Monitoring queries
 
@@ -342,7 +342,7 @@ You can monitor it by using the `:queries` command.
 Here is a screenshot where we are monitoring a long-running (Example A) query in another Neo4j Browser session:
 --
 
-image::{imagedir}/ListQueries1.png[ListQueries1,width=1200,align=center]
+image::ListQueries1.png[ListQueries1,width=1200,align=center]
 
 [.statement]
 The `:queries` command calls `dbms.listQueries()` under the hood, which is why we see two queries here.
@@ -355,14 +355,14 @@ After a while, we see that the query has completed, but in the Neo4j Browser cli
 In this case, all you can do to stop the query from the client is to close/kill the client.
 --
 
-image::{imagedir}/ListQueries2.png[ListQueries2,width=800,align=center]
+image::ListQueries2.png[ListQueries2,width=800,align=center]
 
 [.notes]
 --
 Here is a screenshot where we are monitoring a long-running (Example B) query in another Neo4j Browser session:
 --
 
-image::{imagedir}/ListQueries3.png[ListQueries3,width=800,align=center]
+image::ListQueries3.png[ListQueries3,width=800,align=center]
 
 === Example: Killing a long-running query
 
@@ -373,7 +373,7 @@ you can kill the long running query. Once the query has been killed, the client 
 on the left.
 --
 
-image::{imagedir}/ListQueries4.png[ListQueries4,width=1300,align=center]
+image::ListQueries4.png[ListQueries4,width=1300,align=center]
 
 
 [NOTE]

@@ -8,7 +8,7 @@
 :nextsecttitle: Creating Indexes
 :nextsect: 14
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -91,7 +91,7 @@ This Cypher statement will fail if the graph already has multiple _Movie_ nodes 
 Here is the result of running this Cypher statement on the _Movie_ graph:
 --
 
-image::{imagedir}/AddTitleConstraint.png[AddTitleConstraint,width=500,align=center]
+image::AddTitleConstraint.png[AddTitleConstraint,width=500,align=center]
 
 [.notes]
 --
@@ -107,7 +107,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement on the _Movie_ graph:
 endif::[]
 
-image::{imagedir}/UniquenessFailed.png[UniquenessFailed,width=700,align=center]
+image::UniquenessFailed.png[UniquenessFailed,width=700,align=center]
 
 
 === Uniqueness at runtime
@@ -127,7 +127,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement on the _Movie_ graph:
 endif::[]
 
-image::{imagedir}/UniquenessFailed2.png[UniquenessFailed2,width=700,align=center]
+image::UniquenessFailed2.png[UniquenessFailed2,width=700,align=center]
 
 == Ensuring that properties exist
 
@@ -148,7 +148,7 @@ WHERE m.title CONTAINS 'Gotta'
 RETURN m
 ----
 
-image::{imagedir}/NoTaglineSomething.png[NoTaglineSomething,width=600,align=center]
+image::NoTaglineSomething.png[NoTaglineSomething,width=600,align=center]
 
 === Example: Existence constraint addition fails
 
@@ -168,7 +168,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-image::{imagedir}/ConstraintExistTaglineFailure.png[ConstraintExistTaglineFailure,width=800,align=center]
+image::ConstraintExistTaglineFailure.png[ConstraintExistTaglineFailure,width=800,align=center]
 --
 
 [.notes]
@@ -192,7 +192,7 @@ CREATE CONSTRAINT ExistsREVIEWEDRating
 Notice that when you create the constraint on a relationship, you need not specify the direction of the relationship.
 With the result:
 
-image::{imagedir}/CreateRatingExistenceConstraint.png[CreateRatingExistenceConstraint,width=900,align=center]
+image::CreateRatingExistenceConstraint.png[CreateRatingExistenceConstraint,width=900,align=center]
 
 === Attempting to add relationship without property
 
@@ -214,7 +214,7 @@ MERGE (p)-[:REVIEWED {summary: 'Great movie!'}]->(m)
 [.statement]
 We see this error:
 
-image::{imagedir}/ExistenceConstraintFailed.png[ExistenceConstraintFailed,width=1000,align=center]
+image::ExistenceConstraintFailed.png[ExistenceConstraintFailed,width=1000,align=center]
 --
 
 === Attempting to remove property from relationship
@@ -237,7 +237,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/ExistenceConstraintFailed2.png[ExistenceConstraintFailed2,width=800,align=center]
+image::ExistenceConstraintFailed2.png[ExistenceConstraintFailed2,width=800,align=center]
 --
 
 == Retrieving  constraints defined for the graph
@@ -253,7 +253,7 @@ ifndef::backend-revealjs[]
 And here is what is returned from the graph:
 endif::[]
 
-image::{imagedir}/call_db_constraints.png[call_db_constraints,width=1000,align=center]
+image::call_db_constraints.png[call_db_constraints,width=1000,align=center]
 
 == Dropping constraints
 
@@ -273,7 +273,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/DropConstraint.png[DropConstraint,width=600,align=center]
+image::DropConstraint.png[DropConstraint,width=600,align=center]
 
 == Creating multi-property uniqueness/existence constraint: node key
 
@@ -297,7 +297,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement on our _Movie_ graph:
 endif::[]
 
-image::{imagedir}/NodeKeyCreationFailed.png[NodeKeyCreationFailed,width=1000,align=center]
+image::NodeKeyCreationFailed.png[NodeKeyCreationFailed,width=1000,align=center]
 
 [.notes]
 --
@@ -323,7 +323,7 @@ ifndef::backend-revealjs[]
 With this result:
 endif::[]
 
-image::{imagedir}/SetBorn0.png[SetBorn0,width=800,align=center]
+image::SetBorn0.png[SetBorn0,width=800,align=center]
 --
 
 [.is-half.right]
@@ -331,7 +331,7 @@ image::{imagedir}/SetBorn0.png[SetBorn0,width=800,align=center]
 [.statement]
 Then the creation of the node key succeeds:
 
-image::{imagedir}/CreateNodeKey.png[CreateNodeKey,width=700,align=center]
+image::CreateNodeKey.png[CreateNodeKey,width=700,align=center]
 --
 
 [.notes]
@@ -352,7 +352,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/CreateDuplicateJessicaFailure.png[CreateDuplicateJessicaFailure,width=800,align=center]
+image::CreateDuplicateJessicaFailure.png[CreateDuplicateJessicaFailure,width=800,align=center]
 
 [.notes]
 --
@@ -375,7 +375,7 @@ REMOVE p.born
 [.statement]
 You will see this error:
 
-image::{imagedir}/CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,width=800,align=center]
+image::CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,width=800,align=center]
 --
 
 [.title.has-gold-background.has-team-background]

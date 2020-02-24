@@ -9,7 +9,7 @@
 :toc: left
 :toclevels: 4
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 :manual: http://neo4j.com/docs/operations-manual/4.0
 
 //ifdef::backend-html5[]
@@ -45,7 +45,7 @@ We will begin by defining the components that make up a graph in Neo4j.
 Here we see two nodes.
 These two nodes are related to each other which is why we have a line or link connecting them.
 
-image::{imagedir}/GraphComponents.png[GraphComponents,width=400,align=center]
+image::GraphComponents.png[GraphComponents,width=400,align=center]
 
 === Nodes
 
@@ -62,7 +62,7 @@ Here we see that each node has a different color, perhaps to differentiate its t
 For example, the blue node represents a person and that person node has a name of Jane.
 The green node represents a vehicle and that vehicle node has a type of car.
 
-image::{imagedir}/GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=center]
+image::GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=center]
 
 [.notes]
 --
@@ -85,7 +85,7 @@ In their simplest form, relationships need not contain any information other tha
 But they can (and in Neo4j always do) contain much more.
 --
 
-image::{imagedir}/GraphConcepts-Relationships.png[GraphConcepts-Relationships,width=400,align=center]
+image::GraphConcepts-Relationships.png[GraphConcepts-Relationships,width=400,align=center]
 
 [.notes]
 --
@@ -118,7 +118,7 @@ That same node can also have a label, _Residence_. Another _Location_ node can a
 A label can be used to group nodes of the same type. For example, you may want to retrieve all of the _Business_ nodes.
 --
 
-image::{imagedir}/Nodes.png[Nodes,width=400,align=center]
+image::Nodes.png[Nodes,width=400,align=center]
 
 ==== Relationships
 
@@ -130,14 +130,14 @@ A relationship represents the verb or action between two entities. The _MARRIED_
 Although the relationship is created as directional, it can be queried in a non-directional manner. That is, you can query if two _Person_ nodes have a _MARRIED_ relationship, regardless of the direction of the relationship. For some data models, the direction of the relationship is significant. For example, in Facebook, using the _IS_FRIEND_ relationship is used to indicate which _Person_ invited the other _Person_ to be a friend.
 --
 
-image::{imagedir}/Relationships.png[Relationships,width=400,align=center]
+image::Relationships.png[Relationships,width=400,align=center]
 
 ==== Property graph model
 
 The Neo4j database is a property graph.
 You can add **properties** to nodes and relationships to further enrich the graph model.
 
-image::{imagedir}/Properties.png[Properties,width=500,align=center]
+image::Properties.png[Properties,width=500,align=center]
 
 [.notes]
 --
@@ -147,7 +147,7 @@ For example, a _Person_ node might have a property, _name_ and a _Location_ node
 
 == What is a graph database?
 
-image::{imagedir}/GraphDatabaseInEnterprise.png[GraphDatabaseInEnterprise,width=800,align=center]
+image::GraphDatabaseInEnterprise.png[GraphDatabaseInEnterprise,width=800,align=center]
 
 A graph database is an online database management system with Create, Read, Update, and Delete (CRUD) operations working on a graph data model.
 
@@ -207,7 +207,7 @@ RETURN p.name
 
 The Neo4j Graph Platform includes components that enable developers to create graph-enabled applications.
 
-image::{imagedir}/Neo4jPlatform.png[Neo4jPlatform,width=1000,align=center]
+image::Neo4jPlatform.png[Neo4jPlatform,width=1000,align=center]
 
 [.notes]
 --
@@ -254,7 +254,7 @@ A Neo4j instance is a single process that runs the Neo4j server code.
 A Neo4j instance at a minimum contains two databases, the system database and the default database, neo4j.
 --
 
-image::{imagedir}/Neo4jDBMS.png[Neo4jDBMS,width=300,align=center]
+image::Neo4jDBMS.png[Neo4jDBMS,width=300,align=center]
 
 The *system* database stores metadata about the databases for the installation, as well as security configuration.
 The *default* database (named neo4j by default) is the "user" database where you typically implement your graph data model.
@@ -264,7 +264,7 @@ The *default* database (named neo4j by default) is the "user" database where you
 [.statement]
 In Neo4j Enterprise Edition 4.0, you may have more than one "user" database.
 
-image::{imagedir}/MultipleDatabases.png[MultipleDatabases,width=500,align=center]
+image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 
 [.statement]
 Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
@@ -275,7 +275,7 @@ endif::[]
 
 === Neo4j DBMS: Index-free adjacency
 
-image::{imagedir}/IFA-1.png[IFA-1,width=300,align=center]
+image::IFA-1.png[IFA-1,width=300,align=center]
 
 [.statement]
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
@@ -303,7 +303,7 @@ This is how index-free adjacency operates.
 By contrast, a traditional RDBMS cannot do this.
 It must use a central index.
 
-image::{imagedir}/IFA-2.png[IFA-2,width=800,align=center]
+image::IFA-2.png[IFA-2,width=800,align=center]
 
 [.statement]
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
@@ -332,7 +332,7 @@ Since Neo4j is a native graph database (i.e. it has a graph as its core data mod
 
 === Neo4j DBMS: ACID (Atomic, Consistent, Isolated, Durable)
 
-image::{imagedir}/ACID.png[ACID,width=800,align=center]
+image::ACID.png[ACID,width=800,align=center]
 
 [.statement]
 Transactionality is very important for robust applications that require an ACID (atomicity, consistency, isolation, and durability) guarantees for their data.
@@ -343,7 +343,7 @@ All of these updates to the database must [.underline]#all# succeed or fail.
 
 [.is-two-thirds.left]
 --
-image::{imagedir}/Clustering.png[Clustering,width=600,align=center]
+image::Clustering.png[Clustering,width=600,align=center]
 --
 
 [.is-one-third.right]
@@ -361,7 +361,7 @@ There are many ways that you can tune the performance of the engine to suit your
 
 == Neo4j Aura
 
-image::{imagedir}/Aura.png[Aura,width=700,align=center]
+image::Aura.png[Aura,width=700,align=center]
 
 Neo4j Aura is the simplest way to run the Neo4j DBMS in the cloud.
 
@@ -382,7 +382,7 @@ Once you create a Neo4j Database at the https://console.neo4j.io[Neo4j Aura site
 The Neo4j Sandbox is way that developers can test data models with Neo4j without needing to install anything.
 It is a free, temporary, and cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser. The database in a Sandbox may be blank or it may be pre-populated. It is started automatically for you when you create the Sandbox.
 
-image::{imagedir}/BlankSandbox.png[BlankSandbox,width=600,align=center]
+image::BlankSandbox.png[BlankSandbox,width=600,align=center]
 
 [.notes]
 --
@@ -402,7 +402,7 @@ Neo4j is a UI that enables developers to create projects, each with their own Ne
 It includes an application called  Neo4j Browser which is the UI used to access the started database using Cypher queries.
 --
 
-image::{imagedir}/Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
+image::Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
 
 [.statement]
 The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
@@ -421,7 +421,7 @@ Some graph applications are supported by Neo4j and some are not, so you must be 
 You typically install graph applications from a Neo4j Desktop environment from https://install.graphapp.io/.
 --
 
-image::{imagedir}/GraphApps.png[GraphApps,width=900,align=center]
+image::GraphApps.png[GraphApps,width=900,align=center]
 
 === Some Neo4j graph applications
 
@@ -463,7 +463,7 @@ There are two ways that you can use Neo4j Browser functionality:
 . UI started by Neo4j Desktop.
 . Web browser interface.
 
-image::{imagedir}/Neo4jBrowser.png[Neo4jBrowser,width=900,align=center]
+image::Neo4jBrowser.png[Neo4jBrowser,width=900,align=center]
 
 
 == Neo4j Bloom
@@ -484,7 +484,7 @@ Neo4j Bloom is a Neo4j-supported graph application where you can experience:
 
 [.is-half.right]
 --
-image::{imagedir}/Bloom.png[Bloom,width=600,align=center]
+image::Bloom.png[Bloom,width=600,align=center]
 
 [.statement]
 Visit the https://neo4j.com/bloom/[Bloom page] to learn more about Neo4j Bloom.
@@ -499,7 +499,7 @@ Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that
 
 [.is-two-thirds.left]
 --
-image::{imagedir}/cypher-shell.png[cypher-shell,width=800,align=center]
+image::cypher-shell.png[cypher-shell,width=800,align=center]
 --
 
 [.is-one-third.right]
@@ -536,11 +536,11 @@ GraphQL is an open-source query language for querying parts of a graph. It is no
 A very popular library for graph visualization is neoviz.js, another project in Neo4j Labs.
 --
 
-image::{imagedir}/Plugins.png[Plugins,width=900,align=center]
+image::Plugins.png[Plugins,width=900,align=center]
 
 == Drivers and language support
 
-image::{imagedir}/Drivers.png[Drivers,width=900,align=center]
+image::Drivers.png[Drivers,width=900,align=center]
 
 [.notes]
 --

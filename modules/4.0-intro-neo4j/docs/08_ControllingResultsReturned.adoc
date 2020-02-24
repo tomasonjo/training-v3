@@ -8,7 +8,7 @@
 :nextsecttitle: Creating Nodes
 :nextsect: 9
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -58,7 +58,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/Duplication.png[Duplication,width=600,align=center]
+image::Duplication.png[Duplication,width=600,align=center]
 
 == Eliminating duplication
 
@@ -76,7 +76,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/NoDuplication.png[NoDuplication,width=550,align=center]
+image::NoDuplication.png[NoDuplication,width=550,align=center]
 
 [.notes]
 --
@@ -104,7 +104,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/DuplicationInCollection.png[DuplicationInCollection,width=800,align=center]
+image::DuplicationInCollection.png[DuplicationInCollection,width=800,align=center]
 --
 
 === Eliminating duplication in lists
@@ -127,7 +127,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/NoDuplicationInCollection.png[NoDuplicationInCollection,width=800,align=center]
+image::NoDuplicationInCollection.png[NoDuplicationInCollection,width=800,align=center]
 --
 
 === Using WITH and DISTINCT to eliminate duplication
@@ -151,7 +151,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/NoDuplication2.png[NoDuplication2,width=800,align=center]
+image::NoDuplication2.png[NoDuplication2,width=800,align=center]
 --
 
 == Ordering results
@@ -177,7 +177,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/Ordering.png[Ordering,width=800,align=center]
+image::Ordering.png[Ordering,width=800,align=center]
 --
 
 === Ordering multiple results
@@ -197,7 +197,7 @@ WHERE p.name = 'Tom Hanks'OR p.name = 'Keanu Reeves'
 RETURN DISTINCT m.title, m.released ORDER BY m.released DESC , m.title
 ----
 
-image::{imagedir}/Ordering2.png[Ordering2,width=400,align=center]
+image::Ordering2.png[Ordering2,width=400,align=center]
 
 [.statement]
 There is no limit to the number of properties you can order by.
@@ -227,7 +227,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/Limit.png[Limit,width=600,align=center]
+image::Limit.png[Limit,width=600,align=center]
 --
 
 == Limiting number of intermediate results
@@ -252,7 +252,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/Limit2.png[Limit2,width=600,align=center]
+image::Limit2.png[Limit2,width=600,align=center]
 --
 
 [.notes]
@@ -281,7 +281,7 @@ WITH m, collect (path) AS paths
 RETURN m, paths[0..2]
 ----
 
-image::{imagedir}/Limit3.png[Limit3,width=600,align=center]
+image::Limit3.png[Limit3,width=600,align=center]
 
 [.statement]
 Note that this display in Neo4j Browser is with *Connect result nodes* unchecked.
@@ -326,7 +326,7 @@ endif::[]
 [.is-half.right]
 --
 
-image::{imagedir}/Count5Movies.png[Count5Movies,width=900,align=center]
+image::Count5Movies.png[Count5Movies,width=900,align=center]
 --
 
 [.title.has-gold-background.has-team-background]

@@ -9,7 +9,7 @@
 :nextsecttitle: Creating Relationships
 :nextsect: 10
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -108,7 +108,7 @@ Here is what you see in Neo4j Browser when you create a node for the movie, _Bat
 [.is-half.left]
 --
 
-image::{imagedir}/CreateBatmanBegins.png[CreateBatmanBegins,width=600,align=center]
+image::CreateBatmanBegins.png[CreateBatmanBegins,width=600,align=center]
 --
 
 [.notes]
@@ -119,7 +119,7 @@ Here is the node when we retrieve it. It is the only node in the graph with both
 [is-half.right]
 --
 
-image::{imagedir}/RetrieveBatmanBegins.png[RetrieveBatmanBegins,width=400,align=center]
+image::RetrieveBatmanBegins.png[RetrieveBatmanBegins,width=400,align=center]
 --
 
 [.notes]
@@ -157,7 +157,7 @@ endif::[]
 
 [.is-one-third.right]
 --
-image::{imagedir}/CreateMultiplePersonNodes.png[CreateMultiplePersonNodes,width=400,align=center]
+image::CreateMultiplePersonNodes.png[CreateMultiplePersonNodes,width=400,align=center]
 --
 
 [NOTE]
@@ -215,7 +215,7 @@ RETURN labels(m)
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
 --
 
-image::{imagedir}/SetFantasyLabel.png[SetFantasyLabel,width=800,align=center]
+image::SetFantasyLabel.png[SetFantasyLabel,width=800,align=center]
 
 [.notes]
 --
@@ -270,7 +270,7 @@ RETURN labels(m)
 [.statement]
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
 
-image::{imagedir}/RemoveActionLabel.png[RemoveActionLabel,width=700,align=center]
+image::RemoveActionLabel.png[RemoveActionLabel,width=700,align=center]
 
 == Syntax: Adding properties to a node
 
@@ -329,7 +329,7 @@ RETURN m
 [.statement]
 Assuming that we have previously created the node for the movie, here is the result of running this Cypher statement:
 
-image::{imagedir}/AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,width=800,align=center]
+image::AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,width=800,align=center]
 
 == Example 2: Adding properties to node
 
@@ -354,7 +354,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-image::{imagedir}/SetPropertiesObject.png[SetPropertiesObject,width=800,align=center]
+image::SetPropertiesObject.png[SetPropertiesObject,width=800,align=center]
 
 [.notes]
 --
@@ -367,7 +367,7 @@ Once a property key is added to the graph, it is [.underline]#never# removed.
 
 [.is-one-third.left]
 --
-image::{imagedir}/AllPropertyKeys1.png[AllPropertyKeys1,width=250,align=center]
+image::AllPropertyKeys1.png[AllPropertyKeys1,width=250,align=center]
 --
 [.notes]
 --
@@ -376,7 +376,7 @@ When you examine the property keys in the database (by executing `CALL db.proper
 
 [.is-two-thirds.right]
 --
-image::{imagedir}/AllPropertyKeys2.png[AllPropertyKeys2,width=700,align=center]
+image::AllPropertyKeys2.png[AllPropertyKeys2,width=700,align=center]
 --
 
 == Retrieving properties of a node
@@ -398,7 +398,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/PropertyKeysBatmanBegins.png[PropertyKeysBatmanBegins,width=800,align=center]
+image::PropertyKeysBatmanBegins.png[PropertyKeysBatmanBegins,width=800,align=center]
 
 == Updating properties - JSON-style
 
@@ -420,7 +420,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/AddAndUpdateProperties.png[AddAndUpdateProperties,width=900,align=center]
+image::AddAndUpdateProperties.png[AddAndUpdateProperties,width=900,align=center]
 
 == Syntax: Removing properties from a node
 
@@ -463,7 +463,7 @@ RETURN m
 [.statement]
 Assuming that we have previously created the node for the movie with the these properties, here is the result of running this Cypher statement where we remove each property a different way. One way we remove the property using the `SET` clause to set the property to null. And in another way, we use the `REMOVE` clause.
 
-image::{imagedir}/RemoveProperties.png[RemoveProperties,width=800,align=center]
+image::RemoveProperties.png[RemoveProperties,width=800,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 9: Creating nodes*

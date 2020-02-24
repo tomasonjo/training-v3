@@ -9,7 +9,7 @@
 :nextsecttitle: Controlling Results Returned
 :nextsect: 8
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -54,7 +54,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/WithoutWITH.png[WithoutWITH,width=800,align=center]
+image::WithoutWITH.png[WithoutWITH,width=800,align=center]
 
 [.notes]
 --
@@ -88,7 +88,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/ActorsWith2or3Movies.png[ActorsWith2or3Movies,width=700,align=center]
+image::ActorsWith2or3Movies.png[ActorsWith2or3Movies,width=700,align=center]
 
 [.notes]
 --
@@ -131,7 +131,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/WITHAndUNWIND.png[WITHAndUNWIND,width=700,align=center]
+image::WITHAndUNWIND.png[WITHAndUNWIND,width=700,align=center]
 
 [.statement]
 You find that you use `WITH` and `UNWIND` frequently when you are importing data into the graph.
@@ -162,7 +162,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/WITH2MATCHES.png[WITH2MATCHES,width=800,align=center]
+image::WITH2MATCHES.png[WITH2MATCHES,width=800,align=center]
 
 
 === Example: Another subquery
@@ -185,7 +185,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/PopularActorsWithAtLeast5Movies.png[PopularActorsWithAtLeast5Movies,width=1100,align=center]
+image::PopularActorsWithAtLeast5Movies.png[PopularActorsWithAtLeast5Movies,width=1100,align=center]
 
 [.notes]
 --
@@ -218,7 +218,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/CALLsubquery.png[CALLsubquery,width=900,align=center]
+image::CALLsubquery.png[CALLsubquery,width=900,align=center]
 
 [.statement]
 The variable _m_ used in the subquery is used in the next query.

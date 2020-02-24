@@ -9,7 +9,7 @@
 :nextsecttitle: Controlling the Query Chain
 :nextsect: 7
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -59,7 +59,7 @@ ifndef::backend-revealjs[]
 Returns the following:
 endif::[]
 
-image::{imagedir}/DefaultGrouping.png[DefaultGrouping,width=800,align=center]
+image::DefaultGrouping.png[DefaultGrouping,width=800,align=center]
 
 [.notes]
 --
@@ -90,7 +90,7 @@ ifndef::backend-revealjs[]
 With this result returned:
 endif::[]
 
-image::{imagedir}/AggregationWithCountm.png[AggregationWithCountm,width=800,align=center]
+image::AggregationWithCountm.png[AggregationWithCountm,width=800,align=center]
 
 [.notes]
 --
@@ -125,7 +125,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=1000,align=center]
+image::TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=1000,align=center]
 
 [.notes]
 --
@@ -154,7 +154,7 @@ RETURN collect(m) AS `movies for Tom Cruise`
 [.statement]
 Here is the result returned viewed as a graph. It is the same as simply returning _m_:
 
-image::{imagedir}/TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=800,align=center]
+image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=800,align=center]
 --
 
 [.is-half.right]
@@ -164,7 +164,7 @@ image::{imagedir}/TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=8
 [.statement]
 Here is the result returned viewed as a table. Each node is an object in the list returned:
 
-image::{imagedir}/TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=800,align=center]
+image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=800,align=center]
 --
 
 ==== Counting and collecting
@@ -190,7 +190,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900,align=center]
+image::ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900,align=center]
 
 [.notes]
 --
@@ -226,7 +226,7 @@ You have also learned that nodes and relationships can have properties, whose va
 For example:
 --
 
-image::{imagedir}/MovieNodeinTable.png[MovieNodeinTable,width=400,align=center]
+image::MovieNodeinTable.png[MovieNodeinTable,width=400,align=center]
 
 [.statement]
 Here we see that the Movie nodes have three properties, two of them are of type String while the other is of type Integer.
@@ -258,7 +258,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/CastList1.png[CastList1,width=650,align=center]
+image::CastList1.png[CastList1,width=650,align=center]
 --
 
 [.notes]
@@ -283,7 +283,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/CastList2.png[CastList2,width=900,align=center]
+image::CastList2.png[CastList2,width=900,align=center]
 --
 
 ==== Accessing elements of the list
@@ -308,7 +308,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/CastList3.png[CastList3,width=900,align=center]
+image::CastList3.png[CastList3,width=900,align=center]
 --
 
 [.notes]
@@ -339,7 +339,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/DaysInFeb.png[DaysInFeb,width=900,align=center]
+image::DaysInFeb.png[DaysInFeb,width=900,align=center]
 
 ==== Accessing map elements
 
@@ -354,7 +354,7 @@ We are returning a value that is not retrieved from the graph.
 [.statement]
 A node in the graph, when returned in Neo4j Browser is a map, when displayed as table rows. For example, a Movie node:
 
-image::{imagedir}/NodeIsMap.png[NodeIsMap,width=400,align=center]
+image::NodeIsMap.png[NodeIsMap,width=400,align=center]
 --
 
 ==== Map projections
@@ -379,7 +379,7 @@ RETURN m { .title, .released } AS movie
 [.statement]
 Here is what is returned, the movie node data with only the title and released values:
 
-image::{imagedir}/MapProjection.png[MapProjection,width=700,align=center]
+image::MapProjection.png[MapProjection,width=700,align=center]
 --
 
 [.notes]
@@ -401,7 +401,7 @@ Neo4j has these several basic formats for storing date/time data. There are a nu
 RETURN date(), datetime(), time(), timestamp()
 ----
 
-image::{imagedir}/DateTime.png[DateTime,width=900,align=center]
+image::DateTime.png[DateTime,width=900,align=center]
 
 ==== Accessing components of dates
 
@@ -418,7 +418,7 @@ RETURN date().day, date().year, datetime().year, datetime().hour,
        datetime().minute
 ----
 
-image::{imagedir}/DateTime2.png[DateTime2,width=900,align=center]
+image::DateTime2.png[DateTime2,width=900,align=center]
 --
 
 ==== Working with `timestamp()`
@@ -438,7 +438,7 @@ RETURN datetime({epochmillis:timestamp()}).day,
        datetime({epochmillis:timestamp()}).month
 ----
 
-image::{imagedir}/DateTime3.png[DateTime3,width=1200,align=center]
+image::DateTime3.png[DateTime3,width=1200,align=center]
 --
 
 ==== Type and data conversions

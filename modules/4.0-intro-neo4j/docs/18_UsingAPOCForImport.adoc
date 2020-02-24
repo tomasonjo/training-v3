@@ -8,7 +8,7 @@
 :nextsecttitle: Using the neo4j-admin tool for Import
 :nextsect: 19
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -69,7 +69,7 @@ YIELD name WHERE name STARTS WITH "apoc"
 RETURN name
 ----
 
-image::{imagedir}/APOCInstalled.png[APOCInstalled,width=900,align=center]
+image::APOCInstalled.png[APOCInstalled,width=900,align=center]
 
 == Using APOC to clear the graph
 
@@ -92,7 +92,7 @@ CALL apoc.periodic.iterate(
 )
 ----
 
-image::{imagedir}/ClearDatabase.png[ClearDatabase,width=900,align=center]
+image::ClearDatabase.png[ClearDatabase,width=900,align=center]
 
 [NOTE]
 In Neo4j 4.0, another way that you can clear the graph in Neo4j Browser is to use the _system_ database and then type `CREATE OR REPLACE DATABASE <database-name>`.
@@ -112,7 +112,7 @@ you must do the same when using APOC for the import.
 
 Here is an example of the various types of loading procedures you can use in APOC:
 
-image::{imagedir}/APOCLOADProcedures.png[APOCLOADProcedures,width=1100,align=center]
+image::APOCLOADProcedures.png[APOCLOADProcedures,width=1100,align=center]
 
 == Using APOC for conditional processing
 
@@ -125,7 +125,7 @@ If you want to load denormalized data from a CSV file, you face a couple of chal
 Just as a reminder, here is a snippet of a denormalized CSV file:
 --
 
-image::{imagedir}/DenormalizedData.png[DenormalizedData,width=900,align=center]
+image::DenormalizedData.png[DenormalizedData,width=900,align=center]
 
 [.statement]
 To load this data into the graph you could:
@@ -191,7 +191,7 @@ Then the _personData_ collection is unwound so that each element in a row can be
 Everything is in the graph, except for the relationships.
 --
 
-image::{imagedir}/APOC-noRelationships.png[APOC-noRelationships,width=400,align=center]
+image::APOC-noRelationships.png[APOC-noRelationships,width=400,align=center]
 
 [.notes]
 --
@@ -248,7 +248,7 @@ Certain `apoc` calls cannot end a Cypher query so we place a `RETURN count(*)` a
 Here is the result:
 --
 
-image::{imagedir}/DoWhenAPOC.png[DoWhenAPOC,width=400,align=center]
+image::DoWhenAPOC.png[DoWhenAPOC,width=400,align=center]
 
 == Using APOC to import from CSV
 
@@ -305,7 +305,7 @@ The final argument is the size of the batch, 500.
 Here is the result:
 --
 
-image::{imagedir}/APOCPeriodicIterate.png[APOCPeriodicIterate,width=1300,align=center]
+image::APOCPeriodicIterate.png[APOCPeriodicIterate,width=1300,align=center]
 
 == Using APOC to load JSON
 
@@ -336,7 +336,7 @@ We then `UNWIND` the data and return each question, _q_.
 Here is the result:
 --
 
-image::{imagedir}/ExamineJSONData.png[ExamineJSONData,width=1000,align=center]
+image::ExamineJSONData.png[ExamineJSONData,width=1000,align=center]
 
 === Viewing keys in the JSON data
 
@@ -362,7 +362,7 @@ We then `UNWIND` the data and return each question, _q_.
 Here is the result:
 --
 
-image::{imagedir}/ExamineJSONDataKeys.png[ExamineJSONDataKeys,width=1300,align=center]
+image::ExamineJSONDataKeys.png[ExamineJSONDataKeys,width=1300,align=center]
 
 === Viewing data that will be loaded
 
@@ -387,7 +387,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::{imagedir}/SOQuestionData.png[SOQuestionData,width=1300,align=center]
+image::SOQuestionData.png[SOQuestionData,width=1300,align=center]
 --
 
 === Creating the graph from JSON
@@ -417,7 +417,7 @@ MERGE (user)-[:ANSWERED]->(question)
 Here is the result of querying the nodes in the graph after the load:
 --
 
-image::{imagedir}/SOLoadedGraph.png[SOLoadedGraph,width=500,align=center]
+image::SOLoadedGraph.png[SOLoadedGraph,width=500,align=center]
 
 [.notes]
 --

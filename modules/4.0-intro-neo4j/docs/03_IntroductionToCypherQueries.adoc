@@ -9,7 +9,7 @@
 :nextsecttitle: Specifying Query Filters
 :nextsect: 4
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -63,7 +63,7 @@ endif::[]
 
 Optimized for being read by humans, Cypher's construct uses English prose and iconography (called ASCII Art) to make queries more self-explanatory.
 
-image::{imagedir}/AsciiArt.png[AsciiArt,width=600,align=center]
+image::AsciiArt.png[AsciiArt,width=600,align=center]
 
 
 ==== Cypher to express what to retrieve not how
@@ -75,7 +75,7 @@ Being a declarative language, Cypher focuses on the clarity of expressing *what*
 You can think of Cypher as mapping English language sentence structure to patterns in a graph.
 For example, the nouns are nodes of the graph, the verbs are the relationships in the graph, and the adjectives and adverbs are the properties.
 
-image::{imagedir}/Nouns.png[Nouns,width=700,align=center]
+image::Nouns.png[Nouns,width=700,align=center]
 --
 
 [.notes]
@@ -114,7 +114,7 @@ In the _Movie_ database you will be working with, the nodes in this graph are la
 
 For example, you can see the labels in the database by simply clicking the Database icon in Neo4j Browser:
 
-image::{imagedir}/NodeLabels.png[width=300,align=center]
+image::NodeLabels.png[width=300,align=center]
 
 You can filter the types of nodes that you are querying, by specifying a *label* for a node.
 A node can have zero or more labels.
@@ -193,7 +193,7 @@ Each type of nodes is displayed in a different color.
 The relationships between nodes are also displayed, which you will learn about later in this module.
 --
 
-image::{imagedir}/call_db.schema.visualization.png[call_db.schema.visualization,width=700,align=center]
+image::call_db.schema.visualization.png[call_db.schema.visualization,width=700,align=center]
 
 === Syntax: Using MATCH to retrieve nodes
 
@@ -272,7 +272,7 @@ The default view of the returned nodes are the nodes that were referenced by the
 [.statement]
 The result returned is:
 
-image::{imagedir}/PersonNodes-graph.png[PersonNodes-graph,width=700, align=center]
+image::PersonNodes-graph.png[PersonNodes-graph,width=700, align=center]
 --
 
 [.is-half.right]
@@ -296,7 +296,7 @@ We can also view the nodes as table data where the nodes and their associated pr
 When nodes are displayed as table values, the node labels and ids are not shown, only the property values for the nodes. Node ids are unique identifiers and are set by the graph engine when a node is created.
 --
 
-image::{imagedir}/PersonNodes-table.png[PersonNodes-table,width=700,align=center]
+image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 1: Retrieving nodes*
@@ -324,7 +324,7 @@ All nodes of the same type need not have the same properties.
 For example, in the _Movie_ graph, all _Movie_ nodes have both _title_  and _released_ properties.
 However, it is not a requirement that every _Movie_ node has a property, _tagline_.
 
-image::{imagedir}/MovieProperties.png[MovieProperties,width=600,align=center]
+image::MovieProperties.png[MovieProperties,width=600,align=center]
 --
 
 [.notes]
@@ -347,7 +347,7 @@ Here is what you will see in the result pane when you call the method to return 
 This result stream contains all property keys in the graph. It does not display which nodes utilize these property keys.
 
 
-image::{imagedir}/call_db.PropertyKeys.png[call_db.PropertyKeys,width=700,align=center]
+image::call_db.PropertyKeys.png[call_db.PropertyKeys,width=700,align=center]
 --
 
 === Syntax: Retrieving nodes filtered by a property value
@@ -407,7 +407,7 @@ RETURN p
 [.statement]
 The result returned is:
 
-image::{imagedir}/MatchPersonBorn1970.png[MatchPersonBorn1970,width=600, align=center]
+image::MatchPersonBorn1970.png[MatchPersonBorn1970,width=600, align=center]
 --
 
 === Example: Filtering query by multiple properties
@@ -429,7 +429,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/TwoPropertiesForFilter.png[TwoPropertiesForFilter,width=700,align=center]
+image::TwoPropertiesForFilter.png[TwoPropertiesForFilter,width=700,align=center]
 --
 
 [.notes]
@@ -500,7 +500,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/MatchPersonBorn1965.png[MatchPersonBorn1965,width=800,align=center]
+image::MatchPersonBorn1965.png[MatchPersonBorn1965,width=800,align=center]
 
 === Syntax: Specifying aliases for column headings
 
@@ -541,7 +541,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/UsingAliases.png[UsingAliases,width=800,align=center]
+image::UsingAliases.png[UsingAliases,width=800,align=center]
 --
 
 [.title.has-gold-background.has-team-background]
@@ -637,7 +637,7 @@ Here we see that this graph has a total of 6 relationship types between the node
 All of the other relationships in this graph are from _Person_ nodes to _Movie_ nodes.
 --
 
-image::{imagedir}/call_db.schema-relationships.png[call_db.schema-relationships,width=800,align=center]
+image::call_db.schema-relationships.png[call_db.schema-relationships,width=800,align=center]
 
 [.notes]
 --
@@ -664,7 +664,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/ActorsInMatrix.png[ActorsInMatrix,width=800,align=center]
+image::ActorsInMatrix.png[ActorsInMatrix,width=800,align=center]
 --
 
 [.notes]
@@ -703,7 +703,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/TomHanksActedDirected.png[TomHanksActedDirected,width=700,align=center]
+image::TomHanksActedDirected.png[TomHanksActedDirected,width=700,align=center]
 --
 
 [.notes]
@@ -732,7 +732,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/AnonymousMovieNode.png[AnonymousMovieNode,width=800,align=center]
+image::AnonymousMovieNode.png[AnonymousMovieNode,width=800,align=center]
 
 
 [NOTE]
@@ -761,7 +761,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/AllRelationshipsMatrix.png[AllRelationshipsMatrix,width=800,align=center]
+image::AllRelationshipsMatrix.png[AllRelationshipsMatrix,width=800,align=center]
 --
 
 === More anonymous relationships
@@ -818,7 +818,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/MatrixRelationshipTypes.png[MatrixRelationshipTypes,width=900,align=center]
+image::MatrixRelationshipTypes.png[MatrixRelationshipTypes,width=900,align=center]
 --
 
 === Properties for relationships
@@ -835,7 +835,7 @@ Each relationship has properties that further describe the relationship using th
 --
 
 [.center]
-image::{imagedir}/REVIEWEDProperties.png[ReviewedProperties,width=900,align=center]
+image::REVIEWEDProperties.png[ReviewedProperties,width=900,align=center]
 
 === Retrieving properties for relationships
 
@@ -856,7 +856,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/ReturnPersonRating65.png[ReturnPersonRating65,width=800,align=center]
+image::ReturnPersonRating65.png[ReturnPersonRating65,width=800,align=center]
 --
 
 == Patterns in the graph
@@ -873,7 +873,7 @@ How a graph is traversed for a query depends on what directions are defined for 
 Here is an example of where the _FOLLOWS_ relationship is used in the _Movie_ graph.
 Notice that this relationship is directional.
 
-image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=400,align=center]
+image::FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 --
 
 === Using patterns for queries
@@ -892,7 +892,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/AngelaFollowers.png[AngelaFollowers,width=700,align=center]
+image::AngelaFollowers.png[AngelaFollowers,width=700,align=center]
 --
 
 [.notes]
@@ -905,7 +905,7 @@ In this case there is only one relationship that is defined that points to the A
 
 [.is-half.right]
 --
-image::{imagedir}/AngelaFollowersQueryTraversal.png[AngelaFollowers,width=400,align=center]
+image::AngelaFollowersQueryTraversal.png[AngelaFollowers,width=400,align=center]
 --
 
 === Reversing the traversal
@@ -922,7 +922,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/FollowedByAngela.png[FollowedByAngela,width=700,align=center]
+image::FollowedByAngela.png[FollowedByAngela,width=700,align=center]
 
 [.notes]
 --
@@ -947,7 +947,7 @@ RETURN p1, p2
 [.statement]
 We also return the Angela Scope node so that we can see the relationships in the result. The result returned is:
 
-image::{imagedir}/AngelaFromTo.png[AngelaFromTo,width=700,align=center]
+image::AngelaFromTo.png[AngelaFromTo,width=700,align=center]
 --
 
 [.notes]
@@ -957,7 +957,7 @@ In this case the Angela Scope node is the anchor and the query engine traverses 
 
 [.is-half.right]
 --
-image::{imagedir}/AngelaConnectionsQueryTraversal.png[AngelaConnectionsQueryTraversal,width=400,align=center]
+image::AngelaConnectionsQueryTraversal.png[AngelaConnectionsQueryTraversal,width=400,align=center]
 --
 
 === Traversing multiple relationships
@@ -980,7 +980,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/FollowersOfJessicaFollowers.png[FollowersOfJessicaFollowers,width=800,align-center]
+image::FollowersOfJessicaFollowers.png[FollowersOfJessicaFollowers,width=800,align-center]
 --
 
 [.notes]
@@ -993,7 +993,7 @@ It finds only one node, _Paul Blythe_ that matches the query.
 
 [.is-half.left]
 --
-image::{imagedir}/FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,width=300,align=center]
+image::FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,width=300,align=center]
 --
 
 === Variation on the traversal
@@ -1019,7 +1019,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFollowersOfJessicaFollowers,width=1000,align=center]
+image::NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFollowersOfJessicaFollowers,width=1000,align=center]
 
 === Using patterns to focus the query
 
@@ -1042,7 +1042,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/TraversalInTwoDirections.png[TraversalInTwoDirections,width=1100,align=center]
+image::TraversalInTwoDirections.png[TraversalInTwoDirections,width=1100,align=center]
 --
 
 [.notes]
@@ -1065,7 +1065,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::{imagedir}/ReturnPath.png[ReturnPath,width=1100,align=center]
+image::ReturnPath.png[ReturnPath,width=1100,align=center]
 
 === Returning multiple paths
 
@@ -1086,7 +1086,7 @@ RETURN  path
 Multiple paths are returned. Even if we set Neo4j Browser to not connect result nodes, the nodes are shown as connected in the visualization because we are returning paths, not nodes:
 --
 
-image::{imagedir}/ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=800,align=center]
+image::ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=800,align=center]
 
 
 [NOTE]

@@ -9,7 +9,7 @@
 :nextsecttitle: Aggregation
 :nextsect: 6
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -59,7 +59,7 @@ endif::[]
 
 [.is-half.right]
 --
-image::{imagedir}/TheReplacements.png[TheReplacements,width=1000,align=center]
+image::TheReplacements.png[TheReplacements,width=1000,align=center]
 --
 
 [.notes]
@@ -73,7 +73,7 @@ In all, six relationships were traversed.
 
 [.is-half.left]
 --
-image::{imagedir}/TheReplacementsTraversal.png[TheReplacementsTraversal,width=600,align=center]
+image::TheReplacementsTraversal.png[TheReplacementsTraversal,width=600,align=center]
 --
 
 === Specifying multiple `MATCH` patterns
@@ -87,7 +87,7 @@ Suppose we want to write queries that focus on movies released in the year 2000.
 Here are the nodes and relationships for these movies:
 --
 
-image::{imagedir}/Movies2000.png[Movies2000,width=800,align=center]
+image::Movies2000.png[Movies2000,width=800,align=center]
 
 [.notes]
 --
@@ -116,7 +116,7 @@ endif::[]
 
 [.is-half.right]
 --
-image::{imagedir}/Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=400,align=center]
+image::Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=400,align=center]
 --
 
 [.notes]
@@ -177,7 +177,7 @@ If you click the warning symbol in the top left corner, it produces an explanati
 
 [.is-half.left]
 --
-image::{imagedir}/CartesianProductWarning.png[CartesianProductWarning,width=600,align=center]
+image::CartesianProductWarning.png[CartesianProductWarning,width=600,align=center]
 --
 
 ifndef::backend-revealjs[]
@@ -186,7 +186,7 @@ endif::[]
 
 [.is-half.right]
 --
-image::{imagedir}/KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
+image::KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
 --
 
 ==== Example: Two `MATCH` patterns required
@@ -211,7 +211,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/MegsCoActors.png[MegsCoActors,width=600,align=center]
+image::MegsCoActors.png[MegsCoActors,width=600,align=center]
 
 === Traversal with patterns
 
@@ -246,7 +246,7 @@ When the query engine traverses the graph for these `MATCH` clauses, we see that
 
 [.is-half.left]
 --
-image::{imagedir}/ValKilmerCoActorsMultipleMatchTraversal.png[ValKilmerCoActorsMultipleMatchTraversal,width=400,align=center]
+image::ValKilmerCoActorsMultipleMatchTraversal.png[ValKilmerCoActorsMultipleMatchTraversal,width=400,align=center]
 --
 
 ifndef::backend-revealjs[]
@@ -255,7 +255,7 @@ endif::[]
 
 [.is-half.right]
 --
-image::{imagedir}/ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMatch,width=600,align=center]
+image::ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMatch,width=600,align=center]
 --
 
 ==== Traversal: Multiple patterns in a `MATCH` clause
@@ -283,7 +283,7 @@ We already know the _Person_ node for Val Kilmer so we need not return it.
 
 [.is-half.left]
 --
-image::{imagedir}/ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSingleMatchTraversal,width=400,align=center]
+image::ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSingleMatchTraversal,width=400,align=center]
 --
 
 [.notes]
@@ -293,7 +293,7 @@ The result returned is smaller because it does not include the Val Kilmer node.
 
 [.is-half.right]
 --
-image::{imagedir}/ValKilmerCoActorsSingleMatch.png[ValKilmerCoActorsSingleMatch,width=800,align=center]
+image::ValKilmerCoActorsSingleMatch.png[ValKilmerCoActorsSingleMatch,width=800,align=center]
 --
 [.notes]
 --
@@ -311,7 +311,7 @@ The _Movie_ database for this training does not have much depth of relationships
 
 [.is-one-third.left]
 --
-image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=400,align=center]
+image::FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 --
 
 [.notes]
@@ -333,7 +333,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/TwoHopRelationship.png[TwoHopRelationship,width=700,align=center]
+image::TwoHopRelationship.png[TwoHopRelationship,width=700,align=center]
 --
 
 [.notes]
@@ -406,7 +406,7 @@ When you specify this `MATCH` clause to use the `shortestPath()' function as sho
 
 [.is-half.left]
 --
-image::{imagedir}/ShortestPathWarning.png[ShortestPathWarning,width=600,align=center]
+image::ShortestPathWarning.png[ShortestPathWarning,width=600,align=center]
 --
 
 [.notes]
@@ -419,7 +419,7 @@ Here is the result returned:
 
 [.is-half.right]
 --
-image::{imagedir}/ShortestPath1.png[ShortestPath1,width=500,align=center]
+image::ShortestPath1.png[ShortestPath1,width=500,align=center]
 --
 
 [.notes]
@@ -454,7 +454,7 @@ Here is the result of this query:
 
 [.is-one-third.left]
 --
-image::{imagedir}/Subgraph1.png[Subgraph1,width=800,align=center]
+image::Subgraph1.png[Subgraph1,width=800,align=center]
 --
 
 [.notes]
@@ -464,7 +464,7 @@ If you view the result as text, you will see that it is simply a set of rows whe
 
 [.is-two-thirds.right]
 --
-image::{imagedir}/Subgraph2.png[Subgraph2,width=800,align=center]
+image::Subgraph2.png[Subgraph2,width=800,align=center]
 --
 
 [.notes]
@@ -489,7 +489,7 @@ The difference is that if no matches are found, `OPTIONAL MATCH` will use NULLs 
 [.statement]
 Here is a subgraph of our movies graph with all people named James and their relationships:
 
-image::{imagedir}/TheJames.png[TheJames,width=800,align=center]
+image::TheJames.png[TheJames,width=800,align=center]
 --
 
 [.notes]
@@ -512,7 +512,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::{imagedir}/OptionalMatch.png[OptionalMatch,width=800,align=center]
+image::OptionalMatch.png[OptionalMatch,width=800,align=center]
 --
 
 [.notes]

@@ -8,7 +8,7 @@
 :nextsecttitle: Using Query Best Practices
 :nextsect: 14
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -95,7 +95,7 @@ SET m.videoFormat = 'DVD'
 If there is an index on the _released_ property, the graph engine will find the pointers to all nodes that satisfy the query without having to visit all of the nodes:
 --
 
-image::{imagedir}/IndexForRanges.png[IndexForRanges,width=400,align=center]
+image::IndexForRanges.png[IndexForRanges,width=400,align=center]
 
 == Creating a single-property index
 
@@ -123,7 +123,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/CreateSingle-propertyIndex.png[CreateSingle-propertyIndex,width=1000,align=center]
+image::CreateSingle-propertyIndex.png[CreateSingle-propertyIndex,width=1000,align=center]
 
 == Creating composite indexes
 
@@ -151,7 +151,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/TwoStatements.png[TwoStatements,width=1200,align=center]
+image::TwoStatements.png[TwoStatements,width=1200,align=center]
 
 [.notes]
 --
@@ -177,7 +177,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/CreateCompositeIndex.png[CreateCompositeIndex,width=1000,align=center]
+image::CreateCompositeIndex.png[CreateCompositeIndex,width=1000,align=center]
 
 == Creating full-text schema indexes
 
@@ -219,7 +219,7 @@ ifndef::backend-revealjs[]
 The result returned shows nothing exceptional:
 endif::[]
 
-image::{imagedir}/CreateFullTextIndex1.png[CreateFullTextIndex1,width=900,align=center]
+image::CreateFullTextIndex1.png[CreateFullTextIndex1,width=900,align=center]
 
 === Retrieving configured indexes
 
@@ -239,7 +239,7 @@ CALL db.index.fulltext.createNodeIndex(
 [.statement]
 And here we see our newly-created full-text schema index:
 
-image::{imagedir}/CreateFullTextIndex2.png[CreateFullTextIndex2,width=1300,align=center]
+image::CreateFullTextIndex2.png[CreateFullTextIndex2,width=1300,align=center]
 --
 
 [.notes]
@@ -274,7 +274,7 @@ ifndef::backend-revealjs[]
 And here is the result:
 endif::[]
 
-image::{imagedir}/UseFullTextIndex1.png[UseFullTextIndex1,width=900,align=center]
+image::UseFullTextIndex1.png[UseFullTextIndex1,width=900,align=center]
 
 === Retrieving the score for a full-text search
 
@@ -297,7 +297,7 @@ RETURN node.title, score
 [.statement]
 The nodes returned have a Lucene score based upon how much of _Matrix_ was part of the _title_:
 
-image::{imagedir}/UseFullTextIndex2.png[UseFullTextIndex2,width=900,align=center]
+image::UseFullTextIndex2.png[UseFullTextIndex2,width=900,align=center]
 --
 
 === Example: Searching on a particular property
@@ -318,7 +318,7 @@ ifndef::backend-revealjs[]
 Here is what is returned:
 endif::[]
 
-image::{imagedir}/UseFullTextIndex3.png[UseFullTextIndex3,width=900,align=center]
+image::UseFullTextIndex3.png[UseFullTextIndex3,width=900,align=center]
 
 [.notes]
 --
@@ -339,7 +339,7 @@ ifndef::backend-revealjs[]
 Here is what is returned:
 endif::[]
 
-image::{imagedir}/ManagingIndexes1.png[ManagingIndexes1,width=1300,align=center]
+image::ManagingIndexes1.png[ManagingIndexes1,width=1300,align=center]
 
 === Dropping an index
 
@@ -357,7 +357,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/ManagingIndexes2.png[ManagingIndexes2,width=900,align=center]
+image::ManagingIndexes2.png[ManagingIndexes2,width=900,align=center]
 
 === Dropping a full-text schema index
 
@@ -377,7 +377,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::{imagedir}/ManagingIndexes3.png[ManagingIndexes3,width=900,align=center]
+image::ManagingIndexes3.png[ManagingIndexes3,width=900,align=center]
 --
 
 === Confirming dropped indexes
@@ -394,7 +394,7 @@ ifndef::backend-revealjs[]
 Here is what is returned:
 endif::[]
 
-image::{imagedir}/ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
+image::ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 14: Creating indexes*

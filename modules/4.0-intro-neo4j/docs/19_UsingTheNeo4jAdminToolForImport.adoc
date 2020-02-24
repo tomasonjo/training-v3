@@ -7,7 +7,7 @@
 :nextsecttitle: Using an Application for Import
 :nextsect: 20
 :experimental:
-:imagedir: ../images
+:imagesdir: ../images
 //:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
@@ -244,7 +244,7 @@ Note that it is possible to specify regular expressions for the files specified 
 [.statement]
 Here is the what you will be doing in the next exercise to use the `import` command of `neo4j-admin` to create a database and import CSV files.
 
-image::{imagedir}/ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
+image::ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise 18: Importing data with the import command of neo4j-admin*
