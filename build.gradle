@@ -154,7 +154,7 @@ subprojects {
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
-      modules.pdf.version '1.5.0-rc.2'
+      modules.pdf.version '1.5.2'
       attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
     }
 
