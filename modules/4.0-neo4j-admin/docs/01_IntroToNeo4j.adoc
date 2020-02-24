@@ -10,9 +10,7 @@
 :toclevels: 4
 :experimental:
 :imagedir: ../images
-//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/v4.0-intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
+:manual: http://neo4j.com/docs/operations-manual/4.0
 
 //ifdef::backend-html5[]
 
@@ -263,10 +261,12 @@ The *default* database (named neo4j by default) is the "user" database where you
 
 == Neo4j 4.0 DBMS
 
+[.statement]
 In Neo4j Enterprise Edition 4.0, you may have more than one "user" database.
 
 image::{imagedir}/MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 
+[.statement]
 Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
 
 ifndef::backend-revealjs[]
