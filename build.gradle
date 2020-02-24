@@ -44,7 +44,7 @@ subprojects {
       'presenter': 'Neo Technology',
       'twitter': 'neo4j',
       'email': 'info@neotechnology.com',
-      'neo4j-version': '3.4.4',
+      'neo4j-version': '4.0',
       'currentyear': '2020'
   }
 
@@ -154,7 +154,7 @@ subprojects {
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
-      modules.pdf.version '1.5.0-rc.2'
+      modules.pdf.version '1.5.2'
       attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
     }
 
