@@ -367,7 +367,15 @@ In this training, you will learn how to perform these common administrative task
 * Managing database security
 
 [.title.has-gold-background.has-team-background]
-== *Exercise 1: Setting up Neo4j Enterprise Edition EC2 instance for this course*
+== *Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course*
+
+//ifndef::backend-html5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/02_OverviewOfNeo4jAdministration.adoc
+//./endif::[]
 
 == References
 

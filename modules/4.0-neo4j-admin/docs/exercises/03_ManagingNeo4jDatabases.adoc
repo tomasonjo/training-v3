@@ -1,0 +1,137 @@
+:imagesdir: ../images
+
+== *Exercise #2: Managing the Neo4j instance*
+
+In this Exercise, you will stop and start the Neo4j instance and view its status and log file using the Debian installation you verified in the previous exercise.
+
+=== Exercise steps:
+
+. Open a terminal on your system and connect to your EC2 instance.
+. View the status of the _neo4j_ service:
+
+----
+systemctl status neo4j
+----
+
+You should see something like this:
+
+image::Status-Debian.png[Status-Debian,width=600,align=center]
+
+[start=3]
+. Create the */var/run/neo4j* directory and make sure it is owned by *neo4j*
+----
+sudo mkdir /var/run/neo4j
+sudo chown neo4j:neo4j /var/run/neo4j
+----
+
+image::add_var_run_neo4j.png[add_var_run_neo4j,width=600,align=center]
+
+[start=4]
+. Disable the _neo4j_ service:
+----
+sudo systemctl disable neo4j
+----
+
+image::disable_neo4j_service.png[disable_neo4j_service,width=600,align=center]
+
+[start=5]
+. View the status of the Neo4j instance.
+----
+systemctl status neo4j
+----
+
+image::neo4j_status_service_disabled.png[neo4j_status_service_disabled,width=600,align=center]
+
+[start=6]
+. Start the Neo4j instance.
+
+----
+sudo systemctl start neo4j
+----
+
+[start=7]
+. View the status of the Neo4j instance.
+
+image::Neo4j_started.png[Neo4j_started,width=600,align=center]
+
+[start=8]
+. Stop the Neo4j instance and then view its status.
+
+----
+sudo systemctl stop neo4j
+systemctl status neo4j
+----
+image::Stop_neo4j.png[Stop_neo4j,width=600,align=center]
+
+[start=9]
+. Examine the end of the Neo4j log file.
+
+----
+journalctl -e -u neo4j
+----
+
+image::JournalEnd.png[JournalEnd,width=600,align=center]
+
+[start=10]
+. Examine the database folders created for this Neo4j instance.
+
+image::DataFiles.png[DataFiles,width=600,align=center]
+
+[start=11]
+. Examine the log files for this Neo4j instance.
+
+image::ViewLogFiles.png[ViewLogFiles,width=600,align=center]
+
+== *Exercise #3: Using `cypher-shell`*
+
+In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, change the password for the Neo4j instance, and use both the system and user database.
+
+=== Before you begin
+
+* Make sure you have a terminal window open to your EC2 instance for this course.
+* Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+
+. Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_.
+    *Hint*: Type:  `/usr/bin/cypher-shell`.
+[start=2]
+. Enter a new password that you will remember.
+. Exit out of `cypher-shell`.
+. Start a `cypher-shell` session providing the -u and -p arguments.
+. Use the system database to view all databases served by this Neo4j instance.
+image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
+[start=6]
+. Use the _neo4j_ database and enter this Cypher statement: `CREATE (:Person {name: '<your name'})'`
+. Enter this Cypher statement to retrieve the node you just created: `MATCH (p:Person) RETURN p;`
+. Enter this Cypher statement to delete the node you just created:  `MATCH (p:Person) DELETE p;`
+. Create the directory, _files_ in your home directory.
+----
+cd
+mkdir files
+----
+[start=10]
+. Download this file: https://data.neo4j.com/admin-neo4j/movieDB.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
+----
+cd files
+curl -O https://data.neo4j.com/admin-neo4j/movieDB.cypher
+----
+[start=11]
+. Start `cypher-shell` using movieDB.cypher as input.
+. Start `cypher-shell` and execute these statements to confirm that the data was loaded into the user database:
+----
+CALL db.schema.visualization();
+MATCH (p:Person) WHERE p.name = 'Tom Hanks' RETURN p;
+----
+
+You should see something like this:
+image::ConfirmMovieData.png[ConfirmMovieData,width=1000,align=center]
+
+[start=13]
+. Exit `cypher-shell`.
+
+=== Exercise Summary
+
+You have now successfully started a `cypher-shell` client session that connects to the Neo4j instance.
+You typically use `cypher-shell` to execute Cypher against a user database, but you can also use it to perform some management tasks against the Neo4j instance by accessing the system database.

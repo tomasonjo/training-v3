@@ -45,7 +45,8 @@ Here is a brief overview of the default folders you will frequently use for mana
 
 [cols="20,80", options="header",stripes="none"]
 |====
- *Purpose of folder*
+
+|*Purpose of folder*
 |*Description*
 | 
 {set:cellbgcolor:white}
@@ -68,8 +69,7 @@ In your real application environment, if your system is different, you will need
 When you are setting up a production environment, you want to control who can manage the Neo4j instance.
 You will also want to control when the Neo4j instance starts as you will performing some configuration changes and database operations that may require that the instance to be stopped.
 
-When Neo4j is installed as a Debian package, the _neo4j_ service is enabled and the Neo4j instance is automatically started.
-Other platforms do not start the Neo4j instance automatically.
+When Neo4j is installed as a Debian package, the _neo4j_ service is disabled. On most platforms, the Neo4j instance is not automatically started.
 
 === Post-install: Changing the _neo4j_ password (non-Debian)
 
@@ -95,7 +95,7 @@ You will perform these steps later in the Exercise 2.
 
 == Managing the Neo4j instance
 
-When the instance is started, it creates a database named *graph.db* in the default location which is a folder under */var/lib/neo4j/data/databases*. You can start and stop the instance regardless of whether the _neo4j_ service is enabled.
+When the instance is started, it creates a database folder named *neo4j* in the default location which is a folder under */var/lib/neo4j/data/databases*. You can start and stop the instance regardless of whether the _neo4j_ service is enabled.
 
 You start, stop, restart, and check the status of the Neo4j instance on Debian as follows:
 
@@ -125,12 +125,14 @@ You check the status of the instance as follows:
 
 Here is an example where we check the status of the Neo4j instance:
 
-image::Neo4jStatus-Debian.png[Neo4jStatus-Debian,width=800,align=center]
+image::Neo4j_started.png[Neo4j_started,width=800,align=center]
 
 Here we see that the instance is started. Notice that the service is disabled as well.
-After the instance is started you can identify the process ID (Main PID) from the status command on Debian. It is sometimes helpful to know the process ID of the Neo4j instance (JVM) in the event that it is unresponsive and you must kill it.
+After the instance is started you can identify the process ID (Main PID) from the status command on Debian.
+It is sometimes helpful to know the process ID of the Neo4j instance (JVM) in the event that it is unresponsive and you must kill it.
 
-However, knowing whether the instance is started (active) is generally not sufficient, especially if you have made some configuration changes. You can view details of the Neo4j instance by examining the log file.
+However, knowing whether the instance is started (active) is generally not sufficient, especially if you have made some configuration changes.
+You can view details of the Neo4j instance by examining the log file.
 
 === Viewing the neo4j log
 
@@ -143,56 +145,26 @@ You can view the log file for the instance on Debian as follows:
 * `journalctl -e -u neo4j` to view the end of the neo4j log file.
 * `journalctl -u neo4j -b > neo4j.log` where you can view *neo4j.log* in an editor.
 
-Here is the result from `journalctl`:
+Here is the result from `journalctl` where we want to view then end of the log file:
 
-image::FirstNeo4jLog-Debian.png[FirstNeo4jLog-Debian,width=800,align=center]
+image::JournalEnd.png[JournalEnd,width=800,align=center]
 
 When the Neo4j instance starts, you can also confirm that it is started by seeing the _Started_ record in the log file.
 
 [NOTE]
 You can also view the log file in the *logs* folder on all platforms.
 
-=== *Exercise #2: Managing the Neo4j instance*
+[.title.has-gold-background.has-team-background]
+== *Exercise #2: Managing the Neo4j instance*
 
-In this Exercise, you will stop and start the Neo4j instance and view its status and log file using the Debian installation you verified in the previous exercise.
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
 
-*Before you begin*
+//ifdef::backend-htlm5[]
+//include::exercises/03_ManagingNeo4jDatabases.adoc
+//endif::[]
 
-You should disable the _neo4j_ service `[sudo] systemctrl disable neo4j`, if you are using a system that utilizes the _neo4j_ service (for example, Debian).
-
-*Exercise steps*:
-
-. Open a terminal on your system and connect to your EC2 instance.
-. View the status of the _neo4j_ service:
-----
-systemctrl status neo4j
-----
-
-You should see something like this:
-
-image::systemctrl_status_initial.png[systemctrl_status_initial,width=600,align=center]
-
-[start=3]
-. Create the */var/run/neo4j* directory and make sure it is owned by *neo4j*
-----
-sudo mkdir /var/run/neo4j
-sudo chown neo4j:neo4j /var/run/neo4j
-----
-image::add_var_run_neo4j.png[add_var_run_neo4j,width=600,align=center]
-
-[start=4]
-. Disable the _neo4j_ service:
-----
-sudo systemctrl disable neo4j
-----
-
-image::disable_neo4j_service.png[disable_neo4j_service,width=600,align=center]
-
-. View the status of the Neo4j instance.
-. Stop the Neo4j instance.
-. View the status of the Neo4j instance.
-. Examine the Neo4j log file.
-. Examine the files and folders created for this Neo4j instance.
 
 == Using `cypher-shell`
 
@@ -200,89 +172,96 @@ image::disable_neo4j_service.png[disable_neo4j_service,width=600,align=center]
 
 `/usr/bin/cypher-shell -u <username> -p <password>`
 
-Once authenticated, you enter Cypher statements to execute just as you would in a Neo4j Browser session. One caveat with `cypher-shell`, however is that all Cypher commands [.underline]#must# end with `;`. You exit `cypher-shell` with the command `:exit`.
+Once authenticated, you enter Cypher statements to execute just as you would in a Neo4j Browser session.
+One caveat with `cypher-shell`, however is that all Cypher commands [.underline]#must# end with `;`.
+You exit `cypher-shell` with the command `:exit`.
 
 === Example: Using `cypher-shell`
 
 Here is an example showing that we can successfully log in to the database for the Neo4j instance, providing the default credentials _neo4j/neo4j_:
+Since this is the first login to the database, you must change the password from _neo4j_ to a password you will remember.
 
-image::InitialCypherShellLogin-Debian.png[InitialCypherShellLogin-Debian,width=800,align=center]
+image::InitialLogin-cypher-shell.png[InitialLogin-cypher-shell,width=800,align=center]
+
+In this example we changed the password to _training-helps_.
+
+When you are done with `cypher-shell`, you enter `:exit` to exit.
 
 [NOTE]
 If you set the environment variables NEO4J_USER and NEO4J_PASSWORD with their respective values, then you need not enter your credentials when logging into `cypher-shell`.
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
 
-=== Changing the default password (Debian only)
+=== Example: Using `cypher-shell` providing credentials as arguments
 
-If we were to attempt to access the database for the first time, we would receive an error. This is because the default credentials _neo4j/neo4j_ [underline]#must# be changed. As an administrator, you want to control who can manage this Neo4j instance and its database. To do so, you change the default password for the _neo4j_ user. Later in this training, you will learn more about securing Neo4j by managing users and their access. 
+You can also specify the username and password at the command level to use `cypher-shell` as arguments .
 
-While logged into the database in `cypher-shell`, you execute the procedure to change the password:
+image::Cypher-shell-withParms.png[Cypher-shell-withParms,width=800,align=center]
 
-`CALL dbms.changePassword('newPassword');`
+== Accessing the system database
 
-In this example, we log into `cypher-shell` with our credentials. Then we execute the Cypher command to change the password. Finally, we specify `:exit` to log out of `cypher-shell`.
+After you have successfully logged in to the Neo4j instance using `cypher-shell`, you can execute system commands against the Neo4j instance.
+By default, you are connected to the default Neo4j database, _neo4j_, which is a user database.
 
-image::ChangePassword-Debian.png[ChangePassword-Debian,width=700,align=center]
+System commands use the _system_ database and are primarily used to:
 
-After changing the default password for the Neo4j instance (database), we are now able to access the database after logging in with the new credentials. 
+* View the status of the databases being served by the Neo4j instance
+* Create or drop a user database.
+* Start or stop a user database.
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+To access the system database, you enter `:USE system`.
 
-=== Accessing the database
+image::UseSystem.png[UseSystem,width=1000,align=center]
 
-Here is an example where we execute a Cypher statement against the empty database where we list all active queries:
+Notice that the prompt neo4j@system tells us that all commands we enter will be against the system database.
 
-image::CypherShellStatement-Debian.png[CypherShellStatement-Debian,width=1000,align=center]
+=== Viewing databases for the Neo4j instance
 
-When you are done with `cypher-shell`, you enter `:exit` to exit.
+Using the _system_ database, you can view all of the databases served by this Neo4j instance by entering the command `SHOW DATABASES;`:
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+[NOTE] For all commands and cypher statements, you must end them with the `;` character.
 
-=== *Exercise #2: Using `cypher-shell` to change the password*
+image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
 
-In this Exercise, you will log in to the database with `cypher-shell`, change the password for the database, and execute a Cypher statement to load the database. You can perform this Exercise regardless of the type of system you are using.
+Here we see that this Neo4j instance that we have connected to has the system database and the neo4j database, which is the default name of the user database.
+A Neo4j instance has one system database and any number of user databases.
+After you have created more than one user database, you can configure any single user database as the default database.
 
-*Before you begin*
+=== Selecting the user database to access
 
-You should ensure that the Neo4j instance is started.
+In a client session, you can only access a single user database at a time, even though multiple databases may be online (started).
+You use the :USE command to select the user database to connect to.
 
-*Exercise steps*:
+Here we switch back to the default, _neo4j_ user database by specifying `:USE neo4j`.
+Then you can create or access the data in this user database.
+For example, we access the user database by creating a node with the label, _Person_ and a _name_ of "John Doe", retrieving it, and then deleting it.
 
-. Open a terminal on your system.
-. Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_. (or different credentials if you changed the password previously with )`neo4j-admin set-initial-password`)
-. Execute the Cypher statement, `CALL dbms.listQueries();`. Do you get an error? Note you will not get an error if you previously changed the password.
-. Execute the Cypher statement to change the password to something you will remember.
-. Exit out of `cypher-shell`.
-. Log into the database with `cypher-shell` using the new credentials.
-. Execute the Cypher statement, `CALL dbms.listQueries();`.
-. Exit out of `cypher-shell`.
-. Download this https://s3-us-west-1.amazonaws.com/data.neo4j.com/admin-neo4j/movieDB.cypher[file]. This file contains the Cypher statements to load the database with movie data.
-. Invoke `cypher-shell` sending movieDB.cypher as input. You should see something like the following:
+image::AccessUserDatabase.png[AccessUserDatabase,width=1000,align=center]
 
-image::L03-Ex2-LoadMovieDB-cypher-shell.png[Ex2-LoadMovieDB-cypher-shell,width=1000,align=center]
+=== Sending Cypher statements to the `cypher-shell` session
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+When you log in to `cypher-shell`, you are connected to the default database, which is by default, _neo4j_.
 
-[start=11]
-. The database is now populated with the _Movie_ data. Log in to `cypher-shell` and execute a Cypher statement to retrieve data from the database, for example: `MATCH (p:Person) WHERE p.name='Tom Cruise' RETURN p.name, p.born;` You should see the following:
+You can use `cypher-shell` to populate the default database by sending pre-written Cypher statements to the database to execute.
 
-image::L03-Ex2-RetrieveData.png[Ex2-RetrieveData,width=1000,align=center]
+image::ImportCypher.png[ImportCypher,width=1000,align=center]
 
-[start=12]
-. Exit `cypher-shell`.
+Here we have download a file named *movieDB.cypher* that contains the Cypher statements to create the Movie graph.
+We simply use these Cypher statements as input when we start the `cypher-shell` session.
+They are automatically executed against the default database, _neo4j_.
+
+[.title.has-gold-background.has-team-background]
+== *Exercise #3: Using `cypher-shell`*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/03_ManagingNeo4jDatabases.adoc
+//endif::[]
+
+== Managing the lifecyle of databases
+
 
 == Renaming a Neo4j database
 
@@ -1400,3 +1379,4 @@ $( document ).ready(function() {
 ++++
 
 endif::backend-html5[]
+////

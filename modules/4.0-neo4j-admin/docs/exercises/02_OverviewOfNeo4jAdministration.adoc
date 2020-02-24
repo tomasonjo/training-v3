@@ -1,13 +1,6 @@
+:imagesdir: ../images
 
-= Neo4j 4.0 Administration Exercise Guide
-:doctype: book
-:toc: left
-:toclevels: 3
-:experimental:
-:imagesdir: ../../images
-
-
-== *Exercise 1: Setting up Neo4j Enterprise Edition EC2 instance for this course*
+== *Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course*
 
 We are using Neo4j Enterprise Edition for the hands-on exercises in this training, as some Neo4j features are not included in Community Edition.
 The OS that we will use for this training is Debian.
@@ -86,4 +79,6 @@ image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
 *Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
 
+=== Exercise Summary
 
+You have now confirmed that you can access the EC2 instance that you will use throughout this course to learn about Neo4j Administration.

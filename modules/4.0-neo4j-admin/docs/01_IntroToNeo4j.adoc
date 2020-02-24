@@ -108,7 +108,7 @@ Instead, we can use the data attached to a relationship to preemptively filter w
 A Neo4j database (graph) is composed of two elements: *nodes* and *relationships*.
 Neo4j allows you to identify nodes and relationships and add properties to them to further define the data in the graph.
 
-==== Nodes
+=== Nodes
 
 [.notes]
 --
@@ -120,7 +120,7 @@ A label can be used to group nodes of the same type. For example, you may want t
 
 image::Nodes.png[Nodes,width=400,align=center]
 
-==== Relationships
+=== Relationships
 
 [.notes]
 --
@@ -132,7 +132,7 @@ Although the relationship is created as directional, it can be queried in a non-
 
 image::Relationships.png[Relationships,width=400,align=center]
 
-==== Property graph model
+=== Property graph model
 
 The Neo4j database is a property graph.
 You can add **properties** to nodes and relationships to further enrich the graph model.
