@@ -44,7 +44,7 @@ subprojects {
       'presenter': 'Neo Technology',
       'twitter': 'neo4j',
       'email': 'info@neotechnology.com',
-      'neo4j-version': '3.4.4',
+      'neo4j-version': '4.0',
       'currentyear': '2020'
   }
 
