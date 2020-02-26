@@ -79,6 +79,6 @@ image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
 *Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
 
-=== Exercise Summary
+=== Exercise summary
 
 You have now confirmed that you can access the EC2 instance that you will use throughout this course to learn about Neo4j Administration.

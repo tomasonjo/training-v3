@@ -260,129 +260,164 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/03_ManagingNeo4jDatabases.adoc
 //endif::[]
 
-== Managing the lifecyle of databases
+== Creating databases
 
+In Neo4j 4.0 Enterprise Edition, a Neo4j instance can host multiple user databases. To create a database, you connect to a started Neo4j instance with `cypher-shell`.
 
-== Renaming a Neo4j database
+Here are the commands to create a database:
 
-By default, the Neo4j database (on Debian) is located in the */var/lib/neo4j/data/databases* folder. The database is represented by a subfolder with the default name, *graph.db*. You should never modify, copy, or move any files or folders at or under *graph.db*.
+----
+:USE system
+CREATE DATABASE <database-name>
+----
 
-A key file for a Neo4j instance is */etc/neo4j/neo4j.conf*. This file contains all settings used by the Neo4j instance at runtime. Here is a portion of the default *neo4j.conf* file that is installed with Neo4j. The setting for the name of the database is the property _dbms.active_database_, which, by default, is *graph.db*. Since this is the default configuration as installed, this setting is commented out in the configuration file because Neo4j uses the default at runtime.
+The database must not already exist (Check with the `SHOW DATABASES` command). This command creates the database and starts it.
 
-image::DefaultNeo4jConfig.png[DefaultNeo4jConfig,width=800,align=center]
+Here are some database naming rules:
 
-If you wanted to change the name of the Neo4j database, you could change the folder name *graph.db* to another name, but if you do so, you must uncomment the line in *neo4j.conf* for _dbms.active_database_ to match what you have renamed the database folder to. You should make this type of change in the configuration when the Neo4j instance is stopped.
+* Length must be between 3 and 63 characters.
+* The first character of a name must be an ASCII alphabetic character.
+* Subsequent characters must be ASCII alphabetic or numeric characters, dots or dashes; [a..z][0..9].-
+* Names are case-insensitive and normalized to lowercase.
+* Names that begin with an underscore and with the prefix system are reserved for internal use.
+* All of the above commands are executed as Cypher commands, and the database name is subject to the standard Cypher restrictions on valid identifiers. In particular, the - (dash) character is not legal in Cypher variables, and therefore names with dashes need to be escaped by enclosing with back-ticks. For example, CREATE DATABASE `main-db`.
 
-== Deleting a Neo4j database
+Once a database is created, you cannot rename it.
 
-You would want to delete a Neo4j database for a couple of reasons:
+=== Creating a database
 
-[square]
-* The database is no longer needed or usable and you want to recreate a fresh database.
-* The database is no longer needed and you want to remove it so that a new database can be used. To do this you would load a new database which you will learn about next in this module.
+Here we create a database named _myfirstdatabase_:
 
-To delete a Neo4j database used by a Neo4j instance you must:
+image::CreateDatabase.png[CreateDatabase,width=1000,align=center]
 
-. Stop the Neo4j instance.
-. Remove the folder for the active database.
+You can view the folder created for the database:
 
-For example, delete the *graph.db* database: 
+image::DatabaseFiles.png[DatabaseFiles,width=1000,align=center]
 
-`[sudo] rm -rf /var/lib/neo4j/data/databases/graph.db`
+== Starting and stopping a database
 
-After deleting the Neo4j database, if you were to start the Neo4j instance, it would recreate an empty database. If you want to copy an existing database for use with this Neo4j instance, you dump and load an existing database to be used as the active database. Then you can start the Neo4j instance. You will learn about dumping and loading a database next.
+When a database is started, it uses VM resources. If the application is not actively using a database, you can stop it or restart it as needed.
+
+image::StopStartDatabase.png[StopStartDatabase,width=1000,align=center]
+
+== Database configuration settings
+
+The *neo4j.conf* file contains settings related to the name of the default database.
+
+`dbms.default_database` specifies the default database clients will connect to when they do not specify a specific database.
+
+`dbms.max_databases` specifies the maximum number of databases the Neo4j instance will allow.
+
+image::ChangeDefaultDatabase.png[ChangeDefaultDatabase,width=1000,align=center]
+
+[NOTE]
+Whenever you make a change to the *neo4j.conf* file, you must restart the Neo4j instance. (`[sudo] systemctl restart neo4j`)
+
+== Dropping a database
+
+You drop a database as shown here where we drop the database _neo4j_.
+We can drop it because it is no longer the default database.
+You need not stop the database before your drop it, but dropping it is a permanent deletion of the database.
+
+image::DropDatabase.png[DropDatabase,width=1000,align=center]
+
+[.title.has-gold-background.has-team-background]
+== *Exercise #4: Adding and dropping a database*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/03_ManagingNeo4jDatabases.adoc
+//endif::[]
+
 
 == Copying a Neo4j database
 
-The structure of a Neo4j database is proprietary and could change from one release to another. You should [underline]#never# copy the database from one location in the filesystem/network to another location. You copy a Neo4j database by creating an offline backup.
+You or one of your application developers may want to copy a Neo4j database.
+Perhaps the developers are at a juncture in their development where they want to save what they have worked on thus far.
+Or perhaps they want to give a copy of the database to another developer to work with on a different system.
 
-To create an offline backup of a database that, perhaps you want to have as an additional copy or you want to give  to another user for use on their system, you must:
+The structure of a Neo4j database is proprietary and could change from one release to another.
+You should [underline]#never# copy the database files from one location in the filesystem/network to another location.
 
-. Stop the Neo4j instance.
+There are two ways that you can copy a database:
+
+. Create a copy within the same Neo4j instance.
+. Create a copy (dump file) that you will give to another developer to load into their Neo4j instance running on a different system.
+
+=== Copying a database within the same Neo4j instance
+
+To copy a database within the same Neo4j instance, the source database must be stopped.
+Additionally, the target database that you will be creating must not exist.
+
+You use the `neo4j-admin` tool to copy a database within your Neo4j instance. Here are the steps:
+
+. Ensure the Neo4j instance is started.
+. In `cypher-shell` stop the source database you want to copy.
+. Exit `cypher-shell`.
+. In a different terminal window, enter this:
+----
+sudo /usr/bin/neo4j-admin copy --from-database=<sourceDB> --to-database=<targetDB>
+----
+[NOTE] If you have neo4j credentials for your system, you need not use `sudo` here or need to change ownership to `neo4j:neo4j below`.
+[start=5]
+. Change the ownership to neo4j:neo4j recursively for the sub-folder for targetDB under the databases and transactions folders, for example:
+----
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/databases/<targetDB>
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/transactions/<targetDB>
+----
+[start=6]
+. Restart the Neo4j instance. (Note that if you did not have to change ownership, there is no need to restart Neo4j.)
+. In `cypher-shell' create <targetDB>.
+
+There are other options you can use to customize what is copied. See the _Neo4j Operations Manual_ for details.
+
+=== Creating a dump file from a database
+
+To create a dump file of a database, you must:
+
+. Ensure the Neo4j instance is started.
+. Stop the database you want to dump.
 . Ensure that the folder where you will dump the database exists.
-. Use the `dump` command of the `neo4j-admin` tool to create the dump file.
-. You can now copy the dump file between systems.
+[start=4]
+. Use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
+----
+sudo /usr/bin/neo4j-admin dump --database=<sourceDB> --to=<absolute path to dump file>
+----
+
+This will create a  dump file that can now be transferred between systems to create a new database on a different system.
+
+=== Creating a database from a dump file
 
 Then, if you want to create a database from any offline backup file to use for a Neo4j instance, you must:
 
-. Stop the Neo4j instance.
-. Determine what you will call the new database and adjust *neo4j.conf* to use this database as the active database.
-. Use the `load` command of the `neo4j-admin` tool to create the database from the dump file using the same name you specify in the *neo4j.conf* file.
-. Start the Neo4j instance.
+. Use the `load` command of the `neo4j-admin` tool to create the database from the dump file as follows:
+----
+sudo /usr/bin/neo4j-admin load --database=<targetDB> --from=<absolute path to dump file>
+----
+[NOTE] If you have neo4j credentials for your system, you need not use `sudo` here or need to change ownership to `neo4j:neo4j` below.
+[start=5]
+. Change the ownership to neo4j:neo4j recursively for the sub-folder for targetDB under the databases and transactions folders, for example:
+----
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/databases/<targetDB>
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/transactions/<targetDB>
+----
+[start=6]
+. Restart the Neo4j instance. (Note that if you did not have to change ownership, there is no need to restart Neo4j.)
+. In `cypher-shell' create <targetDB>.
 
-[NOTE]
-Dumping and loading a database is done when the Neo4j instance is stopped. Later in this module, you will learn about online backup and restore. Offline backup is typically done for initial setup and development purposes. Online backup and restore is done in a production environment.
+[.title.has-gold-background.has-team-background]
+== *Exercise #5: Copying databases*
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
 
-=== Creating and offline backup
-
-To create an offline backup, the Neo4j instance must be stopped.
-Here is how to use the `dump` command of the  `neo4j-admin` tool to dump a database to a file:
-
-`[sudo] neo4j-admin dump --database=db-folder --to=db-target-folder/db-dump-file`
-
-_where:_
-
-{set:cellbgcolor:white}
-[frame="none",,width="80%"cols="20,80",stripes=none]
-|===
-|_db-folder_
-|is the name of the folder representing source database to be dumped.
-|_db-target-folder_
-|is the folder in the filesystem where you want to place the dumped database. This folder must exist.
-|_db-dump-file_
-|is the name of the dump file that will be created.
-|===
-{set:cellbgcolor!}
-
-Here is an example where we have previously renamed the database to be _movie.db_ and we have created a folder named _dumps_. We dump the _movie.db_ using `neo4j-admin`:
-
-image::DumpDatabase.png[DumpDatabase,width=1000,align=center]
-
-After the dump file, _movie-dump_ is created, you can move it anywhere on the filesystem or network.
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-=== Creating a database from an offline backup
-
-Assuming that you have a dump file to use, you must first determine what the name of the target database will be. If you use an existing database name, the `load` command, can overwrite the database. If you want to create a new database, then you specify a database name that does not already exist. To perform the `load` command, the Neo4j instance must be stopped. In addition, the user:group permissions of the files created must be _neo4j:neo4j_. 
-
-[NOTE]
-You must either perform the `load` operation as the _neo4j_ user, or after the load, you must change the owner of all files and folders created to _neo4j:neo4j_.
-
-Here is how to use the `load` command of the  `neo4j-admin` tool to load a database from a file:
-
-`[sudo] neo4j-admin load --from=path/db-dump-file --database=db-folder [--force=true]`
-
-_where:_
-
-{set:cellbgcolor:white}
-[frame="none",,width="80%"cols="20,80",stripes=none]
-|===
-|_path_
-|is a folder in the filesystem where the dump file resides.
-|_db-dump-file_
-|is the file previously created with the `dump` command of `neo4j-admin`.
-|_db-folder_
-|is the name of the database that will be created. The database is overwritten if --force is specified as `true`.
-|===
-{set:cellbgcolor!}
-
-Here is an example where we load the contents of *movie-dump* into a database named *movie2.db*. 
-
-image::LoadDatabase.png[LoadDatabase,width=1000,align=center]
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+//ifdef::backend-htlm5[]
+//include::exercises/03_ManagingNeo4jDatabases.adoc
+//endif::[]
 
 ==== Modifying config for new database
 

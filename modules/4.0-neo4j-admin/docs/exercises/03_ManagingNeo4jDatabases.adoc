@@ -82,6 +82,10 @@ image::DataFiles.png[DataFiles,width=600,align=center]
 
 image::ViewLogFiles.png[ViewLogFiles,width=600,align=center]
 
+=== Exercise summary
+
+You have now gained experience starting and stopping a Neo4j instance as well as viewing its status and the log file for the instance.
+
 == *Exercise #3: Using `cypher-shell`*
 
 In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, change the password for the Neo4j instance, and use both the system and user database.
@@ -93,7 +97,6 @@ In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, cha
 
 === Exercise steps:
 
-
 . Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_.
     *Hint*: Type:  `/usr/bin/cypher-shell`.
 [start=2]
@@ -103,9 +106,19 @@ In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, cha
 . Use the system database to view all databases served by this Neo4j instance.
 image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
 [start=6]
-. Use the _neo4j_ database and enter this Cypher statement: `CREATE (:Person {name: '<your name'})'`
-. Enter this Cypher statement to retrieve the node you just created: `MATCH (p:Person) RETURN p;`
-. Enter this Cypher statement to delete the node you just created:  `MATCH (p:Person) DELETE p;`
+. Use the _neo4j_ database and enter this Cypher statement:
+  `CREATE (:Person {name: '<your name'})'`
+[start=7]
+. Enter this Cypher statement to retrieve the node you just created:
+----
+MATCH (p:Person) RETURN p;
+----
+[start=8]
+. Enter this Cypher statement to delete the node you just created:
+----
+MATCH (p:Person) DELETE p;
+----
+[start=9]
 . Create the directory, _files_ in your home directory.
 ----
 cd
@@ -118,7 +131,7 @@ cd files
 curl -O https://data.neo4j.com/admin-neo4j/movieDB.cypher
 ----
 [start=11]
-. Start `cypher-shell` using movieDB.cypher as input.
+. Invoke `cypher-shell` using *movieDB.cypher* as input.
 . Start `cypher-shell` and execute these statements to confirm that the data was loaded into the user database:
 ----
 CALL db.schema.visualization();
@@ -131,7 +144,139 @@ image::ConfirmMovieData.png[ConfirmMovieData,width=1000,align=center]
 [start=13]
 . Exit `cypher-shell`.
 
-=== Exercise Summary
+=== Exercise summary
 
 You have now successfully started a `cypher-shell` client session that connects to the Neo4j instance.
 You typically use `cypher-shell` to execute Cypher against a user database, but you can also use it to perform some management tasks against the Neo4j instance by accessing the system database.
+
+== *Exercise #4: Adding and dropping a database*
+
+In this exercise you will gain some experience with adding and dropping a database.
+
+=== Before you begin
+
+* Make sure you have a terminal window open to your EC2 instance for this course.
+* Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+. Connect to the Neo4j instance with `cypher-shell`.
+. Enter the command to show all databases.
+    *Hint*: You must use the system database.
+image::ShowDatabasesEx.png[ShowDatabasesEx,width=1000,align=center]
+[start=3]
+. Enter the command to create a database named _databaseone_.
+. Enter the command to show all databases.
+image::AddDatabaseOne.png[AddDatabaseOne,width=1000,align=center]
+[start=5]
+. Exit `cypher-shell`.
+. View the folders where the databases are located for this instance.
+image::AddDatabaseOneFiles.png[AddDatabaseOneFiles,width=1000,align=center]
+[start=7]
+. Modify the *neo4j.conf* file to use _databaseone_ as the default database.
+
+*Hint*: In the terminal window:
+----
+sudo vi /etc/neo4j/neo4j.conf
+Type "i" to enter input mode.
+Uncomment the dbms.default.database property.
+Replace neo4j with databaseone.
+Press ESC to get out of input mode.
+Type ":w" to write the changes to the file.
+Type ":q"
+----
+[start=8]
+. Restart the Neo4j instance.
+----
+sudo systemctl restart neo4j
+----
+[start=9]
+. Connect to the Neo4j instance with `cypher-shell`.
+. Enter the command to show all databases.
+. Drop the database _neo4j_.
+. Enter the command to show all databases.
+image::RemovedNeo4j.png[RemovedNeo4j,width=1000,align=center]
+[start=13]
+. Exit `cypher-shell`.
+
+=== Exercise summary
+
+You have now successfully added and dropped a database, as well as specifying a different database as the default database for clients.
+
+== *Exercise #5: Copying databases*
+
+In this exercise, you will use `neo4j-admin` to copy a database and create a database from a dump file.
+
+=== Before you begin
+
+* Make sure you have two terminal windows open to your EC2 instance for this course.
+* Ensure that the Neo4j instance is started.
+
+=== Exercise steps
+
+*Part 1*: First you will create a movies database that will be used in this exercise for copying.
+
+. In `cypher-shell` create a database named _movies_.
+. Exit out of `cypher-shell`.
+. Invoke `cypher-shell` using *movieDB.cypher* as input and specify _movies_ as the database.
+----
+/usr/bin/cypher-shell -u neo4j -p training-helps --database movies < ~/files/movieDB.cypher
+----
+[start=4]
+. In `cypher-shell` confirm that the database was loaded. It should contain 171 nodes:
+----
+MATCH (n) RETURN count(n);
+----
+
+*Part 2*: You will make a copy of the _movies_ database, _movies2_ for local use in the Neo4j instance.
+
+. In `cypher-shell` stop the _movies_ database.
+. Exit `cypher-shell`.
+. In a different terminal window, enter this:
+----
+sudo /usr/bin/neo4j-admin copy --from-database=movies --to-database=movies2
+----
+[start=5]
+. Change the ownership to neo4j:neo4j recursively for the sub-folder for _movies2_ under the *databases* and *transactions*
+folders, for example:
+----
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/databases/movies2
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/transactions/movies2
+----
+[start=6]
+. Restart the Neo4j instance.
+. In `cypher-shell' create _movies2_.
+. Confirm that this _movies2_ database has 171 nodes.
+----
+MATCH (n) RETURN count(n);
+----
+
+*Part 3*: You will dump the _movies_ database.
+
+. Use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
+----
+sudo /usr/bin/neo4j-admin dump --database=movies --to=/home/ubuntu/files/movies.dump
+----
+[start=2]
+. Confirm that the *movies.dump* file was created.
+
+*Part 4*: You use the dump file to create a database.
+
+. Use the `load` command of the `neo4j-admin` tool to create the database, _movies3_ from the dump file as follows:
+----
+sudo /usr/bin/neo4j-admin load --database=movies3 --from=home/ubuntu/files/movies.dump
+----
+[start=2]
+. Change the ownership to neo4j:neo4j recursively for the sub-folder for _movies3_ under the databases and transactions folders, for example:
+----
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/databases/movies3
+sudo chown -R neo4j:neo4j /var/lib/neo4j/data/transactions/movies3
+----
+[start=3]
+. Restart the Neo4j instance.
+. In `cypher-shell' create _movies3_.
+. Confirm that this _movies3_ database has 171 nodes.
+
+=== Exercise summary
+
+You have now gained experience copying a database within the Neo4j instance and also creating a dump file that can be used to create a database on a different system.
