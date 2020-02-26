@@ -149,9 +149,9 @@ image::ConfirmMovieData.png[ConfirmMovieData,width=1000,align=center]
 You have now successfully started a `cypher-shell` client session that connects to the Neo4j instance.
 You typically use `cypher-shell` to execute Cypher against a user database, but you can also use it to perform some management tasks against the Neo4j instance by accessing the system database.
 
-== *Exercise #4: Adding and dropping a database*
+== *Exercise #4: Creating and deleting a database*
 
-In this exercise you will gain some experience with adding and dropping a database.
+In this exercise you will gain some experience with creating and deleting a database.
 
 === Before you begin
 
@@ -198,6 +198,11 @@ sudo systemctl restart neo4j
 image::RemovedNeo4j.png[RemovedNeo4j,width=1000,align=center]
 [start=13]
 . Exit `cypher-shell`.
+
+=== Taking it further
+
+. Try resetting a database that has data in it.
+. Try conditionally creating a database.
 
 === Exercise summary
 
@@ -264,7 +269,7 @@ sudo /usr/bin/neo4j-admin dump --database=movies --to=/home/ubuntu/files/movies.
 
 . Use the `load` command of the `neo4j-admin` tool to create the database, _movies3_ from the dump file as follows:
 ----
-sudo /usr/bin/neo4j-admin load --database=movies3 --from=home/ubuntu/files/movies.dump
+sudo /usr/bin/neo4j-admin load --database=movies3 --from=/home/ubuntu/files/movies.dump
 ----
 [start=2]
 . Change the ownership to neo4j:neo4j recursively for the sub-folder for _movies3_ under the databases and transactions folders, for example:
@@ -274,9 +279,54 @@ sudo chown -R neo4j:neo4j /var/lib/neo4j/data/transactions/movies3
 ----
 [start=3]
 . Restart the Neo4j instance.
+. Ensure that it starts with no errors.
 . In `cypher-shell' create _movies3_.
 . Confirm that this _movies3_ database has 171 nodes.
 
 === Exercise summary
 
 You have now gained experience copying a database within the Neo4j instance and also creating a dump file that can be used to create a database on a different system.
+
+== *Exercise #6: Modifying the location of the databases*
+
+In this Exercise, you will set up a different location for the databases in your local filesystem and start the Neo4j instance using the database at this new location.
+
+*Before you begin*
+
+. You should have created the dump file for the movie database in the *~/files directory*.
+. Stop the Neo4j instance.
+
+*Exercise steps*:
+
+. Open a terminal on your system.
+. Create a folder named *~/neo4j-databases*. This is the folder where the databases will reside which is different from the default location used by Neo4j.
+. Make sure that this *neo4j-databases* folder is owned by _neo4j:neo4j_. For example, navigate to the *~/* folder and enter `sudo chown neo4j:neo4j neo4j-databases`.
+. Modify the *neo4j.conf* file to use */home/ubuntu/neo4j-databases* as the data directory. Also ensure that there the default database is maindb. Your *neo4j.conf* file should look something like this:
+
+image::BestPracticeConfigChangesAtEnd.png[BestPracticeConfigChangesAtEnd,width=900,align=center]
+
+[start=5]
+. Start the Neo4j instance.
+. Examine the log file to ensure that the instance started without errors.
+. Examine the files in the */home/ubuntu/neo4j-databases* location. The instance should have created the *databases* and *transactions* folders. The *databases* folder should look as follows:
+
+image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=center]
+
+[start=8]
+. Connect to the _maindb_ database using `cypher-shell`. Did you need to change the password?
+. Exit `cypher-shell`.
+. Use the `load` command of the `neo4j-admin` tool to create the database, _movies_ from the dump file as follows:
+----
+sudo /usr/bin/neo4j-admin load --database=movies --from=/home/ubuntu/files/movies.dump
+----
+[start=2]
+. Change the ownership to neo4j:neo4j recursively for the sub-folder for _movies_ under the *databases* and *transactions* folders, for example:
+----
+sudo chown -R neo4j:neo4j /home/ubuntu/neo4j-databases/databases/movies
+sudo chown -R neo4j:neo4j /home/ubuntu/neo4j-databases/transactions/movies
+----
+[start=3]
+. Restart the Neo4j instance.
+. Ensure that it starts with no errors.
+. In `cypher-shell' create _movies_.
+. Confirm that this _movies_ database has 171 nodes.

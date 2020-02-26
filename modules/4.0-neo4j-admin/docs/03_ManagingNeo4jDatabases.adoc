@@ -71,15 +71,21 @@ You will also want to control when the Neo4j instance starts as you will perform
 
 When Neo4j is installed as a Debian package, the _neo4j_ service is disabled. On most platforms, the Neo4j instance is not automatically started.
 
-=== Post-install: Changing the _neo4j_ password (non-Debian)
+=== Post-install: Changing the _neo4j_ password
 
-After you install Neo4j and before you start the Neo4j instance, a best practice is to change the default password for the user _neo4j_. You do this on all platforms, except when you have installed a Debian package. You will learn about changing the _neo4j_ password on Debian later in this module.
+After you install Neo4j and before you start the Neo4j instance, a best practice is to change the default password for the user _neo4j_.
+You do this on all platforms, except when you have installed a Debian package.
+You will learn about changing the _neo4j_ password on Debian later in this module.
 
 You change the password for the _neo4j_ user by executing the following command:
 
 `[sudo] bin/neo4j-admin set-initial-password newPassword`
 
 where _newPassword_ is a password you will remember.
+
+[NOTE]
+If at some point you have forgotten the admin password for your installation or you need to change it, you can reset the password by following the steps
+https://neo4j.com/docs/operations-manual/4.0/configuration/password-and-user-recovery/[here]
 
 === Post-install: Debian
 
@@ -300,7 +306,7 @@ When a database is started, it uses VM resources. If the application is not acti
 
 image::StopStartDatabase.png[StopStartDatabase,width=1000,align=center]
 
-== Database configuration settings
+== Initial database configuration settings
 
 The *neo4j.conf* file contains settings related to the name of the default database.
 
@@ -312,17 +318,40 @@ image::ChangeDefaultDatabase.png[ChangeDefaultDatabase,width=1000,align=center]
 
 [NOTE]
 Whenever you make a change to the *neo4j.conf* file, you must restart the Neo4j instance. (`[sudo] systemctl restart neo4j`)
+A best practice is to examine the log file for the Neo4j instance after you have made any configuration changes to ensure that the instance starts with no errors.
 
-== Dropping a database
+== Deleting a database
 
-You drop a database as shown here where we drop the database _neo4j_.
+You delete a database as shown here where we drop the database _neo4j_.
 We can drop it because it is no longer the default database.
 You need not stop the database before your drop it, but dropping it is a permanent deletion of the database.
 
 image::DropDatabase.png[DropDatabase,width=1000,align=center]
 
+== Resetting a database
+
+Suppose you have a database that has been populated with data, constraints, and/or indexes.
+You want to reuse the database and reset it to be empty with no data, constraints, or indexes.
+One way that you can achieve this is to drop the database and then create it again.
+Another way that you can do is is to use the following command:
+
+----
+CREATE OR REPLACE <database>;
+----
+
+== Conditionally creating a database
+
+If you are scripting the creation of databases, you can also create a database if it does not exist as follows:
+
+----
+CREATE <database> IF NOT EXISTS;
+----
+
+[NOTE]
+You cannot use `CREATE OR REPLACE` together with `IF NOT EXISTS`.
+
 [.title.has-gold-background.has-team-background]
-== *Exercise #4: Adding and dropping a database*
+== *Exercise #4: Creating and deleting a database*
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.
@@ -419,190 +448,56 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/03_ManagingNeo4jDatabases.adoc
 //endif::[]
 
-==== Modifying config for new database
-
-In order to access this newly created and loaded database, we must modify *neo4j.conf* to use *movie2.db* as the active database before starting the Neo4j instance:
-
-image::Movie2ActiveDatabase.png[Movie2ActiveDatabase,width=1000,align=center]
-
-In addition, we must change the owner:group for the database folder and its sub-folders to _neo4j:neo4j_ before we start the Neo4j instance.
-
-A best practice is to examine the log file for the Neo4j instance after you have made any configuration changes to ensure that the instance starts with no errors.
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-=== *Exercise #3: Copying a database*
-
-In this Exercise, you will make a copy of your active database that has the movie data in it and use the dump file to create a database.
-
-*Before you begin*
-
-You should have loaded the *graph.db* database with the movie data (Exercise #2) and stopped the Neo4j instance.
-
-*Exercise steps*:
-
-. Open a terminal on your system.
-. Create a folder named */usr/local/work*.
-. Use the `neo4j-admin` script to dump the *graph.db* database to the *work* folder. You should do something like this:
-
-image::L03-Ex3-movie-dump.png[Ex3-movie-dump,width=1000,align=center]
-
-[start=4]
-. Notice that this dump file is simply a file that can be copied to any location.
-. Delete the *graph.db* database by removing the *graph.db* folder and its subfolders.
-. Use the `neo4j-admin` script to load the database from the dump file you just created. Name the database *movie.db*.  You should do something like this:
-
-image::L03-Ex3-movie-load.png[Ex3-movie-load,width=1000,align=center]
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-[start=7]
-. Modify *neo4j.conf* to use *movie.db* as the active database.
-
-image::L03-Ex3-movie-cfg.png[Ex3-movie-cfg,width=800,align=center]
-
-[start=8]
-. If you did not perform the load as the user _neo4j_, you must change the owner:group of all files and folders under *movie.db* to be _neo4j:neo4j_. For example, change directory to the *movie.db* folder and  then enter the command: `[sudo] chown -R neo4j:neo4j movie.db`  
-This will recursively change the owner and group to all files and folders including and under the *movie.db* folder.
-
-[start=9]
-. Start the Neo4j instance.
-. Examine the log file to ensure that the instance started with no errors.
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-[start=11]
-. Access the database using `cypher-shell`. Can you see the movie data in the database?
-
-image::L03-Ex3-AccessDB.png[Ex3-AccessDB,width=800,align=center]
 
 == Modifying the location of the database
 
-If you do not want the database used by the Neo4j instance to reside in the same location as the Neo4j installation, you can modify its location in the *neo4j.conf* file. If you specify a new location for the data, it must exist in the filesystem and the folder must be owned by _neo4j:neo4j_.
+If you do not want the databases used by the Neo4j instance to reside in the same location as the Neo4j installation, you can modify its location in the *neo4j.conf* file. If you specify a new location for the data, it must exist in the filesystem and the folder must be owned by _neo4j:neo4j_.
 
 Here we have specified a new location for the data in the configuration file:
 
-image::ModifyDataLocation.png[ModifyDataLocation,width=800,align=center]
+image::ChangeDatabaseDirectory.png[ChangeDatabaseDirectory,width=800,align=center]
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+In addition, we have specified mainDB as the default database.
+
+=== Best practice for configuration modifications
+
+Here is a best practice you should follow when managing a Neo4j installation.
+It is easier to place all changed property values at the end of the *neo4j.conf* file.
+That way, you can easily see what non-default values you have configured.
+
+Here is an example:
+
+image::BestPracticeConfigChangesAtEnd.png[BestPracticeConfigChangesAtEnd,width=800,align=center]
 
 === Starting Neo4j instance with a new location
 
-We ensure that the location for the data exists and then we can start the Neo4j instance. If this is the first time Neo4j has been started for this location, a new database named *graph.db* will be created. This is because we are using the default database name in the configuration file.
+After you have modified the *neo4j.conf* file with the new location for the databases, you must:
 
-image::UsingNewDataLocation.png[UsingNewDataLocation,width=800,align=center]
+. Ensure the directory exists.
+. Change the owner of the directory to be neo4j.
+. Start or restart the Neo4j instance.
+. Confirm that the instance started with no errors.
 
-If you have an existing database that you want to reside in a different location for the Neo4j instance, remember that you must dump and load the database to safely copy it to the new location.
+image::Neo4jStarted-newLocation1.png[Neo4jStarted-newLocation1,width=800,align=center]
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+When you start the Neo4j instance using a different location for the databases, it first creates and starts a database named whatever you have specified as the default database.
+If you did not specify the default database in the configuration file, it will create a database named _neo4j_.
 
-=== Using a different location for the database
+Here are the new databases in the new location:
 
-If you are starting the Neo4j instance with a new location and do not want to use the default *graph.db* database, you must follow these steps to ensure that the folders for the database are set up properly:
+image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=center]
 
-. Specify the new location in the configuration file, but do not specify the active database name.
-. Start or restart the Neo4j instance. A new *graph.db* folder will be created as well as the *dbms* folder required by the instance (contains important authentication information).
-. Examine the log file to ensure that it started without errors.
-. Stop the Neo4j instance.
-. Specify the name of the active database in the configuration file.
-. Load the data into the database name that will be the active database. 
-. Ensure that the database folder and its subfolders are owned by  _neo4j:neo4j_.
-. Start the Neo4j instance.
-. Examine the log file to ensure it started without errors.
-. Optionally, you can remove the *graph.db* folder as you will be working with a different database you loaded.
+If you have existing databases that you want to reside in a different location for the Neo4j instance, remember that you must dump and load the databases to safely copy them to the new location.
 
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
+==== Password change required
 
-=== *Exercise #4: Modifying the location of the database*
+Just as you needed to change the password for the admin user, neo4j the first time you accessed a database, you must do the same here:
 
-In this Exercise, you will set up a different location for the database in your local filesystem and start the Neo4j instance using the database at this new location.
+image::passwordChangeNewLocation.png[passwordChangeNewLocation,width=800,align=center]
 
-*Before you begin*
+[.title.has-gold-background.has-team-background]
 
-. You should have created the dump file for the movie database (Exercise #3).
-. Stop the Neo4j instance.
-
-*Exercise steps*:
-
-. Open a terminal on your system.
-. Create a folder named */usr/local/data*. This is the folder where the database will reside which is different from the default location used by Neo4j. 
-. Make sure that this *data* folder is owned by _neo4j:neo4j_. For example, navigate to the */usr/local* folder and enter `[sudo ]chown neo4j:neo4j data`. 
-. Modify the *neo4j.conf* file to use */usr/local/data* as the data directory. Also ensure that there is no active database specified. Your *neo4j.conf* file should look something like this:
-
-image::L03-Ex4-LocationConfig.png[Ex4-LocationConfig,width=900,align=center]
-
-[start=5]
-. Start the Neo4j instance.
-. Examine the log file to ensure that the instance started without errors.
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-[start=7]
-. Examine the files in the */usr/local/data* location. The instance should have created the *databases* and *dbms* folders. They should look as follows:
-
-image::L03-Ex4-LocationInUse.png[Ex4-LocationInUse,width=800,align=center]
-
-[start=8]
-. Stop the Neo4j instance.
-. Modify the *neo4j.conf* file to use *movie3.db* as the active database. Your *neo4j.conf* file should look something like this:
-
-image::L03-Ex4-ActiveDatabase.png[Ex4-ActiveDatabase,width=900,align=center]
-
-[start=10]
-. Use the `neo4j-admin` script to load the database from the dump file you created in Exercise 3. Name the database *movie3.db* You should do something like this:
-
-image::L03-Ex4-LoadDB.png[Ex4-LoadDB,width=1000,align=center]
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-[start=11]
-. Ensure that all files and folders including and under *movie3.db* are owned by _neo4j:neo4j_. For example, change directory to the *databases* folder and  then enter the command: `[sudo] chown -R neo4j:neo4j movie3.db` This will recursively change the owner and group to all files and folders under *movie3.db*.
-
-[start=12]
-. Start the Neo4j instance.
-. Examine the log file to ensure that no errors occurred.
-. Access the database using `cypher-shell`. Do you get an authentication error?  This is because the database is now located in a different location and the default credentials of _neo4j/neo4j_ are used.
-
-image::L03-Ex4-Access.png[Ex4-Access,width=800,align=center]
-
-[start=15]
-. Enter the Cypher statement to change the password: `CALL dbms.changePassword('newPassword');`
-. Enter a Cypher statement to retrieve some data: `MATCH (p:Person) WHERE p.name='Meg Ryan' RETURN p.name, p.born;`
-
-ifdef::backend-pdf[]
-// force page break
-<<<
-endif::backend-pdf[]
-
-[start=17]
-. Exit `cypher-shell`.
-
-image::L03-Ex4-Access2.png[Ex4-Access2,width=700,align=center]
-
+// Elaine continue here
 == Checking the consistency of a database
 
 A database's consistency could be compromised if a software or hardware failure has occurred that affects the Neo4j instance. You will learn later in this module about live backups, but if you have reason to believe that a specific database has been corrupted,  you can perform a consistency check on it.
