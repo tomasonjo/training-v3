@@ -1,9 +1,14 @@
-<%#encoding:UTF-8%><%
-slevel = @level.zero? && @special ? 1 : @level
-if (checklist = (option? :checklist) ? 'checklist' : nil)
+<%#encoding:UTF-8%>
+<%
+if (checklist = option?(:checklist) ? 'checklist' : nil)
   if option? :interactive
-    marker_checked = '<input type="checkbox" data-item-complete="1" checked>'
-    marker_unchecked = '<input type="checkbox" data-item-complete="0">'
+    if roles.include?('answers')
+      marker_checked = '<input type="checkbox" data-item-complete="0">'
+      marker_unchecked = '<input type="checkbox" data-item-complete="0">'
+    else
+      marker_checked = '<input type="checkbox" checked>'
+      marker_unchecked = '<input type="checkbox">'
+    end
   else
     if @document.attr? :icons, 'font'
       marker_checked = '<i class="icon-check"></i>'
@@ -13,21 +18,34 @@ if (checklist = (option? :checklist) ? 'checklist' : nil)
       marker_unchecked = '&#10063;'
     end
   end
-end %><div<%= @id && %( id="#{@id}") %> class="<%= ['ulist',checklist,@style,role].compact * ' ' %>"><%
-if title? %>
-<div class="title"><%= title %></div><%
-end %>
-<ul<%= (style_class = checklist || @style) ? %( class="#{style_class}") : nil %>><%
-items.each do |item| %>
+end
+%>
+<div<%= @id && %( id="#{@id}") %> class="<%= ['ulist',checklist,@style,role].compact * ' ' %>">
+<% if title? %>
+<div class="title"><%= title %></div>
+<% end %>
+<ul<%= (style_class = checklist || @style) ? %( class="#{style_class}") : nil %>>
+<% items.each do |item| %>
 <li>
+<% if checklist && item.attr?(:checkbox) %>
 <%
-  if checklist && (item.attr? :checkbox) %><%= %(#{(item.attr? :checked) ? marker_checked : marker_unchecked} #{item.text}) %><%
-  else %><%= item.text %><%
-  end %><%
-  if item.blocks? %>
-<%= item.content %><%
-  end %>
-</li><%
-end %>
+  if roles.include?('answers')
+    if item.attr?(:checked)
+      item_text = "<span class=\"required-answer\">#{item.text}</span>"
+    else
+      item_text = "<span class=\"false-answer\">#{item.text}</span>"
+    end
+  else
+    item_text = item.text
+  end
+%>
+<%= %(#{item.attr?(:checked) ? marker_checked : marker_unchecked} #{item_text}) %>
+<% else %>
+<%= item.text %>
+<% end %><% if item.blocks? %>
+<%= item.content %>
+<% end %>
+</li>
+<% end %>
 </ul>
 </div>
