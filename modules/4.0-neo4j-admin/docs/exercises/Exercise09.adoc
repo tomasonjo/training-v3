@@ -1,0 +1,57 @@
+:imagesdir: ../images
+
+== *Exercise #9: Install a plugin*
+
+
+In this Exercise, you will install the Spatial library for use by your Neo4j instance and you will create and execute a script to report all of the procedures available to the Neo4j instance.
+
+*Before you begin*:
+
+. Stop the Neo4j instance.
+. Make sure you have a terminal window open for executing test commands.
+
+*Exercise steps*:
+
+. In a Web browser, go to the GitHub repository for the https://github.com/neo4j-contrib/spatial[Neo4j Spacial Library].
+. On the main page for this repository, find the latest release of the library that is compatible with your version of Neo4j Enterprise Edition.
+. Download the already-built *.jar* file into the */var/lib/neo4j/plugins* directory.
+. Ensure that the file size is correct and that the file name ends with *.jar*.
+. Change the owner of the *.jar* file to _neo4j:neo4j_ and add execute permissions to the file.
+. Restart the Neo4j instance.
+. Follow the steps on the GitHub page for testing the library.
+
+For example, you should see the following in the repository main page:
+
+image::L03-Ex7-GetSpatialLibrary.png[Ex7-GetSpatialLibrary,width=800,align=center]
+
+ifdef::backend-pdf[]
+// force page break
+<<<
+endif::backend-pdf[]
+
+Here is how you download the *.jar* file into the */var/lib/neo4j/plugins* directory. You should confirm that the file size is correct and that the owner is _neo4j:neo4j_ with execute permissions.
+
+image::L03-Ex7-SpatialLibrary.png[Ex7-SpatialLibrary,width=800,align=center]
+
+
+Here is what you should see when you execute the first `curl` command:
+
+image::L03-Ex7-SpatialQuery1.png[Ex7-SpatialQuery1,width=1000,align=center]
+
+Here is what you should see when you execute the second `curl` command:
+
+image::L03-Ex7-SpatialQuery2.png[Ex7-SpatialQuery2,width=1000,align=center]
+
+[start=8]
+. In the */usr/local/work* directory, create a script named *ListProcedures.sh* that will write the list of procedures available to the Neo4j instance to the */usr/local/work/Procedures.txt* file.
+
+ifdef::backend-pdf[]
+// force page break
+<<<
+endif::backend-pdf[]
+
+[start=9]
+. Run the *ListProcedures.sh* script and examine the contents to also verify that the plugin has been installed. The *Procedures.txt* file should contain these items:
+
+image::L03-Ex7-SpatialLibraryLoaded.png[Ex7-SpatialLibraryLoaded,width=600,align=center]
+

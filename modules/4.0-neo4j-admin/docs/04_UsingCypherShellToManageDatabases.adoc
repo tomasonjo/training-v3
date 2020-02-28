@@ -1,0 +1,293 @@
+
+= Using cypher-shell to Manage Databases
+:doctype: book
+:toc: left
+:toclevels: 3
+:prevsecttitle: Managing a Neo4j Instance
+:prevsect: 3
+:currsect: 4
+:nextsecttitle: Copying Databases
+:nextsect: 5
+:experimental:
+:imagesdir: ../images
+:manual: http://neo4j.com/docs/operations-manual/4.0
+
+////
+ifdef::backend-html5[]
+
+include::scripts.txt[]
+
+endif::backend-html5[]
+////
+
+== About this module
+
+Next, you will learn how to perform some administrative tasks using the `cypher-shell` tool.
+
+At the end of this module, you should be able to:
+[square]
+* Create a Neo4j database.
+* Start a Neo4j database.
+* Use Cypher to load a Neo4j database.
+* Stop a Neo4j database.
+* Show the databases defined for the Neo4j instance.
+
+== Using `cypher-shell`
+
+`cypher-shell` enables you to access the Neo4j database from a terminal window.  You simply log into the database using `cypher-shell` with your credentials:
+
+`/usr/bin/cypher-shell -u <username> -p <password>`
+
+Once authenticated, you enter Cypher statements to execute just as you would in a Neo4j Browser session.
+One caveat with `cypher-shell`, however is that all Cypher commands [.underline]#must# end with `;`.
+You exit `cypher-shell` with the command `:exit`.
+
+=== Example: Using `cypher-shell`
+
+Here is an example showing that we can successfully log in to the database for the Neo4j instance, providing the default credentials _neo4j/neo4j_:
+Since this is the first login to the database, you must change the password from _neo4j_ to a password you will remember.
+
+image::InitialLogin-cypher-shell.png[InitialLogin-cypher-shell,width=800,align=center]
+
+In this example we changed the password to _training-helps_.
+
+When you are done with `cypher-shell`, you enter `:exit` to exit.
+
+[NOTE]
+If you set the environment variables NEO4J_USER and NEO4J_PASSWORD with their respective values, then you need not enter your credentials when logging into `cypher-shell`.
+
+
+=== Example: Using `cypher-shell` providing credentials as arguments
+
+You can also specify the username and password at the command level to use `cypher-shell` as arguments .
+
+image::Cypher-shell-withParms.png[Cypher-shell-withParms,width=800,align=center]
+
+== Accessing the system database
+
+After you have successfully logged in to the Neo4j instance using `cypher-shell`, you can execute system commands against the Neo4j instance.
+By default, you are connected to the default Neo4j database, _neo4j_, which is a user database.
+
+System commands use the _system_ database and are primarily used to:
+
+* View the status of the databases being served by the Neo4j instance
+* Create or drop a user database.
+* Start or stop a user database.
+
+To access the system database, you enter `:USE system`.
+
+image::UseSystem.png[UseSystem,width=1000,align=center]
+
+Notice that the prompt neo4j@system tells us that all commands we enter will be against the system database.
+
+=== Viewing databases for the Neo4j instance
+
+Using the _system_ database, you can view all of the databases served by this Neo4j instance by entering the command `SHOW DATABASES;`:
+
+[NOTE] For all commands and cypher statements, you must end them with the `;` character.
+
+image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
+
+Here we see that this Neo4j instance that we have connected to has the system database and the neo4j database, which is the default name of the user database.
+A Neo4j instance has one system database and any number of user databases.
+After you have created more than one user database, you can configure any single user database as the default database.
+
+=== Selecting the user database to access
+
+In a client session, you can only access a single user database at a time, even though multiple databases may be online (started).
+You use the :USE command to select the user database to connect to.
+
+Here we switch back to the default, _neo4j_ user database by specifying `:USE neo4j`.
+Then you can create or access the data in this user database.
+For example, we access the user database by creating a node with the label, _Person_ and a _name_ of "John Doe", retrieving it, and then deleting it.
+
+image::AccessUserDatabase.png[AccessUserDatabase,width=1000,align=center]
+
+=== Sending Cypher statements to the `cypher-shell` session
+
+When you log in to `cypher-shell`, you are connected to the default database, which is by default, _neo4j_.
+
+You can use `cypher-shell` to populate the default database by sending pre-written Cypher statements to the database to execute.
+
+image::ImportCypher.png[ImportCypher,width=1000,align=center]
+
+Here we have download a file named *movieDB.cypher* that contains the Cypher statements to create the Movie graph.
+We simply use these Cypher statements as input when we start the `cypher-shell` session.
+They are automatically executed against the default database, _neo4j_.
+
+[.title.has-gold-background.has-team-background]
+== *Exercise #3: Using `cypher-shell`*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/Exercise03.adoc
+//endif::[]
+
+== Creating databases
+
+In Neo4j 4.0 Enterprise Edition, a Neo4j instance can host multiple user databases. To create a database, you connect to a started Neo4j instance with `cypher-shell`.
+
+Here are the commands to create a database:
+
+----
+:USE system
+CREATE DATABASE <database-name>
+----
+
+The database must not already exist (Check with the `SHOW DATABASES` command). This command creates the database and starts it.
+
+Here are some database naming rules:
+
+* Length must be between 3 and 63 characters.
+* The first character of a name must be an ASCII alphabetic character.
+* Subsequent characters must be ASCII alphabetic or numeric characters, dots or dashes; [a..z][0..9].-
+* Names are case-insensitive and normalized to lowercase.
+* Names that begin with an underscore and with the prefix system are reserved for internal use.
+* All of the above commands are executed as Cypher commands, and the database name is subject to the standard Cypher restrictions on valid identifiers. In particular, the - (dash) character is not legal in Cypher variables, and therefore names with dashes need to be escaped by enclosing with back-ticks. For example, CREATE DATABASE `main-db`.
+
+Once a database is created, you cannot rename it.
+
+=== Creating a database
+
+Here we create a database named _myfirstdatabase_:
+
+image::CreateDatabase.png[CreateDatabase,width=1000,align=center]
+
+You can view the directory created for the database:
+
+image::DatabaseFiles.png[DatabaseFiles,width=1000,align=center]
+
+== Starting and stopping a database
+
+When a database is started, it uses VM resources. If the application is not actively using a database, you can stop it or restart it as needed.
+
+image::StopStartDatabase.png[StopStartDatabase,width=1000,align=center]
+
+== Initial database configuration settings
+
+The *neo4j.conf* file contains settings related to the name of the default database.
+
+`dbms.default_database` specifies the default database clients will connect to when they do not specify a specific database.
+
+`dbms.max_databases` specifies the maximum number of databases the Neo4j instance will allow.
+
+image::ChangeDefaultDatabase.png[ChangeDefaultDatabase,width=1000,align=center]
+
+[NOTE]
+Whenever you make a change to the *neo4j.conf* file, you must restart the Neo4j instance. (`[sudo] systemctl restart neo4j`)
+A best practice is to examine the log file for the Neo4j instance after you have made any configuration changes to ensure that the instance starts with no errors.
+
+== Deleting a database
+
+You delete a database as shown here where we drop the database _neo4j_.
+We can drop it because it is no longer the default database.
+You need not stop the database before your drop it, but dropping it is a permanent deletion of the database.
+
+image::DropDatabase.png[DropDatabase,width=1000,align=center]
+
+== Resetting a database
+
+Suppose you have a database that has been populated with data, constraints, and/or indexes.
+You want to reuse the database and reset it to be empty with no data, constraints, or indexes.
+One way that you can achieve this is to drop the database and then create it again.
+Another way that you can do is is to use the following command:
+
+----
+CREATE OR REPLACE <database>;
+----
+
+== Conditionally creating a database
+
+If you are scripting the creation of databases, you can also create a database if it does not exist as follows:
+
+----
+CREATE <database> IF NOT EXISTS;
+----
+
+[NOTE]
+You cannot use `CREATE OR REPLACE` together with `IF NOT EXISTS`.
+
+[.title.has-gold-background.has-team-background]
+== *Exercise #4: Creating and deleting a database*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/Exercise04.adoc
+//endif::[]
+
+
+//[#module-3.quiz]
+////
+== Check your understanding
+
+=== Question 1
+
+Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+
+Select the correct answer.
+[%interactive]
+- [ ] [.false-answer]#`neo4j-admin create-database`#
+- [ ] [.false-answer]#`neo4j-admin initialize`#
+- [ ] [.false-answer]#`neo4j create-database`#
+- [ ] [.required-answer]#`neo4j start`#
+
+=== Question 2
+
+Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+
+Select the correct answers.
+[%interactive]
+- [ ] [.required-answer]#Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.#
+- [ ] [.required-answer]#Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.#
+- [ ] [.false-answer]#Run `neo4j-admin rename graph.db ABCRecommendations.db`.#
+- [ ] [.false-answer]#Run `neo4j-admin move graph.db ABCRecommendations.db`.#
+
+=== Question 3
+
+How do you copy a database that you want to give to another user?
+
+Select the correct answer.
+[%interactive]
+- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.#
+- [ ] [.false-answer]#With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.#
+- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.#
+- [ ] [.required-answer]#With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.#
+
+////
+== Summary
+
+You should now be able to:
+
+[square]
+* Create a Neo4j database.
+* Start a Neo4j database.
+* Use Cypher to load a Neo4j database.
+* Stop a Neo4j database.
+* Show the databases defined for the Neo4j instance.
+
+////
+== Grade Quiz and Continue 
+
+++++
+<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
+++++
+
+ifdef::backend-html5[]
+
+include::scripts-end.txt[]
+++++
+<script>
+$( document ).ready(function() {
+  Intercom('trackEvent','training-admin-view-part3');
+});
+</script>
+++++
+
+endif::backend-html5[]
+////

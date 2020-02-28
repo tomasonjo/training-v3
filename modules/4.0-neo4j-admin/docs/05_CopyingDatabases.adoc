@@ -1,0 +1,172 @@
+
+= Copying Databases
+:doctype: book
+:toc: left
+:toclevels: 3
+:prevsecttitle: Using cypher-shell to Manage Databases
+:prevsect: 4
+:currsect: 5
+:nextsecttitle: Changing the Database Location
+:nextsect: 6
+:experimental:
+:imagesdir: ../images
+:manual: http://neo4j.com/docs/operations-manual/4.0
+
+////
+ifdef::backend-html5[]
+
+include::scripts.txt[]
+
+endif::backend-html5[]
+////
+
+== About this module
+
+Next, you will learn the ways that  you can copy a database.
+
+At the end of this module, you should be able to:
+[square]
+* Copy a Neo4j database using the copy command.
+* Create a dump file for a database.
+* Load a dump file to create a database.
+
+== Copying a Neo4j database
+
+You or one of your application developers may want to copy a Neo4j database.
+Perhaps the developers are at a juncture in their development where they want to save what they have worked on thus far.
+Or perhaps they want to give a copy of the database to another developer to work with on a different system.
+
+The structure of a Neo4j database is proprietary and could change from one release to another.
+You should [underline]#never# copy the database files from one location in the filesystem/network to another location.
+
+There are two ways that you can copy a database:
+
+. Create a copy within the same Neo4j instance.
+. Create a copy (dump file) that you will give to another developer to load into their Neo4j instance running on a different system.
+
+=== Copying a database within the same Neo4j instance
+
+To copy a database within the same Neo4j instance, the source database must be stopped.
+Additionally, the target database that you will be creating must not exist.
+
+You use the `neo4j-admin` tool to copy a database within your Neo4j instance. Here are the steps:
+
+. Ensure the Neo4j instance is started.
+. In `cypher-shell` stop the source database you want to copy.
+. Exit `cypher-shell`.
+. In a different terminal window, enter this as the user, neo4j:
+----
+/usr/bin/neo4j-admin copy --from-database=<sourceDB> --to-database=<targetDB>
+----
+[start=5]
+. In `cypher-shell' create <targetDB>.
+
+There are other options you can use to customize what is copied. See the _Neo4j Operations Manual_ for details.
+
+=== Creating a dump file from a database
+
+To create a dump file of a database, you must:
+
+. Ensure the Neo4j instance is started.
+. Stop the database you want to dump.
+. Ensure that the directory where you will dump the database exists.
+[start=4]
+. As the neo4j users, you can use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
+----
+/usr/bin/neo4j-admin dump --database=<sourceDB> --to=<absolute path to dump file>
+----
+
+Note that the user, neo4j, must have write access to the directory.
+
+This will create a  dump file that can now be transferred between systems to create a new database on a different system.
+
+=== Creating a database from a dump file
+
+Then, if you want to create a database from any offline backup file to use for a Neo4j instance, you must:
+
+. Use the `load` command of the `neo4j-admin` tool as the neo4j users, to create the database from the dump file as follows:
+----
+/usr/bin/neo4j-admin load --database=<targetDB> --from=<absolute path to dump file>
+----
+[start=2]
+. In `cypher-shell' create <targetDB>.
+
+[.title.has-gold-background.has-team-background]
+== *Exercise #5: Copying databases*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/Exercise05.adoc
+//endif::[]
+
+
+//[#module-3.quiz]
+////
+== Check your understanding
+
+=== Question 1
+
+Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+
+Select the correct answer.
+[%interactive]
+- [ ] [.false-answer]#`neo4j-admin create-database`#
+- [ ] [.false-answer]#`neo4j-admin initialize`#
+- [ ] [.false-answer]#`neo4j create-database`#
+- [ ] [.required-answer]#`neo4j start`#
+
+=== Question 2
+
+Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+
+Select the correct answers.
+[%interactive]
+- [ ] [.required-answer]#Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.#
+- [ ] [.required-answer]#Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.#
+- [ ] [.false-answer]#Run `neo4j-admin rename graph.db ABCRecommendations.db`.#
+- [ ] [.false-answer]#Run `neo4j-admin move graph.db ABCRecommendations.db`.#
+
+=== Question 3
+
+How do you copy a database that you want to give to another user?
+
+Select the correct answer.
+[%interactive]
+- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.#
+- [ ] [.false-answer]#With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.#
+- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.#
+- [ ] [.required-answer]#With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.#
+////
+
+== Summary
+
+You should now be able to:
+
+[square]
+* Copy a Neo4j database using the copy command.
+* Create a dump file for a database.
+* Load a dump file to create a database.
+
+////
+== Grade Quiz and Continue 
+
+++++
+<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
+++++
+
+ifdef::backend-html5[]
+
+include::scripts-end.txt[]
+++++
+<script>
+$( document ).ready(function() {
+  Intercom('trackEvent','training-admin-view-part3');
+});
+</script>
+++++
+
+endif::backend-html5[]
+////

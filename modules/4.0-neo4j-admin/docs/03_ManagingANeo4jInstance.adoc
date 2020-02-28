@@ -1,0 +1,235 @@
+
+= Managing a Neo4j Instance
+:doctype: book
+:toc: left
+:toclevels: 3
+:prevsecttitle: Overview of Neo4j Administration
+:prevsect: 2
+:currsect: 3
+:nextsecttitle: Using cypher-shell to Manage Databases
+:nextsect: 4
+:experimental:
+:imagesdir: ../images
+:manual: http://neo4j.com/docs/operations-manual/4.0
+
+////
+ifdef::backend-html5[]
+
+include::scripts.txt[]
+
+endif::backend-html5[]
+////
+
+== About this module
+
+Next, you will learn how to perform some administrative tasks with the Neo4j instance.
+
+At the end of this module, you should be able to:
+[square]
+* Start the Neo4j instance.
+* Stop the Neo4j instance.
+* Check the status of the Neo4j instance.
+* Set the password for the _neo4j_ user.
+
+== Neo4j instance files
+
+Depending on your platform, a Neo4j instance's files are, by default, placed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
+Here is a brief overview of the default directories you will frequently use for managing the Neo4j instance in Debian.
+
+[cols="20,80", options="header",stripes="none"]
+|====
+
+|*Purpose of directory*
+|*Description*
+| 
+{set:cellbgcolor:white}
+Tools
+|The  */usr/bin* directory contains the tooling scripts you will typically run to manage the Neo4j instance.
+|Configuration
+|*neo4j.conf* is the primary configuration file for the Neo4j instance and resides in the */etc/neo4j* directory.
+|Logging
+|The */var/log/neo4j* directory contains log files that you can monitor.
+|Database(s)
+|The */var/lib/neo4j/data* directory contains the database(s).
+|====
+{set:cellbgcolor!}
+
+== Post-installation preparation 
+
+In this training, all screenshots and examples are shown using Neo4j Enterprise Edition installed as a Debian package.
+In your real application environment, if your system is different, you will need to adjust file locations and how you manage the Neo4j instance.
+
+When you are setting up a production environment, you want to control who can manage the Neo4j instance.
+You will also want to control when the Neo4j instance starts as you will performing some configuration changes and database operations that may require that the instance to be stopped.
+
+When Neo4j is installed as a Debian package, the _neo4j_ service is disabled. On most platforms, the Neo4j instance is not automatically started.
+
+=== Post-install: Changing the _neo4j_ password for the Neo4j instance
+
+After you install Neo4j and before you start the Neo4j instance, a best practice is to change the default password for the user _neo4j_.
+You do this on all platforms, except when you have installed a Debian package.
+You will learn about changing the _neo4j_ password on Debian later in this module as we use Debian for this course.
+
+On systems, other than Debian, you change the password for the _neo4j_ user by executing the following command:
+
+`[sudo] bin/neo4j-admin set-initial-password newPassword`
+
+where _newPassword_ is a password you will remember.
+
+[NOTE]
+If at some point you have forgotten the admin password for your installation or you need to change it, you can reset the password by following the steps
+https://neo4j.com/docs/operations-manual/4.0/configuration/password-and-user-recovery/[here]
+
+=== Post-install: Debian
+
+Initially and *only on Debian*, you should disable _neo4j_ as a service that is started automatically when the system starts.
+You do this with this command:
+
+`[sudo] systemctl disable neo4j`
+
+In addition, you should create the directory */var/run/neo4j* that is owned by _neo4j:neo4j_.
+This is where the PID for the currently running Neo4j instance is placed.
+
+You will perform these steps later in the Exercise 2.
+
+== Managing the Neo4j instance
+
+When the instance is started, it creates a database directory named *neo4j* in the default location which is a directory under */var/lib/neo4j/data/databases*. You can start and stop the instance regardless of whether the _neo4j_ service is enabled.
+
+You start, stop, restart, and check the status of the Neo4j instance on Debian as follows:
+
+[square]
+* `[sudo] systemctl start neo4j`
+* `[sudo] systemctl stop neo4j`
+* `[sudo] systemctl restart neo4j`
+* `systemctl status neo4j`
+
+You start, stop, restart and check the status of the Neo4j instance on non-Debian systems as follows:
+
+[square]
+* `[sudo] bin/neo4j start`
+* `[sudo] bin/neo4j stop`
+* `[sudo] bin/neo4j restart`
+* `bin/neo4j status`
+
+When the Neo4j instance starts, it opens the database, and writes to the directories for the database and to the log file.
+
+=== Checking the status of the instance
+
+At any time, you can check the status of the Neo4j instance.
+
+You check the status of the instance as follows:
+
+`systemctl status neo4j`
+
+Here is an example where we check the status of the Neo4j instance:
+
+image::Neo4j_started.png[Neo4j_started,width=800,align=center]
+
+Here we see that the instance is started. Notice that the service is disabled as well.
+After the instance is started you can identify the process ID (Main PID) from the status command on Debian.
+It is sometimes helpful to know the process ID of the Neo4j instance (JVM) in the event that it is unresponsive and you must kill it.
+
+However, knowing whether the instance is started (active) is generally not sufficient, especially if you have made some configuration changes.
+You can view details of the Neo4j instance by examining the log file.
+
+=== Viewing the neo4j log
+
+The status command gives you a short glimpse of the status of the Neo4j instance. In some cases, although the instance is _active_, it may not have started successfully. You may want to examine more information about the instance, such as the directories it is using at runtime and information about activity against the instance, and especially if any errors occurred during startup. As an administrator, you should become familiar with the types of records that are written to the log files for the Neo4j instance.
+
+You can view the log file for the instance on Debian as follows:
+
+[square]
+* `journalctl -u neo4j`  to view the entire neo4j log file.
+* `journalctl -e -u neo4j` to view the end of the neo4j log file.
+* `journalctl -u neo4j -b > neo4j.log` where you can view *neo4j.log* in an editor.
+
+Here is the result from `journalctl` where we want to view then end of the log file:
+
+image::JournalEnd.png[JournalEnd,width=800,align=center]
+
+When the Neo4j instance starts, you can also confirm that it is started by seeing the _Started_ record in the log file.
+
+[NOTE]
+You can also view the log file in the *logs* directory on all platforms.
+
+[.title.has-gold-background.has-team-background]
+== *Exercise #2: Managing the Neo4j instance*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/Exercise02.adoc
+//endif::[]
+
+
+//[#module-3.quiz]
+////
+== Check your understanding
+
+=== Question 1
+
+Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+
+Select the correct answer.
+[%interactive]
+- [ ] [.false-answer]#`neo4j-admin create-database`#
+- [ ] [.false-answer]#`neo4j-admin initialize`#
+- [ ] [.false-answer]#`neo4j create-database`#
+- [ ] [.required-answer]#`neo4j start`#
+
+=== Question 2
+
+Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+
+Select the correct answers.
+[%interactive]
+- [ ] [.required-answer]#Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.#
+- [ ] [.required-answer]#Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.#
+- [ ] [.false-answer]#Run `neo4j-admin rename graph.db ABCRecommendations.db`.#
+- [ ] [.false-answer]#Run `neo4j-admin move graph.db ABCRecommendations.db`.#
+
+=== Question 3
+
+How do you copy a database that you want to give to another user?
+
+Select the correct answer.
+[%interactive]
+- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.#
+- [ ] [.false-answer]#With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.#
+- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.#
+- [ ] [.required-answer]#With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.#
+////
+
+== Summary
+
+You should now be able to:
+
+[square]
+* Start the Neo4j instance.
+* Stop the Neo4j instance.
+* Check the status of the Neo4j instance.
+* Set the password for the _neo4j_ user.
+
+////
+== Grade Quiz and Continue 
+
+++++
+<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
+++++
+
+ifdef::backend-html5[]
+
+include::scripts-end.txt[]
+++++
+<script>
+$( document ).ready(function() {
+  Intercom('trackEvent','training-admin-view-part3');
+});
+</script>
+++++
+
+endif::backend-html5[]
+////

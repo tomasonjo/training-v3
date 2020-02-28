@@ -6,7 +6,7 @@
 :prevsecttitle: Introduction to Neo4j
 :prevsect: 1
 :currsect: 2
-:nextsecttitle: Managing Neo4j Databases
+:nextsecttitle: Managing a Neo4j Instance
 :nextsect: 3
 :experimental:
 :manual: http://neo4j.com/docs/operations-manual/4.0
@@ -374,7 +374,7 @@ Refer to the *Exercise Guide* for instructions.
 //endif::[]
 
 //ifdef::backend-htlm5[]
-//include::exercises/02_OverviewOfNeo4jAdministration.adoc
+//include::exercises/Exercise01.adoc
 //./endif::[]
 
 == References
