@@ -48,12 +48,12 @@ In many cases, if you upgrade to a later version of Neo4j, you may also need to 
 Here is an example of a script you can run to produce a file, *Procedures.txt* that contains the names of the procedures currently available for the Neo4j instance:
 
 ----
-echo "CALL dbms.procedures() YIELD name;" | /usr/bin/cypher-shell -u neo4j -p <InstancePassword> --format plain > /usr/local/work/Procedures.txt
+echo "CALL dbms.procedures() YIELD name;" | /usr/bin/cypher-shell -u neo4j -p <InstancePassword> --format plain > /home/ubuntu/report/DefaultProcedures.txt
 ----
 
 This script calls a Neo4j built-in procedure, `dbms.procedures()` to return the name of each procedure available to the graph engine at runtime.
 
-Here is an example of a generated *Procedures.txt* file:
+Here is an example of a generated *DefaultProcedures.txt* file:
 
 image::DefaultProcedures.png[DefaultProcedures,width=800,align=center]
 
@@ -136,13 +136,33 @@ Since APOC is large, you will most likely want to whitebox specific procedures s
 
 And here we see the results after restarting the Neo4j instance:
 
-image::APOCLoaded.png[APOCLoaded,width=600,align=center]
+image::APOCJarLoaded.png[APOCJarLoaded,width=600,align=center]
+
+??You may see some error messages, but you can ignore them as they represent some deprecated functionality of the APOC procedues.
+
 
 === Step 4: Confirm the plugin procedures are available
 
+You can produce a report of all the procedures available in the Neo4j instance:
+
+----
+echo "CALL dbms.procedures() YIELD name;" | /usr/bin/cypher-shell -u neo4j -p <InstancePassword> --format plain > /home/ubuntu/report/APOCProcedures.txt
+----
+
+And here is some of what was produced in the report:
+
+image::APOCProcedures.png[APOCProcedures,width=600,align=center]
 
 [.title.has-gold-background.has-team-background]
 == *Exercise #9: Install a plugin*
+
+//ifndef::backend-htlm5[]
+Refer to the *Exercise Guide* for instructions.
+//endif::[]
+
+//ifdef::backend-htlm5[]
+//include::exercises/Exercise09.adoc
+//endif::[]
 
 
 //[#module-3.quiz]
