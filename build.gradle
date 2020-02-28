@@ -39,6 +39,7 @@ subprojects {
 
   s3 {
     profile = project.hasProperty('s3-profile') ? project.property('s3-profile') : 'default'
+    region = 'us-west-1'
   }
 
   wordpress {
@@ -83,21 +84,22 @@ subprojects {
     outputDir "${projectDir}/build/online"
   }
 
-  task convertOnlineHtml(type: AsciidoctorTask) {
+  // for debugging purpose
+  task convertStandaloneHtml(type: AsciidoctorTask) {
     dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
 
-    inputs.dir "${rootProject.projectDir}/resources/templates/developer"
+    inputs.dir "${rootProject.projectDir}/resources/templates"
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/developer"]
+      options template_dirs: ["${rootProject.projectDir}/resources/templates"]
       attributes 'imagesdir': 'images',
         'sectanchors': ''
     }
 
     baseDir file("${projectDir}/docs")
     sourceDir file("${projectDir}/docs")
-    outputDir file("${projectDir}/build/online")
+    outputDir file("${projectDir}/build/standalone")
 
     resources {
       from("${rootProject.projectDir}/resources/images") {
@@ -109,6 +111,23 @@ subprojects {
         into 'images'
       }
     }
+  }
+
+  task convertOnlineHtml(type: AsciidoctorTask) {
+    dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
+
+    inputs.dir "${rootProject.projectDir}/resources/templates/developer"
+
+    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
+    asciidoctorj {
+      options template_dirs: ["${rootProject.projectDir}/resources/templates/developer"]
+      attributes 'imagesdir': "https://s3-us-west-1.amazonaws.com/training-assets.neo4j.com/course/${project.name}/images/",
+        'sectanchors': ''
+    }
+
+    baseDir file("${projectDir}/docs")
+    sourceDir file("${projectDir}/docs")
+    outputDir file("${projectDir}/build/online")
   }
 
   task convertSlides(type: AsciidoctorJRevealJSTask) {
@@ -194,37 +213,9 @@ subprojects {
   if (new File("${projectDir}/images").exists()) {
     task s3UploadImages(type: S3UploadTask) {
       source = "${projectDir}/images"
-      bucket = "dev.assets.neo4j.com"
-      destination = "wp-content/uploads/online/graphdatabases"
+      bucket = "training-assets.neo4j.com"
+      destination = "course/${project.name}/images"
     }
-  }
-
-  task s3UploadHtmlExclude(type: S3UploadTask) {
-    source = fileTree(dir: "${projectDir}/build/online", excludes: ["images"])
-    bucket = "training.neo4j.com"
-    overwrite = true
-    destination = "production-without-images"
-  }
-
-  task s3UploadHtml(type: S3UploadTask) {
-    source = "${projectDir}/build/online"
-    bucket = "training.neo4j.com"
-    overwrite = true
-    destination = "production"
-  }
-
-  task s3UploadSingleFile(type: S3UploadTask) {
-    source = "${projectDir}/build/online/03_SettingUpYourDevelopmentEnvironment.html"
-    bucket = "training.neo4j.com"
-    overwrite = false
-    destination = "single-file"
-  }
-
-  task s3UploadMultipleFiles(type: S3UploadTask) {
-    source = ["${projectDir}/build/online/01_IntroductionToGraphDatabases.html".toString(), "${projectDir}/build/online/02_IntroductionToNeo4j.html".toString()]
-    bucket = "training.neo4j.com"
-    overwrite = true
-    destination = "multiple-files"
   }
 
   task wordPressUploadCoursePost(type: WordPressUploadPostTask) {
