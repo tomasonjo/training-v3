@@ -10,7 +10,6 @@ class ModuleTableOfContentsTreeProcessor < Extensions::TreeProcessor; use_dsl
       if File.exist?(path)
         require 'yaml'
         module_descriptor = YAML::load_file(path)
-        p module_descriptor
         module_descriptor['nav'].each_with_index do |item, index|
           document.set_attribute "module_toc_link_#{index}", item['url']
           document.set_attribute "module_toc_title_#{index}", item['title']
