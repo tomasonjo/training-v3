@@ -6,11 +6,12 @@
       <h3 class="dev-nav-header"><strong>Online Course</strong></h3>
       <ul style="padding-top: 0;" class="side-nav">
         <% @attributes.select {|k,_| k.start_with?('module_toc_link_') }.each_key do |toc_link_attr| %>
-          <% toc_title_attr = "module_toc_title_#{toc_link_attr.sub 'module_toc_link_', ''}" %>
-          <a href="<%= attr toc_link_attr %>">
+          <% toc_index = toc_link_attr.sub('module_toc_link_', '') %>
+          <% toc_title_attr = "module_toc_title_#{toc_index}" %>
+          <% toc_slug_attr = "module_toc_slug_#{toc_index}" %>
+          <a href="../<%= attr(toc_slug_attr) %>">
             <dl class="menu-list">
-              <!-- fixme: add active on dd element when the page is active -->
-              <dd class="accordion-dev-nav"><%= attr toc_title_attr %></dd>
+              <dd class="accordion-dev-nav <%= attr(toc_slug_attr) == attr('slug') ? 'active' : '' %>"><%= attr(toc_title_attr) %></dd>
             </dl>
           </a>
         <% end %>
