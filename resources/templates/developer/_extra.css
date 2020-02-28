@@ -1,0 +1,17 @@
+pre.rouge.highlight {
+  background: #f9f9f9;
+  border: 1px solid #dddddd;
+  display: block;
+  padding: 10px;
+  margin: 0 0 10px;
+}
+
+pre.rouge.highlight > code {
+  background-color: inherit;
+  border: none;
+  padding: 0;
+}
+
+ul > li code.rouge {
+  font-size: smaller;
+}

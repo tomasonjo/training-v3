@@ -42,6 +42,7 @@
     <div class="guide-section-content large-8 columns">
       <h1 class="entry-title"><%= attr 'doctitle' %></h1>
       <%= content %>
+      <%=  File.new("#{__dir__ }/quiz_partial.html.erb", mode: 'r:UTF-8').read %>
     </div>
     <div class="guide-toc large-2 hide-for-medium-only hide-for-small-only columns">
       <ul class="side-nav">
@@ -63,5 +64,18 @@
     <div class="clearfix"></div>
   </div>
 </article>
+
+<% if syntax_highlighter && syntax_highlighter.docinfo?(:footer) %>
+  <%
+    unless (asset_uri_scheme = (attr('asset-uri-scheme', 'https'))).empty?
+      asset_uri_scheme = %(#{asset_uri_scheme}:)
+    end
+    cdn_base_url = %(#{asset_uri_scheme}//cdnjs.cloudflare.com/ajax/libs)
+  %>
+  <%= syntax_highlighter.docinfo(:footer, self, cdn_base_url: cdn_base_url, linkcss: attr?('linkcss'), self_closing_tag_slash: '/') %>
+<% end %>
+<style>
+  <%= File.new("#{__dir__ }/_extra.css", mode: 'r:UTF-8').read %>
+</style>
 
 <!--%=  File.new("#{__dir__ }/_bottom_partial.html.erb").read %-->
