@@ -5,13 +5,12 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileTree
-import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
+import org.yaml.snakeyaml.DumperOptions
+import org.yaml.snakeyaml.Yaml
 import java.io.File
-import java.nio.file.Paths
 
 
 open class AsciidoctorModuleDescriptorExtension
@@ -30,6 +29,18 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
   @Input
   var outputDir: String = ""
 
+  private val dumperOptions: DumperOptions
+    get() {
+      val options = DumperOptions()
+      options.indent = 2
+      options.isPrettyFlow = true
+      options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
+      options.defaultScalarStyle = DumperOptions.ScalarStyle.DOUBLE_QUOTED
+      return options
+    }
+
+  private val yaml = Yaml(dumperOptions)
+
   @TaskAction
   fun task() {
     val asciidoctor = Asciidoctor.Factory.create()
@@ -38,22 +49,14 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
       val url = "${file.name.removeSuffix(".adoc")}.html"
       val title = document.doctitle
       val slug = document.getAttribute("slug", "")
-      """
-- title: "$title"
-  url: "$url"
-  slug: "$slug"
-  """.trim()
-    }.joinToString("\n")
-    val content = """
-nav:
-${navItems.prependIndent("  ")}
-""".trimIndent()
+      mapOf("title" to title, "url" to url, "slug" to slug)
+    }.toList()
     val outputDirFile = File(outputDir)
     if (!outputDirFile.exists()) {
       outputDirFile.mkdirs()
     }
     val outputFile = File(outputDir, "asciidoctor-module-descriptor.yml")
-    outputFile.writeText(content)
+    outputFile.writeText(yaml.dump(mapOf("nav" to navItems)))
   }
 
   fun setSource(source: String) {
