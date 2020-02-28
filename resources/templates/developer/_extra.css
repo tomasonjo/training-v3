@@ -28,3 +28,7 @@ ul > li code.rouge {
 ul li > [type=checkbox] {
   margin: 0 0 .25rem 0;
 }
+
+details, .audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .videoblock {
+  margin-bottom: 1.25em
+}
