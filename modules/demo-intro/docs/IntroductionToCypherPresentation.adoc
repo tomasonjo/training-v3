@@ -147,7 +147,7 @@ image::person-nodes-graph.png[Person Nodes Graph,height=375,align=center,role=bo
 
 image::PersonNodes-table.png[width=700,align=center,role=border]
 
-[.title.gold]
+[.slide-title.gold]
 == Exercise 1: Retrieving Nodes
 
 In Neo4j Browser:
@@ -216,7 +216,7 @@ RETURN p.name AS name, p.born AS `birth year`
 
 image::AliasBirthDate.png[width=880,align=center,role=border]
 
-[.title.gold]
+[.slide-title.gold]
 == Exercise 2: Filtering queries using property values
 
 In Neo4j Browser:
@@ -312,7 +312,7 @@ RETURN p, m
 
 image::AllRelationshipsMatrix.png[height=200,align=center,role=border]
 
-[.tooltip]
+[.slide-tooltip]
 Connect result nodes enabled in Neo4j Browser
 
 === Retrieving relationship types
@@ -435,7 +435,7 @@ RETURN  path
 image::ReturnPath.png[width=275,align=center,role=border]
 --
 
-[.tooltip]
+[.slide-tooltip]
 Sub-graph
 
 === Using relationship direction to optimize a query
@@ -475,7 +475,7 @@ MATCH (:Person {name: 'Diane Keaton'})-[movRel:ACTED_IN]->
 RETURN movRel.roles
 ----
 
-[.title.gold]
+[.slide-title.gold]
 == Exercise 3: Filtering queries using relationships
 
 In Neo4j Browser:
@@ -484,7 +484,7 @@ kbd:[:play intro-neo4j-exercises]
 
 Then follow instructions for Exercise 3.
 
-[.title.purple]
+[.slide-title.purple]
 == Check your understanding
 
 === Question 1
