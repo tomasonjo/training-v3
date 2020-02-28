@@ -1,7 +1,7 @@
 import com.neo4j.gradle.s3.S3Plugin
 import com.neo4j.gradle.s3.S3UploadTask
-import com.neo4j.gradle.asciidoctor.AsciidoctorTableOfContentsPlugin
-import com.neo4j.gradle.asciidoctor.AsciidoctorTableOfContentsGenerateTask
+import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
+import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.asciidoctor.gradle.jvm.pdf.AsciidoctorPdfTask
 import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
@@ -20,7 +20,7 @@ subprojects {
   apply plugin: 'org.asciidoctor.jvm.gems'
   apply plugin: 'org.asciidoctor.jvm.revealjs'
   apply plugin: S3Plugin
-  apply plugin: AsciidoctorTableOfContentsPlugin
+  apply plugin: AsciidoctorModuleDescriptorPlugin
 
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.13.0'
@@ -68,13 +68,13 @@ subprojects {
     }
   }
 
-  task generateTableOfContents(type: AsciidoctorTableOfContentsGenerateTask) {
+  task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
     source = "${projectDir}/docs"
     outputDir "${projectDir}/build/online"
   }
 
   task convertOnlineHtml(type: AsciidoctorTask) {
-    dependsOn asciidoctorGemsPrepare, generateTableOfContents
+    dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
 
     inputs.dir "${rootProject.projectDir}/resources/templates/developer"
 

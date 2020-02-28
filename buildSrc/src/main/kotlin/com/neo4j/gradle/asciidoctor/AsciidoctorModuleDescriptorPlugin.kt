@@ -11,16 +11,16 @@ import org.gradle.api.tasks.TaskAction
 import java.io.File
 
 
-open class AsciidoctorTableOfContentsExtension
+open class AsciidoctorModuleDescriptorExtension
 
-open class AsciidoctorTableOfContentsPlugin : Plugin<Project> {
+open class AsciidoctorModuleDescriptorPlugin : Plugin<Project> {
 
   override fun apply(target: Project) {
-    target.extensions.create("asciidoctorTableOfContents", AsciidoctorTableOfContentsExtension::class.java)
+    target.extensions.create("asciidoctorModuleDescriptor", AsciidoctorModuleDescriptorExtension::class.java)
   }
 }
 
-abstract class AsciidoctorTableOfContentsGenerateTask : DefaultTask() {
+abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
   @InputFiles
   var sources: MutableList<ConfigurableFileTree> = mutableListOf()
 
@@ -30,15 +30,26 @@ abstract class AsciidoctorTableOfContentsGenerateTask : DefaultTask() {
   @TaskAction
   fun task() {
     val asciidoctor = Asciidoctor.Factory.create()
-    val data = sources.map { it.sorted() }.flatten().sorted().map { file ->
+    val navItems = sources.map { it.sorted() }.flatten().sorted().map { file ->
       val document = asciidoctor.loadFile(file, emptyMap())
-      "${file.name.removeSuffix(".adoc")}.html" to document.doctitle
-    }.toMap()
-    val content = """ASCIIDOCTOR_TABLE_OF_CONTENTS = {
-${data.map { "\"${it.key}\" => \"${it.value}\"" }.joinToString(", ")}
-}
-"""
-    File(outputDir, "asciidoctor_table_of_contents.rb").writeText(content)
+      val url = "${file.name.removeSuffix(".adoc")}.html"
+      val title = document.doctitle
+      val slug = document.getAttribute("slug", "")
+      """
+- title: "$title"
+  url: "$url"
+  slug: "$slug"
+  """.trim()
+    }.joinToString("\n")
+    val content = """
+nav:
+${navItems.prependIndent("  ")}
+""".trimIndent()
+    val outputDirFile = File(outputDir)
+    if (!outputDirFile.exists()) {
+      outputDirFile.mkdirs()
+    }
+    File(outputDir, "asciidoctor-module-descriptor.yml").writeText(content)
   }
 
   fun setSource(source: String) {
