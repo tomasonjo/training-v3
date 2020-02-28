@@ -1,4 +1,6 @@
 = Introduction to Cypher
+:slug: demo-introduction-cypher
+:private:
 :doctype: book
 :toc: left
 :toclevels: 3

@@ -228,6 +228,13 @@ subprojects {
     destination = "multiple-files"
   }
 
+  task wordPressUploadCoursePost(type: WordPressUploadPostTask) {
+    dependsOn convertOnlineHtml
+    source = convertOnlineHtml.outputs.files
+    postType = "course"
+    postStatus = "private"
+  }
+
   task wordPressUploadPost(type: WordPressUploadPostTask) {
     dependsOn convertOnlineHtml
     source = convertOnlineHtml.outputs.files
