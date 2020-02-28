@@ -496,11 +496,11 @@ What Cypher query do you execute to return the email addresses for all customers
 
 Select the correct answer.
 
-[none.answers]
-- ◻️ [src-cypher]`MATCH (n) RETURN n.Customer.email`
-- ◻️ [.fragment.check.ok]#✔️# [src-cypher]`MATCH (c:Customer) RETURN c.email`
-- ◻️ [src-cypher]`MATCH (Customer) RETURN email`
-- ◻️ [src-cypher]`MATCH (c) RETURN Customer.email`
+[.answers]
+- [ ] [src-cypher]`MATCH (n) RETURN n.Customer.email`
+- [x] [src-cypher]`MATCH (c:Customer) RETURN c.email`
+- [ ] [src-cypher]`MATCH (Customer) RETURN email`
+- [ ] [src-cypher]`MATCH (c) RETURN Customer.email`
 
 === Question 2
 
@@ -513,11 +513,11 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 Select the correct answer.
 
-[none.answers]
-- ◻️ [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
-- ◻️ [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
-- ◻️ [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
-- ◻️ [.fragment.check.ok]#✔️# [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
+[.answers]
+- [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
+- [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
+- [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
+- [x] [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
 
 === Question 3
 
@@ -525,11 +525,11 @@ When [.underline]#must# you use a variable in a `MATCH` clause?
 
 Select the correct answer.
 
-[none.answers]
-- ◻️ [.answer]#When you want to query the graph using a node label.#
-- ◻️ [.answer]#When you specify a property value to match the query.#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#When you want to use the node or relationship to return a result.#
-- ◻️ [.answer]#When the query involves 2 types of nodes.#
+[.answers]
+- [ ] When you want to query the graph using a node label.
+- [ ] When you specify a property value to match the query.
+- [x] When you want to use the node or relationship to return a result.
+- [ ] When the query involves 2 types of nodes.
 
 == Summary
 
