@@ -210,7 +210,9 @@ internal class WordPressUpload(val contentType: WordPressContentType,
     }
     val slugs = documentsWithAttributes.map { it.slug }
     val searchUrl = baseUrlBuilder()
-      .addPathSegment(contentType.urlPath)
+      // fixme: the url depends on the document type
+      //.addPathSegment(contentType.urlPath)
+      .addPathSegment(documentType)
       .addQueryParameter("per_page", slugs.size.toString())
       .addQueryParameter("slug", slugs.joinToString(","))
       .addQueryParameter("status", "publish,future,draft,pending,private")
@@ -246,7 +248,8 @@ internal class WordPressUpload(val contentType: WordPressContentType,
         "status" to documentStatus,
         "title" to documentAttributes.title,
         "content" to documentAttributes.content,
-        "tags" to documentAttributes.tags,
+        // fixme: expect a list of ids "{"tags":"tags[0] is not of type integer."}"
+        //"tags" to documentAttributes.tags,
         "type" to documentType
       )
       if (documentTemplate.isNotBlank()) {
@@ -266,9 +269,12 @@ internal class WordPressUpload(val contentType: WordPressContentType,
   private fun updateDocument(data: MutableMap<String, Any>, wordPressDocument: WordPressDocument): Boolean {
     data["id"] = wordPressDocument.id
     val url = baseUrlBuilder()
-      .addPathSegment(contentType.urlPath)
+      .addPathSegment(documentType)
+      // fixme: the url depends on the document type
+      //.addPathSegment(contentType.urlPath)
       .addPathSegment(wordPressDocument.id.toString())
       .build()
+    logger.quiet("Updating ${contentType.name.toLowerCase()} id: ${wordPressDocument.id} using: $data")
     val updateRequest = Request.Builder()
       .url(url)
       .post(klaxon.toJsonString(data).toRequestBody(jsonMediaType))
@@ -288,8 +294,11 @@ internal class WordPressUpload(val contentType: WordPressContentType,
 
   private fun createDocument(data: MutableMap<String, Any>): Boolean {
     val url = baseUrlBuilder()
-      .addPathSegment(contentType.urlPath)
+      .addPathSegment(documentType)
+      // fixme: the url depends on the document type
+      //.addPathSegment(contentType.urlPath)
       .build()
+    logger.quiet("Creating a new ${contentType.name.toLowerCase()} using: $data")
     val createRequest = Request.Builder()
       .url(url)
       .post(klaxon.toJsonString(data).toRequestBody(jsonMediaType))

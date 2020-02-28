@@ -5,10 +5,13 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileTree
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import java.nio.file.Paths
 
 
 open class AsciidoctorModuleDescriptorExtension
@@ -30,7 +33,7 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
   @TaskAction
   fun task() {
     val asciidoctor = Asciidoctor.Factory.create()
-    val navItems = sources.map { it.sorted() }.flatten().sorted().map { file ->
+    val navItems = sources.asSequence().map { it.sorted() }.flatten().sorted().map { file ->
       val document = asciidoctor.loadFile(file, emptyMap())
       val url = "${file.name.removeSuffix(".adoc")}.html"
       val title = document.doctitle
@@ -49,7 +52,8 @@ ${navItems.prependIndent("  ")}
     if (!outputDirFile.exists()) {
       outputDirFile.mkdirs()
     }
-    File(outputDir, "asciidoctor-module-descriptor.yml").writeText(content)
+    val outputFile = File(outputDir, "asciidoctor-module-descriptor.yml")
+    outputFile.writeText(content)
   }
 
   fun setSource(source: String) {
