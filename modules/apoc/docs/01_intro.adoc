@@ -290,13 +290,16 @@ dbms.security.procedures.unrestricted=apoc.*
 
 == Most important slide of the session
 
-[source,cypher]
+[source.center,cypher]
 ----
 CALL apoc.help("keyword")
 ----
 
 [.section-title.has-purple-background.has-puzzle-background]
 == Task: Search for keywords from the docs
+
+[.section-title.has-green-background.has-puzzle-background]
+== Text Functions
 
 == Text Functions - apoc.text.*
 
@@ -311,13 +314,13 @@ CALL apoc.help("keyword")
 
 https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.title.has-purple-background.has-puzzle-background]
 == Task: Use Text Functions
 
 --
 . Return movie titles in ALL CAPS
 . Find the top 10 people with similar names based on Levenshtein distance
-. Return a `; delimited list of all people whose name starts with "Tom"
+. Return a `;` delimited list of all people whose name starts with "Tom"
 --
 
 == Answer: Use Text Functions
@@ -343,7 +346,7 @@ LIMIT 10
 
 == Answer: Use Text Functions
 
-.Return a `; delimited list of all people whose name starts with "Tom"
+.Return a `;` delimited list of all people whose name starts with "Tom"
 [source,cypher]
 ----
 MATCH (p:Person)
@@ -351,3 +354,107 @@ WHERE p.name STARTS WITH "Tom"
 WITH collect(p.name) AS people
 RETURN apoc.text.join(people, ";")
 ----
+
+[.section-title.has-green-background.has-puzzle-background]
+== Collection Functions
+
+== Collection Functions - apoc.coll.*
+
+* sum, avg, min,max,stdev,
+* zip, partition, pairs
+* sort, toSet, contains, split
+* indexOf, different
+* occurrences, frequencies, flatten
+* disjunct, subtract, union, ...
+* set, insert, remove
+
+https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Use Collection Functions
+
+Starting from this query:
+
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+RETURN movie.title, collect(person) AS people
+----
+
+--
+. Sort the `people` collection by the `name` property, in descending order
+. Sort the `people` collection by the `born` property, in ascending order
+. Remove `movie.title` and make the `people` collection unique. Once you've done that break the collection up into sub lists of size 2.
+--
+
+== Answer: Use Collection Functions
+
+.Sort the `people` collection by the `name` property, in descending order
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+RETURN movie.title, apoc.coll.sortNodes(collect(person), "name")
+----
+
+== Answer: Use Collection Functions
+
+.Sort the `people` collection by the `born` property, in ascending order
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+RETURN movie.title, apoc.coll.sortNodes(collect(person), "^born")
+----
+
+== Answer: Use Collection Functions
+
+.Remove `movie.title` and make the `people` collection unique. Once you've done that break the collection up into sub lists of size 2.
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+WITH apoc.coll.toSet(collect(person.name)) AS people
+CALL apoc.coll.partition(people, 2) YIELD value
+RETURN value
+----
+
+
+[.section-title.has-green-background.has-puzzle-background]
+== Map Functions
+
+== Map Functions - apoc.map.*
+
+* fromNodes, fromPairs, fromLists, fromValues
+* merge
+* setKey, removeKey
+* clean(map,[keys],[values])
+* groupBy[Multi]
+
+https://neo4j.com/docs/labs/apoc/current/data-structures/map-functions/
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Use Map Functions
+
+Starting from this query:
+
+[source,cypher]
+----
+:param document =>  ({
+  title: "Frozen",
+  released: 2013,
+  budget: 150000000,
+  tagline: "Don’t you dare!"
+})
+----
+
+--
+. Clean the `$document` map to remove the `budget` property
+. Create a `Movie` node, but remove the `budget` property
+. Return the list of values in the map for the `title`, `released`, and `tagline` propertiesS
+. Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
+--
+
+[.section-title.has-green-background.has-puzzle-background]
+== Conversion Functions
