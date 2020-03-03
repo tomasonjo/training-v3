@@ -297,3 +297,57 @@ CALL apoc.help("keyword")
 
 [.section-title.has-purple-background.has-puzzle-background]
 == Task: Search for keywords from the docs
+
+== Text Functions - apoc.text.*
+
+* indexOf, indexesOf
+* split, replace, regexpGroups
+* format, clean, distance(s)
+* capitalize, decapitalize
+* random, lpad, rpad
+* snakeCase, camelCase, upperCase
+* charAt, hexCode
+* base64, md5, sha1
+
+https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Use Text Functions
+
+--
+. Return movie titles in ALL CAPS
+. Find the top 10 people with similar names based on Levenshtein distance
+. Return a `; delimited list of all people whose name starts with "Tom"
+--
+
+== Answer: Use Text Functions
+
+.Return movie titles in ALL CAPS
+[source,cypher]
+----
+MATCH (m:Movie)
+return m.title, apoc.text.toUpperCase(m.title)
+----
+
+== Answer: Use Text Functions
+
+.Find the top 10 people with similar names based on Levenshtein distance
+[source,cypher]
+----
+MATCH (p1:Person), (p2:Person)
+WHERE p1 <> p2 AND id(p1) < id(p2)
+RETURN p1.name, p2.name,  apoc.text.levenshteinDistance(p1.name, p2.name) AS score
+ORDER BY score
+LIMIT 10
+----
+
+== Answer: Use Text Functions
+
+.Return a `; delimited list of all people whose name starts with "Tom"
+[source,cypher]
+----
+MATCH (p:Person)
+WHERE p.name STARTS WITH "Tom"
+WITH collect(p.name) AS people
+RETURN apoc.text.join(people, ";")
+----
