@@ -10,12 +10,12 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileTree
-import org.gradle.api.internal.file.ImmutablePatternSet
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.*
-import org.gradle.api.tasks.util.PatternFilterable
-import org.gradle.api.tasks.util.PatternSet
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.property
 
 
@@ -51,16 +51,12 @@ abstract class S3UploadTask : DefaultTask() {
   @Input
   var region: String = ""
 
-  @Internal
-  var patternSet: PatternFilterable = ImmutablePatternSet.of(PatternSet())
-
   @TaskAction
   fun task() {
     val s3Extension = project.extensions.findByType(S3Extension::class.java)
     val bucketValue = s3Extension?.bucket?.getOrElse(bucket) ?: bucket
     val regionValue = s3Extension?.region?.getOrElse(region) ?: region
     val profileValue = s3Extension?.profile?.getOrElse(profile) ?: profile
-    logger.info(patternSet.toString())
     val profileCreds = if (profileValue.isNotBlank()) {
       logger.quiet("Using AWS credentials profile: $profileValue")
       ProfileCredentialsProvider(profileValue)
@@ -68,14 +64,14 @@ abstract class S3UploadTask : DefaultTask() {
       ProfileCredentialsProvider()
     }
     val creds = AWSCredentialsProviderChain(
-        EnvironmentVariableCredentialsProvider(),
-        SystemPropertiesCredentialsProvider(),
-        profileCreds,
-        EC2ContainerCredentialsProviderWrapper()
+      EnvironmentVariableCredentialsProvider(),
+      SystemPropertiesCredentialsProvider(),
+      profileCreds,
+      EC2ContainerCredentialsProviderWrapper()
     )
     val amazonS3ClientBuilder = AmazonS3ClientBuilder
-        .standard()
-        .withCredentials(creds)
+      .standard()
+      .withCredentials(creds)
     if (regionValue.isNotBlank()) {
       amazonS3ClientBuilder.withRegion(regionValue)
     }

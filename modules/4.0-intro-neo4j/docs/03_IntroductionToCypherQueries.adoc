@@ -1,5 +1,5 @@
-
 = Introduction to Cypher
+:slug: introduction-to-cypher
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -298,7 +298,7 @@ When nodes are displayed as table values, the node labels and ids are not shown,
 
 image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 1: Retrieving nodes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -544,7 +544,7 @@ endif::[]
 image::UsingAliases.png[UsingAliases,width=800,align=center]
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 2: Filtering queries using property values*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -1141,7 +1141,7 @@ RETURN movRel.roles
 
 We recommend that you follow the https://neo4j.com/docs/cypher-manual/current/styleguide/[Cypher Style Guide^] when writing your Cypher statements.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 3: Filtering queries using relationships*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -1152,7 +1152,7 @@ This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-4.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 
@@ -1165,12 +1165,12 @@ What Cypher query do you execute to return the email addresses for all customers
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `MATCH (n) RETURN n.Customer.email`
-- [x] `MATCH (c:Customer) RETURN c.email`
-- [ ] `MATCH (Customer) RETURN email`
-- [ ] `MATCH (c) RETURN Customer.email`
+
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (n) RETURN n.Customer.email`
+- [x] [src-cypher]`MATCH (c:Customer) RETURN c.email`
+- [ ] [src-cypher]`MATCH (Customer) RETURN email`
+- [ ] [src-cypher]`MATCH (c) RETURN Customer.email`
 
 === Question 2
 
@@ -1183,12 +1183,12 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
-- [ ] `MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
-- [ ] `MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
-- [x] `MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
+
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
+- [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
+- [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
+- [x] [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
 
 === Question 3
 
@@ -1197,14 +1197,14 @@ When [.underline]#must# you use a variable in a MATCH clause?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] When you want to query the graph using a node label.
 - [ ] When you specify a property value to match the query.
 - [x] When you want to use the node or relationship to return a value.
 - [ ] When the query involves 2 types of nodes.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

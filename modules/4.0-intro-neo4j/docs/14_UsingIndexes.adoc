@@ -396,7 +396,7 @@ endif::[]
 
 image::ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 14: Creating indexes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -407,7 +407,7 @@ This exercise has 7 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -417,12 +417,12 @@ What Cypher code below will create a unique index on the _name_ property of the 
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `CREATE INDEX PersonNameIndex FOR (p:Person) ON (p.name)`
-- [ ] `CREATE INDEX PersonNameIndex FOR (p:Person) ON (p.name) ASSERT p.name IS UNIQUE`
-- [x] `CREATE CONSTRAINT PersonNameConstraint ON (p:Person) ASSERT p.name IS UNIQUE`
-- [ ] `CALL db.index.full-text.createNodeIndex('PersonName',['Person'], ['name'])`
+
+[%interactive.answers]
+- [ ] [src-cypher]`CREATE INDEX PersonNameIndex FOR (p:Person) ON (p.name)`
+- [ ] [src-cypher]`CREATE INDEX PersonNameIndex FOR (p:Person) ON (p.name) ASSERT p.name IS UNIQUE`
+- [x] [src-cypher]`CREATE CONSTRAINT PersonNameConstraint ON (p:Person) ASSERT p.name IS UNIQUE`
+- [ ] [src-cypher]`CALL db.index.full-text.createNodeIndex('PersonName',['Person'], ['name'])`
 
 === Question 2
 
@@ -431,8 +431,8 @@ What makes creating a full-text schema index different from creating a property 
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] Full-text schema indexes can use relationship properties.
 - [ ] Full-text schema indexes can check for uniqueness.
 - [x] Full-text schema indexes can use multiple types of nodes for the index.
@@ -445,14 +445,14 @@ What is the difference between a node key and a composite index?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] A composite index can utilize more than one type of node.
 - [ ] A composite index can use relationship properties.
 - [x] A composite index does not enforce uniqueness.
 - [ ] A composite index can enforce existence.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 ifndef::backend-revealjs[]

@@ -1,4 +1,5 @@
 = Neo4j is a Graph Database
+:slug: neo4j-graph-database
 :doctype: book
 :nextsecttitle: The Neo4j Graph Platform
 :nextsect: 2
@@ -405,7 +406,7 @@ We recommend that you take our training course, _Graph Data Modeling for Neo4j_,
 --
 
 //[#module-1.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -416,8 +417,8 @@ What elements make up a graph?
 
 [.statement]
 Select the correct answers.
-//[.interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] tuples
 - [x] nodes
 - [ ] documents
@@ -430,8 +431,8 @@ From a data scientist perspective, which element is key for analyzing the data i
 
 [.statement]
 Select the correct answer.
-//[.interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] node
 - [ ] property
 - [x] relationship
@@ -444,14 +445,14 @@ In Neo4j, you can attach properties to the following elements in the graph?
 
 [.statement]
 Select the correct answers.
-//[.interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] label
 - [x] node
 - [x] relationship
 - [ ] direction
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

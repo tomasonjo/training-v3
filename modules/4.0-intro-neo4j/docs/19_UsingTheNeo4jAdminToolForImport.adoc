@@ -246,7 +246,7 @@ Here is the what you will be doing in the next exercise to use the `import` comm
 
 image::ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 18: Importing data with the import command of neo4j-admin*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -257,7 +257,7 @@ This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -267,8 +267,8 @@ Before you will import data using neo4j-admin, what is one thing you must do?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Create the database.
 - [x] Ensure the database does not exist.
 - [ ] Create the constraints in the database.
@@ -289,8 +289,8 @@ For this part of the import, where does the import process get information about
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] The products_header.csv file must have a field, _USE_LABEL_.
 - [x] The products_header.csv file must have a field, _:LABEL_.
 - [ ] The products.csv file must have the label name in the corresponding _USE_LABEL_ column.
@@ -305,14 +305,13 @@ How many times must you execute the import process using neo4j-admin?
 [.statement]
 Select the correct answer.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] 1
 - [ ] 6
 - [ ] 8
 - [ ] 14
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

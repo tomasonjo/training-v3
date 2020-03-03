@@ -1,6 +1,8 @@
 = Neo4j Slide Types
 :experimental:
 :imagesdir: ../images
+// wordpress
+:slug: neo4j-slide-types
 
 == Title
 
@@ -119,31 +121,31 @@ RETURN p
 image::AngelaFollowers.png[width=600,align=center,role=border]
 --
 
-[.section-title]
+[.slide-section-title]
 == Section title (default: green + node)
 
-[.section-title.has-green-background.has-team-background]
+[.slide-section-title.has-green-background.has-team-background]
 == Section title (green + team)
 
-[.section-title.has-gold-background]
+[.slide-section-title.has-gold-background]
 == Section title (gold)
 
-[.section-title.has-gold-background.has-team-background]
+[.slide-section-title.has-gold-background.has-team-background]
 == Section title (gold + team)
 
-[.section-title.has-purple-background]
+[.slide-section-title.has-purple-background]
 == Section title (purple)
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Section title (purple + puzzle)
 
-[.title]
+[.slide-title]
 == Title (default: green + puzzle)
 
-[.title.has-green-background]
+[.slide-title.has-green-background]
 == Title (green)
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == Title (gold + team): Subtitle
 
 In Neo4j Browser:
@@ -152,7 +154,7 @@ kbd:[:play intro-neo4j-exercises]
 
 Then follow instructions for Exercise 1.
 
-[.title.has-purple-background.has-node-background]
+[.slide-title.has-purple-background.has-node-background]
 == Title (purple + node)
 
 [.half.left.green,transition="fade-in fade-out"]
@@ -240,7 +242,7 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 Select the correct answer.
 
-[.answers]
+[%interactive.answers]
 - [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
 - [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
 - [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`

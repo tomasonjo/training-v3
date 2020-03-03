@@ -42,3 +42,94 @@ image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=c
 
 You have now configured the Neo4j instance to use a different location for the databases.
 
+<<<<<<< HEAD
+=======
+== *Exercise #7: Checking consistency of a database*
+
+In this Exercise, you check the consistency of a database that is consistent. Then you modify a file that causes the database to become corrupt and then check its consistency.
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+. Use `cypher-shell` to load the *movies.dump* data into a database named _movies2_.
+. Use `cypher-shell` to create the _movies2_ database.
+. Confirm that this database has 171 nodes.
+. Stop the _movies2_ database.
+. With `sudo`, create the directory */home/ubuntu/reports*.
+. Change ownership of the reports directory to _neo4j_:  `sudo chown neo4j:neo4j /home/ubuntu/reports`
+. Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written. The consistency check tool should return the following:
+
+image::L03-Ex5-Consistent.png[Ex5-Consistent,width=1000,align=center]
+
+[start=6]
+. Use `cypher-shell` to load the *movies.dump* data into a database named _movies3_.
+. Use `cypher-shell` to create the _movies3_ database.
+. Confirm that this database has 171 nodes.
+. Stop the _movies3_ database.
+. Next, you will "maliciously" corrupt the database. Modify the file *databases/movies3/neostore.nodestore.db* by adding some text to the file.
+
+image::CorruptMovies3.png[CorruptMovies3,width=1000,align=center]
+
+[start=11]
+. Run the consistency check tool on *movieies3* using `neo4j-admin` specifying */home/ubuntu/reports* as the directory where the report will be written. The consistency check tool should return something like the following:
+
+image::L03-Ex5-Inconsistent.png[Ex5-Inconsistent,width=1000,align=center]
+
+[start=12]
+. Use `cypher-shell` to drop the _movies3_ database.
+
+[.slide-title.has-gold-background.has-team-background]
+==  *Exercise #8: Scripting changes to the database*
+
+In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
+
+. *AddConstraintsMovies.cypher*
+. *AddConstraintsMovies2.cypher*
+. *AddConstraints.sh*
+. *MaintainDB.sh*
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+. Create a Cypher script in the */home/ubuntu/files* directory named *AddConstraintsMovies.cypher* with the following statements:
+----
+CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
+CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
+----
+
+[start=6]
+. Create a shell script in the */usr/local/work* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell`. This file should have the following contents:
+
+----
+cat /usr/local/work/AddConstraints.cypher | /usr/bin/cypher-shell -u neo4j -p training-helps --format verbose
+----
+
+[start=7]
+. Create a shell script in the */usr/local/work* directory named *MaintainDB.sh* that will initialize the log file and then call *AddConstraints.sh*. This file should have the following contents:
+
+----
+rm -rf /usr/local/work/MaintainDB.log
+/usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/MaintainDB.log
+----
+
+[start=8]
+. Ensure that the scripts you created have execute permissions.
+. Run the *MaintainDB.sh* script and  view the log file.
+
+image::L03-Ex6-RunMaintainDB.png[Ex6-RunMaintainDB,width=1000,align=center]
+
+[start=10]
+. Confirm that it created the constraints in the database. (Check using cypher-shell (`CALL db.constraints();`))
+
+image::L03-Ex6-ConfirmConstraints.png[Ex6-ConfirmConstraints,width=1000,align=center]
+>>>>>>> f6c22c4864ecebd7f80d433329b5e0bb2f60001b

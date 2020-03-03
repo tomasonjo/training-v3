@@ -223,7 +223,7 @@ image::CALLsubquery.png[CALLsubquery,width=900,align=center]
 [.statement]
 The variable _m_ used in the subquery is used in the next query.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 7: Controlling query processing*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -234,7 +234,7 @@ This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-5.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -252,8 +252,8 @@ RETURN ??
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] a
 - [ ] r
 - [ ] m
@@ -267,8 +267,8 @@ What clauses enable you to perform subqueries?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `SUBMATCH`
 - [x] `WITH`
 - [ ] `QUERY`
@@ -289,14 +289,14 @@ RETURN p.name, movieCount, movie.title
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `ELEMENTS`
 - [x] `UNWIND`
 - [ ] `ROWS`
 - [ ] `SELECT`
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

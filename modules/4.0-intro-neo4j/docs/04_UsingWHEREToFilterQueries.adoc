@@ -1,5 +1,5 @@
-
 = Using WHERE to filter queries
+:slug: using-where-to-filter-queries
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -427,7 +427,7 @@ There are a number of syntax elements of Cypher that we have not covered in this
 You can learn more about these syntax elements in the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] and the https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard].
 --
 
-[.title.has-green-background.has-team-background]
+[.slide-title.has-green-background.has-team-background]
 == *Exercise 4: Filtering queries using the `WHERE` clause*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -438,7 +438,7 @@ This exercise has 13 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-5.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -456,8 +456,8 @@ What variables, can you test in the `WHERE` clause?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] p
 - [x] rel
 - [x] m
@@ -478,8 +478,8 @@ RETURN m.title
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `CONTAINS`
 - [x] `IN`
 - [ ] `IS`
@@ -494,20 +494,14 @@ What query will retrieve this data?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `MATCH (p:Person)`
-       `WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m)`
-       `RETURN p.name, m.title`
-- [x] `MATCH (p:Person)-[:ACTED_IN]->(m:Movie)`
-       `WHERE  (p)-[:WROTE]-(m)`
-       `RETURN p.name, m.title`
-- [ ] `MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie)`
-       `RETURN p.name, m.title`
-- [ ] `MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)`
-       `RETURN p.name, m.title`
 
-[.title.has-green-background.has-puzzle-background]
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (p:Person) WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m) RETURN p.name, m.title`
+- [x] [src-cypher]`MATCH (p:Person)-[:ACTED_IN]->(m:Movie) WHERE  (p)-[:WROTE]-(m) RETURN p.name, m.title`
+- [ ] [src-cypher]`MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie) RETURN p.name, m.title`
+- [ ] [src-cypher]`MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p) RETURN p.name, m.title`
+
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher `WHERE` clauses to test:

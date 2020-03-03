@@ -1,5 +1,5 @@
-
 = Working with Cypher Data
+:slug: working-with-cypher-data
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -458,7 +458,7 @@ Here are some of the built-in conversion functions:
 
 Consult the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 6: Working with Cypher data*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -469,7 +469,7 @@ This exercise has 6 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-5.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -479,8 +479,8 @@ What functions below aggregate results:
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `count()`
 - [ ] `size()`
 - [ ] `map()`
@@ -493,8 +493,8 @@ What construct best represents a node in the graph?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] list
 - [x] map
 - [ ] JSON object
@@ -507,14 +507,14 @@ Which date/time related function returns a long integer value?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `date()`
 - [ ] `datetime()`
 - [ ] `time()`
 - [x] `timestamp()`
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

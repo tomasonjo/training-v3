@@ -11,11 +11,7 @@ module InlineHighlighter
     end
     lexer = Rouge::Lexer.find lang
     theme = Rouge::Theme.find(doc.attr('rouge-style', 'github')).new
-    formatter = if doc.backend == 'html5'
-                  Rouge::Formatters::HTML.new(theme)
-                else
-                  Rouge::Formatters::HTMLInline.new(theme)
-                end
+    formatter = Rouge::Formatters::HTMLInline.new(theme)
     return formatter.format(lexer.lex(text))
   end
 

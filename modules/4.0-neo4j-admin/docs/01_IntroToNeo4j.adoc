@@ -1,4 +1,3 @@
-
 = Introduction to Neo4j
 :doctype: book
 :nextsecttitle: Neo4j Administration Overview
@@ -588,7 +587,7 @@ The two main tools used that are part of the Neo4j installation (located in the 
 * *neo4j* used to start, stop and retrieve the status of the Neo4j DBMS instance.
 * *neo4j-admin* used to create, copy, remove, backup, restore and perform other administrative tasks.
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -599,8 +598,7 @@ What are some of the benefits provided by the Neo4j DBMS?
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] Clustering
 - [x] ACID
 - [x] Index-free adjacency
@@ -614,8 +612,7 @@ As an administrator, what language do you use to retrieve data from a Neo4j data
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] Cypher
 - [ ] SQL
 - [ ] APOC
@@ -629,14 +626,13 @@ What are some of the language drivers that come with Neo4j out of the box that d
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] Java
 - [ ] Ruby
 - [x] Python
 - [x] JavaScript
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

@@ -1,5 +1,5 @@
-
 = Working with Patterns in Queries
+:slug: working-with-patterns-in-queries
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -520,7 +520,7 @@ image::OptionalMatch.png[OptionalMatch,width=800,align=center]
 Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_ value is returned for the movie part of the query, as well as the relationship.
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 5: Working with patterns in queries*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -531,7 +531,7 @@ This exercise has 6 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-5.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -550,8 +550,8 @@ What is the first node that is retrieved by the query engine?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] The first _Person_ node with a _FOLLOWS_ relationship
 - [ ] The first _Person_ node with a _REVIEWED_ relationship
 - [x] The _Movie_ node for the movie, The Replacements
@@ -573,8 +573,8 @@ RETURN a.name, m.title, m.released, w.name
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] The second line should be: `(m2:Movie)<-[:WROTE]-(w:Person)`.
 - [x] Add a comma after the first pattern in the `MATCH` clause.
 - [ ] The second line should be: `(m2:Movie)<-[:WROTE]-(a)`.
@@ -590,14 +590,14 @@ What Cypher `MATCH` clause would you use to find all people in this graph that a
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2..4]->(p2.Person)`
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2-4]->(p2.Person)`
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2.Person)`
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2,4]->(p2.Person)`
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

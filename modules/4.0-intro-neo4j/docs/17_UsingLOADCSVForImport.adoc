@@ -291,7 +291,7 @@ If all fields have data, then `split()` alone will work. If, however, some field
 
 image::TransformMovieData3.png[TransformMovieData3,width=1000,align=center]
 
-[.title.has-green-background.has-team-background]
+[.slide-title.has-green-background.has-team-background]
 == *Guided Exercise: Creating a new database*
 
 [.notes]
@@ -527,7 +527,7 @@ These indexes will make lookup of a _Movie_ by _title_ as well as lookup of a _P
 These indexes are not unique indexes.
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 16: Using LOAD CSV for import*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -538,7 +538,7 @@ This exercise has 9 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -548,8 +548,8 @@ When you execute `LOAD CSV` what unit of data is read from the data source?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] A field
 - [ ] All field values for a single field
 - [x] A row
@@ -562,8 +562,8 @@ What should you add to the graph before you import using LOAD CSV?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Indexes for all important queries
 - [ ] Schema containing the names node labels that will be created
 - [ ] Schema containing the types that will be assigned to properties during the load
@@ -576,14 +576,14 @@ In general, what is the maximum rows you can process using LOAD CSV?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] 1K
 - [ ] 10K
 - [x] 100K
 - [ ] 1M
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 ifndef::backend-revealjs[]

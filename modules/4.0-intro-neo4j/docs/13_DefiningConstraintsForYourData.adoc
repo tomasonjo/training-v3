@@ -378,7 +378,7 @@ You will see this error:
 image::CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,width=800,align=center]
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 13: Defining constraints on your data*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -389,7 +389,7 @@ This exercise has 14 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-6.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -399,8 +399,8 @@ What are some of the constraints you can create for the data in your graph?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Property for a node with a given label is always a string value.
 - [x] Property value for a node with a given label is unique.
 - [x] Property for a node with a given label must exist.
@@ -413,8 +413,8 @@ What types of uniqueness constraints can you define for a graph?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] Unique values for a property of a node
 - [ ] Unique values for a property of a relationship
 - [x] Unique values for a set of properties of a node
@@ -427,14 +427,14 @@ How many properties can be defined for a NODE KEY constraint?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] 0
 - [x] 1
 - [x] 2
 - [x] unlimited
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

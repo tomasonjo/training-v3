@@ -72,7 +72,7 @@ PrepareDB.log
 When the *PrepareDB.sh* script runs its scripts, all output will be written to the log file, including error output. Then you can simply check the log file to make sure it ran as expected.
 Using the Cypher file, together with the run scripts, you can perform something like this to automate changes to a database or set of databases.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 ==  *Exercise #8: Scripting changes to the database*
 
 //ifndef::backend-htlm5[]
@@ -94,34 +94,38 @@ Refer to the *Exercise Guide* for instructions.
 Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
 
 Select the correct answer.
-[%interactive]
-- [ ] [.false-answer]#`neo4j-admin create-database`#
-- [ ] [.false-answer]#`neo4j-admin initialize`#
-- [ ] [.false-answer]#`neo4j create-database`#
-- [ ] [.required-answer]#`neo4j start`#
+
+[%interactive.answers]
+- [ ] `neo4j-admin create-database`
+- [ ] `neo4j-admin initialize`
+- [ ] `neo4j create-database`
+- [x] `neo4j start`
 
 === Question 2
 
 Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
 
 Select the correct answers.
-[%interactive]
-- [ ] [.required-answer]#Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.#
-- [ ] [.required-answer]#Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.#
-- [ ] [.false-answer]#Run `neo4j-admin rename graph.db ABCRecommendations.db`.#
-- [ ] [.false-answer]#Run `neo4j-admin move graph.db ABCRecommendations.db`.#
+
+[%interactive.answers]
+- [x] Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.
+- [x] Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.
+- [ ] [Run `neo4j-admin rename graph.db ABCRecommendations.db`.
+- [ ] Run `neo4j-admin move graph.db ABCRecommendations.db`.
 
 === Question 3
 
 How do you copy a database that you want to give to another user?
 
 Select the correct answer.
-[%interactive]
-- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.#
-- [ ] [.false-answer]#With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.#
-- [ ] [.false-answer]#With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.#
-- [ ] [.required-answer]#With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.#
+
+[%interactive.answers]
+- [ ] With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.
+- [ ] With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.
+- [ ] With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.
+- [x] With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.
 ////
+
 == Summary
 
 You should now be able to:

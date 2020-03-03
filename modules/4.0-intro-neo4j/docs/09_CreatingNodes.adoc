@@ -465,7 +465,7 @@ Assuming that we have previously created the node for the movie with the these p
 
 image::RemoveProperties.png[RemoveProperties,width=800,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 9: Creating nodes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -477,7 +477,7 @@ Estimated time to complete: 30 minutes.
 
 
 //[#module-6.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -487,8 +487,8 @@ What Cypher clauses can you use to create a node?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `CREATE`
 - [ ] `CREATE NODE`
 - [x] `MERGE`
@@ -509,8 +509,8 @@ RETURN s
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `DELETE s.color`
 - [x] `SET s.color=null`
 - [x] `REMOVE s.color`
@@ -532,14 +532,14 @@ REMOVE p.birthYear
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] name
 - [ ] birthYear
 - [x] salary
 - [x] department
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

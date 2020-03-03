@@ -60,3 +60,200 @@ image::RemovedNeo4j.png[RemovedNeo4j,width=1000,align=center]
 
 You have now successfully added and dropped a database, as well as specifying a different database as the default database for clients.
 
+<<<<<<< HEAD
+=======
+== *Exercise #5: Copying databases*
+
+In this exercise, you will use `neo4j-admin` to copy a database and create a database from a dump file.
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is started.
+
+=== Exercise steps
+
+*Part 1*: First you will create a movies database that will be used in this exercise for copying.
+
+. In `cypher-shell` create a database named _movies_.
+. Exit out of `cypher-shell`.
+. Invoke `cypher-shell` using *movieDB.cypher* as input and specify _movies_ as the database.
+----
+/usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movieDB.cypher
+----
+[start=4]
+. In `cypher-shell` confirm that the database was loaded. It should contain 171 nodes:
+----
+MATCH (n) RETURN count(n);
+----
+
+*Part 2*: You will make a copy of the _movies_ database, _movies2_ for local use in the Neo4j instance.
+
+. In `cypher-shell` stop the _movies_ database.
+. Exit `cypher-shell`.
+. Copy the _movies_ database to the _movies2_ database using the neo4j-admin tool:
+----
+/usr/bin/neo4j-admin copy --from-database=movies --to-database=movies2
+----
+[start=4]
+. In `cypher-shell' create _movies2_.
+. Confirm that this _movies2_ database has 171 nodes.
+----
+MATCH (n) RETURN count(n);
+----
+
+*Part 3*: You will dump the _movies_ database.
+
+. Use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
+----
+/usr/bin/neo4j-admin dump --database=movies --to=/home/ubuntu/files/movies.dump
+----
+[start=2]
+. Confirm that the *movies.dump* file was created.
+
+*Part 4*: You use the dump file to create a database.
+
+. Use the `load` command of the `neo4j-admin` tool to create the database, _movies3_ from the dump file as follows:
+----
+/usr/bin/neo4j-admin load --database=movies3 --from=/home/ubuntu/files/movies.dump
+----
+[start=2]
+. In `cypher-shell' create _movies3_.
+. Confirm that this _movies3_ database has 171 nodes.
+
+=== Exercise summary
+
+You have now gained experience copying a database within the Neo4j instance and also creating a dump file that can be used to create a database on a different system.
+
+== *Exercise #6: Modifying the location of the databases*
+
+In this Exercise, you will set up a different location for the databases in your local filesystem and start the Neo4j instance using the database at this new location.
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is stopped.
+. You should have previously created the dump file, *movies.dump* for the movie database in the *~/files directory*.
+
+=== Exercise steps:
+
+
+. Create a directory named *~/neo4j-databases*. This is the directory where the databases will reside which is different from the default location used by Neo4j.
+. Make sure that this *neo4j-databases* directory is owned by _neo4j:neo4j_.
+. Modify the *neo4j.conf* file to use */home/ubuntu/neo4j-databases* as the data directory. Also ensure that there the default database is _maindb_. Your *neo4j.conf* file should look something like this:
+
+image::BestPracticeConfigChangesAtEnd.png[BestPracticeConfigChangesAtEnd,width=900,align=center]
+
+[start=5]
+. Start the Neo4j instance.
+. Examine the log file to ensure that the instance started without errors.
+. Examine the files in the */home/ubuntu/neo4j-databases* location. The instance should have created the *databases* and *transactions* directories. The *databases* directory should look as follows:
+
+image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=center]
+
+[start=8]
+. Connect to the _maindb_ database using `cypher-shell`. Did you need to change the password?
+. Exit `cypher-shell`.
+. Use the `load` command of the `neo4j-admin` tool to create the database, _movies_ from the dump file as follows:
+----
+/usr/bin/neo4j-admin load --database=movies --from=/home/ubuntu/files/movies.dump
+----
+[start=11]
+. In `cypher-shell' create _movies_.
+. Confirm that this _movies_ database has 171 nodes.
+
+=== Exercise summary
+
+You have now configured the Neo4j instance to use a different location for the databases.
+
+== *Exercise #7: Checking consistency of a database*
+
+In this Exercise, you check the consistency of a database that is consistent. Then you modify a file that causes the database to become corrupt and then check its consistency.
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+. Use `cypher-shell` to load the *movies.dump* data into a database named _movies2_.
+. Use `cypher-shell` to create the _movies2_ database.
+. Confirm that this database has 171 nodes.
+. Stop the _movies2_ database.
+. With `sudo`, create the directory */home/ubuntu/reports*.
+. Change ownership of the reports directory to _neo4j_:  `sudo chown neo4j:neo4j /home/ubuntu/reports`
+. Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written. The consistency check tool should return the following:
+
+image::L03-Ex5-Consistent.png[Ex5-Consistent,width=1000,align=center]
+
+[start=6]
+. Use `cypher-shell` to load the *movies.dump* data into a database named _movies3_.
+. Use `cypher-shell` to create the _movies3_ database.
+. Confirm that this database has 171 nodes.
+. Stop the _movies3_ database.
+. Next, you will "maliciously" corrupt the database. Modify the file *databases/movies3/neostore.nodestore.db* by adding some text to the file.
+
+image::CorruptMovies3.png[CorruptMovies3,width=1000,align=center]
+
+[start=11]
+. Run the consistency check tool on *movieies3* using `neo4j-admin` specifying */home/ubuntu/reports* as the directory where the report will be written. The consistency check tool should return something like the following:
+
+image::L03-Ex5-Inconsistent.png[Ex5-Inconsistent,width=1000,align=center]
+
+[start=12]
+. Use `cypher-shell` to drop the _movies3_ database.
+
+[.slide-title.has-gold-background.has-team-background]
+==  *Exercise #8: Scripting changes to the database*
+
+In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
+
+. *AddConstraintsMovies.cypher*
+. *AddConstraintsMovies2.cypher*
+. *AddConstraints.sh*
+. *MaintainDB.sh*
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+. Create a Cypher script in the */home/ubuntu/files* directory named *AddConstraintsMovies.cypher* with the following statements:
+----
+CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
+CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
+----
+
+[start=6]
+. Create a shell script in the */usr/local/work* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell`. This file should have the following contents:
+
+----
+cat /usr/local/work/AddConstraints.cypher | /usr/bin/cypher-shell -u neo4j -p training-helps --format verbose
+----
+
+[start=7]
+. Create a shell script in the */usr/local/work* directory named *MaintainDB.sh* that will initialize the log file and then call *AddConstraints.sh*. This file should have the following contents:
+
+----
+rm -rf /usr/local/work/MaintainDB.log
+/usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/MaintainDB.log
+----
+
+[start=8]
+. Ensure that the scripts you created have execute permissions.
+. Run the *MaintainDB.sh* script and  view the log file.
+
+image::L03-Ex6-RunMaintainDB.png[Ex6-RunMaintainDB,width=1000,align=center]
+
+[start=10]
+. Confirm that it created the constraints in the database. (Check using cypher-shell (`CALL db.constraints();`))
+
+image::L03-Ex6-ConfirmConstraints.png[Ex6-ConfirmConstraints,width=1000,align=center]
+>>>>>>> f6c22c4864ecebd7f80d433329b5e0bb2f60001b

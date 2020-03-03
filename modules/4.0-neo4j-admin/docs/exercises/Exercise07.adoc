@@ -39,6 +39,56 @@ image::L03-Ex5-Inconsistent.png[Ex5-Inconsistent,width=1000,align=center]
 [start=12]
 . Use `cypher-shell` to drop the _movies3_ database.
 
+<<<<<<< HEAD
 === Exercise summary
+=======
+[.slide-title.has-gold-background.has-team-background]
+==  *Exercise #8: Scripting changes to the database*
+
+In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
+
+. *AddConstraintsMovies.cypher*
+. *AddConstraintsMovies2.cypher*
+. *AddConstraints.sh*
+. *MaintainDB.sh*
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+. Ensure that the Neo4j instance is started.
+
+=== Exercise steps:
+
+. Create a Cypher script in the */home/ubuntu/files* directory named *AddConstraintsMovies.cypher* with the following statements:
+----
+CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
+CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
+----
+
+[start=6]
+. Create a shell script in the */usr/local/work* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell`. This file should have the following contents:
+
+----
+cat /usr/local/work/AddConstraints.cypher | /usr/bin/cypher-shell -u neo4j -p training-helps --format verbose
+----
+
+[start=7]
+. Create a shell script in the */usr/local/work* directory named *MaintainDB.sh* that will initialize the log file and then call *AddConstraints.sh*. This file should have the following contents:
+
+----
+rm -rf /usr/local/work/MaintainDB.log
+/usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/MaintainDB.log
+----
+
+[start=8]
+. Ensure that the scripts you created have execute permissions.
+. Run the *MaintainDB.sh* script and  view the log file.
+
+image::L03-Ex6-RunMaintainDB.png[Ex6-RunMaintainDB,width=1000,align=center]
+
+[start=10]
+. Confirm that it created the constraints in the database. (Check using cypher-shell (`CALL db.constraints();`))
+>>>>>>> f6c22c4864ecebd7f80d433329b5e0bb2f60001b
 
 You have now you checked the consistency of a database that is consistent. Then you modified a file that causes the database to become corrupt and then checked its consistency.

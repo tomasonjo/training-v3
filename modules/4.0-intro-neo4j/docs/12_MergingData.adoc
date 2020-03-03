@@ -380,7 +380,7 @@ MATCH (fromDate:Date {year: 2018})
 MERGE (toDate:Date {month: 'January'})-[:IN_YEAR]->(fromDate)
 ----
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 12: Merging data in the graph*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -391,7 +391,7 @@ This exercise has 16 steps.
 Estimated time to complete: 45 minutes.
 
 //[#module-6.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -409,8 +409,7 @@ RETURN p
 [.statement]
 Select the correct answer.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] The _Person_ label exists in the graph.
 - [ ] The _Person_ label does not exist in the graph.
 - [x] The value for name is unique.
@@ -432,8 +431,7 @@ MERGE (p)-[:ACTED_IN]->(m)
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] If the _:ACTED_IN_ relationship exists, it deletes it and recreates it.
 - [x] If the _:ACTED_IN_ relationship exists, it does nothing.
 - [x] If the _:ACTED_IN_ relationship does not exist, it creates it.
@@ -454,15 +452,14 @@ MERGE (p)-[rel:ACTED_IN]->(m)
 
 [.statement]
 Select the correct answers.
-//[%interactive]
 
-[.answers]
+[%interactive.answers]
 - [x] Use the default behavior. The relationship will be created if it doesn't exist.
 - [x] Specify `ON CREATE` to perform additional processing when the relationship is created.
 - [x] Specify `ON MATCH` to perform additional processing when the relationship is not created.
 - [ ] Specify `ON DELETE` to perform additional processing when the relationship is deleted.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

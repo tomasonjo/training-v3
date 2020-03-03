@@ -401,7 +401,7 @@ Here is a very high-level list of some of the best practices you should aim for 
 Many of these guidelines are covered in the course, _Advanced Cypher_.
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 15: Using query best practices*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -412,7 +412,7 @@ This exercise has 14 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -422,8 +422,8 @@ What Cypher keyword can you use to prefix any Cypher statement to examine how ma
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `ANALYZE`
 - [ ] `EXPLAIN`
 - [x] `PROFILE`
@@ -436,8 +436,8 @@ What commands do you use to set values for parameters in your Neo4j Browser sess
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] :set param
 - [x] :param
 - [ ] :set params
@@ -451,14 +451,14 @@ What are some ways that you can kill a query?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] You can close the result pane in Session A, if the query can be seen in Session B.
 - [ ] You can close the result pane in Session A, if the query can no longer be seen in Session B.
 - [x] You can kill any running query seen in Session B.
 - [x] You can close the Neo4j Browser that is running Session A.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:
