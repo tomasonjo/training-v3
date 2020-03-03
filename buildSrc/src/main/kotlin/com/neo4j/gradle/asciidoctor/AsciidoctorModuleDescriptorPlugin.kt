@@ -44,12 +44,16 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
   @TaskAction
   fun task() {
     val asciidoctor = Asciidoctor.Factory.create()
-    val navItems = sources.asSequence().map { it.sorted() }.flatten().sorted().map { file ->
+    val navItems = sources.asSequence().map { it.sorted() }.flatten().sorted().mapNotNull { file ->
       val document = asciidoctor.loadFile(file, emptyMap())
       val url = "${file.name.removeSuffix(".adoc")}.html"
       val title = document.doctitle
-      val slug = document.getAttribute("slug", "")
-      mapOf("title" to title, "url" to url, "slug" to slug)
+      val slug = document.getAttribute("slug", "") as String
+      if (slug.isNotBlank()) {
+        mapOf("title" to title, "url" to url, "slug" to slug)
+      } else {
+        null
+      }
     }.toList()
     val outputDirFile = File(outputDir)
     if (!outputDirFile.exists()) {

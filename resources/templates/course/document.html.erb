@@ -5,17 +5,15 @@
     <div class="dev-menu-nav large-2 hide-for-medium-only hide-for-small-only columns">
       <h3 class="dev-nav-header"><strong>Online Course</strong></h3>
       <ul style="padding-top: 0;" class="side-nav">
-        <% @attributes.select {|k,_| k.start_with?('module_toc_link_') }.each_key do |toc_link_attr| %>
+        <% @attributes.select { |k, _| k.start_with?('module_toc_link_') }.each_key do |toc_link_attr| %>
           <% toc_index = toc_link_attr.sub('module_toc_link_', '') %>
           <% toc_title_attr = "module_toc_title_#{toc_index}" %>
           <% toc_slug_attr = "module_toc_slug_#{toc_index}" %>
-          <% if attr?(toc_slug_attr) %>
-            <a href="../<%= attr(toc_slug_attr) %>">
-              <dl class="menu-list">
-                <dd class="accordion-dev-nav <%= attr(toc_slug_attr) == attr('slug') ? 'active' : '' %>"><%= attr(toc_title_attr) %></dd>
-              </dl>
-            </a>
-          <% end %>
+          <a href="../<%= attr(toc_slug_attr) %>">
+            <dl class="menu-list">
+              <dd class="accordion-dev-nav <%= attr(toc_slug_attr) == attr('slug') ? 'active' : '' %>"><%= attr(toc_title_attr) %></dd>
+            </dl>
+          </a>
         <% end %>
       </ul>
       <div class="c2a-icons">
@@ -44,7 +42,7 @@
     <div class="guide-section-content large-8 columns">
       <h1 class="entry-title"><%= attr 'doctitle' %></h1>
       <%= content %>
-      <%=  File.new("#{__dir__ }/quiz_partial.html.erb", mode: 'r:UTF-8').read %>
+      <%= File.new("#{__dir__ }/quiz_partial.html.erb", mode: 'r:UTF-8').read %>
     </div>
     <div class="guide-toc large-2 hide-for-medium-only hide-for-small-only columns">
       <ul class="side-nav">
@@ -53,7 +51,7 @@
             <h3>Contents</h3>
             <div id="nav" class="toc content active">
               <ul class="sectlevel1">
-                <%  document.find_by({context: :section}) {|section| section.level == 1 }.each do |section| %>
+                <% document.find_by({context: :section}) { |section| section.level == 1 }.each do |section| %>
                   <!-- fixme: highlighting the active section during scroll does not work properly in developer.js -->
                   <li><a href="#<%= section.id %>"><%= section.title %></a></li>
                 <% end %>
