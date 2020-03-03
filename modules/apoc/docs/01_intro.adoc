@@ -43,8 +43,8 @@ At the end of this training, you should be able to:
 | APOC History, installation, documentation| 15'
 | Utility functions |20'
 |Data integration| 20'
-|Cypher execution |20'	
-2+| 	BREAK 
+|Cypher execution |20'
+2+| 	BREAK
 |Path expansion | 30'
 |Graph refactoring | 15'
 |TTL & triggers|  20'
@@ -52,7 +52,7 @@ At the end of this training, you should be able to:
 | Questions, outlook, contribution | 10'
 |===
 
-== How do we learn APOC? 
+== How do we learn APOC?
 
 
 * Massively hands-on, lots of exercises
@@ -68,7 +68,7 @@ Have you:
 
 * Used built-in procedures in Neo4j?
 * Installed and used APOC?
-* Used other procedure libraries? 
+* Used other procedure libraries?
     ** Graph Algorithms, GraphAware NLP, Spatial?
 * Written your own procedures/functions?
 * Deployed your procedures/functions to production?
@@ -83,7 +83,7 @@ User-defined procedures let you write custom code that:
 * Is written in any JVM language
 * Accesses the Neo4j Java API
 * Is deployed to the database server
-* Accessed by applications via Cypher
+* Can be accessed by applications via Cypher
 --
 
 [.is-half.right]
@@ -183,11 +183,117 @@ RETURN name, signature
 --
 
 [.is-half.right]
+--
 image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
+--
 
 
+[.statement.is-full]
 Reference: https://neo4j.com/docs/operations-manual/current/reference/procedures/
 
 
 [.section-title.has-purple-background.has-puzzle-background]
 == Task: How many procedures exist per group?
+
+[.section-title.has-green-background.has-puzzle-background]
+== About APOC
+
+== About APOC
+
+[.is-half.left]
+--
+* Large standard library of utility  functions and procedures
+* Actively developed - many contributors
+* "scratch your itch"
+* Makes Cypher easier to use
+* Enable some specific use-cases
+* Plan is to migrate some of the functionality into the Neo4j product
+--
+
+[.is-half.right]
+--
+image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
+--
+
+== A history of APOC
+
+* Started life as Michael Hunger's “Fun Project”
+* 3.0 was about to have User-defined procedures callable from Cypher but was missing many utility procedures.
+* APOC added them and quickly grew from 50 to 150 to 450 procedures & functions
+* It's an active OSS project
+* It has many contributors and users (100k downloads)
+
+[.section-title.has-green-background.has-puzzle-background]
+== Report issues and contribute
+
+
+[.section-title.has-green-background.has-puzzle-background]
+== Ask questions
+
+[.section-title.has-green-background.has-puzzle-background]
+== Learn more
+
+== Learn more
+
+* APOC video series at https://r.neo4j.com/apoc-videos[r.neo4j.com/apoc-videos^]
+* Documentation at https://www.neo4j.com/docs/labs/apoc[neo4j.com/docs/labs/apoc^]
+* Neo4j Browser guide (``:play apoc`)
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Open the docs and have a look around
+
+[.section-title.has-green-background.has-puzzle-background]
+== Installation
+
+== APOC availability
+
+[.is-half.left]
+--
+* Neo4j Sandbox
+* Neo4j Desktop
+* Neo4j Aura
+* Docker
+--
+
+== APOC on Neo4j Desktop
+
+image of installing in a project
+
+== APOC on Neo4j Server
+
+--
+* Download the latest release JAR from https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/latest[github.com/neo4j-contrib/neo4j-apoc-procedures/releases/latest^]
+* Copy into $NEO4J_HOME/plugins
+* Remove older versions!
+* Add to $NEO4J_HOME/conf/apoc.conf
+
+[source,properties]
+----
+dbms.security.procedures.unrestricted=apoc.*
+----
+
+* Restart server
+--
+
+== Docker
+
+[source, bash]
+----
+
+----
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Install APOC
+
+[.section-title.has-green-background.has-puzzle-background]
+== Built-in Help
+
+== Most important slide of the session
+
+[source,cypher]
+----
+CALL apoc.help("keyword")
+----
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Search for keywords from the docs
