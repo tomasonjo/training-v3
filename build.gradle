@@ -225,20 +225,6 @@ subprojects {
     status = "private"
   }
 
-  task wordPressUploadTwin4j(type: WordPressUploadTask) {
-    dependsOn convertOnlineHtml
-    source = convertOnlineHtml.outputs.files
-    type = "twin4j"
-    status = "private"
-  }
-
-  task wordPressUploadDeveloper(type: WordPressUploadTask) {
-    dependsOn convertOnlineHtml
-    source = convertOnlineHtml.outputs.files
-    type = "developer"
-    status = "private"
-  }
-
   task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
 }
 
