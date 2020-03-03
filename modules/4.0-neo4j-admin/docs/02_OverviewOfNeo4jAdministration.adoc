@@ -393,8 +393,8 @@ Suppose your organization has two applications that require Neo4j. Each applicat
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] One, that will service two databases.
 - [ ] Two, one Neo4j installation for each database.
 - [ ] Two, one Core Server, and one Read Replica  Server.
@@ -407,8 +407,8 @@ Which features below are available [.underline]#only# in the Enterprise Edition 
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] ACID transactions
 - [x] Causal Clusters
 - [x] Multiple user databases
@@ -421,8 +421,8 @@ What type of process [.underline]#must# Neo4j run in?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Daemon
 - [x] JVM
 - [ ] Docker Container

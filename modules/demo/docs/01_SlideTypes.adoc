@@ -240,7 +240,7 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 Select the correct answer.
 
-[.answers]
+[%interactive.answers]
 - [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
 - [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
 - [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`

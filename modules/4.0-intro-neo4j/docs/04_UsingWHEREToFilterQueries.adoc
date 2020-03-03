@@ -456,8 +456,8 @@ What variables, can you test in the `WHERE` clause?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] p
 - [x] rel
 - [x] m
@@ -478,8 +478,8 @@ RETURN m.title
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `CONTAINS`
 - [x] `IN`
 - [ ] `IS`
@@ -494,18 +494,12 @@ What query will retrieve this data?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `MATCH (p:Person)`
-       `WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m)`
-       `RETURN p.name, m.title`
-- [x] `MATCH (p:Person)-[:ACTED_IN]->(m:Movie)`
-       `WHERE  (p)-[:WROTE]-(m)`
-       `RETURN p.name, m.title`
-- [ ] `MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie)`
-       `RETURN p.name, m.title`
-- [ ] `MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p)`
-       `RETURN p.name, m.title`
+
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (p:Person) WHERE  (p)-[:WROTE]-(m) AND (p)-[WROTE]-(m) RETURN p.name, m.title`
+- [x] [src-cypher]`MATCH (p:Person)-[:ACTED_IN]->(m:Movie) WHERE  (p)-[:WROTE]-(m) RETURN p.name, m.title`
+- [ ] [src-cypher]`MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie) RETURN p.name, m.title`
+- [ ] [src-cypher]`MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p) RETURN p.name, m.title`
 
 [.title.has-green-background.has-puzzle-background]
 == Summary

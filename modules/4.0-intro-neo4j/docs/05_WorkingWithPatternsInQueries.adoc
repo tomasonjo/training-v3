@@ -550,8 +550,8 @@ What is the first node that is retrieved by the query engine?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] The first _Person_ node with a _FOLLOWS_ relationship
 - [ ] The first _Person_ node with a _REVIEWED_ relationship
 - [x] The _Movie_ node for the movie, The Replacements
@@ -573,8 +573,8 @@ RETURN a.name, m.title, m.released, w.name
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] The second line should be: `(m2:Movie)<-[:WROTE]-(w:Person)`.
 - [x] Add a comma after the first pattern in the `MATCH` clause.
 - [ ] The second line should be: `(m2:Movie)<-[:WROTE]-(a)`.
@@ -590,8 +590,8 @@ What Cypher `MATCH` clause would you use to find all people in this graph that a
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2..4]->(p2.Person)`
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2-4]->(p2.Person)`
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2.Person)`

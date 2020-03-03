@@ -564,8 +564,7 @@ What are some of the benefits provided by the Neo4j DBMS?
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] Clustering
 - [x] ACID
 - [x] Index-free adjacency
@@ -579,8 +578,7 @@ What libraries are available in Neo4j Desktop for developing your application?
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] APOC
 - [ ] JGraph
 - [x] Graph Algorithms
@@ -595,8 +593,7 @@ What are some of the language drivers that come with Neo4j out of the box?
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] Java
 - [ ] Ruby
 - [x] Python

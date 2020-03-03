@@ -399,8 +399,8 @@ What are some of the constraints you can create for the data in your graph?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Property for a node with a given label is always a string value.
 - [x] Property value for a node with a given label is unique.
 - [x] Property for a node with a given label must exist.
@@ -413,8 +413,8 @@ What types of uniqueness constraints can you define for a graph?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] Unique values for a property of a node
 - [ ] Unique values for a property of a relationship
 - [x] Unique values for a set of properties of a node
@@ -427,8 +427,8 @@ How many properties can be defined for a NODE KEY constraint?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] 0
 - [x] 1
 - [x] 2

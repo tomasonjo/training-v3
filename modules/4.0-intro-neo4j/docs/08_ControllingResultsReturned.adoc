@@ -358,8 +358,8 @@ RETURN  m.title
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `MATCH ()-[:REVIEWED]->(m:Movie)`
        `RETURN  DISTINCT m.title`
 - [ ] `MATCH ()-[:REVIEWED]->(m:Movie)`
@@ -378,8 +378,8 @@ How many property values can you order in the returned result?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] One
 - [x] As many as you need to
 - [ ] Two
@@ -392,8 +392,8 @@ We want to retrieve the names of the five oldest actors in our dataset. What cod
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `MATCH (p:Person)-[:ACTED_IN]->()`
       `WITH p LIMIT 5`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born`

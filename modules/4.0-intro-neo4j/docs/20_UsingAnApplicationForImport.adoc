@@ -257,8 +257,8 @@ What supported drivers can you use to write a Neo4j application?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] Java
 - [x] JavaScript
 - [x] Python
@@ -272,8 +272,8 @@ What programming languages support asynchronous calls to Neo4j:
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] JavaScript
 - [x] Java
 - [ ] Python
@@ -286,8 +286,8 @@ What programming languages support synchronous calls to Neo4j:
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] JavaScript
 - [x] Java
 - [x] Python

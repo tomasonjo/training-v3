@@ -267,8 +267,8 @@ Before you will import data using neo4j-admin, what is one thing you must do?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Create the database.
 - [x] Ensure the database does not exist.
 - [ ] Create the constraints in the database.
@@ -289,8 +289,8 @@ For this part of the import, where does the import process get information about
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] The products_header.csv file must have a field, _USE_LABEL_.
 - [x] The products_header.csv file must have a field, _:LABEL_.
 - [ ] The products.csv file must have the label name in the corresponding _USE_LABEL_ column.
@@ -305,8 +305,7 @@ How many times must you execute the import process using neo4j-admin?
 [.statement]
 Select the correct answer.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [x] 1
 - [ ] 6
 - [ ] 8

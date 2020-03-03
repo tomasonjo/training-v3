@@ -252,8 +252,8 @@ RETURN ??
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] a
 - [ ] r
 - [ ] m
@@ -267,8 +267,8 @@ What clauses enable you to perform subqueries?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `SUBMATCH`
 - [x] `WITH`
 - [ ] `QUERY`
@@ -289,8 +289,8 @@ RETURN p.name, movieCount, movie.title
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `ELEMENTS`
 - [x] `UNWIND`
 - [ ] `ROWS`
