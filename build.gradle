@@ -116,11 +116,11 @@ subprojects {
   task convertOnlineHtml(type: AsciidoctorTask) {
     dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
 
-    inputs.dir "${rootProject.projectDir}/resources/templates/developer"
+    inputs.dir "${rootProject.projectDir}/resources/templates/course"
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/developer"]
+      options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
       attributes 'imagesdir': "https://s3-us-west-1.amazonaws.com/training-assets.neo4j.com/course/${project.name}/images/",
         'sectanchors': ''
     }
