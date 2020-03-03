@@ -1,0 +1,101 @@
+= Neo4j Training Material: Publish pages
+:uri-wp-rest-api-ref: https://developer.wordpress.org/rest-api/reference/
+
+== Publish to WordPress
+
+=== Prerequisite
+
+To publish pages to WordPress, you will need an application account to authenticate with the {uri-wp-rest-api-ref}[WordPress REST API].
+You will also need an S3 account to push images to S3.
+
+==== Upload images to S3
+
+The following command will upload the images of the _4.0-intro-neo4j_ module to S3 using the AWS profile named _neo4j_:
+
+ $ ./gradlew :4.0-intro-neo4j:s3UploadImages -Ps3-profile=neo4j
+
+This process only adds or updates (if the `overwrite` attribute is set to true) images.
+In other words, this process won't remove images from S3.
+
+==== AsciiDoc attribute
+
+A page must have a (unique) `slug` attribute:
+
+[source,adoc]
+----
+= Introduction to Cypher
+:slug: introduction-cypher
+----
+
+=== Upload to WordPress
+
+The following command will publish pages to WordPress:
+
+ $ ./gradlew 4.0-intro-neo4j:wordPressUploadCourse -Pwordpress-username=neo -Pwordpress-host="neo4j.com" -Pwordpress-password="abcd"
+
+If the slug already exists, the page will be updated. Otherwise the page will be created.
+This process won't remove pages from WordPress.
+
+=== How?
+
+A companion YAML file will be produced for each page during the build:
+
+[source]
+----
+00_AboutThisCourse.html
+00_AboutThisCourse.yml
+----
+
+.00_AboutThisCourse.yml
+[source,yaml]
+----
+slug: "introduction-to-neo4j-4-0"
+title: "Introduction to Neo4j 4.0"
+----
+
+This file will be used by the WordPress plugin to update the HTML content of the corresponding page (using the slug).
+
+In addition, a module descriptor will also be generated:
+
+.asciidoctor-module-descriptor.yml
+[source,yaml]
+----
+nav:
+- title: "Introduction to Neo4j 4.0"
+  url: "00_AboutThisCourse.html"
+  slug: "introduction-to-neo4j-4-0"
+
+- title: "Neo4j is a Graph Database"
+  url: "01_Neo4jIsAGraphDatabase.html"
+  slug: "neo4j-graph-database"
+
+- title: "The Neo4j Graph Platform"
+  url: "02_TheNeo4jGraphPlatform.html"
+  slug: "neo4j-graph-platform"
+----
+
+The above file will be used to generate the Table Of Contents. In the future, we might use this file to add the next/previous page:
+
+[source,yaml]
+----
+nav:
+- title: "Introduction to Neo4j 4.0"
+  url: "00_AboutThisCourse.html"
+  slug: "introduction-to-neo4j-4-0"
+  next:
+    slug: "neo4j-graph-database"
+
+- title: "Neo4j is a Graph Database"
+  url: "01_Neo4jIsAGraphDatabase.html"
+  slug: "neo4j-graph-database"
+  previous:
+    slug: "introduction-to-neo4j-4-0"
+  next:
+    slug: "neo4j-graph-platform"
+
+- title: "The Neo4j Graph Platform"
+  url: "02_TheNeo4jGraphPlatform.html"
+  slug: "neo4j-graph-platform"
+  previous:
+    slug: "neo4j-graph-database"
+----

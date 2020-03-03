@@ -503,18 +503,21 @@ kbd:not(.keyseq) {
   font-size: 1em;
 }
 
-.reveal section.title > h2 {
+.reveal section.title > h2,
+.reveal section.slide-title > h2 {
   margin-top: 6rem;
 }
 
 /* backgrounds */
 
 .reveal section.title,
+.reveal section.slide-title,
 .reveal section.bg-purple,
 .reveal section.has-purple-background,
 .reveal section.has-green-background,
 .reveal section.has-gold-background,
 .reveal section.title > h2,
+.reveal section.slide-title > h2,
 .reveal section.bg-purple > h2,
 .reveal section.has-purple-background > h2,
 .reveal section.has-green-background > h2,
@@ -539,6 +542,7 @@ kbd:not(.keyseq) {
 
 /* add a white logo (on the right) */
 .slide-background.title::after,
+.slide-background.slide-title::after,
 .slide-background.has-puzzle-background::after,
 .slide-background.has-team-background::after {
   content: '';
@@ -690,7 +694,8 @@ kbd:not(.keyseq) {
 }
 
 /* backward-compatible title */
-.slide-background.title > .slide-background-content::before {
+.slide-background.title > .slide-background-content::before,
+.slide-background.slide-title > .slide-background-content::before {
   content: "";
   position: absolute;
   top: 0;
@@ -703,7 +708,8 @@ kbd:not(.keyseq) {
   filter: brightness(0.75);
 }
 
-.slide-background.title > .slide-background-content::after {
+.slide-background.title > .slide-background-content::after,
+.slide-background.slide-title > .slide-background-content::after {
   position: absolute;
   content: "";
   height: 100%;
@@ -874,7 +880,8 @@ kbd:not(.keyseq) {
   padding-bottom: 0;
 }
 
-.reveal div.paragraph.tooltip {
+.reveal div.paragraph.tooltip,
+.reveal div.paragraph.slide-tooltip {
   position: absolute;
   bottom: 125px;
   right: 50px;
@@ -884,7 +891,8 @@ kbd:not(.keyseq) {
   width: 170px;
 }
 
-.reveal div.paragraph.tooltip > p {
+.reveal div.paragraph.tooltip > p,
+.reveal div.paragraph.slide-tooltip > p {
   padding: 0;
   margin: 0;
 }
@@ -1038,6 +1046,7 @@ span.fragment.check {
     position: absolute;
   }
   .slide-background.title::after,
+  .slide-background.slide-title::after,
   .slide-background.has-puzzle-background::after,
   .slide-background.has-team-background::after {
     position: absolute;

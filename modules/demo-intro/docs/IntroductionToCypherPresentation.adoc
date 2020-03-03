@@ -11,6 +11,9 @@
 :imagesdir: ../images
 :manual: http://neo4j.com/docs/developer-manual/current
 :manual-cypher: {manual}/cypher
+// wordpress
+:private:
+:slug: demo-introduction-cypher
 
 == Overview
 
@@ -144,7 +147,7 @@ image::person-nodes-graph.png[Person Nodes Graph,height=375,align=center,role=bo
 
 image::PersonNodes-table.png[width=700,align=center,role=border]
 
-[.title.gold]
+[.slide-title.gold]
 == Exercise 1: Retrieving Nodes
 
 In Neo4j Browser:
@@ -213,7 +216,7 @@ RETURN p.name AS name, p.born AS `birth year`
 
 image::AliasBirthDate.png[width=880,align=center,role=border]
 
-[.title.gold]
+[.slide-title.gold]
 == Exercise 2: Filtering queries using property values
 
 In Neo4j Browser:
@@ -309,7 +312,7 @@ RETURN p, m
 
 image::AllRelationshipsMatrix.png[height=200,align=center,role=border]
 
-[.tooltip]
+[.slide-tooltip]
 Connect result nodes enabled in Neo4j Browser
 
 === Retrieving relationship types
@@ -432,7 +435,7 @@ RETURN  path
 image::ReturnPath.png[width=275,align=center,role=border]
 --
 
-[.tooltip]
+[.slide-tooltip]
 Sub-graph
 
 === Using relationship direction to optimize a query
@@ -472,7 +475,7 @@ MATCH (:Person {name: 'Diane Keaton'})-[movRel:ACTED_IN]->
 RETURN movRel.roles
 ----
 
-[.title.gold]
+[.slide-title.gold]
 == Exercise 3: Filtering queries using relationships
 
 In Neo4j Browser:
@@ -481,7 +484,7 @@ kbd:[:play intro-neo4j-exercises]
 
 Then follow instructions for Exercise 3.
 
-[.title.purple]
+[.slide-title.purple]
 == Check your understanding
 
 === Question 1
@@ -493,15 +496,15 @@ What Cypher query do you execute to return the email addresses for all customers
 
 Select the correct answer.
 
-[none.answers]
-- ◻️ [src-cypher]`MATCH (n) RETURN n.Customer.email`
-- ◻️ [.fragment.check.ok]#✔️# [src-cypher]`MATCH (c:Customer) RETURN c.email`
-- ◻️ [src-cypher]`MATCH (Customer) RETURN email`
-- ◻️ [src-cypher]`MATCH (c) RETURN Customer.email`
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (n) RETURN n.Customer.email`
+- [x] [src-cypher]`MATCH (c:Customer) RETURN c.email`
+- [ ] [src-cypher]`MATCH (Customer) RETURN email`
+- [ ] [src-cypher]`MATCH (c) RETURN Customer.email`
 
 === Question 2
 
-[.statement]
+[%interactive.statement]
 Suppose you have a graph that contains _Customer_ and _Product_ nodes. A _Customer_ node can have a _BOUGHT_ relationship with a _Product_ node.
 _Customer_ nodes can have other relationships with _Product_ nodes.
 A _Customer_ node has a property named _customerName_.
@@ -510,11 +513,11 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 Select the correct answer.
 
-[none.answers]
-- ◻️ [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
-- ◻️ [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
-- ◻️ [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
-- ◻️ [.fragment.check.ok]#✔️# [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
+- [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
+- [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
+- [x] [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
 
 === Question 3
 
@@ -522,11 +525,11 @@ When [.underline]#must# you use a variable in a `MATCH` clause?
 
 Select the correct answer.
 
-[none.answers]
-- ◻️ [.answer]#When you want to query the graph using a node label.#
-- ◻️ [.answer]#When you specify a property value to match the query.#
-- ◻️ [.fragment.check.ok]#✔️# [.answer]#When you want to use the node or relationship to return a result.#
-- ◻️ [.answer]#When the query involves 2 types of nodes.#
+[%interactive.answers]
+- [ ] When you want to query the graph using a node label.
+- [ ] When you specify a property value to match the query.
+- [x] When you want to use the node or relationship to return a result.
+- [ ] When the query involves 2 types of nodes.
 
 == Summary
 
