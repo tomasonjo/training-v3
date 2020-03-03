@@ -125,7 +125,8 @@ After you have placed the *.jar* file into the *plugins* directory, you must mod
 As described on the APOC GitHub page, you have an option of either _sandboxing_ or _whitelisting_ the procedures of the plugin.
 How much of the APOC library is used by your application is determined by the developers so you should use them as a resource for this type of configuration change.
 
-Suppose we want to allow [.underline]#all# APOC procedures to be available to this Neo4j instance. We would sandbox the plugin in the *neo4j.conf* file as follows, similar to how we sandboxed the graph algorithms where we specify `dbms.security.procedures.unrestricted=algo.*,apoc.*`.
+Suppose we want to allow [.underline]#all# APOC procedures to be available to this Neo4j instance.
+We would sandbox the plugin in the *neo4j.conf* file as follows where we specify `dbms.security.procedures.unrestricted=apoc.*`.
 
 image::APOCConfig.png[APOCConfig,width=600,align=center]
 
