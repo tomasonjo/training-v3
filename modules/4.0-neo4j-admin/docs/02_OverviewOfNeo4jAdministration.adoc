@@ -366,7 +366,7 @@ In this training, you will learn how to perform these common administrative task
 * Managing Causal Clusters
 * Managing database security
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course*
 
 //ifndef::backend-html5[]
@@ -384,7 +384,7 @@ You should consult the https://neo4j.com/docs/operations-manual/3.5/installation
 The https://neo4j.com/docs/java-reference/3.5/tutorials-java-embedded/[Java Developer Manual ] covers using embedded mode for Neo4j and is intended for developers.
 
 //[#module-2.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 === Question 1
 
@@ -428,7 +428,7 @@ Select the correct answer.
 - [ ] Docker Container
 - [ ] Kubernetes
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

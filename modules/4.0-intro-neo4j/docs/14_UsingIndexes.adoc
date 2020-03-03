@@ -396,7 +396,7 @@ endif::[]
 
 image::ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 14: Creating indexes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -407,7 +407,7 @@ This exercise has 7 steps.
 Estimated time to complete: 30 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -452,7 +452,7 @@ Select the correct answer.
 - [x] A composite index does not enforce uniqueness.
 - [ ] A composite index can enforce existence.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 ifndef::backend-revealjs[]

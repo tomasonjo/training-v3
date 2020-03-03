@@ -153,7 +153,7 @@ And here is some of what was produced in the report:
 
 image::APOCProcedures.png[APOCProcedures,width=600,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #9: Install a plugin*
 
 //ifndef::backend-htlm5[]

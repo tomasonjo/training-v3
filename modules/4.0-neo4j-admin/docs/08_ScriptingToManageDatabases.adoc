@@ -72,7 +72,7 @@ PrepareDB.log
 When the *PrepareDB.sh* script runs its scripts, all output will be written to the log file, including error output. Then you can simply check the log file to make sure it ran as expected.
 Using the Cypher file, together with the run scripts, you can perform something like this to automate changes to a database or set of databases.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 ==  *Exercise #8: Scripting changes to the database*
 
 //ifndef::backend-htlm5[]

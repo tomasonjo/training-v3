@@ -150,7 +150,7 @@ When the Neo4j instance starts, you can also confirm that it is started by seein
 [NOTE]
 You can also view the log file in the *logs* directory on all platforms.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #2: Managing the Neo4j instance*
 
 //ifndef::backend-htlm5[]
@@ -245,7 +245,7 @@ Here we have download a file named *movieDB.cypher* that contains the Cypher sta
 We simply use these Cypher statements as input when we start the `cypher-shell` session.
 They are automatically executed against the default database, _neo4j_.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #3: Using `cypher-shell`*
 
 //ifndef::backend-htlm5[]
@@ -340,7 +340,7 @@ CREATE <database> IF NOT EXISTS;
 [NOTE]
 You cannot use `CREATE OR REPLACE` together with `IF NOT EXISTS`.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #4: Creating and deleting a database*
 
 //ifndef::backend-htlm5[]
@@ -413,7 +413,7 @@ Then, if you want to create a database from any offline backup file to use for a
 [start=2]
 . In `cypher-shell' create <targetDB>.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #5: Copying databases*
 
 //ifndef::backend-htlm5[]
@@ -471,7 +471,7 @@ Just as you needed to change the password for the admin user, neo4j the first ti
 
 image::passwordChangeNewLocation.png[passwordChangeNewLocation,width=800,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #6: Modifying the location of the databases*
 
 //ifndef::backend-htlm5[]
@@ -515,7 +515,7 @@ If inconsistencies are found, a report is generated and placed in the directory 
 
 Inconsistencies in a database are a serious matter that should be looked into with the help of Neo4j Technical Support. 
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise #7: Checking consistency of a database*
 
 //ifndef::backend-htlm5[]
@@ -568,7 +568,7 @@ PrepareDB.log
 When the *PrepareDB.sh* script runs its scripts, all output will be written to the log file, including error output. Then you can simply check the log file to make sure it ran as expected.
 Using the Cypher file, together with the run scripts, you can perform something like this to automate changes to a database or set of databases.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 ==  *Exercise #8: Scripting changes to the database*
 
 //ifndef::backend-htlm5[]
