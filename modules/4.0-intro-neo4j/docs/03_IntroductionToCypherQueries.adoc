@@ -1165,12 +1165,12 @@ What Cypher query do you execute to return the email addresses for all customers
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `MATCH (n) RETURN n.Customer.email`
-- [x] `MATCH (c:Customer) RETURN c.email`
-- [ ] `MATCH (Customer) RETURN email`
-- [ ] `MATCH (c) RETURN Customer.email`
+
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (n) RETURN n.Customer.email`
+- [x] [src-cypher]`MATCH (c:Customer) RETURN c.email`
+- [ ] [src-cypher]`MATCH (Customer) RETURN email`
+- [ ] [src-cypher]`MATCH (c) RETURN Customer.email`
 
 === Question 2
 
@@ -1183,12 +1183,12 @@ What Cypher query do you execute to return all of the products (by name) bought 
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
-- [ ] `MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
-- [ ] `MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
-- [ ] `MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
-- [x] `MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
+
+[%interactive.answers]
+- [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
+- [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
+- [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
+- [x] [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
 
 === Question 3
 
@@ -1197,8 +1197,8 @@ When [.underline]#must# you use a variable in a MATCH clause?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] When you want to query the graph using a node label.
 - [ ] When you specify a property value to match the query.
 - [x] When you want to use the node or relationship to return a value.

@@ -417,8 +417,8 @@ What elements make up a graph?
 
 [.statement]
 Select the correct answers.
-//[.interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] tuples
 - [x] nodes
 - [ ] documents
@@ -431,8 +431,8 @@ From a data scientist perspective, which element is key for analyzing the data i
 
 [.statement]
 Select the correct answer.
-//[.interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] node
 - [ ] property
 - [x] relationship
@@ -445,8 +445,8 @@ In Neo4j, you can attach properties to the following elements in the graph?
 
 [.statement]
 Select the correct answers.
-//[.interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] label
 - [x] node
 - [x] relationship

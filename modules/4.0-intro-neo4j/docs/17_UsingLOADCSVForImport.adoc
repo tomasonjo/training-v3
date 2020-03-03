@@ -548,8 +548,8 @@ When you execute `LOAD CSV` what unit of data is read from the data source?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] A field
 - [ ] All field values for a single field
 - [x] A row
@@ -562,8 +562,8 @@ What should you add to the graph before you import using LOAD CSV?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Indexes for all important queries
 - [ ] Schema containing the names node labels that will be created
 - [ ] Schema containing the types that will be assigned to properties during the load
@@ -576,8 +576,8 @@ In general, what is the maximum rows you can process using LOAD CSV?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] 1K
 - [ ] 10K
 - [x] 100K

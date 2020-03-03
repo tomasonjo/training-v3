@@ -224,8 +224,8 @@ What must you do before executing the `DELETE` clause?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] Get a reference to the node.
 - [x] Ensure the node has no relationships.
 - [ ] Remove all labels from the node.
@@ -238,8 +238,8 @@ What happens if you attempt to delete a node using `DELETE`, and the node has ex
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] You receive a client error.
 - [ ] The node is deleted.
 - [ ] The node's relationships are deleted.
@@ -253,8 +253,7 @@ Suppose you retrieve a node, _n_ in the graph that is related to other nodes. Wh
 [.statement]
 Select the correct answer.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] `DELETE n`
 - [ ] `DELETE n WITH RELATIONSHIPS`
 - [ ] `REMOVE n`

@@ -351,8 +351,8 @@ CREATE (a)-[rel:ACTED_IN]-(m)
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `CREATE` should be replaced with `CREATE RELATIONSHIP`.
 - [ ] You cannot specify a variable for a relationship.
 - [x] Direction must be specified when you create the relationship.
@@ -373,8 +373,7 @@ CREATE (p)-[r:ACTED_IN]->(m)
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] `CREATE`
 - [ ] `CREATE PROPERTY`
 - [x] `SET`
@@ -396,8 +395,7 @@ CREATE (a)-[rel:ACTED_IN {roles: ['The Villain','Joe']}]-(m)
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] None
 - [ ] One
 - [ ] Two

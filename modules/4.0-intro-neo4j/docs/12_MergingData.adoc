@@ -409,8 +409,7 @@ RETURN p
 [.statement]
 Select the correct answer.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] The _Person_ label exists in the graph.
 - [ ] The _Person_ label does not exist in the graph.
 - [x] The value for name is unique.
@@ -432,8 +431,7 @@ MERGE (p)-[:ACTED_IN]->(m)
 [.statement]
 Select the correct answers.
 
-//[%interactive]
-[.answers]
+[%interactive.answers]
 - [ ] If the _:ACTED_IN_ relationship exists, it deletes it and recreates it.
 - [x] If the _:ACTED_IN_ relationship exists, it does nothing.
 - [x] If the _:ACTED_IN_ relationship does not exist, it creates it.
@@ -454,9 +452,8 @@ MERGE (p)-[rel:ACTED_IN]->(m)
 
 [.statement]
 Select the correct answers.
-//[%interactive]
 
-[.answers]
+[%interactive.answers]
 - [x] Use the default behavior. The relationship will be created if it doesn't exist.
 - [x] Specify `ON CREATE` to perform additional processing when the relationship is created.
 - [x] Specify `ON MATCH` to perform additional processing when the relationship is not created.

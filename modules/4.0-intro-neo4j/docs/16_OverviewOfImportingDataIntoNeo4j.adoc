@@ -194,8 +194,8 @@ Suppose you want to import data into a Neo4j Database from files that were creat
 What format is required to load the data using existing Neo4j tooling?
 
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] RDF
 - [x] JSON
 - [x] XML
@@ -208,8 +208,8 @@ What tooling is available for importing data from a live RDBMS?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Cypher using `LOAD CSV`
 - [x] Cypher using APOC jdbc procedures
 - [x] Java application using both jdbc and Neo4j drivers
@@ -222,8 +222,8 @@ What is the fastest way to import data into a Neo4j database?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Cypher + APOC procedures
 - [ ] Neo4j ETL Tool
 - [x] neo4j-admin import tool

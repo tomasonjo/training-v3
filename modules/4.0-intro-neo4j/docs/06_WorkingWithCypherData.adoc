@@ -479,8 +479,8 @@ What functions below aggregate results:
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `count()`
 - [ ] `size()`
 - [ ] `map()`
@@ -493,8 +493,8 @@ What construct best represents a node in the graph?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] list
 - [x] map
 - [ ] JSON object
@@ -507,8 +507,8 @@ Which date/time related function returns a long integer value?
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `date()`
 - [ ] `datetime()`
 - [ ] `time()`

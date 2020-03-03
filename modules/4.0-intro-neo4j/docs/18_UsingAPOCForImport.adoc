@@ -445,8 +445,8 @@ What APOC procedure can you use to batch transactions when a lot of data needs t
 
 [.statement]
 Select the correct answer.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `apoc.batch()`
 - [ ] `apoc.transaction.batch()`
 - [ ] `apoc.iterate()`
@@ -459,8 +459,8 @@ The procedure `apoc.do.when()` is used for:
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] Scheduling when a load should occur.
 - [x] Executing Cypher code when a condition is true and alternate Cypher code when the condition is false.
 - [ ] An alternative to the `MERGE` clause.
@@ -473,8 +473,8 @@ What does `CALL apoc.schema.assert({},{},true)` do?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] Drops all constraints in the graph.
 - [x] Drops all indexes in the graph.
 - [ ] Removes all relationships in the graph.

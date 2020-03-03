@@ -487,8 +487,8 @@ What Cypher clauses can you use to create a node?
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] `CREATE`
 - [ ] `CREATE NODE`
 - [x] `MERGE`
@@ -509,8 +509,8 @@ RETURN s
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [ ] `DELETE s.color`
 - [x] `SET s.color=null`
 - [x] `REMOVE s.color`
@@ -532,8 +532,8 @@ REMOVE p.birthYear
 
 [.statement]
 Select the correct answers.
-//[%interactive]
-[.answers]
+
+[%interactive.answers]
 - [x] name
 - [ ] birthYear
 - [x] salary
