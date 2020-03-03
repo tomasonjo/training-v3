@@ -456,5 +456,43 @@ Starting from this query:
 . Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
 --
 
+== Answer: Use Collection Functions
+
+.Clean the `$document` map to remove the `budget` property
+[source,cypher]
+----
+RETURN apoc.map.clean($document, ["budget"], [])
+----
+
+== Answer: Use Collection Functions
+
+.Create a `Movie` node, but remove the `budget` property
+[source,cypher]
+----
+WITH apoc.map.clean($document, ["budget"], []) AS properties
+CREATE(m:Movie)
+SET m += properties
+RETURN m
+----
+
+== Answer: Use Collection Functions
+
+.Return the list of values in the map for the `title`, `released`, and `tagline` propertiesS
+[source,cypher]
+----
+RETURN apoc.map.values($document, ["released", "title", "tagline"])
+----
+
+== Answer: Use Collection Functions
+
+.Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
+[source,cypher]
+----
+WITH apoc.map.clean($document, ["budget"], []) AS properties
+CREATE(m:Movie)
+SET m += properties
+RETURN m
+----
+
 [.section-title.has-green-background.has-puzzle-background]
 == Conversion Functions
