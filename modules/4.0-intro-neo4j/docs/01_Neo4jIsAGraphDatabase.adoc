@@ -1,4 +1,5 @@
 = Neo4j is a Graph Database
+:slug: neo4j-graph-database
 :doctype: book
 :nextsecttitle: The Neo4j Graph Platform
 :nextsect: 2

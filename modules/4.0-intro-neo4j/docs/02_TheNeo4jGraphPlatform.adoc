@@ -1,5 +1,5 @@
-
 = The Neo4j Graph Platform
+:slug: neo4j-graph-platform
 :doctype: book
 :toc: left
 :toclevels: 3

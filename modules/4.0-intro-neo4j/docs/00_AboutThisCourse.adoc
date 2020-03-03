@@ -1,4 +1,5 @@
 = Introduction to Neo4j 4.0
+:slug: introduction-to-neo4j-4-0
 :doctype: book
 :nextsecttitle: Neo4j is a Graph Database
 :nextsect: 1
