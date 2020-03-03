@@ -17,7 +17,7 @@ In your real application, if you were to back up a production stand-alone Neo4j 
 === Exercise steps:
 
 . Modify the Neo4j configuration so that online backup is enabled and will be done on this same host.
-For example, your *neo4j.conf* file should look something like this:
+For example, your *neo4j.conf* properties should look something like this:
 
 ----
 

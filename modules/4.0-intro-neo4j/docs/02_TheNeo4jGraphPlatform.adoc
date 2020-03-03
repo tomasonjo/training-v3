@@ -45,7 +45,7 @@ Data scientists and data analysts typically use a combination Cypher queries, as
 End-users typically use applications written by developers to access the graph data.
 --
 
-=== Components of the Neo4j Graph Platform
+=== Components of the Neo4j Graph Platform````
 
 To better understand the Neo4j Graph Platform, you will learn about these components and the benefits they provide.
 
