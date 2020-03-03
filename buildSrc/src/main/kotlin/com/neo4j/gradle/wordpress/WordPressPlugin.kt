@@ -43,8 +43,16 @@ open class WordPressPlugin : Plugin<Project> {
 data class DocumentAttributes(val slug: String, val title: String, val tags: List<String>, val content: String)
 
 abstract class WordPressUploadTask : DefaultTask() {
+
   @InputFiles
   var sources: MutableList<ConfigurableFileTree> = mutableListOf()
+
+  @Input
+  var type: String = ""
+
+  @Input
+  // publish, future, draft, pending, private
+  var status: String = "draft"
 
   @Input
   var scheme: String = "https"
@@ -61,7 +69,24 @@ abstract class WordPressUploadTask : DefaultTask() {
   @Input
   var template: String = ""
 
-  fun wordPressConnectionInfo(): WordPressConnectionInfo {
+  @TaskAction
+  fun task() {
+    if (type.isBlank()) {
+      logger.error("The type is mandatory, aborting...")
+      return
+    }
+    val wordPressUpload = WordPressUpload(
+      documentType = WordPressDocumentType(type),
+      documentStatus = status,
+      documentTemplate = template,
+      sources = sources,
+      connectionInfo = wordPressConnectionInfo(),
+      logger = logger
+    )
+    wordPressUpload.publish()
+  }
+
+  private fun wordPressConnectionInfo(): WordPressConnectionInfo {
     val wordPressExtension = project.extensions.findByType(WordPressExtension::class.java)
     val hostValue = wordPressExtension?.host?.getOrElse(host) ?: host
     val schemeValue = wordPressExtension?.scheme?.getOrElse(scheme) ?: scheme
@@ -104,63 +129,6 @@ abstract class WordPressUploadTask : DefaultTask() {
   }
 }
 
-abstract class WordPressUploadPageTask : WordPressUploadTask() {
-
-  @Input
-  var pageType: String = ""
-
-  @Input
-  // publish, future, draft, pending, private
-  var pageStatus: String = "draft"
-
-  @TaskAction
-  fun task() {
-    if (pageType.isBlank()) {
-      logger.error("the page type is mandatory, aborting...")
-      return
-    }
-    val wordPressUpload = WordPressUpload(
-      contentType = WordPressContentType.PAGE,
-      documentType = pageType,
-      documentStatus = pageStatus,
-      documentTemplate = template,
-      sources = sources,
-      connectionInfo = wordPressConnectionInfo(),
-      logger = logger
-    )
-    wordPressUpload.publish()
-  }
-
-}
-
-abstract class WordPressUploadPostTask : WordPressUploadTask() {
-
-  @Input
-  var postType: String = ""
-
-  @Input
-  // publish, future, draft, pending, private
-  var postStatus: String = "draft"
-
-  @TaskAction
-  fun task() {
-    if (postType.isBlank()) {
-      logger.error("The post type is mandatory, aborting...")
-      return
-    }
-    val wordPressUpload = WordPressUpload(
-      contentType = WordPressContentType.POST,
-      documentType = postType,
-      documentStatus = postStatus,
-      documentTemplate = template,
-      sources = sources,
-      connectionInfo = wordPressConnectionInfo(),
-      logger = logger
-    )
-    wordPressUpload.publish()
-  }
-}
-
 data class WordPressConnectionInfo(val scheme: String,
                                    val host: String,
                                    val username: String,
@@ -169,18 +137,20 @@ data class WordPressConnectionInfo(val scheme: String,
                                    val writeTimeout: Duration = Duration.ofSeconds(10),
                                    val readTimeout: Duration = Duration.ofSeconds(30))
 
-enum class WordPressContentType(val urlPath: String) {
-  POST("posts"),
-  PAGE("pages")
+data class WordPressDocumentType(val name: String) {
+  val urlPath: String = when (name) {
+    // type is singular but endpoint is plural for built-in types post and page.
+    "post" -> "posts"
+    "page" -> "pages"
+    else -> name
+  }
 }
 
 data class WordPressDocument(val id: Int,
                              val slug: String,
-                             val type: String,
-                             val contentType: WordPressContentType)
+                             val type: WordPressDocumentType)
 
-internal class WordPressUpload(val contentType: WordPressContentType,
-                               val documentType: String,
+internal class WordPressUpload(val documentType: WordPressDocumentType,
                                val documentStatus: String,
                                val documentTemplate: String,
                                val sources: MutableList<ConfigurableFileTree>,
@@ -210,9 +180,7 @@ internal class WordPressUpload(val contentType: WordPressContentType,
     }
     val slugs = documentsWithAttributes.map { it.slug }
     val searchUrl = baseUrlBuilder()
-      // fixme: the url depends on the document type
-      //.addPathSegment(contentType.urlPath)
-      .addPathSegment(documentType)
+      .addPathSegment(documentType.urlPath)
       .addQueryParameter("per_page", slugs.size.toString())
       .addQueryParameter("slug", slugs.joinToString(","))
       .addQueryParameter("status", "publish,future,draft,pending,private")
@@ -230,7 +198,7 @@ internal class WordPressUpload(val contentType: WordPressContentType,
         jsonArray.value.mapNotNull { item ->
           if (item is JsonObject) {
             val slug = item.string("slug")!!
-            slug to WordPressDocument(item.int("id")!!, slug, item.string("type")!!, contentType)
+            slug to WordPressDocument(item.int("id")!!, slug, documentType)
           } else {
             null
           }
@@ -269,12 +237,10 @@ internal class WordPressUpload(val contentType: WordPressContentType,
   private fun updateDocument(data: MutableMap<String, Any>, wordPressDocument: WordPressDocument): Boolean {
     data["id"] = wordPressDocument.id
     val url = baseUrlBuilder()
-      .addPathSegment(documentType)
-      // fixme: the url depends on the document type
-      //.addPathSegment(contentType.urlPath)
+      .addPathSegment(documentType.urlPath)
       .addPathSegment(wordPressDocument.id.toString())
       .build()
-    logger.quiet("Updating ${contentType.name.toLowerCase()} id: ${wordPressDocument.id} using: $data")
+    logger.quiet("Updating ${documentType.name.toLowerCase()} id: ${wordPressDocument.id}")
     val updateRequest = Request.Builder()
       .url(url)
       .post(klaxon.toJsonString(data).toRequestBody(jsonMediaType))
@@ -283,10 +249,10 @@ internal class WordPressUpload(val contentType: WordPressContentType,
       try {
         val jsonObject = klaxon.parseJsonObject(responseBody.charStream())
         val id = jsonObject.int("id")!!
-        logger.quiet("Successfully updated the ${contentType.name.toLowerCase()} with id: $id")
+        logger.quiet("Successfully updated the ${documentType.name.toLowerCase()} with id: $id")
         true
       } catch (e: KlaxonException) {
-        logger.error("Unable to parse the response for the ${contentType.name.toLowerCase()} with slug: ${data["slug"]}", e)
+        logger.error("Unable to parse the response for the ${documentType.name.toLowerCase()} with slug: ${data["slug"]}", e)
         false
       }
     } ?: false
@@ -294,11 +260,9 @@ internal class WordPressUpload(val contentType: WordPressContentType,
 
   private fun createDocument(data: MutableMap<String, Any>): Boolean {
     val url = baseUrlBuilder()
-      .addPathSegment(documentType)
-      // fixme: the url depends on the document type
-      //.addPathSegment(contentType.urlPath)
+      .addPathSegment(documentType.urlPath)
       .build()
-    logger.quiet("Creating a new ${contentType.name.toLowerCase()} using: $data")
+    logger.quiet("Creating a new ${documentType.name.toLowerCase()}")
     val createRequest = Request.Builder()
       .url(url)
       .post(klaxon.toJsonString(data).toRequestBody(jsonMediaType))
@@ -307,10 +271,10 @@ internal class WordPressUpload(val contentType: WordPressContentType,
       try {
         val jsonObject = klaxon.parseJsonObject(responseBody.charStream())
         val id = jsonObject.int("id")!!
-        logger.quiet("Successfully created a new ${contentType.name.toLowerCase()} with id: $id")
+        logger.quiet("Successfully created a new ${documentType.name.toLowerCase()} with id: $id")
         true
       } catch (e: KlaxonException) {
-        logger.error("Unable to parse the response for the new ${contentType.name.toLowerCase()} with slug: ${data["slug"]}", e)
+        logger.error("Unable to parse the response for the new ${documentType.name.toLowerCase()} with slug: ${data["slug"]}", e)
         false
       }
     } ?: false

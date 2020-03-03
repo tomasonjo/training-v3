@@ -3,7 +3,7 @@ import com.neo4j.gradle.s3.S3UploadTask
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import com.neo4j.gradle.wordpress.WordPressPlugin
-import com.neo4j.gradle.wordpress.WordPressUploadPostTask
+import com.neo4j.gradle.wordpress.WordPressUploadTask
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.asciidoctor.gradle.jvm.pdf.AsciidoctorPdfTask
 import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
@@ -218,25 +218,25 @@ subprojects {
     }
   }
 
-  task wordPressUploadCoursePost(type: WordPressUploadPostTask) {
+  task wordPressUploadCourse(type: WordPressUploadTask) {
     dependsOn convertOnlineHtml
     source = convertOnlineHtml.outputs.files
-    postType = "course"
-    postStatus = "private"
+    type = "course"
+    status = "private"
   }
 
-  task wordPressUploadPost(type: WordPressUploadPostTask) {
+  task wordPressUploadTwin4j(type: WordPressUploadTask) {
     dependsOn convertOnlineHtml
     source = convertOnlineHtml.outputs.files
-    postType = "twin4j"
-    postStatus = "private"
+    type = "twin4j"
+    status = "private"
   }
 
-  task wordPressUploadDeveloperPost(type: WordPressUploadPostTask) {
+  task wordPressUploadDeveloper(type: WordPressUploadTask) {
     dependsOn convertOnlineHtml
     source = convertOnlineHtml.outputs.files
-    postType = "developer"
-    postStatus = "private"
+    type = "developer"
+    status = "private"
   }
 
   task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
