@@ -16,9 +16,9 @@ In this exercise, you will use `neo4j-admin` to copy a database and create a dat
 
 . In `cypher-shell` create a database named _movies_.
 . Exit out of `cypher-shell`.
-. Invoke `cypher-shell` using *movieDB.cypher* as input and specify _movies_ as the database.
+. Invoke `cypher-shell` using *movies.cypher* as input and specify _movies_ as the database.
 ----
-/usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movieDB.cypher
+/usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movies.cypher
 ----
 [start=4]
 . In `cypher-shell` confirm that the database was loaded. It should contain 171 nodes:

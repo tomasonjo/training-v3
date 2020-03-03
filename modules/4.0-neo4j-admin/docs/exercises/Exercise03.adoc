@@ -44,15 +44,15 @@ mkdir files
 
 image::OwnerNeo4jFiles.png[OwnerNeo4jFiles,width=1000,align=center]
 [start=11]
-. Download this file: https://data.neo4j.com/admin-neo4j/movieDB.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
+. Download this file: https://data.neo4j.com/admin-neo4j/movies.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
 ----
 cd files
-curl -O https://data.neo4j.com/admin-neo4j/movieDB.cypher
+curl -O https://data.neo4j.com/admin-neo4j/movies.cypher
 ----
 [start=12]
-. Invoke `cypher-shell` using *movieDB.cypher* as input.
+. Invoke `cypher-shell` using *movies.cypher* as input.
 ----
-/usr/bin/cypher-shell -u neo4j -p <passwordYouCreatedForNeo4jInstance> < /home/ubuntu/files/movieDB.cypher
+/usr/bin/cypher-shell -u neo4j -p <passwordYouCreatedForNeo4jInstance> < /home/ubuntu/files/movies.cypher
 ----
 [start=13]
 . Start `cypher-shell` and execute these statements to confirm that the data was loaded into the user database:

@@ -45,7 +45,7 @@ rm -rf /home/ubuntu/reports/MaintainDB.log
 image::RunMaintainDB.png[RunMaintainDB,width=1000,align=center]
 
 [start=10]
-. Confirm that it created the constraints in the database. (Check using cypher-shell (`CALL db.constraints();`))
+. Confirm that it created the constraints in the default database (_maindb_). (Check using cypher-shell (`CALL db.constraints();`))
 
 image::ConfirmConstraints.png[ConfirmConstraints,width=1000,align=center]
 

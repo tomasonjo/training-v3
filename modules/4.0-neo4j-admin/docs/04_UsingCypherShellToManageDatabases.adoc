@@ -111,7 +111,7 @@ You can use `cypher-shell` to populate the default database by sending pre-writt
 
 image::ImportCypher.png[ImportCypher,width=1000,align=center]
 
-Here we have download a file named *movieDB.cypher* that contains the Cypher statements to create the Movie graph.
+Here we have download a file named *movies.cypher* that contains the Cypher statements to create the Movie graph.
 We simply use these Cypher statements as input when we start the `cypher-shell` session.
 They are automatically executed against the default database, _neo4j_.
 

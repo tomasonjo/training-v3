@@ -77,12 +77,11 @@ After you restart the Neo4j instance with the configuration changes, you can the
 neo4j-admin backup --backup-dir=<backup-directory>
                    [--verbose]
                    --from=<Neo4j-instance-host-address:<port>
-                   [--database=<database-name>]
+                   --database=<database-name>
                    --check-consistency
                    --report-dir=<report-directory>
 ----
 
-If you do not specify a database, it will back up all databases.
 If a database has previously been backed up to the backup directory, the backup will be for any changes since the last backup.
 
 There are a number of other options you can specify related to performance and specific types of checks.

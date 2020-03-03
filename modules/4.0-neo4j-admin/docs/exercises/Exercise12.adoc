@@ -1,0 +1,90 @@
+:imagesdir: ../images
+
+== *Exercise #12: Importing data*
+
+In this exercise you will create a database from a set of CSV files using the import functionality of the neo4j-admin tool.
+
+=== Before you begin
+
+. Make sure you have a terminal window open to your EC2 instance for this course.
+. Ensure that you are the user _neo4j_.
+
+=== Exercise steps:
+
+. Downloaded the ZIP file containing the CSV files to the *files* directory:
+
+----
+cd /home/ubuntu/files
+curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
+----
+
+[start=2]
+. Unzip the contents of the *crimes-dataset.zip*.
+
+----
+/usr/bin/unzip crimes-dataset.zip
+----
+
+[start=3]
+. The crimes-dataset directory should contain six CSV files. Move these six files to */var/lib/neo4j/import* folder for the Neo4j instance.
+. Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
+. Change directory to the *import* directory.
+. Use the neo4j-admin tool to import the CSV files using these guidelines:*
+
+----
+             --database crimes
+             --nodes crimes_header.csv,crimes.csv
+             --nodes beats.csv
+             --nodes=PrimaryType=primaryTypes.csv
+             --relationships crimesBeats.csv
+             --relationships=PRIMARY_TYPE=crimesPrimaryTypes.csv
+             --trim-strings=true
+----
+
+This is what you should enter (ensure there are no newline characters):
+
+[source]
+----
+/usr/bin/neo4j-admin import --database crimes --nodes crimes_header.csv,crimes.csv --nodes beats.csv --nodes=PrimaryType=primaryTypes.csv -
+-relationships crimesBeats.csv --relationships=PRIMARY_TYPE=crimesPrimaryTypes.csv --trim-strings=true > /home/ubuntu/reports/import.out
+----
+
+*Note*: Depending on your system, it could take up to 10 minutes to load this data.
+
+This is what you should see in the terminal window if all goes well:
+
+[.thumb]
+image::{imagedir}/adminImportDone.png[adminImportDone,width=500]
+
+[start=7]
+. Examine the contents of *import.out*. Did it execute without error?
+
+Here is what the beginning of *import.out* file should look like:
+
+[.thumb]
+image::{imagedir}/importout1.png[importout1,width=400]
+
+Here is what the end of *import.out* file should look like:
+
+[.thumb]
+image::{imagedir}/importout2.png[importout2,width=400]
+
+[start=8]
+. In `cypher-shell` create the crimes database.
+. Enter the following Cypher statements to view the schema of the database and return the number of nodes:
+
+----
+:use crimes
+CALL db.schema.visualization();
+MATCH (n) RETURN count(n);
+----
+
+The database information should now look as follows:
+
+[.thumb]
+image::{imagedir}/Afteradmin-toolImport.png[Afteradmin-toolImport,width=600]
+
+
+=== Exercise summary
+
+In this exercise you created a database from a set of CSV files using the import functionality of the neo4j-admin tool.
