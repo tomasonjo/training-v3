@@ -39,7 +39,7 @@ subprojects {
 
   s3 {
     profile = project.hasProperty('s3-profile') ? project.property('s3-profile') : 'default'
-    region = 'us-west-1'
+    region = 'us-east-1'
   }
 
   wordpress {
@@ -121,7 +121,7 @@ subprojects {
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
-      attributes 'imagesdir': "https://s3-us-west-1.amazonaws.com/training-assets.neo4j.com/course/${project.name}/images/",
+      attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
         'sectanchors': ''
     }
 
@@ -213,7 +213,7 @@ subprojects {
   if (new File("${projectDir}/images").exists()) {
     task s3UploadImages(type: S3UploadTask) {
       source = "${projectDir}/images"
-      bucket = "training-assets.neo4j.com"
+      bucket = "dev.assets.neo4j.com"
       destination = "course/${project.name}/images"
     }
   }
