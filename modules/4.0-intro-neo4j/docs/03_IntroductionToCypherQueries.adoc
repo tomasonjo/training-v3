@@ -298,7 +298,7 @@ When nodes are displayed as table values, the node labels and ids are not shown,
 
 image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 1: Retrieving nodes*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -544,7 +544,7 @@ endif::[]
 image::UsingAliases.png[UsingAliases,width=800,align=center]
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 2: Filtering queries using property values*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -1141,7 +1141,7 @@ RETURN movRel.roles
 
 We recommend that you follow the https://neo4j.com/docs/cypher-manual/current/styleguide/[Cypher Style Guide^] when writing your Cypher statements.
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 3: Filtering queries using relationships*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -1152,7 +1152,7 @@ This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-4.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 
@@ -1204,7 +1204,7 @@ Select the correct answer.
 - [x] When you want to use the node or relationship to return a value.
 - [ ] When the query involves 2 types of nodes.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

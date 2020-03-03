@@ -424,7 +424,7 @@ image::SOLoadedGraph.png[SOLoadedGraph,width=500,align=center]
 If you were to load thousands or more questions, you should ensure that you have created uniqueness constraints on _Question.question_id_ and _User.name_ before you attempt the load.
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 17: Using APOC for importing data*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -435,7 +435,7 @@ This exercise has 6 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -480,7 +480,7 @@ Select the correct answers.
 - [ ] Removes all relationships in the graph.
 - [ ] Removes all nodes in the graph.
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

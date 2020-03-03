@@ -321,7 +321,7 @@ Here is the result returned. An alternative to `REMOVE rel.roles` would be `SET 
 
 image::RemoveRoles.png[RemoveRoles,width=1000,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 10: Creating relationships*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -332,7 +332,7 @@ This exercise has 13 steps.
 Estimated time to complete: 45 minutes.
 
 //[#module-6.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -403,7 +403,7 @@ Select the correct answer.
 - [ ] Two
 - [x] Three
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:

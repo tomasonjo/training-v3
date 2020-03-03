@@ -400,7 +400,7 @@ Just as in the Neo4j Browser application, you can save frequently-used Cypher co
 In addition, when using the Web browser interface to Neo4j Browser, you can use Browser Sync to keep your favorites in the Cloud.
 --
 
-[.title.has-green-background.has-team-background]
+[.slide-title.has-green-background.has-team-background]
 == *Guided Exercise: Getting Started with Neo4j Browser*
 
 [.notes]
@@ -553,7 +553,7 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 *Note:* In Neo4j Desktop which is used by developers, you have the create, start, and stop administrative functionality.
 
 //[#module-2.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -602,7 +602,7 @@ Select the correct answers.
 - [x] Python
 - [x] JavaScript
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

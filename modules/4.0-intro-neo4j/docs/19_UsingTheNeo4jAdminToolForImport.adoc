@@ -246,7 +246,7 @@ Here is the what you will be doing in the next exercise to use the `import` comm
 
 image::ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 18: Importing data with the import command of neo4j-admin*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -257,7 +257,7 @@ This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -312,7 +312,7 @@ Select the correct answer.
 - [ ] 8
 - [ ] 14
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

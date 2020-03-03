@@ -236,7 +236,7 @@ neo4j.session(
 This code uses a synchronous programming model to create each node in the graph.
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 19: Importing data from an RDBMS using an application*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -247,7 +247,7 @@ This exercise has 5 steps.
 Estimated time to complete: 10 minutes.
 
 //[#module-7.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -293,7 +293,7 @@ Select the correct answers.
 - [x] Python
 - [x] C#
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to:

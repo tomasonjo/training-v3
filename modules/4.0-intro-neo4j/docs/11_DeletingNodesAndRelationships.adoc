@@ -202,7 +202,7 @@ And here is what the _Batman Begins_ node and its relationships now look like. T
 image::BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=center]
 --
 
-[.title.has-gold-background.has-team-background]
+[.slide-title.has-gold-background.has-team-background]
 == *Exercise 11: Deleting nodes and relationships*
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -213,7 +213,7 @@ This exercise has 6 steps.
 Estimated time to complete: 10 minutes.
 
 //[#module-6.quiz]
-[.section-title.has-purple-background.has-puzzle-background]
+[.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
@@ -260,7 +260,7 @@ Select the correct answer.
 - [ ] `REMOVE n`
 - [x] `DETACH DELETE n`
 
-[.title.has-green-background.has-puzzle-background]
+[.slide-title.has-green-background.has-puzzle-background]
 == Summary
 
 You should now be able to write Cypher statements to:
