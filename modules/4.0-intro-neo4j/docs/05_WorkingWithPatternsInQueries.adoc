@@ -520,7 +520,7 @@ image::OptionalMatch.png[OptionalMatch,width=800,align=center]
 Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_ value is returned for the movie part of the query, as well as the relationship.
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 5: Working with patterns in queries
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
