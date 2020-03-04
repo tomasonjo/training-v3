@@ -370,7 +370,7 @@ RETURN apoc.text.join(people, ";")
 
 https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
 
-[.title.has-purple-background.has-puzzle-background]
+[.has-purple-background.has-puzzle-background]
 == Task: Use Collection Functions
 
 Starting from this query:
@@ -382,6 +382,7 @@ WHERE movie.title CONTAINS "Matrix"
 RETURN movie.title, collect(person) AS people
 ----
 
+[.small]
 --
 . Sort the `people` collection by the `name` property, in descending order
 . Sort the `people` collection by the `born` property, in ascending order
@@ -434,7 +435,7 @@ RETURN value
 
 https://neo4j.com/docs/labs/apoc/current/data-structures/map-functions/
 
-[.title.has-purple-background.has-puzzle-background]
+[.has-purple-background.has-puzzle-background]
 == Task: Use Map Functions
 
 Starting from this query:
@@ -449,10 +450,11 @@ Starting from this query:
 })
 ----
 
+[.small]
 --
 . Clean the `$document` map to remove the `budget` property
 . Create a `Movie` node, but remove the `budget` property
-. Return the list of values in the map for the `title`, `released`, and `tagline` propertiesS
+. Return the list of values in the map for the `title`, `released`, and `tagline` properties
 . Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
 --
 
@@ -477,7 +479,7 @@ RETURN m
 
 == Answer: Use Collection Functions
 
-.Return the list of values in the map for the `title`, `released`, and `tagline` propertiesS
+.Return the list of values in the map for the `title`, `released`, and `tagline` properties
 [source,cypher]
 ----
 RETURN apoc.map.values($document, ["released", "title", "tagline"])
@@ -488,11 +490,81 @@ RETURN apoc.map.values($document, ["released", "title", "tagline"])
 .Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
 [source,cypher]
 ----
-WITH apoc.map.clean($document, ["budget"], []) AS properties
+WITH ["released", "title", "tagline"] AS keys
+WITH keys, apoc.map.values($document, keys) AS values
 CREATE(m:Movie)
-SET m += properties
+SET m += apoc.map.fromtLists(keys, values)
 RETURN m
 ----
 
 [.section-title.has-green-background.has-puzzle-background]
-== Conversion Functions
+== Data Import/Export
+
+== Data Import - apoc.import.*
+
+* JSON
+* CSV
+* Excel
+* XML
+* HTML
+* GraphML
+* JDBC/ElasticSearch/MongoDB/Couchbase
+
+== Data Export - apoc.export.*
+
+* CSV
+* JSON
+* Cypher Script
+* GraphML
+* Gephi
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Create a new database called `stackoverflow` and switch to it
+
+[.section-title.has-green-background.has-puzzle-background]
+== Data Import: StackOverflow
+
+== Data Import: StackOverflow
+
+image::{imagedir}/example-data.neo4j.org-so-so_neo4j_1.json.png[StackOverflow dataset^, align=center,role="stretch"]
+
+== apoc.load.json
+
+* Enables loading of JSON documents from web APIs and files
+* Supports JSON Path and streaming JSON
+* Supports compressed data
+
+https://neo4j.com/docs/labs/apoc/current/import/load-json/
+
+== Data Import: StackOverflow
+
+[source,cypher]
+----
+:param url => ("http://example-data.neo4j.org/so/so_neo4j_1.json")
+----
+
+[source,cypher]
+----
+CALL apoc.load.json($url) YIELD value
+UNWIND value.items AS item
+RETURN item
+LIMIT 1;
+----
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Import StackOverflow
+
+Create the following graph model from the StackOverflow dataset using the `apoc.load.json` procedure.
+
+<insert-image-of-graph-model>
+
+== Periodic Execution
+
+* Driving statement
+* Executing statement
+* `batchSize: 10000` - automatic batching of input stream
+* `parallel: true` - parallel execution
+* `concurrency: 10` - number of threads
+* `retries: 3` - retries if statement fails
+
+https://neo4j.com/docs/labs/apoc/current/graph-updates/periodic-execution/
