@@ -459,7 +459,7 @@ Here are some of the built-in conversion functions:
 Consult the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise 6: Working with Cypher data*
+== Exercise 6: Working with Cypher data
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 6.

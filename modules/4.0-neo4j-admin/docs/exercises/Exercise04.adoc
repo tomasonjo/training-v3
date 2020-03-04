@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #4: Creating and deleting a database*
+== Exercise #4: Creating and deleting a database
 
 In this exercise you will gain some experience with creating and deleting a database.
 

@@ -379,7 +379,7 @@ image::CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,width=800,ali
 --
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise 13: Defining constraints on your data*
+== Exercise 13: Defining constraints on your data
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 13.

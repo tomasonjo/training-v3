@@ -74,7 +74,7 @@ In this course, we will not be configuring secure HTTPs connectors as we need a 
 You should consult the https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL documentation] for details in your real, production environment.
 
 [.title.has-gold-background.has-team-background]
-===  *Exercise #10: Modify the HTTP port*
+==  Exercise #10: Modify the HTTP port
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.

@@ -397,7 +397,7 @@ endif::[]
 image::ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise 14: Creating indexes*
+== Exercise 14: Creating indexes
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 14.

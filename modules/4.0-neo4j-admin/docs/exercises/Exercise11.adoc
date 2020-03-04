@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #11: Managing backups*
+== Exercise #11: Managing backups
 
 In this Exercise, you will perform an online backup of a database where you use the same host for the backup process.
 Then you will modify the database.

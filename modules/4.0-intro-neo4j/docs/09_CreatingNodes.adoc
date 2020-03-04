@@ -466,7 +466,7 @@ Assuming that we have previously created the node for the movie with the these p
 image::RemoveProperties.png[RemoveProperties,width=800,align=center]
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise 9: Creating nodes*
+== Exercise 9: Creating nodes
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 9.

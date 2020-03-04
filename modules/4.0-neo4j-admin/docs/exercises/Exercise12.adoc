@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #12: Importing data*
+== Exercise #12: Importing data
 
 In this exercise you will create a database from a set of CSV files using the import functionality of the neo4j-admin tool.
 

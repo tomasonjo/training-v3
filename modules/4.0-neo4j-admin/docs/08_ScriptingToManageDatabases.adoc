@@ -73,7 +73,7 @@ When the *PrepareDB.sh* script runs its scripts, all output will be written to t
 Using the Cypher file, together with the run scripts, you can perform something like this to automate changes to a database or set of databases.
 
 [.slide-title.has-gold-background.has-team-background]
-==  *Exercise #8: Scripting changes to the database*
+==  Exercise #8: Scripting changes to the database
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.

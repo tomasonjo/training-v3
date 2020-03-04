@@ -299,7 +299,7 @@ When nodes are displayed as table values, the node labels and ids are not shown,
 image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise 1: Retrieving nodes*
+== Exercise 1: Retrieving nodes
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 1.

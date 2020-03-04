@@ -425,7 +425,7 @@ If you were to load thousands or more questions, you should ensure that you have
 --
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise 17: Using APOC for importing data*
+== Exercise 17: Using APOC for importing data
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 17.

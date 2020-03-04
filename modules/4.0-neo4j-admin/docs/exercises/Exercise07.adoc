@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #7: Checking consistency of a database*
+== Exercise #7: Checking consistency of a database
 
 In this Exercise, you check the consistency of a database that is consistent. Then you modify a file that causes the database to become corrupt and then check its consistency.
 

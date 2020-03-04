@@ -116,7 +116,7 @@ We simply use these Cypher statements as input when we start the `cypher-shell` 
 They are automatically executed against the default database, _neo4j_.
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise #3: Using `cypher-shell`*
+== Exercise #3: Using `cypher-shell`
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.

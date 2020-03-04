@@ -92,7 +92,7 @@ Then, if you want to create a database from any offline backup file to use for a
 . In `cypher-shell' create <targetDB>.
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise #5: Copying databases*
+== Exercise #5: Copying databases
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.

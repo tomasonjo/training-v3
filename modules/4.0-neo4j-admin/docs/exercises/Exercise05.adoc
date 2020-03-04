@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #5: Copying databases*
+== Exercise #5: Copying databases
 
 In this exercise, you will use `neo4j-admin` to copy a database and create a database from a dump file.
 

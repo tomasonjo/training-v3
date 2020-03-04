@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #2: Managing the Neo4j instance*
+== Exercise #2: Managing the Neo4j instance
 
 In this Exercise, you will stop and start the Neo4j instance and view its status and log file using the Debian installation you verified in the previous exercise.
 

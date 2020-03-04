@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-== *Exercise #6: Modifying the location of the databases*
+== Exercise #6: Modifying the location of the databases
 
 In this Exercise, you will set up a different location for the databases in your local filesystem and start the Neo4j instance using the database at this new location.
 

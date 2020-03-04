@@ -154,7 +154,7 @@ When the Neo4j instance starts, you can also confirm that it is started by seein
 You can also view the log file in the *logs* directory on all platforms.
 
 [.slide-title.has-gold-background.has-team-background]
-== *Exercise #2: Managing the Neo4j instance*
+== Exercise #2: Managing the Neo4j instance
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.

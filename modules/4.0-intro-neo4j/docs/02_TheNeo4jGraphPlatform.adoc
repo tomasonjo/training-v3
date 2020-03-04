@@ -401,7 +401,7 @@ In addition, when using the Web browser interface to Neo4j Browser, you can use 
 --
 
 [.slide-title.has-green-background.has-team-background]
-== *Guided Exercise: Getting Started with Neo4j Browser*
+== Guided Exercise: Getting Started with Neo4j Browser
 
 [.notes]
 --
