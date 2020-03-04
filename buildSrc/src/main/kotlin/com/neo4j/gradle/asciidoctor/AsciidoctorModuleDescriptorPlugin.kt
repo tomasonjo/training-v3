@@ -2,6 +2,7 @@ package com.neo4j.gradle.asciidoctor
 
 import org.asciidoctor.Asciidoctor
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileTree
@@ -29,6 +30,9 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
   @Input
   var outputDir: String = ""
 
+  @Input
+  var moduleName: String = ""
+
   private val dumperOptions: DumperOptions
     get() {
       val options = DumperOptions()
@@ -43,6 +47,9 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
 
   @TaskAction
   fun task() {
+    if (moduleName.isBlank()) {
+      throw GradleException("moduleName is mandatory to build the module descriptor, aborting...")
+    }
     val asciidoctor = Asciidoctor.Factory.create()
     val navItems = sources.asSequence().map { it.sorted() }.flatten().sorted().mapNotNull { file ->
       val document = asciidoctor.loadFile(file, emptyMap())
@@ -55,12 +62,29 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
         null
       }
     }.toList()
+    val linkedNavItems = navItems.mapIndexed { index: Int, item: Map<String, String> ->
+      if (index + 1 < navItems.size) {
+        val nextItem = navItems[index + 1]
+        val nextConfig = mapOf<String, Any>(
+          "next" to mapOf(
+            "slug" to nextItem["slug"],
+            "title" to nextItem["title"]
+          )
+        )
+        item.plus(nextConfig)
+      } else {
+        item
+      }
+    }
     val outputDirFile = File(outputDir)
     if (!outputDirFile.exists()) {
       outputDirFile.mkdirs()
     }
     val outputFile = File(outputDir, "asciidoctor-module-descriptor.yml")
-    outputFile.writeText(yaml.dump(mapOf("nav" to navItems)))
+    outputFile.writeText(yaml.dump(mapOf(
+      "module_name" to moduleName,
+      "nav" to linkedNavItems
+    )))
   }
 
   fun setSource(source: String) {
