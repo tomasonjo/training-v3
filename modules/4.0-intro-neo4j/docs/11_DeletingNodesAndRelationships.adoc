@@ -212,8 +212,7 @@ and follow the instructions for Exercise 11.
 This exercise has 6 steps.
 Estimated time to complete: 10 minutes.
 
-//[#module-6.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

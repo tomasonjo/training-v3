@@ -468,7 +468,6 @@ and follow the instructions for Exercise 6.
 This exercise has 6 steps.
 Estimated time to complete: 15 minutes.
 
-//[#module-5.quiz]
 [.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 

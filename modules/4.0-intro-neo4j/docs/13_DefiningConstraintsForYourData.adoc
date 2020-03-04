@@ -388,8 +388,7 @@ and follow the instructions for Exercise 13.
 This exercise has 14 steps.
 Estimated time to complete: 30 minutes.
 
-//[#module-6.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

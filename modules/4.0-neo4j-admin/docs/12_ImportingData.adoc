@@ -246,8 +246,7 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/Exercise12.adoc
 //endif::[]
 
-//[#module-7.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

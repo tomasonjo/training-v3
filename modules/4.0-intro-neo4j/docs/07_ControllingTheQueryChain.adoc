@@ -233,8 +233,7 @@ and follow the instructions for Exercise 7.
 This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
-//[#module-5.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

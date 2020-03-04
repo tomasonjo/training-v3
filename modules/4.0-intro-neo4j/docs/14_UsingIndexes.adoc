@@ -406,8 +406,7 @@ and follow the instructions for Exercise 14.
 This exercise has 7 steps.
 Estimated time to complete: 30 minutes.
 
-//[#module-7.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
