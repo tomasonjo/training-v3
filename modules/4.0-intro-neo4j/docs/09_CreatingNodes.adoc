@@ -538,7 +538,7 @@ Select the correct answers.
 - [x] salary
 - [x] department
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:

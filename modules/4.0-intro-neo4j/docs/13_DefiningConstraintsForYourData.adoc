@@ -433,7 +433,7 @@ Select the correct answers.
 - [x] 2
 - [x] unlimited
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

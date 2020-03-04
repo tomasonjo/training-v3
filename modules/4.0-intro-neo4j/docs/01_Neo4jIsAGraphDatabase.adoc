@@ -451,7 +451,7 @@ Select the correct answers.
 - [x] relationship
 - [ ] direction
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

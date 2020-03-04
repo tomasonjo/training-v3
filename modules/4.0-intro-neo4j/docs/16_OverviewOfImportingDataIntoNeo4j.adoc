@@ -228,7 +228,7 @@ Select the correct answer.
 - [x] neo4j-admin import tool
 - [ ] Cypher's `LOAD CSV`
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

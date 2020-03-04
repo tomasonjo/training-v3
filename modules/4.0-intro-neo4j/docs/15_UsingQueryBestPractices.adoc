@@ -457,7 +457,7 @@ Select the correct answers.
 - [x] You can kill any running query seen in Session B.
 - [x] You can close the Neo4j Browser that is running Session A.
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

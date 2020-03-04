@@ -598,7 +598,7 @@ Select the correct answers.
 - [x] Python
 - [x] JavaScript
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

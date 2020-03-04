@@ -1203,7 +1203,7 @@ Select the correct answer.
 - [x] When you want to use the node or relationship to return a value.
 - [ ] When the query involves 2 types of nodes.
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:

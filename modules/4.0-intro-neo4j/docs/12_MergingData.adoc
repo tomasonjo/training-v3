@@ -458,7 +458,7 @@ Select the correct answers.
 - [x] Specify `ON MATCH` to perform additional processing when the relationship is not created.
 - [ ] Specify `ON DELETE` to perform additional processing when the relationship is deleted.
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:

@@ -503,20 +503,22 @@ kbd:not(.keyseq) {
   font-size: 1em;
 }
 
+.reveal section.summary > h2,
 .reveal section.title > h2,
 .reveal section.slide-title > h2 {
   margin-top: 6rem;
 }
 
 /* backgrounds */
-
 .reveal section.title,
+.reveal section.summary,
 .reveal section.slide-title,
 .reveal section.bg-purple,
 .reveal section.has-purple-background,
 .reveal section.has-green-background,
 .reveal section.has-gold-background,
 .reveal section.title > h2,
+.reveal section.summary > h2,
 .reveal section.slide-title > h2,
 .reveal section.bg-purple > h2,
 .reveal section.has-purple-background > h2,
@@ -542,6 +544,7 @@ kbd:not(.keyseq) {
 
 /* add a white logo (on the right) */
 .slide-background.title::after,
+.slide-background.summary::after,
 .slide-background.slide-title::after,
 .slide-background.has-puzzle-background::after,
 .slide-background.has-team-background::after {
@@ -695,6 +698,7 @@ kbd:not(.keyseq) {
 
 /* backward-compatible title */
 .slide-background.title > .slide-background-content::before,
+.slide-background.summary > .slide-background-content::before,
 .slide-background.slide-title > .slide-background-content::before {
   content: "";
   position: absolute;
@@ -709,6 +713,7 @@ kbd:not(.keyseq) {
 }
 
 .slide-background.title > .slide-background-content::after,
+.slide-background.summary > .slide-background-content::after,
 .slide-background.slide-title > .slide-background-content::after {
   position: absolute;
   content: "";
@@ -733,6 +738,7 @@ kbd:not(.keyseq) {
     background-position: center;
 }
 
+.slide-background.summary > .slide-background-content::before,
 .slide-background.has-green-background > .slide-background-content::before {
     content: "";
     position: absolute;
@@ -761,6 +767,7 @@ kbd:not(.keyseq) {
 
 /* background transparent color after */
 .slide-background.has-puzzle-background > .slide-background-content::after,
+.slide-background.summary > .slide-background-content::after,
 .slide-background.has-puzzle-background.has-green-background > .slide-background-content::after,
 .slide-background.has-team-background.has-green-background > .slide-background-content::after {
   position: absolute;
@@ -795,6 +802,7 @@ kbd:not(.keyseq) {
 }
 
 /* background image before */
+.slide-background.summary > .slide-background-content::before,
 .slide-background.has-puzzle-background > .slide-background-content::before {
   content: "";
   position: absolute;
@@ -1044,6 +1052,7 @@ span.fragment.check {
     position: absolute;
   }
   .slide-background.title::after,
+  .slide-background.summary::after,
   .slide-background.slide-title::after,
   .slide-background.has-puzzle-background::after,
   .slide-background.has-team-background::after {

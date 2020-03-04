@@ -596,7 +596,7 @@ Select the correct answer.
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2.Person)`
 - [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2,4]->(p2.Person)`
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:

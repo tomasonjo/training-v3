@@ -310,7 +310,7 @@ Select the correct answer.
 - [ ] 8
 - [ ] 14
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

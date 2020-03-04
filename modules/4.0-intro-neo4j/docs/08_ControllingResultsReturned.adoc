@@ -404,7 +404,7 @@ Select the correct answers.
 - [x] `MATCH (p:Person)`
       `ETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5`
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:
