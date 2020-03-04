@@ -1,4 +1,4 @@
-:imagesdir: ../images
+:imagesdir: ../../images
 
 == Exercise #2: Managing the Neo4j instance
 

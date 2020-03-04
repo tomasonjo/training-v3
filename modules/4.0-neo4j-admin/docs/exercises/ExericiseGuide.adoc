@@ -1,10 +1,20 @@
+:imagesdir: ../../images
 
 = Neo4j 4.0 Administration Exercise Guide
 :doctype: book
 :toc: left
 :toclevels: 3
 :experimental:
-:imagesdir: ../images
 
-include::./exercises/02_OverviewOfNeo4jAdministration.adoc[]
-include::./exercises/03_ManagingNeo4jDatabases.adoc[]
+include::Exercise01.adoc[]
+include::Exercise02.adoc[]
+include::Exercise03.adoc[]
+include::Exercise04.adoc[]
+include::Exercise05.adoc[]
+include::Exercise06.adoc[]
+include::Exercise07.adoc[]
+include::Exercise08.adoc[]
+include::Exercise09.adoc[]
+include::Exercise10.adoc[]
+include::Exercise11.adoc[]
+include::Exercise12.adoc[]
