@@ -1,14 +1,14 @@
-<!--%=  File.new("#{__dir__ }/_top_partial.html.erb").read %-->
-
 <article id="content" role="main">
   <div class="content-wrapper">
     <div class="dev-menu-nav large-2 hide-for-medium-only hide-for-small-only columns">
       <h3 class="dev-nav-header"><strong>Online Course</strong></h3>
       <ul style="padding-top: 0;" class="side-nav">
-        <% @attributes.select { |k, _| k.start_with?('module_toc_link_') }.each_key do |toc_link_attr| %>
-          <% toc_index = toc_link_attr.sub('module_toc_link_', '') %>
-          <% toc_title_attr = "module_toc_title_#{toc_index}" %>
-          <% toc_slug_attr = "module_toc_slug_#{toc_index}" %>
+        <% @attributes.select { |k, _| k.start_with?('module-toc-link-') }.each_key do |toc_link_attr| %>
+          <%
+            toc_index = toc_link_attr.sub('module-toc-link-', '')
+            toc_title_attr = "module-toc-title-#{toc_index}"
+            toc_slug_attr = "module-toc-slug-#{toc_index}"
+          %>
           <a href="../<%= attr(toc_slug_attr) %>">
             <dl class="menu-list">
               <dd class="accordion-dev-nav <%= attr(toc_slug_attr) == attr('slug') ? 'active' : '' %>"><%= attr(toc_title_attr) %></dd>
@@ -42,7 +42,21 @@
     <div class="guide-section-content large-8 columns">
       <h1 class="entry-title"><%= attr 'doctitle' %></h1>
       <%= content %>
-      <%= File.new("#{__dir__ }/quiz_partial.html.erb", mode: 'r:UTF-8').read %>
+      <div id="_grade_quiz_and_continue" class="sect1 columns medium-12" style="padding-left: 0;">
+        <h3>Grade Quiz and Continue</h3>
+        <!-- fixme: configure the module link -->
+        <div class="paragraph">
+          <a class="next-section medium button" href="../<%= attr('module-next-slug') %>/">Continue to <%= attr('module-next-title') %></a>
+        </div>
+        <script>
+          window.trainingClassName = "<%= attr('module-name') %>"
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+        <script src="https://neo4jsandbox.com/js/js.cookie-2.1.3.min.js"></script>
+        <script src="https://graphacademy.neo4j.com/training-classes/js/classes-v2.js" type="text/javascript"></script>
+        <script src="https://graphacademy.neo4j.com/training-quizes/js/quizes-v2.js" type="text/javascript"></script>
+        <script src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/js/jwt-decode.min.js"></script>
+      </div>
     </div>
     <div class="guide-toc large-2 hide-for-medium-only hide-for-small-only columns">
       <ul class="side-nav">
@@ -77,5 +91,3 @@
 <style>
   <%= File.new("#{__dir__ }/_extra.css", mode: 'r:UTF-8').read %>
 </style>
-
-<!--%=  File.new("#{__dir__ }/_bottom_partial.html.erb").read %-->
