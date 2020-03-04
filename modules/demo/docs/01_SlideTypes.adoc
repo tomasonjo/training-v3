@@ -78,6 +78,10 @@ RETURN p, rel, m
 
 image::MatchRelationshipActedIn.png[height=500,align=center,role=border]
 
+== Images (stretch)
+
+image::WebNeo4jBrowser.png[align=center,role="stretch"]
+
 == Video
 
 [.center]
@@ -153,6 +157,9 @@ In Neo4j Browser:
 kbd:[:play intro-neo4j-exercises]
 
 Then follow instructions for Exercise 1.
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Create a new database called `stackoverflow` and switch to it
 
 [.slide-title.has-purple-background.has-node-background]
 == Title (purple + node)
