@@ -240,7 +240,7 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
       .addPathSegment(documentType.urlPath)
       .addPathSegment(wordPressDocument.id.toString())
       .build()
-    logger.quiet("Updating ${documentType.name.toLowerCase()} id: ${wordPressDocument.id}")
+    logger.debug("POST $url")
     val updateRequest = Request.Builder()
       .url(url)
       .post(klaxon.toJsonString(data).toRequestBody(jsonMediaType))
@@ -249,7 +249,7 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
       try {
         val jsonObject = klaxon.parseJsonObject(responseBody.charStream())
         val id = jsonObject.int("id")!!
-        logger.quiet("Successfully updated the ${documentType.name.toLowerCase()} with id: $id")
+        logger.quiet("Successfully updated the ${documentType.name.toLowerCase()} with id: $id and slug: ${data["slug"]}")
         true
       } catch (e: KlaxonException) {
         logger.error("Unable to parse the response for the ${documentType.name.toLowerCase()} with slug: ${data["slug"]}", e)
@@ -262,7 +262,7 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
     val url = baseUrlBuilder()
       .addPathSegment(documentType.urlPath)
       .build()
-    logger.quiet("Creating a new ${documentType.name.toLowerCase()}")
+    logger.debug("POST $url")
     val createRequest = Request.Builder()
       .url(url)
       .post(klaxon.toJsonString(data).toRequestBody(jsonMediaType))
@@ -271,7 +271,7 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
       try {
         val jsonObject = klaxon.parseJsonObject(responseBody.charStream())
         val id = jsonObject.int("id")!!
-        logger.quiet("Successfully created a new ${documentType.name.toLowerCase()} with id: $id")
+        logger.quiet("Successfully created a new ${documentType.name.toLowerCase()} with id: $id and slug: ${data["slug"]}")
         true
       } catch (e: KlaxonException) {
         logger.error("Unable to parse the response for the new ${documentType.name.toLowerCase()} with slug: ${data["slug"]}", e)
