@@ -498,7 +498,7 @@ RETURN m
 ----
 
 [.section-title.has-green-background.has-puzzle-background]
-== Data Import/Export
+== Data Import
 
 == Data Import - apoc.import.*
 
@@ -551,6 +551,8 @@ RETURN item
 LIMIT 1;
 ----
 
+[.title.has-purple-background.has-puzzle-background]
+== Task: Import StackOverflow
 [.title.has-purple-background.has-puzzle-background]
 == Task: Import StackOverflow
 
@@ -629,6 +631,31 @@ YIELD value
 * Create a job that
 * List the jobs and cancel them
 * Use `apoc.periodic.iterate` to add a label to all questions tagged `cypher`
+
+[.section-title.has-green-background.has-puzzle-background]
+== Data Export
+
+== Data Export - apoc.export.*
+
+* CSV
+* JSON
+* Cypher Script
+* GraphML
+* Gephi
+
+https://neo4j.com/docs/labs/apoc/current/export/
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Create a new database called `stackoverflow.export`
+
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Export StackOverflow
+
+This task has two parts:
+
+. Export all of the questions and associated nodes that have the tag `cypher` as Cypher Script
+. Import the output into the `stackoverflow.export` database
 
 [.section-title.has-green-background.has-puzzle-background]
 == Path Expansion
