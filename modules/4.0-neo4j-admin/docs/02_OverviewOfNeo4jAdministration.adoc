@@ -428,7 +428,7 @@ Select the correct answer.
 - [ ] Docker Container
 - [ ] Kubernetes
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

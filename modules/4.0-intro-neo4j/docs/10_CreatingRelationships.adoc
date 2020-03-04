@@ -401,7 +401,7 @@ Select the correct answer.
 - [ ] Two
 - [x] Three
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:

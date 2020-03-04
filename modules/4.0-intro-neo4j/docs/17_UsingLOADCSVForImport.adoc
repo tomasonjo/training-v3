@@ -583,7 +583,7 @@ Select the correct answer.
 - [x] 100K
 - [ ] 1M
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 ifndef::backend-revealjs[]

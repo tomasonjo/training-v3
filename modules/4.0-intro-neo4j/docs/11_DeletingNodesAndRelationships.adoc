@@ -259,7 +259,7 @@ Select the correct answer.
 - [ ] `REMOVE n`
 - [x] `DETACH DELETE n`
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher statements to:

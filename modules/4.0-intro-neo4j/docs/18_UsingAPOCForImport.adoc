@@ -480,7 +480,7 @@ Select the correct answers.
 - [ ] Removes all relationships in the graph.
 - [ ] Removes all nodes in the graph.
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to:

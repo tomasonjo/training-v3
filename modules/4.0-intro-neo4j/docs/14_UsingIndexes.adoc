@@ -452,7 +452,7 @@ Select the correct answer.
 - [x] A composite index does not enforce uniqueness.
 - [ ] A composite index can enforce existence.
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 ifndef::backend-revealjs[]

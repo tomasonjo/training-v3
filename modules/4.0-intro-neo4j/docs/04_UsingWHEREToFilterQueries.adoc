@@ -501,7 +501,7 @@ Select the correct answer.
 - [ ] [src-cypher]`MATCH (p:Person)-[:ACTED_IN | WROTE]->(m:Movie) RETURN p.name, m.title`
 - [ ] [src-cypher]`MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[WROTE]-(p) RETURN p.name, m.title`
 
-[.slide-title.has-green-background.has-puzzle-background]
+[.summary]
 == Summary
 
 You should now be able to write Cypher `WHERE` clauses to test:
