@@ -437,8 +437,7 @@ and follow the instructions for Exercise 4.
 This exercise has 13 steps.
 Estimated time to complete: 30 minutes.
 
-//[#module-5.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

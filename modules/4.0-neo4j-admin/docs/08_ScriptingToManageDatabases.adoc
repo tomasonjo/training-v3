@@ -85,8 +85,8 @@ Refer to the *Exercise Guide* for instructions.
 
 
 
-//[#module-3.quiz]
 ////
+[.quiz]
 == Check your understanding
 
 === Question 1

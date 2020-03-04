@@ -71,8 +71,8 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/Exercise07.adoc
 //endif::[]
 
-//[#module-3.quiz]
 ////
+[.quiz]
 == Check your understanding
 
 === Question 1

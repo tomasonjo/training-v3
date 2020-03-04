@@ -1151,8 +1151,7 @@ and follow the instructions for Exercise 3.
 This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
-//[#module-4.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 

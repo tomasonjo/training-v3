@@ -476,8 +476,7 @@ This exercise has 18 steps.
 Estimated time to complete: 30 minutes.
 
 
-//[#module-6.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

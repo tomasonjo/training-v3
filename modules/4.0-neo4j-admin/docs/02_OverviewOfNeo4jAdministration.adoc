@@ -383,8 +383,7 @@ You should consult the https://neo4j.com/docs/operations-manual/3.5/installation
 
 The https://neo4j.com/docs/java-reference/3.5/tutorials-java-embedded/[Java Developer Manual ] covers using embedded mode for Neo4j and is intended for developers.
 
-//[#module-2.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 === Question 1
 
