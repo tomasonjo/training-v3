@@ -406,7 +406,7 @@ We recommend that you take our training course, _Graph Data Modeling for Neo4j_,
 --
 
 //[#module-1.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1

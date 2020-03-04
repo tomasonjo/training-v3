@@ -553,7 +553,7 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 *Note:* In Neo4j Desktop which is used by developers, you have the create, start, and stop administrative functionality.
 
 //[#module-2.quiz]
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
 == Check your understanding
 
 === Question 1
