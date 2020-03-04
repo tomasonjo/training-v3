@@ -1,4 +1,4 @@
-:imagesdir: ../../images
+:imagesdir: ../images
 
 == Exercise #4: Creating and deleting a database
 

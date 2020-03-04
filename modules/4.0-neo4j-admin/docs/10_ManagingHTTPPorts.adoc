@@ -31,12 +31,12 @@ The ports frequently used are the connector ports:
 
 [cols="10,10,80", options="header",stripes="none"]
 |====
- *Name*
+| *Name*
 | *Port Number*
 | *Description*
 |
 {set:cellbgcolor:white}
- HTTP
+HTTP
 | 7474
 | Used by Neo4j Browser. It is *not* encrypted so it should never be exposed externally.
 | HTTPS

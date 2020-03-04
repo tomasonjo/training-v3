@@ -56,7 +56,6 @@ CSV files contain one of:
 
 You must understand how headers relate to the data, what the field separator is, and make sure that the data is property formatted.
 You must ensure that the data in the CSV files is clean and ready for import.
---
 
 == Using neo4j-admin for import
 

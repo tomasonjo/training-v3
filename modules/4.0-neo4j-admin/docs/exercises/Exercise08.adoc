@@ -1,4 +1,4 @@
-:imagesdir: ../../images
+:imagesdir: ../images
 
 ==  Exercise #8: Scripting changes to the database
 

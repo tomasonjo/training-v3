@@ -1,4 +1,3 @@
-:imagesdir: ../../images
 
 = Neo4j 4.0 Administration Exercise Guide
 :doctype: book
@@ -6,15 +5,16 @@
 :toclevels: 3
 :experimental:
 
-include::Exercise01.adoc[]
-include::Exercise02.adoc[]
-include::Exercise03.adoc[]
-include::Exercise04.adoc[]
-include::Exercise05.adoc[]
-include::Exercise06.adoc[]
-include::Exercise07.adoc[]
-include::Exercise08.adoc[]
-include::Exercise09.adoc[]
-include::Exercise10.adoc[]
-include::Exercise11.adoc[]
-include::Exercise12.adoc[]
+include::exercises/Exercise01.adoc[]
+include::../exercises/Exercise02.adoc[]
+include::../exercises/Exercise03.adoc[]
+include::../exercises/Exercise04.adoc[]
+include::../exercises/Exercise05.adoc[]
+include::../exercises/Exercise06.adoc[]
+include::../exercises/Exercise07.adoc[]
+include::../exercises/Exercise08.adoc[]
+include::../exercises/Exercise09.adoc[]
+include::../exercises/Exercise10.adoc[]
+include::../exercises/Exercise11.adoc[]
+include::../exercises/Exercise12.adoc[]
+

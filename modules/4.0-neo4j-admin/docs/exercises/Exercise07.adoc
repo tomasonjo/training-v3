@@ -1,4 +1,4 @@
-:imagesdir: ../../images
+:imagesdir: ../images
 
 == Exercise #7: Checking consistency of a database
 
@@ -32,7 +32,7 @@ image::L03-Ex5-Consistent.png[Ex5-Consistent,width=1000,align=center]
 image::CorruptMovies3.png[CorruptMovies3,width=1000,align=center]
 
 [start=11]
-. Run the consistency check tool on *movieies3* using `neo4j-admin` specifying */home/ubuntu/reports* as the directory where the report will be written. The consistency check tool should return something like the following:
+. Run the consistency check tool on *movies3* using `neo4j-admin` specifying */home/ubuntu/reports* as the directory where the report will be written. The consistency check tool should return something like the following:
 
 image::L03-Ex5-Inconsistent.png[Ex5-Inconsistent,width=1000,align=center]
 

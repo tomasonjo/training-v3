@@ -1,6 +1,6 @@
 :imagesdir: ../images
 
-:imagesdir: ../../images
+:imagesdir: ../images
 
 == Exercise #5: Copying databases
 
