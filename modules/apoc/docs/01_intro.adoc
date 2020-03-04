@@ -558,7 +558,7 @@ Create the following graph model from the StackOverflow dataset using the `apoc.
 
 <insert-image-of-graph-model>
 
-== Periodic Execution
+== apoc.periodic.iterate
 
 * Driving statement
 * Executing statement
@@ -567,4 +567,241 @@ Create the following graph model from the StackOverflow dataset using the `apoc.
 * `concurrency: 10` - number of threads
 * `retries: 3` - retries if statement fails
 
-https://neo4j.com/docs/labs/apoc/current/graph-updates/periodic-execution/
+https://neo4j.com/docs/labs/apoc/current/graph-updates/periodic-execution/#commit-batching
+
+== Running large-scale updates
+
+[source.center,cypher]
+----
+CALL apoc.periodic.iterate(
+  'MATCH (n:Person) RETURN n',
+  'SET n.name = n.firstName + " " + n.lastName',
+  {batchSize:10000, parallel:true, concurrency:10}
+)
+----
+
+== Running large-scale updates
+
+[source.center,cypher]
+----
+CALL apoc.periodic.iterate(
+  'UNWIND range(1,165) as page
+   RETURN "http://example-data.neo4j.org/so/so_neo4j_"+page+".json" as url',
+  'CALL apoc.load.json(url) YIELD value
+   UNWIND value.items AS q
+   MERGE (question:Question {id:q.question_id})...',
+  {batchSize:1}
+)
+----
+
+== Conditional Cypher execution
+
+.Read Only Queries
+[source,cypher]
+----
+CALL apoc.when(condition, ifQuery, elseQuery, paramMap)
+YIELD value
+----
+
+[source,cypher]
+----
+CALL apoc.case([condition, query, condition, query, ... ], elseQuery, paramMap)
+YIELD value
+
+----
+
+.Write Queries
+[source,cypher]
+----
+CALL apoc.do.when(condition, ifQuery, elseQuery, paramMap)
+YIELD value
+----
+
+[source,cypher]
+----
+CALL apoc.do.case([condition, query, condition, query, ... ], elseQuery, paramMap)
+YIELD value
+----
+
+[.title.has-purple-background.has-puzzle-background]
+== Task
+
+* Create a job that
+* List the jobs and cancel them
+* Use `apoc.periodic.iterate` to add a label to all questions tagged `cypher`
+
+[.section-title.has-green-background.has-puzzle-background]
+== Path Expansion
+
+== Path Expansion
+
+Customized path expansion from start node(s)
+
+* Min/max traversals
+* Limit number of results
+* Optional (no rows removed if no results, if set to true)
+* Choice of BFS/DFS expansion
+* Custom uniqueness (restrictions on visitations of nodes/rels)
+* Relationship and label filtering
+* No property filtering/evaluation
+
+== Expander procedures: apoc.path.*
+
+[.small]
+.The original, when you don’t need much customization
+[source,cypher]
+----
+expand(startNode(s), relationshipFilter, labelFilter, minLevel, maxLevel) YIELD path
+----
+
+[.small]
+.Most flexible, rich configuration map
+[source,cypher]
+----
+expandConfig(startNode(s), configMap) YIELD path
+----
+
+[.small]
+.Only distinct nodes, don't care about paths
+[source,cypher]
+----
+subgraphNodes(startNode(s), configMap) YIELD node
+----
+
+[.small]
+.Only one distinct path to each node
+[source,cypher]
+----
+spanningTree(startNode(s), configMap) YIELD path
+----
+
+[.small]
+.Only distinct nodes and all rels between them
+[source,cypher]
+----
+subgraphAll(startNode(s), configMap) YIELD nodes, relationships
+----
+
+[.small]
+https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
+
+== Config map values
+
+* minLevel: int
+* maxLevel: int
+* relationshipFilter: string
+* labelFilter: string
+* uniqueness: string (‘RELATIONSHIP_PATH’, ’NODE_GLOBAL’, ‘NODE_PATH’, etc)
+* bfs: boolean,
+* filterStartNode: boolean
+* limit: int
+* optional: boolean
+* endNodes: [nodes]
+* terminatorNodes: [nodes]
+* whitelistNodes: [nodes]
+* blacklistNodes: [nodes]
+* sequence: string
+* beginSequenceAtStart: boolean
+
+== Relationship filter
+
+Which relationships (type and direction) to follow:
+
+* '<ACTED_IN' - Incoming Rel
+* 'DIRECTED>' - Outgoing Rel
+* 'REVIEWED' - Any direction
+* ‘>’ - Direction, any type
+* '<ACTED_IN | DIRECTED> | REVIEWED' - Multiple, in varied direction
+
+== Label filter
+
+What is/isn't allowed during expansion, and what is/isn't returned:
+
+* '-Director' – Blacklist, not allowed in path
+* '+Person' – Whitelist , only allowed in path (+ symbol optional)
+  **    (no whitelist = all allowed)
+* '>Reviewer' – End node, only return these, and continue expansion past them
+* '/Producer' – Terminator node, only return these, stop expansion
+* 'Person|Movie|-Director|>Reviewer|/Producer' – Combine them
+
+== Sequences
+
+* Repeating sequences of relationships, labels, or both.
+* Uses labelFilter and relationshipFilter, just add commas
+* Or use sequence for both together
+
+labelFilter:'Post | -Blocked, Reply, >Admin'
+(use beginSequenceAtStart:false if sequence begins at one hop from start node)
+
+relationshipFilter:'NEXT>,<FROM,POSTED>|REPLIED>'
+
+sequence:'Post |-Blocked, NEXT>, Reply, <FROM, >Admin, POSTED>| REPLIED>'
+
+== End nodes/terminator nodes
+
+What if we already have the nodes that should end the expansion?
+
+* `endNodes` – like filter, but takes a collection of nodes (or ids)
+* `terminatorNodes` – like filter (stop expand), but also takes a collection (whitelistNodes and blacklistNodes too!)
+* Can be used with labelFilter or sequence, but continue or include must be unanimous.
+
+== Example: Get connected nodes
+
+[.small]
+.get all connected nodes reachable from Keanu Reeves
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.subgraphNodes(k, {}) YIELD node
+RETURN node
+----
+
+[.small]
+.now see the paths used to obtain those results
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.spanningTree(k, {}) YIELD path
+RETURN path
+----
+
+[.small]
+.just get the movies reachable from Keanu Reeves
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.subgraphNodes(k, {labelFilter:'>Movie'}) YIELD node as movie
+RETURN movie
+----
+
+[.small]
+.get the local subgraph of all nodes and rels within 3 hops of Keanu Reeves, actors only
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.subgraphAll(k, {maxLevel:3, relationshipFilter:'ACTED_IN'}) YIELD nodes, relationships
+RETURN nodes, relationships
+----
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Get closest Reviewers
+
+Switch back to the default database and add `Reviewer` labels:
+
+[source,cypher]
+----
+MATCH (rev:Person)
+WHERE (rev)-[:REVIEWED]->()
+SET rev:Reviewer
+----
+
+[.small]
+--
+. Can you write a query to find if there’s a :Reviewer node within 5 hops of Christian Bale?
+  ** Start with the Cypher query
+  ** Then rewrite using the path expander procedure
+
+. Write a query to match to 5 random :Persons, then get the 2 closest :Reviewers for each person
+  ** Start with the path expander procedure
+  ** What difficulties would you have doing this with just Cypher?
+--
