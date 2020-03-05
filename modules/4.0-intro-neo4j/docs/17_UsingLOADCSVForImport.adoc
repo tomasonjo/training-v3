@@ -527,7 +527,7 @@ These indexes will make lookup of a _Movie_ by _title_ as well as lookup of a _P
 These indexes are not unique indexes.
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 16: Using LOAD CSV for import
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

@@ -1,3 +1,4 @@
+
 = Exercise #6: Modifying the location of the databases
 ifndef::imagesdir[:imagesdir: ../../images]
 

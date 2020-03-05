@@ -149,8 +149,8 @@ image::AngelaFollowers.png[width=600,align=center,role=border]
 [.slide-title.has-green-background]
 == Title (green)
 
-[.slide-title.has-gold-background.has-team-background]
-== Title (gold + team): Subtitle
+[.student-exercise]
+== Exercise #1: Install a plugin
 
 In Neo4j Browser:
 

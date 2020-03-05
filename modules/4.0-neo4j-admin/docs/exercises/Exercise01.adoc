@@ -1,3 +1,4 @@
+
 = Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]

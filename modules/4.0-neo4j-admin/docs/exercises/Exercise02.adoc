@@ -1,3 +1,4 @@
+
 = Exercise #2: Managing the Neo4j instance
 ifndef::imagesdir[:imagesdir: ../../images]
 

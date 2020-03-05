@@ -58,9 +58,9 @@ image::Inconsistencies.png[Inconsistencies,width=1000,align=center]
 
 If inconsistencies are found, a report is generated and placed in the directory specified for the report location.
 
-Inconsistencies in a database are a serious matter that should be looked into with the help of Neo4j Technical Support. 
+Inconsistencies in a database are a serious matter that should be looked into with the help of Neo4j Technical Support.
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise #7: Checking consistency of a database
 
 //ifndef::backend-htlm5[]

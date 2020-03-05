@@ -329,7 +329,7 @@ endif::[]
 image::Count5Movies.png[Count5Movies,width=900,align=center]
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 8: Controlling results returned
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

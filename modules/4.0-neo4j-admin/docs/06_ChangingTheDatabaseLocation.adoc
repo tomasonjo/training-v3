@@ -74,7 +74,7 @@ Just as you needed to change the password for the admin user, neo4j the first ti
 
 image::passwordChangeNewLocation.png[passwordChangeNewLocation,width=800,align=center]
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise #6: Modifying the location of the databases
 
 //ifndef::backend-htlm5[]

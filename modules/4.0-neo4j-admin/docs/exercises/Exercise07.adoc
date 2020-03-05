@@ -1,3 +1,4 @@
+
 = Exercise #7: Checking consistency of a database
 ifndef::imagesdir[:imagesdir: ../../images]
 

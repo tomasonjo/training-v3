@@ -505,6 +505,7 @@ kbd:not(.keyseq) {
 
 .reveal section.summary > h2,
 .reveal section.title > h2,
+.reveal section.student-exercise > h2,
 .reveal section.slide-title > h2 {
   margin-top: 6rem;
 }
@@ -513,6 +514,7 @@ kbd:not(.keyseq) {
 .reveal section.title,
 .reveal section.summary,
 .reveal section.slide-title,
+.reveal section.student-exercise,
 .reveal section.bg-purple,
 .reveal section.has-purple-background,
 .reveal section.has-green-background,
@@ -520,6 +522,7 @@ kbd:not(.keyseq) {
 .reveal section.title > h2,
 .reveal section.summary > h2,
 .reveal section.slide-title > h2,
+.reveal section.student-exercise > h2,
 .reveal section.bg-purple > h2,
 .reveal section.has-purple-background > h2,
 .reveal section.has-green-background > h2,
@@ -546,6 +549,7 @@ kbd:not(.keyseq) {
 .slide-background.title::after,
 .slide-background.summary::after,
 .slide-background.slide-title::after,
+.slide-background.student-exercise::after,
 .slide-background.has-puzzle-background::after,
 .slide-background.has-team-background::after {
   content: '';
@@ -698,6 +702,7 @@ kbd:not(.keyseq) {
 
 /* backward-compatible title */
 .slide-background.title > .slide-background-content::before,
+.slide-background.student-exercise > .slide-background-content::before,
 .slide-background.summary > .slide-background-content::before,
 .slide-background.slide-title > .slide-background-content::before {
   content: "";
@@ -713,6 +718,7 @@ kbd:not(.keyseq) {
 }
 
 .slide-background.title > .slide-background-content::after,
+.slide-background.student-exercise > .slide-background-content::after,
 .slide-background.summary > .slide-background-content::after,
 .slide-background.slide-title > .slide-background-content::after {
   position: absolute;
@@ -752,6 +758,7 @@ kbd:not(.keyseq) {
     background-position: center;
 }
 
+.slide-background.student-exercise > .slide-background-content::before,
 .slide-background.has-gold-background > .slide-background-content::before {
     content: "";
     position: absolute;
@@ -791,6 +798,7 @@ kbd:not(.keyseq) {
 }
 
 .slide-background.has-puzzle-background.has-gold-background > .slide-background-content::after,
+.slide-background.student-exercise > .slide-background-content::after,
 .slide-background.has-team-background.has-gold-background > .slide-background-content::after {
   position: absolute;
   content: "";
@@ -816,6 +824,7 @@ kbd:not(.keyseq) {
   filter: brightness(0.75);
 }
 
+.slide-background.student-exercise > .slide-background-content::before,
 .slide-background.has-team-background > .slide-background-content::before {
   content: "";
   position: absolute;
@@ -1052,6 +1061,7 @@ span.fragment.check {
     position: absolute;
   }
   .slide-background.title::after,
+  .slide-background.student-exercise::after,
   .slide-background.summary::after,
   .slide-background.slide-title::after,
   .slide-background.has-puzzle-background::after,

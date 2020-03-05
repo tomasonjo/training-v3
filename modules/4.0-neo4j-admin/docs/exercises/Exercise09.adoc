@@ -1,3 +1,4 @@
+
 = Exercise #9: Install a plugin
 ifndef::imagesdir[:imagesdir: ../../images]
 

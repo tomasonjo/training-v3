@@ -1,3 +1,4 @@
+
 = Exercise #5: Copying databases
 ifndef::imagesdir[:imagesdir: ../../images]
 

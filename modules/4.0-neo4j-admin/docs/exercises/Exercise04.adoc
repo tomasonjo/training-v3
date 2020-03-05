@@ -1,3 +1,4 @@
+
 = Exercise #4: Creating and deleting a database
 ifndef::imagesdir[:imagesdir: ../../images]
 

@@ -115,7 +115,7 @@ Here we have download a file named *movies.cypher* that contains the Cypher stat
 We simply use these Cypher statements as input when we start the `cypher-shell` session.
 They are automatically executed against the default database, _neo4j_.
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise #3: Using `cypher-shell`
 
 //ifndef::backend-htlm5[]
@@ -210,8 +210,8 @@ CREATE <database> IF NOT EXISTS;
 [NOTE]
 You cannot use `CREATE OR REPLACE` together with `IF NOT EXISTS`.
 
-[.slide-title.has-gold-background.has-team-background]
-== *Exercise #4: Creating and deleting a database*
+[.student-exercise]
+== Exercise #4: Creating and deleting a database
 
 //ifndef::backend-htlm5[]
 Refer to the *Exercise Guide* for instructions.

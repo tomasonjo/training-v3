@@ -1,5 +1,7 @@
+
 = Exercise #8: Scripting changes to the database
 ifndef::imagesdir[:imagesdir: ../../images]
+
 
 In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
 
