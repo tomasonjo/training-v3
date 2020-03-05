@@ -1,15 +1,16 @@
 
-== Exercise #12: Importing data
-ifndef::imagesdir[:imagesdir: ../images]
+= Exercise #12: Importing data
+ifndef::imagesdir[:imagesdir: ../../images]
+
 
 In this exercise you will create a database from a set of CSV files using the import functionality of the neo4j-admin tool.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Downloaded the ZIP file containing the CSV files to the *files* directory:
 
@@ -82,7 +83,6 @@ The database information should now look as follows:
 [.thumb]
 image::Afteradmin-toolImport.png[Afteradmin-toolImport,width=600]
 
-
-=== Exercise summary
+== Exercise summary
 
 In this exercise you created a database from a set of CSV files using the import functionality of the neo4j-admin tool.

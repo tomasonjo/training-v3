@@ -1,21 +1,20 @@
 
-
-== Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course
-ifndef::imagesdir[:imagesdir: ../images]
+= Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course
+// for local preview
+ifndef::imagesdir[:imagesdir: ../../images]
 
 We are using Neo4j Enterprise Edition for the hands-on exercises in this training, as some Neo4j features are not included in Community Edition.
 The OS that we will use for this training is Debian.
 In your real application environment, the location of files for managing Neo4j and the terminal commands will be different.
 Neo4j Enterprise Edition is available for download with a 30-day evaluation license.
 
-
-=== Before you begin
+== Before you begin
 
 Ensure that you have been provided with an EC2 instance (IP address) to use by your instructor.
 You will use this EC2 instance throughout this course.
 Follow the steps below, depending on your OS.
 
-=== Exercise steps (OS X and Linux):
+== Exercise steps (OS X and Linux):
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Change permissions on the private key file as follows:
@@ -40,7 +39,7 @@ yes
 
 image::OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
 
-=== Exercise steps (Windows):
+== Exercise steps (Windows):
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Download https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[PuTTY].
@@ -80,6 +79,6 @@ image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
 *Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
 
-=== Exercise summary
+== Exercise summary
 
 You have now confirmed that you can access the EC2 instance that you will use throughout this course to learn about Neo4j Administration.

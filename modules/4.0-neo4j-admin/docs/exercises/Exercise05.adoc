@@ -1,17 +1,16 @@
-:imagesdir: ../images
 
-== Exercise #5: Copying databases
-ifndef::imagesdir[:imagesdir: ../images]
+= Exercise #5: Copying databases
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this exercise, you will use `neo4j-admin` to copy a database and create a database from a dump file.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 . Ensure that the Neo4j instance is started.
 
-=== Exercise steps
+== Exercise steps
 
 *Part 1*: First you will create a movies database that will be used in this exercise for copying.
 
@@ -61,6 +60,6 @@ MATCH (n) RETURN count(n);
 . In `cypher-shell' create _movies3_.
 . Confirm that this _movies3_ database has 171 nodes.
 
-=== Exercise summary
+== Exercise summary
 
 You have now gained experience copying a database within the Neo4j instance and also creating a dump file that can be used to create a database on a different system.

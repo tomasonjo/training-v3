@@ -1,16 +1,16 @@
 
-== Exercise #7: Checking consistency of a database
-ifndef::imagesdir[:imagesdir: ../images]
+= Exercise #7: Checking consistency of a database
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you check the consistency of a database that is consistent. Then you modify a file that causes the database to become corrupt and then check its consistency.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 . Ensure that the Neo4j instance is started.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Use `cypher-shell` to load the *movies.dump* data into a database named _movies2_.
 . Use `cypher-shell` to create the _movies2_ database.
@@ -39,7 +39,6 @@ image::Inconsistencies.png[Inconsistencies,width=1000,align=center]
 [start=12]
 . Use `cypher-shell` to drop the _movies3_ database.
 
-
-=== Exercise summary
+== Exercise summary
 
 You have now you checked the consistency of a database that is consistent. Then you modified a file that causes the database to become corrupt and then checked its consistency.

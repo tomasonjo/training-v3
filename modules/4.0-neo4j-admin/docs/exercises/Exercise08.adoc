@@ -1,10 +1,7 @@
 
-<<<<<<< HEAD
-==  Exercise #8: Scripting changes to the database
-ifndef::imagesdir[:imagesdir: ../images]
-=======
-== Exercise #8: Scripting changes to the database
->>>>>>> 46fdac159faa195607ea931b94aaa33542c477c9
+= Exercise #8: Scripting changes to the database
+ifndef::imagesdir[:imagesdir: ../../images]
+
 
 In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
 
@@ -13,13 +10,13 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 . *AddConstraints.sh*
 . *MaintainDB.sh*
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 . Ensure that the Neo4j instance is started.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Create a Cypher script in the */home/ubuntu/files* directory named *AddConstraintsMovies.cypher* with the following statements:
 ----
@@ -53,6 +50,6 @@ image::RunMaintainDB.png[RunMaintainDB,width=1000,align=center]
 
 image::ConfirmConstraints.png[ConfirmConstraints,width=1000,align=center]
 
-=== Exercise summary
+== Exercise summary
 
 You have now written some shell scripts to manage a database.

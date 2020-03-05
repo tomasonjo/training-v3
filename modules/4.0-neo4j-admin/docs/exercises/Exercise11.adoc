@@ -1,6 +1,6 @@
 
-== Exercise #11: Managing backups
-ifndef::imagesdir[:imagesdir: ../images]
+= Exercise #11: Managing backups
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will perform an online backup of a database where you use the same host for the backup process.
 Then you will modify the database.
@@ -9,12 +9,12 @@ Finally, you will restore the database from the backup to see that it was succes
 [NOTE]
 In your real application, if you were to back up a production stand-alone Neo4j instance, you would use a different host from the host that is running the Neo4j instance.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Modify the Neo4j configuration so that online backup is enabled and will be done on this same host.
 For example, your *neo4j.conf* properties should look something like this:
@@ -117,7 +117,7 @@ MATCH (n) RETURN count(n);
 . Confirm that the _movies_ database has 342 nodes.
 
 
-=== Exercise summary
+== Exercise summary
 
 You have gained experience backing up all databases, backing up a single database, and restoring a database.
 

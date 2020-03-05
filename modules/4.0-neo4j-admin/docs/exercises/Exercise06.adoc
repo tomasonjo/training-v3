@@ -1,18 +1,17 @@
 
-== Exercise #6: Modifying the location of the databases
-ifndef::imagesdir[:imagesdir: ../images]
+= Exercise #6: Modifying the location of the databases
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will set up a different location for the databases in your local filesystem and start the Neo4j instance using the database at this new location.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 . Ensure that the Neo4j instance is stopped.
 . You should have previously created the dump file, *movies.dump* for the movie database in the *~/files directory*.
 
-=== Exercise steps:
-
+== Exercise steps:
 
 . Create a directory named *~/neo4j-databases*. This is the directory where the databases will reside which is different from the default location used by Neo4j.
 . Make sure that this *neo4j-databases* directory is owned by _neo4j:neo4j_.
@@ -38,7 +37,7 @@ image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=c
 . In `cypher-shell' create _movies_.
 . Confirm that this _movies_ database has 171 nodes.
 
-=== Exercise summary
+== Exercise summary
 
 You have now configured the Neo4j instance to use a different location for the databases.
 
