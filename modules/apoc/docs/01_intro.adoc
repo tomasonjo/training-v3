@@ -241,7 +241,7 @@ image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
 * Documentation at https://www.neo4j.com/docs/labs/apoc[neo4j.com/docs/labs/apoc^]
 * Neo4j Browser guide (`:play apoc`)
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.section-title.has-purple-background]
 == Task: Open the docs and have a look around
 
 [.section-title.has-green-background.has-puzzle-background]
@@ -316,10 +316,10 @@ services:
 
 https://gist.github.com/mneedham/12a9643d1d5628e6e659ed138e083bd7[gist.github.com/mneedham/12a9643d1d5628e6e659ed138e083bd7^]
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.section-title.has-purple-background]
 == Task: Install APOC
 
-[.section-title.has-green-background.has-puzzle-background]
+[.section-title.has-green-background]
 == Built-in Help
 
 == Most important slide of the session
@@ -332,7 +332,7 @@ CALL apoc.help("keyword")
 [.section-title.has-purple-background.has-puzzle-background]
 == Task: Search for keywords from the docs
 
-[.section-title.has-green-background.has-puzzle-background]
+[.section-title.has-green-background]
 == Text Functions
 
 == Text Functions - apoc.text.*
@@ -404,7 +404,7 @@ RETURN apoc.text.join(people, ";")
 
 https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
 
-[.has-purple-background.has-puzzle-background]
+[.has-purple-background]
 == Task: Use Collection Functions
 
 Starting from this query:
@@ -469,7 +469,7 @@ RETURN value
 
 https://neo4j.com/docs/labs/apoc/current/data-structures/map-functions/
 
-[.has-purple-background.has-puzzle-background]
+[.has-purple-background]
 == Task: Use Map Functions
 
 Starting from this query:
@@ -551,7 +551,7 @@ RETURN m
 
 image::{imagedir}/example-data.neo4j.org-so-so_neo4j_1.json.png[StackOverflow dataset^, align=center,role="stretch"]
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.section-title.has-purple-background]
 == Task: Create a new database called `stackoverflow` and switch to it
 
 == apoc.load.json
@@ -577,12 +577,45 @@ RETURN item
 LIMIT 1;
 ----
 
-[.title.has-purple-background.has-puzzle-background]
+[.title.has-purple-background]
 == Task: Import StackOverflow
 
 Create the following graph model from the StackOverflow dataset using the `apoc.load.json` procedure.
 
 <insert-image-of-graph-model>
+
+Tip: Start with just a few rows while you check the import query works!
+
+[source.small,cypher]
+----
+CALL apoc.load.json($url) YIELD value
+UNWIND value.items AS item
+WITH item LIMIT 20
+...
+----
+
+== Answer: Import StackOverflow
+
+[source.small,cypher]
+----
+CALL apoc.load.json($url) YIELD value
+UNWIND value.items AS item
+WITH item LIMIT 20
+
+MERGE (q:Question {id: item.question_id})
+ON CREATE SET
+  q.lastActivityDate = datetime({epochSeconds: item.last_activity_date}),
+  q.creationDate = datetime({epochSeconds: item.creation_date}),
+  q.title = item.title
+
+MERGE (owner:User {id:item.owner.user_id})
+ON CREATE SET owner.display_name = item.owner.display_name
+
+MERGE (owner)-[:ASKED]->(q)
+
+FOREACH (tagName IN item.tags |
+MERGE (tag:Tag {name:tagName}) MERGE (q)-[:TAGGED]->(tag));
+----
 
 == Temporal Data Formatting
 
@@ -602,7 +635,9 @@ duration.between(datetime(),date()),
 )
 ----
 
-[.title.has-purple-background.has-puzzle-background]
+https://neo4j.com/docs/labs/apoc/current/temporal/temporal-conversions/
+
+[.title.has-purple-background]
 == Task: Querying StackOverflow
 
 --
@@ -660,7 +695,7 @@ CALL apoc.do.case([condition, query, condition, query, ... ], elseQuery, paramMa
 YIELD value
 ----
 
-[.title.has-purple-background.has-puzzle-background]
+[.title.has-purple-background]
 == Task: Conditional Cypher Execution
 
 Update the StackOverflow import query to <do something conditional>
@@ -701,6 +736,23 @@ CALL apoc.periodic.iterate(
 )
 ----
 
+[.title.has-purple-background]
+== Task: Import all of StackOverflow
+
+Use the `apoc.periodic.iterate` procedure to import all 165 pages of StackOverflow data.
+
+[source.center,cypher]
+----
+CALL apoc.periodic.iterate(
+  'UNWIND range(1,165) as page
+   RETURN "http://example-data.neo4j.org/so/so_neo4j_"+page+".json" as url',
+  'CALL apoc.load.json(url) YIELD value
+   UNWIND value.items AS q
+   ...',
+  {batchSize:1}
+)
+----
+
 == TTL
 
 == Background Operations
@@ -727,7 +779,31 @@ CALL apoc.periodic.iterate(
 
 https://neo4j.com/docs/labs/apoc/current/export/
 
-[.title.has-purple-background.has-puzzle-background]
+== Data Export - CSV
+
+[source,cypher]
+----
+CALL apoc.export.csv.all("all.csv", {})
+----
+
+== Data Export - CSV
+
+.import/all.csv
+[source,csv]
+----
+"_id","_labels","creationDate","display_name","id","lastActivityDate","name","title","_start","_end","_type"
+"0",":Question","2018-09-17T07:01:21Z","","52362348","2018-09-17T07:07:03Z","","Changing neo4j conf enviroment variable has no effect",,,
+"1",":Question","2018-09-17T04:17:26Z","","52360684","2018-09-17T07:57:46Z","","How i can delete NULL values in dataset in neo4j?",,,
+"2",":Question","2018-09-17T04:03:08Z","","52360594","2018-09-17T08:00:57Z","","I am looking for a written generic DAO, Base Entity Manager... for Neo4j",,,
+"3",":Question","2018-09-16T12:05:14Z","","52353955","2018-09-17T03:43:48Z","","Deleting one of properties and creating it as new node under fulfilling condition",,,
+"4",":Question","2018-09-16T08:25:06Z","","52352327","2018-09-16T09:03:51Z","","Calculate in a query the difference in minutes between a start time and an end time",,,
+"5",":Question","2018-09-16T06:21:11Z","","52351504","2018-09-16T06:22:10Z","","Swagger UI disappeared after switching to Neo4j (show &#39;Database&#39; instead Swagger)",,,
+"6",":Question","2018-09-15T23:27:37Z","","52349700","2018-09-15T23:27:37Z","","Graph DB Store Version 0.A.0",,,
+"7",":Question","2018-09-15T20:01:16Z","","52348383","2018-09-15T22:09:40Z","","Neo4j: How time-consuming is EVERY branch between node A and F?",,,
+"8",":Question","2018-09-15T19:40:59Z","","52348239","2018-09-17T07:03:28Z","","Update of RelationshipEntity resets values of various other rich relationships in Neo4j",,,
+----
+
+[.title.has-purple-background]
 == Task: Export StackOverflow
 
 . Create a new database called `stackoverflow.export`
@@ -791,42 +867,42 @@ https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
 
 == Config map values
 
-* minLevel: int
-* maxLevel: int
-* relationshipFilter: string
-* labelFilter: string
-* uniqueness: string (‘RELATIONSHIP_PATH’, ’NODE_GLOBAL’, ‘NODE_PATH’, etc)
-* bfs: boolean,
-* filterStartNode: boolean
-* limit: int
-* optional: boolean
-* endNodes: [nodes]
-* terminatorNodes: [nodes]
-* whitelistNodes: [nodes]
-* blacklistNodes: [nodes]
-* sequence: string
-* beginSequenceAtStart: boolean
+* `minLevel: int`
+* `maxLevel: int`
+* `relationshipFilter: string`
+* `labelFilter: string`
+* `uniqueness: string` (`RELATIONSHIP_PATH`, `NODE_GLOBAL`, `NODE_PATH`)
+* `bfs: boolean`
+* `filterStartNode: boolean`
+* `limit: int`
+* `optional: boolean`
+* `endNodes: [nodes]`
+* `terminatorNodes: [nodes]`
+* `whitelistNodes: [nodes]`
+* `blacklistNodes: [nodes]`
+* `sequence: string`
+* `beginSequenceAtStart: boolean`
 
 == Relationship filter
 
 Which relationships (type and direction) to follow:
 
-* '<ACTED_IN' - Incoming Rel
-* 'DIRECTED>' - Outgoing Rel
-* 'REVIEWED' - Any direction
-* ‘>’ - Direction, any type
-* '<ACTED_IN | DIRECTED> | REVIEWED' - Multiple, in varied direction
+* `<ACTED_IN` - Incoming Rel
+* `DIRECTED>` - Outgoing Rel
+* `REVIEWED` - Any direction
+* `>` - Direction, any type
+* `<ACTED_IN | DIRECTED> | REVIEWED` - Multiple, in varied direction
 
 == Label filter
 
 What is/isn't allowed during expansion, and what is/isn't returned:
 
-* '-Director' – Blacklist, not allowed in path
-* '+Person' – Whitelist , only allowed in path (+ symbol optional)
+* `-Director` – Blacklist, not allowed in path
+* `+Person` – Whitelist , only allowed in path (+ symbol optional)
   **    (no whitelist = all allowed)
-* '>Reviewer' – End node, only return these, and continue expansion past them
-* '/Producer' – Terminator node, only return these, stop expansion
-* 'Person|Movie|-Director|>Reviewer|/Producer' – Combine them
+* `>Reviewer` – End node, only return these, and continue expansion past them
+* `/Producer` – Terminator node, only return these, stop expansion
+* `Person|Movie|-Director|>Reviewer|/Producer`– Combine them
 
 == Sequences
 
@@ -887,7 +963,7 @@ CALL apoc.path.subgraphAll(k, {maxLevel:3, relationshipFilter:'ACTED_IN'}) YIELD
 RETURN nodes, relationships
 ----
 
-[.title.has-purple-background.has-puzzle-background]
+[.title.has-purple-background]
 == Task: Get closest Reviewers
 
 Switch back to the default database and add `Reviewer` labels:
