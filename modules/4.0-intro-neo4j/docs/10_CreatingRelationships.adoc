@@ -321,7 +321,7 @@ Here is the result returned. An alternative to `REMOVE rel.roles` would be `SET 
 
 image::RemoveRoles.png[RemoveRoles,width=1000,align=center]
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 10: Creating relationships
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

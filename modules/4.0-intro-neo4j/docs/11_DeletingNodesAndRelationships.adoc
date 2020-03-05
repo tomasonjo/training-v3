@@ -202,7 +202,7 @@ And here is what the _Batman Begins_ node and its relationships now look like. T
 image::BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=center]
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 11: Deleting nodes and relationships
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

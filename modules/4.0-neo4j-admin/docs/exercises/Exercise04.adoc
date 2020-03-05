@@ -1,5 +1,6 @@
 
 == Exercise #4: Creating and deleting a database
+ifndef::imagesdir[:imagesdir: ../images]
 
 In this exercise you will gain some experience with creating and deleting a database.
 

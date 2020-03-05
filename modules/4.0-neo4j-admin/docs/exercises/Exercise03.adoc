@@ -1,6 +1,8 @@
 
 == Exercise #3: Using `cypher-shell`
 
+ifndef::imagesdir[:imagesdir: ../images]
+
 In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, change the password for the Neo4j instance, and use both the system and user database.
 
 === Before you begin

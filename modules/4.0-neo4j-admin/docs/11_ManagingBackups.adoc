@@ -129,7 +129,7 @@ You then need to create it again against the _system_ database.
 [NOTE]
 If you restore a database as _root_ with _--force_, make sure that you change the ownership (recursively) of the database directory to _neo4j:neo4j_ before creating the database.
 
-[.title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise #11: Managing backups
 
 //ifndef::backend-htlm5[]

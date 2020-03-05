@@ -366,7 +366,7 @@ In this training, you will learn how to perform these common administrative task
 * Managing Causal Clusters
 * Managing database security
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course
 
 //ifndef::backend-html5[]

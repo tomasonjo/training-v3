@@ -380,7 +380,7 @@ MATCH (fromDate:Date {year: 2018})
 MERGE (toDate:Date {month: 'January'})-[:IN_YEAR]->(fromDate)
 ----
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 12: Merging data in the graph
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

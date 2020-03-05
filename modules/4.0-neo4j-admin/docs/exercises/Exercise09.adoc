@@ -1,6 +1,6 @@
 
 == Exercise #9: Install a plugin
-
+ifndef::imagesdir[:imagesdir: ../images]
 
 In this Exercise, you will install the APOC library for use by your Neo4j instance and you will create and execute a script to report all of the procedures available to the Neo4j instance.
 

@@ -223,7 +223,7 @@ image::CALLsubquery.png[CALLsubquery,width=900,align=center]
 [.statement]
 The variable _m_ used in the subquery is used in the next query.
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 7: Controlling query processing
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
