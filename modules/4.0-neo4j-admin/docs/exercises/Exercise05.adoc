@@ -1,3 +1,4 @@
+:imagesdir: ../images
 
 == Exercise #5: Copying databases
 

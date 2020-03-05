@@ -298,7 +298,7 @@ When nodes are displayed as table values, the node labels and ids are not shown,
 
 image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 1: Retrieving nodes
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
@@ -544,8 +544,8 @@ endif::[]
 image::UsingAliases.png[UsingAliases,width=800,align=center]
 --
 
-[.slide-title.has-gold-background.has-team-background]
-== *Exercise 2: Filtering queries using property values*
+[.student-exercise]
+== Exercise 2: Filtering queries using property values
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 2.
@@ -1141,8 +1141,8 @@ RETURN movRel.roles
 
 We recommend that you follow the https://neo4j.com/docs/cypher-manual/current/styleguide/[Cypher Style Guide^] when writing your Cypher statements.
 
-[.slide-title.has-gold-background.has-team-background]
-== *Exercise 3: Filtering queries using relationships*
+[.student-exercise]
+== Exercise 3: Filtering queries using relationships
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
 and follow the instructions for Exercise 3.

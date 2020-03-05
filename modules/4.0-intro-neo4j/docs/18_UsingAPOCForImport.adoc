@@ -424,7 +424,7 @@ image::SOLoadedGraph.png[SOLoadedGraph,width=500,align=center]
 If you were to load thousands or more questions, you should ensure that you have created uniqueness constraints on _Question.question_id_ and _User.name_ before you attempt the load.
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 17: Using APOC for importing data
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

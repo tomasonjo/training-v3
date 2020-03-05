@@ -401,7 +401,7 @@ Here is a very high-level list of some of the best practices you should aim for 
 Many of these guidelines are covered in the course, _Advanced Cypher_.
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 15: Using query best practices
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

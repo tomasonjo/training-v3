@@ -236,7 +236,7 @@ neo4j.session(
 This code uses a synchronous programming model to create each node in the graph.
 --
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise 19: Importing data from an RDBMS using an application
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]

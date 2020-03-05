@@ -154,7 +154,7 @@ And here is some of what was produced in the report:
 
 image::APOCProcedures.png[APOCProcedures,width=600,align=center]
 
-[.slide-title.has-gold-background.has-team-background]
+[.student-exercise]
 == Exercise #9: Install a plugin
 
 //ifndef::backend-htlm5[]
