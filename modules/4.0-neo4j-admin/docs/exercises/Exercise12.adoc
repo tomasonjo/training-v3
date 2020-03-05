@@ -1,5 +1,6 @@
 
 = Exercise #12: Importing data
+// for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
 

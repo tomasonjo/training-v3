@@ -1,5 +1,6 @@
 
 = Exercise #11: Managing backups
+// for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will perform an online backup of a database where you use the same host for the backup process.

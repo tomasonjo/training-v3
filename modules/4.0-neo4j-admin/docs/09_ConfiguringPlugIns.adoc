@@ -139,7 +139,7 @@ And here we see the results after restarting the Neo4j instance:
 
 image::APOCJarLoaded.png[APOCJarLoaded,width=600,align=center]
 
-??You may see some error messages, but you can ignore them as they represent some deprecated functionality of the APOC procedues.
+You may see some error messages, but you can ignore them as they represent some deprecated functionality of the APOC procedues.
 
 
 === Step 4: Confirm the plugin procedures are available
@@ -165,47 +165,45 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/Exercise09.adoc
 //endif::[]
 
-
-////
 [.quiz]
 == Check your understanding
 
 === Question 1
 
-Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+What Cypher statement do you execute to get a list of all procedures available to the Neo4j instance?
 
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] `neo4j-admin create-database`
-- [ ] `neo4j-admin initialize`
-- [ ] `neo4j create-database`
-- [x] `neo4j start`
+- [ ] `CALL getProcedures();`
+- [x] `CALL dbms.procedures();`
+- [ ] `SHOW PROCEDURES;`
+- [ ] `:PROCEDURES`
 
 === Question 2
 
-Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+After you have placed the *.jar* file for a plugin in the *plugin* directory for the Neo4j instance, what must you do before you restart the Neo4j instance?
 
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.
-- [x] Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.
-- [ ] Run `neo4j-admin rename graph.db ABCRecommendations.db`.
-- [ ] Run `neo4j-admin move graph.db ABCRecommendations.db`.
+- [x] Change the *.jar* file to have execute permissions.
+- [x] Ensure the *.jar* file is owned by _neo4j:neo4j_.
+- [x] Add the plugin to dbms.security.procedures.unrestricted in *neo4j.conf*.
+- [ ] Specify which databases will use the plugin in *neo4j.conf*.
 
 === Question 3
 
-How do you copy a database that you want to give to another user?
+Suppose a given plugin is very large, but your applications only use a few procedures of the plugin.
+What configuration change do you make to limit what procedures are loaded when the Neo4j instance starts?
 
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.
-- [x] With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.
-////
+- [x] Add the whitelist configuration.
+- [ ] Add the sandbox configuration.
+- [ ] Add the desired procedures to *procedures.conf*.
+- [ ] Add the desired procedures to *procedures-to-load.conf*.
 
 == Summary
 

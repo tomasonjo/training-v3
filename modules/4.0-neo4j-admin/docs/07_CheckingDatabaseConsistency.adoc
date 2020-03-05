@@ -42,9 +42,12 @@ Here is how you use the `neo4j-admin` tool to check the consistency of the datab
 The database named _database-name_ is found in the Neo4j instance.
 If the tool comes back with no error, then the database is consistent.
 Otherwise, an error is returned and a report is written to _report-location_.
-You can specify verbose reporting. See the https://neo4j.com/docs/operations-manual/4.0/tools/consistency-checker/[Neo4j Operations Manual] for more options. For example, you can check the consistency of a backup which is a best practice.
+You can specify verbose reporting.
+See the https://neo4j.com/docs/operations-manual/4.0/tools/consistency-checker/[Neo4j Operations Manual] for more options.
+For example, you typically check the consistency of a backup which is a best practice you will learn about later in this training.
 
-Suppose we had loaded the *movies2* database with `neo4j-admin`. Here is what a successful run of the consistency checker should produce:
+Suppose we had loaded the *movies2* database with `neo4j-admin`.
+Here is what a successful run of the consistency checker should produce:
 
 image::ConsistentPassed.png[ConsistentPassed,width=1000,align=center]
 
@@ -71,46 +74,46 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/Exercise07.adoc
 //endif::[]
 
-////
+
 [.quiz]
 == Check your understanding
 
 === Question 1
 
-Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+Suppose that you suspect that one of the user databases in your Neo4j instance has become corrupt.
+What is the first thing you need to do?
 
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] `neo4j-admin create-database`
-- [ ] `neo4j-admin initialize`
-- [ ] `neo4j create-database`
-- [x] `neo4j start`
+- [ ] Back up the database.
+- [ ] Shut down the Neo4j instance.
+- [ ] Restart the Neo4j instance.
+- [x] Stop the database that may be corrupt.
 
 === Question 2
 
-Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+What tool do you use to check the consistency of a database?
+
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] `neo4j-check-consistency`
+- [x] `neo4j-admin check-consistency`
+- [ ] `neo4j-admin check`
+- [ ] `cypher-shell`
+
+=== Question 3
+
+As a best practice, when should you always check the consistency of a database?
 
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.
-- [x] Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.
-- [ ] Run `neo4j-admin rename graph.db ABCRecommendations.db`.
-- [ ] Run `neo4j-admin move graph.db ABCRecommendations.db`.
-
-=== Question 3
-
-How do you copy a database that you want to give to another user?
-
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.
-- [x] With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.
-////
+- [x] When an event occurs in your monitoring that makes you suspect a problem.
+- [ ] Immediately after start up of the Neo4j instance.
+- [ ] Prior to shut down of the Neo4j instance.
+- [x] When you back up a database.
 
 == Summary
 

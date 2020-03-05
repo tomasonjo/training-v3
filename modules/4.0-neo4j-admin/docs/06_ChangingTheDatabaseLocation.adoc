@@ -85,48 +85,45 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/Exercise06.adoc
 //endif::[]
 
-
-
-////
 [.quiz]
 == Check your understanding
 
 === Question 1
 
-Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+What file must you modify if you want the location of the databases for your Neo4j instance to be located in a non-default directory?
 
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] `neo4j-admin create-database`
-- [ ] `neo4j-admin initialize`
-- [ ] `neo4j create-database`
-- [x] `neo4j start`
+- [ ] *database.conf*
+- [ ] *neo4j-database.conf*
+- [ ] *neo4j-instance.conf*
+- [x] *neo4j.conf*
 
 === Question 2
 
-Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+The directory/folder that will be used for the Neo4j instance databases must be owned by which user:group?
+
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] root:root
+- [ ] neo4j:root
+- [x] neo4j:neo4j
+- [ ] root:neo4j
+
+=== Question 3
+
+Suppose you configure a new location for the databases for the Neo4j instance.
+After the Neo4j instance starts, what are the first things you must do?
 
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.
-- [x] Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.
-- [ ] [Run `neo4j-admin rename graph.db ABCRecommendations.db`.
-- [ ] Run `neo4j-admin move graph.db ABCRecommendations.db`.
-
-=== Question 3
-
-How do you copy a database that you want to give to another user?
-
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.
-- [x] With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.
-////
+- [ ] Create the system database.
+- [ ] Create the user database.
+- [x] Ensure the Neo4j instance successfully starts.
+- [x] Change the password for the _neo4j_ user.
 
 == Summary
 

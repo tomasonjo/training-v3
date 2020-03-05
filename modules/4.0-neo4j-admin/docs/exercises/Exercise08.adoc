@@ -1,5 +1,6 @@
 
 = Exercise #8: Scripting changes to the database
+// for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
 

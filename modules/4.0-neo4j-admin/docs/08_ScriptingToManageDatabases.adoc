@@ -36,12 +36,12 @@ As a database administrator, you may need to automate changes to databases.
 The most common types of changes that administrators may want to perform are related to the application.
 As an administrator, you work with architects and developers to created scripts to:
 
-* Create or drop databases
-* Create constraints
-* Create indexes
-* Load data
-* Update data
-* Restructure the graph (change graph data model)
+* Create or drop databases.
+* Create constraints.
+* Create indexes.
+* Load data.
+* Update data.
+* Restructure the graph (change graph data model).
 * Add users and access control.
 
 === Examples: Adding constraints
@@ -64,8 +64,7 @@ cat /usr/local/work/AddConstraintsMovies.cypher | /usr/bin/cypher-shell -u neo4j
 *3. PrepareDB.sh* that initializes the log file, *PrepareDB.log*, and calls the script to add the constraints:
 ----
 rm -rf /usr/local/work/PrepareDB.log
-/usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/
-PrepareDB.log
+/usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/PrepareDB.log
 # Other scripts here
 ----
 
@@ -83,48 +82,50 @@ Refer to the *Exercise Guide* for instructions.
 //include::exercises/Exercise08.adoc
 //endif::[]
 
-
-
-////
 [.quiz]
 == Check your understanding
 
 === Question 1
 
-Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
-
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] `neo4j-admin create-database`
-- [ ] `neo4j-admin initialize`
-- [ ] `neo4j create-database`
-- [x] `neo4j start`
-
-=== Question 2
-
-Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+What tools do you typically use to automate changes to databases?
 
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.
-- [x] Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.
-- [ ] [Run `neo4j-admin rename graph.db ABCRecommendations.db`.
-- [ ] Run `neo4j-admin move graph.db ABCRecommendations.db`.
+- [x] Terminal shell that you are comfortable with.
+- [ ] `neo4j`
+- [ ] `neo4j-admin`
+- [x] `cypher-shell`
+
+=== Question 2
+
+What tools do you typically use to automate management of databases?
+
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Terminal shell that you are comfortable with.
+- [ ] `neo4j`
+- [x] `neo4j-admin`
+- [x] `cypher-shell`
 
 === Question 3
 
-How do you copy a database that you want to give to another user?
+What type of file would this content be placed in for scripting purposes?
+
+----
+CREATE CONSTRAINT ON (d:Department) ASSERT d.num IS UNIQUE;
+CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
+CALL db.constraints();
+----
 
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.
-- [x] With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.
-////
+- [ ] *.txt*
+- [ ] *.db*
+- [x] *.cypher*
+- [ ] *.sh*
 
 == Summary
 

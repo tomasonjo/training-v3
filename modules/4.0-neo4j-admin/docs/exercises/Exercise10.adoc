@@ -1,5 +1,6 @@
 
 = Exercise #10: Modify the HTTP port
+// for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, will modify the HTTP used by your instance to allow external connections.
