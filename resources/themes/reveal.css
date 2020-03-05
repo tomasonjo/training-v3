@@ -513,6 +513,7 @@ kbd:not(.keyseq) {
 /* backgrounds */
 .reveal section.title,
 .reveal section.summary,
+.reveal section.quiz,
 .reveal section.slide-title,
 .reveal section.student-exercise,
 .reveal section.bg-purple,
@@ -521,6 +522,7 @@ kbd:not(.keyseq) {
 .reveal section.has-gold-background,
 .reveal section.title > h2,
 .reveal section.summary > h2,
+.reveal section.quiz > h2,
 .reveal section.slide-title > h2,
 .reveal section.student-exercise > h2,
 .reveal section.bg-purple > h2,
@@ -548,6 +550,7 @@ kbd:not(.keyseq) {
 /* add a white logo (on the right) */
 .slide-background.title::after,
 .slide-background.summary::after,
+.slide-background.quiz::after,
 .slide-background.slide-title::after,
 .slide-background.student-exercise::after,
 .slide-background.has-puzzle-background::after,
@@ -572,10 +575,12 @@ kbd:not(.keyseq) {
 }
 
 /* section title */
+.reveal section.quiz,
 .reveal section.slide-section-title {
   height: 100%;
 }
 
+.reveal section.quiz > h2,
 .reveal section.slide-section-title > h2 {
   color: white;
   display: flex;
@@ -773,8 +778,8 @@ kbd:not(.keyseq) {
 }
 
 /* background transparent color after */
-.slide-background.has-puzzle-background > .slide-background-content::after,
 .slide-background.summary > .slide-background-content::after,
+.slide-background.has-puzzle-background > .slide-background-content::after,
 .slide-background.has-puzzle-background.has-green-background > .slide-background-content::after,
 .slide-background.has-team-background.has-green-background > .slide-background-content::after {
   position: absolute;
@@ -786,6 +791,7 @@ kbd:not(.keyseq) {
   background: linear-gradient(350deg, #70b9f099 0%, #70b9f066 33%, #71cd9c66 66%, #71cd9c99 100%);
 }
 
+.slide-background.quiz > .slide-background-content::after,
 .slide-background.has-puzzle-background.has-purple-background > .slide-background-content::after,
 .slide-background.has-team-background.has-purple-background > .slide-background-content::after {
   position: absolute;
@@ -811,6 +817,7 @@ kbd:not(.keyseq) {
 
 /* background image before */
 .slide-background.summary > .slide-background-content::before,
+.slide-background.quiz > .slide-background-content::before,
 .slide-background.has-puzzle-background > .slide-background-content::before {
   content: "";
   position: absolute;
@@ -1063,6 +1070,7 @@ span.fragment.check {
   .slide-background.title::after,
   .slide-background.student-exercise::after,
   .slide-background.summary::after,
+  .slide-background.quiz::after,
   .slide-background.slide-title::after,
   .slide-background.has-puzzle-background::after,
   .slide-background.has-team-background::after {

@@ -405,7 +405,7 @@ As you gain experience with Cypher and think about modeling your application, yo
 We recommend that you take our training course, _Graph Data Modeling for Neo4j_, which introduces you to the best practices for modeling data and implementing graph data models in Neo4j.
 --
 
-[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz]
 == Check your understanding
 
 === Question 1

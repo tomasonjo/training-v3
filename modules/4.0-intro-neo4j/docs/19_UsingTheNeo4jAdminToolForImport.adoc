@@ -256,7 +256,7 @@ and follow the instructions for Exercise 18.
 This exercise has 5 steps.
 Estimated time to complete: 15 minutes.
 
-[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz]
 == Check your understanding
 
 === Question 1
