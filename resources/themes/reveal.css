@@ -390,6 +390,12 @@ body {
   font-weight: 700;
 }
 
+
+.is-full {
+  width: 100%;
+  clear: both;
+}
+
 .is-half {
   width: 50%;
 }

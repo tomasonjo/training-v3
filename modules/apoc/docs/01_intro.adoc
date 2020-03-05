@@ -1,0 +1,1037 @@
+
+= APOC for Analytics and Operations
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:neo4j-version: 4.0
+:currentyear: 2020
+:doctype: book
+:nextsecttitle: The Neo4j Graph Platform
+:nextsect: 2
+:currsect: 1
+:prevsecttitle: About this Course
+:prevsect: 0
+:toc: left
+:toclevels: 4
+:experimental:
+:imagedir: ../images
+//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/v4.0-intro-neo4j/img
+:manual: http://neo4j.com/docs/developer-manual/current
+:manual-cypher: {manual}/cypher
+
+
+== About this module
+
+[.notes]
+--
+Neo4j enables developers to create applications that are best architected as graph-powered systems that are built upon the rich connectedness of data.
+--
+
+At the end of this training, you should be able to:
+[square]
+* Thing 1
+* Thing 2
+* Thing 3
+
+
+== Agenda
+
+[.small]
+--
+[opts="header"]
+|===
+| Module | Time
+| User-defined functions & procedures in Neo4j |15'
+| APOC History, installation, documentation| 15'
+| Utility functions |20'
+|Data integration| 20'
+|Cypher execution |20'
+2+| 	BREAK
+|TTL & triggers|  20'
+|Graph refactoring | 15'
+|Path expansion | 30'
+|Virtual nodes & relationships + graph grouping | 20'
+| Questions, outlook, contribution | 10'
+|===
+--
+
+== How do we learn APOC?
+
+* Massively hands-on, lots of exercises
+* Help each other!
+* Ask questions as they come up
+* Datasets: Movie graph, StackOverflow
+* Have the APOC docs open
+* Bring your own "How do I?"
+
+== Questions for you
+
+Have you:
+
+* Used built-in procedures in Neo4j?
+* Installed and used APOC?
+* Used other procedure libraries?
+    ** Graph Algorithms, GraphAware NLP, Spatial?
+* Written your own procedures/functions?
+* Deployed your procedures/functions to production?
+* Contributed to APOC or other procedure libraries?
+
+== Extending Neo4j
+
+[.is-half.left]
+--
+User-defined procedures let you write custom code that:
+
+* Is written in any JVM language
+* Accesses the Neo4j Java API
+* Is deployed to the database server
+* Can be accessed by applications via Cypher
+--
+
+[.is-half.right]
+image::{imagedir}/extending-neo4j.png[Extending Neo4j]
+
+== Neo4j developer surface
+
+[.small]
+--
+|===
+| 2000-2010 | 0.x | Embedded Java API
+| 2010-2014 | 1.x | REST
+| 2014-2015 | 2.x | Cypher over HTTP
+| 2016 |3.0.x|Bolt, Official language drivers, User-defined procedures
+|2016|3.1.x|User-defined functions
+|2017|3.2.x| User-defined aggregation functions
+|===
+--
+
+
+[.section-title.has-green-background.has-puzzle-background]
+== Getting started with Neo4j
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Setup
+
+. Install Neo4j (Desktop, Server, Docker)
+. Create & start a new 4.0 database with the movies graph
+
+[.section-title.has-green-background.has-puzzle-background]
+== Usage
+
+== Procedures - Usage
+
+[source,cypher]
+----
+CALL db.labels()
+----
+
+[opts="header"]
+|===
+| label
+| "Movie"
+| "Person"
+|===
+
+== Procedures - Usage
+
+.Shortcut for non-arg procedures
+[source,cypher]
+----
+CALL db.labels;
+----
+
+.Arguments in parentheses
+[source,cypher]
+----
+CALL db.labels();
+----
+
+.Deal with results
+[source,cypher]
+----
+CALL db.labels() YIELD label RETURN count(label);
+----
+
+.Filter results
+[source,cypher]
+----
+CALL db.labels() YIELD label WHERE label START WITH 'db.' RETURN *;
+----
+
+== Listing procedures
+
+[source,cypher]
+----
+CALL dbms.procedures()
+YIELD name, signature, description
+WHERE name STARTS WITH "db."
+RETURN name, signature
+----
+
+[.section-title.has-green-background.has-puzzle-background]
+== Built-in procedures & functions
+
+== Built-in procedures
+
+[.is-half.left]
+--
+* database
+* clustering
+* security
+* monitoring
+* schema
+* indexing
+* configuration
+--
+
+[.is-half.right]
+--
+image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
+--
+
+
+[.statement.is-full]
+Reference: https://neo4j.com/docs/operations-manual/current/reference/procedures/
+
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: How many procedures exist per group?
+
+[.section-title.has-green-background.has-puzzle-background]
+== About APOC
+
+== About APOC
+
+[.is-half.left]
+--
+* Large standard library of utility  functions and procedures
+* Actively developed - many contributors
+* "scratch your itch"
+* Makes Cypher easier to use
+* Enable some specific use-cases
+* Plan is to migrate some of the functionality into the Neo4j product
+--
+
+[.is-half.right]
+--
+image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
+--
+
+== A history of APOC
+
+* Started life as Michael Hunger's “Fun Project”
+* 3.0 was about to have User-defined procedures callable from Cypher but was missing many utility procedures.
+* APOC added them and quickly grew from 50 to 150 to 450 procedures & functions
+* It's an active OSS project
+* It has many contributors and users (100k downloads)
+
+[.section-title.has-green-background.has-puzzle-background]
+== Report issues and contribute
+
+
+[.section-title.has-green-background.has-puzzle-background]
+== Ask questions
+
+[.section-title.has-green-background.has-puzzle-background]
+== Learn more
+
+== Learn more
+
+* APOC video series at https://r.neo4j.com/apoc-videos[r.neo4j.com/apoc-videos^]
+* Documentation at https://www.neo4j.com/docs/labs/apoc[neo4j.com/docs/labs/apoc^]
+* Neo4j Browser guide (`:play apoc`)
+
+[.section-title.has-purple-background]
+== Task: Open the docs and have a look around
+
+[.section-title.has-green-background.has-puzzle-background]
+== Installation
+
+== APOC availability
+
+[.is-half.left]
+--
+* Neo4j Sandbox
+* Neo4j Desktop
+* Neo4j Aura
+* Docker
+--
+
+== APOC on Neo4j Desktop
+
+image of installing in a project
+
+== APOC on Neo4j Server
+
+--
+* Download the latest release JAR from https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/latest[github.com/neo4j-contrib/neo4j-apoc-procedures/releases/latest^]
+* Copy into $NEO4J_HOME/plugins
+* Remove older versions!
+* Add to $NEO4J_HOME/conf/apoc.conf
+
+[source,properties]
+----
+dbms.security.procedures.unrestricted=apoc.*
+----
+
+* Restart server
+--
+
+== APOC on Docker
+
+[source,bash]
+----
+docker run -it --rm \
+  --env 'NEO4JLABS_PLUGINS=["apoc"]' \
+  --env 'NEO4J_ACCEPT_LICENSE_AGREEMENT=yes' \
+  -p 7687:7687 -p 7474:7474 \
+  neo4j:4.0.0-enterprise
+----
+
+== APOC on Docker - Docker Compose
+
+.docker-compose.yml
+[source, yml]
+----
+
+version: '3.7'
+
+services:
+  neo4j:
+    image: neo4j:4.0.0-enterprise
+    container_name: "gc2020-apoc"
+    volumes:
+      - ./plugins:/plugins
+      - ./data:/data
+      - ./import:/import
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - "NEO4J_ACCEPT_LICENSE_AGREEMENT=yes"
+      - "NEO4J_AUTH=neo4j/neo"
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4JLABS_PLUGINS=["apoc"]
+----
+
+https://gist.github.com/mneedham/12a9643d1d5628e6e659ed138e083bd7[gist.github.com/mneedham/12a9643d1d5628e6e659ed138e083bd7^]
+
+[.section-title.has-purple-background]
+== Task: Install APOC
+
+[.section-title.has-green-background]
+== Built-in Help
+
+== Most important slide of the session
+
+[source.center,cypher]
+----
+CALL apoc.help("keyword")
+----
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Search for keywords from the docs
+
+[.section-title.has-green-background]
+== Text Functions
+
+== Text Functions - apoc.text.*
+
+* indexOf, indexesOf
+* split, replace, regexpGroups
+* format, clean, distance(s)
+* capitalize, decapitalize
+* random, lpad, rpad
+* snakeCase, camelCase, upperCase
+* charAt, hexCode
+* base64, md5, sha1
+
+https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Use Text Functions
+
+--
+. Return movie titles in ALL CAPS
+. Find the top 10 people with similar names based on Levenshtein distance
+. Return a `;` delimited list of all people whose name starts with "Tom"
+--
+
+== Answer: Use Text Functions
+
+.Return movie titles in ALL CAPS
+[source,cypher]
+----
+MATCH (m:Movie)
+return m.title, apoc.text.toUpperCase(m.title)
+----
+
+== Answer: Use Text Functions
+
+.Find the top 10 people with similar names based on Levenshtein distance
+[source,cypher]
+----
+MATCH (p1:Person), (p2:Person)
+WHERE p1 <> p2 AND id(p1) < id(p2)
+RETURN p1.name, p2.name,  apoc.text.levenshteinDistance(p1.name, p2.name) AS score
+ORDER BY score
+LIMIT 10
+----
+
+== Answer: Use Text Functions
+
+.Return a `;` delimited list of all people whose name starts with "Tom"
+[source,cypher]
+----
+MATCH (p:Person)
+WHERE p.name STARTS WITH "Tom"
+WITH collect(p.name) AS people
+RETURN apoc.text.join(people, ";")
+----
+
+[.section-title.has-green-background.has-puzzle-background]
+== Collection Functions
+
+== Collection Functions - apoc.coll.*
+
+* sum, avg, min,max,stdev,
+* zip, partition, pairs
+* sort, toSet, contains, split
+* indexOf, different
+* occurrences, frequencies, flatten
+* disjunct, subtract, union, ...
+* set, insert, remove
+
+https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
+
+[.has-purple-background]
+== Task: Use Collection Functions
+
+Starting from this query:
+
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+RETURN movie.title, collect(person) AS people
+----
+
+[.small]
+--
+. Sort the `people` collection by the `name` property, in descending order
+. Sort the `people` collection by the `born` property, in ascending order
+. Remove `movie.title` and make the `people` collection unique. Once you've done that break the collection up into sub lists of size 2.
+--
+
+== Answer: Use Collection Functions
+
+.Sort the `people` collection by the `name` property, in descending order
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+RETURN movie.title, apoc.coll.sortNodes(collect(person), "name")
+----
+
+== Answer: Use Collection Functions
+
+.Sort the `people` collection by the `born` property, in ascending order
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+RETURN movie.title, apoc.coll.sortNodes(collect(person), "^born")
+----
+
+== Answer: Use Collection Functions
+
+.Remove `movie.title` and make the `people` collection unique. Once you've done that break the collection up into sub lists of size 2.
+[source,cypher]
+----
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WHERE movie.title CONTAINS "Matrix"
+WITH apoc.coll.toSet(collect(person.name)) AS people
+CALL apoc.coll.partition(people, 2) YIELD value
+RETURN value
+----
+
+
+[.section-title.has-green-background.has-puzzle-background]
+== Map Functions
+
+== Map Functions - apoc.map.*
+
+* fromNodes, fromPairs, fromLists, fromValues
+* merge
+* setKey, removeKey
+* clean(map,[keys],[values])
+* groupBy[Multi]
+
+https://neo4j.com/docs/labs/apoc/current/data-structures/map-functions/
+
+[.has-purple-background]
+== Task: Use Map Functions
+
+Starting from this query:
+
+[source,cypher]
+----
+:param document =>  ({
+  title: "Frozen",
+  released: 2013,
+  budget: 150000000,
+  tagline: "Don’t you dare!"
+})
+----
+
+[.small]
+--
+. Clean the `$document` map to remove the `budget` property
+. Create a `Movie` node, but remove the `budget` property
+. Return the list of values in the map for the `title`, `released`, and `tagline` properties
+. Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
+--
+
+== Answer: Use Collection Functions
+
+.Clean the `$document` map to remove the `budget` property
+[source,cypher]
+----
+RETURN apoc.map.clean($document, ["budget"], [])
+----
+
+== Answer: Use Collection Functions
+
+.Create a `Movie` node, but remove the `budget` property
+[source,cypher]
+----
+WITH apoc.map.clean($document, ["budget"], []) AS properties
+CREATE(m:Movie)
+SET m += properties
+RETURN m
+----
+
+== Answer: Use Collection Functions
+
+.Return the list of values in the map for the `title`, `released`, and `tagline` properties
+[source,cypher]
+----
+RETURN apoc.map.values($document, ["released", "title", "tagline"])
+----
+
+== Answer: Use Collection Functions
+
+.Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
+[source,cypher]
+----
+WITH ["released", "title", "tagline"] AS keys
+WITH keys, apoc.map.values($document, keys) AS values
+CREATE(m:Movie)
+SET m += apoc.map.fromtLists(keys, values)
+RETURN m
+----
+
+[.section-title.has-green-background.has-puzzle-background]
+== Data Import
+
+== Data Import - apoc.import.*
+
+* JSON
+* CSV
+* Excel
+* XML
+* HTML
+* GraphML
+* JDBC/ElasticSearch/MongoDB/Couchbase
+
+[.section-title.has-green-background.has-puzzle-background]
+== Data Import: StackOverflow
+
+== Data Import: StackOverflow
+
+image::{imagedir}/example-data.neo4j.org-so-so_neo4j_1.json.png[StackOverflow dataset^, align=center,role="stretch"]
+
+[.section-title.has-purple-background]
+== Task: Create a new database called `stackoverflow` and switch to it
+
+== apoc.load.json
+
+* Enables loading of JSON documents from web APIs and files
+* Supports JSON Path and streaming JSON
+* Supports compressed data
+
+https://neo4j.com/docs/labs/apoc/current/import/load-json/
+
+== Data Import: StackOverflow
+
+[source,cypher]
+----
+:param url => ("http://example-data.neo4j.org/so/so_neo4j_1.json")
+----
+
+[source,cypher]
+----
+CALL apoc.load.json($url) YIELD value
+UNWIND value.items AS item
+RETURN item
+LIMIT 1;
+----
+
+[.title.has-purple-background]
+== Task: Import StackOverflow
+
+Create the following graph model from the StackOverflow dataset using the `apoc.load.json` procedure.
+
+<insert-image-of-graph-model>
+
+Tip: Start with just a few rows while you check the import query works!
+
+[source.small,cypher]
+----
+CALL apoc.load.json($url) YIELD value
+UNWIND value.items AS item
+WITH item LIMIT 20
+...
+----
+
+== Answer: Import StackOverflow
+
+[source.small,cypher]
+----
+CALL apoc.load.json($url) YIELD value
+UNWIND value.items AS item
+WITH item LIMIT 20
+
+MERGE (q:Question {id: item.question_id})
+ON CREATE SET
+  q.lastActivityDate = datetime({epochSeconds: item.last_activity_date}),
+  q.creationDate = datetime({epochSeconds: item.creation_date}),
+  q.title = item.title
+
+MERGE (owner:User {id:item.owner.user_id})
+ON CREATE SET owner.display_name = item.owner.display_name
+
+MERGE (owner)-[:ASKED]->(q)
+
+FOREACH (tagName IN item.tags |
+MERGE (tag:Tag {name:tagName}) MERGE (q)-[:TAGGED]->(tag));
+----
+
+== Temporal Data Formatting
+
+[source,cypher]
+----
+RETURN apoc.temporal.format(
+datetime(),
+'yyyy/MM/dd HH:mm:ss'
+)
+----
+
+[source,cypher]
+----
+RETURN apoc.temporal.formatDuration(
+duration.between(datetime(),date()),
+'HH:mm:ss'
+)
+----
+
+https://neo4j.com/docs/labs/apoc/current/temporal/temporal-conversions/
+
+[.title.has-purple-background]
+== Task: Querying StackOverflow
+
+--
+. Return the following properties of `Question` nodes: `title`, `lastActivityDate`, and `creationDate`, with dates formatted in `yyyy/MM/dd HH:mm:ss` format
+. Calculate the duration between `lastActivityDate` and `creationDate`, and return it in `HH:mm` format
+--
+
+== Answer: Querying StackOverflow
+
+.Return the following properties of `Question` nodes: `title`, `lastActivityDate`, and `creationDate`, with dates formatted in `yyyy/MM/dd HH:mm:ss` format
+[source,cypher]
+----
+MATCH (q:Question)
+RETURN q.title,
+       apoc.temporal.format(q.creationDate, 'yyyy/MM/dd HH:mm:ss'),
+       apoc.temporal.format(q.lastActivityDate, 'yyyy/MM/dd HH:mm:ss')
+----
+
+== Answer: Querying StackOverflow
+
+.Calculate the duration between `lastActivityDate` and `creationDate`, and return it in `HH:mm` format
+[source,cypher]
+----
+MATCH (q:Question)
+WITH q, duration.between(q.creationDate,q.lastActivityDate) AS duration
+RETURN q.title,
+       apoc.temporal.formatDuration(duration,'HH:mm')
+----
+
+== Conditional Cypher execution
+
+.Read Only Queries
+[source,cypher]
+----
+CALL apoc.when(condition, ifQuery, elseQuery, paramMap)
+YIELD value
+----
+
+[source,cypher]
+----
+CALL apoc.case([condition, query, condition, query, ... ], elseQuery, paramMap)
+YIELD value
+----
+
+.Write Queries
+[source,cypher]
+----
+CALL apoc.do.when(condition, ifQuery, elseQuery, paramMap)
+YIELD value
+----
+
+[source,cypher]
+----
+CALL apoc.do.case([condition, query, condition, query, ... ], elseQuery, paramMap)
+YIELD value
+----
+
+[.title.has-purple-background]
+== Task: Conditional Cypher Execution
+
+Update the StackOverflow import query to <do something conditional>
+
+== apoc.periodic.iterate
+
+* Driving statement
+* Executing statement
+* `batchSize: 10000` - automatic batching of input stream
+* `parallel: true` - parallel execution
+* `concurrency: 10` - number of threads
+* `retries: 3` - retries if statement fails
+
+https://neo4j.com/docs/labs/apoc/current/graph-updates/periodic-execution/#commit-batching
+
+== Running large-scale updates
+
+[source.center,cypher]
+----
+CALL apoc.periodic.iterate(
+  'MATCH (n:Person) RETURN n',
+  'SET n.name = n.firstName + " " + n.lastName',
+  {batchSize:10000, parallel:true, concurrency:10}
+)
+----
+
+== Running large-scale updates
+
+[source.center,cypher]
+----
+CALL apoc.periodic.iterate(
+  'UNWIND range(1,165) as page
+   RETURN "http://example-data.neo4j.org/so/so_neo4j_"+page+".json" as url',
+  'CALL apoc.load.json(url) YIELD value
+   UNWIND value.items AS q
+   MERGE (question:Question {id:q.question_id})...',
+  {batchSize:1}
+)
+----
+
+[.has-purple-background]
+== Task: Import all of StackOverflow
+
+Use the `apoc.periodic.iterate` procedure to import all 165 pages of StackOverflow data.
+
+[source.center,cypher]
+----
+CALL apoc.periodic.iterate(
+  'UNWIND range(1,165) as page
+   RETURN "http://example-data.neo4j.org/so/so_neo4j_"+page+".json" as url',
+  'CALL apoc.load.json(url) YIELD value
+   UNWIND value.items AS q
+   ...',
+  {batchSize:1}
+)
+----
+
+== Time To Live (TTL)
+
+* Enable in config: apoc.ttl.enabled=true
+* Creates Index on :TTL(ttl)
+
+Label :TTL Property: ttl
+apoc.date.expire(node, time, unit)
+apoc.date.expireIn(node, time, unit)
+
+== Time To Live (TTL)
+
+Background job (every 60s - configurable) that runs:
+
+[source,cypher]
+----
+MATCH (n:TTL)
+WHERE n.ttl > timestamp()
+WITH n LIMIT 1000
+DETACH DELETE n
+----
+
+== Background Operations
+
+[source,cypher]
+----
+CALL apoc.trigger.add(name, statement,{phase:before/after})
+yield name, statement, installed
+----
+
+* Pause/resume/list/remove
+* Transaction-Event-Handler calls Cypher code
+* Parameters: createdNodes, assignedNodeProperties, deletedNodes,...
+* Utility functions to extract entities/properties from update-records
+* Managed with graph properties
+
+== Refactoring
+
+* Clone nodes/sub graphs
+* Merge nodes/relationships
+* Redirect relationships
+* Normalize properties to boolean values
+* Create labels from property values
+* Rename node labels, relationship types, and properties
+
+https://neo4j.com/docs/labs/apoc/current/graph-updates/graph-refactoring/
+
+[.title.has-purple-background.has-puzzle-background]
+== Task
+
+* Create a job that
+* List the jobs and cancel them
+* Use `apoc.periodic.iterate` to add a label to all questions tagged `cypher`
+
+[.section-title.has-green-background.has-puzzle-background]
+== Data Export
+
+== Data Export - apoc.export.*
+
+* CSV
+* JSON
+* Cypher Script
+* GraphML
+* Gephi
+
+https://neo4j.com/docs/labs/apoc/current/export/
+
+== Data Export - CSV
+
+[source,cypher]
+----
+CALL apoc.export.csv.all("all.csv", {})
+----
+
+== Data Export - CSV
+
+.import/all.csv
+[source,csv]
+----
+"_id","_labels","creationDate","display_name","id","lastActivityDate","name","title","_start","_end","_type"
+"0",":Question","2018-09-17T07:01:21Z","","52362348","2018-09-17T07:07:03Z","","Changing neo4j conf enviroment variable has no effect",,,
+"1",":Question","2018-09-17T04:17:26Z","","52360684","2018-09-17T07:57:46Z","","How i can delete NULL values in dataset in neo4j?",,,
+"2",":Question","2018-09-17T04:03:08Z","","52360594","2018-09-17T08:00:57Z","","I am looking for a written generic DAO, Base Entity Manager... for Neo4j",,,
+"3",":Question","2018-09-16T12:05:14Z","","52353955","2018-09-17T03:43:48Z","","Deleting one of properties and creating it as new node under fulfilling condition",,,
+"4",":Question","2018-09-16T08:25:06Z","","52352327","2018-09-16T09:03:51Z","","Calculate in a query the difference in minutes between a start time and an end time",,,
+"5",":Question","2018-09-16T06:21:11Z","","52351504","2018-09-16T06:22:10Z","","Swagger UI disappeared after switching to Neo4j (show &#39;Database&#39; instead Swagger)",,,
+"6",":Question","2018-09-15T23:27:37Z","","52349700","2018-09-15T23:27:37Z","","Graph DB Store Version 0.A.0",,,
+"7",":Question","2018-09-15T20:01:16Z","","52348383","2018-09-15T22:09:40Z","","Neo4j: How time-consuming is EVERY branch between node A and F?",,,
+"8",":Question","2018-09-15T19:40:59Z","","52348239","2018-09-17T07:03:28Z","","Update of RelationshipEntity resets values of various other rich relationships in Neo4j",,,
+----
+
+[.has-purple-background]
+== Task: Export StackOverflow
+
+. Create a new database called `stackoverflow.export`
+. Export all of the questions and associated nodes that have the tag `cypher` as Cypher Script to a file
+. Import that file into the `stackoverflow.export` database
+
+[.section-title.has-green-background.has-puzzle-background]
+== Advanced Querying
+
+== Path Expansion
+
+Customized path expansion from start node(s)
+
+* Min/max traversals
+* Limit number of results
+* Optional (no rows removed if no results, if set to true)
+* Choice of BFS/DFS expansion
+* Custom uniqueness (restrictions on visitations of nodes/rels)
+* Relationship and label filtering
+* No property filtering/evaluation
+
+== Expander procedures: apoc.path.*
+
+[.small]
+.The original, when you don’t need much customization
+[source,cypher]
+----
+expand(startNode(s), relationshipFilter, labelFilter, minLevel, maxLevel) YIELD path
+----
+
+[.small]
+.Most flexible, rich configuration map
+[source,cypher]
+----
+expandConfig(startNode(s), configMap) YIELD path
+----
+
+[.small]
+.Only distinct nodes, don't care about paths
+[source,cypher]
+----
+subgraphNodes(startNode(s), configMap) YIELD node
+----
+
+[.small]
+.Only one distinct path to each node
+[source,cypher]
+----
+spanningTree(startNode(s), configMap) YIELD path
+----
+
+[.small]
+.Only distinct nodes and all rels between them
+[source,cypher]
+----
+subgraphAll(startNode(s), configMap) YIELD nodes, relationships
+----
+
+[.small]
+https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
+
+== Config map values
+
+--
+* `minLevel: int`
+* `maxLevel: int`
+* `relationshipFilter: string`
+* `labelFilter: string`
+* `uniqueness: string` (`RELATIONSHIP_PATH`, `NODE_GLOBAL`, `NODE_PATH`)
+* `bfs: boolean`
+* `filterStartNode: boolean`
+* `limit: int`
+--
+
+== Config map values
+
+[.small]
+--
+* `optional: boolean`
+* `endNodes: [nodes]`
+* `terminatorNodes: [nodes]`
+* `whitelistNodes: [nodes]`
+* `blacklistNodes: [nodes]`
+* `sequence: string`
+* `beginSequenceAtStart: boolean`
+--
+
+== Relationship filter
+
+Which relationships (type and direction) to follow:
+
+* `<ACTED_IN` - Incoming Rel
+* `DIRECTED>` - Outgoing Rel
+* `REVIEWED` - Any direction
+* `>` - Direction, any type
+* `<ACTED_IN | DIRECTED> | REVIEWED` - Multiple, in varied direction
+
+== Label filter
+
+What is/isn't allowed during expansion, and what is/isn't returned:
+
+* `-Director` – Blacklist, not allowed in path
+* `+Person` – Whitelist , only allowed in path (+ symbol optional)
+  **    (no whitelist = all allowed)
+* `>Reviewer` – End node, only return these, and continue expansion past them
+* `/Producer` – Terminator node, only return these, stop expansion
+* `Person|Movie|-Director|>Reviewer|/Producer`– Combine them
+
+== Sequences
+
+* Repeating sequences of relationships, labels, or both.
+* Uses labelFilter and relationshipFilter, just add commas
+* Or use sequence for both together
+
+labelFilter:'Post | -Blocked, Reply, >Admin'
+(use beginSequenceAtStart:false if sequence begins at one hop from start node)
+
+relationshipFilter:'NEXT>,<FROM,POSTED>|REPLIED>'
+
+sequence:'Post |-Blocked, NEXT>, Reply, <FROM, >Admin, POSTED>| REPLIED>'
+
+== End nodes/terminator nodes
+
+What if we already have the nodes that should end the expansion?
+
+* `endNodes` – like filter, but takes a collection of nodes (or ids)
+* `terminatorNodes` – like filter (stop expand), but also takes a collection (whitelistNodes and blacklistNodes too!)
+* Can be used with labelFilter or sequence, but continue or include must be unanimous.
+
+== Example: Get connected nodes
+
+[.small]
+.get all connected nodes reachable from Keanu Reeves
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.subgraphNodes(k, {}) YIELD node
+RETURN node
+----
+
+[.small]
+.now see the paths used to obtain those results
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.spanningTree(k, {}) YIELD path
+RETURN path
+----
+
+[.small]
+.just get the movies reachable from Keanu Reeves
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.subgraphNodes(k, {labelFilter:'>Movie'}) YIELD node as movie
+RETURN movie
+----
+
+[.small]
+.get the local subgraph of all nodes and rels within 3 hops of Keanu Reeves, actors only
+[source,cypher]
+----
+MATCH (k:Person {name:'Keanu Reeves'})
+CALL apoc.path.subgraphAll(k, {maxLevel:3, relationshipFilter:'ACTED_IN'}) YIELD nodes, relationships
+RETURN nodes, relationships
+----
+
+[.has-purple-background]
+== Task: Get closest Reviewers
+
+Switch back to the default database and add `Reviewer` labels:
+
+[source,cypher]
+----
+MATCH (rev:Person)
+WHERE (rev)-[:REVIEWED]->()
+SET rev:Reviewer
+----
+
+[.small]
+--
+. Can you write a query to find if there’s a :Reviewer node within 5 hops of Christian Bale?
+  ** Start with the Cypher query
+  ** Then rewrite using the path expander procedure
+
+. Write a query to match to 5 random :Persons, then get the 2 closest :Reviewers for each person
+  ** Start with the path expander procedure
+  ** What difficulties would you have doing this with just Cypher?
+--
+
+== Neighborhood Search
