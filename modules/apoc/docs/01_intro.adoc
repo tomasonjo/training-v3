@@ -867,6 +867,8 @@ https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
 
 == Config map values
 
+[.small]
+--
 * `minLevel: int`
 * `maxLevel: int`
 * `relationshipFilter: string`
@@ -882,6 +884,7 @@ https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
 * `blacklistNodes: [nodes]`
 * `sequence: string`
 * `beginSequenceAtStart: boolean`
+--
 
 == Relationship filter
 
@@ -963,7 +966,7 @@ CALL apoc.path.subgraphAll(k, {maxLevel:3, relationshipFilter:'ACTED_IN'}) YIELD
 RETURN nodes, relationships
 ----
 
-[.title.has-purple-background]
+[.has-purple-background]
 == Task: Get closest Reviewers
 
 Switch back to the default database and add `Reviewer` labels:
