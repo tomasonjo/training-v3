@@ -36,6 +36,8 @@ At the end of this training, you should be able to:
 
 == Agenda
 
+[.small]
+--
 [opts="header"]
 |===
 | Module | Time
@@ -45,19 +47,19 @@ At the end of this training, you should be able to:
 |Data integration| 20'
 |Cypher execution |20'
 2+| 	BREAK
-|Path expansion | 30'
-|Graph refactoring | 15'
 |TTL & triggers|  20'
+|Graph refactoring | 15'
+|Path expansion | 30'
 |Virtual nodes & relationships + graph grouping | 20'
 | Questions, outlook, contribution | 10'
 |===
+--
 
 == How do we learn APOC?
 
-
 * Massively hands-on, lots of exercises
 * Help each other!
-* Ask questions as they arise.
+* Ask questions as they come up
 * Datasets: Movie graph, StackOverflow
 * Have the APOC docs open
 * Bring your own "How do I?"
@@ -89,9 +91,10 @@ User-defined procedures let you write custom code that:
 [.is-half.right]
 image::{imagedir}/extending-neo4j.png[Extending Neo4j]
 
-
 == Neo4j developer surface
 
+[.small]
+--
 |===
 | 2000-2010 | 0.x | Embedded Java API
 | 2010-2014 | 1.x | REST
@@ -99,19 +102,18 @@ image::{imagedir}/extending-neo4j.png[Extending Neo4j]
 | 2016 |3.0.x|Bolt, Official language drivers, User-defined procedures
 |2016|3.1.x|User-defined functions
 |2017|3.2.x| User-defined aggregation functions
-
 |===
+--
 
 
 [.section-title.has-green-background.has-puzzle-background]
-== Getting started with Neo4j Desktop
+== Getting started with Neo4j
 
-[.section-title.has-purple-background.has-puzzle-background]
-== Task: Install Neo4j Desktop
+[.title.has-purple-background.has-puzzle-background]
+== Task: Setup
 
-
-[.section-title.has-purple-background.has-puzzle-background]
-== Task: Create & start  a new 4.0 database with the movies graph
+. Install Neo4j (Desktop, Server, Docker)
+. Create & start a new 4.0 database with the movies graph
 
 [.section-title.has-green-background.has-puzzle-background]
 == Usage
@@ -237,7 +239,7 @@ image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
 
 * APOC video series at https://r.neo4j.com/apoc-videos[r.neo4j.com/apoc-videos^]
 * Documentation at https://www.neo4j.com/docs/labs/apoc[neo4j.com/docs/labs/apoc^]
-* Neo4j Browser guide (``:play apoc`)
+* Neo4j Browser guide (`:play apoc`)
 
 [.section-title.has-purple-background.has-puzzle-background]
 == Task: Open the docs and have a look around
@@ -275,12 +277,44 @@ dbms.security.procedures.unrestricted=apoc.*
 * Restart server
 --
 
-== Docker
+== APOC on Docker
 
-[source, bash]
+[source,bash]
+----
+docker run -it --rm \
+  --env 'NEO4JLABS_PLUGINS=["apoc"]' \
+  --env 'NEO4J_ACCEPT_LICENSE_AGREEMENT=yes' \
+  -p 7687:7687 -p 7474:7474 \
+  neo4j:4.0.0-enterprise
 ----
 
+== APOC on Docker - Docker Compose
+
+.docker-compose.yml
+[source, yml]
 ----
+
+version: '3.7'
+
+services:
+  neo4j:
+    image: neo4j:4.0.0-enterprise
+    container_name: "gc2020-apoc"
+    volumes:
+      - ./plugins:/plugins
+      - ./data:/data
+      - ./import:/import
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - "NEO4J_ACCEPT_LICENSE_AGREEMENT=yes"
+      - "NEO4J_AUTH=neo4j/neo"
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4JLABS_PLUGINS=["apoc"]
+----
+
+https://gist.github.com/mneedham/12a9643d1d5628e6e659ed138e083bd7[gist.github.com/mneedham/12a9643d1d5628e6e659ed138e083bd7^]
 
 [.section-title.has-purple-background.has-puzzle-background]
 == Task: Install APOC
@@ -510,23 +544,15 @@ RETURN m
 * GraphML
 * JDBC/ElasticSearch/MongoDB/Couchbase
 
-== Data Export - apoc.export.*
-
-* CSV
-* JSON
-* Cypher Script
-* GraphML
-* Gephi
-
-[.section-title.has-purple-background.has-puzzle-background]
-== Task: Create a new database called `stackoverflow` and switch to it
-
 [.section-title.has-green-background.has-puzzle-background]
 == Data Import: StackOverflow
 
 == Data Import: StackOverflow
 
 image::{imagedir}/example-data.neo4j.org-so-so_neo4j_1.json.png[StackOverflow dataset^, align=center,role="stretch"]
+
+[.section-title.has-purple-background.has-puzzle-background]
+== Task: Create a new database called `stackoverflow` and switch to it
 
 == apoc.load.json
 
@@ -553,12 +579,91 @@ LIMIT 1;
 
 [.title.has-purple-background.has-puzzle-background]
 == Task: Import StackOverflow
-[.title.has-purple-background.has-puzzle-background]
-== Task: Import StackOverflow
 
 Create the following graph model from the StackOverflow dataset using the `apoc.load.json` procedure.
 
 <insert-image-of-graph-model>
+
+== Temporal Data Formatting
+
+[source,cypher]
+----
+RETURN apoc.temporal.format(
+datetime(),
+'yyyy/MM/dd HH:mm:ss'
+)
+----
+
+[source,cypher]
+----
+RETURN apoc.temporal.formatDuration(
+duration.between(datetime(),date()),
+'HH:mm:ss'
+)
+----
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Querying StackOverflow
+
+--
+. Return the following properties of `Question` nodes: `title`, `lastActivityDate`, and `creationDate`, with dates formatted in `yyyy/MM/dd HH:mm:ss` format
+. Calculate the duration between `lastActivityDate` and `creationDate`, and return it in `HH:mm` format
+--
+
+== Answer: Querying StackOverflow
+
+.Return the following properties of `Question` nodes: `title`, `lastActivityDate`, and `creationDate`, with dates formatted in `yyyy/MM/dd HH:mm:ss` format
+[source,cypher]
+----
+MATCH (q:Question)
+RETURN q.title,
+       apoc.temporal.format(q.creationDate, 'yyyy/MM/dd HH:mm:ss'),
+       apoc.temporal.format(q.lastActivityDate, 'yyyy/MM/dd HH:mm:ss')
+----
+
+== Answer: Querying StackOverflow
+
+.Calculate the duration between `lastActivityDate` and `creationDate`, and return it in `HH:mm` format
+[source,cypher]
+----
+MATCH (q:Question)
+WITH q, duration.between(q.creationDate,q.lastActivityDate) AS duration
+RETURN q.title,
+       apoc.temporal.formatDuration(duration,'HH:mm')
+----
+
+== Conditional Cypher execution
+
+.Read Only Queries
+[source,cypher]
+----
+CALL apoc.when(condition, ifQuery, elseQuery, paramMap)
+YIELD value
+----
+
+[source,cypher]
+----
+CALL apoc.case([condition, query, condition, query, ... ], elseQuery, paramMap)
+YIELD value
+----
+
+.Write Queries
+[source,cypher]
+----
+CALL apoc.do.when(condition, ifQuery, elseQuery, paramMap)
+YIELD value
+----
+
+[source,cypher]
+----
+CALL apoc.do.case([condition, query, condition, query, ... ], elseQuery, paramMap)
+YIELD value
+----
+
+[.title.has-purple-background.has-puzzle-background]
+== Task: Conditional Cypher Execution
+
+Update the StackOverflow import query to <do something conditional>
 
 == apoc.periodic.iterate
 
@@ -596,34 +701,11 @@ CALL apoc.periodic.iterate(
 )
 ----
 
-== Conditional Cypher execution
+== TTL
 
-.Read Only Queries
-[source,cypher]
-----
-CALL apoc.when(condition, ifQuery, elseQuery, paramMap)
-YIELD value
-----
+== Background Operations
 
-[source,cypher]
-----
-CALL apoc.case([condition, query, condition, query, ... ], elseQuery, paramMap)
-YIELD value
-
-----
-
-.Write Queries
-[source,cypher]
-----
-CALL apoc.do.when(condition, ifQuery, elseQuery, paramMap)
-YIELD value
-----
-
-[source,cypher]
-----
-CALL apoc.do.case([condition, query, condition, query, ... ], elseQuery, paramMap)
-YIELD value
-----
+== Refactoring
 
 [.title.has-purple-background.has-puzzle-background]
 == Task
@@ -653,7 +735,7 @@ https://neo4j.com/docs/labs/apoc/current/export/
 . Import that file into the `stackoverflow.export` database
 
 [.section-title.has-green-background.has-puzzle-background]
-== Path Expansion
+== Advanced Querying
 
 == Path Expansion
 
