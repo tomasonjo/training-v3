@@ -152,6 +152,7 @@ When the Neo4j instance starts, you can also confirm that it is started by seein
 
 [NOTE]
 You can also view the log file in the *logs* directory on all platforms.
+For example, on non-Debian and non RPM systems, the Neo4j log information is written to the *neo4j.log* file.
 
 [.student-exercise]
 == Exercise #2: Managing the Neo4j instance
@@ -165,46 +166,46 @@ Refer to the *Exercise Guide* for instructions.
 //endif::[]
 
 
-////
 [.quiz]
 == Check your understanding
 
 === Question 1
 
-Suppose that you have installed Neo4j Enterprise Edition and have modified the name of the active database in the Neo4j configuration file. What tool and command do you run to create the new database?
+What is the name of the configuration file used by the Neo4j instance when it start?
 
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] `neo4j-admin create-database`
-- [ ] `neo4j-admin initialize`
-- [ ] `neo4j create-database`
-- [x] `neo4j start`
+- [ ] *neo4j.properties*
+- [x] *neo4j.conf*
+- [ ] *neo4j-config.xml*
+- [ ] *neo4j-config.json*
 
 === Question 2
 
-Suppose that you want the existing Neo4j database to have the name *ABCRecommendations.db*. Assuming that you have stopped the Neo4j instance, what steps must you perform to modify the name of the database, which currently has a default name of *graph.db*?
+You control the Neo4j instance by using the `neo4j` tool which on Debian is accessed using `systemctl`.
+What commands are available for managing the Neo4j instance?
 
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Rename the *NEO4J_HOME/graph.db* directory to *NEO4J_HOME/ABCRecommendations.db*.
-- [x] Modify *neo4j.conf* to use _dbms.active_database=ABCRecommendations.db_.
-- [ ] [Run `neo4j-admin rename graph.db ABCRecommendations.db`.
-- [ ] Run `neo4j-admin move graph.db ABCRecommendations.db`.
+- [x] start
+- [x] stop
+- [x] restart
+- [ ] reset
 
 === Question 3
 
-How do you copy a database that you want to give to another user?
+On Debian, how do you determine if the Neo4j instance is started?
 
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [ ] With the Neo4j instance started, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance stopped, run `neo4j-admin copy` providing the location where the copy will be created.
-- [ ] With the Neo4j instance started, run `neo4j-admin dump` providing the location where the dump file will be created.
-- [x] With the Neo4j instance stopped, run `neo4j-admin dump` providing the location where the dump file will be created.
-////
+- [x] `systemctl status neo4j` and look for "Started".
+- [ ] `systemctl started neo4j` and look for "Started".
+- [x] `journalctl -e -u neo4j` and look for "Started".
+- [ ] Open the neo4j.log file and view the end of the file to find "Started".
+
 
 == Summary
 

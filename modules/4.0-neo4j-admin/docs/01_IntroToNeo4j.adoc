@@ -587,7 +587,7 @@ The two main tools used that are part of the Neo4j installation (located in the 
 * *neo4j* used to start, stop and retrieve the status of the Neo4j DBMS instance.
 * *neo4j-admin* used to create, copy, remove, backup, restore and perform other administrative tasks.
 
-[.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz]
 == Check your understanding
 
 === Question 1

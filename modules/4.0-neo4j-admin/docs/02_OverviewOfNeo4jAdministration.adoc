@@ -385,10 +385,12 @@ The https://neo4j.com/docs/java-reference/3.5/tutorials-java-embedded/[Java Deve
 
 [.quiz]
 == Check your understanding
+
 === Question 1
 
 [.statement]
-Suppose your organization has two applications that require Neo4j. Each application uses a different Neo4j database and the clients access the database in server mode. For these two databases, how many Neo4j installations are required?
+Suppose your organization has two applications that require Neo4j. Each application uses a different Neo4j database and the clients access the database in server mode, rather than embedded mode.
+For these two databases, how many Neo4j installations are required for the applications to access these databases?
 
 [.statement]
 Select the correct answer.
