@@ -85,7 +85,7 @@ These instructions may change in future releases of Neo4j.
 . Restart the Neo4j instance.
 . Confirm the procedures of the plugin are available.
 
-==== Sandboxing
+=== Sandboxing
 
 Neo4j provides _sandboxing_ to ensure that procedures do not inadvertently use insecure APIs.
 For example, when writing custom code it is possible to access Neo4j APIs that are not publicly supported, and these internal APIs are subject to change, without notice.
@@ -95,7 +95,7 @@ or contain security checks.
 
 image::DefaultSandboxing.png[DefaultSandboxing,width=800,align=center]
 
-==== Whitelisting
+=== Whitelisting
 
 Neo4j _whitelisting_ can be used to allow loading only a few extensions from a larger library.
 The configuration setting _dbms.security.procedures.whitelist_ is used to name certain procedures that should be

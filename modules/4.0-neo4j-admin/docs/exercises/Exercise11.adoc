@@ -1,4 +1,3 @@
-:imagesdir: ../images
 
 == Exercise #11: Managing backups
 
@@ -82,7 +81,7 @@ MATCH (n) RETURN count(n);
 ----
 MATCH (n) RETURN count(n);
 ----
-/// elaine resume here
+
 [start=15]
 . Perform an online backup using these guidelines:
 .. Back up the _movies_ database.
@@ -92,7 +91,7 @@ MATCH (n) RETURN count(n);
 
 The result of the backup should look as follows:
 
-image::BackupMovies[BackupMovies].png[BackupMovies,width=1000,align=center]
+image::BackupMovies.png[BackupMovies,width=1000,align=center]
 
 [start=16]
 . Invoke `cypher-shell` to add more nodes to the _movies_ database using the *movies.cypher* file.
