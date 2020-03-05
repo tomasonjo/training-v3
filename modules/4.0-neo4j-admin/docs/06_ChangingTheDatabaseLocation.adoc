@@ -1,4 +1,3 @@
-
 = Changing the Database Location
 :doctype: book
 :toc: left

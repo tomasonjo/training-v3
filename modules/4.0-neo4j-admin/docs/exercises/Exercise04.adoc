@@ -1,15 +1,15 @@
-
-== Exercise #4: Creating and deleting a database
+= Exercise #4: Creating and deleting a database
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this exercise you will gain some experience with creating and deleting a database.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . You are the user, _neo4j_.
 . Ensure that the Neo4j instance is started.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Connect to the Neo4j instance with `cypher-shell`.
 . Enter the command to show all databases.
@@ -54,12 +54,12 @@ image::RemovedNeo4j.png[RemovedNeo4j,width=1000,align=center]
 [start=13]
 . Exit `cypher-shell`.
 
-=== Taking it further
+== Taking it further
 
 . Try resetting a database that has data in it.
 . Try conditionally creating a database.
 
-=== Exercise summary
+== Exercise summary
 
 You have now successfully added and dropped a database, as well as specifying a different database as the default database for clients.
 

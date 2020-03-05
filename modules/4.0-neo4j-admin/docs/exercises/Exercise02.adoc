@@ -1,9 +1,9 @@
-
-== Exercise #2: Managing the Neo4j instance
+= Exercise #2: Managing the Neo4j instance
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will stop and start the Neo4j instance and view its status and log file using the Debian installation you verified in the previous exercise.
 
-=== Before you begin
+== Before you begin
 
 For the exercises in this course, the commands you use to access the Neo4j instance, should be done as the user, _neo4j_. On the EC2 instance created for you, the user, _neo4j_ has the password _neo4j_ and has sudo permissions.
 
@@ -14,7 +14,7 @@ su neo4j
 neo4j
 ----
 
-=== Exercise steps:
+== Exercise steps:
 
 . View the status of the _neo4j_ service:
 
@@ -91,7 +91,7 @@ image::DataFiles.png[DataFiles,width=600,align=center]
 
 image::ViewLogFiles.png[ViewLogFiles,width=600,align=center]
 
-=== Exercise summary
+== Exercise summary
 
 You have now gained experience starting and stopping a Neo4j instance as well as viewing its status and the log file for the instance.
 

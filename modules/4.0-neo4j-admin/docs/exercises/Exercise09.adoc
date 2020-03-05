@@ -1,15 +1,14 @@
-
-== Exercise #9: Install a plugin
-
+= Exercise #9: Install a plugin
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will install the APOC library for use by your Neo4j instance and you will create and execute a script to report all of the procedures available to the Neo4j instance.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 
-=== Exercise steps:
+== Exercise steps:
 
 . In a Web browser, go to the GitHub repository for the https://github.com/neo4j-contrib/neo4j-apoc-procedures[APOC library].
 . Find the latest release of the library that is compatible with Neo4j Enterprise Edition 4.0.
@@ -47,7 +46,7 @@ echo "CALL dbms.procedures() YIELD name;" | /usr/bin/cypher-shell -u neo4j -p <I
 [start=8]
 . Confirm that APOC procedures are loaded by examining the file produced.
 
-=== Exercise summary
+== Exercise summary
 
 You have now configured a Neo4j instance so that applications that access the databases can use APOC library procedures.
 

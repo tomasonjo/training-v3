@@ -1,15 +1,15 @@
-
-== Exercise #3: Using `cypher-shell`
+= Exercise #3: Using `cypher-shell`
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, change the password for the Neo4j instance, and use both the system and user database.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Make sure you have changed to the user, _neo4j_:  `su neo4j` providing _neo4j_ as the password.
 . Ensure that the Neo4j instance is started.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_.
     *Hint*: Type:  `/usr/bin/cypher-shell`.
@@ -68,7 +68,7 @@ image::ConfirmMovieData.png[ConfirmMovieData,width=1000,align=center]
 [start=14]
 . Exit `cypher-shell`.
 
-=== Exercise summary
+== Exercise summary
 
 You have now successfully started a `cypher-shell` client session that connects to the Neo4j instance.
 You typically use `cypher-shell` to execute Cypher against a user database, but you can also use it to perform some management tasks against the Neo4j instance by accessing the system database.

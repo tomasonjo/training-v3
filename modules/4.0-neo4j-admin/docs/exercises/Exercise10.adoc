@@ -1,15 +1,15 @@
-
-== Exercise #10: Modify the HTTP port
+= Exercise #10: Modify the HTTP port
+ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, will modify the HTTP used by your instance to allow external connections.
 Then you will modify the configuration to use a different port for HTTP connections.
 
-=== Before you begin
+== Before you begin
 
 . Make sure you have a terminal window open to your EC2 instance for this course.
 . Ensure that you are the user _neo4j_.
 
-=== Exercise steps:
+== Exercise steps:
 
 . Determine the public IP address for your EC2 instance for this course.
 ----
@@ -47,8 +47,7 @@ image::UsePort9999.png[UsePort9999,width=1200,align=center]
 . Change the configuration back to using the default HTTP port of 7474.
 . Restart the Neo4j instance.
 
-
-=== Exercise summary
+== Exercise summary
 
 You have now configured and tested changes to the HTTP port and whether the Neo4j instance can be accessed from an external client..
 
