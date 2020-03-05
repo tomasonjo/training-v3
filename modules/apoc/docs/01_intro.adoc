@@ -736,7 +736,7 @@ CALL apoc.periodic.iterate(
 )
 ----
 
-[.title.has-purple-background]
+[.has-purple-background]
 == Task: Import all of StackOverflow
 
 Use the `apoc.periodic.iterate` procedure to import all 165 pages of StackOverflow data.
@@ -753,11 +753,51 @@ CALL apoc.periodic.iterate(
 )
 ----
 
-== TTL
+== Time To Live (TTL)
+
+* Enable in config: apoc.ttl.enabled=true
+* Creates Index on :TTL(ttl)
+
+Label :TTL Property: ttl
+apoc.date.expire(node, time, unit)
+apoc.date.expireIn(node, time, unit)
+
+== Time To Live (TTL)
+
+Background job (every 60s - configurable) that runs:
+
+[source,cypher]
+----
+MATCH (n:TTL)
+WHERE n.ttl > timestamp()
+WITH n LIMIT 1000
+DETACH DELETE n
+----
 
 == Background Operations
 
+[source,cypher]
+----
+CALL apoc.trigger.add(name, statement,{phase:before/after})
+yield name, statement, installed
+----
+
+* Pause/resume/list/remove
+* Transaction-Event-Handler calls Cypher code
+* Parameters: createdNodes, assignedNodeProperties, deletedNodes,...
+* Utility functions to extract entities/properties from update-records
+* Managed with graph properties
+
 == Refactoring
+
+* Clone nodes/sub graphs
+* Merge nodes/relationships
+* Redirect relationships
+* Normalize properties to boolean values
+* Create labels from property values
+* Rename node labels, relationship types, and properties
+
+https://neo4j.com/docs/labs/apoc/current/graph-updates/graph-refactoring/
 
 [.title.has-purple-background.has-puzzle-background]
 == Task
@@ -803,7 +843,7 @@ CALL apoc.export.csv.all("all.csv", {})
 "8",":Question","2018-09-15T19:40:59Z","","52348239","2018-09-17T07:03:28Z","","Update of RelationshipEntity resets values of various other rich relationships in Neo4j",,,
 ----
 
-[.title.has-purple-background]
+[.has-purple-background]
 == Task: Export StackOverflow
 
 . Create a new database called `stackoverflow.export`
@@ -867,7 +907,6 @@ https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
 
 == Config map values
 
-[.small]
 --
 * `minLevel: int`
 * `maxLevel: int`
@@ -877,6 +916,12 @@ https://neo4j.com/docs/labs/apoc/current/graph-querying/path-expander/
 * `bfs: boolean`
 * `filterStartNode: boolean`
 * `limit: int`
+--
+
+== Config map values
+
+[.small]
+--
 * `optional: boolean`
 * `endNodes: [nodes]`
 * `terminatorNodes: [nodes]`
@@ -988,3 +1033,5 @@ SET rev:Reviewer
   ** Start with the path expander procedure
   ** What difficulties would you have doing this with just Cypher?
 --
+
+== Neighborhood Search
