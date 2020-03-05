@@ -390,7 +390,7 @@ and follow the instructions for Exercise 12.
 This exercise has 16 steps.
 Estimated time to complete: 45 minutes.
 
-[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz]
 == Check your understanding
 
 === Question 1

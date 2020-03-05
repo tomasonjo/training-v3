@@ -183,7 +183,7 @@ image::ETLTool.png[ETLTool,width=1000,align=center]
 * Live RDBMS Server.
 * No limit to size of data to import.
 
-[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz]
 == Check your understanding
 
 === Question 1

@@ -537,7 +537,7 @@ and follow the instructions for Exercise 16.
 This exercise has 9 steps.
 Estimated time to complete: 30 minutes.
 
-[.quiz.slide-section-title.has-purple-background.has-puzzle-background]
+[.quiz]
 == Check your understanding
 
 === Question 1
