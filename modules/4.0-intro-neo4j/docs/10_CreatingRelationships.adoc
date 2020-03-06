@@ -308,7 +308,10 @@ image::RemoveRoles.png[RemoveRoles,width=1000,align=center]
 [.student-exercise]
 == Exercise 10: Creating relationships
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 10.
 
 [NOTE]

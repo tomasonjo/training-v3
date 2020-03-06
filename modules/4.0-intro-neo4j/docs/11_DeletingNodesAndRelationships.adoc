@@ -189,7 +189,10 @@ image::BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=c
 [.student-exercise]
 == Exercise 11: Deleting nodes and relationships
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 11.
 
 [NOTE]

@@ -367,7 +367,10 @@ image::CannotRemoveNodeKeyProperty.png[CannotRemoveNodeKeyProperty,width=800,ali
 [.student-exercise]
 == Exercise 13: Defining constraints on your data
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 13.
 
 [NOTE]

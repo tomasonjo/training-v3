@@ -1,0 +1,31 @@
+= Introduction to Neo4j 4.0: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+
+//image::neo4j-icon.png[neo4j-icon,width=600,align=center]
+
+include::00_AboutThisCourse.adoc[]
+include::01_Neo4jIsAGraphDatabase.adoc[]
+include::02_TheNeo4jGraphPlatform.adoc[]
+include::03_IntroductionToCypherQueries.adoc[]
+include::04_UsingWHEREToFilterQueries.adoc[]
+include::05_WorkingWithPatternsInQueries.adoc[]
+include::06_WorkingWithCypherData.adoc[]
+include::07_ControllingTheQueryChain.adoc[]
+include::08_ControllingResultsReturned.adoc[]
+include::09_CreatingNodes.adoc[]
+include::10_CreatingRelationships.adoc[]
+include::11_DeletingNodesAndRelationships.adoc[]
+include::12_MergingData.adoc[]
+include::13_DefiningConstraintsForYourData.adoc[]
+include::14_UsingIndexes.adoc[]
+include::15_UsingQueryBestPractices.adoc[]
+include::16_OverviewOfImportingDataIntoNeo4j.adoc[]
+include::17_UsingLOADCSVForImport.adoc[]
+include::18_UsingAPOCForImport.adoc[]
+include::19_UsingTheNeo4jAdminToolForImport.adoc[]
+include::20_UsingAnApplicationForImport.adoc[]
+include::21_Summary.adoc[]
+

@@ -210,7 +210,10 @@ The variable _m_ used in the subquery is used in the next query.
 [.student-exercise]
 == Exercise 7: Controlling query processing
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 7.
 
 [NOTE]

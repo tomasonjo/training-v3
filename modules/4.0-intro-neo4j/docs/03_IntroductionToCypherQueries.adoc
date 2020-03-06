@@ -287,7 +287,10 @@ image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
 [.student-exercise]
 == Exercise 1: Retrieving nodes
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 1.
 
 [NOTE]
@@ -533,7 +536,10 @@ image::UsingAliases.png[UsingAliases,width=800,align=center]
 [.student-exercise]
 == Exercise 2: Filtering queries using property values
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 2.
 
 [NOTE]
@@ -1130,7 +1136,10 @@ We recommend that you follow the https://neo4j.com/docs/cypher-manual/current/st
 [.student-exercise]
 == Exercise 3: Filtering queries using relationships
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 3.
 
 [NOTE]

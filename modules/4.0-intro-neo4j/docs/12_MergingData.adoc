@@ -368,7 +368,10 @@ MERGE (toDate:Date {month: 'January'})-[:IN_YEAR]->(fromDate)
 [.student-exercise]
 == Exercise 12: Merging data in the graph
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 12.
 
 [NOTE]

@@ -235,7 +235,10 @@ image::ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
 [.student-exercise]
 == Exercise 18: Importing data with the import command of neo4j-admin
 
-In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play 4.0-intro-neo4j-exercises]
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-neo4j-exercises]
+
 and follow the instructions for Exercise 18.
 
 [NOTE]
