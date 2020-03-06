@@ -11,13 +11,14 @@ class ModuleInfoTreeProcessor < Extensions::TreeProcessor; use_dsl
         require 'yaml'
         module_descriptor = YAML::load_file(path)
         document_slug = (document.attr 'slug')
-        module_descriptor['nav'].each_with_index do |item, index|
-          document.set_attribute "module-toc-link-#{index}", item['url']
-          document.set_attribute "module-toc-title-#{index}", item['title']
-          document.set_attribute "module-toc-slug-#{index}", item['slug']
-          if item.has_key?('next') && (document_slug == item['slug'])
-            document.set_attr "module-next-slug", item['next']['slug'], false
-            document.set_attr "module-next-title", item['next']['title'], false
+        module_descriptor['pages'].each_with_index do |page, index|
+          document.set_attribute "module-toc-link-#{index}", page['url']
+          document.set_attribute "module-toc-title-#{index}", page['title']
+          document.set_attribute "module-toc-slug-#{index}", page['slug']
+          document.set_attribute "module-quiz-#{index}", page['quiz']
+          if page.has_key?('next') && (document_slug == page['slug'])
+            document.set_attr "module-next-slug", page['next']['slug'], false
+            document.set_attr "module-next-title", page['next']['title'], false
           end
         end
         document.set_attribute "module-name", module_descriptor['module_name']
