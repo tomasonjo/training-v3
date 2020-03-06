@@ -1,25 +1,9 @@
-
 = Using APOC for Import
 :doctype: book
 :toc: left
 :toclevels: 3
-:prevsecttitle: Using LOAD CSV for Import
-:currsect: 18
-:nextsecttitle: Using the neo4j-admin tool for Import
-:nextsect: 19
-:experimental:
+:module-next-title: Using the neo4j-admin tool for Import
 :imagesdir: ../images
-//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 

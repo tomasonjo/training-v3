@@ -59,7 +59,10 @@ subprojects {
       'twitter': 'neo4j',
       'email': 'info@neotechnology.com',
       'neo4j-version': '4.0',
-      'currentyear': '2020'
+      'currentyear': '2020',
+      'experimental': '',
+      'manual': 'http://neo4j.com/docs/developer-manual/current',
+      'manual-cypher': '{manual}/cypher'
   }
 
   revealjs {

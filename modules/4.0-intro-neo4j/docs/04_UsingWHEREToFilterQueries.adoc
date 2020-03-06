@@ -3,24 +3,8 @@
 :doctype: book
 :toc: left
 :toclevels: 3
-:prevsecttitle: Introduction to Cypher Queries
-:prevsect: 3
-:currsect: 4
-:nextsecttitle: Specifying More Patterns in Queries
-:nextsect: 5
-:experimental:
+:module-next-title: Specifying More Patterns in Queries
 :imagesdir: ../images
-//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 
