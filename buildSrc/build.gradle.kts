@@ -23,9 +23,9 @@ gradlePlugin {
       id = "com.neo4j.gradle.s3.S3Plugin"
       implementationClass = "com.neo4j.gradle.s3.S3Plugin"
     }
-    create("asciidoctorTableOfContents") {
-      id = "com.neo4j.gradle.asciidoctor.AsciidoctorTableOfContentsPlugin"
-      implementationClass = "com.neo4j.gradle.asciidoctor.AsciidoctorTableOfContentsPlugin"
+    create("asciidoctorModuleDescriptor") {
+      id = "com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin"
+      implementationClass = "com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin"
     }
     create("wordpress") {
       id = "com.neo4j.gradle.wordpress.WordPressPlugin"
