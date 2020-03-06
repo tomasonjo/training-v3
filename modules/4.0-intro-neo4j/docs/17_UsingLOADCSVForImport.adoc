@@ -2,23 +2,8 @@
 :doctype: book
 :toc: left
 :toclevels: 3
-:prevsecttitle: Overview of Importing Data into Neo4j
-:currsect: 17
-:nextsecttitle: Using Cypher and APOC for Import
-:nextsect: 18
-:experimental:
+:module-next-title: Using Cypher and APOC for Import
 :imagesdir: ../images
-//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 

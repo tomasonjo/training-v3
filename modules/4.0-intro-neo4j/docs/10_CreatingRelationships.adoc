@@ -1,26 +1,8 @@
-
 = Creating Relationships
 :doctype: book
 :toc: left
 :toclevels: 3
-:prevsecttitle: Creating Nodes
-:prevsect: 9
-:currsect: 10
-:nextsecttitle: Deleting Nodes and Relationships
-:nextsect: 11
-:experimental:
 :imagesdir: ../images
-//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 

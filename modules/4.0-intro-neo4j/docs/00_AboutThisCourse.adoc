@@ -1,27 +1,11 @@
 = Introduction to Neo4j 4.0
 :slug: introduction-to-neo4j-4-0
 :doctype: book
-:nextsecttitle: Neo4j is a Graph Database
-:nextsect: 1
-:currsect: 0
-:prevsecttitle:
-:prevsect: 0
 :toc: left
 :toclevels: 4
-:experimental:
 :imagesdir: ../images
-//:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/v4.0-intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
-
-//ifdef::backend-html5[]
-
-//include::scripts.txt[]
-
-//endif::backend-html5[]
 
 == About this course
-
 
 This course introduces you to graph databases and how to use Neo4j and Cypher to query and update a Neo4j database.
 
