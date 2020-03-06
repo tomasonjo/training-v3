@@ -55,7 +55,7 @@ endif::[]
 . Controlling the Query Chain
 . Controlling Results Returned
 . Creating Nodes
-
++
 ifdef::backend-revealjs[]
 == Day 2: Lessons
 endif::[]

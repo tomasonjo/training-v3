@@ -13,50 +13,68 @@ In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, cha
 == Exercise steps:
 
 . Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_.
++
+
     *Hint*: Type:  `/usr/bin/cypher-shell`.
-[start=2]
+
 . Enter a new password that you will remember for the Neo4j instance. Note that this is not the same password as the user, _neo4j_.
 . Exit out of `cypher-shell`.
 . Start a `cypher-shell` session providing the -u and -p arguments.
 . Use the system database to view all databases served by this Neo4j instance.
++
 
 image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
-[start=6]
+
 . Use the _neo4j_ database and enter this Cypher statement:
++
+
   `CREATE (:Person {name: '<your name'})'`
-[start=7]
+
 . Enter this Cypher statement to retrieve the node you just created:
++
+
 ----
 MATCH (p:Person) RETURN p;
 ----
-[start=8]
+
 . Enter this Cypher statement to delete the node you just created:
++
+
 ----
 MATCH (p:Person) DELETE p;
 ----
-[start=9]
+
 . Create the directory, _files_ in your home directory.
++
+
 ----
 cd
 mkdir files
 ----
-[start=10]
+
 . Make sure that the _files_ directory is owned by the user _neo4j_.
++
 
 image::OwnerNeo4jFiles.png[OwnerNeo4jFiles,width=1000,align=center]
-[start=11]
+
 . Download this file: https://data.neo4j.com/admin-neo4j/movies.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
++
+
 ----
 cd files
 curl -O https://data.neo4j.com/admin-neo4j/movies.cypher
 ----
-[start=12]
+
 . Invoke `cypher-shell` using *movies.cypher* as input.
++
+
 ----
 /usr/bin/cypher-shell -u neo4j -p <passwordYouCreatedForNeo4jInstance> < /home/ubuntu/files/movies.cypher
 ----
-[start=13]
+
 . Start `cypher-shell` and execute these statements to confirm that the data was loaded into the user database:
++
+
 ----
 CALL db.schema.visualization();
 MATCH (p:Person) WHERE p.name = 'Tom Hanks' RETURN p;
@@ -66,7 +84,6 @@ You should see something like this:
 
 image::ConfirmMovieData.png[ConfirmMovieData,width=1000,align=center]
 
-[start=14]
 . Exit `cypher-shell`.
 
 == Exercise summary

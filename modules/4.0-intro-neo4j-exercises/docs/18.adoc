@@ -23,12 +23,12 @@ Go to the next page to start this exercise.
 == Exercise 18.1: Place the CSV files in the *import* folder (Instructions/Solution)
 
 . You must have downloaded the following ZIP file containing the CSV files:
++
 
 http://data.neo4j.com/v4.0-intro-neo4j/crimes-dataset.zip
 
 *Hint*: use `curl -O` or `wget`, or simply use the Web browser to download.
 
-[start=2]
 . In Neo4j Desktop for the project's database you are using, select *Manage > Open Folder*.
 . Unzip the contents of the *crimes-dataset.zip* to the *import* folder. The *import* folder should contain six CSV files.
 

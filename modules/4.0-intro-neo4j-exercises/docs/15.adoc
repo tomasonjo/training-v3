@@ -123,7 +123,7 @@ image::{imagedir}/UsingOneParameter.png[UsingOneParameter,width=800]
 
 
 . *Modify the _year_ parameter to be a different value, _2006_.*
-
++
 
 [source, cypher]
 ----
@@ -133,7 +133,6 @@ image::{imagedir}/UsingOneParameter.png[UsingOneParameter,width=800]
 [.thumb]
 image::{imagedir}/UsingOneParameter2.png[UsingOneParameter2,width=800]
 
-[start=2]
 . *Retest your query.*
 
 [source, cypher]

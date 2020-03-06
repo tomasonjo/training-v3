@@ -63,7 +63,7 @@ image::{imagedir}/groovyInstalled.png[groovyInstalled,width=500]
 == Exercise 19.3: Modify the groovy file to use the Neo4j RDBMS credentials (Instructions/Solution)
 
 . Here is the *import.groovy* file that you should place somewhere on your system:
-
++
 [source]
 ----
 @GrabConfig( systemClassLoader=true )
@@ -108,7 +108,6 @@ neo4j.session(SessionConfig.builder().withDatabase("products").build()).withClos
 
 ++++
 
-[start=2]
 . Modify the NEO4J value to match the credentials you use to connect to the Neo4j database.
 
 == Exercise 19.4: Run the application to load the data (Instructions/Solution)

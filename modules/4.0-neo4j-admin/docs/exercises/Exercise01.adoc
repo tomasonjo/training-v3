@@ -18,20 +18,21 @@ Follow the steps below, depending on your OS.
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Change permissions on the private key file as follows:
++
 
 ----
 chmod 400 neo4j-training.pem
 ----
 
-[start=3]
 . Open a terminal window on your system.
 . Enter the following in the terminal window:
++
 
 ----
 ssh -i neo4j-training.pem ubuntu@<IP address>
 yes
 ----
-[start=5]
+
 . You should now be logged in to the EC2 instance.
 . Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.
 
@@ -44,11 +45,11 @@ image::OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Download https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[PuTTY].
 . Install PuTTY by running the install executable using these guidelines:
++
     Use defaults everywhere but change it so that it creates a desktop shortcut.
 
 image::PuTTYInstallOptions.png[PuTTYInstallOptions,width=500,align=center]
 
-[start=4]
 . Open PuTTY.
 .. In *Category* panel, select *SSH*.
 .. Enter the location where you downloaded the private key.
@@ -66,15 +67,15 @@ image::PuTTYSavedSession.png[PuTTYSavedSession,width=500,align=center]
 
 [start=6]
 . Connect to the EC2 instance by clicking *Open*.
++
 
 image::OpenEC2FromPuTTY.png[OpenEC2FromPuTTY,width=400,align=center]
 
-[start=7]
 . You should now have a terminal window for the EC2 instance. Enter *ubuntu* to log in.
++
 
 image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
-[start=8]
 . Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.
 
 *Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].

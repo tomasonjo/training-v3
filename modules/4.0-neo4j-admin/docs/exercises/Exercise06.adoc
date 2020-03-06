@@ -17,24 +17,26 @@ In this Exercise, you will set up a different location for the databases in your
 . Create a directory named *~/neo4j-databases*. This is the directory where the databases will reside which is different from the default location used by Neo4j.
 . Make sure that this *neo4j-databases* directory is owned by _neo4j:neo4j_.
 . Modify the *neo4j.conf* file to use */home/ubuntu/neo4j-databases* as the data directory. Also ensure that there the default database is _maindb_. Your *neo4j.conf* file should look something like this:
++
 
 image::BestPracticeConfigChangesAtEnd.png[BestPracticeConfigChangesAtEnd,width=900,align=center]
 
-[start=5]
 . Start the Neo4j instance.
 . Examine the log file to ensure that the instance started without errors.
 . Examine the files in the */home/ubuntu/neo4j-databases* location. The instance should have created the *databases* and *transactions* directories. The *databases* directory should look as follows:
++
 
 image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=center]
 
-[start=8]
 . Connect to the _maindb_ database using `cypher-shell`. Did you need to change the password?
 . Exit `cypher-shell`.
 . Use the `load` command of the `neo4j-admin` tool to create the database, _movies_ from the dump file as follows:
++
+
 ----
 /usr/bin/neo4j-admin load --database=movies --from=/home/ubuntu/files/movies.dump
 ----
-[start=11]
+
 . In `cypher-shell' create _movies_.
 . Confirm that this _movies_ database has 171 nodes.
 

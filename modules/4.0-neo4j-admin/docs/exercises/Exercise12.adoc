@@ -14,24 +14,25 @@ In this exercise you will create a database from a set of CSV files using the im
 == Exercise steps:
 
 . Downloaded the ZIP file containing the CSV files to the *files* directory:
++
 
 ----
 cd /home/ubuntu/files
 curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 ----
 
-[start=2]
 . Unzip the contents of the *crimes-dataset.zip*.
++
 
 ----
 /usr/bin/unzip crimes-dataset.zip
 ----
 
-[start=3]
 . The crimes-dataset directory should contain six CSV files. Move these six files to */var/lib/neo4j/import* folder for the Neo4j instance.
 . Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
 . Change directory to the *import* directory.
 . Use the `neo4j-admin` tool to import the CSV files using these guidelines:*
++
 
 ----
              --database crimes
@@ -53,23 +54,19 @@ This is what you should enter (ensure there are no newline characters):
 
 This is what you should see in the terminal window if all goes well:
 
-[.thumb]
 image::ImportCrimes1.png[ImportCrimes1,width=500]
 
-[start=7]
 . Examine the contents of *import.out*. Did it execute without error?
++
 
 Here is what the beginning of *import.out* file should look like:
 
-[.thumb]
 image::importout1.png[importout1,width=400]
 
 Here is what the end of *import.out* file should look like:
 
-[.thumb]
 image::importout2.png[importout2,width=400]
 
-[start=8]
 . In `cypher-shell` create the crimes database.
 . Enter the following Cypher statements to view the schema of the database and return the number of nodes:
 
@@ -81,7 +78,6 @@ MATCH (n) RETURN count(n);
 
 The database information should now look as follows:
 
-[.thumb]
 image::Afteradmin-toolImport.png[Afteradmin-toolImport,width=600]
 
 == Exercise summary

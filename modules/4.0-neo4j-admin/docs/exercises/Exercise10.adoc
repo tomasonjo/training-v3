@@ -14,20 +14,24 @@ Then you will modify the configuration to use a different port for HTTP connecti
 == Exercise steps:
 
 . Determine the public IP address for your EC2 instance for this course.
++
+
 ----
 curl ifconfig.me
 ----
 
-[start=2]
 . On your local system, open a Web browser and go to  <address returned by ifconfig.me>:7474. You should not be able to access the Neo4j instance. This is because you have not opened up the server for external access.
 . Change the configuration to allow external connections to the default HTTP port 7474.
++
+
 ----
 dbms.connectors.default_listen_address=0.0.0.0
 ----
-[start=4]
+
 . Restart the Neo4j instance.
 . Try accessing <address returned by ifconfig.me>:7474. Is it attempting to connect?
 . Enter the credentials for your Neo4j instance. You should now be connected.
++
 
 image::ExternalConnect7474.png[ExternalConnect7474,width=1200,align=center]
 
@@ -35,6 +39,7 @@ image::ExternalConnect7474.png[ExternalConnect7474,width=1200,align=center]
 . Restart the Neo4j instance.
 . Can you access the Neo4j instance using port 9999 as you did previously from an external system using a Web browser? You should not be able to. This is not a Neo4j configuration issue, but rather an EC2 instance limitation where the EC2 instance has only allowed access to port 7474 from other systems.
 . Enter this in a EC2 terminal window to confirm that you can access using the HTTP API the Neo4j instance using the 9999 port number:
++
 
 ----
 curl -v -H "Content-Type: application/json" -d '{ "statements" : [ { "statement"  : "CALL db.schema.visualization()" }]}' http://localhost:9999/db/data/transaction/commit -u neo4j
@@ -45,7 +50,6 @@ You should see something like the following:
 
 image::UsePort9999.png[UsePort9999,width=1200,align=center]
 
-[start=11]
 . Change the configuration back to using the default HTTP port of 7474.
 . Restart the Neo4j instance.
 

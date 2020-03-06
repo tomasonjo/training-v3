@@ -18,10 +18,12 @@ In this exercise, you will use `neo4j-admin` to copy a database and create a dat
 . In `cypher-shell` create a database named _movies_.
 . Exit out of `cypher-shell`.
 . Invoke `cypher-shell` using *movies.cypher* as input and specify _movies_ as the database.
++
+
 ----
 /usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movies.cypher
 ----
-[start=4]
+
 . In `cypher-shell` confirm that the database was loaded. It should contain 171 nodes:
 ----
 MATCH (n) RETURN count(n);
@@ -32,10 +34,11 @@ MATCH (n) RETURN count(n);
 . In `cypher-shell` stop the _movies_ database.
 . Exit `cypher-shell`.
 . Copy the _movies_ database to the _movies2_ database using the neo4j-admin tool:
++
 ----
 /usr/bin/neo4j-admin copy --from-database=movies --to-database=movies2
 ----
-[start=4]
+
 . In `cypher-shell' create _movies2_.
 . Confirm that this _movies2_ database has 171 nodes.
 ----
@@ -45,19 +48,23 @@ MATCH (n) RETURN count(n);
 *Part 3*: You will dump the _movies_ database.
 
 . Use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
++
+
 ----
 /usr/bin/neo4j-admin dump --database=movies --to=/home/ubuntu/files/movies.dump
 ----
-[start=2]
+
 . Confirm that the *movies.dump* file was created.
 
 *Part 4*: You use the dump file to create a database.
 
 . Use the `load` command of the `neo4j-admin` tool to create the database, _movies3_ from the dump file as follows:
++
+
 ----
 /usr/bin/neo4j-admin load --database=movies3 --from=/home/ubuntu/files/movies.dump
 ----
-[start=2]
+
 . In `cypher-shell' create _movies3_.
 . Confirm that this _movies3_ database has 171 nodes.
 

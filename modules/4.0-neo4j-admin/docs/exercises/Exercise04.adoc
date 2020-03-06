@@ -15,21 +15,25 @@ In this exercise you will gain some experience with creating and deleting a data
 
 . Connect to the Neo4j instance with `cypher-shell`.
 . Enter the command to show all databases.
++
     *Hint*: You must use the system database.
 
 image::ShowDatabasesEx.png[ShowDatabasesEx,width=1000,align=center]
-[start=3]
+
 . Enter the command to create a database named _databaseone_.
 . Enter the command to show all databases.
++
 
 image::AddDatabaseOne.png[AddDatabaseOne,width=1000,align=center]
-[start=5]
+
 . Exit `cypher-shell`.
 . View the directories where the databases are located for this instance.
++
 
 image::AddDatabaseOneFiles.png[AddDatabaseOneFiles,width=1000,align=center]
-[start=7]
+
 . Modify the *neo4j.conf* file to use _databaseone_ as the default database.
++
 
 *Hint*: In the terminal window:
 ----
@@ -41,19 +45,22 @@ Press ESC to get out of input mode.
 Type ":w" to write the changes to the file.
 Type ":q"
 ----
-[start=8]
+
 . Restart the Neo4j instance. Any change to the Neo4j configuration file requires a restart of the Neo4j instance.
++
+
 ----
 sudo systemctl restart neo4j
 ----
-[start=9]
+
 . Connect to the Neo4j instance with `cypher-shell`.
 . Enter the command to show all databases.
 . Drop the database _neo4j_.
 . Enter the command to show all databases.
++
 
 image::RemovedNeo4j.png[RemovedNeo4j,width=1000,align=center]
-[start=13]
+
 . Exit `cypher-shell`.
 
 == Taking it further

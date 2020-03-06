@@ -15,37 +15,35 @@ In this Exercise, you will install the APOC library for use by your Neo4j instan
 . In a Web browser, go to the GitHub repository for the https://github.com/neo4j-contrib/neo4j-apoc-procedures[APOC library].
 . Find the latest release of the library that is compatible with Neo4j Enterprise Edition 4.0.
 . Download the already-built *.jar* file into the */var/lib/neo4j/plugins* directory.
++
 
 ----
 cd /var/lib/neo4j/plugins
 curl -L <URL for the jar file> > <name of the jar file>
 ----
 
-[start=4]
 . Add execute permissions to the file.
++
 
 ----
 sudo chmod +x <name of the jar file>
 ----
 
-[start=5]
 . Modify */etc/neo4j/neo4j.conf* to allow (sandbox) all procedures of the APOC library.
++
 
 ----
 dbms.security.procedures.unrestricted=apoc.*
 ----
 
-[start=6]
 . Start or restart the Neo4j instance.
-
-[start=7]
 . Using `cypher-shell` write a command to create the procedures.txt file that contains all of the procedures that are loaded for the Neo4j instance.
++
 
 ----
 echo "CALL dbms.procedures() YIELD name;" | /usr/bin/cypher-shell -u neo4j -p <InstancePassword> --format plain > /home/ubuntu/report/procedures.txt
 ----
 
-[start=8]
 . Confirm that APOC procedures are loaded by examining the file produced.
 
 == Exercise summary

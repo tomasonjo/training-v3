@@ -20,24 +20,24 @@ In this Exercise, you check the consistency of a database that is consistent. Th
 . With `sudo`, create the directory */home/ubuntu/reports*.
 . Change ownership of the reports directory to _neo4j_:  `sudo chown neo4j:neo4j /home/ubuntu/reports`
 . Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written. The consistency check tool should return the following:
++
 
 image::ConsistentPassed.png[ConsistentPassed,width=1000,align=center]
 
-[start=6]
 . Use `cypher-shell` to load the *movies.dump* data into a database named _movies3_.
 . Use `cypher-shell` to create the _movies3_ database.
 . Confirm that this database has 171 nodes.
 . Stop the _movies3_ database.
 . Next, you will "maliciously" corrupt the database. Modify the file *databases/movies3/neostore.nodestore.db* by adding some text to the file.
++
 
 image::CorruptMovies3.png[CorruptMovies3,width=1000,align=center]
 
-[start=11]
 . Run the consistency check tool on *movies3* using `neo4j-admin` specifying */home/ubuntu/reports* as the directory where the report will be written. The consistency check tool should return something like the following:
++
 
 image::Inconsistencies.png[Inconsistencies,width=1000,align=center]
 
-[start=12]
 . Use `cypher-shell` to drop the _movies3_ database.
 
 == Exercise summary

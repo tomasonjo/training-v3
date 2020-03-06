@@ -298,29 +298,27 @@ Here are the steps to create a new database, _Movies_:
 --
 
 . In Neo4j Browser, select the system database.
++
 
 ifndef::backend-revealjs[]
 
 image::CreateMoviesDB1.png[CreateMoviesDB1,width=900,align=center]
 endif::[]
 
-[start=2]
 . Create the new movies database in the query edit pane with `CREATE DATABASE Movies`
-
++
 ifndef::backend-revealjs[]
 
 image::CreateMoviesDB2.png[CreateMoviesDB2,width=900,align=center]
 endif::[]
 
-[start=3]
 . Enter the browser command `:dbs` in the query edit pane to see the list of existing databases.
-
++
 ifndef::backend-revealjs[]
 
 image::CreateMoviesDB3.png[CreateMoviesDB3,width=900,align=center]
 endif::[]
 
-[start=4]
 . Enter the browser command `:use movies` to switch to this newly created, empty database.
 
 ifndef::backend-revealjs[]

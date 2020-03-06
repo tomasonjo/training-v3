@@ -19,13 +19,13 @@ In your real application, if you were to back up a production stand-alone Neo4j 
 
 . Modify the Neo4j configuration so that online backup is enabled and will be done on this same host.
 For example, your *neo4j.conf* properties should look something like this:
++
 
 ----
 dbms.backup.enabled=true
 dbms.backup.address=localhost:6362
 ----
 
-[start=2]
 . Restart the Neo4j instance.
 . Create a directory named */home/ubuntu/backups* and ensure that it is owned by _neo4j:neo4j_.
 . In `cypher-shell`, confirm that all database are started. There should be four databases:
@@ -34,13 +34,13 @@ dbms.backup.address=localhost:6362
 .. movies
 .. movies2
 . Confirm that the movies database has 171 nodes:
++
 
 ----
 :USE movies
 MATCH (n) RETURN count(n);
 ----
 
-[start=6]
 . Perform an online backup of the _system_ database using these guidelines:
 .. Perform a consistency check.
 .. Use the *backups* directory for the location of the backup.
@@ -57,34 +57,35 @@ image::BackupSystem.png[BackupSystem,width=1000,align=center]
 .. movies2
 . In `cypher-shell` drop the _movies_ database.
 . Use the restore tool to restore the _movies_ database.
++
 
 You should see something like this:
 
 image::RestoreMovies.png[RestoreMovies,width=1000,align=center]
 
-[start=10]
 . In `cypher-shell` create the _movies_ database that was just restored.
 . Confirm that the _movies_ database has 171 nodes.
++
 
 ----
 MATCH (n) RETURN count(n);
 ----
 
-[start=12]
 . Exit `cypher-shell`.
 . Invoke `cypher-shell` to add nodes to the _movies_ database using the *movies.cypher* file.
++
 
 ----
 /usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movies.cypher
 ----
 
-[start=14]
 . In `cypher-shell` confirm that the database contains 342 nodes:
++
+
 ----
 MATCH (n) RETURN count(n);
 ----
 
-[start=15]
 . Perform an online backup using these guidelines:
 .. Back up the _movies_ database.
 .. Verbose.
@@ -97,18 +98,19 @@ image::BackupMovies.png[BackupMovies,width=1000,align=center]
 
 [start=16]
 . Invoke `cypher-shell` to add more nodes to the _movies_ database using the *movies.cypher* file.
++
 
 ----
 /usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movies.cypher
 ----
 
-[start=17]
 . In `cypher-shell` confirm that the database contains 513 nodes:
++
+
 ----
 MATCH (n) RETURN count(n);
 ----
 
-[start=18]
 . Next, you will restore the _movies_ database to the one that has 342 nodes. Stop the _movies_ database.
 . Restore the _movies_ using these guidelines:
 .. Use the same _backups_ location.
