@@ -1,5 +1,5 @@
 = Using Query Best Practices
-:slug: using-query-best-practices
+:slug: 15-using-query-best-practices
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,6 +1,6 @@
 
 = Scripting to Manage Databases
-:slug: scripting-manage-databases
+:slug: 08-scripting-manage-databases
 :doctype: book
 :toc: left
 :toclevels: 4

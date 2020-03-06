@@ -1,5 +1,5 @@
 = Working with Cypher Data
-:slug: working-with-cypher-data
+:slug: 06-working-with-cypher-data
 :doctype: book
 :toc: left
 :toclevels: 4

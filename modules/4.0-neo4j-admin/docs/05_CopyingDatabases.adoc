@@ -1,6 +1,6 @@
 
 = Copying Databases
-:slug: copying-databases
+:slug: 05-copying-databases
 :doctype: book
 :toc: left
 :toclevels: 4

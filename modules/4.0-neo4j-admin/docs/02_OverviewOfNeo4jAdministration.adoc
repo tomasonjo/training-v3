@@ -1,6 +1,6 @@
 
 = Overview of Neo4j Administration
-:slug: overview-neo4j-admin
+:slug: 02-overview-neo4j-admin
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,6 +1,6 @@
 
 = Managing Backups
-:slug: managing-backups
+:slug: 11-managing-backups
 :doctype: book
 :toc: left
 :toclevels: 4

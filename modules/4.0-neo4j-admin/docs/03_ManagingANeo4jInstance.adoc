@@ -1,6 +1,6 @@
 
 = Managing a Neo4j Instance
-:slug: managing-neo4j-instance
+:slug: 03-managing-neo4j-instance
 :doctype: book
 :toc: left
 :toclevels: 4

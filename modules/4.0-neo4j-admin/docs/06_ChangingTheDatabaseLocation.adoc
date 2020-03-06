@@ -1,5 +1,5 @@
 = Changing the Database Location
-:slug: changing-database-location
+:slug: 06-hanging-database-location
 :doctype: book
 :toc: left
 :toclevels: 4

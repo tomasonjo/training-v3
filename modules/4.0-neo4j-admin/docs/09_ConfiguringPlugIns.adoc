@@ -1,6 +1,6 @@
 
 = Configuring Plugins
-:slug: configuring-plugins
+:slug: 09-configuring-plugins
 :doctype: book
 :toc: left
 :toclevels: 4

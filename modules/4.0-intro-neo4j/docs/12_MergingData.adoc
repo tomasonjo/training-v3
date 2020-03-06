@@ -1,5 +1,5 @@
 = Merging Data
-:slug: merging-data
+:slug: 12-merging-data
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,5 +1,5 @@
 = Using Indexes
-:slug: using-indexes
+:slug: 14-using-indexes
 :doctype: book
 :toc: left
 :toclevels: 4

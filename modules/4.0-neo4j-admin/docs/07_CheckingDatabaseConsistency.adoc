@@ -1,6 +1,6 @@
 
 = Checking Database Consistency
-:slug: checking-database-consistency
+:slug: 07-checking-database-consistency
 :doctype: book
 :toc: left
 :toclevels: 4

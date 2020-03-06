@@ -1,5 +1,5 @@
 = Creating Nodes
-:slug: creating-nodes
+:slug: 09-creating-nodes
 :doctype: book
 :toc: left
 :toclevels: 4

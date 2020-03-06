@@ -1,5 +1,5 @@
 = Controlling the Query Chain
-:slug: controlling-query-chain
+:slug: 07-controlling-query-chain
 :doctype: book
 :toc: left
 :toclevels: 4

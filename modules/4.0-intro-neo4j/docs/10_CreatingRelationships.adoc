@@ -1,5 +1,5 @@
 = Creating Relationships
-slug: creating-relationships
+slug: 10-creating-relationships
 :doctype: book
 :toc: left
 :toclevels: 4

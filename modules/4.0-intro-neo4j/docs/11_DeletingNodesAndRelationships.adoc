@@ -1,5 +1,5 @@
 = Deleting Nodes and Relationships
-:slug: deleting-nodes-and-relationships
+:slug: 11-deleting-nodes-and-relationships
 :doctype: book
 :toc: left
 :toclevels: 4

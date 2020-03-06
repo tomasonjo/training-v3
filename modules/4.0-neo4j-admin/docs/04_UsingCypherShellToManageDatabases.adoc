@@ -1,6 +1,6 @@
 
 = Using cypher-shell to Manage Databases
-:slug: using-cypher-shell-manage-databases
+:slug: 04-using-cypher-shell-manage-databases
 :doctype: book
 :toc: left
 :toclevels: 4

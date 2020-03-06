@@ -1,5 +1,5 @@
 = Using LOAD CSV for Import
-:slug: using-load-csv-import
+:slug: 17-using-load-csv-import
 :doctype: book
 :toc: left
 :toclevels: 4

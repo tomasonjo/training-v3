@@ -1,5 +1,5 @@
 = Controlling Results Returned
-:slug: controlling-results-returned
+:slug: 08-controlling-results-returned
 :doctype: book
 :toc: left
 :toclevels: 4
