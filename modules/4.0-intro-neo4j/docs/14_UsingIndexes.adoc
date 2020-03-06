@@ -1,8 +1,10 @@
 = Using Indexes
+:slug: using-indexes
 :doctype: book
 :toc: left
-:toclevels: 3
+:toclevels: 4
 :imagesdir: ../images
+:module-next-title: Using Query Best Practices
 
 == About this module
 

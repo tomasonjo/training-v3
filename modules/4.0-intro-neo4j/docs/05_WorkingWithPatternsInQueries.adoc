@@ -2,8 +2,8 @@
 :slug: working-with-patterns-in-queries
 :doctype: book
 :toc: left
-:toclevels: 3
-:module-next-title: Aggregation
+:toclevels: 4
+:module-next-title: Working with Cypher Data
 :imagesdir: ../images
 
 == About this module

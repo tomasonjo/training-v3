@@ -1,16 +1,11 @@
 
 = Using cypher-shell to Manage Databases
+:slug: using-cypher-shell-manage-databases
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Managing a Neo4j Instance
-:prevsect: 3
-:currsect: 4
-:nextsecttitle: Copying Databases
-:nextsect: 5
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Copying Databases
 
 ////
 ifdef::backend-html5[]

@@ -1,16 +1,11 @@
 
 = Managing a Neo4j Instance
+:slug: managing-neo4j-instance
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Overview of Neo4j Administration
-:prevsect: 2
-:currsect: 3
-:nextsecttitle: Using cypher-shell to Manage Databases
-:nextsect: 4
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Using cypher-shell to Manage Databases
 
 ////
 ifdef::backend-html5[]

@@ -1,16 +1,11 @@
 
 = Managing HTTP Ports
+:slug: managing-http-ports
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Configuring Plugins
-:prevsect: 9
-:currsect: 10
-:nextsecttitle: Managing Backups
-:nextsect: 11
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Managing Backups
 
 ////
 ifdef::backend-html5[]

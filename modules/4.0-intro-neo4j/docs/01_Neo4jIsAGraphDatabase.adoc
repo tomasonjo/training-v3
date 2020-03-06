@@ -4,7 +4,8 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:revealjs_totaltime: 1800
+//:revealjs_totaltime: 1800
+:module-next-title: The Neo4j Graph Platform
 
 == About this module
 

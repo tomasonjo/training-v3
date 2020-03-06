@@ -1,16 +1,11 @@
 
 = Managing Backups
+:slug: managing-backups
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Managing HTTP Ports
-:prevsect: 10
-:currsect: 11
-:nextsecttitle: Importing Data
-:nextsect: 12
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Importing Data
 
 ////
 ifdef::backend-html5[]

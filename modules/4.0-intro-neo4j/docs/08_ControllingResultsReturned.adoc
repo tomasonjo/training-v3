@@ -1,8 +1,10 @@
 = Controlling Results Returned
+:slug: controlling-results-returned
 :doctype: book
 :toc: left
-:toclevels: 3
+:toclevels: 4
 :imagesdir: ../images
+:module-next-title: Creating Nodes
 
 == About this module
 

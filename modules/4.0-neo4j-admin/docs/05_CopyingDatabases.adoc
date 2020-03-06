@@ -1,16 +1,11 @@
 
 = Copying Databases
+:slug: copying-databases
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Using cypher-shell to Manage Databases
-:prevsect: 4
-:currsect: 5
-:nextsecttitle: Changing the Database Location
-:nextsect: 6
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Changing the Database Location
 
 ////
 ifdef::backend-html5[]

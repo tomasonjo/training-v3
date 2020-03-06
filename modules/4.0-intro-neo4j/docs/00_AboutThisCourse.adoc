@@ -1,9 +1,10 @@
 = Introduction to Neo4j 4.0
-:slug: introduction-to-neo4j-4-0
+:slug: intro-neo4j-about
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
+:module-next-title: Neo4j is a Graph Database
 
 == About this course
 

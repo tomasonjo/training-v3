@@ -1,15 +1,11 @@
 = Introduction to Neo4j
+:slug: admin-4-0-intro-neo4j
 :doctype: book
-:nextsecttitle: Neo4j Administration Overview
-:nextsect: 2
-:currsect: 1
-:prevsecttitle: About this Course
-:prevsect: 0
 :toc: left
 :toclevels: 4
-:experimental:
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Overview of Neo4j Administration
+
 
 //ifdef::backend-html5[]
 

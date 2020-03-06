@@ -1,16 +1,11 @@
 
 = Scripting to Manage Databases
+:slug: scripting-manage-databases
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Changing the Database Location
-:prevsect: 7
-:currsect: 8
-:nextsecttitle: Configuring Plugins
-:nextsect: 8
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:manual: http://neo4j.com/docs/operations-manual/4.0
+:module-next-title: Configuring Plugins
 
 ////
 ifdef::backend-html5[]
