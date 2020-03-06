@@ -51,20 +51,21 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
       throw GradleException("moduleName is mandatory to build the module descriptor, aborting...")
     }
     val asciidoctor = Asciidoctor.Factory.create()
-    val navItems = sources.asSequence().map { it.sorted() }.flatten().sorted().mapNotNull { file ->
+    val pages = sources.asSequence().map { it.sorted() }.flatten().sorted().mapNotNull { file ->
       val document = asciidoctor.loadFile(file, emptyMap())
       val url = "${file.name.removeSuffix(".adoc")}.html"
       val title = document.doctitle
       val slug = document.getAttribute("slug", "") as String
+      val hasQuiz = document.findBy(mapOf("context" to ":section", "role" to "quiz")).isNotEmpty()
       if (slug.isNotBlank()) {
-        mapOf("title" to title, "url" to url, "slug" to slug)
+        mapOf("title" to title, "url" to url, "slug" to slug, "quiz" to hasQuiz.toString())
       } else {
         null
       }
     }.toList()
-    val linkedNavItems = navItems.mapIndexed { index: Int, item: Map<String, String> ->
-      if (index + 1 < navItems.size) {
-        val nextItem = navItems[index + 1]
+    val pagesInfo = pages.mapIndexed { index: Int, item: Map<String, String> ->
+      if (index + 1 < pages.size) {
+        val nextItem = pages[index + 1]
         val nextConfig = mapOf<String, Any>(
           "next" to mapOf(
             "slug" to nextItem["slug"],
@@ -83,7 +84,7 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
     val outputFile = File(outputDir, "asciidoctor-module-descriptor.yml")
     outputFile.writeText(yaml.dump(mapOf(
       "module_name" to moduleName,
-      "nav" to linkedNavItems
+      "pages" to pagesInfo
     )))
   }
 

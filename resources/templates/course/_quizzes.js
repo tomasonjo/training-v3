@@ -1,18 +1,9 @@
 /* global $, Cookies */
 document.addEventListener('DOMContentLoaded', function () {
-  var trainingName = window.trainingClassName
-  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
-
-  // for testing purpose!
-  var currentQuizStatus = {
-    failed: ['neo4j-graph-platform'],
-    passed: ['neo4j-graph-database'],
-    untried: [
-      'introduction-to-cypher',
-      'using-where-to-filter-queries',
-      'working-with-patterns-in-queries',
-      'working-with-cypher-data'
-    ]
+  function arrayDiff(a, b) {
+    return a.filter(function (i) {
+      return b.indexOf(i) < 0
+    })
   }
 
   function getQuizStatus() {
@@ -36,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
       'passed': passed,
       'failed': failed
     }
-    console.log('data', data)
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/setQuizStatus',
@@ -73,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function gradeQuiz(quizElement, slug) {
-    if (currentQuizStatus && currentQuizStatus.passed && currentQuizStatus.passed[slug]) {
+    if (currentQuizStatus && currentQuizStatus.passed && currentQuizStatus.passed.indexOf(slug) !== -1) {
       // already passed!
       return true
     }
@@ -99,24 +89,38 @@ document.addEventListener('DOMContentLoaded', function () {
     return quizSuccess
   }
 
-  setQuizStatus(['neo4j-graph-database'], ['neo4j-graph-platform'])
-    .then(function (response) {
-      console.log('setQuizStatus - response', response)
-    })
+  // initial state
+  var trainingName = window.trainingClassName
+  var trainingModules = window.trainingClassModules
+  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
+  var currentQuizStatus = {
+    failed: [],
+    passed: [],
+    untried: trainingModules
+  }
+  updateProgressIndicators(currentQuizStatus)
 
+  // get the current quiz status from the server
   getQuizStatus()
     .then(function (response) {
-      console.log('getQuizStatus - response', response)
-      var quizesStatusL = {}
-      var failed = response['quizStatus']['failed']
-      var passed = response['quizStatus']['passed']
-      var untried = response['quizStatus']['untried']
+      var quizStatus = response['quizStatus']
+      if (quizStatus) {
+        var failed = quizStatus['failed']
+        var passed = quizStatus['passed']
+        var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
+        currentQuizStatus = {
+          failed: failed,
+          passed: passed,
+          untried: untried
+        }
+        updateProgressIndicators(currentQuizStatus)
+      } else {
+        console.warn('Unable to update the current quiz status, response from the server is empty', response)
+      }
     })
     .catch(function (error) {
       console.error('Unable to get quiz status', error)
     })
-
-  updateProgressIndicators(currentQuizStatus)
 
   $('[data-type="grade-quiz"]').click(function (event) {
     event.preventDefault()
