@@ -2,7 +2,7 @@
 :slug: neo4j-graph-platform
 :doctype: book
 :toc: left
-:toclevels: 4
+:toclevels: 3
 :imagesdir: ../images
 :module-next-title: Introduction to Cypher Queries
 
@@ -13,7 +13,6 @@ The Neo4j Graph Platform enables developers to create applications that are best
 At the end of this module, you should be able to:
 [square]
 * Describe the components and benefits of the Neo4j Graph Platform.
-
 
 == Neo4j Graph Platform
 
@@ -139,7 +138,6 @@ Every single time you want to visit Anne’s house, you need to follow these sam
 With index-free adjacency, when a node or relationship is written to the database, it is stored in the database as connected and any subsequent access to the data is done using pointer navigation which is [.underline]#very fast#.
 Since Neo4j is a native graph database (i.e. it has a graph as its core data model), it supports very large graphs where connected data can be traversed in constant time without the need for an index.
 
-
 === Neo4j DBMS: ACID (Atomic, Consistent, Isolated, Durable)
 
 image::ACID.png[ACID,width=800,align=center]
@@ -185,21 +183,17 @@ To use Neo4j Aura, you must pay a monthly subscription fee which is based upon t
 
 Once you create a Neo4j Database at the https://console.neo4j.io[Neo4j Aura site], it will be managed by Neo4j.
 
-ifdef::backend-html5[]
+ifdef::backend-html5,backend-pdf[]
 Here is a short video that shows how to create a database in Neo4j Aura:
-++++
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lnoxoAsWguM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-++++
+endif::[]
 
-endif::backend-html5[]
+ifdef::backend-html5[]
+video::lnoxoAsWguM[youtube,width=560,height=315]
+endif::[]
 
 ifdef::backend-pdf[]
-
-Here is a short video that shows how to create a database in Neo4j Aura:
-
 https://youtu.be/lnoxoAsWguM
-
-endif::backend-pdf[]
+endif::[]
 
 == Neo4j Sandbox
 
@@ -220,23 +214,17 @@ The Sandbox is intended as a temporary environment or for learning about the fea
 [.statement]
 You create a Sandbox by creating an account at the https://sandbox.neo4j.com[Neo4j Sandbox site].
 
-ifdef::backend-html5[]
-
+ifdef::backend-html5,backend-pdf[]
 Here is a video that shows how to create a Neo4j Sandbox account and a Neo4j Sandbox instance:
+endif::[]
 
-++++
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OSk1ePl2PUM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<br>
-++++
-
-endif::backend-html5[]
+ifdef::backend-html5[]
+video::OSk1ePl2PUM[youtube,width=560,height=315]
+endif::[]
 
 ifdef::backend-pdf[]
-
-Here is a video that shows how to create a Neo4j Sandbox account and a Neo4j Sandbox instance:
-
 https://youtu.be/OSk1ePl2PUM
-endif::backend-pdf[]
+endif::[]
 
 == Neo4j Desktop
 
@@ -255,39 +243,32 @@ image::Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
 [.statement]
 The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
 
-ifdef::backend-html5[]
+
+ifdef::backend-html5,backend-pdf[]
 These videos show how to install and get started using Neo4j Desktop.
+endif::[]
 
-If using OS X:
+ifdef::backend-html5[]
+.If using OS X
+[%collapsible%open]
+====
+video::pPhJi9twN9Q[youtube,width=560,height=315]
+====
 
-++++
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pPhJi9twN9Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-++++
+.If using Linux
+[%collapsible]
+====
+video::qyu1IHiJh-c[youtube,width=560,height=315]
+====
 
-{nbsp} +
-
-If using Linux:
-
-++++
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qyu1IHiJh-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-++++
-
-{nbsp} +
-If using Windows:
-
-++++
-<iframe width="560" height="315" src="https://www.youtube.com/embed/V8rxwhoxfDw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-++++
-{nbsp} +
-
-*Note*: Before you install on Windows, make sure you have the latest version of PowerShell installed.
-
-endif::backend-html5[]
+.If using Windows
+[%collapsible]
+====
+video::V8rxwhoxfDw[youtube,width=560,height=315]
+====
+endif::[]
 
 ifdef::backend-pdf[]
-
-These videos show how to install and get started using Neo4j Desktop.
-
 If using OS X:
 
 https://youtu.be/pPhJi9twN9Q
@@ -299,11 +280,12 @@ https://youtu.be/qyu1IHiJh-c
 If using Windows:
 
 https://youtu.be/V8rxwhoxfDw
+endif::[]
 
-*Note*: Before you install on Windows, make sure you have the latest version of PowerShell installed.
-
-endif::backend-pdf[]
-
+ifdef::backend-html5,backend-pdf[]
+[NOTE]
+Before you install on Windows, make sure you have the latest version of PowerShell installed.
+endif::[]
 
 == Neo4j graph applications
 
@@ -334,7 +316,6 @@ Here are [.underline]#some# of the graph applications you can use:
 * *Query Log Analyzer*: Analyze queries that executed on your system.
 * *Neo4j Cloud Tool*: Tools for working with Neo4j Aura
 * *Graph Algos Playground*: Run graph algorithms and generate code for them.
-
 
 == Neo4j Browser
 
@@ -413,7 +394,6 @@ video::oHo-lQ79zf0[youtube,width=560,height=315,pdfwidth=100%]
 
 [NOTE]
 Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
-
 
 == Neo4j Bloom
 
@@ -535,7 +515,8 @@ Developers and administrators use command-line tools for managing the Neo4j DBMS
 * *neo4j* used to start, stop and retrieve the status of the Neo4j DBMS instance.
 * *neo4j-admin* used to create, copy, remove, backup, restore and perform other administrative tasks.
 
-*Note:* In Neo4j Desktop which is used by developers, you have the create, start, and stop administrative functionality.
+[NOTE]
+In Neo4j Desktop which is used by developers, you have the create, start, and stop administrative functionality.
 
 [.quiz]
 == Check your understanding
@@ -570,7 +551,6 @@ Select the correct answers.
 
 === Question 3
 
-
 [.statement]
 What are some of the language drivers that come with Neo4j out of the box?
 
@@ -589,24 +569,3 @@ Select the correct answers.
 You should now be able to:
 [square]
 * Describe the components and benefits of the Neo4j Graph Platform.
-
-////
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-3/">Continue to Module 3</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part2');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////
