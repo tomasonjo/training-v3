@@ -40,6 +40,70 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
+  function getClassCertificate() {
+    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    return $.ajax({
+      type: 'POST',
+      url: backendBaseUrl + '/genClassCertificate',
+      contentType: 'application/json',
+      dataType: 'json',
+      async: true,
+      data: JSON.stringify({'className': trainingName}),
+      headers: {
+        'Authorization': idToken
+      }
+    })
+  }
+
+  function getEnrollmentForClass() {
+    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    return $.ajax({
+      type: 'GET',
+      url: backendBaseUrl + '/getClassEnrollment?className=' + trainingName,
+      async: true,
+      headers: {
+        'Authorization': idToken
+      }
+    })
+  }
+
+  function enrollStudentInClass(firstName, lastName) {
+    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    return $.ajax({
+      type: 'POST',
+      url: backendBaseUrl + '/setClassEnrollment',
+      contentType: 'application/json',
+      dataType: 'json',
+      async: true,
+      data: JSON.stringify({
+        'className': window.trainingClassName,
+        'firstName': firstName,
+        'lastName': lastName
+      }),
+      headers: {
+        'Authorization': idToken
+      }
+    })
+  }
+
+  function logTrainingView() {
+    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    return $.ajax({
+      type: 'POST',
+      url: backendBaseUrl + '/logTrainingView',
+      contentType: 'application/json',
+      dataType: 'json',
+      async: true,
+      data: JSON.stringify({
+        'className': window.trainingClassName,
+        'partName': window.trainingPartName || 'unknown'
+      }),
+      headers: {
+        'Authorization': idToken
+      }
+    })
+  }
+
   function updateProgressIndicators(quizStatus) {
     document.querySelectorAll('[data-type="progress-indicator"]').forEach(function (element) {
       var slug = element.dataset.slug
@@ -89,38 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return quizSuccess
   }
 
-  // initial state
-  var trainingName = window.trainingClassName
-  var trainingModules = window.trainingClassModules
-  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
-  var currentQuizStatus = {
-    failed: [],
-    passed: [],
-    untried: trainingModules
-  }
-  updateProgressIndicators(currentQuizStatus)
-
-  // get the current quiz status from the server
-  getQuizStatus()
-    .then(function (response) {
-      var quizStatus = response['quizStatus']
-      if (quizStatus) {
-        var failed = quizStatus['failed']
-        var passed = quizStatus['passed']
-        var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
-        currentQuizStatus = {
-          failed: failed,
-          passed: passed,
-          untried: untried
-        }
-        updateProgressIndicators(currentQuizStatus)
-      } else {
-        console.warn('Unable to update the current quiz status, response from the server is empty', response)
-      }
-    })
-    .catch(function (error) {
-      console.error('Unable to get quiz status', error)
-    })
+  // events
 
   $('[data-type="grade-quiz"]').click(function (event) {
     event.preventDefault()
@@ -148,10 +181,49 @@ document.addEventListener('DOMContentLoaded', function () {
     updateProgressIndicators(currentQuizStatus)
     setQuizStatus(currentQuizStatus['passed'], currentQuizStatus['failed'])
       .then(function () {
-        if (quizSuccess) {
-          document.location = hrefSuccess;
+          if (quizSuccess) {
+            document.location = hrefSuccess;
+          }
         }
-      }
-    )
+      )
   })
+
+  // initial state
+  var trainingName = window.trainingClassName
+  var trainingModules = window.trainingClassModules
+  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
+  var currentQuizStatus = {
+    failed: [],
+    passed: [],
+    untried: trainingModules
+  }
+  updateProgressIndicators(currentQuizStatus)
+
+  if (Cookies.get('com.neo4j.accounts.idToken')) {
+    // we're authenticated!
+    // todo: we need to check if the token is valid otherwise we won't be able to get or update the quiz status.
+    // get the current quiz status from the server
+    getQuizStatus()
+      .then(function (response) {
+        var quizStatus = response['quizStatus']
+        if (quizStatus) {
+          var failed = quizStatus['failed']
+          var passed = quizStatus['passed']
+          var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
+          currentQuizStatus = {
+            failed: failed,
+            passed: passed,
+            untried: untried
+          }
+          updateProgressIndicators(currentQuizStatus)
+        } else {
+          console.warn('Unable to update the current quiz status, response from the server is empty', response)
+        }
+      })
+      .catch(function (error) {
+        console.error('Unable to get quiz status', error)
+      })
+  } else if (typeof window.trainingPartName !== 'undefined') {
+    window.location = 'https://neo4j.com/accounts/login/?targetUrl=' + encodeURI(window.location.href)
+  }
 })

@@ -85,7 +85,9 @@ subprojects {
   task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
     source = "${projectDir}/docs"
     outputDir "${projectDir}/build/online"
-    moduleName project.name
+    // fixme: for testing purpose, remove it before publishing to production
+    moduleName project.name == '4.0-intro-neo4j' ? 'demo-course-neo4j' : project.name
+    // moduleName project.name
   }
 
   // for debugging purpose
