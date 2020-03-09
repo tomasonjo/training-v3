@@ -67,6 +67,7 @@ require 'json'
         %>
         <script>
           window.trainingClassName = "<%= attr('module-name') %>"
+          window.trainingPartName = "<%= attr('slug') %>"
           window.trainingClassModules = <%= modules.to_json %>
         </script>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
