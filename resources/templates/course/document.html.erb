@@ -46,7 +46,7 @@ require 'json'
       </div>
     </div>
     <div class="guide-section-content large-8 columns">
-      <h1 class="entry-title"><%= attr 'doctitle' %></h1>
+      <h1 class="entry-title"><%= attr('doctitle') %></h1>
       <%= content %>
       <div id="_grade_quiz_and_continue" class="sect1 columns medium-12" style="padding-left: 0;">
         <h3>Grade Quiz and Continue</h3>
@@ -111,3 +111,8 @@ require 'json'
 <style>
   <%= File.new("#{__dir__ }/_extra.css", mode: 'r:UTF-8').read %>
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    Intercom('trackEvent','course-' + <%= attr('module-name') %> + '-' + <%= attr('slug') %>)
+  })
+</script>
