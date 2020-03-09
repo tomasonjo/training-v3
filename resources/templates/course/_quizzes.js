@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (Cookies.get('com.neo4j.accounts.idToken')) {
     // we're authenticated!
-    // we could check expiration of token, but not critical for this app.
+    // todo: we need to check if the token is valid otherwise we won't be able to get or update the quiz status.
     // get the current quiz status from the server
     getQuizStatus()
       .then(function (response) {
