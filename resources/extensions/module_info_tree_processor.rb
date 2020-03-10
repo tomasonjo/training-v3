@@ -22,6 +22,7 @@ class ModuleInfoTreeProcessor < Extensions::TreeProcessor; use_dsl
               document.set_attr "module-next-title", page['next']['title'], false
             end
             document.set_attribute "module-quiz", page['quiz']
+            document.set_attribute "module-certificate", page['certificate']
           end
         end
         document.set_attribute "module-name", module_descriptor['module_name']

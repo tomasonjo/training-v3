@@ -249,6 +249,19 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function (error) {
         console.error('Unable to get quiz status', error)
       })
+
+    getClassCertificate()
+      .then(function (response) {
+        var certificateResultElement = $('[data-certificate-result]')
+        if ('url' in response) {
+          certificateResultElement.html('<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>')
+        } else {
+          certificateResultElement.html('<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>')
+        }
+      })
+      .catch(function (error) {
+        console.error('Unable to get certificate', error)
+      })
   } else if (typeof trainingPartName !== 'undefined') {
     window.location = 'https://neo4j.com/accounts/login/?targetUrl=' + encodeURI(window.location.href)
   }

@@ -57,8 +57,15 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
       val title = document.doctitle
       val slug = document.getAttribute("slug", "") as String
       val hasQuiz = document.findBy(mapOf("context" to ":section", "role" to "quiz")).isNotEmpty()
+      val hasCertificate = document.findBy(mapOf("context" to ":section", "role" to "certificate")).isNotEmpty()
       if (slug.isNotBlank()) {
-        mapOf("title" to title, "url" to url, "slug" to slug, "quiz" to hasQuiz.toString())
+        mapOf(
+          "title" to title,
+          "url" to url,
+          "slug" to slug,
+          "quiz" to hasQuiz.toString(),
+          "certificate" to hasCertificate.toString()
+        )
       } else {
         null
       }
