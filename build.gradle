@@ -128,7 +128,8 @@ subprojects {
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
       attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
-        'sectanchors': ''
+        'sectanchors': '',
+        'intercom-app-id': 'dt0ig5ab'
     }
 
     baseDir file("${projectDir}/docs")
