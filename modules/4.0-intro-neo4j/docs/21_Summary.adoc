@@ -20,6 +20,7 @@
 ++++
 ////
 
+
 == Course Summary
 
 In this course, you have learned how to:
@@ -111,30 +112,5 @@ https://stackoverflow.com/tags/neo4j/hot
 We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.
 ////
 
-////
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part8');
-});
-</script>
-++++
-
-++++
-<script>
-$( document ).ready(function() {
-  $('#cert-result').html("<i>... Checking for certificate ...</i>");
-  getClassCertificate().then( function( value ) {
-    if ('url' in value) {
-      $('#cert-result').html( "<a href=\"" + value['url'] + "\">Download Certificate</a>" );
-    } else {
-      $('#cert-result').html( "Certificate not available yet.  Did you complete the quizzes at the end of each section?" );
-    }
-  });
-
-});
-</script>
-++++
-////
+[.certificate]
+== Certificate

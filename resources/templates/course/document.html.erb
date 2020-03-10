@@ -48,37 +48,45 @@ require 'json'
     <div class="guide-section-content large-8 columns">
       <h1 class="entry-title"><%= attr('doctitle') %></h1>
       <%= content %>
-      <div id="_grade_quiz_and_continue" class="sect1 columns medium-12" style="padding-left: 0;">
-        <div class="paragraph">
-          <% if attr('module-quiz') == 'true' %>
-            <a data-action="grade-quiz" data-slug="<%= attr('slug') %>" class="medium button secondary"><i class="fa fa-check"></i> Check Answers</a>
-          <% end %>
-          <a class="medium button primary" href="../<%= attr('module-next-slug') %>/"><i class="fa fa-arrow-right" aria-hidden="true"></i> Continue to <%= attr('module-next-title') %></a>
+      <% if attr('module-certificate') == 'true' %>
+        <div id="_get_certificate" class="sect1 columns medium-12" style="padding-left: 0;">
+          <div data-certificate-result>
+            <i>Checking for certificate...</i>
+          </div>
         </div>
-        <%
-          modules = (@attributes.select { |k, _| k.start_with?('module-quiz-') }.keys.map do |quiz_attr|
-            quiz_index = quiz_attr.sub('module-quiz-', '')
-            page_slug_attr = "module-toc-slug-#{quiz_index}"
-            if attr(quiz_attr) == 'true'
-              attr(page_slug_attr)
-            else
-              nil
-            end
-          end).compact
-        %>
-        <script>
-          window.trainingClassName = "<%= attr('module-name') %>"
-          window.trainingPartName = "<%= attr('slug') %>"
-          window.trainingClassModules = <%= modules.to_json %>
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-        <script src="https://neo4jsandbox.com/js/js.cookie-2.1.3.min.js"></script>
-        <script src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/js/jwt-decode.min.js"></script>
-        <!-- fixme: upload _quizzes.js to s3 -->
-        <script>
-          <%= File.new("#{__dir__ }/_quizzes.js", mode: 'r:UTF-8').read %>
-        </script>
-      </div>
+      <% else %>
+        <div id="_grade_quiz_and_continue" class="sect1 columns medium-12" style="padding-left: 0;">
+          <div class="paragraph">
+            <% if attr('module-quiz') == 'true' %>
+              <a data-action="grade-quiz" data-slug="<%= attr('slug') %>" class="medium button secondary"><i class="fa fa-check"></i> Check Answers</a>
+            <% end %>
+            <a class="medium button primary" href="../<%= attr('module-next-slug') %>/"><i class="fa fa-arrow-right" aria-hidden="true"></i> Continue to <%= attr('module-next-title') %></a>
+          </div>
+        </div>
+      <% end %>
+      <%
+        modules = (@attributes.select { |k, _| k.start_with?('module-quiz-') }.keys.map do |quiz_attr|
+          quiz_index = quiz_attr.sub('module-quiz-', '')
+          page_slug_attr = "module-toc-slug-#{quiz_index}"
+          if attr(quiz_attr) == 'true'
+            attr(page_slug_attr)
+          else
+            nil
+          end
+        end).compact
+      %>
+      <script>
+        window.trainingClassName = "<%= attr('module-name') %>"
+        window.trainingPartName = "<%= attr('slug') %>"
+        window.trainingClassModules = <%= modules.to_json %>
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+      <script src="https://neo4jsandbox.com/js/js.cookie-2.1.3.min.js"></script>
+      <script src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/js/jwt-decode.min.js"></script>
+      <!-- fixme: upload _quizzes.js to s3 -->
+      <script>
+        <%= File.new("#{__dir__ }/_quizzes.js", mode: 'r:UTF-8').read %>
+      </script>
     </div>
     <div class="guide-toc large-2 hide-for-medium-only hide-for-small-only columns">
       <ul class="side-nav">
