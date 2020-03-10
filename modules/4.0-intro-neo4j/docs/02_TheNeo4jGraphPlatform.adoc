@@ -236,13 +236,10 @@ Neo4j Desktop is a UI that enables you to create projects, each with their own N
 It includes an application called  Neo4j Browser which is the UI you use to access the started database using Cypher queries.
 --
 
-//NEED TO REDO THIS WITH A 4.0 local database*
-
 image::Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
 
 [.statement]
 The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
-
 
 ifdef::backend-html5,backend-pdf[]
 These videos show how to install and get started using Neo4j Desktop.
@@ -386,11 +383,20 @@ Show the students the basics of using Neo4j Browser and have them do the same on
 endif::[]
 --
 
-[.statement]
+ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with common tasks in Neo4j Browser.
+endif::[]
 
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5,backend-revealjs[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315,pdfwidth=100%]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
+
 
 [NOTE]
 Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
