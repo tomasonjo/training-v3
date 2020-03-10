@@ -196,8 +196,6 @@ document.addEventListener('DOMContentLoaded', function () {
       $(target).before('<div id="quiz-result">' +
         '<p class="paragraph">' +
         '<span style="color: #F44336">Please correct errors</span> in quiz responses above to continue. Questions with incorrect responses are highlighted in <span style="color: #F44336">red</span>.' +
-        '<br>' +
-        '<a href="' + hrefSuccess + '">Click here</a> if you wish to advance to next section without passing the quiz.' +
         '</p>' +
         '</div>'
       )
