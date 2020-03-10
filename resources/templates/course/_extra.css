@@ -38,7 +38,7 @@ details, .audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .vi
   display: none;
 }
 
-i[data-type="progress-indicator"] {
+i[data-progress-indicator] {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -48,22 +48,22 @@ i[data-type="progress-indicator"] {
   text-align: center;
 }
 
-i[data-type="progress-indicator"].passed::before {
+i[data-progress-indicator].passed::before {
   content: "\f00c";
   color: #63b345;
 }
 
-i[data-type="progress-indicator"].untried::before {
+i[data-progress-indicator].untried::before {
   content: "\f096";
   color: #676473;
 }
 
-i[data-type="progress-indicator"].failed::before {
+i[data-progress-indicator].failed::before {
   content: "\f00d";
   color: #F44336;
 }
 
-i[data-type="progress-indicator"].none::before {
+i[data-progress-indicator].none::before {
   content: "";
 }
 

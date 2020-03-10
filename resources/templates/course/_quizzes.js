@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
       dataType: 'json',
       async: true,
       data: JSON.stringify({
-        'className': window.trainingClassName,
+        'className': trainingName,
         'firstName': firstName,
         'lastName': lastName
       }),
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function () {
       dataType: 'json',
       async: true,
       data: JSON.stringify({
-        'className': window.trainingClassName,
-        'partName': window.trainingPartName || 'unknown'
+        'className': trainingName,
+        'partName': trainingPartName || 'unknown'
       }),
       headers: {
         'Authorization': idToken
@@ -104,8 +104,27 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
+  function updatePageQuiz() {
+    // && is (somehow) encoded as &#38;
+    if (currentQuizStatus) {
+      if (currentQuizStatus.passed) {
+        if (currentQuizStatus.passed.indexOf(trainingPartName) !== -1) {
+          var gradeQuizButton = $('[data-action="grade-quiz"]').first()
+          gradeQuizButton.hide()
+          var gradeQuizElement = $('.quiz').first()
+          gradeQuizElement.find('.required-answer').each(function () {
+            $(this).prev(':checkbox').prop('checked', true)
+          })
+          gradeQuizElement.find('.false-answer').each(function () {
+            $(this).prev(':checkbox').prop('checked', false)
+          })
+        }
+      }
+    }
+  }
+
   function updateProgressIndicators(quizStatus) {
-    document.querySelectorAll('[data-type="progress-indicator"]').forEach(function (element) {
+    document.querySelectorAll('[data-progress-indicator]').forEach(function (element) {
       var slug = element.dataset.slug
       // reset
       var classList = element.classList
@@ -155,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // events
 
-  $('[data-type="grade-quiz"]').click(function (event) {
+  $('[data-action="grade-quiz"]').click(function (event) {
     event.preventDefault()
 
     var quizResultElement = $('#quiz-result')
@@ -166,7 +185,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var target = event.target
     var hrefSuccess = target.href
     var quizSuccess = gradeQuiz($(".quiz").first(), target.dataset.slug)
-    if (!quizSuccess) {
+    if (quizSuccess) {
+      $(target).before('<div id="quiz-result">' +
+        '<p class="paragraph">' +
+        '<span style="color: #63b345">All good!</span> you can advance to next section.' +
+        '</p>' +
+        '</div>'
+      )
+    } else {
       $(target).before('<div id="quiz-result">' +
         '<p class="paragraph">' +
         '<span style="color: #F44336">Please correct errors</span> in quiz responses above to continue. Questions with incorrect responses are highlighted in <span style="color: #F44336">red</span>.' +
@@ -180,17 +206,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // update indicators
     updateProgressIndicators(currentQuizStatus)
     setQuizStatus(currentQuizStatus['passed'], currentQuizStatus['failed'])
-      .then(function () {
-          if (quizSuccess) {
-            document.location = hrefSuccess;
-          }
-        }
-      )
+      .catch(function (error) {
+        // question: what should we do? display an error message to the user?
+        console.error('Unable to update quiz status', error)
+      })
   })
 
   // initial state
   var trainingName = window.trainingClassName
   var trainingModules = window.trainingClassModules
+  var trainingPartName = window.trainingPartName
   var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
   var currentQuizStatus = {
     failed: [],
@@ -216,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
             untried: untried
           }
           updateProgressIndicators(currentQuizStatus)
+          updatePageQuiz()
         } else {
           console.warn('Unable to update the current quiz status, response from the server is empty', response)
         }
@@ -223,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function (error) {
         console.error('Unable to get quiz status', error)
       })
-  } else if (typeof window.trainingPartName !== 'undefined') {
+  } else if (typeof trainingPartName !== 'undefined') {
     window.location = 'https://neo4j.com/accounts/login/?targetUrl=' + encodeURI(window.location.href)
   }
 })
