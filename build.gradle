@@ -208,6 +208,78 @@ subprojects {
     outputDir file("${projectDir}/build/online")
   }
 
+  /* single document */
+  task convertSinglePdf(type: AsciidoctorPdfTask) {
+    dependsOn asciidoctorGemsPrepare
+
+    inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
+
+    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
+    asciidoctorj {
+      modules.pdf.version '1.5.2'
+      attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
+        'imagesdir': '../images'
+    }
+
+    baseDir file("${projectDir}/single-pdf")
+    sourceDir file("${projectDir}/single-pdf")
+    outputDir file("${projectDir}/build/single-pdf")
+  }
+
+  task convertSingleSlides(type: AsciidoctorJRevealJSTask) {
+    dependsOn asciidoctorGemsPrepare
+
+    revealjsOptions {
+      controls = false
+      progressBar = true
+      pushToHistory = true
+      overviewMode = true
+      touchMode = true
+      theme = 'white'
+    }
+
+    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
+    asciidoctorj {
+      options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
+      attributes 'revealjs_customtheme': 'themes/reveal.css',
+        'imagesdir': 'images',
+        'revealjs_center': 'false',
+        'revealjs_width': '1280',
+        'revealjs_height': '720',
+        'revealjs_margin': '0.05',
+        'revealjs_fragmentinurl': 'true',
+        'revealjs_slidenumber': 'c',
+        'revealjs_minscale': '0.2',
+        'revealjs_maxscale': '2'
+    }
+
+    plugins 'denehyg/menu.js'
+    pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
+
+    baseDirFollowsSourceDir()
+    sourceDir file("${projectDir}/single-slides")
+    outputDir file("${projectDir}/build/single-slides")
+
+    resources {
+      from("${rootProject.projectDir}/resources/themes") {
+        include 'reveal.css'
+        into 'themes'
+      }
+      from("${rootProject.projectDir}/resources/extensions") {
+        include 'cypher-highlightjs.js'
+        into 'extensions'
+      }
+      from("${rootProject.projectDir}/resources/images") {
+        include '**'
+        into 'images'
+      }
+      from("${projectDir}/images") {
+        include '**'
+        into 'images'
+      }
+    }
+  }
+
   task convert {
     dependsOn convertOnlineHtml
     dependsOn convertOnlinePdf

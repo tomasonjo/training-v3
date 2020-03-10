@@ -1,0 +1,30 @@
+= Introduction to Neo4j 4.0: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[]
+include::{includedir}/01_Neo4jIsAGraphDatabase.adoc[]
+include::{includedir}/02_TheNeo4jGraphPlatform.adoc[]
+include::{includedir}/03_IntroductionToCypherQueries.adoc[]
+include::{includedir}/04_UsingWHEREToFilterQueries.adoc[]
+include::{includedir}/05_WorkingWithPatternsInQueries.adoc[]
+include::{includedir}/06_WorkingWithCypherData.adoc[]
+include::{includedir}/07_ControllingTheQueryChain.adoc[]
+include::{includedir}/08_ControllingResultsReturned.adoc[]
+include::{includedir}/09_CreatingNodes.adoc[]
+include::{includedir}/10_CreatingRelationships.adoc[]
+include::{includedir}/11_DeletingNodesAndRelationships.adoc[]
+include::{includedir}/12_MergingData.adoc[]
+include::{includedir}/13_DefiningConstraintsForYourData.adoc[]
+include::{includedir}/14_UsingIndexes.adoc[]
+include::{includedir}/15_UsingQueryBestPractices.adoc[]
+include::{includedir}/16_OverviewOfImportingDataIntoNeo4j.adoc[]
+include::{includedir}/17_UsingLOADCSVForImport.adoc[]
+include::{includedir}/18_UsingAPOCForImport.adoc[]
+include::{includedir}/19_UsingTheNeo4jAdminToolForImport.adoc[]
+include::{includedir}/20_UsingAnApplicationForImport.adoc[]
+include::{includedir}/21_Summary.adoc[]
+

@@ -56,7 +56,8 @@ body {
   word-wrap: break-word;
 }
 
-.reveal h1 {
+.reveal h1,
+.reveal section.slide-start-title > h2 {
   font-size: 2.5em;
 }
 
@@ -74,7 +75,8 @@ body {
   font-size: 1.3em;
 }
 
-.reveal h1 {
+.reveal h1,
+.reveal section.slide-start-title > h2 {
   text-shadow: none;
 }
 
@@ -514,6 +516,11 @@ kbd:not(.keyseq) {
 .reveal section.student-exercise > h2,
 .reveal section.slide-title > h2 {
   margin-top: 6rem;
+}
+
+.reveal section.slide-start-title > h2 {
+  font-weight: 800;
+  margin-top: 12rem;
 }
 
 /* backgrounds */
