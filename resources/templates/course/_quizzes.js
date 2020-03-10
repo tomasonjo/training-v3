@@ -1,5 +1,17 @@
-/* global $, Cookies */
+/* global $, Cookies, jwt_decode */
 document.addEventListener('DOMContentLoaded', function () {
+
+  var gradeQuizElement = $('[data-action="grade-quiz"]')
+  var siteUrl = window.location.href
+
+  var getTimeDiff = function (time1, time2) {
+    var hourDiff = time2 - time1
+    var diffDays = Math.floor(hourDiff / 86400000)
+    var diffHrs = Math.floor((hourDiff % 86400000) / 3600000)
+    var diffMins = Math.floor(((hourDiff % 86400000) % 3600000) / 60000)
+    return {'days': diffDays, 'hours': diffHrs, 'mins': diffMins}
+  }
+
   function arrayDiff(a, b) {
     return a.filter(function (i) {
       return b.indexOf(i) < 0
@@ -109,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentQuizStatus) {
       if (currentQuizStatus.passed) {
         if (currentQuizStatus.passed.indexOf(trainingPartName) !== -1) {
-          var gradeQuizButton = $('[data-action="grade-quiz"]').first()
+          var gradeQuizButton = gradeQuizElement.first()
           gradeQuizButton.hide()
           var gradeQuizElement = $('.quiz').first()
           gradeQuizElement.find('.required-answer').each(function () {
@@ -172,9 +184,40 @@ document.addEventListener('DOMContentLoaded', function () {
     return quizSuccess
   }
 
+  var attemptRenewToken = function (silent, nextTimeout, nextTimeoutSilent) {
+    console.log('attempting to renew token...')
+    var iframe = document.createElement('iframe')
+    iframe.style.display = 'none'
+    iframe.src = 'https://neo4j.com/accounts/login?targetUrl=' + encodeURI(siteUrl)
+    document.body.appendChild(iframe)
+    if (nextTimeout) {
+      setTimeout(function () {
+        attemptRenewToken(nextTimeoutSilent, nextTimeout, nextTimeoutSilent);
+      }, nextTimeout)
+    }
+  }
+
+  var logout = function () {
+    window.location = 'https://neo4j.com/accounts/login/?targetUrl=' + encodeURI(siteUrl)
+  }
+
+  function checkTokenExpiration(idToken) {
+    var decodedToken = jwt_decode(idToken);
+    var expiresIn = getTimeDiff(Date.now(), (decodedToken.exp) * 1000)
+    if (expiresIn.days > 0 || expiresIn.hours > 0) {
+      // token is good.
+    } else if (expiresIn.days === 0 && expiresIn.hours === 0 && expiresIn.mins > 1 && expiresIn.mins < 60) {
+      // expiring soon, let's immediately get a new token
+      attemptRenewToken(true, 1000 * 60 * 30, false)
+    } else {
+      // token is already expired, log user out in UI; token won't work
+      logout()
+    }
+  }
+
   // events
 
-  $('[data-action="grade-quiz"]').click(function (event) {
+  gradeQuizElement.click(function (event) {
     event.preventDefault()
 
     var quizResultElement = $('#quiz-result')
@@ -184,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var target = event.target
     var hrefSuccess = target.href
-    var quizSuccess = gradeQuiz($(".quiz").first(), target.dataset.slug)
+    var quizSuccess = gradeQuiz($('.quiz').first(), target.dataset.slug)
     if (quizSuccess) {
       $(target).before('<div id="quiz-result">' +
         '<p class="paragraph">' +
@@ -222,9 +265,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   updateProgressIndicators(currentQuizStatus)
 
-  if (Cookies.get('com.neo4j.accounts.idToken')) {
+  var idToken = Cookies.get('com.neo4j.accounts.idToken');
+  if (idToken) {
     // we're authenticated!
-    // todo: we need to check if the token is valid otherwise we won't be able to get or update the quiz status.
+    // check if the token is not expired (or will expire soon)
+    checkTokenExpiration(idToken)
     // get the current quiz status from the server
     getQuizStatus()
       .then(function (response) {
@@ -261,6 +306,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Unable to get certificate', error)
       })
   } else if (typeof trainingPartName !== 'undefined') {
-    window.location = 'https://neo4j.com/accounts/login/?targetUrl=' + encodeURI(window.location.href)
+    logout()
   }
 })
