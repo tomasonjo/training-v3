@@ -52,7 +52,7 @@ One way to to this is with the `WITH` clause in Cypher.
 [.notes]
 --
 During the execution of a `MATCH` clause, you can specify that you want some intermediate calculations or values that will be used for further processing of the query.
-You use the `WITH` clause to perform intermediate processing that is not possible in a RETURN clause.
+You use the `WITH` clause to perform intermediate processing that is not possible in a `RETURN` clause.
 
 Here is an example where we start the query processing by retrieving all actors and their movies. 
 During the query processing, want to only return actors that have 2 or 3 movies.
@@ -107,8 +107,8 @@ RETURN m.title, actorCount, actor.name
 --
 The query retrieves all people who acted in movies. During the query, for each movie, the list of actors are collected, as well as the count of actors.
 The `WITH` clause makes the variables _actors_, _actorCount_, and _m_ available for the rest of the query processing.
-The UNWIND clause turns the list of actors into rows of actors.
-Then the query returns the title of the movie, the actor count, and the actor name for each row of the actors collection.
+The `UNWIND` clause turns the list of actors into rows of actors.
+Then the query returns the _title_ of the movie, the actor count, and the actor name for each row of the _actors_ collection.
 --
 
 ifndef::backend-revealjs[]
@@ -173,8 +173,8 @@ image::PopularActorsWithAtLeast5Movies.png[PopularActorsWithAtLeast5Movies,width
 
 [.notes]
 --
-In this example, we first retrieve all people, but then specify a pattern in the `WITH` clause where we calculate the number of `:ACTED_IN` relationships retrieved using the `size()` function.
-If this value is greater than five, we then also retrieve the `:DIRECTED` paths to return the name of the person and the title of the movie they directed. In the result, we see that these actors acted in more than five movies, but _Tom Hanks_ is the only actor who directed a movie and thus the only person to have a value for the movie.
+In this example, we first retrieve all people, but then specify a pattern in the `WITH` clause where we calculate the number of _:ACTED_IN_ relationships retrieved using the `size()` function.
+If this value is greater than five, we then also retrieve the _:DIRECTED_ paths to return the name of the person and the title of the movie they directed. In the result, we see that these actors acted in more than five movies, but _Tom Hanks_ is the only actor who directed a movie and thus the only person to have a value for the movie.
 Notice here that _m_ only refers to movies that were directed by _p_.
 --
 

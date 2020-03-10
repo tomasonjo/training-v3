@@ -12,16 +12,18 @@
 --
 You have just learned how import data into the graph using Cypher together with APOC.
 APOC provides you with more capabilities for import.
-Another way that you can import data into the graph is with and administrative tool, neo4j-admin.
-Next, you will learn how to use neo4j-admin to create a graph from CSV files.
+Another way that you can import data into the graph is with and administrative tool, `neo4j-admin`.
+Next, you will learn how to use `neo4j-admin` to create a graph from CSV files.
+You will be working with data for a much larger dataset representing crimes.
+
 --
 
 At the end of this module, you should be able to:
 
 [square]
-* Import data from a set of CSV files using the neo4j-admin tool.
+* Import data from a set of CSV files using the `neo4j-admin` tool.
 
-== What is neo4j-admin?
+== What is `neo4j-admin`?
 
 A Neo4j installation includes a *bin* folder that contains some useful utilities that can be used by both developers and administrators.
 These include:
@@ -33,15 +35,15 @@ These include:
 
 [.notes]
 --
-In this lesson, you will learn how to use the import feature of *neo4j-admin*.
-You should use *neo4j-admin* for import when you have extremely large amounts of data to import, for example greater than 10M nodes.
+In this lesson, you will learn how to use the import feature of `neo4j-admin`.
+You should use `neo4j-admin` for import when you have extremely large amounts of data to import, for example greater than 10M nodes.
 --
 
 == Preparing for import
 
 [.notes]
 --
-Just as you became familiar with the content of CSV files when you imported them with Cypher, you must do the same with the CSV data you will be importing.
+Just as you became familiar with the content of CSV files when you imported them with Cypher, you must do the same with the CSV data you will be importing with `neo4j-admin`.
 You must understand how headers relate to the data, what the field separator is, and make sure that the data is property formatted.
 Unlike using Cypher to import the data, you don't have the flexibility to transform the data during the import.
 You must ensure that the data in the CSV files is clean and ready for import.

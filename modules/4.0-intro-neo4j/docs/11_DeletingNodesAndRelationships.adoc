@@ -54,8 +54,8 @@ image::DeleteJaneDoe.png[DeleteJaneDoe,width=800,align=center]
 --
 You can delete a node provided:
 
-. You can obtain a reference to it (typically using `MATCH`)
-. The node has no relationships
+. You can obtain a reference to it (typically using `MATCH`).
+. The node has no relationships.
 
 So if you accidentally created multiple nodes in the graph, you can retrieve them with a `MATCH` clause and delete them.
 --
@@ -64,7 +64,7 @@ So if you accidentally created multiple nodes in the graph, you can retrieve the
 
 [.notes]
 --
-In our graph, the Katie Holms node already has an _:ACTED_IN_ relationship with the Batman Begins movie.
+In our graph, the _Katie Holmes_ node already has an _:ACTED_IN_ relationship with the _Batman Begins_ movie.
 Perhaps we were over zealous with the creation of relationships between nodes.
 For example, what if we had this code where relationships were created:
 --
@@ -87,7 +87,7 @@ endif::[]
 image::TooManyRels.png[TooManyRels,width=800,align=center]
 
 [.statement]
-We see that there are now three relationships from Katie Holmes and Batman Begins.
+We see that there are now three relationships from _Katie Holmes_ and _Batman Begins_.
 
 === Finding and deleting relationships
 
@@ -115,7 +115,7 @@ image::DeleteRels.png[DeleteRels,width=800,align=center]
 
 [.notes]
 --
-You can confirm that there is only one relationship associated with the Katie Holmes node as follows:
+You can confirm that there is only one relationship associated with the _Katie Holmes_ node as follows:
 --
 
 [source,cypher]

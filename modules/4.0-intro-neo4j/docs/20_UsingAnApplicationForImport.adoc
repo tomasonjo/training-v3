@@ -10,7 +10,7 @@
 
 [.notes]
 --
-You have just learned how import data into the graph using the import tool of neo4j-import.
+You have just learned how import data into the graph using the import tool of `neo4j-admin`.
 Another way that you can import data into the graph is with an application that connects to the database instance using one of the supported drivers.
 In a java-based application, you can import data by establishing a connection to both the relational database and the Neo4j database to read from the relational database via jdbc drivers and access the Neo4j database using the appropriate language drivers.
 Next, you will learn about the Neo4j drivers to load data into the graph.

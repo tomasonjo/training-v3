@@ -86,7 +86,7 @@ In Neo4j 4.0, another way that you can clear the graph in Neo4j Browser is to us
 
 [.notes]
 --
-One benefit of using APOC for loading data into the graph is that it can sometimes be faster than LOAD CSV.
+One benefit of using APOC for loading data into the graph is that it can sometimes be faster than `LOAD CSV`.
 In addition, APOC has some procedures that are helpful during the load, one of which is to control conditional processing.
 And as you have already learned, with APOC, you can load large datasets that will fail if using `LOAD CSV` or even `USING PERIODIC COMMIT LOAD CSV`.
 
@@ -171,7 +171,7 @@ MERGE (p:Person {id: person.id})
 --
 This code reads the data from a _row_ and creates the _personData_ collection that holds the data for a person.
 It creates the _Movie_ nodes based upon the _row_ data.
-With the `WITH *" clause, all variables are carried forward in the query.
+With the `WITH *` clause, all variables are carried forward in the query.
 Then the _personData_ collection is unwound so that each element in a row can be used to create the _Person_ nodes.
 Everything is in the graph, except for the relationships.
 --

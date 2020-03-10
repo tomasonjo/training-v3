@@ -175,7 +175,7 @@ You do so by executing `CALL db.schema.visualization()`, which calls the Neo4j p
 
 For example, when we run this procedure in our training environment, we see the following in the result pane.
 Here we see that the graph has 2 labels defined for nodes, _Person_ and _Movie_.
-Each type of nodes is displayed in a different color.
+Each type of node is displayed in a different color.
 The relationships between nodes are also displayed, which you will learn about later in this module.
 --
 
@@ -423,7 +423,7 @@ image::TwoPropertiesForFilter.png[TwoPropertiesForFilter,width=700,align=center]
 
 [.notes]
 --
-As it turns out, there is only one movie with the _tagline_, _Free your mind_ in the _Movie_ database, but if we had specified a different year, the query would not have returned a value because when you specify properties, both properties must match.
+As it turns out, there is only one movie with the _tagline_, 'Free your mind` in the _Movie_ database, but if we had specified a different year, the query would not have returned a value because when you specify properties, both properties must match.
 --
 
 === Syntax: Returning property values
@@ -631,11 +631,6 @@ All of the other relationships in this graph are from _Person_ nodes to _Movie_ 
 
 image::call_db.schema-relationships.png[call_db.schema-relationships,width=800,align=center]
 
-[.notes]
---
-The relationship types can also be viewed by selecting the arrow to the right in the relationship type row.
---
-
 === Using a relationship in a query
 
 [.notes]
@@ -790,7 +785,7 @@ In this training, we will use `+-->+`, `--`, and `+<--+` to represent anonymous 
 === Retrieving the relationship types
 
 [.statement]
-There is a built-in function, `type()` that returns the relationship type of a relationship.
+There is a built-in function, `type()` that returns the type of a relationship.
 
 [.notes]
 --

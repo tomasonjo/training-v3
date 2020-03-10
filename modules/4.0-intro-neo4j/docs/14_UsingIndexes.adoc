@@ -18,15 +18,15 @@ Next, you will learn about creating property and fulltext schema indexes in the 
 At the end of this module, you should be able to:
 [square]
 
-* Describe when indexes are used in Cypher
-* Create a single property index
-* Create a multi-property index
-* Create a full-text schema index
-* Use a fulltext schema index
-* Manage indexes
-** List indexes
-** Drop an index
-** Drop a full-text schema index
+* Describe when indexes are used in Cypher.
+* Create a single property index.
+* Create a multi-property index.
+* Create a full-text schema index.
+* Use a fulltext schema index.
+* Manage indexes:
+** List indexes.
+** Drop an index.
+** Drop a full-text schema index.
 
 == Indexes in Neo4j
 
@@ -191,7 +191,7 @@ You can change the underlying index provider of any index.
 
 [.notes]
 --
-Here is an example where we create a full-text schema index on data in _title_ property of Movie nodes and data in the _name_ property of Person nodes:
+Here is an example where we create a full-text schema index on data in _title_ property of _Movie_ nodes and data in the _name_ property of _Person_ nodes:
 --
 
 [source,cypher]
@@ -289,7 +289,7 @@ image::UseFullTextIndex2.png[UseFullTextIndex2,width=900,align=center]
 
 [.notes]
 --
-With full-text indexes created, you can also specify which property you want to search for. Here is an example where we are looking for _Jerry_, but only as a _name_ property of a Person node:
+With full-text indexes created, you can also specify which property you want to search for. Here is an example where we are looking for _Jerry_, but only as a _name_ property of a _Person_ node:
 --
 
 [source,cypher]

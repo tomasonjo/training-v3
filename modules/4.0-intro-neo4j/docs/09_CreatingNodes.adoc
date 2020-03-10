@@ -41,14 +41,14 @@ CREATE (optionalVariable optionalLabels {optionalProperties})
 
 [.notes]
 --
-If you plan on referencing the newly created node, you must provide a variable. Whether you provide labels or properties at node creation time is optional. In most cases, you will want to provide some label and property values for a node when created. This will enable you to later retrieve the node. Provided you have a reference to the node (for example, using a `MATCH` clause), you can always add, update, or remove labels and properties at a later time.
+If you plan on referencing the newly-created node, you must provide a variable. Whether you provide labels or properties at node creation time is optional. In most cases, you will want to provide some label and property values for a node when created. This will enable you to later retrieve the node. Provided you have a reference to the node (for example, using a `MATCH` clause), you can always add, update, or remove labels and properties at a later time.
 
-Next, you will see some examples of creating a single node in Cypher:
+Next, you will see some examples of creating a single node in Cypher.
 --
 
 === Example #1
 
-Add a node to the graph of type _Movie_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the label _Movie_ can also be retrieved which will contain this node:
+Add a node to the graph of type _Movie_ with the _title_, _Batman Begins_. This node can be retrieved using the _title_. A set of nodes with the label _Movie_ can also be retrieved which will contain this node:
 
 [source,cypher]
 ----
@@ -57,7 +57,7 @@ CREATE (:Movie {title: 'Batman Begins'})
 
 === Example #2
 
-Add a node with two labels to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node:
+Add a node with two labels to the graph of types _Movie_ and _Action_ with the _title_, _Batman Begins_. This node can be retrieved using the _title_. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node:
 
 [source,cypher]
 ----
@@ -66,7 +66,7 @@ CREATE (:Movie:Action {title: 'Batman Begins'})
 
 === Example #3
 
-Add a node to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. The variable _m_ can be used for later processing after the `CREATE` clause:
+Add a node to the graph of types _Movie_ and _Action_ with the _title_, _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. The variable _m_ can be used for later processing after the `CREATE` clause:
 
 [source,cypher]
 ----
@@ -75,7 +75,7 @@ CREATE (m:Movie:Action {title: 'Batman Begins'})
 
 === Example #4
 
-Add a node to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. Here we return the title of the node:
+Add a node to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the _title_. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. Here we return the _title_ of the node:
 
 [source,cypher]
 ----
@@ -98,7 +98,7 @@ image::CreateBatmanBegins.png[CreateBatmanBegins,width=600,align=center]
 
 [.notes]
 --
-Here is the node when we retrieve it. It is the only node in the graph with both a label of _Action_ so to retrieve it from the graph is straightforward where we only specify the node labels.
+Here is the node when we retrieve it. It is the only node in the graph with a label of _Action_ so to retrieve it from the graph is straightforward where we only specify the node labels.
 --
 
 [is-half.right]
@@ -261,9 +261,9 @@ image::RemoveActionLabel.png[RemoveActionLabel,width=700,align=center]
 
 [.notes]
 --
-After you have created a node and have a reference to the node, you can add properties to the node, again using the `SET` keyword. 
+After you have created a node and have a reference to the node, you can add properties to the node  using the `SET` keyword.
 
-Here are simplified syntax examples for adding properties to a node referenced by the variable x:
+Here are simplified syntax examples for adding properties to a node referenced by the variable _x_:
 --
 
 [source.big,cypher]
@@ -293,7 +293,7 @@ If the property does not exist, it is added to the node. If the property exists,
 Note that the type of data for a property is not enforced.  
 That is, you can assign a string value to a property that was once a numeric value and visa versa.
 
-When specify the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if the _propertyNnameX_ exists for the node. If the _propertyNameX_ does not exist for the node, then the property is added to the node.
+When specify the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if _propertyNnameX_ exists for the node. If  _propertyNameX_ does not exist for the node, then the property is added to the node.
 --
 
 == Example: Adding properties to a node
@@ -411,9 +411,9 @@ image::AddAndUpdateProperties.png[AddAndUpdateProperties,width=900,align=center]
 
 [.notes]
 --
-There are two ways that you can remove a property from a node. One way is to use the REMOVE keyword. The other way is to set the property's value to `null`.
+There are two ways that you can remove a property from a node. One way is to use the `REMOVE` keyword. The other way is to set the property's value to null.
 
-Here are simplified syntax examples for removing properties from a node referenced by the variable x:
+Here are simplified syntax examples for removing properties from a node referenced by the variable _x_:
 --
 
 [source.big,cypher]

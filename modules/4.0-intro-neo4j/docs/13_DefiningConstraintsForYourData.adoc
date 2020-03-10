@@ -268,7 +268,7 @@ image::DropConstraint.png[DropConstraint,width=600,align=center]
 A node key is used to define the uniqueness and existence constraint for [.underline]#multiple# properties of a node of a certain type.
 A node key is  also used as a composite index in the graph.
 
-Suppose that in our _Movie_ graph, we will not allow a _Person_ node to be created where both the _name_ and _born_ properties are the same. We can create a constraint that will be a node key to ensure that this uniqueness for the set of properties is asserted. 
+Suppose that in our Movie graph, we will not allow a _Person_ node to be created where both the _name_ and _born_ properties are the same. We can create a constraint that will be a node key to ensure that this uniqueness for the set of properties is asserted.
 
 Here is an example to create this node key:
 --
@@ -280,7 +280,7 @@ CREATE CONSTRAINT UniqueNameBornConstraint
 ----
 
 ifndef::backend-revealjs[]
-Here is the result of running this Cypher statement on our _Movie_ graph:
+Here is the result of running this Cypher statement on our Movie graph:
 endif::[]
 
 image::NodeKeyCreationFailed.png[NodeKeyCreationFailed,width=1000,align=center]

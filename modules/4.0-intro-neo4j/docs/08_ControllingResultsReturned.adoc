@@ -11,7 +11,7 @@
 [.notes]
 --
 You have learned how to query the database using both simple and complex patterns and you have learned how to control query processing by chaining queries using `WITH`.
-In this module, we focus on controlling how results are processed in the RETURN  and WITH clauses.
+In this module, we focus on controlling how results are processed in the `RETURN`  and `WITH` clauses.
 --
 
 At the end of this module, you should be able to write Cypher statements to:
@@ -115,7 +115,7 @@ endif::[]
 image::NoDuplicationInCollection.png[NoDuplicationInCollection,width=800,align=center]
 --
 
-=== Using WITH and DISTINCT to eliminate duplication
+=== Using `WITH` and `DISTINCT` to eliminate duplication
 
 [.notes]
 --
@@ -243,7 +243,7 @@ image::Limit2.png[Limit2,width=600,align=center]
 [.notes]
 --
 At most 6 nodes that are in the pattern of the `MATCH` clause are retrieved. Two rows are returned.
-Notice that the Keanu Reeves value is returned in the second row because that node represents the upper limit of the number of _Person_ nodes retrieved in this query pattern.
+Notice that the _Keanu Reeves_ value is returned in the second row because that node represents the upper limit of the number of _Person_ nodes retrieved in this query pattern.
 --
 
 === Another example using `LIMIT`
@@ -251,7 +251,7 @@ Notice that the Keanu Reeves value is returned in the second row because that no
 [.notes]
 --
 Here is another example of limiting results.
-Suppose we want to retrieve five movies and for each movie, return the :ACTED_IN path to at most two actors.
+Suppose we want to retrieve five movies and for each movie, return the _:ACTED_IN_ path to at most two actors.
 Here is one way to perform this query:
 --
 

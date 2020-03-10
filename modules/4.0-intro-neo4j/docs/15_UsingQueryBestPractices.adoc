@@ -105,7 +105,7 @@ Subsequently, you need only change the value of the parameter and not the Cypher
 [.is-half.right]
 --
 [.statement]
-After we have changed the _actorName_ parameter to 'Tom Cruise', we get a different result with the same Cypher query:
+After we have changed the _actorName_ parameter to _Tom Cruise_, we get a different result with the same Cypher query:
 
 image::TomCruiseParameter.png[TomCruiseParameter,width=800,align=center]
 --
@@ -161,7 +161,7 @@ image::ViewParams.png[ViewParams,width=500,align=center]
 
 [.notes]
 --
-The _Movie_ graph that you have been using during course is a very small graph.
+The Movie graph that you have been using during this course is a very small graph.
 As you start working with large datasets, it will be important to not only add appropriate indexes to your graph, but also write Cypher statements that execute as efficiently as possible.
 This is a combination of good graph data modeling and query tuning.
 
@@ -321,7 +321,7 @@ image::ROGUE2.png[ROGUE2,width=600,align=center]
 
 [.notes]
 --
-You might want to understand whether the query is taking a long time or whether the query has completed, but it is returning a log of results.
+You might want to understand whether the query is taking a long time or whether the query has completed, but it is returning a lot of results.
 
 You can monitor it by using the `:queries` command.
 Here is a screenshot where we are monitoring a long-running (Example A) query in another Neo4j Browser session:
@@ -375,10 +375,10 @@ Here is a very high-level list of some of the best practices you should aim for 
 [square]
 * Create an use indexes effectively.
 * Use parameters rather than literals in your queries.
-* Specify node labels in MATCH clauses.
+* Specify node labels in `MATCH` clauses.
 * Reduce the number of rows passed processed.
-* Aggregate early in the query, rather than in the RETURN clause, if possible.
-* Use DISTINCT and LIMIT early in the query to reduce the number of rows processed.
+* Aggregate early in the query, rather than in the `RETURN` clause, if possible.
+* Use `DISTINCT` and `LIMIT` early in the query to reduce the number of rows processed.
 * Defer property access until you really need it.
 
 [.notes]

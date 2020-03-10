@@ -83,7 +83,7 @@ If the node or pattern is not found, by default, it is created.
 You use the simple `MERGE` clause to:
 
 [square]
-* Create a unique node based on label and key information for a property or set of properties,
+* Create a unique node based on label and key information for a property or set of properties.
 * Update a node based on label and key information for a property or set of properties.
 * Create a unique relationship between two nodes.
 * Create a unique node and relationship in the context of another node.
@@ -187,7 +187,7 @@ image::OnlyTwoMichaelCaines.png[OnlyTwoMichaelCaines,width=800,align=center]
 
 [.notes]
 --
-We would find that the Michael Caine node with the label Actor is not created.
+We would find that the _Michael Caine_ node with the label _Actor_ is not created.
 The `MERGE` found this node in the graph and did not create a new one.
 --
 
@@ -227,7 +227,7 @@ image::MichaelCainesAndOneRel.png[MichaelCainesAndOneRel,width=600,align=center]
 === Example: Using `MERGE`
 
 [.statement]
-Here is code where we want to create the _:ACTED_IN_ relationship between Michael Caine and the movie Batman Begins.
+Here is code where we want to create the _:ACTED_IN_ relationship between _Michael Caine_ and the movie _Batman Begins_.
 
 [source,cypher]
 ----
@@ -283,7 +283,7 @@ image::CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=1000,align=center]
 == Verifying the merge
 
 [.statement]
-Here is the code to display the nodes that have anything to do with Michael Caine.
+Here is the code to display the nodes that have anything to do with _Michael Caine_.
 
 [source,cypher]
 ----
@@ -315,8 +315,8 @@ ON MATCH SET a.birthPlace = 'UK'
 
 [.notes]
 --
-And here we see that only the exiting node with the name, Sir Michael Caine is updated with the new _birthPlace_.
-Furthermore, no new node is created for Sir Michael Caine.
+And here we see that only the existing node with the name, _Sir Michael Caine_ is updated with the new _birthPlace_.
+Furthermore, no new node is created for _Sir Michael Caine_.
 --
 
 image::UpdateToUK.png[UpdateToUK,width=400,align=center]
@@ -355,7 +355,7 @@ That's why in most cases you should first `MERGE` your nodes and then your relat
 === Use MERGE carefully
 
 
-Only if you intentionally want to create a node within the context of another (like a month within a year) then a MERGE pattern with one bound and one unbound node makes sense.
+Only if you intentionally want to create a node within the context of another (like a month within a year) then a `MERGE` clause with one bound and one unbound node makes sense.
 
 For example:
 

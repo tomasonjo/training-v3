@@ -11,7 +11,7 @@
 
 [.notes]
 --
-In many applications, you want to populate your graph with comes from data that was written to _.csv_ files or files of other types.
+In many applications, you want to populate your graph with data that was written to CSV files or files of other types.
 There are many nuances and best practices for loading data into a graph from files.
 In this lesson, you will be introduced to some simple steps for loading CSV data into your graph with Cypher.
 
@@ -19,13 +19,13 @@ At the end of this module, you should be able to:
 --
 
 [square]
-* Describe the steps for importing data with Cypher
+* Describe the steps for importing data with Cypher.
 * Prepare the graph and data for import:
 ** Inspect data.
 ** Determine if data needs to be transformed.
 ** Determine the size of the data that will be imported.
 ** Create the Constraints in the graph.
-* Import the data with `LOAD CSV`
+* Import the data with `LOAD CSV`.
 * Create indexes for newly-loaded data.
 
 == Loading data with Cypher
@@ -46,7 +46,7 @@ In Cypher, you can:
 CSV import is commonly used to import data into a graph.
 If you want to import data from CSV, you will need to first develop a model that describes how data from your CSV maps to data in your graph.
 
-Assuming that you have an agreed-upon data model, here are the basic steps you should follow for importing using Cypher:
+Assuming that you have an agreed-upon data model, here are the basic steps you should follow for importing using Cypher and CSV files:
 --
 [.statement]
 . Determine how the CSV file will be structured.
@@ -93,7 +93,7 @@ image::WithWithoutHeaders.png[WithWithoutHeaders,width=1400,align=center]
 --
 In these examples, the comma (,) is the field terminator.
 This is the default that Cypher uses.
-If you want to use a different field terminator, you must specify the `FIELDTERMINATOR` clause.
+If you want to use a different field terminator, you must specify the `FIELDTERMINATOR` symbol.
 --
 
 == Normalized data
@@ -258,7 +258,7 @@ image::TransformMovieData2.png[TransformMovieData2,width=1100,align=center]
 In additions, lists in a field may need to be transformed to usable lists in Cypher.
 As you can see in the data, the _genres_ field contains data separated by a colon (:).
 In fact, the _genres_ field is a string and we want to turn it into a Cypher list of string values.
-To do this, we use the `split()`  and `coalesce()' functions as shown here:
+To do this, we use the `split()`  and `coalesce()` functions as shown here:
 --
 
 [source,cypher]
@@ -329,7 +329,7 @@ endif::[]
 [.notes]
 --
 Once you have selected the _movies_ database, all Cypher statements will execute against this new database.
-You can switch between databases simply by selected them im the left Database pane.
+You can switch between databases simply by selected them in the left Database pane.
 --
 
 == Create constraints before loading the data
@@ -373,7 +373,7 @@ You should create additional indexes in the graph after the data is loaded.
 [.notes]
 --
 It is important for you to understand how much data will be loaded.
-By default LOAD CSV can handle the loading of up to 100K lines/rows.
+By default `LOAD CSV` can handle the loading of up to 100K lines/rows.
 
 You can query the size of your CSV files as follows:
 --
@@ -406,16 +406,16 @@ endif::[]
 [.notes]
 --
 The first option is to use `USING PERIODIC COMMIT LOAD CSV`.
-Placing `USING PERIODIC COMMIT` enables the load to commit its transactions every 1000 rows which will enable the entire import of a large file to succeed.
-However, there are certain type of Cypher constructs that will prevent `USING PERIODIC COMMIT` to be ignored.
+Placing `USING PERIODIC COMMIT` enables the load, by default, to commit its transactions every 1000 rows which will enable the entire import of a large file to succeed.
+However, there are certain types of Cypher constructs that will cause `USING PERIODIC COMMIT` to be ignored.
 Cypher statements that use _eager operators_ will prevent you from using `USING PERIODIC COMMIT`.
 Some examples of these eager operators include:
 
 [square]
-* collect()
-* count()
-* ORDER BY
-* DISTINCT
+* `collect()`
+* `ount()`
+* `ORDER BY`
+* `DISTINCT`
 
 If you cannot use `USING PERIODIC COMMIT` because your Cypher include some eager operators, then you can use APOC to import the data, which you will learn about in the the next lesson.
 --
@@ -442,9 +442,9 @@ MERGE (m:Movie {id:toInteger(row.movieId)})
 [.notes]
 --
 With this code, each line is read as _row_.
-Then we use the row field names (from the header row) to assign values to a new Movie node.
+Then we use the _row_ field names (from the header row) to assign values to a new Movie node.
 We use built-in functions to transform the string data in the row into values that are assigned to the properties of the _Movie_ node.
-`MERGE` is the best way to create this code because we have our uniqueness constraint defined for the _id_ property of the Movie node.
+`MERGE` is the best choice because we have our uniqueness constraint defined for the _id_ property of the Movie node.
 We use `split()` to set the value for the genres property which will be a list.
 --
 

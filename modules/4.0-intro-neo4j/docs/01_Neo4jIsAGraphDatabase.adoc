@@ -125,7 +125,7 @@ Mathematically, a node is defined as “a point where two or more edges (relatio
 This is not at all intuitive!
 However, it provides important insight into how graphs are used.
 Since the entire point of modeling data as a graph is to traverse a chain of linked nodes, one useful way of thinking about nodes is that they are waypoints along the traversal route.
-They contain information you need to decide which links are good ones to follow, and which should be ignored.
+They contain information and you need to decide which links are good ones to follow, and which should be ignored.
 Relationships are those links.
 --
 
@@ -169,7 +169,7 @@ In Neo4j traversal is optimized since that is how one performs queries in the gr
 --
 
 During traversal of a Neo4j graph, nodes may be visited more than once, but a relationship is only traversed once.
-This is called a path in Neo4j.
+This is called a *path* in Neo4j.
 
 [.is-half.left]
 --
@@ -225,7 +225,7 @@ endif::[]
 
 [.notes]
 --
-If you have ever tried to write a SQL statement with a large number of JOINs, you know that you quickly lose sight of what the query actually does, due to all tables that are required to connect the data.
+If you have ever tried to write a SQL statement with a large number of JOINs, you know that you quickly lose sight of what the query actually does, due to the number of tables that are required to connect the data.
 --
 
 [%unbreakable]
@@ -261,7 +261,7 @@ RETURN p.name
 The biggest value that graphs bring to an application is their ability to store relationships and connections as first-class entities.
 
 For instance, the early adopters of graph technology built their businesses around the value of data relationships.
-These companies have now become industry leaders: LinkedIn, Google, Facebook and PayPal.
+These companies have now become industry leaders: LinkedIn, Google, Facebook, and PayPal.
 --
 
 There are many uses for graph databases in an enterprise.
@@ -370,7 +370,7 @@ A Movie node has title and released properties.
 The ACTED_IN relationship has a roles property.
 --
 
-As you learn Cypher in this course, you will explore all of these node and relationship types in the graph,
+As you learn Cypher in this course, you will explore all of these node and relationship types in the graph.
 
 == Exploring graphgists
 
