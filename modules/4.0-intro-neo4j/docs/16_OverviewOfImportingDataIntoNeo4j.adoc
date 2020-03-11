@@ -30,7 +30,7 @@ Which option you choose depends on:
 
 === Options for importing data into Neo4j
 
-image::ImportOptions.png[ImportOptions,width=1300,align=center]
+image::ImportOptions.png[ImportOptions,width=1000,align=center]
 
 === Prepare for the import
 

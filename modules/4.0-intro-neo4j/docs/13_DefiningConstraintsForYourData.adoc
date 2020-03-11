@@ -93,7 +93,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this Cypher statement on the _Movie_ graph:
 endif::[]
 
-image::UniquenessFailed.png[UniquenessFailed,width=700,align=center]
+image::UniquenessFailed.png[UniquenessFailed,width=400,align=center]
 
 
 === Uniqueness at runtime

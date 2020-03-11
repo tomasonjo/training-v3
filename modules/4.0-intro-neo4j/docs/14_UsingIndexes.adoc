@@ -17,7 +17,8 @@ Next, you will learn about creating property and full-text schema indexes in the
 
 At the end of this module, you should be able to:
 [square]
-
+[.statement]
+--
 * Describe when indexes are used in Cypher.
 * Create a single property index.
 * Create a multi-property index.
@@ -27,6 +28,7 @@ At the end of this module, you should be able to:
 ** List indexes.
 ** Drop an index.
 ** Drop a full-text schema index.
+--
 
 == Indexes in Neo4j
 
@@ -259,7 +261,7 @@ ifndef::backend-revealjs[]
 And here is the result:
 endif::[]
 
-image::UseFullTextIndex1.png[UseFullTextIndex1,width=900,align=center]
+image::UseFullTextIndex1.png[UseFullTextIndex1,width=600,align=center]
 
 === Retrieving the score for a full-text search
 
@@ -442,11 +444,10 @@ Select the correct answer.
 [.summary]
 == Summary
 
-ifndef::backend-revealjs[]
 You should now be able to:
-endif::[]
+[.statement]
+--
 [square]
-
 * Describe when indexes are used in Cypher
 * Create a single property index
 * Create a multi-property index
@@ -456,6 +457,7 @@ endif::[]
 ** List indexes
 ** Drop an index
 ** Drop a full-text schema index
+--
 
 ////
 ++++

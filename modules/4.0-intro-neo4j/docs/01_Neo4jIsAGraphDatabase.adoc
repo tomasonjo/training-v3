@@ -217,6 +217,10 @@ ifdef::backend-pdf[]
 https://youtu.be/GM9bB4ytGao
 endif::[]
 
+ifdef::backend-revealjs[]
+kbd:[https://youtu.be/GM9bB4ytGao]
+endif::[]
+
 === Querying a graph is intuitive in Cypher
 
 [.notes]

@@ -57,7 +57,7 @@ In all, six relationships were traversed.
 
 [.is-half.left]
 --
-image::TheReplacementsTraversal.png[TheReplacementsTraversal,width=600,align=center]
+image::TheReplacementsTraversal.png[TheReplacementsTraversal,width=500,align=center]
 --
 
 === Specifying multiple `MATCH` patterns
@@ -71,7 +71,7 @@ Suppose we want to write queries that focus on movies released in the year _2000
 Here are the nodes and relationships for these movies:
 --
 
-image::Movies2000.png[Movies2000,width=800,align=center]
+image::Movies2000.png[Movies2000,width=700,align=center]
 
 [.notes]
 --
@@ -100,7 +100,7 @@ endif::[]
 
 [.is-half.right]
 --
-image::Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=400,align=center]
+image::Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=300,align=center]
 --
 
 [.notes]
@@ -161,7 +161,7 @@ If you click the warning symbol in the top left corner, it produces an explanati
 
 [.is-half.left]
 --
-image::CartesianProductWarning.png[CartesianProductWarning,width=600,align=center]
+image::CartesianProductWarning.png[CartesianProductWarning,width=500,align=center]
 --
 
 ifndef::backend-revealjs[]
@@ -195,7 +195,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::MegsCoActors.png[MegsCoActors,width=500,align=center]
+image::MegsCoActors.png[MegsCoActors,width=400,align=center]
 
 === Traversal with patterns
 

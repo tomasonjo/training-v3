@@ -48,26 +48,19 @@ If you want to import data from CSV, you will need to first develop a model that
 
 Assuming that you have an agreed-upon data model, here are the basic steps you should follow for importing using Cypher and CSV files:
 --
-[.statement]
+[.small]
+--
 . Determine how the CSV file will be structured.
-[.statement]
 . Determine if normalized or denormalized data.
-[.statement]
 . Ensure IDs to be used in the data are unique.
-[.statement]
-. Ensure data in CSV files is "clean".
-[.statement]
+. Ensure data in CSV files is "clean".]
 . Execute Cypher code to inspect the data.
-[.statement]
 . Determine if data needs to be transformed.
-[.statement]
 . Ensure constraints are created in the graph.
-[.statement]
 . Determine the size of the data to be loaded.
-[.statement]
 . Execute Cypher code to load the data.
-[.statement]
 . Add indexes to the graph.
+--
 
 == CSV file structure
 
@@ -87,7 +80,7 @@ Including headers in the CSV file reduces syncing issues, but if the size of the
 
 Here are examples of CSV files with and without headers:
 
-image::WithWithoutHeaders.png[WithWithoutHeaders,width=1400,align=center]
+image::WithWithoutHeaders.png[WithWithoutHeaders,width=1000,align=center]
 
 [.notes]
 --
@@ -223,13 +216,13 @@ If you want numeric data, then you must transform it with functions such as:
 --
 
 [square]
-* toInteger()
-* toFloat()
+* `toInteger()`
+* `toFloat()`
 
 [.statement]
 For example, we want to transform these field values to numbers as shown here:
 
-image::TransformMovieData1.png[TransformMovieData1,width=750,align=center]
+image::TransformMovieData1.png[TransformMovieData1,width=500,align=center]
 
 === Preview the data transformation
 
@@ -248,7 +241,7 @@ RETURN toFloat(line.avgVote), line.genres, toInteger(line.movieId),
        line.title, toInteger(line.releaseYear) LIMIT 10
 ----
 
-image::TransformMovieData2.png[TransformMovieData2,width=1100,align=center]
+image::TransformMovieData2.png[TransformMovieData2,width=700,align=center]
 --
 
 === Transforming lists
@@ -276,7 +269,7 @@ RETURN toFloat(line.avgVote), split(coalesce(line.genres,""), ":"),
 If all fields have data, then `split()` alone will work. If, however, some fields may have no values and you want an empty list created for the property, then you should use `split()` together with `coalesce()`.
 --
 
-image::TransformMovieData3.png[TransformMovieData3,width=1000,align=center]
+image::TransformMovieData3.png[TransformMovieData3,width=700,align=center]
 
 [.slide-title.has-green-background.has-team-background]
 == *Guided Exercise: Creating a new database*
@@ -470,7 +463,7 @@ Both the *directors.csv* and *roles.csv* files contain information about how Mov
 In this example, we import the data to create the relationships between existing _Movie_ and _Person_ nodes:
 --
 
-[source,cypher]
+[source.fit,cypher]
 ----
 LOAD CSV WITH HEADERS FROM
 https://data.neo4j.com/v4.0-intro-neo4j/directors.csv' AS row
@@ -499,7 +492,7 @@ ifndef::backend-revealjs[]
 So for example:
 endif::[]
 
-[source,cypher]
+[source.fit,cypher]
 ----
 // Do this only after ALL data has been imported
 CREATE INDEX MovieTitleIndex ON (m:Movie) FOR (m.title);

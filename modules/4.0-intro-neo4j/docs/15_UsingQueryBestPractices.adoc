@@ -77,7 +77,7 @@ You can even specify a Cypher expression to the right of `+=>+` to set the value
 [.statememnt]
 Here is the result of executing the `:param` command:
 
-image::SetActorNameParameter.png[SetActorNameParameter,width=600,align=center]
+image::SetActorNameParameter.png[SetActorNameParameter,width=400,align=center]
 
 [.notes]
 --
@@ -144,7 +144,7 @@ ifndef::backend-revealjs[]
 With the result:
 endif::[]
 
-image::TomCruiseAndTopGun.png[TomCruiseAndTopGun,width=1000,align=center]
+image::TomCruiseAndTopGun.png[TomCruiseAndTopGun,width=600,align=center]
 
 [.notes]
 --
@@ -218,7 +218,7 @@ RETURN p.name, m.title, m.released
 Here is the query plan returned:
 --
 
-image::EXPLAIN.png[EXPLAIN,width=1200,align=center]
+image::EXPLAIN.png[EXPLAIN,width=700,align=center]
 
 [.notes]
 --
@@ -237,7 +237,7 @@ With `EXPLAIN`, the query does not run, the graph engine simply produces the que
 Here is the query plan with its steps expanded:
 --
 
-image::EXPLAIN2.png[EXPLAIN2,width=1100,align=center]
+image::EXPLAIN2.png[EXPLAIN2,width=800,align=center]
 
 [.notes]
 --
@@ -340,14 +340,14 @@ After a while, we see that the query has completed, but in the Neo4j Browser cli
 In this case, all you can do to stop the query from the client is to close/kill the client.
 --
 
-image::ListQueries2.png[ListQueries2,width=800,align=center]
+image::ListQueries2.png[ListQueries2,width=500,align=center]
 
 [.notes]
 --
 Here is a screenshot where we are monitoring a long-running (Example B) query in another Neo4j Browser session:
 --
 
-image::ListQueries3.png[ListQueries3,width=800,align=center]
+image::ListQueries3.png[ListQueries3,width=500,align=center]
 
 === Example: Killing a long-running query
 

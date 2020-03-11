@@ -43,7 +43,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::Duplication.png[Duplication,width=600,align=center]
+image::Duplication.png[Duplication,width=500,align=center]
 
 == Eliminating duplication
 
@@ -89,7 +89,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::DuplicationInCollection.png[DuplicationInCollection,width=800,align=center]
+image::DuplicationInCollection.png[DuplicationInCollection,width=500,align=center]
 --
 
 === Eliminating duplication in lists
@@ -162,7 +162,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::Ordering.png[Ordering,width=800,align=center]
+image::Ordering.png[Ordering,width=600,align=center]
 --
 
 === Ordering multiple results
@@ -182,7 +182,7 @@ WHERE p.name = 'Tom Hanks'OR p.name = 'Keanu Reeves'
 RETURN DISTINCT m.title, m.released ORDER BY m.released DESC , m.title
 ----
 
-image::Ordering2.png[Ordering2,width=400,align=center]
+image::Ordering2.png[Ordering2,width=350,align=center]
 
 [.statement]
 There is no limit to the number of properties you can order by.
@@ -212,7 +212,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::Limit.png[Limit,width=600,align=center]
+image::Limit.png[Limit,width=500,align=center]
 --
 
 == Limiting number of intermediate results

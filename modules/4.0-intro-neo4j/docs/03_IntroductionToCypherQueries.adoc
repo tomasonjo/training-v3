@@ -14,6 +14,8 @@ Cypher is the query language you use to retrieve data from the Neo4j Database, a
 --
 
 At the end of this module, you should be able to write Cypher statements to:
+[.small]
+--
 [square]
 * Retrieve nodes from the graph.
 * Filter nodes retrieved using labels and property values of nodes.
@@ -24,6 +26,7 @@ Throughout this training, you should refer to:
 [square]
 * https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
 * http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+--
 
 === What is Cypher?
 
@@ -129,26 +132,21 @@ Notice that a node must have the parentheses. The labels and the variable for a 
 
 ==== Examples specifying nodes
 
-[%unbreakable]
---
-[source.center,cypher]
+Here are some examples of specifying nodes:
+
+[source,cypher]
 ----
 // anonymous node not be referenced later in the query
 ()
-
 // variable p, a reference to a node used later
 (p)
-
 // anonymous node of type Person
 (:Person)
-
 // p, a reference to a node of type Person
 (p:Person)
-
 // p, a reference to a node of types Actor and Director
 (p:Actor:Director)
 ----
---
 
 [.notes]
 --
@@ -229,11 +227,10 @@ The _variable_ must be specified here, otherwise the query will have nothing to 
 
 ===  Example `MATCH` and `RETURN`
 
-ifndef::backend-revealjs[]
-Here are example queries to the _Movie_ database:
-endif::[]
 
-[source.center,cypher]
+Here we retrieve all nodes:
+
+[source.fit,cypher]
 ----
 MATCH (n) 			// returns all nodes in the graph
 RETURN n
@@ -336,7 +333,7 @@ Here is what you will see in the result pane when you call the method to return 
 This result stream contains all property keys in the graph. It does not display which nodes utilize these property keys.
 
 
-image::call_db.PropertyKeys.png[call_db.PropertyKeys,width=700,align=center]
+image::call_db.PropertyKeys.png[call_db.PropertyKeys,width=600,align=center]
 --
 
 === Syntax: Retrieving nodes filtered by a property value
@@ -620,16 +617,19 @@ endif::[]
 
 === Examining relationships
 
-[.notes]
+[.statement]
 --
 You can run `CALL db.schema.visualizaton()` to view the relationship types in the graph.
 In the _Movie_ graph, we see these relationships between the nodes:
+--
 
+[.notes]
+--
 Here we see that this graph has a total of 6 relationship types between the nodes. Some _Person_ nodes are connected to other _Person_ nodes using the _FOLLOWS_ relationship type.
 All of the other relationships in this graph are from _Person_ nodes to _Movie_ nodes.
 --
 
-image::call_db.schema-relationships.png[call_db.schema-relationships,width=800,align=center]
+image::call_db.schema-relationships.png[call_db.schema-relationships,width=500,align=center]
 
 === Using a relationship in a query
 
@@ -805,7 +805,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::MatrixRelationshipTypes.png[MatrixRelationshipTypes,width=900,align=center]
+image::MatrixRelationshipTypes.png[MatrixRelationshipTypes,width=600,align=center]
 --
 
 === Properties for relationships
@@ -1030,7 +1030,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::TraversalInTwoDirections.png[TraversalInTwoDirections,width=1000,align=center]
+image::TraversalInTwoDirections.png[TraversalInTwoDirections,width=500,align=center]
 --
 
 [.notes]

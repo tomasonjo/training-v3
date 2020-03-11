@@ -74,7 +74,7 @@ ifndef::backend-revealjs[]
 With this result returned:
 endif::[]
 
-image::AggregationWithCountm.png[AggregationWithCountm,width=800,align=center]
+image::AggregationWithCountm.png[AggregationWithCountm,width=700,align=center]
 
 [.notes]
 --
@@ -148,7 +148,7 @@ image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=500,align=ce
 [.statement]
 Here is the result returned viewed as a table. Each node is an object in the list returned:
 
-image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=400,align=center]
+image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=300,align=center]
 --
 
 ==== Counting and collecting
@@ -242,7 +242,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::CastList1.png[CastList1,width=650,align=center]
+image::CastList1.png[CastList1,width=550,align=center]
 --
 
 [.notes]
@@ -267,7 +267,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::CastList2.png[CastList2,width=900,align=center]
+image::CastList2.png[CastList2,width=700,align=center]
 --
 
 ==== Accessing elements of the list
@@ -363,7 +363,7 @@ RETURN m { .title, .released } AS movie
 [.statement]
 Here is what is returned, the movie node data with only the _title_ and _released_ values:
 
-image::MapProjection.png[MapProjection,width=700,align=center]
+image::MapProjection.png[MapProjection,width=600,align=center]
 --
 
 [.notes]

@@ -202,7 +202,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::CALLsubquery.png[CALLsubquery,width=900,align=center]
+image::CALLsubquery.png[CALLsubquery,width=700,align=center]
 
 [.statement]
 The variable _m_ used in the subquery is used in the next query.

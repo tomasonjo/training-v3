@@ -142,7 +142,7 @@ Here is the result of running this Cypher example.
 We do not find a node with the label _Actor_ so the graph engine creates one.
 --
 
-image::MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=600,align=center]
+image::MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=500,align=center]
 
 
 [.small]
@@ -226,7 +226,7 @@ endif::[]
 
 image::MichaelCainesAndOneRel.png[MichaelCainesAndOneRel,width=600,align=center]
 
-=== Example: Using `MERGE`
+=== Example: Using `MERGE` to create relationship
 
 [.statement]
 Here is code where we want to create the _:ACTED_IN_ relationship between _Michael Caine_ and the movie _Batman Begins_.
@@ -242,7 +242,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this code:
 endif::[]
 
-image::MergeToCreateRel.png[MergeToCreateRel,width=1000,align=center]
+image::MergeToCreateRel.png[MergeToCreateRel,width=600,align=center]
 
 [.notes]
 --
@@ -321,7 +321,7 @@ And here we see that only the existing node with the name, _Sir Michael Caine_ i
 Furthermore, no new node is created for _Sir Michael Caine_.
 --
 
-image::UpdateToUK.png[UpdateToUK,width=400,align=center]
+image::UpdateToUK.png[UpdateToUK,width=300,align=center]
 
 === Using `MERGE` to create relationships
 

@@ -18,7 +18,7 @@ At the end of this module, you should be able to:
 
 The Neo4j Graph Platform includes components that enable you to develop your graph-enabled application.
 
-image::Neo4jPlatform.png[Neo4jPlatform,width=1000,align=center]
+image::Neo4jPlatform.png[Neo4jPlatform,width=700,align=center]
 
 [.notes]
 --
@@ -165,8 +165,12 @@ Neo4j clusters are only available with Neo4j Enterprise Edition.
 
 === Neo4j DBMS: Graph engine
 
+image::Neo4jDatabase.png[Neo4jDatabase,width=300,align=center]
+
+[.statement]
 The Neo4j graph engine is used to interpret Cypher statements and also executes kernel-level code to store and retrieve data, whether it is on disk, or cached in memory. 
 The graph engine has been improved with every release of Neo4j to provide the most efficient access to an application's graph data. There are many ways that you can tune the performance of the engine to suit your particular application needs. 
+
 
 == Neo4j Aura
 
@@ -241,7 +245,7 @@ It includes an application called  Neo4j Browser which is the UI you use to acce
 image::Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
 
 [.statement]
-The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
+The Neo4j Desktop runs on image::, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
 
 ifdef::backend-html5,backend-pdf[]
 These videos show how to install and get started using Neo4j Desktop.
@@ -297,8 +301,9 @@ Many of the graph applications supported by Neo4j are the work of https://neo4j.
 Some graph applications are supported by Neo4j and some are not, so you must be aware of the type of support you can receive for a particular graph application.
 You typically install graph applications from your Neo4j Desktop environment from https://install.graphapp.io/.
 --
+Here are some Neo4j graph applications:
 
-image::GraphApps.png[GraphApps,width=900,align=center]
+image::GraphApps.png[GraphApps,width=700,align=center]
 
 === Some Neo4j graph applications
 
@@ -355,7 +360,7 @@ You typically use it to access a database that is running locally, but you can u
 [.statement]
 If you save your frequently-used Cypher code in *favorites*, you can download them so you can use them elsewhere (like in your application code).
 
-image::Neo4jBrowser.png[Neo4jBrowser,width=700,align=center]
+image::Neo4jBrowser.png[Neo4jBrowser,width=600,align=center]
 
 
 === 2. Use Neo4j Browser Web browser interface
@@ -363,7 +368,7 @@ image::Neo4jBrowser.png[Neo4jBrowser,width=700,align=center]
 [.statement]
 You can use the Web interface to access to access a local Neo4j DBMS, or a database in Neo4j Aura or Neo4j Sandbox.
 
-image::WebNeo4jBrowser.png[WebNeo4jBrowser,width=900,align=center]
+image::WebNeo4jBrowser.png[WebNeo4jBrowser,width=600,align=center]
 
 [.notes]
 --
@@ -388,6 +393,9 @@ Show the students the basics of using Neo4j Browser and have them do the same on
 . Show how to display the entire query pane with ESC.
 . Show hot to minimize a window.
 . Show how to pin a window.
+
+Here is the video:  https://youtu.be/oHo-lQ79zf0
+
 endif::[]
 --
 
@@ -395,12 +403,15 @@ ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with common tasks in Neo4j Browser.
 endif::[]
 
-
 ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-html5,backend-revealjs[]
+ifdef::backend-revealjs[]
+kbd:[https://youtu.be/oHo-lQ79zf0]
+endif::[]
+
+ifdef::backend-html5[]
 [.center]
 video::oHo-lQ79zf0[youtube,width=560,height=315]
 endif::[]
@@ -440,7 +451,6 @@ Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that
 
 == cypher-shell
 
-
 image::cypher-shell.png[cypher-shell,width=500,align=center]
 
 [.statement]
@@ -476,11 +486,15 @@ GraphQL is an open-source query language for querying parts of a graph. It is no
 A very popular library for graph visualization is neoviz.js, another project of Neo4j Labs.
 --
 
-image::Plugins.png[Plugins,width=900,align=center]
+Here are the plugins that come with Neo4j Desktop:
+
+image::Plugins.png[Plugins,width=700,align=center]
 
 == Drivers and language support
 
-image::Drivers.png[Drivers,width=600,align=center]
+Here are some drivers that Neo4j supports:
+
+image::Drivers.png[Drivers,width=400,align=center]
 
 [.notes]
 --

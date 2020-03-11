@@ -94,7 +94,7 @@ RETURN p.name, m.title, m.released
 
 Here is the result:
 
-image::MoviesBetween2003And2004.png[MoviesBetween2003And2004,width=800,align=center]
+image::MoviesBetween2003And2004.png[MoviesBetween2003And2004,width=600,align=center]
 
 ==== Example: Specifying a range differently
 
@@ -266,11 +266,10 @@ WHERE p.name =~'Tom.*'
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+[.statement]
 Here is the result:
-endif::[]
 
-image::MatchTomsRegex.png[MatchTomsRegex,width=800,align=center]
+image::MatchTomsRegex.png[MatchTomsRegex,width=400,align=center]
 
 
 [NOTE]
@@ -296,11 +295,11 @@ MATCH (p:Person)-[:WROTE]->(m:Movie)
 RETURN p.name, m.title
 ----
 
-ifndef::backend-revealjs[]
+[.statement]
 Here is the result:
-endif::[]
 
-image::WroteMovies.png[WroteMovies,width=700,align=center]
+
+image::WroteMovies.png[WroteMovies,width=400,align=center]
 --
 
 ====  Example: Testing with patterns - 2
@@ -317,11 +316,10 @@ WHERE NOT exists( (p)-[:DIRECTED]->(m) )
 RETURN p.name, m.title
 ----
 
-ifndef::backend-revealjs[]
+[.statement]
 Here is the result:
-endif::[]
 
-image::WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=800, align=center]
+image::WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=400, align=center]
 --
 
 ==== Example: Testing with patterns - 3
@@ -338,12 +336,10 @@ WHERE gene.name= 'Gene Hackman'
 AND exists( (other)-[:DIRECTED]->(m) )
 RETURN  gene, other, m
 ----
-
-ifndef::backend-revealjs[]
+[.statement]
 Here is the result:
-endif::[]
 
-image::ExistsPattern.png[ExistsPattern,width=600,align=center]
+image::ExistsPattern.png[ExistsPattern,width=400,align=center]
 --
 
 ==== Testing with list values
@@ -375,7 +371,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::UsingIN.png[UsingIN,width=800,align=center]
+image::UsingIN.png[UsingIN,width=400,align=center]
 --
 
 ==== Testing list values in the graph

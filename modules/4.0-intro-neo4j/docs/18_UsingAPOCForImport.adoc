@@ -54,7 +54,7 @@ YIELD name WHERE name STARTS WITH "apoc"
 RETURN name
 ----
 
-image::APOCInstalled.png[APOCInstalled,width=700,align=center]
+image::APOCInstalled.png[APOCInstalled,width=600,align=center]
 
 == Using APOC to clear the graph
 
@@ -93,11 +93,11 @@ And as you have already learned, with APOC, you can load large datasets that wil
 Just as you inspect the data, determine if data needs to be transformed, and create uniqueness constraints before the import with `LOAD CSV`,
 you must do the same when using APOC for the import.
 --
-[.statement]
 
+[.statement]
 Here is an example of the various types of loading procedures you can use in APOC:
 
-image::APOCLOADProcedures.png[APOCLOADProcedures,width=1100,align=center]
+image::APOCLOADProcedures.png[APOCLOADProcedures,width=800,align=center]
 
 == Using APOC for conditional processing
 
@@ -321,7 +321,7 @@ We then `UNWIND` the data and return each question, _q_.
 Here is the result:
 --
 
-image::ExamineJSONData.png[ExamineJSONData,width=1000,align=center]
+image::ExamineJSONData.png[ExamineJSONData,width=600,align=center]
 
 === Viewing keys in the JSON data
 
@@ -347,7 +347,7 @@ We then `UNWIND` the data and return each question, _q_.
 Here is the result:
 --
 
-image::ExamineJSONDataKeys.png[ExamineJSONDataKeys,width=1300,align=center]
+image::ExamineJSONDataKeys.png[ExamineJSONDataKeys,width=800,align=center]
 
 === Viewing data that will be loaded
 
