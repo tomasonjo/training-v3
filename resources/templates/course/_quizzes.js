@@ -167,14 +167,14 @@ document.addEventListener('DOMContentLoaded', function () {
     quizElement.find('h3').css('color', '#525865')
     quizElement.find('.required-answer').each(function () {
       if (!$(this).prev(':checkbox').prop('checked')) {
-        $(this).closest('.ulist').siblings('h3').css('color', '#F44336');
-        quizSuccess = false;
+        $(this).closest('.ulist').siblings('h3').css('color', '#F44336')
+        quizSuccess = false
       }
     })
     quizElement.find('.false-answer').each(function () {
       if ($(this).prev(':checkbox').prop('checked')) {
-        $(this).closest('.ulist').siblings('h3').css('color', '#F44336');
-        quizSuccess = false;
+        $(this).closest('.ulist').siblings('h3').css('color', '#F44336')
+        quizSuccess = false
       }
     })
     if (quizSuccess && currentQuizStatus && currentQuizStatus.passed) {
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(iframe)
     if (nextTimeout) {
       setTimeout(function () {
-        attemptRenewToken(nextTimeoutSilent, nextTimeout, nextTimeoutSilent);
+        attemptRenewToken(nextTimeoutSilent, nextTimeout, nextTimeoutSilent)
       }, nextTimeout)
     }
   }
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function checkTokenExpiration(idToken) {
-    var decodedToken = jwt_decode(idToken);
+    var decodedToken = jwt_decode(idToken)
     var expiresIn = getTimeDiff(Date.now(), (decodedToken.exp) * 1000)
     if (expiresIn.days > 0 || expiresIn.hours > 0) {
       // token is good.
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   updateProgressIndicators(currentQuizStatus)
 
-  var idToken = Cookies.get('com.neo4j.accounts.idToken');
+  var idToken = Cookies.get('com.neo4j.accounts.idToken')
   if (idToken) {
     // we're authenticated!
     // check if the token is not expired (or will expire soon)

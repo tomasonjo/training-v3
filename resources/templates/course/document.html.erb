@@ -123,6 +123,7 @@ require 'json'
 </style>
 <%# Intercom widget %>
 <script>
+  /* global Cookies */
   window.intercomSettings = {
     app_id: "<%= attr('intercom-app-id') %>",
     hide_default_launcher: true
@@ -161,6 +162,20 @@ require 'json'
     }
   })()
   document.addEventListener('DOMContentLoaded', function () {
+    var userInfoIntercom = Cookies.getJSON('com.neo4j.accounts.userInfo')
+    if (userInfoIntercom) {
+      try {
+        Intercom('update', {
+          app_id: '<%= attr('intercom-app-id') %>',
+          name: userInfoIntercom.name,
+          email: userInfoIntercom.email,
+          user_id: userInfoIntercom.sub,
+          hide_default_launcher: true
+        })
+      } catch (err) {
+        console.error('Unable to call Intercom with user info', err)
+      }
+    }
     Intercom('trackEvent','course-<%= attr('module-name') %>-<%= attr('slug') %>')
   })
 </script>
