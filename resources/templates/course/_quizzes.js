@@ -1,7 +1,8 @@
 /* global $, Cookies, jwt_decode */
 document.addEventListener('DOMContentLoaded', function () {
 
-  var gradeQuizElement = $('[data-action="grade-quiz"]')
+  var gradeQuizActionElement = $('[data-action="grade-quiz"]')
+  var quizElement = $('.quiz').first()
   var siteUrl = window.location.href
 
   var getTimeDiff = function (time1, time2) {
@@ -121,13 +122,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentQuizStatus) {
       if (currentQuizStatus.passed) {
         if (currentQuizStatus.passed.indexOf(trainingPartName) !== -1) {
-          var gradeQuizButton = gradeQuizElement.first()
-          gradeQuizButton.hide()
-          var gradeQuizElement = $('.quiz').first()
-          gradeQuizElement.find('.required-answer').each(function () {
+          gradeQuizActionElement.hide()
+          quizElement.find('.required-answer').each(function () {
             $(this).prev(':checkbox').prop('checked', true)
           })
-          gradeQuizElement.find('.false-answer').each(function () {
+          quizElement.find('.false-answer').each(function () {
             $(this).prev(':checkbox').prop('checked', false)
           })
         }
@@ -157,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  function gradeQuiz(quizElement, slug) {
+  function gradeQuiz(slug) {
     if (currentQuizStatus && currentQuizStatus.passed && currentQuizStatus.passed.indexOf(slug) !== -1) {
       // already passed!
       return true
@@ -217,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // events
 
-  gradeQuizElement.click(function (event) {
+  gradeQuizActionElement.click(function (event) {
     event.preventDefault()
 
     var quizResultElement = $('#quiz-result')
@@ -226,8 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var target = event.target
-    var hrefSuccess = target.href
-    var quizSuccess = gradeQuiz($('.quiz').first(), target.dataset.slug)
+    var quizSuccess = gradeQuiz(target.dataset.slug)
     if (quizSuccess) {
       $(target).before('<div id="quiz-result">' +
         '<p class="paragraph">' +
