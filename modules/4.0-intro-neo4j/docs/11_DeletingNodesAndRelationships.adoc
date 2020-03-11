@@ -17,9 +17,9 @@ Next, you will learn how to delete nodes and relationships in the graph.
 At the end of this module, you should be able to write Cypher statements to:
 [square]
 
-* Delete a node
-* Delete a relationship
-* Delete a node and its relationships
+* Delete a node.
+* Delete a relationship.
+* Delete a node and its relationships.
 
 
 == Deleting nodes
@@ -251,9 +251,9 @@ Select the correct answer.
 You should now be able to write Cypher statements to:
 [square]
 
-* Delete a node
-* Delete a relationship
-* Delete a node and its relationships
+* Delete a node.
+* Delete a relationship.
+* Delete a node and its relationships.
 
 ////
 == Grade Quiz and Continue 

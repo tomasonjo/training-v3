@@ -178,6 +178,7 @@ SET x:Label         // adding one label to node referenced by the variable x
 SET x:Label1:Label2	// adding two labels to node referenced by the variable x
 ----
 
+[.statement]
 If you attempt to add a label to a node for which the label already exists, the `SET` processing is ignored.
 
 === Example: Adding labels to a node
@@ -448,7 +449,7 @@ RETURN m
 [.statement]
 Assuming that we have previously created the node for the movie with the these properties, here is the result of running this Cypher statement where we remove each property a different way. One way we remove the property using the `SET` clause to set the property to null. And in another way, we use the `REMOVE` clause.
 
-image::RemoveProperties.png[RemoveProperties,width=800,align=center]
+image::RemoveProperties.png[RemoveProperties,width=700,align=center]
 
 [.student-exercise]
 == Exercise 9: Creating nodes

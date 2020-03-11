@@ -1,4 +1,4 @@
-= Using WHERE to filter queries
+= Using WHERE to Filter Queries
 :slug: 04-using-where-to-filter-queries
 :doctype: book
 :toc: left
@@ -16,6 +16,8 @@ Cypher provides a rich set of `MATCH` clauses and keywords you can use to get mo
 --
 
 At the end of this module, you should be able to write Cypher `WHERE` clauses for testing:
+[.small]
+--
 [square]
 * Equality.
 * Multiple values.
@@ -26,6 +28,7 @@ At the end of this module, you should be able to write Cypher `WHERE` clauses fo
 * Regular expressions.
 * Patterns in the graph.
 * Inclusion in a list.
+--
 
 === Testing equality
 
@@ -163,7 +166,7 @@ ifndef::backend-revealjs[]
 Here is the result of running this second query:
 endif::[]
 
-image::TestLabels.png[TestLabels,width=600,align=center]
+image::TestLabels.png[TestLabels,width=500,align=center]
 --
 
 [.notes]
@@ -340,7 +343,7 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::ExistsPattern.png[ExistsPattern,width=650,align=center]
+image::ExistsPattern.png[ExistsPattern,width=600,align=center]
 --
 
 ==== Testing with list values
@@ -398,17 +401,19 @@ ifndef::backend-revealjs[]
 Here is the result:
 endif::[]
 
-image::UsingINRoles.png[UsingINRoles,width=800,align=center]
+image::UsingINRoles.png[UsingINRoles,width=600,align=center]
 
 ifndef::backend-revealjs[]
 Later in this course, you will learn how to create lists from your queries by aggregating data in the graph.
 endif::[]
 
-
+[.small]
+--
 [NOTE]
-[.statement]
 There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses.
 You can learn more about these syntax elements in the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] and the https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard].
+--
+
 --
 
 [.slide-title.has-green-background.has-team-background]
@@ -491,6 +496,8 @@ Select the correct answer.
 == Summary
 
 You should now be able to write Cypher `WHERE` clauses to test:
+[.small]
+--
 [square]
 * Equality.
 * Multiple values.
@@ -501,7 +508,7 @@ You should now be able to write Cypher `WHERE` clauses to test:
 * Regular expressions.
 * Patterns in the graph.
 * Inclusion in a list.
-
+--
 ////
 == Grade Quiz and Continue 
 

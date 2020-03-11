@@ -37,6 +37,8 @@ These include:
 --
 In this lesson, you will learn how to use the import feature of `neo4j-admin`.
 You should use `neo4j-admin` for import when you have extremely large amounts of data to import, for example greater than 10M nodes.
+
+You will load data into a crimes database that is much larger than the databases you have been working with.
 --
 
 == Preparing for import

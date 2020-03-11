@@ -229,7 +229,7 @@ If you want numeric data, then you must transform it with functions such as:
 [.statement]
 For example, we want to transform these field values to numbers as shown here:
 
-image::TransformMovieData1.png[TransformMovieData1,width=850,align=center]
+image::TransformMovieData1.png[TransformMovieData1,width=750,align=center]
 
 === Preview the data transformation
 
@@ -399,7 +399,7 @@ If the number of rows exceeds 100K, then you have two options.
 
 ifdef::backend-revealjs[]
 
-. `USING PERIODIC COMMIT LOAD CSV`
+. `USING PERIODIC COMMIT LOAD CSV`.
 . Use the APOC library.
 endif::[]
 
@@ -545,7 +545,7 @@ Select the correct answer.
 === Question 2
 
 [.statement]
-What should you add to the graph before you import using LOAD CSV?
+What should you add to the graph before you import using `LOAD CSV`?
 
 [.statement]
 Select the correct answer.
@@ -559,7 +559,7 @@ Select the correct answer.
 === Question 3
 
 [.statement]
-In general, what is the maximum rows you can process using LOAD CSV?
+In general, what is the maximum rows you can process using `LOAD CSV`?
 
 [.statement]
 Select the correct answer.
@@ -584,7 +584,7 @@ endif::[]
 ** Determine if data needs to be transformed.
 ** Determine the size of the data that will be imported.
 ** Create the Constraints in the graph.
-* Import the data with `LOAD CSV`
+* Import the data with `LOAD CSV`.
 * Create indexes for newly-loaded data.
 
 ////

@@ -54,7 +54,7 @@ YIELD name WHERE name STARTS WITH "apoc"
 RETURN name
 ----
 
-image::APOCInstalled.png[APOCInstalled,width=900,align=center]
+image::APOCInstalled.png[APOCInstalled,width=700,align=center]
 
 == Using APOC to clear the graph
 

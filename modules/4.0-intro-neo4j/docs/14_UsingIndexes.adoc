@@ -12,7 +12,7 @@
 --
 You have learned how to define both uniqueness and existence constraints for your data.
 A uniqueness constraint is also an index where the default implementation is a b-tree structure.
-Next, you will learn about creating property and fulltext schema indexes in the graph.
+Next, you will learn about creating property and full-text schema indexes in the graph.
 --
 
 At the end of this module, you should be able to:
@@ -22,7 +22,7 @@ At the end of this module, you should be able to:
 * Create a single property index.
 * Create a multi-property index.
 * Create a full-text schema index.
-* Use a fulltext schema index.
+* Use a full-text schema index.
 * Manage indexes:
 ** List indexes.
 ** Drop an index.
@@ -313,7 +313,7 @@ Please see the _Cypher Reference Manual_ for more on using full-text schema inde
 == Managing Indexes
 
 [.statement]
-You have already see the three types of indexes in our database thus far using this Cypher statement:
+You have already seen the three types of indexes in our database thus far using this Cypher statement:
 
 [source,cypher]
 ----

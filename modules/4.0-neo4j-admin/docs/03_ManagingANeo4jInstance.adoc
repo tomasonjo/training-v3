@@ -28,9 +28,13 @@ At the end of this module, you should be able to:
 
 == Neo4j instance files
 
+[.notes]
+--
 Depending on your platform, a Neo4j instance's files are, by default, placed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
 Here is a brief overview of the default directories you will frequently use for managing the Neo4j instance in Debian.
-
+--
+[.small]
+--
 [cols="20,80", options="header",stripes="none"]
 |====
 
@@ -48,27 +52,35 @@ Tools
 |The */var/lib/neo4j/data* directory contains the database(s).
 |====
 {set:cellbgcolor!}
+--
 
 == Post-installation preparation 
 
 In this training, all screenshots and examples are shown using Neo4j Enterprise Edition installed as a Debian package.
 In your real application environment, if your system is different, you will need to adjust file locations and how you manage the Neo4j instance.
 
+[.notes]
+--
 When you are setting up a production environment, you want to control who can manage the Neo4j instance.
 You will also want to control when the Neo4j instance starts as you will performing some configuration changes and database operations that may require that the instance to be stopped.
 
 When Neo4j is installed as a Debian package, the _neo4j_ service is disabled. On most platforms, the Neo4j instance is not automatically started.
+--
 
 === Post-install: Changing the _neo4j_ password for the Neo4j instance
 
+[.statement]
 After you install Neo4j and before you start the Neo4j instance, a best practice is to change the default password for the user _neo4j_.
 You do this on all platforms, except when you have installed a Debian package.
 You will learn about changing the _neo4j_ password on Debian later in this module as we use Debian for this course.
 
+
+[.statement]
 On systems, other than Debian, you change the password for the _neo4j_ user by executing the following command:
 
 `[sudo] bin/neo4j-admin set-initial-password newPassword`
 
+[.statement]
 where _newPassword_ is a password you will remember.
 
 [NOTE]
@@ -89,65 +101,103 @@ You will perform these steps later in the Exercise 2.
 
 == Managing the Neo4j instance
 
-When the instance is started, it creates a database directory named *neo4j* in the default location which is a directory under */var/lib/neo4j/data/databases*. You can start and stop the instance regardless of whether the _neo4j_ service is enabled.
+[.small]
+--
+When the instance is started, it creates a database directory named *neo4j* in the default location which is a directory under */var/lib/neo4j/data/databases*.
+--
 
-You start, stop, restart, and check the status of the Neo4j instance on Debian as follows:
+[.notes]
+--
+You can start and stop the instance regardless of whether the _neo4j_ service is enabled.
+--
+
+[.is-half.left.small]
+--
+Here is how  you manage the Neo4j instance on Debian:
 
 [square]
 * `[sudo] systemctl start neo4j`
 * `[sudo] systemctl stop neo4j`
 * `[sudo] systemctl restart neo4j`
 * `systemctl status neo4j`
+--
 
-You start, stop, restart and check the status of the Neo4j instance on non-Debian systems as follows:
+[.is-half.right.small]
+--
+Here is how  you manage the Neo4j instance on non-Debian systems:
 
 [square]
 * `[sudo] bin/neo4j start`
 * `[sudo] bin/neo4j stop`
 * `[sudo] bin/neo4j restart`
 * `bin/neo4j status`
+--
 
+[.statement]
 When the Neo4j instance starts, it opens the database, and writes to the directories for the database and to the log file.
+
 
 === Checking the status of the instance
 
+[.notes]
+--
 At any time, you can check the status of the Neo4j instance.
 
 You check the status of the instance as follows:
+--
 
 `systemctl status neo4j`
 
+[.notes]
+--
 Here is an example where we check the status of the Neo4j instance:
+--
 
-image::Neo4j_started.png[Neo4j_started,width=800,align=center]
+image::Neo4j_started.png[Neo4j_started,width=1200,align=center]
 
+[.notes]
+--
 Here we see that the instance is started. Notice that the service is disabled as well.
 After the instance is started you can identify the process ID (Main PID) from the status command on Debian.
 It is sometimes helpful to know the process ID of the Neo4j instance (JVM) in the event that it is unresponsive and you must kill it.
 
 However, knowing whether the instance is started (active) is generally not sufficient, especially if you have made some configuration changes.
 You can view details of the Neo4j instance by examining the log file.
+--
 
 === Viewing the neo4j log
 
+[.notes]
+--
 The status command gives you a short glimpse of the status of the Neo4j instance. In some cases, although the instance is _active_, it may not have started successfully. You may want to examine more information about the instance, such as the directories it is using at runtime and information about activity against the instance, and especially if any errors occurred during startup. As an administrator, you should become familiar with the types of records that are written to the log files for the Neo4j instance.
+--
 
+[.small]
+--
 You can view the log file for the instance on Debian as follows:
 
 [square]
 * `journalctl -u neo4j`  to view the entire neo4j log file.
 * `journalctl -e -u neo4j` to view the end of the neo4j log file.
 * `journalctl -u neo4j -b > neo4j.log` where you can view *neo4j.log* in an editor.
+--
 
+[.notes]
+--
 Here is the result from `journalctl` where we want to view then end of the log file:
+--
 
-image::JournalEnd.png[JournalEnd,width=800,align=center]
+image::JournalEnd.png[JournalEnd,align=center,width=900]
 
+[.notes]
+--
 When the Neo4j instance starts, you can also confirm that it is started by seeing the _Started_ record in the log file.
+
 
 [NOTE]
 You can also view the log file in the *logs* directory on all platforms.
 For example, on non-Debian and non RPM systems, the Neo4j log information is written to the *neo4j.log* file.
+--
 
 [.student-exercise]
 == Exercise #2: Managing the Neo4j instance
@@ -166,7 +216,7 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
-What is the name of the configuration file used by the Neo4j instance when it start?
+What is the name of the configuration file used by the Neo4j instance when it starts?
 
 Select the correct answer.
 

@@ -270,7 +270,7 @@ When you specify a pattern for a `MATCH` clause, you should always specify a nod
 [.notes]
 --
 One thing to notice in this example is that some of the displayed nodes are connected by the _FOLLOWS_ relationship.
-The visualization shows the relationship between these nodes because he have specified *Connect result nodes* in our Neo4j Browser settings.
+The visualization shows the relationship between these nodes because we have specified *Connect result nodes* in our Neo4j Browser settings.
 Some of the Person nodes represent people who reviewed Movies and as such, they follow each other.
 --
 ==== Viewing nodes as table data
@@ -571,7 +571,7 @@ Thus far, you have learned how to specify a node in a `MATCH` clause.
 You can specify nodes and their relationships to traverse the graph and quickly find the data of interest.
 --
 
-Here is how Cypher uses ASCII art to specify path used for a query:
+Here is how Cypher uses ASCII art to specify the path used for a query:
 
 [source.big, cypher]
 ----
@@ -865,6 +865,7 @@ image::FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 
 === Using patterns for queries
 
+[.statement]
 We can perform a query that returns all _Person_ nodes who follow _Angela Scope_:
 
 [source,cypher]
@@ -879,7 +880,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::AngelaFollowers.png[AngelaFollowers,width=700,align=center]
+image::AngelaFollowers.png[AngelaFollowers,width=600,align=center]
 --
 
 [.notes]
@@ -1029,7 +1030,7 @@ ifndef::backend-revealjs[]
 The result returned is:
 endif::[]
 
-image::TraversalInTwoDirections.png[TraversalInTwoDirections,width=1100,align=center]
+image::TraversalInTwoDirections.png[TraversalInTwoDirections,width=1000,align=center]
 --
 
 [.notes]
@@ -1089,9 +1090,7 @@ Later in this course, you will learn other ways to query data and how to control
 
 ifndef::backend-revealjs[]
 Here are the *Neo4j-recommended* Cypher coding standards that we use in this training:
-endif::[]
 
-ifndef::backend-revealjs[]
 [square]
 * Node labels are CamelCase and begin with an upper-case letter (examples: _Person_, _NetworkAddress_). Note that node labels are case-sensitive.
 * Property keys, variables, parameters, aliases, and functions are camelCase and begin with a lower-case letter (examples: _businessAddress_, _title_). Note that these elements are case-sensitive.
@@ -1100,10 +1099,12 @@ ifndef::backend-revealjs[]
 * String constants are in single quotes, unless the string contains a quote or apostrophe (examples: _'The Matrix'_, _"Something's Gotta Give"_). Note that  you can also escape single or double quotes within strings that are quoted with the same using a backslash character.
 * Specify variables only when needed for use later in the Cypher statement.
 * Place named nodes and relationships (that use variables) before anonymous nodes and relationships in your `MATCH` clauses when possible.
-* Specify anonymous relationships with `+-->+`, `--`, or `+<--+`
+* Specify anonymous relationships with `+-->+`, `--`, or `+<--+`.
 endif::[]
 
 ifdef::backend-revealjs[]
+[.small]
+--
 [square]
 * Names, except for keywords are case-sensitive.
 * Node labels are CamelCase and begin with an upper-case letter.
@@ -1112,7 +1113,8 @@ ifdef::backend-revealjs[]
 * Cypher keywords are upper-case.
 * String constants are in single quotes.
 * Place named nodes and relationships (that use variables) before anonymous nodes and relationships.
-* Specify anonymous relationships with `+-->+`, `--`, or `+<--+`
+* Specify anonymous relationships with `+-->+`, `--`, or `+<--+`.
+--
 endif::[]
 
 === Example: Using style recommendations

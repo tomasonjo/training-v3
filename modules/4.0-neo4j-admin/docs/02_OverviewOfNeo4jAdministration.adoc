@@ -88,8 +88,10 @@ The clients can be JVMs, .NET resources, a Web server, all of which can be acces
 
 image::Neo4jServerClients.png[Neo4jClients,width=600,align=center]
 
-[.statement]
+[.notes]
+--
 As a Neo4j database administrator, you are responsible for the availability and consistency of the Neo4j databases used by the clients.
+--
 
 === Example architecture #2: Integrating Neo4j with other databases
 
@@ -100,7 +102,7 @@ Data can be fetched from the different systems in order to be manipulated by an 
 Other solutions can involve loading of data from a number of databases into Neo4j in order to efficiently do connected data analysis on the combined data set.
 --
 
-image::Polyglot.png[Polyglot,width=700,align=center]
+image::Polyglot.png[Polyglot,width=1000,align=center]
 
 === Microservices
 
@@ -110,19 +112,20 @@ With cloud-hosted microservices, the implementation chosen for the microservice 
 In a cloud-based microservice architecture, there may be a number of services that Neo4j can provide to the end-users.
 --
 
-image::Microservices.png[Microservices,width=600,align=center]
-
-[.statement]
-As a Neo4j database administrator, you are responsible for the availability and consistency of the Neo4j database(s), and for making the data accessible by applications.
-Application developers are responsible for the logic in transferring and manipulating data between the databases.
-
-=== Example architecture #3: Using Neo4j Causal Clustering 
-
-[.statement]
-Causal Clustering is used in production environments where high throughput, continuous availability, and reliability are important factors.
+image::Microservices.png[Microservices,width=900,align=center]
 
 [.notes]
 --
+As a Neo4j database administrator, you are responsible for the availability and consistency of the Neo4j database(s), and for making the data accessible by applications.
+Application developers are responsible for the logic in transferring and manipulating data between the databases.
+--
+
+=== Example architecture #3: Using Neo4j Causal Clustering 
+
+[.notes]
+--
+Causal Clustering is used in production environments where high throughput, continuous availability, and reliability are important factors.
+
 With Causal Clusters, you configure multiple Neo4j instances that communicate with each other about updates to the database(s).
 Causal Clusters are used when data needs to reside in multiple physical locations, or if you want to implement a high availability architecture where access to data will not be affected if a Neo4j instance goes down.
 --
@@ -136,11 +139,13 @@ image::ClustersHighLevel.png[ClustersHighLevel,width=700,align=center]
 A common use for Neo4j is when different data is required in a set of geographic locations. For example, an  online retailer may have different data in the US and Europe. Some data could be shared between different geographically located data centers, but the most heavily updated data needs to physically reside closer to the end-user applications. Neo4j Causal Clusters can be configured to span geographic locations.
 --
 
-image::ClustersHighLevelDistributed.png[ClustersHighLevelDistributed,width=800,align=center]
+image::ClustersHighLevelDistributed.png[ClustersHighLevelDistributed,width=1200,align=center]
 
-[.statement]
+[.notes]
+--
 As a Neo4j database administrator, you will be responsible for configuring and monitoring Causal Clusters.
 You will work with architects to determine the appropriate configuration of the Causal Cluster, taking into account aspects such as: uptime requirements, performance requirements, and redundancy required in order to handle events of Neo4j instance failure or data center failure.
+--
 
 === Architecting distributed servers
 
@@ -163,12 +168,13 @@ We will cover the configuration, management and monitoring of Causal Clusters in
 --
 A common use case for Neo4j is for data scientists analyze complex patterns in connected data.
 Neo4j Bloom, or some other data visualization tool, may be used as the front-end.
---
+
 
 The following are two common patterns this use case:
 
 . Neo4j is used to find and analyze connections in data from other data sources. To cater for this, the Neo4j database is loaded with data from several sources. As a Neo4j database administrator, you will ensure that the Neo4j database used for this purpose is kept up-to-date and that the data is secure and appropriately backed up.
 . Data scientists analyze the data in a Neo4j production database. In order to safeguard the production database from potentially heavy queries, a dedicated Read Replica is configured (Causal Cluster) . In this case, the analytics database is always up-to-date with the production database, and its administration is a part of the regular Causal Cluster maintenance work (see Example architecture #3).
+--
 
 image::DataAnalytics.png[DataAnalytics,width=300,align=center]
 
@@ -180,10 +186,12 @@ Some enterprises need to consolidate large amounts of data for analysis. The dat
 A common  architecture for streaming and analyzing data for consolidation is Apache Spark.
 --
 
-image::GraphCompute.png[GraphCompute,width=800,align=center]
+image::GraphCompute.png[GraphCompute,width=1000,align=center]
 
-[.statement]
+[.notes]
+--
 As a Neo4j database administrator, you will work with architects to ensure that the Neo4j database in this type of environment is properly configured and available to the computational engines that will write to the graph.
+--
 
 == Neo4j versions
 
@@ -274,7 +282,11 @@ You should consult the https://neo4j.com/docs/operations-manual/4.0/installation
 
 == Neo4j deployment options
 
-Early in the development of an application, a decision will be made whether to deploy Neo4j instance(s), embedded within the application, or to deploy Neo4j in the Cloud. 
+Early in the development of an application, a decision will be made whether to deploy:
+
+. Neo4j instance(s).
+. Neo4j embedded within the application.
+. Neo4j in the Cloud.
 
 === Server mode deployments
 
@@ -284,7 +296,7 @@ This is the most common deployment, and it is recommended for all on-site deploy
 In this architecture, Neo4j runs as a database server and can be accessed through binary and http APIs for data querying and updating.
 --
 
-image::ClientServerDeployment.png[ClientServerDeployment,width=600,align=center]
+image::ClientServerDeployment.png[ClientServerDeployment,width=800,align=center]
 
 ==== Key advantages of server mode
 
@@ -314,7 +326,7 @@ This architecture is more common in OEM setups, where Neo4j runs integrated as p
 This makes it very easy to directly work with the database and get lightning fast performance.
 --
 
-image::EmbeddedDeployment.png[EmbeddedDeployment,width=300,align=center]
+image::EmbeddedDeployment.png[EmbeddedDeployment,width=400,align=center]
 
 ==== Key advantages of embedded mode
 
@@ -431,11 +443,9 @@ Select the correct answer.
 You should now be able to:
 [square]
 * Describe common application architectures that use Neo4j.
-* Determine which edition of Neo4j to use. 
-* Download a specific Neo4j version.
+* Determine which edition of Neo4j to use.
 * Determine which deployment option to use.
 * Describe the administrative tasks for Neo4j.
-* Install Neo4j Enterprise Edition.
 
 ////
 == Grade Quiz and Continue 

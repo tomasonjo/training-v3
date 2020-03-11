@@ -23,7 +23,7 @@ image::Neo4jPlatform.png[Neo4jPlatform,width=1000,align=center]
 [.notes]
 --
 It is used by developers, administrators, data analysts, and data scientists to access application data.
-Developers create the data in the graph by either importing it into the graph or using the Cypher language to implement the data model. In addition, developers are responsible for integrating the graph with other systems and DBMS installations.
+Developers create the data in the graph by either importing it into the graph or using the Cypher language to implement the data model. In addition, developers are responsible for integrating the graph with other systems and database management system (DBMS) installations.
 Admins manage the processes and files related to the Neo4j installation.
 Data scientists and data analysts typically use a combination Cypher queries, as well as tools to analyze the data.
 End-users typically use applications written by developers to access the graph data.
@@ -72,21 +72,23 @@ The *default* database (named neo4j by default) is the "user" database where you
 
 == Neo4j 4.0 DBMS
 
+[.statement]
 In Neo4j Enterprise Edition 4.0, you may have more than one "user" database.
 
 image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 
+[.statement]
 Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
 
 ifndef::backend-revealjs[]
-Next, you will learn about some features of Neo4j DBMS that make it different from traditional RDBMS.
+Next, you will learn about some features of Neo4j DBMS that make it different from traditional relational database management system (RDBMS).
 endif::[]
 
 === Neo4j DBMS: Index-free adjacency
 
 image::IFA-1.png[IFA-1,width=300,align=center]
 
-[.statement]
+[.small]
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
 
 Most people would follow these simple steps:
@@ -114,7 +116,7 @@ It must use a central index.
 
 image::IFA-2.png[IFA-2,width=800,align=center]
 
-[.statement]
+[.small]
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
 
 [.notes]
@@ -177,7 +179,7 @@ Neo4j Aura is the simplest way to run the Neo4j DBMS in the cloud.
 Completely automated and fully-managed, Neo4j Aura delivers the world’s most flexible, reliable and developer-friendly graph database as a service.
 With Neo4j Aura, you leave the day-to-day management of your database to the same engineers who built Neo4j, freeing you to focus on building rich graph-powered applications.
 Backups are done automatically for you and the database is available 24x7.
-In addition,  Neo4j will ensure that the database instance is always up-to-date with the latest version of Neo4j.
+In addition,  the Neo4j Aura team will ensure that the database instance is always up-to-date with the latest version of Neo4j.
 To use Neo4j Aura, you must pay a monthly subscription fee which is based upon the size of your graph.
 --
 
@@ -305,13 +307,19 @@ image::GraphApps.png[GraphApps,width=900,align=center]
 Here are [.underline]#some# of the graph applications you can use:
 --
 
-[square]
+[square.small]
 * *Neo4j Browser*: UI for testing Cypher queries and visualizing the graph.
+
 * *Neo4j Bloom*: A tool for exploring graphs and generating Cypher code.
+
 * *Neo4j ETL Tool*: UI for connecting to a data source to import into the graph.
+
 * *Halin*: Monitor your Neo4j DBMS.
+
 * *Query Log Analyzer*: Analyze queries that executed on your system.
+
 * *Neo4j Cloud Tool*: Tools for working with Neo4j Aura.
+
 * *Graph Algos Playground*: Run graph algorithms and generate code for them.
 
 == Neo4j Browser
@@ -355,7 +363,7 @@ image::Neo4jBrowser.png[Neo4jBrowser,width=700,align=center]
 [.statement]
 You can use the Web interface to access to access a local Neo4j DBMS, or a database in Neo4j Aura or Neo4j Sandbox.
 
-image::WebNeo4jBrowser.png[WebNeo4jBrowser,width=700,align=center]
+image::WebNeo4jBrowser.png[WebNeo4jBrowser,width=900,align=center]
 
 [.notes]
 --
@@ -408,9 +416,9 @@ Before you perform the tasks shown in this video, you must have either created a
 Neo4j Bloom is a Neo4j-supported graph application where you can experience:
 --
 
-[.is-half.left]
+[.is-half.left.statement]
 --
-[square.statement]
+[square.small]
 * Visual presentation of your graph data tangibly reveals non-obvious connections.
 * Easy-to-understand visualizations explain data connectedness to every colleague.
 * Codeless search tools let you quickly explore your data without technical expertise.
@@ -432,17 +440,13 @@ Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that
 
 == cypher-shell
 
-[.is-two-thirds.left]
---
-image::cypher-shell.png[cypher-shell,width=800,align=center]
---
 
-[.is-one-third.right]
---
+image::cypher-shell.png[cypher-shell,width=500,align=center]
+
 [.statement]
 `cypher-shell` is part of the Neo4j installation and is located in the *bin* directory.
 It is a command-line tool that you can use to connect to a Neo4j DBMS instance and run Cypher statements against the database.
---
+
 [.notes]
 --
 It is useful if you want to create scripts that automatically run against the database(s).
@@ -457,7 +461,7 @@ Even if you have not installed Neo4j, you can download and install cypher-shell 
 --
 Just as there are graph applications written by Neo4j engineers and Neo4j community members, there are libraries you can incorporate into your application.
 A library is also called a plug-in as it is used to extend what you can do in Cypher.
-Some libraries are available in Neo4j Desktop, while others you must download and install.
+Some libraries are available in Neo4j Desktop, while you must download and install other libraries.
 
 In early 2020, some functions and procedures from the Graph Algorithms Library will be officially supported by Neo4j as the Graph Data Science Library (GDS).
 Before that, support for this library has come from and will continue to come from Neo4j Labs for the algorithms that are not officially supported by Neo4j.
@@ -476,7 +480,7 @@ image::Plugins.png[Plugins,width=900,align=center]
 
 == Drivers and language support
 
-image::Drivers.png[Drivers,width=900,align=center]
+image::Drivers.png[Drivers,width=600,align=center]
 
 [.notes]
 --
@@ -515,12 +519,25 @@ One Neo4j-supported integration that you can download enables data to be streame
 --
 == Administration tools
 
+[.statement]
 Developers and administrators use command-line tools for managing the Neo4j DBMS. The three main tools used that are part of the Neo4j installation (located in the *bin* directory) include:
 
-[square]
-* *cypher-shell* used to create, start, stop, and drop a particular database as well as query the "user" database.
-* *neo4j* used to start, stop and retrieve the status of the Neo4j DBMS instance.
-* *neo4j-admin* used to create, copy, remove, backup, restore and perform other administrative tasks.
+[.small]
+--
+{set:cellbgcolor:white}
+[frame="none",grid=none,width="90%"cols="30,70",stripes=none]
+|===
+h|Tool
+h|Description
+|*cypher-shell*
+|Create, start, stop, and drop a particular database as well as query the "user" database.
+|*neo4j*
+|Start, stop and retrieve the status of the Neo4j DBMS instance.
+|*neo4j-admin*
+|Create, copy, remove, backup, restore and perform other administrative tasks.
+|===
+{set:cellbgcolor!}
+--
 
 [NOTE]
 In Neo4j Desktop which is used by developers, you have the create, start, and stop administrative functionality.

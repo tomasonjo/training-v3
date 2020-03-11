@@ -37,25 +37,31 @@ At the end of this module, you should be able to:
 We will begin by defining the components that make up a graph in Neo4j.
 --
 
+[.small]
+--
 Here we see two nodes.
 These two nodes are related to each other which is why we have a line or link connecting them.
+--
 
 image::GraphComponents.png[GraphComponents,width=400,align=center]
 
 === Nodes
 
+[.small]
+--
 First, let’s define a node in Neo4j.
 Nodes are the main objects of a graph.
+--
 
 [.notes]
 --
 We say this not because nodes contain more data than relationships--although they usually do--but because it is perfectly acceptable to have nodes without any relationships.
 Conversely,  is is [.underline]#not# possible to have a relationship without any nodes.
---
 
 Here we see that each node has a different color, perhaps to differentiate its type from another node.
 For example, the blue node represents a person and that person node has a name of Jane.
 The green node represents a vehicle and that vehicle node has a type of car.
+--
 
 image::GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=center]
 
@@ -100,8 +106,10 @@ Instead, we can use the data attached to a relationship to preemptively filter w
 
 == The Neo4j property graph model
 
+
 A Neo4j database (graph) is composed of two elements: *nodes* and *relationships*.
 Neo4j allows you to identify nodes and relationships and add properties to them to further define the data in the graph.
+
 
 === Nodes
 
@@ -131,6 +139,7 @@ image::Relationships.png[Relationships,width=400,align=center]
 
 The Neo4j database is a property graph.
 You can add **properties** to nodes and relationships to further enrich the graph model.
+
 
 image::Properties.png[Properties,width=500,align=center]
 
@@ -163,12 +172,13 @@ ifdef::backend-html5,backend-pdf[]
 In this video, you will see the benefits of using the native graph database, Neo4j.
 endif::[]
 
-ifdef::backend-html5[]
+ifdef::backend-html5,backend-revealjs[]
+[.center]
 video::GM9bB4ytGao[youtube,width=560,height=315]
 endif::[]
 
 ifdef::backend-pdf[]
-https:://youtu.be/GM9bB4ytGao
+https://youtu.be/GM9bB4ytGao
 endif::[]
 
 === Querying a graph is intuitive in Cypher
@@ -180,7 +190,9 @@ If you have ever tried to write a SQL statement with a large number of JOINs, yo
 
 [%unbreakable]
 --
+
 [.statement]
+
 For example, in an organizational domain, here is what a SQL statement that lists the employees in the IT Department would look like:
 
 [source]
@@ -193,6 +205,7 @@ LEFT JOIN Department
 WHERE Department.name = "IT Department"
 ----
 
+
 [.statement]
 Cypher is the language for accessing data in the Neo4j database. In contrast to SQL, Cypher syntax stays clean and focused on domain concepts since queries are expressed visually:
 
@@ -204,10 +217,12 @@ RETURN p.name
 ----
 --
 
-
 == Neo4j Graph Platform
 
+[.small]
+--
 The Neo4j Graph Platform includes components that enable developers to create graph-enabled applications.
+--
 
 image::Neo4jPlatform.png[Neo4jPlatform,width=1000,align=center]
 
@@ -222,7 +237,10 @@ End-users typically use applications written by developers to access the graph d
 
 === Components of the Neo4j Graph Platform
 
+[.notes]
+--
 To better understand the Neo4j Graph Platform, you will learn about these components and the benefits they provide.
+--
 
 [.is-half.left]
 --
@@ -250,7 +268,7 @@ To better understand the Neo4j Graph Platform, you will learn about these compon
 
 [.notes]
 --
-The heart of the Neo4j Graph Platform is the Neo4j DBMS.
+The heart of the Neo4j Graph Platform is the Neo4j Database Management system (DBMS).
 The Neo4j DBMS includes processes and resources needed to manage a single Neo4j instance or a set of Neo4j instances that form a cluster.
 A Neo4j instance is a single process that runs the Neo4j server code.
 A Neo4j instance at a minimum contains two databases, the system database and the default database, neo4j.
@@ -261,15 +279,20 @@ image::Neo4jDBMS.png[Neo4jDBMS,width=300,align=center]
 The *system* database stores metadata about the databases for the installation, as well as security configuration.
 The *default* database (named neo4j by default) is the "user" database where you typically implement your graph data model.
 
+
 == Neo4j 4.0 DBMS
 
-[.statement]
+[.small]
+--
 In Neo4j Enterprise Edition 4.0, you may have more than one "user" database.
+--
 
 image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 
-[.statement]
+[.small]
+--
 Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
+--
 
 ifndef::backend-revealjs[]
 Next, you will learn about some features of Neo4j DBMS that make it different from traditional RDBMS.
@@ -279,7 +302,8 @@ endif::[]
 
 image::IFA-1.png[IFA-1,width=300,align=center]
 
-[.statement]
+[.small]
+--
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
 
 Most people would follow these simple steps:
@@ -287,6 +311,7 @@ Most people would follow these simple steps:
 . Leave my house.
 . Point myself towards Anne’s house.
 . Walk to Anne’s house.
+--
 
 [.notes]
 --
@@ -302,24 +327,37 @@ This is how index-free adjacency operates.
 
 ==== Contrast index-free adjacency with RDBMS
 
-By contrast, a traditional RDBMS cannot do this.
-It must use a central index.
-
-image::IFA-2.png[IFA-2,width=800,align=center]
-
-[.statement]
-Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
-
 [.notes]
 --
-In a RDBMS world, the pie-delivery process would go like this:
+By contrast, a traditional Relational Database Management System (RDBMS) cannot do this.
+It must use a central index.
+--
 
+[is-half.left]
+--
+image::IFA-2.png[IFA-2,width=300,align=center]
+--
+
+[is-half.right]
+--
+Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
+--
+
+ifndef::backend-revealjs[]
+In a RDBMS world, the pie-delivery process would go like this:
+endif::[]
+
+[.small]
+--
 . Leave my house.
 . Walk to the town hall.  It contains a Central Index containing the addresses of everyone in town.
 Stand in line.  Everyone looking for an address needs to do the same thing you are, so there is a wait.
 . Tell the search agent whom you’re looking for.  They will look up Anne’s address in the index (note that the larger the town, the longer it takes to do the search).  The agent gives you Anne’s address.
 . Enter the address into the map app on your phone, and follow the directions to Anne’s house.
+--
 
+[.notes]
+--
 This is obviously inefficient.
 You needed to walk twice as far, had to wait in line, and had to wait for a search process to complete.
 But to make matters even worse, there is no concept of "learning the route", no matter how many times you take it.
@@ -328,28 +366,33 @@ Every single time you want to visit Anne’s house, you need to follow these sam
 
 ==== Index-free adjacency in Neo4j
 
+[.small]
+--
 With index-free adjacency, when a node or relationship is written to the database, it is stored in the database as connected and any subsequent access to the data is done using pointer navigation which is [.underline]#very fast#.
 Since Neo4j is a native graph database (i.e. it has a graph as its core data model), it supports very large graphs where connected data can be traversed in constant time without the need for an index.
-
+--
 
 === Neo4j DBMS: ACID (Atomic, Consistent, Isolated, Durable)
 
 image::ACID.png[ACID,width=800,align=center]
 
-[.statement]
+[.notes]
+--
 Transactionality is very important for robust applications that require an ACID (atomicity, consistency, isolation, and durability) guarantees for their data.
 If a relationship between nodes is created, not only is the relationship created, but the nodes are updated as connected.
 All of these updates to the database must [.underline]#all# succeed or fail.
+--
 
 === Neo4j DBMS: Clusters
 
-[.is-two-thirds.left]
+[.is-half.left]
 --
 image::Clustering.png[Clustering,width=600,align=center]
 --
 
-[.is-one-third.right]
+[.is-half.right]
 --
+
 [.statement]
 Neo4j supports clusters that provide high availability, scalability for read access to the data, and failover which is important to many enterprises.
 Neo4j clusters are only available with Neo4j Enterprise Edition.
@@ -357,9 +400,14 @@ Neo4j clusters are only available with Neo4j Enterprise Edition.
 
 === Neo4j DBMS: Graph engine
 
+image::Neo4jDatabase.png[Neo4jDatabase,width=300,align=center]
+
+[.small]
+--
 The Neo4j graph engine is used to interpret Cypher statements and also executes kernel-level code to store and retrieve data, whether it is on disk, or cached in memory.
 The graph engine has been improved with every release of Neo4j to provide the most efficient access to an application's graph data.
 There are many ways that you can tune the performance of the engine to suit your particular application needs.
+--
 
 == Neo4j Aura
 
@@ -374,15 +422,17 @@ With Neo4j Aura, you leave the day-to-day management of your database to the sam
 Backups are done automatically for you and the database is available 24X7.
 In addition, the Neo4j will ensure that the database instance is always up-to-date with the latest version of Neo4j.
 To use Neo4j Aura, you must pay a monthly subscription fee which is based upon the size of your graph.
---
 
 Once you create a Neo4j Database at the https://console.neo4j.io[Neo4j Aura site], it will be managed by Neo4j support engineers.
+--
 
 == Neo4j Sandbox
 
-[.statement]
+[.small]
+--
 The Neo4j Sandbox is way that developers can test data models with Neo4j without needing to install anything.
 It is a free, temporary, and cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser. The database in a Sandbox may be blank or it may be pre-populated. It is started automatically for you when you create the Sandbox.
+--
 
 image::BlankSandbox.png[BlankSandbox,width=600,align=center]
 
@@ -406,9 +456,10 @@ It includes an application called  Neo4j Browser which is the UI used to access 
 
 image::Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
 
-[.statement]
+[.small]
+--
 The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
-
+--
 
 
 == Neo4j graph applications
@@ -460,13 +511,17 @@ ifdef::backend-revealjs[]
 * Execute built-in procedures and commands.
 endif::[]
 
+=== Using Neo4j Browser
+
+[.small]
+--
 There are two ways that you can use Neo4j Browser functionality:
 
 . UI started by Neo4j Desktop.
 . Web browser interface.
+--
 
 image::Neo4jBrowser.png[Neo4jBrowser,width=900,align=center]
-
 
 == Neo4j Bloom
 
@@ -475,22 +530,16 @@ image::Neo4jBrowser.png[Neo4jBrowser,width=900,align=center]
 Neo4j Bloom is a Neo4j-supported graph application where you can experience:
 --
 
-[.is-half.left]
---
-[square.statement]
+[square.small]
 * Visual presentation of your graph data tangibly reveals non-obvious connections.
 * Easy-to-understand visualizations explain data connectedness to every colleague.
 * Codeless search tools let you quickly explore your data without technical expertise.
 * Browsing tools make it easy for you to discover new insights from your data.
---
 
-[.is-half.right]
---
-image::Bloom.png[Bloom,width=600,align=center]
+image::Bloom.png[Bloom,width=500,align=center]
 
 [.statement]
 Visit the https://neo4j.com/bloom/[Bloom page] to learn more about Neo4j Bloom.
---
 
 [.notes]
 --
@@ -499,17 +548,17 @@ Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that
 
 == cypher-shell
 
-[.is-two-thirds.left]
+[.is-half.left]
 --
 image::cypher-shell.png[cypher-shell,width=800,align=center]
 --
 
-[.is-one-third.right]
+[.is-half.right]
 --
-[.statement]
 cypher-shell is part of the Neo4j installation and is located in the *bin* directory.
 It is a command-line tool that you can use to connect to a Neo4j DBMS instance and run Cypher statements against the database.
 --
+
 [.notes]
 --
 It is useful if you want to create scripts that automatically run against the database(s).
@@ -542,7 +591,7 @@ image::Plugins.png[Plugins,width=900,align=center]
 
 == Drivers and language support
 
-image::Drivers.png[Drivers,width=900,align=center]
+image::Drivers.png[Drivers,width=650,align=center]
 
 [.notes]
 --
@@ -583,12 +632,17 @@ One Neo4j-supported integration that developers can download enables data to be 
 
 == Administration tools
 
+[.notes]
+--
 Developers and administrators use command-line tools for managing the Neo4j DBMS.
-The two main tools used that are part of the Neo4j installation (located in the *bin* directory) include:
+The main tools used that are part of the Neo4j installation (located in the *bin* directory) include:
+--
 
 [square]
 * *neo4j* used to start, stop and retrieve the status of the Neo4j DBMS instance.
 * *neo4j-admin* used to create, copy, remove, backup, restore and perform other administrative tasks.
+* *cypher-shell* used to create, start, stop, drop databases and indexes and to and retrieve data from a user database.
+
 
 [.quiz]
 == Check your understanding
@@ -598,8 +652,10 @@ The two main tools used that are part of the Neo4j installation (located in the 
 [.statement]
 What are some of the benefits provided by the Neo4j DBMS?
 
+
 [.statement]
 Select the correct answers.
+
 
 [%interactive.answers]
 - [x] Clustering
@@ -613,7 +669,9 @@ Select the correct answers.
 As an administrator, what language do you use to retrieve data from a Neo4j database?
 
 [.statement]
-Select the correct answers.
+
+Select the correct answer.
+
 
 [%interactive.answers]
 - [x] Cypher
@@ -624,9 +682,12 @@ Select the correct answers.
 === Question 3
 
 [.statement]
-What are some of the language drivers that come with Neo4j out of the box that developers might use?
+
+What are some of the language drivers that come with Neo4j out-of-the-box that developers might use?
+
 
 [.statement]
+
 Select the correct answers.
 
 [%interactive.answers]

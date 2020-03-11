@@ -19,9 +19,9 @@ Next, you will learn how to merge data in the graph.
 
 At the end of this module, you should be able to write Cypher statements to:
 [square]
-* Merge data in a graph
-** Creating nodes
-** Creating relationships
+* Merge data in a graph by:
+** Creating nodes.
+** Creating relationships.
 
 == Merging data in the graph
 [.notes]
@@ -142,12 +142,14 @@ Here is the result of running this Cypher example.
 We do not find a node with the label _Actor_ so the graph engine creates one.
 --
 
-image::MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=800,align=center]
+image::MergeActorMichaelCaine.png[MergeActorMichaelCaine,width=600,align=center]
 
 
+[.small]
+--
 [NOTE]
-[.statement]
 A best practice when using `MERGE` is to only specify properties that have unique values and unique labels.
+--
 
 === Repeating the same `MERGE`
 
@@ -451,9 +453,9 @@ Select the correct answers.
 
 You should now be able to write Cypher statements to:
 [square]
-* Merge data in a graph
-** Creating nodes
-** Creating relationships
+* Merge data in a graph by:
+** Creating nodes.
+** Creating relationships.
 
 ////
 == Grade Quiz and Continue 

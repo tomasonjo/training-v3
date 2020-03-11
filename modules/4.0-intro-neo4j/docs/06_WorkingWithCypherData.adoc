@@ -138,7 +138,7 @@ RETURN collect(m) AS `movies for Tom Cruise`
 [.statement]
 Here is the result returned viewed as a graph. It is the same as simply returning _m_:
 
-image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=800,align=center]
+image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=500,align=center]
 --
 
 [.is-half.right]
@@ -148,7 +148,7 @@ image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=800,align=ce
 [.statement]
 Here is the result returned viewed as a table. Each node is an object in the list returned:
 
-image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=800,align=center]
+image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=400,align=center]
 --
 
 ==== Counting and collecting
@@ -436,10 +436,10 @@ Depending on  how you need to convert data in the graph, you can use any of the 
 Here are some of the built-in conversion functions:
 
 [square]
-* toInteger()
-* toLower()
-* toUpper( )
-* toString()
+* `toInteger()`
+* `toLower()`
+* `toUpper( )`
+* `toString()`
 
 Consult the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
 

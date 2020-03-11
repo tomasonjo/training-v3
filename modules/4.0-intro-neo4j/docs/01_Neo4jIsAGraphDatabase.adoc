@@ -319,6 +319,7 @@ For this training, we will use a Movies graph to get you started with accessing 
 --
 The data model is very simple, it includes entities such as:
 
+[square]
 * Movie
 * Person/Actor/Director
 
@@ -328,6 +329,7 @@ that are implemented as nodes in the graph.
 --
 People are related to Movies using these relationships:
 
+[square]
 * DIRECTED
 * ACTED_IN
 * WROTE

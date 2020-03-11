@@ -17,7 +17,10 @@ endif::backend-html5[]
 
 == About this module
 
+[.notes]
+--
 Next, you will learn how to perform some administrative tasks using the `cypher-shell` tool.
+--
 
 At the end of this module, you should be able to:
 [square]
@@ -29,27 +32,43 @@ At the end of this module, you should be able to:
 
 == Using `cypher-shell`
 
+[.notes]
+--
 `cypher-shell` enables you to access the Neo4j database from a terminal window.  You simply log into the database using `cypher-shell` with your credentials:
+--
 
 `/usr/bin/cypher-shell -u <username> -p <password>`
 
-Once authenticated, you enter Cypher statements to execute just as you would in a Neo4j Browser session.
-One caveat with `cypher-shell`, however is that all Cypher commands [.underline]#must# end with `;`.
-You exit `cypher-shell` with the command `:exit`.
+[.small]
+--
+
+* Once authenticated, you enter Cypher statements to execute just as you would in a Neo4j Browser session.
+
+* One caveat with `cypher-shell`, however is that all Cypher commands [.underline]#must# end with `;`.
+
+* You exit `cypher-shell` with the command `:exit`.
+--
 
 [NOTE]
 You can also manage databases using Neo4j Browser connected to the Neo4j instance. Since this training is intended for administrators, we will cover using `cypher-shell`.
 
 === Example: Using `cypher-shell`
 
+[.notes]
+--
 Here is an example showing that we can successfully log in to the database for the Neo4j instance, providing the default credentials _neo4j/neo4j_:
 Since this is the first login to the database, you must change the password from _neo4j_ to a password you will remember.
+--
 
 image::InitialLogin-cypher-shell.png[InitialLogin-cypher-shell,width=800,align=center]
+
+[.notes]
+--
 
 In this example we changed the password to _training-helps_.
 
 When you are done with `cypher-shell`, you enter `:exit` to exit.
+--
 
 [NOTE]
 If you set the environment variables NEO4J_USER and NEO4J_PASSWORD with their respective values, then you need not enter your credentials when logging into `cypher-shell`.
@@ -57,26 +76,36 @@ If you set the environment variables NEO4J_USER and NEO4J_PASSWORD with their re
 
 === Example: Using `cypher-shell` providing credentials as arguments
 
+
 You can also specify the username and password at the command level to use `cypher-shell` as arguments .
 
-image::Cypher-shell-withParms.png[Cypher-shell-withParms,width=800,align=center]
+image::Cypher-shell-withParms.png[Cypher-shell-withParms,width=1000,align=center]
 
 == Accessing the system database
 
+[.notes]
+--
 After you have successfully logged in to the Neo4j instance using `cypher-shell`, you can execute system commands against the Neo4j instance.
 By default, you are connected to the default Neo4j database, _neo4j_, which is a user database.
+--
 
+[.small]
+--
 System commands use the _system_ database and are primarily used to:
 
-* View the status of the databases being served by the Neo4j instance
+* View the status of the databases being served by the Neo4j instance.
 * Create or drop a user database.
 * Start or stop a user database.
 
 To access the system database, you enter `:USE system`.
+--
 
 image::UseSystem.png[UseSystem,width=1000,align=center]
 
+[.notes]
+--
 Notice that the prompt neo4j@system tells us that all commands we enter will be against the system database.
+--
 
 === Viewing databases for the Neo4j instance
 
@@ -84,7 +113,7 @@ Using the _system_ database, you can view all of the databases served by this Ne
 
 [NOTE] For all commands and cypher statements, you must end them with the `;` character.
 
-image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
+image::ShowInitialDatabases.png[ShowInitialDatabases,width=900,align=center]
 
 Here we see that this Neo4j instance that we have connected to has the system database and the neo4j database, which is the default name of the user database.
 A Neo4j instance has one system database and any number of user databases.

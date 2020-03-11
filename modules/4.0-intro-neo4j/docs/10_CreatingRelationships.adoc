@@ -113,9 +113,11 @@ endif::[]
 
 image::CreateTwoRelationships.png[CreateTwoRelationships,width=700,align=center]
 
+[.small]
+--
 [NOTE]
-[.statement]
 When you create relationships based upon a `MATCH` clause, you must be certain that only a single node is returned for the `MATCH`, otherwise multiple relationships will be created.
+--
 
 == Creating a relationship with properties
 
@@ -254,6 +256,7 @@ CREATE (a)-[:ACTED_IN {roles: ['Bruce Wayne', 'Batman']}]->(m)
 RETURN a, m
 ----
 
+[.statement]
 By default, the graph engine will create a relationship between two nodes, even if one already exists.
 This could be dangerous so in your code make sure that if you use `CREATE` to create a relationship, it does not already exist.
 
