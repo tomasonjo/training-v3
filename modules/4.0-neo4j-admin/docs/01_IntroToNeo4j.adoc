@@ -669,7 +669,6 @@ Select the correct answers.
 As an administrator, what language do you use to retrieve data from a Neo4j database?
 
 [.statement]
-
 Select the correct answer.
 
 
@@ -682,12 +681,10 @@ Select the correct answer.
 === Question 3
 
 [.statement]
-
 What are some of the language drivers that come with Neo4j out-of-the-box that developers might use?
 
 
 [.statement]
-
 Select the correct answers.
 
 [%interactive.answers]

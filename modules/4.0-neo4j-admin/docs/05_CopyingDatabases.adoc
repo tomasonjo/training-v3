@@ -17,7 +17,10 @@ endif::backend-html5[]
 
 == About this module
 
+[.notes]
+--
 Next, you will learn the ways that  you can copy a database.
+--
 
 At the end of this module, you should be able to:
 [square]
@@ -27,76 +30,132 @@ At the end of this module, you should be able to:
 
 == Copying a Neo4j database
 
+[.notes]
+--
 You or one of your application developers may want to copy a Neo4j database.
 Perhaps the developers are at a juncture in their development where they want to save what they have worked on thus far.
 Or perhaps they want to give a copy of the database to another developer to work with on a different system.
 
 The structure of a Neo4j database is proprietary and could change from one release to another.
 You should [underline]#never# copy the database files from one location in the filesystem/network to another location.
-
+--
+[.statement]
+--
 There are two ways that you can copy a database:
 
-. Create a copy within the same Neo4j instance.
-. Create a copy (dump file) that you will give to another developer to load into their Neo4j instance running on a different system.
+[square]
+* Create a copy within the same Neo4j instance.
+* Create a copy (dump file) that you will give to another developer to load into their Neo4j instance running on a different system.
 
 Before you copy a database it must be stopped.
+--
+
+[.notes]
+--
 Later in this training, you will learn how to back up a database while it is online.
+--
 
 === Copying a database within the same Neo4j instance
 
+[.notes]
+--
 To copy a database within the same Neo4j instance, the source database must be stopped.
 Additionally, the target database that you will be creating must not exist.
 
 You use the `neo4j-admin` tool to copy a database within your Neo4j instance. Here are the steps:
+--
 
+[.small]
+--
 . Ensure the Neo4j instance is started.
 . In `cypher-shell` stop the source database you want to copy:
-.. `:USE system`
-.. `STOP DATABASE <sourceDB>`;
++
+
+[source]
+----
+:USE system
+STOP DATABASE <sourceDB>;
+----
 . In a different terminal window, enter this as the user, neo4j:
 +
 
+[source]
 ----
 /usr/bin/neo4j-admin copy --from-database=<sourceDB> --to-database=<targetDB>
 ----
 
-. In `cypher-shell'  again:  `CREATE DATABASE <targetDB>;`.
+. In `cypher-shell`  again:
 
+[source]
+----
+CREATE DATABASE <targetDB>;
+----
+
+--
+
+[.notes]
+--
 There are other options you can use to customize what is copied. See the _Neo4j Operations Manual_ for details.
+--
 
 === Creating a dump file from a database
 
+[.notes]
+--
 To create a dump file of a database, you must:
+--
 
+[.small]
+--
 . Ensure the Neo4j instance is started.
 . In `cypher-shell`, stop the database you want to dump:
-.. `:USE system`
-.. `STOP DATABASE <sourceDB>;`
++
+
+[source]
+----
+:USE system
+STOP DATABASE <sourceDB>;
+----
+
 . Ensure that the directory where you will dump the database exists.
 . As the neo4j users, you can use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
 
+[source]
 ----
 /usr/bin/neo4j-admin dump --database=<sourceDB> --to=<absolute path to dump file>
 ----
 
 Note that the user, neo4j, must have write access to the directory.
+--
 
+[.notes]
+--
 This will create a  dump file that can now be transferred between systems to create a new database on a different system.
+--
 
 === Creating a database from a dump file
 
+[.notes]
+--
 Then, if you want to create a database from any offline backup file to use for a Neo4j instance, you must:
+--
 
 . Use the `load` command of the `neo4j-admin` tool as the neo4j users, to create the database from the dump file as follows:
 +
 
+[source]
 ----
 /usr/bin/neo4j-admin load --database=<targetDB> --from=<absolute path to dump file>
 ----
 
 . In `cypher-shell' create the database:
-.. `:USE system`
-.. `CREATE DATABASE <targetDB>;`
++
+
+[source]
+----
+:USE system
+CREATE DATABASE <targetDB>;
+----
 
 [.student-exercise]
 == Exercise #5: Copying databases
@@ -115,9 +174,11 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 You want to make a copy of an existing database that is online in your Neo4j instance.
 What must you do before you copy it?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -128,20 +189,24 @@ Select the correct answer.
 
 === Question 2
 
-What tools do you use the create a copy of a database within the same Neo4j instance?
+[.statement]
+What tool do you use the create a copy of a database within the same Neo4j instance?
 
-Select the correct answers.
+[.statement]
+Select the correct answer.
 
 [%interactive.answers]
 - [x] `cypher-shell`
-- [x] `neo4j copy`
+- [ ] `neo4j copy`
 - [ ] `neo4j-admin copy`
 - [ ] `neo4j-admin dump`
 
 === Question 3
 
+[.statement]
 What tools do you use the create a copy of a database that will be used on a different system?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]

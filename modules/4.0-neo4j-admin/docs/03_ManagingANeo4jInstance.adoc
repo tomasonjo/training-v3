@@ -216,8 +216,10 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 What is the name of the configuration file used by the Neo4j instance when it starts?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -228,9 +230,11 @@ Select the correct answer.
 
 === Question 2
 
+[.statement]
 You control the Neo4j instance by using the `neo4j` tool which on Debian is accessed using `systemctl`.
 What commands are available for managing the Neo4j instance?
 
+[statement]
 Select the correct answers.
 
 [%interactive.answers]
@@ -241,8 +245,10 @@ Select the correct answers.
 
 === Question 3
 
+[.statement]
 On Debian, how do you determine if the Neo4j instance is started?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]
