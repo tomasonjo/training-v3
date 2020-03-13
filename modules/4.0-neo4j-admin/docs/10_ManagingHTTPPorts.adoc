@@ -21,8 +21,11 @@ Next, you will learn how to adjust access to the databases with HTTP ports.
 
 == Configuring connector ports for the Neo4j instance
 
+[.notes]
+--
 The Neo4j instance uses https://neo4j.com/docs/operations-manual/3.5/configuration/ports/[default port numbers] that may conflict with other processes on your system.
 The ports frequently used are the connector ports:
+--
 
 [cols="10,10,80", options="header",stripes="none"]
 |====
@@ -45,28 +48,42 @@ HTTP
 
 === Default configuration: Connector ports
 
+[small]
+--
 Here are the default settings for connector ports:
+--
 
-image::DefaultConnectorPorts.png[DefaultConnectorPorts,width=600,align=center]
+image::DefaultConnectorPorts.png[DefaultConnectorPorts,width=800,align=center]
 
+[.notes]
+--
 Notice that by default the HTTPS connector is disabled, but the default HTTP port is 7474 and the default bolt port is 7687.
 If any of these ports conflict with ports already used on your system, you can change these connector ports by modifying these property values in the *neo4j.conf* file.
+--
 
 === Connector ports: Development vs. production
 
+[.notes]
+--
 In a development mode, clients can connect to the Neo4j instance using the bolt or HTTP connector ports.
 This is fine in a development environment only where access from different systems in your network are allowed.
+--
 
+[.statement]
 By default, a Neo4j instance cannot be accessed by a client running on a different system.
 If you want to allow external connections to the Neo4j instance, you must set this property:
 
+[source]
 ----
 dbms.connectors.default_listen_address=0.0.0.0
 ----
 
+[.notes]
+--
 In production, an application that needs to connect to the Neo4j instance from a different system, should use a secure (encrypted) connection.
 In this training, we will not be configuring secure HTTPs connectors as we need a real CA for a real company to do this.
 You should consult the https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL documentation] for details in your real, production environment.
+--
 
 [.student-exercise]
 == Exercise #10: Modify the HTTP port
@@ -84,8 +101,10 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 What are the types of client connections possible for a Neo4j instance?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]
@@ -96,8 +115,10 @@ Select the correct answers.
 
 === Question 2
 
+[.statement]
 What is the default port number for HTTP access to the Neo4j instance locally?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -108,12 +129,14 @@ Select the correct answer.
 
 === Question 3
 
+[.statement]
 What is the effect of setting this property in the *neo4j.conf* file?
 
 ----
 dbms.connectors.default_listen_address=0.0.0.0
 ----
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]

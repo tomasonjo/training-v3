@@ -1,5 +1,5 @@
 = Changing the Database Location
-:slug: 06-hanging-database-location
+:slug: 06-changing-database-location
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -15,8 +15,10 @@ endif::backend-html5[]
 ////
 
 == About this module
-
+[.notes]
+--
 Next, you will learn how to set up the Neo4j instance to use a specific, non-default location for the databases.
+--
 
 At the end of this module, you should be able to:
 [square]
@@ -25,47 +27,69 @@ At the end of this module, you should be able to:
 
 == Modifying the location of the database
 
+[.notes]
+--
 If you do not want the databases used by the Neo4j instance to reside in the same location as the Neo4j installation, you can modify its location in the *neo4j.conf* file. If you specify a new location for the data, it must exist in the filesystem and the directory must be owned by _neo4j:neo4j_.
+--
 
+[.statement]
 Here we have specified a new location for the data in the configuration file:
 
 image::ChangeDatabaseDirectory.png[ChangeDatabaseDirectory,width=800,align=center]
 
+[.statement]
 In addition, we have specified mainDB as the default database.
 
 === Best practice for configuration modifications
 
+[.notes]
+--
 Here is a best practice you should follow when managing a Neo4j installation.
 It is easier to place all changed property values at the end of the *neo4j.conf* file.
 That way, you can easily see what non-default values you have configured.
 
 Here is an example:
+--
 
 image::BestPracticeConfigChangesAtEnd.png[BestPracticeConfigChangesAtEnd,width=800,align=center]
 
-=== Starting Neo4j instance with a new location
+=== Configuring Neo4j instance with a new location
 
+[.small]
+--
 After you have modified the *neo4j.conf* file with the new location for the databases, you must:
 
 . Ensure the directory exists.
 . Change the owner of the directory to be neo4j.
 . Start or restart the Neo4j instance.
 . Confirm that the instance started with no errors.
+--
 
-image::Neo4jStarted-newLocation1.png[Neo4jStarted-newLocation1,width=800,align=center]
+image::Neo4jStarted-newLocation1.png[Neo4jStarted-newLocation1,width=600,align=center]
 
+=== Starting Neo4j instance with a new location
+
+[.notes]
+--
 When you start the Neo4j instance using a different location for the databases, it first creates and starts a database named whatever you have specified as the default database.
 If you did not specify the default database in the configuration file, it will create a database named _neo4j_.
+--
 
+[.statement]
 Here are the new databases in the new location:
 
 image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=center]
 
+[.notes]
+--
 If you have existing databases that you want to reside in a different location for the Neo4j instance, remember that you must dump and load the databases to safely copy them to the new location.
-
+--
 ==== Password change required
 
+[.notes]
+--
 Just as you needed to change the password for the admin user, neo4j the first time you accessed a database, you must do the same here for this new location of the Neo4j databases:
+--
 
 image::passwordChangeNewLocation.png[passwordChangeNewLocation,width=800,align=center]
 
@@ -85,8 +109,10 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 What file must you modify if you want the location of the databases for your Neo4j instance to be located in a non-default directory?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -97,8 +123,10 @@ Select the correct answer.
 
 === Question 2
 
+[.statement]
 The directory/folder that will be used for the Neo4j instance databases must be owned by which user:group?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -109,9 +137,11 @@ Select the correct answer.
 
 === Question 3
 
+[.statement]
 Suppose you configure a new location for the databases for the Neo4j instance.
 After the Neo4j instance starts, what are the first things you must do?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]

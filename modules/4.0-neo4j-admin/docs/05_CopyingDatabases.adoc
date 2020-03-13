@@ -190,7 +190,7 @@ Select the correct answer.
 === Question 2
 
 [.statement]
-What tool do you use the create a copy of a database within the same Neo4j instance?
+What tools do you use the create a copy of a database within the same Neo4j instance?
 
 [.statement]
 Select the correct answer.
@@ -198,7 +198,7 @@ Select the correct answer.
 [%interactive.answers]
 - [x] `cypher-shell`
 - [ ] `neo4j copy`
-- [ ] `neo4j-admin copy`
+- [x] `neo4j-admin copy`
 - [ ] `neo4j-admin dump`
 
 === Question 3

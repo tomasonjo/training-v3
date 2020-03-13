@@ -5,7 +5,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title:Scripting to Manage Databases
+:module-next-title: Scripting to Manage Databases
 
 ////
 ifdef::backend-html5[]
@@ -17,7 +17,10 @@ endif::backend-html5[]
 
 == About this module
 
+[.notes]
+--
 Next, you will learn how to check the consistency of a Neo4j database.
+--
 
 At the end of this module, you should be able to:
 [square]
@@ -25,15 +28,26 @@ At the end of this module, you should be able to:
 
 == Checking the consistency of a database
 
+[.notes]
+--
 A database's consistency could be compromised if a software or hardware failure has occurred that affects the Neo4j database.
 You will learn later in this module about live backups, but if you have reason to believe that a specific database has been corrupted,  you can perform a consistency check on it.
+--
 
+[.small]
+--
 The Neo4j database must be stopped to perform the consistency check.
 
 Here is how you use the `neo4j-admin` tool to check the consistency of the database:
+--
 
-`neo4j-admin check-consistency --database=<database-name> --report-dir=report-location [--verbose]`
-
+[source]
+----
+neo4j-admin check-consistency --database=<database-name>
+                              --report-dir=report-location [--verbose]
+----
+[.notes]
+--
 The database named _database-name_ is found in the Neo4j instance.
 If the tool comes back with no error, then the database is consistent.
 Otherwise, an error is returned and a report is written to _report-location_.
@@ -43,20 +57,29 @@ For example, you typically check the consistency of a backup which is a best pra
 
 Suppose we had loaded the *movies2* database with `neo4j-admin`.
 Here is what a successful run of the consistency checker should produce:
+--
+image::ConsistentPassed.png[ConsistentPassed,width=550,align=center]
 
-image::ConsistentPassed.png[ConsistentPassed,width=1000,align=center]
-
+[.notes]
+--
 No report is written to the reports directory because the consistency check passed.
+--
 
-=== Inconsistencies found
+=== Example: Inconsistencies found
 
+[.notes]
+--
 Here is an example of what an unsuccessful run of the consistency checker should produce:
+--
 
-image::Inconsistencies.png[Inconsistencies,width=1000,align=center]
+image::Inconsistencies.png[Inconsistencies,width=900,align=center]
 
+[.notes]
+--
 If inconsistencies are found, a report is generated and placed in the directory specified for the report location.
 
 Inconsistencies in a database are a serious matter that should be looked into with the help of Neo4j Technical Support.
+--
 
 [.student-exercise]
 == Exercise #7: Checking consistency of a database
@@ -75,9 +98,11 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 Suppose that you suspect that one of the user databases in your Neo4j instance has become corrupt.
 What is the first thing you need to do?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -88,8 +113,10 @@ Select the correct answer.
 
 === Question 2
 
+[.statement]
 What tool do you use to check the consistency of a database?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]
@@ -100,8 +127,10 @@ Select the correct answer.
 
 === Question 3
 
+[.statement]
 As a best practice, when should you always check the consistency of a database?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]

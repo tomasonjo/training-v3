@@ -16,8 +16,10 @@ endif::backend-html5[]
 ////
 
 == About this module
-
+[.notes]
+--
 In most cases, you will want to automate the management of a Neo4j instance.
+--
 
 At the end of this module, you should be able to:
 [square]
@@ -27,10 +29,14 @@ At the end of this module, you should be able to:
 
 == Scripting with cypher-shell
 
+[.notes]
+--
 As a database administrator, you may need to automate changes to databases.
 The most common types of changes that administrators may want to perform are related to the application.
 As an administrator, you work with architects and developers to created scripts to:
+--
 
+[square]
 * Create or drop databases.
 * Create constraints.
 * Create indexes.
@@ -39,32 +45,57 @@ As an administrator, you work with architects and developers to created scripts 
 * Restructure the graph (change graph data model).
 * Add users and access control.
 
-=== Examples: Adding constraints
+=== Example: Adding constraints - 1
 
 Suppose that we create 3 files to make changes:
 
 *1. AddConstraintsMovies.cypher* that contains the Cypher statements to execute in `cypher-shell`:
+
+
+[source]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
 CALL db.constraints();
 ----
+
+[.small]
+--
 Note that each Cypher statement must end with a `;`.
+--
+
+=== Example: Adding constraints - 2
 
 *2. AddConstraints.sh* that invokes `cypher-shell` using a set of Cypher statements and specifies verbose output:
+
+[source]
 ----
-cat /usr/local/work/AddConstraintsMovies.cypher | /usr/bin/cypher-shell -u neo4j -p <InstancePassword>  --database movies --format verbose
+cat /usr/local/work/AddConstraintsMovies.cypher |
+       /usr/bin/cypher-shell -u neo4j -p <InstancePassword>
+       --database movies --format verbose
 ----
 
+[.small]
+--
+Note that this statement must not have linefeeds in it.
+--
+
+=== Example: Adding constraints - 3
+
 *3. PrepareDB.sh* that initializes the log file, *PrepareDB.log*, and calls the script to add the constraints:
+
+[source]
 ----
 rm -rf /usr/local/work/PrepareDB.log
 /usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/PrepareDB.log
 # Other scripts here
 ----
 
+[.notes]
+--
 When the *PrepareDB.sh* script runs its scripts, all output will be written to the log file, including error output. Then you can simply check the log file to make sure it ran as expected.
 Using the Cypher file, together with the run scripts, you can perform something like this to automate changes to a database or set of databases.
+--
 
 [.student-exercise]
 == Exercise #8: Scripting changes to the database
@@ -82,8 +113,10 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 What tools do you typically use to automate changes to databases?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]
@@ -94,8 +127,10 @@ Select the correct answers.
 
 === Question 2
 
+[.statement]
 What tools do you typically use to automate management of databases?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]
@@ -106,6 +141,7 @@ Select the correct answers.
 
 === Question 3
 
+[.statement]
 What type of file would this content be placed in for scripting purposes?
 
 ----
@@ -114,6 +150,7 @@ CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
 CALL db.constraints();
 ----
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]

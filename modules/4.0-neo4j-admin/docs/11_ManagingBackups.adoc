@@ -17,57 +17,93 @@ endif::backend-html5[]
 
 == About this module
 
+[.notes]
+--
 Online backup is used in production where the application cannot tolerate the database being unavailable.
+--
+
 In this part of the training, you will learn how to back up and restore databases in a Neo4j instance.
 
 
 == Overview of backup with Neo4j
 
-Backup is an essential process for any deployed application. The Causal Clustering capabilities of Neo4j enable you to provide uninterrupted access to databases because data is replicated in more than one server.
+[.notes]
+--
+Backup is an essential process for any deployed application.
+The Causal Clustering capabilities of Neo4j enable you to provide uninterrupted access to databases because data is replicated in more than one server.
 Backup is a little different.
-It enables you to take a snapshot of a database or set of databases at a given time.
-Backups are essential for a deployed application, especially if some [rogue] application behavior changes the database in a way that cannot be detected or automatically undone.
-In this scenario, you need to roll back transactions to a certain point in time.
+--
 
+[.statement]
+--
+[square]
+* Backup enables you to take a snapshot of a database or set of databases at a given time.
+* Backups are essential for a deployed application, especially if some [rogue] application behavior changes the database in a way that cannot be detected or automatically undone.
+In this scenario, you need to roll back transactions to a certain point in time.
+--
 == Backup architecture
 
+[.statement]
 A best practice is to run the backup process from a different system where the Neo4j instance is running.
+
+[.notes]
+--
 The backup process is done using the neo4j-admin tool's backup functionality.
 This enables the backup performance to not negatively impact the performance of the Neo4j instance that is servicing clients.
 What that means is that you must install Neo4j on at least two systems.
 You do not configure anything on the server where the backups will be performed from and you do not run a Neo4j instance on that server either.
+--
 
-image::BackupArchitecture.png[BackupArchitecture,width=1200,align=center]
+image::BackupArchitecture.png[BackupArchitecture,width=900,align=center]
 
+[.notes]
+--
 A common practice for many enterprises is to back up their databases to Amazon S3 sites.
 In addition, if any backups are to be stored in S3, they should  be encrypted as well as the channel used to create send the backup to S3.
+--
 
 == Backup concepts
 
-When backing up the databases of a Neo4j instance, a best practice is to back up the system database and the user databases.
-You perform a full backup initially and during subsequent backups, you back up increments that contain only the data that changed since the last backup.
-Another part of the backup process that is important is to confirm that the database being backed up is consistent.
+[small]
+--
+[square]
+* When backing up the databases of a Neo4j instance, a best practice is to back up the system database and the user databases.
+* You perform a full backup initially and during subsequent backups, you back up increments that contain only the data that changed since the last backup.
+* Another part of the backup process that is important is to confirm that the database being backed up is consistent.
+--
 
+[.notes]
+--
 There are other options that you can additionally specify about the backup that you can read about in the _Neo4j Operations Manual_.
+--
 
 == Enabling online backup
 
+[.small]
+--
 To enable a Neo4j instance to be backed up online, you must add these two properties to the *neo4j.conf* file for the Neo4j instance that will be backed up:
+--
 
+[source]
 ----
 dbms.backup.enabled=true
 dbms.backup.address=<host-address>:<6362-6372>
 ----
 
+[.small]
+--
 Where _host-address_ is the address of a server from which you will run neo4j-admin to perform the backup.
 You must specify a port number that will not conflict with existing ports used on the server being backed up.
-
+--
 
 === Performing the backup
 
+[.notes]
+--
 After you restart the Neo4j instance with the configuration changes, you can then initiate the backup on the server you specified in _host_address_ as follows with consistency checking:
+--
 
-[listing]
+[source]
 ----
 neo4j-admin backup --backup-dir=<backup-directory>
                    [--verbose]
@@ -77,6 +113,8 @@ neo4j-admin backup --backup-dir=<backup-directory>
                    --report-dir=<report-directory>
 ----
 
+[.notes]
+--
 If a database has previously been backed up to the backup directory, the backup will be for any changes since the last backup.
 
 There are a number of other options you can specify related to performance and specific types of checks.
@@ -84,31 +122,47 @@ See the documentation for details.
 
 If the backup was successful it returns 0.
 If a non-zero value is returned, the backup failed or a consistency check failed, both of which need to be investigated.
+--
 
+[.small]
+--
 One thing that you need to determine is whether the consistency checking will be done during the backup or on the backup image after the backup has completed.
 If you need to speed up the backup process and whether it taxes the Neo4j instance, then it will be better to check the consistency after the backup.
 
 [NOTE]
 In most cases, you will need to set the HEAP_SIZE environment variable before you start the backup process.
+--
 
 === Restore architecture
 
+[.small]
+--
 You use the `neo4j-admin` tool to restore a database.
 You run the restore process on the same system where the Neo4j instance resides.
+--
 
-image::RestoreArchitecture.png[RestoreArchitecture,width=1200,align=center]
+image::RestoreArchitecture.png[RestoreArchitecture,width=900,align=center]
 
+[.notes]
+--
 If you need to restore all databases, then you can first shut down the Neo4j instance and restore all of them.
 
 If you need to restore a specific database, you must ensure that the Neo4j instance is started, but the database that you want to restore is stopped.
+--
 
 === Restoring from a backup
 
+[.small]
+--
 If you need to restore a specific database from a backup, you must first stop the database you want to restore.
+--
 
+[.notes]
+--
 Here is how you restore the database from a backup:
+--
 
-[listing]
+[source]
 ----
 neo4j-admin restore
           --from=<absolute-path-to-backup-instance-directory-name>
@@ -117,12 +171,14 @@ neo4j-admin restore
           [--verbose]
 ----
 
+[.small]
+--
 If you specify _--force_, the existing database will be replaced.
 You then need to create it again against the _system_ database.
 
-
 [NOTE]
 If you restore a database as _root_ with _--force_, make sure that you change the ownership (recursively) of the database directory to _neo4j:neo4j_ before creating the database.
+--
 
 [.student-exercise]
 == Exercise #11: Managing backups
@@ -140,8 +196,10 @@ Refer to the *Exercise Guide* for instructions.
 
 === Question 1
 
+[.statement]
 What is a best practice for performing backups for the databases a Neo4j instance?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]
@@ -152,8 +210,10 @@ Select the correct answers.
 
 === Question 2
 
+[.statement]
 To perform an online backup, what must you configure in *neo4j.conf*?
 
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]
@@ -164,9 +224,11 @@ Select the correct answers.
 
 === Question 3
 
+[.statement]
 Suppose you need to restore two databases named _customers_ and _orders_ from backups.
 What must you do before you perform the restore process?
 
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]

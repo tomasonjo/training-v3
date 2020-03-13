@@ -1,5 +1,5 @@
 
-= Importing data
+= Importing Data
 :slug: 12-importing-data
 :doctype: book
 :toc: left
@@ -17,28 +17,42 @@ endif::backend-html5[]
 
 == About this module
 
+[.notes]
+--
 As an administrator, you may need to populate data in a database from files that were extracted from an RDBMS.
+--
+
 In this module, you will learn how to import data from CSV files using the `import` functionality of the `neo4j-admin` tool.
 
 == Importing data
 
+[.notes]
+--
 There are many ways that data can be imported into a Neo4j database where the source of the data is an RDBMS.
+--
 
-You have lots of options for importing data into Neo4j.
+[.statement]
+--
+You have many options for importing data into Neo4j.
 Which option you choose depends on:
 
 [square]
 * How much data you have.
 * What tools you are comfortable using.
 * How much time you have to perform the import.
+--
 
 == Options for importing data into Neo4j
 
-image::ImportOptions.png[ImportOptions,width=1300,align=center]
+image::ImportOptions.png[ImportOptions,width=900,align=center]
 
+[.notes]
+--
 The developers of your application may be responsible for importing the data.
 In other scenarios, you may be given a set of CSV files that will need to be imported into a database.
+--
 
+[.statement]
 Using the `neo4j-admin` tool is by far the quickest way to import data into the database.
 
 == CSV files for import
@@ -49,20 +63,28 @@ CSV files contain one of:
 * rows with data
 * header row and data
 
+[.notes]
+--
 You must understand how headers relate to the data, what the field separator is, and make sure that the data is property formatted.
 You must ensure that the data in the CSV files is clean and ready for import.
+--
 
 == Using neo4j-admin for import
 
+[.notes]
+--
 When using neo4j-admin for import:
+--
 
+[.statement]
+--
 [square]
 * The database to be imported into must not exist as it will be created as part of the import.
 * The header information has additional information used for creating the nodes and relationships.
 * Node CSV files are structured differently from relationship CSV files.
 * All CSV files must use the same field separator.
 * You create the constraints (and indexes) after the import.
-
+--
 
 === Example: CSV file for nodes: Beat
 
