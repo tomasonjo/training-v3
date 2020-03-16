@@ -56,7 +56,7 @@ From the drivers that Neo4j supports, you must decide whether you will make call
 The programming model you choose will depend upon the concurrency requirements for the import process.
 Some drivers support concurrency while others do not.
 
-=== Example: Synchronous Java example
+== Example: Synchronous Java example
 
 [.statement]
 Here is an example where we wait for the call to return before continuing:
@@ -77,7 +77,7 @@ try (Session session = driver.session()) {
 }
 ----
 
-=== Example: Asynchronous Java example
+== Example: Asynchronous Java example
 
 [.statement]
 Here is an example where we continue processing while the call executes:
@@ -95,7 +95,7 @@ session.readTransactionAsync(tx ->
 ).whenComplete((ignore, error) -> session.closeAsync());
 ----
 
-=== Example: Synchronous Python example
+== Example: Synchronous Python example
 
 [source]
 ----
@@ -111,7 +111,7 @@ with driver.session() as session:
     session.read_transaction(print_names)
 ----
 
-=== Example: Synchronous JavaScript example
+== Example: Synchronous JavaScript example
 
 [source]
 ----
@@ -129,7 +129,7 @@ resultPromise.then(result => {
 });
 ----
 
-=== Example: Synchronous C# example
+== Example: Synchronous C# example
 
 [source]
 ----
@@ -146,7 +146,7 @@ Console.WriteLine(record["a.name"]);
 }
 ----
 
-=== Example: Asynchronous C# example
+== Example: Asynchronous C# example
 
 [source]
 ----
@@ -289,23 +289,3 @@ You should now be able to:
 [square]
 * Read data from a relational database and create nodes in a Neo4j database using the Neo4j Java drivers.
 
-////
-
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

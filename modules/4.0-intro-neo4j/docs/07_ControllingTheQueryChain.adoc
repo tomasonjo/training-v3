@@ -22,7 +22,7 @@ At the end of this module, you should be able to write Cypher statements to:
 * Perform subqueries with `WITH`.
 * Perform subqueries with `CALL`.
 
-=== Intermediate processing using `WITH`
+== Intermediate processing using `WITH`
 
 [.statement]
 Here is an example where we return each actor, the number of movies they acted in, and the titles of the movies:
@@ -47,7 +47,7 @@ What we really want to do is test the count of each movie, but the count is an a
 One way to to this is with the `WITH` clause in Cypher.
 --
 
-==== Example: Using `WITH`
+=== Example: Using `WITH`
 
 [.notes]
 --
@@ -85,7 +85,7 @@ Notice that for the `RETURN` clause, _a_, _numMovies_, and _movies_ are availabl
 [.statement]
 You have to name all expressions with an alias in a `WITH` that are existing variables.
 
-=== Using `WITH` and `UNWIND`
+== Using `WITH` and `UNWIND`
 
 [.notes]
 --
@@ -120,7 +120,7 @@ image::WITHAndUNWIND.png[WITHAndUNWIND,width=700,align=center]
 [.statement]
 You find that you use `WITH` and `UNWIND` frequently when you are importing data into the graph.
 
-=== Example: Subqueries with `WITH`
+== Example: Subqueries with `WITH`
 
 [.notes]
 --
@@ -178,7 +178,7 @@ If this value is greater than five, we then also retrieve the _:DIRECTED_ paths 
 Notice here that _m_ only refers to movies that were directed by _p_.
 --
 
-=== Performing subqueries with `CALL`
+== Performing subqueries with `CALL`
 
 [.notes]
 --
@@ -291,25 +291,3 @@ You should now be able to write Cypher statements to:
 * Using `WITH` and `UNWIND` for query processing.
 * Perform subqueries with `WITH`.
 * Perform subqueries with `CALL`.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-6/">Continue to Module 6</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part5');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

@@ -24,7 +24,7 @@ At the end of this module, you should be able to write Cypher statements to:
 * Work with maps.
 * Work with dates.
 
-=== Aggregation in Cypher
+== Aggregation in Cypher
 
 [.notes]
 --
@@ -53,7 +53,7 @@ How Cypher groups values returned by default will depend on the number of nodes 
 This graph has more _Person_ nodes than _Movie_ nodes so the grouping is done based upon the movie titles.
 --
 
-==== Using `count()` to aggregate
+== Using `count()` to aggregate
 
 [.notes]
 --
@@ -88,7 +88,7 @@ For example, in the Cypher statement shown above, all rows returned with the sam
 That is, there are exactly four movies that _Lana Washowski_ directed with _Hugo Weaving_ acting in.
 --
 
-==== Collecting results
+== Collecting results
 
 [.notes]
 --
@@ -117,7 +117,7 @@ Notice that the list is defined in square brackets and each element of the list 
 This list contains a set of strings.
 --
 
-==== Collecting nodes
+== Collecting nodes
 
 [.notes]
 --
@@ -151,7 +151,7 @@ Here is the result returned viewed as a table. Each node is an object in the lis
 image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=300,align=center]
 --
 
-==== Counting and collecting
+== Counting and collecting
 
 [.notes]
 --
@@ -181,7 +181,7 @@ image::ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900,ali
 Notice here that the _director.name_ value is a grouping key for the results returned.
 --
 
-==== Using `collect()` and `size()`
+=== Using `collect()` and `size()`
 
 [.notes]
 --
@@ -201,7 +201,7 @@ RETURN actor.name, director.name, size(collect(m)) AS collaborations,
        collect(m.title) AS movies
 ----
 
-=== Working with Cypher data
+== Working with Cypher data
 
 [.notes]
 --
@@ -220,7 +220,7 @@ You have also learned that the `collect()` function can create lists of values o
 Next, you will learn more about working with lists and dates in Cypher.
 endif::[]
 
-==== Lists
+== Lists
 
 [.notes]
 --
@@ -250,7 +250,7 @@ image::CastList1.png[CastList1,width=550,align=center]
 Notice that when viewing nodes in table view, each node is shown with {} notation and key value pairs. This structure is called a map in Cypher,
 --
 
-==== Using strings in lists
+=== Using strings in lists
 
 [%unbreakable]
 --
@@ -270,7 +270,7 @@ endif::[]
 image::CastList2.png[CastList2,width=700,align=center]
 --
 
-==== Accessing elements of the list
+=== Accessing elements of the list
 
 [.notes]
 --
@@ -302,7 +302,7 @@ In this result we return the first cast member (indexed by 0) of each list for e
 You can read more about working with lists in the _List Functions_ section of the _Neo4j Cypher Manual_.
 --
 
-==== Working with maps
+== Working with maps
 
 [.notes]
 --
@@ -325,7 +325,7 @@ endif::[]
 
 image::DaysInFeb.png[DaysInFeb,width=900,align=center]
 
-==== Accessing map elements
+=== Accessing map elements
 
 [.notes]
 --
@@ -341,7 +341,7 @@ A node in the graph, when returned in Neo4j Browser is a map, when displayed as 
 image::NodeIsMap.png[NodeIsMap,width=400,align=center]
 --
 
-==== Map projections
+== Map projections
 
 [.notes]
 --
@@ -371,7 +371,7 @@ image::MapProjection.png[MapProjection,width=600,align=center]
 You can learn more about map projections in the _Cypher Reference Manual_.
 --
 
-==== Working with dates
+== Working with dates
 
 [.notes]
 --
@@ -388,7 +388,7 @@ RETURN date(), datetime(), time(), timestamp()
 
 image::DateTime.png[DateTime,width=900,align=center]
 
-==== Accessing components of dates
+=== Accessing components of dates
 
 [.notes]
 --
@@ -406,7 +406,7 @@ RETURN date().day, date().year, datetime().year, datetime().hour,
 image::DateTime2.png[DateTime2,width=900,align=center]
 --
 
-==== Working with `timestamp()`
+=== Working with `timestamp()`
 
 [.notes]
 --
@@ -426,7 +426,7 @@ RETURN datetime({epochmillis:timestamp()}).day,
 image::DateTime3.png[DateTime3,width=1200,align=center]
 --
 
-==== Type and data conversions
+== Type and data conversions
 
 [.notes]
 --
@@ -511,25 +511,3 @@ You should now be able to write Cypher statements to:
 * Work with lists.
 * Work with maps.
 * Work with dates.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-6/">Continue to Module 6</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part5');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

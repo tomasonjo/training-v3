@@ -96,7 +96,7 @@ endif::[]
 image::UniquenessFailed.png[UniquenessFailed,width=400,align=center]
 
 
-=== Uniqueness at runtime
+=== Example: Uniqueness at runtime
 
 [.notes]
 --
@@ -432,24 +432,3 @@ You should now be able to:
 * Create an existence constraint for a node property in the graph.
 * Create a uniqueness constraint for a set of node properties in the graph.
 * Manage constraints in the graph.
-
-////
-
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

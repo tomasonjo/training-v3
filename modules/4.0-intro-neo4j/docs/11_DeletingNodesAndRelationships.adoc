@@ -89,7 +89,7 @@ image::TooManyRels.png[TooManyRels,width=500,align=center]
 [.statement]
 We see that there are now three relationships from _Katie Holmes_ and _Batman Begins_.
 
-=== Finding and deleting relationships
+=== Example: Finding and deleting relationships
 
 [.notes]
 --
@@ -111,7 +111,7 @@ endif::[]
 
 image::DeleteRels.png[DeleteRels,width=500,align=center]
 
-==== Confirming deletion
+=== Example: Confirming deletion
 
 [.notes]
 --
@@ -153,7 +153,7 @@ We would see this error:
 
 image::LiamNeesonDeleteError.png[LiamNeesonDeleteError,width=800,align=center]
 
-=== Using `DETACH DELETE`
+== Using `DETACH DELETE`
 
 [.notes]
 --
@@ -254,24 +254,3 @@ You should now be able to write Cypher statements to:
 * Delete a node.
 * Delete a relationship.
 * Delete a node and its relationships.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-7/">Continue to Module 7</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part6');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

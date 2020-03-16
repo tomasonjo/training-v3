@@ -28,7 +28,7 @@ Throughout this training, you should refer to:
 * http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
 --
 
-=== What is Cypher?
+== What is Cypher?
 
 [.notes]
 --
@@ -48,14 +48,14 @@ ifdef::backend-revealjs[]
 * Easily-understood syntax.
 endif::[]
 
-==== Cypher is ASCII art
+=== Cypher is ASCII art
 
 Optimized for being read by humans, Cypher's construct uses English prose and iconography (called ASCII Art) to make queries more self-explanatory.
 
 image::AsciiArt.png[AsciiArt,width=600,align=center]
 
 
-==== Cypher to express what to retrieve not how
+=== Cypher to express what to retrieve not how
 
 [%unbreakable]
 --
@@ -80,7 +80,7 @@ And some of the collection semantics have been borrowed from languages such as H
 The Cypher language has been made available to anyone to implement and use via openCypher (opencypher.org), allowing any database vendor, researcher or other interested party to reap the benefits of our years of effort and experience in developing a first class graph query language.
 --
 
-==== Nodes
+== Nodes
 
 Cypher uses a pair of parentheses like `()`, `(n)` to represent a node, much like a circle on a whiteboard.
 
@@ -92,14 +92,14 @@ Recall that a node typically represents an entity in your domain.
 An anonymous node, `()`, represents one or more nodes during a query processing where there are no restrictions of the type of node or the properties of the node.
 --
 
-==== Labels
+== Labels
 
 Nodes in a graph are typically labeled. Labels are used to group nodes and filter queries against the graph.
 That is, labels can be used to optimize queries.
 
 In the _Movie_ database you will be working with, the nodes in this graph are labeled _Movie_ or _Person_ to represent two types of nodes.
 
-==== Viewing labels in the graph
+=== Viewing labels in the graph
 
 For example, you can see the labels in the database by simply clicking the Database icon in Neo4j Browser:
 
@@ -108,7 +108,7 @@ image::NodeLabels.png[width=300,align=center]
 You can filter the types of nodes that you are querying, by specifying a *label* for a node.
 A node can have zero or more labels.
 
-==== Syntax: Specifying nodes
+== Syntax: Specifying nodes
 
 [%unbreakable]
 --
@@ -130,7 +130,7 @@ Here are simplified syntax examples for specifying a node:
 Notice that a node must have the parentheses. The labels and the variable for a node are optional.
 --
 
-==== Examples specifying nodes
+=== Examples specifying nodes
 
 Here are some examples of specifying nodes:
 
@@ -153,7 +153,7 @@ Here are some examples of specifying nodes:
 A node can have multiple labels. For example a node can be created with a label of _Person_ and that same node can be modified to also have the label of _Actor_ and/or _Director_.
 --
 
-==== Comments in Cypher
+=== Comments in Cypher
 
 In Cypher, you can place a comment (starts with `//`) anywhere in your Cypher to specify that the rest of the line is interpreted as a comment.
 
@@ -164,7 +164,7 @@ MATCH (n)
 RETURN n  //return all nodes
 ----
 
-=== Examining the data model
+== Examining the data model
 
 [.notes]
 --
@@ -179,7 +179,7 @@ The relationships between nodes are also displayed, which you will learn about l
 
 image::call_db.schema.visualization.png[call_db.schema.visualization,width=700,align=center]
 
-=== Syntax: Using MATCH to retrieve nodes
+== Syntax: Using MATCH to retrieve nodes
 
 //ifdef::backend-html5[]
 
@@ -270,7 +270,8 @@ One thing to notice in this example is that some of the displayed nodes are conn
 The visualization shows the relationship between these nodes because we have specified *Connect result nodes* in our Neo4j Browser settings.
 Some of the Person nodes represent people who reviewed Movies and as such, they follow each other.
 --
-==== Viewing nodes as table data
+
+== Viewing nodes as table data
 
 [.notes]
 --
@@ -336,7 +337,7 @@ This result stream contains all property keys in the graph. It does not display 
 image::call_db.PropertyKeys.png[call_db.PropertyKeys,width=600,align=center]
 --
 
-=== Syntax: Retrieving nodes filtered by a property value
+== Syntax: Retrieving nodes filtered by a property value
 
 [.notes]
 --
@@ -423,7 +424,7 @@ image::TwoPropertiesForFilter.png[TwoPropertiesForFilter,width=700,align=center]
 As it turns out, there is only one movie with the _tagline_, 'Free your mind` in the _Movie_ database, but if we had specified a different year, the query would not have returned a value because when you specify properties, both properties must match.
 --
 
-=== Syntax: Returning property values
+== Syntax: Returning property values
 
 
 //ifdef::backend-html5[]
@@ -578,7 +579,7 @@ Here is how Cypher uses ASCII art to specify the path used for a query:
 ()<--()     // the second node has a relationship to the first node
 ----
 
-=== Syntax: Querying using relationships
+== Syntax: Querying using relationships
 
 [.notes]
 --
@@ -615,7 +616,7 @@ _where:_
 {set:cellbgcolor!}
 endif::[]
 
-=== Examining relationships
+== Examining relationships
 
 [.statement]
 --
@@ -631,7 +632,7 @@ All of the other relationships in this graph are from _Person_ nodes to _Movie_ 
 
 image::call_db.schema-relationships.png[call_db.schema-relationships,width=500,align=center]
 
-=== Using a relationship in a query
+== Using a relationship in a query
 
 [.notes]
 --
@@ -671,7 +672,7 @@ MATCH (p)-[rel:ACTED_IN]->(m {title:'The Matrix'})
 RETURN p,m
 ----
 
-=== Querying by multiple relationships
+== Querying by multiple relationships
 
 [.notes]
 --
@@ -698,7 +699,7 @@ image::TomHanksActedDirected.png[TomHanksActedDirected,width=700,align=center]
 Notice that there are multiple rows returned for the movie, _That Thing You Do_. This is because _Tom Hanks_ acted in and directed that movie.
 --
 
-=== Using anonymous nodes in a query
+== Using anonymous nodes in a query
 
 [.notes]
 --
@@ -726,7 +727,7 @@ image::AnonymousMovieNode.png[AnonymousMovieNode,width=800,align=center]
 A best practice is to place named nodes (those with variables) before anonymous nodes in a `MATCH` clause.
 --
 
-=== Using an anonymous relationship for a query
+== Using an anonymous relationship for a query
 
 [.notes]
 --
@@ -782,7 +783,7 @@ RETURN p, m
 In this training, we will use `+-->+`, `--`, and `+<--+` to represent anonymous relationships as it is a Cypher best practice.
 --
 
-=== Retrieving the relationship types
+== Retrieving the relationship types
 
 [.statement]
 There is a built-in function, `type()` that returns the type of a relationship.
@@ -808,7 +809,7 @@ endif::[]
 image::MatrixRelationshipTypes.png[MatrixRelationshipTypes,width=600,align=center]
 --
 
-=== Properties for relationships
+== Properties for relationships
 
 [.notes]
 --
@@ -824,7 +825,7 @@ Each relationship has properties that further describe the relationship using th
 [.center]
 image::REVIEWEDProperties.png[ReviewedProperties,width=900,align=center]
 
-=== Retrieving properties for relationships
+== Retrieving properties for relationships
 
 [.notes]
 --
@@ -1039,7 +1040,7 @@ In this query, notice that there are multiple records returned for a movie, each
 Each row is unique since the focal point of the query is the actor/director for a particular movie.
 --
 
-=== Returning paths
+== Returning paths
 
 In addition, you can assign a variable to the path and return the path as follows:
 
@@ -1146,7 +1147,6 @@ Estimated time to complete: 15 minutes.
 [.quiz]
 == Check your understanding
 
-
 === Question 1
 
 [.statement]
@@ -1205,24 +1205,3 @@ You should now be able to write Cypher statements to:
 * Retrieve property values from nodes in the graph.
 * Filter nodes retrieved using relationships.
 
-////
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-5/">Continue to Module 5</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part4');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

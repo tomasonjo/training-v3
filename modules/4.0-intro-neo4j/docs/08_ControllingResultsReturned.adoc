@@ -68,7 +68,7 @@ image::NoDuplication.png[NoDuplication,width=550,align=center]
 Using `DISTINCT` in the `RETURN` clause here means that rows with identical values will not be returned.
 --
 
-=== Duplication in lists
+== Duplication in lists
 
 [.notes]
 --
@@ -92,7 +92,7 @@ endif::[]
 image::DuplicationInCollection.png[DuplicationInCollection,width=500,align=center]
 --
 
-=== Eliminating duplication in lists
+== Eliminating duplication in lists
 
 [.notes]
 --
@@ -215,7 +215,7 @@ endif::[]
 image::Limit.png[Limit,width=500,align=center]
 --
 
-== Limiting number of intermediate results
+=== Limiting number of intermediate results
 
 [.notes]
 --
@@ -272,7 +272,7 @@ image::Limit3.png[Limit3,width=600,align=center]
 Note that this display in Neo4j Browser is with *Connect result nodes* unchecked.
 --
 
-=== Alternative to `LIMIT`
+== Alternative to `LIMIT`
 
 [.notes]
 --
@@ -400,25 +400,3 @@ You should now be able to write Cypher statements to:
 * Eliminate duplication in results returned.
 * Order results returned.
 * Limit the number of results returned.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-6/">Continue to Module 6</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part5');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

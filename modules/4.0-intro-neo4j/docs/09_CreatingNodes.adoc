@@ -239,7 +239,7 @@ REMOVE x:Label1, x:Label2
 If you attempt to remove a label from a node for which the label does not exist, it is ignored.
 --
 
-== Example: Removing labels from a node
+=== Example: Removing labels from a node
 
 [.notes]
 --
@@ -297,7 +297,7 @@ That is, you can assign a string value to a property that was once a numeric val
 When specify the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if _propertyNnameX_ exists for the node. If  _propertyNameX_ does not exist for the node, then the property is added to the node.
 --
 
-== Example: Adding properties to a node
+=== Example: Adding properties to a node
 
 [.notes]
 --
@@ -317,7 +317,7 @@ Assuming that we have previously created the node for the movie, here is the res
 
 image::AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,width=800,align=center]
 
-== Example 2: Adding properties to node
+=== Example 2: Adding properties to node
 
 [.notes]
 --
@@ -427,7 +427,7 @@ REMOVE x.propertyName
 SET x.propertyName = null
 ----
 
-== Example: Removing properties from a node
+=== Example: Removing properties from a node
 
 [.notes]
 --
@@ -539,24 +539,3 @@ You should now be able to write Cypher statements to:
 * Add and remove node labels.
 * Add and remove node properties.
 * Update node properties.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-7/">Continue to Module 7</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part6');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

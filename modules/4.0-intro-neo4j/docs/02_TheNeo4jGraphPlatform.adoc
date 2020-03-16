@@ -29,7 +29,7 @@ Data scientists and data analysts typically use a combination Cypher queries, as
 End-users typically use applications written by developers to access the graph data.
 --
 
-=== Components of the Neo4j Graph Platform
+== Components of the Neo4j Graph Platform
 
 To better understand the Neo4j Graph Platform, you will learn about these components and the benefits they provide.
 
@@ -109,7 +109,7 @@ No wasted time or effort.
 This is how index-free adjacency operates.
 --
 
-==== Contrast index-free adjacency with RDBMS
+=== Contrast index-free adjacency with RDBMS
 
 By contrast, a traditional RDBMS cannot do this.
 It must use a central index.
@@ -135,7 +135,7 @@ But to make matters even worse, there is no concept of "learning the route", no 
 Every single time you want to visit Anne’s house, you need to follow these same steps!
 --
 
-==== Index-free adjacency in Neo4j
+=== Index-free adjacency in Neo4j
 
 With index-free adjacency, when a node or relationship is written to the database, it is stored in the database as connected and any subsequent access to the data is done using pointer navigation which is [.underline]#very fast#.
 Since Neo4j is a native graph database (i.e. it has a graph as its core data model), it supports very large graphs where connected data can be traversed in constant time without the need for an index.

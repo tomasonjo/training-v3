@@ -310,24 +310,3 @@ You should now be able to:
 
 [square]
 * Import data from a set of CSV files using the neo4j-admin tool.
-
-////
-
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

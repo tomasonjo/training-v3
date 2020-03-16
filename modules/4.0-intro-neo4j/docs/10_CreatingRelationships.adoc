@@ -48,7 +48,7 @@ When you create the relationship, it *must* have direction. You can query nodes 
 In most cases, unless you are connecting nodes at creation time, you will retrieve the two nodes, each with  their own variables, for example, by specifying a `WHERE` clause to find them, and then use the variables to connect them.
 --
 
-=== Creating a relationship
+=== Example: Creating a relationship
 
 [.notes]
 --
@@ -88,7 +88,7 @@ endif::[]
 image::CreateActedInRelationship.png[CreateActedInRelationship,width=600,align=center]
 --
 
-=== Creating multiple relationships
+== Creating multiple relationships
 
 [.notes]
 --
@@ -398,26 +398,3 @@ You should now be able to write Cypher statements to:
 * Create nodes and relationships together.
 * Add properties to a relationship.
 * Remove properties from a relationship.
-
-////
-
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-7/">Continue to Module 7</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part6');
-});
-</script>
-++++
-
-endif::backend-html5[]
-
-////

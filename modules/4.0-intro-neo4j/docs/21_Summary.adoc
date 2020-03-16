@@ -5,21 +5,6 @@
 :toclevels: 3
 :imagesdir: ../images
 
-////
-
-[#module-8.quiz]
-== Quiz Results
-++++
-<span id="quizes-result"></span>
-++++
-
-== Course Completion Certificate
-
-++++
-<span id="cert-result"></span>
-++++
-////
-
 
 == Course Summary
 

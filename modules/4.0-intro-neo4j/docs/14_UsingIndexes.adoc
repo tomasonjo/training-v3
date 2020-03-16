@@ -148,7 +148,7 @@ Notice that in the above Cypher statements we use the semi-colon `;` to separate
 In general, you need not end a Cypher statement with a semi-colon, but if you want to execute multiple Cypher statements, you must separate them. You have already used the semi-colon to separate Cypher statements when you loaded the _Movie_ database in the training exercises.
 --
 
-=== Creating a composite index
+=== Example: Creating a composite index
 
 [.notes]
 --
@@ -208,7 +208,7 @@ endif::[]
 
 image::CreateFullTextIndex1.png[CreateFullTextIndex1,width=900,align=center]
 
-=== Retrieving configured indexes
+== Retrieving configured indexes
 
 [.notes]
 --
@@ -263,7 +263,7 @@ endif::[]
 
 image::UseFullTextIndex1.png[UseFullTextIndex1,width=600,align=center]
 
-=== Retrieving the score for a full-text search
+== Retrieving the score for a full-text search
 
 [.notes]
 --
@@ -328,7 +328,7 @@ endif::[]
 
 image::ManagingIndexes1.png[ManagingIndexes1,width=1300,align=center]
 
-=== Dropping an index
+== Dropping an index
 
 [.notes]
 --
@@ -346,7 +346,7 @@ endif::[]
 
 image::ManagingIndexes2.png[ManagingIndexes2,width=900,align=center]
 
-=== Dropping a full-text schema index
+== Dropping a full-text schema index
 
 [.notes]
 --
@@ -458,23 +458,3 @@ You should now be able to:
 ** Drop an index
 ** Drop a full-text schema index
 --
-
-////
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

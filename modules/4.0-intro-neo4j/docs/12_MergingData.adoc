@@ -88,7 +88,7 @@ You use the simple `MERGE` clause to:
 * Create a unique relationship between two nodes.
 * Create a unique node and relationship in the context of another node.
 
-=== Syntax: Using `MERGE` to create nodes
+== Syntax: Using `MERGE` to create nodes
 
 [.notes]
 --
@@ -209,7 +209,7 @@ RETURN variable
 If there is an existing node with  _Label1_ and _nodeProperties1_  with the _:REL_TYPE_ relationship to an existing node with  _Label2_ and _nodeProperties2_ in the graph, no relationship is created. If the relationship does not exist, the relationship is created.
 --
 
-=== Example: Existing relationships
+=== Example: Finding existing relationships
 
 [.statement]
 Here is an example. We currently have the _Person_ node with the _:ACTED_IN_ relationship, but we do not have this relationship with the _Actor_ node.
@@ -282,7 +282,7 @@ Here is the result of executing this code:
 
 image::CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=1000,align=center]
 
-== Verifying the merge
+=== Example: Verifying the merge
 
 [.statement]
 Here is the code to display the nodes that have anything to do with _Michael Caine_.
@@ -323,7 +323,7 @@ Furthermore, no new node is created for _Sir Michael Caine_.
 
 image::UpdateToUK.png[UpdateToUK,width=300,align=center]
 
-=== Using `MERGE` to create relationships
+== Using `MERGE` to create relationships
 
 [.notes]
 --
@@ -456,24 +456,3 @@ You should now be able to write Cypher statements to:
 * Merge data in a graph by:
 ** Creating nodes.
 ** Creating relationships.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-7/">Continue to Module 7</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part6');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

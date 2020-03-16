@@ -22,7 +22,7 @@ At the end of this module, you should be able to:
 * Describe the Neo4j property graph model.
 * Whiteboard a graph data model.
 
-=== What is a graph?
+== What is a graph?
 
 
 A graph is a collection of objects, each of which has links with the other objects.
@@ -88,7 +88,7 @@ But mainly, graphs are uniquely useful when answering a question that  involves 
 
 You will frequently hear Neo4j people refer to such questions as graph problems--and they are surprisingly common in the real world.
 --
-=== Graph concepts - nodes and relationships
+== Graph concepts - nodes and relationships
 
 [.notes]
 --
@@ -102,7 +102,7 @@ These two nodes are related to each other which is why we have a line or link co
 
 image::GraphComponents.png[GraphComponents,width=400,align=center]
 
-==== Nodes
+== Nodes
 
 First, let’s define a node in Neo4j.
 Nodes are the main objects of a graph.
@@ -129,7 +129,7 @@ They contain information and you need to decide which links are good ones to fol
 Relationships are those links.
 --
 
-==== Relationships
+== Relationships
 
 [.notes]
 --
@@ -157,7 +157,7 @@ This does not scale well.
 Instead, we can use the data attached to a relationship to preemptively filter which links to follow during traversal.
 --
 
-==== Traversing a graph
+== Traversing a graph
 
 [.notes]
 --
@@ -185,7 +185,7 @@ Relationships have direction, as well as types so you can identify which relatio
 In this example, although the "2" node is visited multiple times, no relationship between the nodes is traversed more than once.
 --
 
-=== What is a graph database?
+== What is a graph database?
 
 image::GraphDatabaseInEnterprise.png[GraphDatabaseInEnterprise,width=800,align=center]
 
@@ -254,7 +254,7 @@ RETURN p.name
 ----
 --
 
-=== Use cases for graph databases
+== Use cases for graph databases
 
 [.notes]
 --
@@ -271,12 +271,12 @@ image::UseCases.png[UseCases,width=800,align=center]
 
 You can read more about how customers are using Neo4j https://neo4j.com/use-cases[here].
 
-=== The Neo4j property graph model
+== The Neo4j property graph model
 
 A graph is composed of two elements: *nodes* and *relationships*.
 Neo4j allows you to identify nodes and relationships and add properties to them to further define the data in the graph.
 
-==== Nodes
+=== Nodes
 
 [.notes]
 --
@@ -288,7 +288,7 @@ A label can be used to group nodes of the same type. For example, you may want t
 
 image::Nodes.png[Nodes,width=400,align=center]
 
-==== Relationships
+=== Relationships
 
 [.notes]
 --
@@ -393,7 +393,7 @@ Graphgists are developed by a wide range of developers from Neo4j and from the N
 You can explore this site to see how other applications have modeled their data and get an appreciation for what can be done in Neo4j.
 --
 
-== Example graphgist
+=== Example graphgist
 
 [.is-half.left]
 --
@@ -467,25 +467,3 @@ You should now be able to:
 * Describe some common use cases for using a graph database.
 * Describe the Neo4j property graph model.
 * Whiteboard a graph data model.
-
-////
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-2/">Continue to Module 2</a>
-++++
-
-ifdef::backend-html5[]
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part1');
-});
-</script>
-++++
-
-endif::backend-html5[]
-
-////

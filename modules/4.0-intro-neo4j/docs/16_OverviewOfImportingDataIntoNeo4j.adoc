@@ -28,11 +28,11 @@ Which option you choose depends on:
 * What tools you are comfortable using.
 * How much time you have to perform the import.
 
-=== Options for importing data into Neo4j
+== Options for importing data into Neo4j
 
 image::ImportOptions.png[ImportOptions,width=1000,align=center]
 
-=== Prepare for the import
+== Prepare for the import
 
 [.notes]
 --
@@ -222,24 +222,3 @@ You should now be able to:
 [square]
 
 * Describe your options for importing data into Neo4j.
-
-////
-
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

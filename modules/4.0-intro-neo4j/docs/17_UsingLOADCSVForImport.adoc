@@ -224,7 +224,7 @@ For example, we want to transform these field values to numbers as shown here:
 
 image::TransformMovieData1.png[TransformMovieData1,width=500,align=center]
 
-=== Preview the data transformation
+== Preview the data transformation
 
 [.notes]
 --
@@ -244,7 +244,7 @@ RETURN toFloat(line.avgVote), line.genres, toInteger(line.movieId),
 image::TransformMovieData2.png[TransformMovieData2,width=700,align=center]
 --
 
-=== Transforming lists
+== Transforming lists
 
 [.notes]
 --
@@ -413,7 +413,7 @@ Some examples of these eager operators include:
 If you cannot use `USING PERIODIC COMMIT` because your Cypher include some eager operators, then you can use APOC to import the data, which you will learn about in the the next lesson.
 --
 
-=== Importing nodes
+== Importing nodes
 
 [.notes]
 --
@@ -452,7 +452,7 @@ image::LoadMovies1.png[LoadMovies1,width=900,align=center]
 For normalized data, you load all CSV files that contain the data that will be used to create nodes. In our example, this includes the *people.csv* file.
 --
 
-=== Importing relationships
+== Importing relationships
 
 [.notes]
 --
@@ -580,23 +580,3 @@ endif::[]
 * Import the data with `LOAD CSV`.
 * Create indexes for newly-loaded data.
 
-////
-
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

@@ -30,7 +30,7 @@ At the end of this module, you should be able to write Cypher `WHERE` clauses fo
 * Inclusion in a list.
 --
 
-=== Testing equality
+== Testing equality
 
 [.notes]
 --
@@ -61,7 +61,7 @@ WHERE m.released = 2008
 RETURN p, m
 ----
 
-==== Testing multiple values
+== Testing multiple values
 
 
 In this example, you can only refer to named nodes or relationships in a `WHERE` clause so remember that you must specify a variable for any node or relationship you are testing in the `WHERE` clause. 
@@ -76,7 +76,7 @@ WHERE m.released = 2008 OR m.released = 2009
 RETURN p, m
 ----
 
-==== Example: Testing ranges
+=== Example: Testing ranges
 
 [.notes]
 --
@@ -96,7 +96,7 @@ Here is the result:
 
 image::MoviesBetween2003And2004.png[MoviesBetween2003And2004,width=600,align=center]
 
-==== Example: Specifying a range differently
+=== Example: Specifying a range differently
 
 You can also specify the same query as:
 
@@ -118,7 +118,7 @@ A special condition in a query is when the retrieval returns an unknown value ca
 You should read the _Neo4j Cypher Manual's_ section _Working with null_ to understand how  `null` values are used at runtime.
 --
 
-==== Testing labels 
+== Testing labels
 
 ifndef::backend-revealjs[]
 Thus far, you have used the node labels to filter queries in a `MATCH` clause. 
@@ -174,7 +174,7 @@ image::TestLabels.png[TestLabels,width=500,align=center]
 Not all node labels need to be tested during a query, but if your graph has multiple labels for the same node, filtering it by the node label will provide better query performance.
 --
 
-==== Testing existence of a property
+== Testing existence of a property
 
 [.notes]
 --
@@ -199,7 +199,7 @@ endif::[]
 
 image::JackNicholsonMoviesWithTaglines.png[JackNicholsonMoviesWithTaglines,width=1100,align=center]
 
-==== Testing strings
+== Testing strings
 
 [.notes]
 --
@@ -223,7 +223,7 @@ endif::[]
 
 image::ActorsNamedMichael.png[ActorsNamedMichael,width=800,align=center]
 
-==== String comparisons are case-sensitive
+=== String comparisons are case-sensitive
 
 [.notes]
 --
@@ -250,7 +250,7 @@ See the _String functions_ section of the _Neo4j Cypher Manual_ for more informa
 It is sometimes useful to use the built-in string functions to modify the data that is returned in the query in the RETURN clause.
 --
 
-==== Testing with regular expressions
+== Testing with regular expressions
 
 [.notes]
 --
@@ -276,7 +276,7 @@ image::MatchTomsRegex.png[MatchTomsRegex,width=400,align=center]
 [.statement]
 If you specify a regular expression. The index will never be used. In addition, the property value must fully match the regular expression.
 
-==== Example: Testing with patterns - 1
+== Example: Testing with patterns - 1
 
 [.notes]
 --
@@ -302,7 +302,7 @@ Here is the result:
 image::WroteMovies.png[WroteMovies,width=400,align=center]
 --
 
-====  Example: Testing with patterns - 2
+==  Example: Testing with patterns - 2
 
 [%unbreakable]
 --
@@ -322,7 +322,7 @@ Here is the result:
 image::WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=400, align=center]
 --
 
-==== Example: Testing with patterns - 3
+== Example: Testing with patterns - 3
 
 [%unbreakable]
 --
@@ -342,7 +342,7 @@ Here is the result:
 image::ExistsPattern.png[ExistsPattern,width=400,align=center]
 --
 
-==== Testing with list values
+== Testing with list values
 
 [.notes]
 --
@@ -374,7 +374,7 @@ endif::[]
 image::UsingIN.png[UsingIN,width=400,align=center]
 --
 
-==== Testing list values in the graph
+=== Testing list values in the graph
 
 [.notes]
 --
@@ -505,25 +505,4 @@ You should now be able to write Cypher `WHERE` clauses to test:
 * Patterns in the graph.
 * Inclusion in a list.
 --
-////
-== Grade Quiz and Continue 
 
-++++
-<a class="next-section medium button" href="../part-6/">Continue to Module 6</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part5');
-});
-</script>
-++++
-
-endif::backend-html5[]
-
-////

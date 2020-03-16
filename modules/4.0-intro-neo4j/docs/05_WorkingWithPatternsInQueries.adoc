@@ -21,7 +21,7 @@ At the end of this module, you should be able to write Cypher statements to:
 * Return a subgraph.
 * Specify `OPTIONAL` in a query.
 
-=== Traversal in a MATCH clause
+== Traversal in a MATCH clause
 
 [.statement]
 Suppose we want to find all of the followers of people who reviewed the movie, _The Replacements_.
@@ -60,7 +60,7 @@ In all, six relationships were traversed.
 image::TheReplacementsTraversal.png[TheReplacementsTraversal,width=500,align=center]
 --
 
-=== Specifying multiple `MATCH` patterns
+== Specifying multiple `MATCH` patterns
 
 [.notes]
 --
@@ -109,7 +109,7 @@ It returns 15 rows, one for each actor with the associated movie title and name 
 When multiple patterns are specified in a `MATCH` clause, no relationship is traversed more than one time.
 --
 
-=== Specifying a single pattern
+== Specifying a single pattern
 
 However, a better way to write this same query would be:
 
@@ -128,7 +128,7 @@ This is useful when you are looking for a specific node in the graph and want to
 You will learn about creating nodes and relationships later in this training. 
 --
 
-==== Example: Using two MATCH patterns
+=== Example: Using two MATCH patterns
 
 [.notes]
 --
@@ -173,7 +173,7 @@ endif::[]
 image::KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
 --
 
-==== Example: Two `MATCH` patterns required
+=== Example: Two `MATCH` patterns required
 
 [.notes]
 --
@@ -197,7 +197,7 @@ endif::[]
 
 image::MegsCoActors.png[MegsCoActors,width=400,align=center]
 
-=== Traversal with patterns
+== Traversal with patterns
 
 [.notes]
 --
@@ -242,7 +242,7 @@ endif::[]
 image::ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMatch,width=600,align=center]
 --
 
-==== Traversal: Multiple patterns in a `MATCH` clause
+== Traversal: Multiple patterns in a `MATCH` clause
 
 [.notes]
 --
@@ -284,7 +284,7 @@ image::ValKilmerCoActorsSingleMatch.png[ValKilmerCoActorsSingleMatch,width=800,a
 A best practice is to traverse as few nodes as possible so in this example, using multiple `MATCH` patterns is best.
 --
 
-=== Specifying varying length paths
+== Specifying varying length paths
 
 [.notes]
 --
@@ -325,7 +325,7 @@ image::TwoHopRelationship.png[TwoHopRelationship,width=700,align=center]
 If we had specified `[:FOLLOWS*]` rather than `[:FOLLOWS*2]`, the query would return all _Person_ nodes that are in the `:FOLLOWS` path from _Paul Blythe_.
 --
 
-==== Syntax: Varying length patterns
+== Syntax: Varying length patterns
 
 [.notes]
 --
@@ -365,7 +365,7 @@ Retrieve the paths of lengths 1, 2, or 3 with the relationship, _:RELTYPE_ from 
 (node1)-[:RELTYPE*1..3]->(node2)
 ----
 
-=== Finding the shortest path
+== Finding the shortest path
 
 [.notes]
 --
@@ -413,7 +413,7 @@ Notice that the graph engine has traversed many types of relationships to get to
 When you use `ShortestPath()`, you can specify a upper limits for the shortest path. In addition, you should aim to provide the patterns for the from an to nodes that execute efficiently. For example, use labels and indexes.
 --
 
-=== Returning a subgraph
+== Returning a subgraph
 
 [.notes]
 --
@@ -459,7 +459,7 @@ Later in this course, you will learn more about working with lists, which is wha
 The APOC library is very useful if you want to query the graph to obtain subgraphs.
 --
 
-=== Specifying optional pattern matching
+== Specifying optional pattern matching
 
 [.notes]
 --
@@ -593,25 +593,3 @@ You should now be able to write Cypher statements to:
 * Specify varying length paths.
 * Return a subgraph.
 * Specify `OPTIONAL` in a query.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-6/">Continue to Module 6</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part5');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////
