@@ -61,7 +61,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::NoDuplication.png[NoDuplication,width=550,align=center]
+image::NoDuplication.png[NoDuplication,width=450,align=center]
 
 [.notes]
 --

@@ -120,7 +120,7 @@ WHERE p.name = 'Michael Caine'
 RETURN p
 ----
 
-image::MichaelCaine.png[MichaelCaine,width=900,align=center]
+image::MichaelCaine.png[MichaelCaine,width=500,align=center]
 
 === Example: Using `MERGE`
 

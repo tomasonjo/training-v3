@@ -84,7 +84,7 @@ ifndef::backend-revealjs[]
 Here is the result of executing this code:
 endif::[]
 
-image::TooManyRels.png[TooManyRels,width=500,align=center]
+image::TooManyRels.png[TooManyRels,width=300,align=center]
 
 [.statement]
 We see that there are now three relationships from _Katie Holmes_ and _Batman Begins_.

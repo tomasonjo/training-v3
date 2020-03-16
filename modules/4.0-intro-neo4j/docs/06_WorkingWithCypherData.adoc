@@ -148,7 +148,7 @@ image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=500,align=ce
 [.statement]
 Here is the result returned viewed as a table. Each node is an object in the list returned:
 
-image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=300,align=center]
+image::TomCruiseMovieCollection3.png[TomCruiseMovieCollection3,width=200,align=center]
 --
 
 == Counting and collecting
@@ -242,7 +242,7 @@ ifndef::backend-revealjs[]
 Here is the result returned:
 endif::[]
 
-image::CastList1.png[CastList1,width=550,align=center]
+image::CastList1.png[CastList1,width=500,align=center]
 --
 
 [.notes]

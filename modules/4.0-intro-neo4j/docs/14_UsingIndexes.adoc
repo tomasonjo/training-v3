@@ -15,10 +15,10 @@ A uniqueness constraint is also an index where the default implementation is a b
 Next, you will learn about creating property and full-text schema indexes in the graph.
 --
 
+[.small]
+--
 At the end of this module, you should be able to:
 [square]
-[.statement]
---
 * Describe when indexes are used in Cypher.
 * Create a single property index.
 * Create a multi-property index.
@@ -444,9 +444,10 @@ Select the correct answer.
 [.summary]
 == Summary
 
-You should now be able to:
-[.statement]
+[.small]
 --
+You should now be able to:
+
 [square]
 * Describe when indexes are used in Cypher
 * Create a single property index
