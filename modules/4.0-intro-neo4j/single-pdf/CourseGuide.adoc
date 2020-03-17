@@ -26,5 +26,6 @@ include::{includedir}/17_UsingLOADCSVForImport.adoc[]
 include::{includedir}/18_UsingAPOCForImport.adoc[]
 include::{includedir}/19_UsingTheNeo4jAdminToolForImport.adoc[]
 include::{includedir}/20_UsingAnApplicationForImport.adoc[]
-include::{includedir}/21_Summary.adoc[]
+include::{includedir}/21_UsingTheETLToolForImport.adoc[]
+include::{includedir}/22_Summary.adoc[]
 

@@ -63,4 +63,7 @@ include::{includedir}/19_UsingTheNeo4jAdminToolForImport.adoc[leveloffset=+1]
 include::{includedir}/20_UsingAnApplicationForImport.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/21_Summary.adoc[leveloffset=+1]
+include::{includedir}/21_UsingTheETLToolForImport.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/22_Summary.adoc[leveloffset=+1]
