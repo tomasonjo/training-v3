@@ -1,0 +1,287 @@
+= Test Images
+:slug: test-images
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+
+
+== Properties for relationships
+
+[.notes]
+--
+Recall that a node can have as set of properties, each identified by its property key.
+Relationships can also have properties.
+This enables your graph model to provide more data about the relationships between the nodes.
+
+Here is an example from the _Movie_ graph.
+The movie, _The Da Vinci Code_ has two people that reviewed it, _Jessica Thompson_ and _James Thompson_. Each of these _Person_ nodes has the _REVIEWED_ relationship to the _Movie_ node for _The Da Vinci Code_.
+Each relationship has properties that further describe the relationship using the _summary_ and _rating_ properties.
+--
+
+[.center]
+image::full/REVIEWEDProperties.png[ReviewedProperties,align=center]
+
+== Retrieving properties for relationships
+
+[.notes]
+--
+Just as you can specify property values for filtering nodes for a query, you can specify property values for a relationship. This query returns the name of of the person who gave the movie a rating of _65._
+--
+
+[%unbreakable]
+--
+[source,cypher]
+----
+MATCH (p:Person)-[:REVIEWED {rating: 65}]->(:Movie {title: 'The Da Vinci Code'})
+RETURN p.name
+----
+
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+image::two-thirds/ReturnPersonRating65.png[ReturnPersonRating65,align=center]
+--
+
+== Patterns in the graph
+
+[.notes]
+--
+Thus far, you have learned how to specify nodes, properties, and relationships in your Cypher queries.
+Since relationships are directional, it is important to understand how patterns are used in graph traversal during query execution.
+How a graph is traversed for a query depends on what directions are defined for relationships and how the pattern is specified in the `MATCH` clause.
+--
+
+[%unbreakable]
+--
+Here is an example of where the _FOLLOWS_ relationship is used in the _Movie_ graph.
+Notice that this relationship is directional.
+
+image::third/FollowsRelationships.png[FollowsRelationships,align=center]
+--
+
+=== Using patterns for queries
+
+[.statement]
+We can perform a query that returns all _Person_ nodes who follow _Angela Scope_:
+
+[source,cypher]
+----
+MATCH  (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
+RETURN p
+----
+
+[.is-half.left]
+--
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+
+image::half/AngelaFollowers.png[AngelaFollowers,align=center]
+--
+
+[.notes]
+--
+For this query the Person node for Angela Scope is the anchor of the query.
+It is the first node that is retrieved from the graph.
+Then the query engine looks for all relationships _into_ this node and retrieves them.
+In this case there is only one relationship that is defined that points to the Angela Scope node, Paul Blythe.
+--
+
+[.is-half.right]
+--
+image::quarter/AngelaFollowersQueryTraversal.png[AngelaFollowers,align=center]
+--
+
+=== Reversing the traversal
+
+If we reverse the direction in the pattern, the query returns different results:
+
+[source,cypher]
+----
+MATCH  (p:Person)<-[:FOLLOWS]-(:Person {name:'Angela Scope'})
+RETURN p
+----
+
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+image::half/FollowedByAngela.png[FollowedByAngela,align=center]
+
+[.notes]
+--
+In this case the query engine found the Angela Scope node as the anchor and then looked for all relationships _out from_ the Angela Scope node.
+--
+
+=== Querying by any direction of the relationship
+
+[.notes]
+--
+We can also find out what _Person_ nodes are connected by the _FOLLOWS_ relationship in either direction by removing the directional arrow from the pattern.
+--
+
+[source,cypher]
+----
+MATCH  (p1:Person)-[:FOLLOWS]-(p2:Person {name:'Angela Scope'})
+RETURN p1, p2
+----
+
+[.is-half.left]
+--
+[.statement]
+We also return the Angela Scope node so that we can see the relationships in the result. The result returned is:
+
+image::half/AngelaFromTo.png[AngelaFromTo,align=center]
+--
+
+[.notes]
+--
+In this case the Angela Scope node is the anchor and the query engine traverses all _FOLLOWS_ relationships both in and out of the Angela Scope Node.
+--
+
+[.is-half.right]
+--
+image::third/AngelaConnectionsQueryTraversal.png[AngelaConnectionsQueryTraversal,align=center]
+--
+
+=== Traversing multiple relationships
+
+[.statement]
+Since we have a graph, we can traverse through nodes to obtain relationships further into the traversal.
+
+[.statement]
+For example, we can write a Cypher query to return all followers of the followers of _Jessica Thompson_.
+
+[source,cypher]
+----
+MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
+RETURN p
+----
+
+[.is-half.right]
+--
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+image::half/FollowersOfJessicaFollowers.png[FollowersOfJessicaFollowers,align-center]
+--
+
+[.notes]
+--
+For this query the _Jessica Thompson_ node is the anchor.
+Then from the Jessica Thompson node, the query engine looks for any relationships into that node.
+It finds two, but then it must traverse more to find the next FOLLOWS relationship (if any) out of the found nodes.
+It finds only one node, _Paul Blythe_ that matches the query.
+--
+
+[.is-half.left]
+--
+image::quarter/FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,align=center]
+--
+
+=== Variation on the traversal
+
+[.notes]
+--
+This query could also be modified to return each person along the matched path by specifying variables for the nodes and returning them.
+For example:
+--
+
+[source,cypher]
+----
+MATCH  (p:Person)-[:FOLLOWS]->(p2:Person)-[:FOLLOWS]->(p3:Person {name:'Jessica Thompson'})
+RETURN p.name, p2.name, p3.name
+----
+
+[.notes]
+--
+For this query, although the query engine traverses the path from _Jessica Thompson_ to _James Thompson_, it finds that the _James Thompson_ node does not match the entire path specified.
+--
+
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+image::full/NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFollowersOfJessicaFollowers,align=center]
+
+=== Using patterns to focus the query
+
+[.notes]
+--
+As you gain more experience with Cypher, you will see how patterns in your queries enable you to focus on the relationships in the graph.
+For example, suppose we want to retrieve all unique relationships between an actor, a movie, and a director.
+This query will return many unique rows of information that provide this pattern in the graph:
+--
+
+[%unbreakable]
+--
+[source,cypher]
+----
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
+RETURN a.name, m.title, d.name
+----
+
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+image::third/TraversalInTwoDirections.png[TraversalInTwoDirections,align=center]
+--
+
+[.notes]
+--
+In this query, notice that there are multiple records returned for a movie, each with its set of values for the actor and director.
+Each row is unique since the focal point of the query is the actor/director for a particular movie.
+--
+
+== Returning paths
+
+In addition, you can assign a variable to the path and return the path as follows:
+
+[source,cypher]
+----
+MATCH  path = (:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
+RETURN  path
+----
+
+ifndef::backend-revealjs[]
+The result returned is:
+endif::[]
+
+image::half/ReturnPath.png[ReturnPath,align=center]
+
+=== Returning multiple paths
+
+[.notes]
+--
+Here is another example where multiple paths are returned.
+The query is to return all paths from actors to a movie that was directed by Ron Howard
+--
+
+[source,cypher]
+----
+MATCH  path = (:Person)-[:ACTED_IN]->(:Movie)<-[:DIRECTED]-(:Person {name:'Ron Howard'})
+RETURN  path
+----
+
+[.notes]
+--
+Multiple paths are returned. Even if we set Neo4j Browser to not connect result nodes, the nodes are shown as connected in the visualization because we are returning paths, not nodes:
+--
+
+image::third/ReturnRonHowardPaths.png[ReturnRonHowardPaths,align=center]
+
+
+[NOTE]
+[.statement]
+A best practice is to specify direction in your `MATCH` statements. This will optimize queries, especially for larger graphs.
+
+[.notes]
+--
+Later in this course, you will learn other ways to query data and how to control the results returned.
+--
+

@@ -50,17 +50,19 @@ Then you simply click the *Add Application* icon to add the Neo4j ETL Tool.
 
 image::AddETLTool.png[AddETLTool,width=300,align=center]
 
-[.small]
+[small]
 --
 Here is what your project should look like with the Neo4j ETL Tool added:
 --
 
-image::ETLToolAdded.png[ETLToolAdded,width=300,align=center]
+image::ETLToolAdded.png[ETLToolAdded,width=200,align=center]
 
-=
+[small]
+--
 [NOTE]
 Make sure that you have updated Neo4j Desktop so that it has the latest version of the ETL Tool.
 At this writing, the latest version is 1.5.0.
+--
 
 == Create and start the Neo4j instance
 
@@ -77,7 +79,10 @@ You can skip this step if you plan to use an existing project that already has a
 
 == Create the database you will import data into
 
+[.notes]
+--
 You will most likely be importing the data into a newly-created database.
+--
 
 [source,cypher]
 ----
@@ -85,37 +90,57 @@ create database customers;
 show databases
 ----
 
-image::DatabaseForImport.png[DatabaseForImport,width=400,align=center]
+image::DatabaseForImport.png[DatabaseForImport,width=700,align=center]
 
+[small]
+--
 Next, you are ready to use the Neo4j ETL Tool for import.
+--
 
 == Starting the Neo4j ETL Tool
 
+[.notes]
+--
 Here is the initial page you see when you start the Neo4j ETL tool:
+--
 
-image::OpenETLTool.png[OpenETLTool,width=600,align=center]
+image::OpenETLTool.png[OpenETLTool,width=800,align=center]
 
+[small]
+--
 The first thing you should do is connect to the RDBMS.
-
+--
 == Connecting to the RDBMS
 
+[.notes]
+--
 Here is an example where we are providing the connection information for an existing RDBMS from which we will be retrieving data for the import.
+--
 
-image::JDBCConnection.png[JDBCConnection,width=600,align=center]
+image::JDBCConnection.png[JDBCConnection,width=700,align=center]
 
 == Connection tested and saved
 
+[.notes]
+--
 You must test and save the RDBMS connection to ensure the Neo4j ETL Tool will be able to access the RDBMS.
+--
 
-image::ConnectionSaved.png[ConnectionSaved,width=800,align=center]
+image::ConnectionSaved.png[ConnectionSaved,width=700,align=center]
 
 == Prepare for mapping
 
+[.notes]
+--
 After you have connected to the RDBMS, you must select the Neo4j Desktop project and the Neo4j instance to use for the mapping.
+--
 
-image::PrepareForMapping.png[PrepareForMapping,width=600,align=center]
+image::PrepareForMapping.png[PrepareForMapping,width=800,align=center]
 
-You then click *START MAPPING* to begin view the default mapping.
+[small]
+--
+You then click *START MAPPING* to begin the  mapping.
+--
 
 == Successful mapping
 
@@ -125,57 +150,84 @@ If the Neo4j ETL Tool can successfully derive a mapping from the RDBMS, you will
 You can clear the message and then click *NEXT*.
 --
 
-image::MappingSuccessful.png[MappingSuccessful,width=800,align=center]
+image::MappingSuccessful.png[MappingSuccessful,width=700,align=center]
 
 == Default node mapping
 
+[.notes]
+--
 For the northwind RDBMS, here is the default mapping that could be used to import the nodes.
+--
 
 image::DefaultNodeMapping.png[DefaultNodeMapping,width=800,align=center]
 
 == Default relationship mapping
 
+[.notes]
+--
 And here is the default relationship mapping.
+--
 
-image::DefaultRelationshipMapping.png[DefaultRelationshipMapping,width=600,align=center]
+image::DefaultRelationshipMapping.png[DefaultRelationshipMapping,width=800,align=center]
 
 == Changing node labels and what data will be imported
 
+[.notes]
+--
 In the node tab, you can change the name that node labels will have and also skip data to be imported.
+--
 
-image::ChangeNodeLabels.png[ChangeNodeLabels,width=800,align=center]
+image::ChangeNodeLabels.png[ChangeNodeLabels,width=700,align=center]
 
 == Changing node properties
 
+[.notes]
+--
 You can even change what properties will be imported, their names, and types by selecting the edit icon for a node.
+--
 
 image::NodeProperties.png[NodeProperties,width=800,align=center]
 
 == Changing relationship types
 
+[.notes]
+--
 You can modify the names of relationships and if they will be skipped upon import.
+--
 
-image::RelationshipMapping.png[RelationshipMapping,width=900,align=center]
+image::RelationshipMapping.png[RelationshipMapping,width=800,align=center]
 
 ==  Saving the mapping
 
+[.notes]
+--
 After your customization of the mapping, you should always save it.
+--
 
 image::SaveMapping.png[SaveMapping,width=800,align=center]
 
+[.small]
+--
 Then you click *NEXT* to continue to the import.
+--
 
 ==  Select the database for import
 
+[.notes]
+--
 Before you import, you must select the currently started database that you want to import the data into.
+--
 
 image::PrepareToImport.png[PrepareToImport,width=800,align=center]
 
 == Import the data
 
+[.notes]
+--
 You then click *IMPORT DATA* to import the data.
+--
 
-image::ImportSuccessful.png[ImportSuccessful,width=800,align=center]
+image::ImportSuccessful.png[ImportSuccessful,width=750,align=center]
 
 [.student-exercise]
 == Exercise 20: Importing data using Neo4j ETL Tool
