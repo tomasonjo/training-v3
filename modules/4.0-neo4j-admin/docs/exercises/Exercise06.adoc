@@ -3,38 +3,47 @@
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
-In this Exercise, you will set up a different location for the databases in your local filesystem and start the Neo4j instance using the database at this new location.
+In this Exercise, you will set up a different location for the databases from where they are placed by default.
+
+If your production system were to use Docker instances, you would simply specify a different location for the data directory (--volume)  when you create the Docker Neo4j instance.
+
+Since a Docker Neo4j instance is already created for this training with volumes mounted in your local filesystem, you will get some experience with specifying a different location for the databases in the Neo4j configuration.
+
+On a non-Docker installation, you would specify this location in the Neo4j configuration as you will do in this exercise.
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Ensure that you are the user _neo4j_.
+. Make sure you have a terminal window open to your Docker Neo4j instance for this course.
 . Ensure that the Neo4j instance is stopped.
-. You should have previously created the dump file, *movies.dump* for the movie database in the *~/files directory*.
+. You should have previously created the dump file, *movies.dump* for the movie database in the *$HOME/docker-neo4j/data* directory.
 
 == Exercise steps:
 
-. Create a directory named *~/neo4j-databases*. This is the directory where the databases will reside which is different from the default location used by Neo4j.
-. Make sure that this *neo4j-databases* directory is owned by _neo4j:neo4j_.
-. Modify the *neo4j.conf* file to use */home/ubuntu/neo4j-databases* as the data directory. Also ensure that there the default database is _maindb_. Your *neo4j.conf* file should look something like this:
-+
+. Create a directory named *$HOME/docker-neo4j/neo4j/data/new-location*. This is the directory where the databases will reside which is different from the default location used by Neo4j.
+. Make sure that this *new-location* directory is writable.
+. Modify the *neo4j.conf* file to use this new location as the data directory. Also ensure that there the default database is _maindb_. Your *neo4j.conf* file should look something like this:
 
-image::BestPracticeConfigChangesAtEnd.png[BestPracticeConfigChangesAtEnd,width=900,align=center]
+image::NewLocationDocker.png[NewLocationDocker,width=900,align=center]
 
-. Start the Neo4j instance.
+[start=4]
+. Start the Docker Neo4j instance.
 . Examine the log file to ensure that the instance started without errors.
-. Examine the files in the */home/ubuntu/neo4j-databases* location. The instance should have created the *databases* and *transactions* directories. The *databases* directory should look as follows:
-+
 
-image::Neo4jStarted-newLocation2.png[Neo4jStarted-newLocation2,width=800,align=center]
+image::Neo4jStarted-newLocationDocker.png[Neo4jStarted-newLocationDocker,width=800,align=center]
 
+[start=6]
+. Examine the files in the *new-location* directory. The instance should have created the *databases* and *transactions* directories. The *databases* directory should look as follows:
+
+image::Neo4jStarted-newLocation2Docker.png[Neo4jStarted-newLocation2Docker,width=800,align=center]
+
+[start=7]
 . Connect to the _maindb_ database using `cypher-shell`. Did you need to change the password?
 . Exit `cypher-shell`.
 . Use the `load` command of the `neo4j-admin` tool to create the database, _movies_ from the dump file as follows:
 +
 
 ----
-/usr/bin/neo4j-admin load --database=movies --from=/home/ubuntu/files/movies.dump
+[sudo] docker exec --interactive neo4j bin/neo4j-admin load --database=movies --from=data/movies.dump
 ----
 
 . In `cypher-shell' create _movies_.

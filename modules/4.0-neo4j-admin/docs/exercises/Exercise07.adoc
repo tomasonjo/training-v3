@@ -7,9 +7,8 @@ In this Exercise, you check the consistency of a database that is consistent. Th
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Ensure that you are the user _neo4j_.
-. Ensure that the Neo4j instance is started.
+. Make sure you have a terminal window open to your Docker Neo4j instance for this course.
+. Ensure that the Docker Neo4j instance is started.
 
 == Exercise steps:
 
@@ -17,10 +16,14 @@ In this Exercise, you check the consistency of a database that is consistent. Th
 . Use `cypher-shell` to create the _movies2_ database.
 . Confirm that this database has 171 nodes.
 . Stop the _movies2_ database.
-. With `sudo`, create the directory */home/ubuntu/reports*.
-. Change ownership of the reports directory to _neo4j_:  `sudo chown neo4j:neo4j /home/ubuntu/reports`
-. Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written. The consistency check tool should return the following:
+. Create the directory *$HOME/docker-neo4j/logs/reports*.
+. Make this new directory writable.
+. Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written.
 +
+
+----
+[sudo] docker exec --interactive neo4j bin/neo4j-admin check-consistency --database=movies2 --report-dir=logs/reports
+----
 
 image::ConsistentPassed.png[ConsistentPassed,width=1000,align=center]
 

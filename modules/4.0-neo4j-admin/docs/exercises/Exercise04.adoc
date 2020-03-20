@@ -7,9 +7,8 @@ In this exercise you will gain some experience with creating and deleting a data
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. You are the user, _neo4j_.
-. Ensure that the Neo4j instance is started.
+. Make sure you have a terminal window open to your Neo4j Docker instance for this course.
+. Ensure that the Docker Neo4j instance is started.
 
 == Exercise steps:
 
@@ -18,48 +17,65 @@ In this exercise you will gain some experience with creating and deleting a data
 +
     *Hint*: You must use the system database.
 
-image::ShowDatabasesEx.png[ShowDatabasesEx,width=1000,align=center]
+image::ShowDatabasesExDocker.png[ShowDatabasesExDocker,width=1000,align=center]
 
 . Enter the command to create a database named _databaseone_.
 . Enter the command to show all databases.
 +
 
-image::AddDatabaseOne.png[AddDatabaseOne,width=1000,align=center]
+image::AddDatabaseOneDocker.png[AddDatabaseOneDocker,width=1000,align=center]
 
 . Exit `cypher-shell`.
 . View the directories where the databases are located for this instance.
 +
 
-image::AddDatabaseOneFiles.png[AddDatabaseOneFiles,width=1000,align=center]
+image::AddDatabaseOneFilesDocker.png[AddDatabaseOneFilesDocker,width=1000,align=center]
 
-. Modify the *neo4j.conf* file to use _databaseone_ as the default database.
+*Note*:  Normally in Debian, you simply modify the *conf/neo4j.conf* file to make changes to the Neo4j instance when it starts.
+In a Docker Neo4j instance, it is a little different.
+For your reference the default *default-neo4j.conf* file is available for your inspection so you can see what this file would look like on, for example, a Debian system.
+With the Docker Neo4j instance, it uses its own internal configuration, but you can override configuration settings in one of two ways.
+
+. One is with the settings you specify when you create the Docker instance (create_neo4j_instance.sh).
+. The other way is to specify configuration values in a *neo4j.conf* file that is located in the shared volume used by the Docker Neo4j Docker instance. This is how you will add configuration changes to the Neo4j instance for this training.
 +
 
-*Hint*: In the terminal window:
+[start=5]
+. Create the *neo4j.conf* file in the *$HOME/docker-neo4j/neo4j/conf* directory created when you created the Docker Neo4j instance.
+. Add the `dbms.default.database` property for *databaseone* to this file.
+
 ----
-sudo vi /etc/neo4j/neo4j.conf
-Type "i" to enter input mode.
-Uncomment the dbms.default.database property.
-Replace neo4j with databaseone.
+sudo vi ~/docker-neo4j/neo4j/neo4j.conf
+Enter "i" to enter input mode.
+Enter dbms.default.database=databaseone
 Press ESC to get out of input mode.
 Type ":w" to write the changes to the file.
-Type ":q"
+Type ":q" to quit the editor
 ----
 
-. Restart the Neo4j instance. Any change to the Neo4j configuration file requires a restart of the Neo4j instance.
+Your neo4j.conf file should be as follows:
+
+image::AddConfigDatabaseoneDocker.png[AddConfigDatabaseoneDocker,width=1000,align=center]
+
+[start=7]
+. Restart the Docker Neo4j instance. Any change to the Neo4j configuration file requires a restart of the Neo4j instance.
 +
 
 ----
-sudo systemctl restart neo4j
+[sudo] docker stop neo4j
+[sudo] docker start neo4j
 ----
 
 . Connect to the Neo4j instance with `cypher-shell`.
-. Enter the command to show all databases.
+. Enter the command to show all databases to confirm that _databaseone_ is now the default database.
+
+image::CheckDefaultDatabaseDocker.png[CheckDefaultDatabaseDocker,width=1000,align=center]
+
+[start=10]
 . Drop the database _neo4j_.
 . Enter the command to show all databases.
-+
 
-image::RemovedNeo4j.png[RemovedNeo4j,width=1000,align=center]
+image::RemovedNeo4jDocker.png[RemovedNeo4jDocker,width=1000,align=center]
 
 . Exit `cypher-shell`.
 

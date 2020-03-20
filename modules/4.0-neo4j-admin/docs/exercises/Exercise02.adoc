@@ -3,102 +3,74 @@
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
-In this Exercise, you will stop and start the Neo4j instance and view its status and log file using the Debian installation you verified in the previous exercise.
+In this Exercise, you will stop and start the Neo4j instance and view its status and log file using the Docker Neo4j instance you verified in the previous exercise.
 
 == Before you begin
 
-For the exercises in this course, the commands you use to access the Neo4j instance, should be done as the user, _neo4j_. On the EC2 instance created for you, the user, _neo4j_ has the password _neo4j_ and has sudo permissions.
-
-. Open a terminal on your system an connect to the EC2 instance as the user, _ubuntu_
-. Change to the user, _neo4j_ where the password is also _neo4j_. Don't confuse the password for the user, _neo4j_ with the password you will use for the Neo4j instance.
-----
-su neo4j
-neo4j
-----
+Open a terminal on your system to access the Docker Neo4j instance.
 
 == Exercise steps:
 
-. View the status of the _neo4j_ service:
+. View the status of neo4j:
 +
 
 ----
-systemctl status neo4j
+[sudo] docker logs neo4j
 ----
 
 You should see something like this:
 
-image::Status-Debian.png[Status-Debian,width=600,align=center]
+image::Status-docker.png[Status-docker,width=600,align=center]
 
-. Create the */var/run/neo4j* directory and make sure it is owned by *neo4j*
-+
-----
-sudo mkdir /var/run/neo4j
-sudo chown neo4j:neo4j /var/run/neo4j
-----
-
-image::add_var_run_neo4j.png[add_var_run_neo4j,width=600,align=center]
-
-. Disable the _neo4j_ service:
-+
-
-----
-sudo systemctl disable neo4j
-----
-
-image::disable_neo4j_service.png[disable_neo4j_service,width=600,align=center]
-
-. View the status of the Neo4j instance.
-+
-
-----
-systemctl status neo4j
-----
-
-image::neo4j_status_service_disabled.png[neo4j_status_service_disabled,width=600,align=center]
-
-
-. Start the Neo4j instance.
-+
-
-----
-sudo systemctl start neo4j
-----
-
-. View the status of the Neo4j instance.
-+
-
-image::Neo4j_started.png[Neo4j_started,width=600,align=center]
 
 . Stop the Neo4j instance and then view its status.
 +
 
 ----
-sudo systemctl stop neo4j
-systemctl status neo4j
+[sudo] docker stop neo4j
+[sudo] docker logs neo4j
 ----
 
-image::Stop_neo4j.png[Stop_neo4j,width=600,align=center]
+image::Stop_neo4j-docker.png[Stop_neo4j-docker,width=600,align=center]
 
-. Examine the end of the Neo4j log file.
-+
-
-----
-journalctl -e -u neo4j
-----
-
-image::JournalEnd.png[JournalEnd,width=600,align=center]
 
 . Examine the database directories created for this Neo4j instance.
 +
 
-image::DataFiles.png[DataFiles,width=600,align=center]
+image::DataFilesDocker.png[DataFilesDocker,width=600,align=center]
 
 
 . Examine the log files for this Neo4j instance.
 
-image::ViewLogFiles.png[ViewLogFiles,width=600,align=center]
+image::ViewLogFilesDocker.png[ViewLogFilesDocker,width=600,align=center]
+
+*Note*: The log files you see here are for advanced monitoring. To view the basic log file in the Docker Neo4j instance, you use the `docker logs` command.
+
+
+== Basic Docker commands
+
+[cols="50,50", options="header",stripes="none"]
+|====
+
+|*Docker command*
+|*Description*
+|
+{set:cellbgcolor:white}
+|[sudo] docker start <name>
+|Start the instance of a given name.
+|[sudo] docker stop <name>
+|Stop the instance of a given name.
+|[sudo] docker ps
+|View instances that are running.
+|[sudo] docker ps -a
+|View all instances that are running or stopped.
+|[sudo] docker rm <name>
+|Remove an instance.
+|====
+{set:cellbgcolor!}
+
 
 == Exercise summary
 
-You have now gained experience starting and stopping a Neo4j instance as well as viewing its status and the log file for the instance.
+You have now gained experience starting and stopping a Docker Neo4j instance as well as viewing its status and the log file for the instance.
 

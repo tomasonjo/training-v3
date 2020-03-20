@@ -325,7 +325,7 @@ image::TwoHopRelationship.png[TwoHopRelationship,width=700,align=center]
 If we had specified `[:FOLLOWS*]` rather than `[:FOLLOWS*2]`, the query would return all _Person_ nodes that are in the `:FOLLOWS` path from _Paul Blythe_.
 --
 
-== Syntax: Varying length patterns
+== Syntax: Varying length patterns - 1
 
 [.notes]
 --
@@ -348,6 +348,8 @@ Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_
 ----
 (nodeA)-[:RELTYPE*]-(nodeB)
 ----
+
+== Syntax: Varying length patterns - 2
 
 [.statement]
 Retrieve the paths of length 3 with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_:

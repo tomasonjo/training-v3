@@ -1,20 +1,98 @@
 
-= Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course
+= Exercise 1: Setting up the Docker instance for this course
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
-We are using Neo4j Enterprise Edition for the hands-on exercises in this training, as some Neo4j features are not included in Community Edition.
-The OS that we will use for this training is Debian.
+We are using a Neo4j Enterprise Edition Docker instance for the hands-on exercises in this training, as some Neo4j features are not included in Community Edition.
+The underlying OS for the Docker instance is Debian.
 In your real application environment, the location of files for managing Neo4j and the terminal commands will be different.
 Neo4j Enterprise Edition is available for download with a 30-day evaluation license.
 
-== Before you begin
+You have two ways that you can use the Neo4j Docker image for this training:
+
+1. Install Docker on your local system from https://hub.docker.com. This is the preferred method as you will have access to the Docker instance for as long as you need it. This method is *required* for students taking this course online.
+2. Access the EC2 instance that has Docker already set up. Use this method if you are in a classroom with an instructor and you cannot set up Docker on your system. Temporary access rights  to the EC2 instance will be given to you by your instructor.)
+
+== Using the Docker instance on your local system
+
+=== Before you begin
+
+You must install Docker on your system from https://hub.docker.com.
+
+=== Setup steps
+
+. Verify that you have access to docker on your system:
++
+----
+docker --help
+----
+
+image::DockerInstalled.png[DockerInstalled,width=600,align=center]
+
+. Install the Neo4j docker instance
++
+
+----
+docker pull neo4j:4.0.1-enterprise
+----
+
+. Confirm that the docker instance with the TAG, 4.0.1-enterprise is available:
++
+
+----
+docker images
+----
+
+. Create a directory on your system that you will use for your coursework:
++
+----
+mkdir $HOME/docker-neo4j
+----
+
+. Create a script in this new directory named create_neo4j_instance.sh that will have the following content:
++
+
+----
+docker run \
+    --name=neo4j \
+    --publish=7474:7474 --publish=7687:7687 \
+    --volume=$HOME/docker-neo4j/neo4j/data/:/data \
+    --volume=$HOME/docker-neo4j/neo4j/logs/:/logs \
+    --volume=$HOME/docker-neo4j/neo4j/conf/:/conf \
+    --volume=$HOME/docker-neo4j/neo4j/plugins/:/plugins \
+    --volume=$HOME/docker-neo4j/neo4j/import/:/import \
+    --env NEO4J_dbms_memory_pagecache_size=4G \
+    --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
+    --detach \
+    neo4j:4.0.1-enterprise
+----
+
+. Make sure this script has execute permissions.
+. Run the script to create the Neo4j instance and confirm that it creates the neo4j directory.
++
+
+----
+./create_neo4j_instance.sh
+----
+
+. Run the Docker command to see the running instances.
+
+----
+docker ps
+----
+
+image::DockerInstanceStarted.png[DockerInstanceStarted,width=600,align=center]
+
+
+== Using the EC2 instance
+
+=== Before you begin
 
 Ensure that you have been provided with an EC2 instance (IP address) to use by your instructor.
 You will use this EC2 instance throughout this course.
 Follow the steps below, depending on your OS.
 
-== Exercise steps (OS X and Linux):
+=== Setup steps (OS X and Linux):
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Change permissions on the private key file as follows:
@@ -40,7 +118,7 @@ yes
 
 image::OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
 
-== Exercise steps (Windows):
+=== Setup steps (Windows):
 
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Download https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[PuTTY].
@@ -76,10 +154,26 @@ image::OpenEC2FromPuTTY.png[OpenEC2FromPuTTY,width=400,align=center]
 
 image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
-. Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.
+=== Confirm that you can start the Docker instance in the EC2 instance (OS X, Linux, and Windows)
 
-*Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
+. Navigate to the *docker-neo4j* folder.
+. Create the Docker Neo4j instance:
++
+
+----
+ sudo ./create_neo4j_instance.sh
+----
+
+. Run the Docker command to see the running instances.
+
+----
+sudo docker ps
+----
+
+// NOTE: need to get a screenshot on the EC2 instance
+
+image::DockerInstanceStartedEC2.png[DockerInstanceStarted,width=600,align=center]
 
 == Exercise summary
 
-You have now confirmed that you can access the EC2 instance that you will use throughout this course to learn about Neo4j Administration.
+You have now confirmed that you can start the Docker instance either running locally or in an EC2 instance that you will use throughout this course to learn about Neo4j Administration.

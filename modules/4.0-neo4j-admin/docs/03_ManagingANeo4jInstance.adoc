@@ -56,7 +56,7 @@ Tools
 
 == Post-installation preparation 
 
-In this training, all screenshots and examples are shown using Neo4j Enterprise Edition installed as a Debian package.
+In this training, all screenshots and examples are shown using Neo4j Enterprise Edition installed as a Debian package. Some are from the Neo4j instance running on Debian and some are from the Docker instance, similar to what you will be working with for the hands-on exercises.
 In your real application environment, if your system is different, you will need to adjust file locations and how you manage the Neo4j instance.
 
 [.notes]
@@ -97,13 +97,11 @@ You do this with this command:
 In addition, you should create the directory */var/run/neo4j* that is owned by _neo4j:neo4j_.
 This is where the PID for the currently running Neo4j instance is placed.
 
-You will perform these steps later in the Exercise 2.
-
 == Managing the Neo4j instance
 
 [.small]
 --
-When the instance is started, it creates a database directory named *neo4j* in the default location which is a directory under */var/lib/neo4j/data/databases*.
+When the instance is started (on Debian) it creates a database directory named *neo4j* in the default location which is a directory under */var/lib/neo4j/data/databases*.
 --
 
 [.notes]
@@ -165,6 +163,7 @@ However, knowing whether the instance is started (active) is generally not suffi
 You can view details of the Neo4j instance by examining the log file.
 --
 
+
 === Viewing the neo4j log
 
 [.notes]
@@ -195,9 +194,28 @@ When the Neo4j instance starts, you can also confirm that it is started by seein
 
 
 [NOTE]
-You can also view the log file in the *logs* directory on all platforms.
-For example, on non-Debian and non RPM systems, the Neo4j log information is written to the *neo4j.log* file.
+You can also view the log file (*neo4j.log*) in the *logs* directory on non Debian platforms.
+For a Docker Neo4j instance, you use the *logs* command.
+
 --
+
+=== About the Docker Neo4j instance
+
+When a Docker Neo4j instance is started, it *is* the Neo4j instance you work with.
+That is, you do not start and stop the Neo4j instance, but rather the Docker Neo4j instance.
+For all hands-on exercises of this training, you will using the Docker Neo4j instance.
+
+With Docker, there is no PID as there are on other systems for checking the status of the Neo4j instance.
+That is, `systemctl status neo4j` cannot be used to check the status of the Neo4j instance.
+
+Instead, you can view the log to check the status:
+
+----
+[sudo] docker logs neo4j
+----
+
+image::Neo4j_started-docker.png[Neo4j_started_docker,width=1200,align=center]
+
 
 [.student-exercise]
 == Exercise #2: Managing the Neo4j instance
@@ -232,7 +250,7 @@ Select the correct answer.
 
 [.statement]
 You control the Neo4j instance by using the `neo4j` tool which on Debian is accessed using `systemctl`.
-What commands are available for managing the Neo4j instance?
+What commands are available for managing the non-Docker Neo4j instance?
 
 [statement]
 Select the correct answers.

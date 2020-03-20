@@ -232,6 +232,8 @@ It is ideal for smaller internal or do-it-yourself projects that do not require 
 The Community Edition is free to download and use and is available from the https://neo4j.com/download-center/#releases[Neo4j  download page] or from the https://github.com/neo4j/neo4j[Neo4j GitHub repository].
 --
 
+[NOTE]
+Many of the Neo4j 4.0 features covered in this training such as multi-database instances and online backup are only supported in Neo4j Enterprise Edition.
 === Enterprise Edition
 
 The Enterprise Edition extends the functionality of the Community Edition to include key features for performance and scalability such as a clustering architecture for high availability and online backup functionality.
@@ -362,20 +364,23 @@ To learn more about Neo4j Cloud deployments see the https://neo4j.com/developer/
 
 [.notes]
 --
-In this training, you will learn how to perform these common administrative tasks for a server mode deployment:
+There are many common administrative tasks for a server mode deployment:
 --
 
 [square]
-* Managing a Neo4j database 
-* Managing plugins used with the Neo4j database
+* *Managing a Neo4j database*
+* *Managing plugins used with the Neo4j database*
 * Managing logging
 * Monitoring queries
-* Backing up and restoring databases
+* *Backing up and restoring databases*
 * Managing Causal Clusters
 * Managing database security
+* *Importing data*
 
+[NOTE]
+This training covers basic Neo4j 4.0 administration using Enterprise Edition. Tasks highlighted in *bold* are covered in this training.
 [.student-exercise]
-== Exercise 1: Accessing the Neo4j Enterprise Edition EC2 instance for this course
+== Exercise 1: Setting up the Docker instance for this course
 
 //ifndef::backend-html5[]
 Refer to the *Exercise Guide* for instructions.
@@ -387,9 +392,9 @@ Refer to the *Exercise Guide* for instructions.
 
 == References
 
-You should consult the https://neo4j.com/docs/operations-manual/3.5/installation/[Neo4J Operations Manual] for more information about the installation requirements and procedures for your target platform, as well as details for Neo4j administration tasks. 
+You should consult the https://neo4j.com/docs/operations-manual/current/installation/[Neo4J Operations Manual] for more information about the installation requirements and procedures for your target platform, as well as details for Neo4j administration tasks.
 
-The https://neo4j.com/docs/java-reference/3.5/tutorials-java-embedded/[Java Developer Manual ] covers using embedded mode for Neo4j and is intended for developers.
+The https://neo4j.com/docs/java-reference/current/tutorials-java-embedded/[Java Developer Manual ] covers using embedded mode for Neo4j and is intended for developers.
 
 [.quiz]
 == Check your understanding

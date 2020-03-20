@@ -6,56 +6,74 @@ In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, cha
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Make sure you have changed to the user, _neo4j_:  `su neo4j` providing _neo4j_ as the password.
-. Ensure that the Neo4j instance is started.
+. Make sure you have a terminal window open where you have access to the Docker Neo4j instance for this course.
+. Ensure that the Docker Neo4j instance is started.
 
 == Exercise steps:
 
 . Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_.
 +
 
-    *Hint*: Type:  `/usr/bin/cypher-shell`.
+----
+[sudo] docker exec -it neo4j bin/cypher-shell
+----
 
 . Enter a new password that you will remember for the Neo4j instance. Note that this is not the same password as the user, _neo4j_.
++
+
+image::FirstLoginCypherShell.png[FirstLoginCypherShell,width=1000,align=center]
+
 . Exit out of `cypher-shell`.
++
+
+----
+:exit
+----
+
 . Start a `cypher-shell` session providing the -u and -p arguments.
 . Use the system database to view all databases served by this Neo4j instance.
 +
 
-image::ShowInitialDatabases.png[ShowInitialDatabases,width=1000,align=center]
+image::ShowInitialDatabasesDocker.png[ShowInitialDatabasesDocker,width=1000,align=center]
 
 . Use the _neo4j_ database and enter this Cypher statement:
 +
 
-  `CREATE (:Person {name: '<your name'})'`
+----
+:use neo4j
+CREATE (:Person {name: '<your name'});
+----
 
+
+image::CreatePersonDocker.png[CreatePersonDocker,width=1000,align=center]
+
+[start=7]
 . Enter this Cypher statement to retrieve the node you just created:
-+
 
 ----
 MATCH (p:Person) RETURN p;
 ----
 
+image::FindPersonDocker.png[FindPersonDocker,width=1000,align=center]
+
+[start=8]
 . Enter this Cypher statement to delete the node you just created:
-+
 
 ----
 MATCH (p:Person) DELETE p;
 ----
 
-. Create the directory, _files_ in your home directory.
+image::DeletePersonDocker.png[DeletePersonDocker,width=1000,align=center]
+
+[start=9]
+. Exit out of cypher-shell.
+. Create the directory, _files_ in your *$HOME/docker-neo4j* directory.
 +
 
 ----
-cd
+cd ~/docker-neo4j
 mkdir files
 ----
-
-. Make sure that the _files_ directory is owned by the user _neo4j_.
-+
-
-image::OwnerNeo4jFiles.png[OwnerNeo4jFiles,width=1000,align=center]
 
 . Download this file: https://data.neo4j.com/admin-neo4j/movies.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
 +
@@ -69,11 +87,16 @@ curl -O https://data.neo4j.com/admin-neo4j/movies.cypher
 +
 
 ----
-/usr/bin/cypher-shell -u neo4j -p <passwordYouCreatedForNeo4jInstance> < /home/ubuntu/files/movies.cypher
+cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
 ----
 
-. Start `cypher-shell` and execute these statements to confirm that the data was loaded into the user database:
+. Start `cypher-shell`.
 +
+----
+[sudo] docker exec -it neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
+----
+
+. Execute these statements to confirm that the data was loaded into the user database:
 
 ----
 CALL db.schema.visualization();
@@ -82,8 +105,9 @@ MATCH (p:Person) WHERE p.name = 'Tom Hanks' RETURN p;
 
 You should see something like this:
 
-image::ConfirmMovieData.png[ConfirmMovieData,width=1000,align=center]
+image::ConfirmMovieDataDocker.png[ConfirmMovieDataDocker,width=1000,align=center]
 
+[start=15]
 . Exit `cypher-shell`.
 
 == Exercise summary
