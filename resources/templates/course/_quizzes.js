@@ -1,9 +1,18 @@
-/* global $, Cookies, jwt_decode */
+/* global $, jwt_decode */
 document.addEventListener('DOMContentLoaded', function () {
 
   var gradeQuizActionElement = $('[data-action="grade-quiz"]')
   var quizElement = $('.quiz').first()
   var siteUrl = window.location.href
+
+  var trainingName = window.trainingClassName
+  var trainingModules = window.trainingClassModules
+  var trainingPartName = window.trainingPartName
+
+  var quizStatusLocalStorageKey = 'com.neo4j.graphacademy.' + trainingName + '.quizStatus'
+  var idTokenLocalStorageKey = 'com.neo4j.accounts.idToken'
+
+  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
 
   var getTimeDiff = function (time1, time2) {
     var hourDiff = time2 - time1
@@ -20,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function getQuizStatus() {
-    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
     return $.ajax({
       type: 'GET',
       url: backendBaseUrl + '/getQuizStatus?className=' + trainingName,
@@ -34,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function setQuizStatus(passed, failed) {
-    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
     var data = {
       'className': window.trainingClassName,
       'passed': passed,
@@ -54,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function getClassCertificate() {
-    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/genClassCertificate',
@@ -69,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function getEnrollmentForClass() {
-    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
     return $.ajax({
       type: 'GET',
       url: backendBaseUrl + '/getClassEnrollment?className=' + trainingName,
@@ -81,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function enrollStudentInClass(firstName, lastName) {
-    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/setClassEnrollment',
@@ -100,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function logTrainingView() {
-    var idToken = Cookies.get('com.neo4j.accounts.idToken')
+    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/logTrainingView',
@@ -252,18 +261,20 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   // initial state
-  var trainingName = window.trainingClassName
-  var trainingModules = window.trainingClassModules
-  var trainingPartName = window.trainingPartName
-  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
-  var currentQuizStatus = {
-    failed: [],
-    passed: [],
-    untried: trainingModules
+  var currentQuizStatus
+  var quizStatus = window.localStorage.getItem(quizStatusLocalStorageKey)
+  if (quizStatus) {
+    currentQuizStatus = JSON.parse(quizStatus)
+  } else {
+    currentQuizStatus = {
+      failed: [],
+      passed: [],
+      untried: trainingModules
+    }
   }
   updateProgressIndicators(currentQuizStatus)
 
-  var idToken = Cookies.get('com.neo4j.accounts.idToken')
+  var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
   if (idToken) {
     // we're authenticated!
     // check if the token is not expired (or will expire soon)
