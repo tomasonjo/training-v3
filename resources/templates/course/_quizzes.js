@@ -254,6 +254,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // update indicators
     updateProgressIndicators(currentQuizStatus)
     setQuizStatus(currentQuizStatus['passed'], currentQuizStatus['failed'])
+      .then(() => {
+        window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
+      })
       .catch(function (error) {
         // question: what should we do? display an error message to the user?
         console.error('Unable to update quiz status', error)
@@ -292,6 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passed: passed,
             untried: untried
           }
+          window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
           updateProgressIndicators(currentQuizStatus)
           updatePageQuiz()
         } else {
