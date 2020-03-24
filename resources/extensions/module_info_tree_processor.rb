@@ -13,22 +13,28 @@ class ModuleInfoTreeProcessor < Extensions::TreeProcessor; use_dsl
       if File.exist?(path)
         require 'yaml'
         module_descriptor = YAML::load_file(path)
-        document_slug = if (document.attr 'stage') != 'production' && (slug = document.attr 'slug')
-          slug = "#{TESTING_SLUG_PREFIX}#{slug}"
-          document.set_attr 'slug', slug
-          slug
-        else
-          (document.attr 'slug')
+        if (document_slug = document.attr 'slug')
+          if (document.attr 'stage') != 'production'
+            document_slug = "#{TESTING_SLUG_PREFIX}#{document_slug}"
+            document.set_attr 'slug', document_slug
+          end
         end
         module_descriptor['pages'].each_with_index do |page, index|
           document.set_attribute "module-toc-link-#{index}", page['url']
           document.set_attribute "module-toc-title-#{index}", page['title']
           page_slug = page['slug']
+          if (document.attr 'stage') != 'production'
+            page_slug = "#{TESTING_SLUG_PREFIX}#{page_slug}"
+          end
           document.set_attribute "module-toc-slug-#{index}", page_slug
           document.set_attribute "module-quiz-#{index}", page['quiz']
           if document_slug == page_slug
             if page.has_key?('next')
-              document.set_attr 'module-next-slug', page['next']['slug'], false
+              next_page_slug = page['next']['slug']
+              if (document.attr 'stage') != 'production'
+                next_page_slug = "#{TESTING_SLUG_PREFIX}#{next_page_slug}"
+              end
+              document.set_attr 'module-next-slug', next_page_slug, false
               document.set_attr 'module-next-title', page['next']['title'], false
             end
             document.set_attribute 'module-quiz', page['quiz']
