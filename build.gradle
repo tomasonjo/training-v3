@@ -52,7 +52,7 @@ subprojects {
   asciidoctorj {
     requires "${rootProject.projectDir}/resources/extensions.rb"
     attributes 'allow-uri-read': '',
-      'env': project.hasProperty('env') ? project.property('env') : '',
+      'stage': project.hasProperty('stage') ? project.property('stage') : '',
       'source-highlighter': 'rouge',
       'rouge-style': 'neo.forest',
       'presenter': 'Neo Technology',

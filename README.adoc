@@ -80,11 +80,13 @@ You can also clean a particular directory:
 
  $ ./gradlew :demo:clean
 
-== Development mode/environment
+== Local development mode
 
-When converting the online training, you can define the property "env" to "dev" to avoid loading analytics and token validation code in the HTML pages:
+// QUESTION: As far as I understand, in the future, we will only have two stages: testing (private page on WordPress) > production (public page on WordPress)
+// So we should probably update this section because the "local" stage does not exist anymore.
+When converting the online training, you can define the property "stage" to "local" to avoid loading analytics and token validation code in the HTML pages:
 
- $ ./gradlew :demo:convertOnlineHtml -Penv=dev
+ $ ./gradlew :demo:convertOnlineHtml -Pstage=local
 
 == LiveReload
 

@@ -227,7 +227,7 @@
 <script src="https://neo4j.com/online_training/cypher-gadget/libs/jquery.js"></script>
 <script src="https://neo4j.com/online_training/cypher-gadget/libs/jquery-ui.min.js"></script>
 <script src="https://neo4j.com/online_training/cypher-gadget/libs/jquery.modal.min.js"></script>
-<% if attr('env') != 'dev' %>
+<% if attr('stage') != 'local' %>
 <script src="https://browser.sentry-cdn.com/4.4.1/bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">Sentry.init({dsn: 'https://652808557bb1478883636c96edb51739@sentry.io/1342352'});</script>
 <script src="https://munchkin.marketo.net/munchkin.js"></script>
