@@ -3,6 +3,61 @@
 
 == Publish to WordPress
 
+The infrastructure is consisting of:
+
+Amazon S3::
+Used to host static resources (mostly images). +
+Two buckets are available:
+
+- testing
+- production
+
+WordPress::
+A single WordPress instance for both private and public pages.
+
+Backend API::
+Used to manage quizzes answers and certificates and hosted on AWS Labmda. +
+Two instances are available:
+
+- testing
+- production
+
+=== Stages
+
+We are using 3 stages:
+
+- `local`
+- `testing`
+- `production`
+
+You can define the stage using the property "stage" in the Gradle command line:
+
+ $ ./gradlew 4.0-intro-neo4j:convertOnlineHtml -Pstage=local
+
+==== Local stage
+
+We are using this stage to preview local HTML content before publishing to WordPress.
+The HTML produced will be almost identical to what will be published to WordPress but the page won't use the exact same style and features.
+In other words, the page might look different on WordPress compared to what you are seeing on local preview.
+We are mostly using this stage to make sure that the content is well formatted.
+
+==== Testing stage
+
+In testing stage, we will publish _private_ pages to WordPress.
+Private pages can only be seen if you're logged in to your WordPress account.
+In other words, private pages, cannot be seen by unauthenticated users.
+
+In testing stage, we will use the "testing" S3 bucket and the "testing" backend API instance to not make sure that we are not impacting the production pages.
+
+In addition, pages will be published using a prefixed slug.
+For instance, if your page slug is: `01-neo4j-graph-database`,
+then the page will be effectively published on WordPress using the slug `+_testing_01-neo4j-graph-database+`.
+Otherwise, the live page will be overwritten since we are using a single WordPress instance.
+
+==== Production stage
+
+Publish _public_ pages to WordPress using the "production" S3 bucket and the "production" backend API instance.
+
 === Prerequisite
 
 To publish pages to WordPress, you will need an application account to authenticate with the {uri-wp-rest-api-ref}[WordPress REST API].
@@ -26,6 +81,8 @@ A page must have a (unique) `slug` attribute:
 = Introduction to Cypher
 :slug: introduction-cypher
 ----
+
+
 
 === Upload to WordPress
 
