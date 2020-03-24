@@ -36,7 +36,7 @@ abstract class S3UploadTask : DefaultTask() {
   @InputFiles
   var sources: MutableList<ConfigurableFileTree> = mutableListOf()
 
-  @OutputFile
+  @Input
   var destination: String = ""
 
   @Input
