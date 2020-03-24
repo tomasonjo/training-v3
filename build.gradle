@@ -125,11 +125,31 @@ subprojects {
     inputs.dir "${rootProject.projectDir}/resources/templates/course"
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
+    def stage = project.findProperty('stage')
     asciidoctorj {
+      def imagesdir = {
+        switch (stage) {
+          case 'production':
+            return "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/"
+          case 'testing':
+            return "https://s3.console.aws.amazon.com/s3/buckets/graphacademy.neo4j.com/test-images/${project.name}"
+          default:
+            return './images'
+        }
+      }
       options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
-      attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
+      attributes 'imagesdir': imagesdir,
         'sectanchors': '',
         'intercom-app-id': 'dt0ig5ab'
+    }
+
+    if (stage != 'production' && stage != 'testing') {
+      resources {
+        from("${projectDir}/images") {
+          include '**'
+          into 'images'
+        }
+      }
     }
 
     baseDir file("${projectDir}/docs")
@@ -291,10 +311,19 @@ subprojects {
   }
 
   if (new File("${projectDir}/images").exists()) {
-    task s3UploadImages(type: S3UploadTask) {
-      source = "${projectDir}/images"
-      bucket = "dev.assets.neo4j.com"
-      destination = "course/${project.name}/images"
+    def stage = project.findProperty('stage')
+    if (stage == 'production') {
+      task s3UploadImages(type: S3UploadTask) {
+        source = "${projectDir}/images"
+        bucket = "dev.assets.neo4j.com"
+        destination = "course/${project.name}/images"
+      }
+    } else if (stage == 'testing') {
+      task s3UploadImages(type: S3UploadTask) {
+        source = "${projectDir}/images"
+        bucket = "graphacademy.neo4j.com"
+        destination = "test-images/${project.name}"
+      }
     }
   }
 
