@@ -312,12 +312,14 @@ subprojects {
   if (new File("${projectDir}/images").exists()) {
     if (stage == 'production') {
       task s3UploadImages(type: S3UploadTask) {
+        //overwrite = true
         source = "${projectDir}/images"
         bucket = "dev.assets.neo4j.com"
         destination = "course/${project.name}/images"
       }
     } else if (stage == 'testing') {
       task s3UploadImages(type: S3UploadTask) {
+        //overwrite = true
         source = "${projectDir}/images"
         bucket = "dev.assets.neo4j.com"
         destination = "test-course/${project.name}/images"
@@ -330,7 +332,7 @@ subprojects {
       dependsOn convertOnlineHtml
       source = convertOnlineHtml.outputs.files
       type = "course"
-      status = stage == 'production' ? "public" : "private"
+      status = "private"
     }
   }
 
