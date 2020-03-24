@@ -131,7 +131,7 @@ subprojects {
           case 'production':
             return "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/"
           case 'testing':
-            return "https://s3.console.aws.amazon.com/s3/buckets/graphacademy.neo4j.com/test-images/${project.name}"
+            return "https://s3.amazonaws.com/dev.assets.neo4j.com/test-course/${project.name}/images/"
           default:
             return './images'
         }
