@@ -24,6 +24,9 @@ open class AsciidoctorModuleDescriptorPlugin : Plugin<Project> {
 }
 
 abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
+
+  private val TESTING_SLUG_PREFIX = "_testing_"
+
   @InputFiles
   var sources: MutableList<ConfigurableFileTree> = mutableListOf()
 
@@ -55,10 +58,16 @@ abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
       val document = asciidoctor.loadFile(file, emptyMap())
       val url = "${file.name.removeSuffix(".adoc")}.html"
       val title = document.doctitle
-      val slug = document.getAttribute("slug", "") as String
+      val slugAttrValue = document.getAttribute("slug", "") as String
       val hasQuiz = document.findBy(mapOf("context" to ":section", "role" to "quiz")).isNotEmpty()
       val hasCertificate = document.findBy(mapOf("context" to ":section", "role" to "certificate")).isNotEmpty()
-      if (slug.isNotBlank()) {
+      if (slugAttrValue.isNotBlank()) {
+        val stage = document.getAttribute("stage", "") as String
+        val slug = if (stage == "production") {
+          slugAttrValue
+        } else {
+          "$TESTING_SLUG_PREFIX${slugAttrValue}"
+        }
         mapOf(
           "title" to title,
           "url" to url,
