@@ -79,6 +79,11 @@ require 'json'
         window.trainingClassName = "<%= attr('module-name') %>"
         window.trainingPartName = "<%= attr('slug') %>"
         window.trainingClassModules = <%= modules.to_json %>
+        <% if attr('stage') === 'production' %>
+          window.trainingBackendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
+        <% else %>
+          window.trainingBackendBaseUrl = 'https://9niagofhzb.execute-api.us-east-1.amazonaws.com/dev'
+        <% end %>
       </script>
       <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
       <script src="https://neo4jsandbox.com/js/js.cookie-2.1.3.min.js"></script>

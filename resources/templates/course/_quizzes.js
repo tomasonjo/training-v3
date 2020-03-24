@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var quizStatusLocalStorageKey = 'com.neo4j.graphacademy.' + trainingName + '.quizStatus'
   var idTokenLocalStorageKey = 'com.neo4j.accounts.idToken'
 
-  var backendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
+  var backendBaseUrl = window.trainingBackendBaseUrl
 
   var getTimeDiff = function (time1, time2) {
     var hourDiff = time2 - time1
