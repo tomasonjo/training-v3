@@ -321,8 +321,8 @@ subprojects {
     } else if (stage == 'testing') {
       task s3UploadImages(type: S3UploadTask) {
         source = "${projectDir}/images"
-        bucket = "graphacademy.neo4j.com"
-        destination = "test-images/${project.name}"
+        bucket = "dev.assets.neo4j.com"
+        destination = "test-course/${project.name}/images"
       }
     }
   }
