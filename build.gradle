@@ -37,6 +37,8 @@ subprojects {
     }
   }
 
+  def stage = project.findProperty('stage')
+
   s3 {
     profile = project.hasProperty('s3-profile') ? project.property('s3-profile') : 'default'
     region = 'us-east-1'
@@ -52,7 +54,7 @@ subprojects {
   asciidoctorj {
     requires "${rootProject.projectDir}/resources/extensions.rb"
     attributes 'allow-uri-read': '',
-      'stage': project.hasProperty('stage') ? project.property('stage') : '',
+      'stage': stage != null ? stage : '',
       'source-highlighter': 'rouge',
       'rouge-style': 'neo.forest',
       'presenter': 'Neo Technology',
@@ -123,7 +125,6 @@ subprojects {
     inputs.dir "${rootProject.projectDir}/resources/templates/course"
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
-    def stage = project.findProperty('stage')
     asciidoctorj {
       def imagesdir = {
         switch (stage) {
@@ -309,7 +310,6 @@ subprojects {
   }
 
   if (new File("${projectDir}/images").exists()) {
-    def stage = project.findProperty('stage')
     if (stage == 'production') {
       task s3UploadImages(type: S3UploadTask) {
         source = "${projectDir}/images"
@@ -325,11 +325,13 @@ subprojects {
     }
   }
 
-  task wordPressUploadCourse(type: WordPressUploadTask) {
-    dependsOn convertOnlineHtml
-    source = convertOnlineHtml.outputs.files
-    type = "course"
-    status = "private"
+  if (stage == 'production' || stage == 'testing') {
+    task wordPressUploadCourse(type: WordPressUploadTask) {
+      dependsOn convertOnlineHtml
+      source = convertOnlineHtml.outputs.files
+      type = "course"
+      status = stage == 'production' ? "public" : "private"
+    }
   }
 
   task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
