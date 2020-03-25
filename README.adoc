@@ -151,11 +151,7 @@ Now we can execute tasks on this new module, for instance: `./gradlew :browser:c
 
 cd modules/demo/build/slides
 
-2. Start the Web server:
-
-python -m SimpleHTTPServer 8080
-
-3. View the slides in a Web Browser by going to localhost:8080
+2. Open the an HTML page in JS-enabled Browser
 
 [square]
 * `ESC` to see summary slides

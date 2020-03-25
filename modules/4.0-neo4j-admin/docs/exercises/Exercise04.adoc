@@ -33,7 +33,7 @@ image::AddDatabaseOneFilesDocker.png[AddDatabaseOneFilesDocker,width=1000,align=
 
 *Note*:  Normally in Debian, you simply modify the *conf/neo4j.conf* file to make changes to the Neo4j instance when it starts.
 In a Docker Neo4j instance, it is a little different.
-For your reference the default *default-neo4j.conf* file is available for your inspection so you can see what this file would look like on, for example, a Debian system.
+
 With the Docker Neo4j instance, it uses its own internal configuration, but you can override configuration settings in one of two ways.
 
 . One is with the settings you specify when you create the Docker instance (create_neo4j_instance.sh).

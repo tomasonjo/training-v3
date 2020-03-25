@@ -61,6 +61,33 @@ Notice that by default the HTTPS connector is disabled, but the default HTTP por
 If any of these ports conflict with ports already used on your system, you can change these connector ports by modifying these property values in the *neo4j.conf* file.
 --
 
+== Viewing current configuration values
+
+As you configure a Neo4j instance, either for development, testing, or production, it is very important that you know the existing configuration values.
+For most Neo4j instances, you can view the *neo4j.conf* file.
+Another way that you can view the current configuration values for a Neo4j instance is with a Cypher call:
+
+----
+// return all configuration values
+CALL dbms.listConfig() YIELD name, value RETURN name, value;
+----
+
+This is particularly useful when using a Docker Neo4j instance where you do not have access to the *neo4j.conf* file used by the instance:
+
+image::listConfigDocker.png[listConfigDocker,width=800,align=center]
+
+== Viewing specific configuration values
+
+If you want to query the current Neo4j instance for particular configuration values, you can use Cypher's WHERE clause to specify the filter.
+In this example, we want all configuration properties in the instance that contains the string "http":
+
+----
+// return specific configuration values
+CALL dbms.listConfig() YIELD name, value WHERE name CONTAINS "http" RETURN name,value;
+----
+
+image::listConfigDockerhttp.png[listConfigDockerhttp,width=800,align=center]
+
 === Connector ports: Development vs. production
 
 [.notes]
@@ -81,7 +108,7 @@ dbms.connectors.default_listen_address=0.0.0.0
 [.notes]
 --
 In production, an application that needs to connect to the Neo4j instance from a different system, should use a secure (encrypted) connection.
-In this training, we will not be configuring secure HTTPs connectors as we need a real CA for a real company to do this.
+But another level of security for a system is to use non-default ports. In this training, we will not be configuring secure HTTPs connectors as we need a real CA for a real company to do this.
 You should consult the https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL documentation] for details in your real, production environment.
 --
 

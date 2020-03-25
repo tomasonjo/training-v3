@@ -13,44 +13,81 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Ensure that you are the user _neo4j_.
-. Ensure that the Neo4j instance is started.
+. Make sure you have a terminal window open to your Docker instance for this course.
+. Ensure that the Docker Neo4j instance is started.
 
 == Exercise steps:
 
-. Create a Cypher script in the */home/ubuntu/files* directory named *AddConstraintsMovies.cypher* with the following statements:
+. log in to the Docker Neo4j instance, with bash:
 +
+----
+docker exec -it neo4j /bin/bash
+----
 
+. Navigate to the */usr* directory.
+. Create a directory */usr/scripts*.
+. Change to the */usr/scripts* directory.
+.Create a Cypher script in the */usr/scripts* directory named *AddConstraintsMovies.cypher* as follows:
+.. Copy the following text to your clipboard:
 ----
 CREATE CONSTRAINT TitleConstraint ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT NameConstraint ON (p:Person) ASSERT p.name IS UNIQUE;
 ----
+.. Type cat > AddConstraintsMovies.cypher
+.. Press ENTER.
+.. Paste what you have in the clipboard.
+.. Press ENTER.
+.. Enter CTL+d.
+. Confirm that the file has the correct contents using the command: cat AddConstraintsMovies.cypher
 
-. Create a shell script in the */home/ubuntu/files* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell`. This file should have the following contents:
+image::CreatedCypherScriptDocker.png[CreatedCypherScriptDocker,width=1000,align=center]
+
+. Create a shell script in the */usr/scripts* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell` as follows:
 +
 
+.. Copy the following text to your clipboard:
 ----
-cat /home/ubuntu/files/AddConstraintsMovies.cypher | /usr/bin/cypher-shell -u neo4j -p <Neo4j instance password>  --format verbose
+cat /usr/scripts/AddConstraintsMovies.cypher | /var/lib/neo4j/bin/cypher-shell -u neo4j -p <Neo4j instance password>  --format verbose
 ----
+.. Change the text in the clipboard to use your password your set up for your Neo4j instance
+.. Type cat > AddConstraints.sh
+.. Press ENTER.
+.. Paste what you have in the clipboard.
+.. Press ENTER.
+.. Enter CTL+d.
+. Confirm that the file has the correct contents using the command: cat AddConstraints.sh
 
-. Create a shell script in the */home/ubuntu/files* directory named *MaintainDB.sh* that will initialize the log file and then call *AddConstraints.sh*. This file should have the following contents:
+image::CreatedBashScriptDocker.png[CreatedBashScriptDocker,width=1000,align=center]
+
+
+. Create a shell script in the */usr/scripts* directory named *MaintainDB.sh* that will initialize the log file and then call *AddConstraints.sh* as follows:
 +
 
+.. Copy the following text to your clipboard:
 ----
-rm -rf /home/ubuntu/reports/MaintainDB.log
-/home/ubuntu/files/AddConstraints.sh 2>&1 >> /home/ubuntu/reports/MaintainDB.log
+rm -rf /var/lib/neo4j/logs/reports/MaintainDB.log
+/usr/scripts/AddConstraints.sh 2>&1 >> /var/lib/neo4j/logs/reports/MaintainDB.log
 ----
+
+.. Type cat > MaintainDB.sh
+.. Press ENTER.
+.. Paste what you have in the clipboard.
+.. Press ENTER.
+.. Enter CTL+d.
+. Confirm that the file has the correct contents using the command: cat MaintainDB.sh
+
+image::CreatedBashScriptDocker2.png[CreatedBashScriptDocker2,width=1000,align=center]
+
 
 . Ensure that the scripts you created have execute permissions.
 . Run the *MaintainDB.sh* script and  view the log file.
 +
 
-image::RunMaintainDB.png[RunMaintainDB,width=1000,align=center]
+image::RunMaintainDBDocker.png[RunMaintainDBDocker,width=1000,align=center]
 
 . Confirm that it created the constraints in the default database (_maindb_). (Check using cypher-shell (`CALL db.constraints();`))
 
-image::ConfirmConstraints.png[ConfirmConstraints,width=1000,align=center]
+image::ConfirmConstraintsDocker.png[ConfirmConstraintsDocker,width=1000,align=center]
 
 == Exercise summary
 

@@ -3,42 +3,37 @@
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
-In this Exercise, will modify the HTTP used by your instance to allow external connections.
-Then you will modify the configuration to use a different port for HTTP connections.
+In this Exercise, will modify the HTTP used by your instance. How you change the HTTP port will depend on your host OS.
+On OS X, the port forwarding is not as clean as on Debian so to set up a Docker Neo4j instance that uses a different HTTP port, you must create a new instance.
+
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Ensure that you are the user _neo4j_.
+. Make sure you have a terminal window open to your Docker Neo4j instance for this course.
 
-== Exercise steps:
+== Exercise steps (EC2 instance)
 
-. Determine the public IP address for your EC2 instance for this course.
+. Connect to the instance with cypher-shell.
+. Call the procedure to list the entire configuration for the instance.
++
+image::listConfigDocker.png[listConfigDocker,width=800,align=center]
+
+. Call the procedure to list all properties that have "http" in them.
 +
 
-----
-curl ifconfig.me
-----
+image::listConfigDockerhttp.png[listConfigDockerhttp,width=800,align=center]
 
-. On your local system, open a Web browser and go to  <address returned by ifconfig.me>:7474. You should not be able to access the Neo4j instance. This is because you have not opened up the server for external access.
-. Change the configuration to allow external connections to the default HTTP port 7474.
+. Change the configuration for the HTTP port to a value that is not in use on your system, for example *9999*.
++
+image::changehttp.png[changehttp,width=800,align=center]
+
+. Restart the Docker Neo4j instance.
+. With cypher-shell, confirm that the dbms.connector.http.listen_address value is 9999 using  dbms.listConfig().
 +
 
-----
-dbms.connectors.default_listen_address=0.0.0.0
-----
+image::confirmchangehttp.png[confirmchangehttp,width=800,align=center]
 
-. Restart the Neo4j instance.
-. Try accessing <address returned by ifconfig.me>:7474. Is it attempting to connect?
-. Enter the credentials for your Neo4j instance. You should now be connected.
-+
-
-image::ExternalConnect7474.png[ExternalConnect7474,width=1200,align=center]
-
-. Next, change the configuration for the HTTP port to a value that is not in use on your system, for example *9999*.
-. Restart the Neo4j instance.
-. Can you access the Neo4j instance using port 9999 as you did previously from an external system using a Web browser? You should not be able to. This is not a Neo4j configuration issue, but rather an EC2 instance limitation where the EC2 instance has only allowed access to port 7474 from other systems.
-. Enter this in a EC2 terminal window to confirm that you can access using the HTTP API the Neo4j instance using the 9999 port number:
+. Enter this in a terminal window to confirm that you can access using the HTTP API the Neo4j instance using the 9999 port number:
 +
 
 ----
@@ -50,10 +45,51 @@ You should see something like the following:
 
 image::UsePort9999.png[UsePort9999,width=1200,align=center]
 
+[start=8]
 . Change the configuration back to using the default HTTP port of 7474.
 . Restart the Neo4j instance.
 
+== Exercise steps (OS X)
+
+. Create a directory *$HOME/docker-neo4j/testhttp*. You will be creating a new container that uses this directory, rather than *neo4j*.
+. Stop the Docker Neo4j instance.
+. Copy the *create_neo4j_instance.sh* to *create_neo4j_instance_http.sh*.
+. Modify *create_neo4j_instance_http.sh* so that it uses the directory *testhttp* rather than *neo4j*.
+. Modify the port mapping for 7474 to be 9999.
++
+image::InstancePort9999.png[InstancePort9999,width=1200,align=center]
+
+. Run the script to create and start the instance.
+. Confirm the docker instance successfully started.
+. View the log for the instance.
++
+
+image::LogInstancePort9999.png[LogInstancePort9999,width=1200,align=center]
+
+. Stop the testhttp Docker Neo4j instance.
+. Start the testhttp Docker Neo4j instance.
+. Connect to the instance with cypher-shell. You will need to change the password since this is a new Neo4j instance.
++
+
+image::cypher-shell-testhttp.png[cypher-shell-testhttp,width=1200,align=center]
+
+. Call the procedure to list the entire configuration for the instance.
++
+image::listConfigDocker.png[listConfigDocker,width=800,align=center]
+
+. Call the procedure to list all properties that have "http" in them.
++
+
+image::ListConfig-testhttp.png[ListConfig-testhttp,width=800,align=center]
+
+. In a Web browser, access the server  using port 9999.
++
+
+image::WebBrowser-testhttp.png[WebBrowser-testhttp,width=800,align=center]
+
+. Stop the testhttp Docker Neo4j instance.
+
 == Exercise summary
 
-You have now configured and tested changes to the HTTP port and whether the Neo4j instance can be accessed from an external client..
+You have now configured and tested changes to the HTTP port and whether the Neo4j instance can be accessed from a different HTTP port.
 
