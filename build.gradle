@@ -227,17 +227,64 @@ subprojects {
     outputDir file("${projectDir}/build/online")
   }
 
+  /**
+   * Copy svg images to "build/images-pdf" before generating a PDF.
+   */
+  task copySvgImagesPdf(type: Copy) {
+    doFirst {
+      mkdir "$buildDir/images-pdf"
+    }
+
+    from "${projectDir}/images"
+    include '*.svg'
+    into "$buildDir/images-pdf"
+  }
+
+  /**
+   * Prepare the images before generating a PDF.
+   *
+   * Since high-resolution images consume a *lot* of memory while generating a PDF with Asciidoctor,
+   * we downscale png and jpg/jpeg images using a max width and height in pixels.
+   *
+   * We rely on ImageMagick (more specifically `mogrify` command line) to downscale the images.
+   * https://imagemagick.org/
+   *
+   * We also copy svg images to "build/images-pdf".
+   */
+  task prepareImagesPdf(type: Exec) {
+    dependsOn copySvgImagesPdf
+
+    inputs.dir "${projectDir}/images"
+    inputs.files "${projectDir}/images/**"
+    outputs.dir "$buildDir/images-pdf"
+    outputs.files "$buildDir/images-pdf/**"
+
+    workingDir "${projectDir}/images"
+
+    if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.png') }.isEmpty()) {
+      commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.png'
+    }
+    if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpeg') }.isEmpty()) {
+      commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpeg'
+    }
+    if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpg') }.isEmpty()) {
+      commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpg'
+    }
+  }
+
   /* single document */
   task convertSinglePdf(type: AsciidoctorPdfTask) {
     dependsOn asciidoctorGemsPrepare
+    dependsOn prepareImagesPdf
 
     inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
+      inProcess 'IN_PROCESS'
       modules.pdf.version '1.5.2'
       attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
-        'imagesdir': '../images'
+        'imagesdir': "${buildDir}/images-pdf"
     }
 
     baseDir file("${projectDir}/single-pdf")
