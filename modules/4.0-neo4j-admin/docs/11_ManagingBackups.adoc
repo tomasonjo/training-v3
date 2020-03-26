@@ -87,7 +87,7 @@ To enable a Neo4j instance to be backed up online, you must add these two proper
 [source]
 ----
 dbms.backup.enabled=true
-dbms.backup.address=<host-address>:<6362-6372>
+dbms.backup.listen_address=<host-address>:<6362-6372>
 ----
 
 [.small]
@@ -165,7 +165,7 @@ Here is how you restore the database from a backup:
 [source]
 ----
 neo4j-admin restore
-          --from=<absolute-path-to-backup-instance-directory-name>
+          --from=<backup-directory>
           --database=<database-name>
           [--force]
           [--verbose]

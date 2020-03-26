@@ -13,7 +13,7 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 
 == Before you begin
 
-. Make sure you have a terminal window open to your Docker instance for this course.
+. Make sure you have a terminal window open to your Docker Neo4j instance for this course.
 . Ensure that the Docker Neo4j instance is started.
 
 == Exercise steps:
@@ -21,27 +21,31 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 . log in to the Docker Neo4j instance, with bash:
 +
 ----
-docker exec -it neo4j /bin/bash
+[sudo] docker exec -it neo4j /bin/bash
 ----
 
 . Navigate to the */usr* directory.
 . Create a directory */usr/scripts*.
 . Change to the */usr/scripts* directory.
-.Create a Cypher script in the */usr/scripts* directory named *AddConstraintsMovies.cypher* as follows:
+. Create a Cypher script in the */usr/scripts* directory named *AddConstraintsMovies.cypher* as follows:
+
 .. Copy the following text to your clipboard:
 ----
 CREATE CONSTRAINT TitleConstraint ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT NameConstraint ON (p:Person) ASSERT p.name IS UNIQUE;
 ----
-.. Type cat > AddConstraintsMovies.cypher
-.. Press ENTER.
+
+[start=2]
+.. Type *cat > AddConstraintsMovies.cypher*.
+.. Press *ENTER*.
 .. Paste what you have in the clipboard.
-.. Press ENTER.
-.. Enter CTL+d.
-. Confirm that the file has the correct contents using the command: cat AddConstraintsMovies.cypher
+.. Press *ENTER*.
+.. Enter *CTL+d*.
+.. Confirm that the file has the correct contents using the command: *cat AddConstraintsMovies.cypher*
 
 image::CreatedCypherScriptDocker.png[CreatedCypherScriptDocker,width=1000,align=center]
 
+[start=6]
 . Create a shell script in the */usr/scripts* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell` as follows:
 +
 
@@ -49,13 +53,14 @@ image::CreatedCypherScriptDocker.png[CreatedCypherScriptDocker,width=1000,align=
 ----
 cat /usr/scripts/AddConstraintsMovies.cypher | /var/lib/neo4j/bin/cypher-shell -u neo4j -p <Neo4j instance password>  --format verbose
 ----
+[start=2]
 .. Change the text in the clipboard to use your password your set up for your Neo4j instance
-.. Type cat > AddConstraints.sh
-.. Press ENTER.
+.. Type *cat > AddConstraints.sh*.
+.. Press *ENTER*.
 .. Paste what you have in the clipboard.
-.. Press ENTER.
-.. Enter CTL+d.
-. Confirm that the file has the correct contents using the command: cat AddConstraints.sh
+.. Press *ENTER*.
+.. Enter *CTL+d*.
+.. Confirm that the file has the correct contents using the command: *cat AddConstraints.sh*
 
 image::CreatedBashScriptDocker.png[CreatedBashScriptDocker,width=1000,align=center]
 
@@ -68,13 +73,13 @@ image::CreatedBashScriptDocker.png[CreatedBashScriptDocker,width=1000,align=cent
 rm -rf /var/lib/neo4j/logs/reports/MaintainDB.log
 /usr/scripts/AddConstraints.sh 2>&1 >> /var/lib/neo4j/logs/reports/MaintainDB.log
 ----
-
-.. Type cat > MaintainDB.sh
-.. Press ENTER.
+[start=2]
+.. Type *cat > MaintainDB.sh*.
+.. Press *ENTER*.
 .. Paste what you have in the clipboard.
-.. Press ENTER.
-.. Enter CTL+d.
-. Confirm that the file has the correct contents using the command: cat MaintainDB.sh
+.. Press *ENTER*.
+.. Enter *CTL+d*.
+. Confirm that the file has the correct contents using the command: *cat MaintainDB.sh*
 
 image::CreatedBashScriptDocker2.png[CreatedBashScriptDocker2,width=1000,align=center]
 

@@ -226,7 +226,6 @@ neo4j-admin import
   --relationships [<jheader-csv-file-1>,]<join-csv-file-1>
   --relationships=<REL_TYPE>=[<jheader-csv-file-2>,]<join-csv-file-2>
   --trim-strings=true
-  > import.out
 ----
 
 [.notes]

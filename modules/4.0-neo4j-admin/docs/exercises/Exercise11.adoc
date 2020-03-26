@@ -12,8 +12,7 @@ In your real application, if you were to back up a production stand-alone Neo4j 
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Ensure that you are the user _neo4j_.
+. Make sure you have a terminal window open to your Docker Neo4j instance (neo4j) for this course.
 
 == Exercise steps:
 
@@ -23,12 +22,13 @@ For example, your *neo4j.conf* properties should look something like this:
 
 ----
 dbms.backup.enabled=true
-dbms.backup.address=localhost:6362
+dbms.backup.listen_address=localhost:6362
 ----
 
-. Restart the Neo4j instance.
-. Create a directory named */home/ubuntu/backups* and ensure that it is owned by _neo4j:neo4j_.
-. In `cypher-shell`, confirm that all database are started. There should be four databases:
+. Restart the Docker Neo4j instance.
+. View the logs to make sure it started with no errors.
+. Since we are using Docker for our training exercises, you must create a directory that is accessible from the Docker Neo4j instance. Create the following directory in the $HOME/docker-neo4j/neo4j/logs directory named *backups* and ensure that it has all permissions (chmmod 777 backups).
+. In `cypher-shell`, make sure that all database are started. There should be four databases:
 .. system
 .. maindb
 .. movies
@@ -46,9 +46,13 @@ MATCH (n) RETURN count(n);
 .. Use the *backups* directory for the location of the backup.
 .. Use the *reports* directory for the report location.
 
+----
+[sudo] docker exec --interactive neo4j bin/neo4j-admin backup --backup-dir=logs/backups --from=localhost:6362 --check-consistency --database=system --report-dir=logs/reports
+----
+
 The result of the backup should look something like this:
 
-image::BackupSystem.png[BackupSystem,width=1000,align=center]
+image::BackupSystemDocker.png[BackupSystemDocker,width=1000,align=center]
 
 [start=7]
 . Repeat the backup procedure for the user databases
@@ -59,9 +63,9 @@ image::BackupSystem.png[BackupSystem,width=1000,align=center]
 . Use the restore tool to restore the _movies_ database.
 +
 
-You should see something like this:
-
-image::RestoreMovies.png[RestoreMovies,width=1000,align=center]
+----
+[sudo] docker exec --interactive neo4j bin/neo4j-admin restore --from=logs/backups/movies --database=movies
+----
 
 . In `cypher-shell` create the _movies_ database that was just restored.
 . Confirm that the _movies_ database has 171 nodes.
@@ -76,7 +80,7 @@ MATCH (n) RETURN count(n);
 +
 
 ----
-/usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movies.cypher
+[sudo] cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified> --database movies
 ----
 
 . In `cypher-shell` confirm that the database contains 342 nodes:
@@ -88,20 +92,19 @@ MATCH (n) RETURN count(n);
 
 . Perform an online backup using these guidelines:
 .. Back up the _movies_ database.
-.. Verbose.
 .. Perform a consistency check.
 .. Use the *backups* directory for the location of the backup
 
 The result of the backup should look as follows:
 
-image::BackupMovies.png[BackupMovies,width=1000,align=center]
+image::BackupMoviesDocker.png[BackupMoviesDocker,width=1000,align=center]
 
 [start=16]
 . Invoke `cypher-shell` to add more nodes to the _movies_ database using the *movies.cypher* file.
 +
 
 ----
-/usr/bin/cypher-shell -u neo4j -p <Neo4jInstancePassword> --database movies < /home/ubuntu/files/movies.cypher
+[sudo] cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified> --database movies
 ----
 
 . In `cypher-shell` confirm that the database contains 513 nodes:
@@ -115,6 +118,12 @@ MATCH (n) RETURN count(n);
 . Restore the _movies_ using these guidelines:
 .. Use the same _backups_ location.
 .. Specify _force_ so that the database will be replaced.
+
+----
+[sudo] docker exec --interactive neo4j bin/neo4j-admin restore --from=logs/backups/movies --database=movies --force
+----
+
+----
 . Connect to the Neo4j instance with `cypher-shell`.
 . Start the _movies_ database.
 . Confirm that the _movies_ database has 342 nodes.

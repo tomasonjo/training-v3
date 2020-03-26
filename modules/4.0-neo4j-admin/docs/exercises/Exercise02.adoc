@@ -52,9 +52,8 @@ image::ViewLogFilesDocker.png[ViewLogFilesDocker,width=600,align=center]
 [cols="50,50", options="header",stripes="none"]
 |====
 
-|*Docker command*
 |*Description*
-|
+|*Docker command*
 {set:cellbgcolor:white}
 |[sudo] docker start <name>
 |Start the instance of a given name.

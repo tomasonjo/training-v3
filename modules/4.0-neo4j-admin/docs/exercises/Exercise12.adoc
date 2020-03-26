@@ -8,8 +8,8 @@ In this exercise you will create a database from a set of CSV files using the im
 
 == Before you begin
 
-. Make sure you have a terminal window open to your EC2 instance for this course.
-. Ensure that you are the user _neo4j_.
+. Make sure you have a terminal window open to your Docker Neo4j instance for this course.
+. Ensure the instance is started.
 
 == Exercise steps:
 
@@ -28,7 +28,7 @@ curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 /usr/bin/unzip crimes-dataset.zip
 ----
 
-. The crimes-dataset directory should contain six CSV files. Move these six files to */var/lib/neo4j/import* folder for the Neo4j instance.
+. The crimes-dataset directory should contain six CSV files. Move these six files to *import* folder for the Docker Neo4j instance.
 . Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
 . Change directory to the *import* directory.
 . Use the `neo4j-admin` tool to import the CSV files using these guidelines:*
@@ -36,11 +36,11 @@ curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 
 ----
              --database crimes
-             --nodes crimes_header.csv,crimes.csv
-             --nodes beats.csv
-             --nodes=PrimaryType=primaryTypes.csv
-             --relationships crimesBeats.csv
-             --relationships=PRIMARY_TYPE=crimesPrimaryTypes.csv
+             --nodes /import/crimes_header.csv,/import/crimes.csv
+             --nodes /import/beats.csv
+             --nodes=PrimaryType=/import/primaryTypes.csv
+             --relationships /import/crimesBeats.csv
+             --relationships=PRIMARY_TYPE=/import/crimesPrimaryTypes.csv
              --trim-strings=true
 ----
 
@@ -48,24 +48,12 @@ This is what you should enter (ensure there are no newline characters):
 
 [source]
 ----
-/usr/bin/neo4j-admin import --database crimes --nodes crimes_header.csv,crimes.csv --nodes beats.csv --nodes=PrimaryType=primaryTypes.csv -
--relationships crimesBeats.csv --relationships=PRIMARY_TYPE=crimesPrimaryTypes.csv --trim-strings=true > /home/ubuntu/reports/import.out
+[sudo] docker exec --interactive neo4j bin/neo4j-admin import --database crimes --nodes /import/crimes_header.csv,/import/crimes.csv --nodes /import/beats.csv --nodes=PrimaryType=/import/primaryTypes.csv --relationships /import/crimesBeats.csv --relationships=PRIMARY_TYPE=/import/crimesPrimaryTypes.csv --trim-strings=true
 ----
 
 This is what you should see in the terminal window if all goes well:
 
-image::ImportCrimes1.png[ImportCrimes1,width=500]
-
-. Examine the contents of *import.out*. Did it execute without error?
-+
-
-Here is what the beginning of *import.out* file should look like:
-
-image::importout1.png[importout1,width=400]
-
-Here is what the end of *import.out* file should look like:
-
-image::importout2.png[importout2,width=400]
+image::ImportCrimesDocker1.png[ImportCrimesDocker1,width=500]
 
 . In `cypher-shell` create the crimes database.
 . Enter the following Cypher statements to view the schema of the database and return the number of nodes:
@@ -78,7 +66,7 @@ MATCH (n) RETURN count(n);
 
 The database information should now look as follows:
 
-image::Afteradmin-toolImport.png[Afteradmin-toolImport,width=600]
+image::Afteradmin-toolImportDocker.png[Afteradmin-toolImportDocker,width=600]
 
 == Exercise summary
 

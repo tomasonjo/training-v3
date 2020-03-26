@@ -19,6 +19,7 @@ In this exercise you will gain some experience with creating and deleting a data
 
 image::ShowDatabasesExDocker.png[ShowDatabasesExDocker,width=1000,align=center]
 
+[start=3]
 . Enter the command to create a database named _databaseone_.
 . Enter the command to show all databases.
 +
@@ -36,7 +37,7 @@ In a Docker Neo4j instance, it is a little different.
 
 With the Docker Neo4j instance, it uses its own internal configuration, but you can override configuration settings in one of two ways.
 
-. One is with the settings you specify when you create the Docker instance (create_neo4j_instance.sh).
+. One is with the settings you specify when you create the Docker instance (*create_neo4j_instance.sh*).
 . The other way is to specify configuration values in a *neo4j.conf* file that is located in the shared volume used by the Docker Neo4j Docker instance. This is how you will add configuration changes to the Neo4j instance for this training.
 +
 
@@ -74,6 +75,7 @@ image::CheckDefaultDatabaseDocker.png[CheckDefaultDatabaseDocker,width=1000,alig
 [start=10]
 . Drop the database _neo4j_.
 . Enter the command to show all databases.
++
 
 image::RemovedNeo4jDocker.png[RemovedNeo4jDocker,width=1000,align=center]
 

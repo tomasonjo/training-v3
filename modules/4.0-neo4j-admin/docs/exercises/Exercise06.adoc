@@ -23,6 +23,10 @@ On a non-Docker installation, you would specify this location in the Neo4j confi
 . Make sure that this *new-location* directory is writable.
 . Modify the *neo4j.conf* file to use this new location as the data directory. Also ensure that there the default database is _maindb_. Your *neo4j.conf* file should look something like this:
 
+----
+dbms.default_database=maindb
+dbms.directories.data=data/new-location
+----
 image::NewLocationDocker.png[NewLocationDocker,width=900,align=center]
 
 [start=4]
