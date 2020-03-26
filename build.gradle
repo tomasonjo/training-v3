@@ -87,7 +87,7 @@ subprojects {
   task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
     source = "${projectDir}/docs"
     outputDir "${projectDir}/build/online"
-    moduleName project.name
+    moduleName stage != 'production' ? "_testing_${project.name}" : project.name
   }
 
   // for debugging purpose
