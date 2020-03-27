@@ -1,4 +1,3 @@
-
 = Copying Databases
 :slug: 05-copying-databases
 :doctype: book
@@ -6,14 +5,6 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Changing the Database Location
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 
@@ -157,16 +148,19 @@ Then, if you want to create a database from any offline backup file to use for a
 CREATE DATABASE <targetDB>;
 ----
 
+ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]
 == Exercise #5: Copying databases
+endif::[]
 
-//ifndef::backend-htlm5[]
+ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
-//endif::[]
+endif::[]
 
-//ifdef::backend-htlm5[]
-//include::exercises/Exercise05.adoc
-//endif::[]
+ifndef::backend-pdf,backend-revealjs[]
+
+include::exercises/Exercise05.adoc[]
+endif::[]
 
 
 [.quiz]
@@ -223,24 +217,3 @@ You should now be able to:
 * Copy a Neo4j database using the copy command.
 * Create a dump file for a database.
 * Load a dump file to create a database.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-admin-view-part3');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

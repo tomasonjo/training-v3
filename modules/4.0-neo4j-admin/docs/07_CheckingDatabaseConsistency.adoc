@@ -1,4 +1,3 @@
-
 = Checking Database Consistency
 :slug: 07-checking-database-consistency
 :doctype: book
@@ -6,14 +5,6 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Scripting to Manage Databases
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 
@@ -81,16 +72,19 @@ If inconsistencies are found, a report is generated and placed in the directory 
 Inconsistencies in a database are a serious matter that should be looked into with the help of Neo4j Technical Support.
 --
 
+ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]
 == Exercise #7: Checking consistency of a database
+endif::[]
 
-//ifndef::backend-htlm5[]
+ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
-//endif::[]
+endif::[]
 
-//ifdef::backend-htlm5[]
-//include::exercises/Exercise07.adoc
-//endif::[]
+ifndef::backend-pdf,backend-revealjs[]
+
+include::exercises/Exercise07.adoc[]
+endif::[]
 
 
 [.quiz]
@@ -145,24 +139,3 @@ You should now be able to:
 
 [square]
 * Use neo4j-admin to check the consistency of a Neo4j database.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-admin-view-part3');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

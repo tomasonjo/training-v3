@@ -1,4 +1,3 @@
-
 = Configuring Plugins
 :slug: 09-configuring-plugins
 :doctype: book
@@ -6,14 +5,6 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Managing HTTP Ports
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 
@@ -215,16 +206,19 @@ And here is some of what was produced in the report:
 
 image::APOCProcedures.png[APOCProcedures,width=250,align=center]
 
+ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]
 == Exercise #9: Install a plugin
+endif::[]
 
-//ifndef::backend-htlm5[]
+ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
-//endif::[]
+endif::[]
 
-//ifdef::backend-htlm5[]
-//include::exercises/Exercise09.adoc
-//endif::[]
+ifndef::backend-pdf,backend-revealjs[]
+
+include::exercises/Exercise09.adoc[]
+endif::[]
 
 [.quiz]
 == Check your understanding
@@ -279,24 +273,3 @@ You should now be able to:
 [square]
 * Make a library (plugin) available to applications.
 * Confirm that a plugin is available.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-admin-view-part3');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

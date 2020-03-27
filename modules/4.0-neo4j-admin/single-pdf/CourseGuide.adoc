@@ -1,0 +1,22 @@
+= Neo4j 4.0 Administration: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
+include::{includedir}/01_IntroToNeo4j.adoc[leveloffset=+1]
+include::{includedir}/02_OverviewOfNeo4jAdministration.adoc[leveloffset=+1]
+include::{includedir}/03_ManagingANeo4jInstance.adoc[leveloffset=+1]
+include::{includedir}/04_UsingCypherShellToManageDatabases.adoc[leveloffset=+1]
+include::{includedir}/05_CopyingDatabases.adoc[leveloffset=+1]
+include::{includedir}/06_ChangingTheDatabaseLocation.adoc[leveloffset=+1]
+include::{includedir}/07_CheckingDatabaseConsistency.adoc[leveloffset=+1]
+include::{includedir}/08_ScriptingToManageDatabases.adoc[leveloffset=+1]
+include::{includedir}/09_ConfiguringPlugins.adoc[leveloffset=+1]
+include::{includedir}/10_ManagingHTTPPorts.adoc[leveloffset=+1]
+include::{includedir}/11_ManagingBackups.adoc[leveloffset=+1]
+include::{includedir}/12_ImportingData.adoc[leveloffset=+1]
+include::{includedir}/13_Summary.adoc[leveloffset=+1]
+

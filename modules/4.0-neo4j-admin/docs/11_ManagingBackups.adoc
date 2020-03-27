@@ -1,4 +1,3 @@
-
 = Managing Backups
 :slug: 11-managing-backups
 :doctype: book
@@ -6,14 +5,6 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Importing Data
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 
@@ -180,16 +171,19 @@ You then need to create it again against the _system_ database.
 If you restore a database as _root_ with _--force_, make sure that you change the ownership (recursively) of the database directory to _neo4j:neo4j_ before creating the database.
 --
 
+ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]
 == Exercise #11: Managing backups
+endif::[]
 
-//ifndef::backend-htlm5[]
+ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
-//endif::[]
+endif::[]
 
-//ifdef::backend-htlm5[]
-//include::exercises/Exercise11.adoc
-//endif::[]
+ifndef::backend-pdf,backend-revealjs[]
+
+include::exercises/Exercise11.adoc[]
+endif::[]
 
 [.quiz]
 == Check your understanding
@@ -241,24 +235,3 @@ Select the correct answer.
 == Summary
 
 You should now be able to back up and restore a Neo4j database.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-admin-view-part3');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

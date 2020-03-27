@@ -1,4 +1,3 @@
-
 = Exercise #8: Scripting changes to the database
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
@@ -6,10 +5,10 @@ ifndef::imagesdir[:imagesdir: ../../images]
 
 In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
 
-. *AddConstraintsMovies.cypher*
-. *AddConstraintsMovies2.cypher*
-. *AddConstraints.sh*
-. *MaintainDB.sh*
+* *AddConstraintsMovies.cypher*
+* *AddConstraintsMovies2.cypher*
+* *AddConstraints.sh*
+* *MaintainDB.sh*
 
 == Before you begin
 
@@ -28,14 +27,13 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 . Create a directory */usr/scripts*.
 . Change to the */usr/scripts* directory.
 . Create a Cypher script in the */usr/scripts* directory named *AddConstraintsMovies.cypher* as follows:
-
 .. Copy the following text to your clipboard:
++
 ----
 CREATE CONSTRAINT TitleConstraint ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT NameConstraint ON (p:Person) ASSERT p.name IS UNIQUE;
 ----
 
-[start=2]
 .. Type *cat > AddConstraintsMovies.cypher*.
 .. Press *ENTER*.
 .. Paste what you have in the clipboard.
@@ -47,13 +45,12 @@ image::CreatedCypherScriptDocker.png[CreatedCypherScriptDocker,width=1000,align=
 
 [start=6]
 . Create a shell script in the */usr/scripts* directory named *AddConstraints.sh* that will forward *AddConstraints.cypher* to `cypher-shell` as follows:
-+
-
 .. Copy the following text to your clipboard:
++
 ----
 cat /usr/scripts/AddConstraintsMovies.cypher | /var/lib/neo4j/bin/cypher-shell -u neo4j -p <Neo4j instance password>  --format verbose
 ----
-[start=2]
+
 .. Change the text in the clipboard to use your password your set up for your Neo4j instance
 .. Type *cat > AddConstraints.sh*.
 .. Press *ENTER*.
@@ -64,25 +61,23 @@ cat /usr/scripts/AddConstraintsMovies.cypher | /var/lib/neo4j/bin/cypher-shell -
 
 image::CreatedBashScriptDocker.png[CreatedBashScriptDocker,width=1000,align=center]
 
-
+[start=7]
 . Create a shell script in the */usr/scripts* directory named *MaintainDB.sh* that will initialize the log file and then call *AddConstraints.sh* as follows:
-+
-
 .. Copy the following text to your clipboard:
++
 ----
 rm -rf /var/lib/neo4j/logs/reports/MaintainDB.log
 /usr/scripts/AddConstraints.sh 2>&1 >> /var/lib/neo4j/logs/reports/MaintainDB.log
 ----
-[start=2]
 .. Type *cat > MaintainDB.sh*.
 .. Press *ENTER*.
 .. Paste what you have in the clipboard.
 .. Press *ENTER*.
 .. Enter *CTL+d*.
+[start=8]
 . Confirm that the file has the correct contents using the command: *cat MaintainDB.sh*
-
++
 image::CreatedBashScriptDocker2.png[CreatedBashScriptDocker2,width=1000,align=center]
-
 
 . Ensure that the scripts you created have execute permissions.
 . Run the *MaintainDB.sh* script and  view the log file.

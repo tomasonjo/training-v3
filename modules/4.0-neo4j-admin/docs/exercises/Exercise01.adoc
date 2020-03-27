@@ -1,4 +1,3 @@
-
 = Exercise 1: Setting up the Docker instance for this course
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
@@ -8,10 +7,16 @@ The underlying OS for the Docker instance is Debian.
 In your real application environment, the location of files for managing Neo4j and the terminal commands will be different.
 Neo4j Enterprise Edition is available for download with a 30-day evaluation license.
 
+ifdef::backend-pdf[]
 You have two ways that you can use the Neo4j Docker image for this training:
 
-1. Install Docker on your local system from https://hub.docker.com. This is the preferred method as you will have access to the Docker instance for as long as you need it. This method is *required* for students taking this course online.
-2. Access the EC2 instance that has Docker already set up. Use this method if you are in a classroom with an instructor and you cannot set up Docker on your system. Temporary access rights  to the EC2 instance will be given to you by your instructor.)
+. Install Docker on your local system from https://hub.docker.com. This is the preferred method as you will have access to the Docker instance for as long as you need it.
+. Access the EC2 instance that has Docker already set up. Use this method if you are in a classroom with an instructor and you cannot set up Docker on your system. Temporary access rights  to the EC2 instance will be given to you by your instructor.
+endif::[]
+
+ifndef::backend-pdf[]
+You must Install Docker on your local system from https://hub.docker.com before you can perform the exercises for this training.
+endif::[]
 
 == Using the Docker instance on your local system
 
@@ -29,7 +34,8 @@ docker --help
 
 image::DockerInstalled.png[DockerInstalled,width=600,align=center]
 
-. Install the Neo4j docker instance
+[start=2]
+. Install the Neo4j docker image.
 +
 
 ----
@@ -83,7 +89,7 @@ docker ps
 
 image::DockerInstanceStarted.png[DockerInstanceStarted,width=600,align=center]
 
-
+ifdef::backend-pdf[]
 == Using the EC2 instance
 
 === Before you begin
@@ -123,11 +129,12 @@ image::OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Download https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[PuTTY].
 . Install PuTTY by running the install executable using these guidelines:
-+
+
     Use defaults everywhere but change it so that it creates a desktop shortcut.
 
 image::PuTTYInstallOptions.png[PuTTYInstallOptions,width=500,align=center]
 
+[start=4]
 . Open PuTTY.
 .. In *Category* panel, select *SSH*.
 .. Enter the location where you downloaded the private key.
@@ -174,6 +181,8 @@ sudo docker ps
 
 image::DockerInstanceStartedEC2.png[DockerInstanceStarted,width=600,align=center]
 
+endif::[]
+
 == Exercise summary
 
-You have now confirmed that you can start the Docker instance either running locally or in an EC2 instance that you will use throughout this course to learn about Neo4j Administration.
+You have now confirmed that you can start the Docker Neo4j instance that you will use throughout this course to learn about Neo4j Administration.

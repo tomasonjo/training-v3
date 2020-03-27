@@ -6,14 +6,6 @@
 :imagesdir: ../images
 :module-next-title: Checking Database Consistency
 
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
-
 == About this module
 [.notes]
 --
@@ -23,7 +15,6 @@ Next, you will learn how to set up the Neo4j instance to use a specific, non-def
 At the end of this module, you should be able to:
 [square]
 * Modify the location where Neo4j databases are placed.
-
 
 == Modifying the location of the database
 
@@ -93,16 +84,19 @@ Just as you needed to change the password for the admin user, neo4j the first ti
 
 image::passwordChangeNewLocation.png[passwordChangeNewLocation,width=800,align=center]
 
+ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]
 == Exercise #6: Modifying the location of the databases
+endif::[]
 
-//ifndef::backend-htlm5[]
+ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
-//endif::[]
+endif::[]
 
-//ifdef::backend-htlm5[]
-//include::exercises/Exercise06.adoc
-//endif::[]
+ifndef::backend-pdf,backend-revealjs[]
+
+include::exercises/Exercise06.adoc[]
+endif::[]
 
 [.quiz]
 == Check your understanding
@@ -156,24 +150,3 @@ You should now be able to:
 
 [square]
 * Modify the location where Neo4j databases are placed.
-
-////
-== Grade Quiz and Continue 
-
-++++
-<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-admin-view-part3');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

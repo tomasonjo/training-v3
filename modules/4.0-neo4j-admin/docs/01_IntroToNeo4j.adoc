@@ -1,17 +1,10 @@
 = Introduction to Neo4j
-:slug: 01-admin-4-0-intro-neo4j
+:slug: 01-admin-intro-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Overview of Neo4j Administration
-
-
-//ifdef::backend-html5[]
-
-//include::scripts.txt[]
-
-//endif::backend-html5[]
 
 == About this module
 
@@ -706,24 +699,4 @@ You should now be able to:
 ** Libraries, drivers, integrations used with Neo4j.
 ** Administrative tools.
 
-////
-== Grade Quiz and Continue
 
-++++
-<a class="next-section medium button" href="../part-2/">Continue to Module 2</a>
-++++
-
-ifdef::backend-html5[]
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part1');
-});
-</script>
-++++
-
-endif::backend-html5[]
-
-////

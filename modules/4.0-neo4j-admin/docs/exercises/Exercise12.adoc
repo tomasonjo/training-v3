@@ -1,4 +1,3 @@
-
 = Exercise #12: Importing data
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
@@ -32,7 +31,6 @@ curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 . Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
 . Change directory to the *import* directory.
 . Use the `neo4j-admin` tool to import the CSV files using these guidelines:*
-+
 
 ----
              --database crimes
@@ -46,7 +44,6 @@ curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 
 This is what you should enter (ensure there are no newline characters):
 
-[source]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin import --database crimes --nodes /import/crimes_header.csv,/import/crimes.csv --nodes /import/beats.csv --nodes=PrimaryType=/import/primaryTypes.csv --relationships /import/crimesBeats.csv --relationships=PRIMARY_TYPE=/import/crimesPrimaryTypes.csv --trim-strings=true
 ----
@@ -55,11 +52,12 @@ This is what you should see in the terminal window if all goes well:
 
 image::ImportCrimesDocker1.png[ImportCrimesDocker1,width=500]
 
+[start=7]
 . In `cypher-shell` create the crimes database.
-. Enter the following Cypher statements to view the schema of the database and return the number of nodes:
+. Enter the following Cypher statements to view the schema of the database and return the number of nodes.
 
 ----
-:USE crimes
+:use crimes
 CALL db.schema.visualization();
 MATCH (n) RETURN count(n);
 ----

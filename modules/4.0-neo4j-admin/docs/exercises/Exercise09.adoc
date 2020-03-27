@@ -1,4 +1,3 @@
-
 = Exercise #9: Install a plugin
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]

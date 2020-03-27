@@ -1,4 +1,3 @@
-
 = Exercise #7: Checking consistency of a database
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
@@ -19,7 +18,7 @@ In this Exercise, you check the consistency of a database that is consistent. Th
 . Create the directory *$HOME/docker-neo4j/logs/reports*.
 . Make this new directory writable.
 . Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written.
-+
+
 
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin check-consistency --database=movies2 --report-dir=logs/reports
@@ -27,8 +26,10 @@ In this Exercise, you check the consistency of a database that is consistent. Th
 
 image::ConsistentPassedDocker.png[ConsistentPassedDocker,width=1000,align=center]
 
-*Note*: You will see a few information messages about record formats which are specific to Docker Neo4j instances that you can safely ignore.
+[NOTE]
+You will see a few information messages about record formats which are specific to Docker Neo4j instances that you can safely ignore.
 
+[start=8]
 . Use `neo4j-admin` to load the *movies.dump* data into a database named _movies3_.
 . Use `cypher-shell` to create the _movies3_ database.
 . Confirm that this database has 171 nodes.

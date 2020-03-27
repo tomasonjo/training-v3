@@ -1,19 +1,9 @@
-
 = Importing Data
 :slug: 12-importing-data
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-
-
-////
-ifdef::backend-html5[]
-
-include::scripts.txt[]
-
-endif::backend-html5[]
-////
 
 == About this module
 
@@ -250,16 +240,19 @@ Here is the what you will be doing in the next exercise to use the `import` comm
 
 image::ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
 
+ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]
 == Exercise 12: Importing data with the import command of neo4j-admin
+endif::[]
 
-//ifndef::backend-htlm5[]
+ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
-//endif::[]
+endif::[]
 
-//ifdef::backend-htlm5[]
-//include::exercises/Exercise12.adoc
-//endif::[]
+ifndef::backend-pdf,backend-revealjs[]
+
+include::exercises/Exercise12.adoc[]
+endif::[]
 
 [.quiz]
 == Check your understanding
@@ -322,24 +315,3 @@ You should now be able to:
 
 [square]
 * Import data from a set of CSV files using the neo4j-admin tool.
-
-////
-
-++++
-<a class="next-section medium button" href="../part-8/">Continue to Module 8</a>
-++++
-
-ifdef::backend-html5[]
-
-include::scripts-end.txt[]
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-introv2-view-part7');
-});
-</script>
-++++
-
-endif::backend-html5[]
-////

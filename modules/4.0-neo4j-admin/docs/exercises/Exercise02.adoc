@@ -1,4 +1,3 @@
-
 = Exercise #2: Managing the Neo4j instance
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
@@ -12,7 +11,6 @@ Open a terminal on your system to access the Docker Neo4j instance.
 == Exercise steps:
 
 . View the status of neo4j:
-+
 
 ----
 [sudo] docker logs neo4j
@@ -22,9 +20,8 @@ You should see something like this:
 
 image::Status-docker.png[Status-docker,width=600,align=center]
 
-
+[start=2]
 . Stop the Neo4j instance and then view its status.
-+
 
 ----
 [sudo] docker stop neo4j
@@ -33,7 +30,7 @@ image::Status-docker.png[Status-docker,width=600,align=center]
 
 image::Stop_neo4j-docker.png[Stop_neo4j-docker,width=600,align=center]
 
-
+[start=3]
 . Examine the database directories created for this Neo4j instance.
 +
 
@@ -44,7 +41,8 @@ image::DataFilesDocker.png[DataFilesDocker,width=600,align=center]
 
 image::ViewLogFilesDocker.png[ViewLogFilesDocker,width=600,align=center]
 
-*Note*: The log files you see here are for advanced monitoring. To view the basic log file in the Docker Neo4j instance, you use the `docker logs` command.
+[NOTE]
+The log files you see here are for advanced monitoring. To view the basic log file in the Docker Neo4j instance, you use the `docker logs` command.
 
 
 == Basic Docker commands
