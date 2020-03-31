@@ -9,6 +9,7 @@ On OS X, the port forwarding is not as clean as on Debian so to set up a Docker 
 == Before you begin
 
 . Make sure you have a terminal window open to your Docker Neo4j instance for this course.
+. Make sure the Docker Neo4j instance is started.
 
 ifdef::backend-pdf[]
 == Exercise steps (EC2 Docker Neo4j instance):
@@ -55,21 +56,19 @@ endif::[]
 
 . Create a directory *$HOME/docker-neo4j/testhttp*. You will be creating a new container that uses this directory, rather than *neo4j*.
 . Stop the Docker Neo4j instance.
-. Copy the *create_neo4j_instance.sh* to *create_neo4j_instance_http.sh*.
-. Modify *create_neo4j_instance_http.sh* so that it uses the directory *testhttp* rather than *neo4j*.
+. Copy the *create_neo4j_instance.sh* or *create_neo4j_instance.bat* to *create_neo4j_instance_http.sh* or *create_neo4j_instance_http.bat* .
+. Modify *create_neo4j_instance_http.sh* or *create_neo4j_instance_http.bat* so that it uses the directory *testhttp* rather than *neo4j* and its name is *testhttp*.
 . Modify the port mapping for 7474 to be 9999.
 +
 image::InstancePort9999.png[InstancePort9999,width=1200,align=center]
 
-. Run the script to create and start the instance.
+. Run the script to create and start the *testhttp* instance.
 . Confirm the docker instance successfully started.
 . View the log for the instance.
 +
 
 image::LogInstancePort9999.png[LogInstancePort9999,width=1200,align=center]
 
-. Stop the testhttp Docker Neo4j instance.
-. Start the testhttp Docker Neo4j instance.
 . Connect to the instance with cypher-shell. You will need to change the password since this is a new Neo4j instance.
 +
 

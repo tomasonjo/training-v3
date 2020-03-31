@@ -3,10 +3,9 @@
 ifndef::imagesdir[:imagesdir: ../../images]
 
 
-In this Exercise, you will gain experience scripting with `cypher-shell`. You will create four files in the */home/ubuntu/files* directory:
+In this Exercise, you will gain experience scripting with `cypher-shell`. You will create three files in the */home/ubuntu/files* directory:
 
 * *AddConstraintsMovies.cypher*
-* *AddConstraintsMovies2.cypher*
 * *AddConstraints.sh*
 * *MaintainDB.sh*
 
@@ -26,7 +25,7 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 . Navigate to the */usr* directory.
 . Create a directory */usr/scripts*.
 . Change to the */usr/scripts* directory.
-. Create a Cypher script in the */usr/scripts* directory named *AddConstraintsMovies.cypher* as follows:
+. There is no built-in editor for this instance so you will create the scripts using the _cat_ command. Create a Cypher script in the */usr/scripts* directory named *AddConstraintsMovies.cypher* as follows:
 .. Copy the following text to your clipboard:
 +
 ----

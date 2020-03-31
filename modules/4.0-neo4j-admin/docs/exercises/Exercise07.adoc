@@ -19,7 +19,6 @@ In this Exercise, you check the consistency of a database that is consistent. Th
 . Make this new directory writable.
 . Run the consistency check tool on *movies2* using `neo4j-admin` specifying *reports* as the directory where the report will be written.
 
-
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin check-consistency --database=movies2 --report-dir=logs/reports
 ----

@@ -15,17 +15,17 @@ In this exercise you will create a database from a set of CSV files using the im
 . Downloaded the ZIP file containing the CSV files to the *files* directory:
 +
 
+On OS X and Linux:
+
 ----
 cd /home/ubuntu/files
 curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 ----
 
+On Windows, open the file in a Web browser to download it.
+
 . Unzip the contents of the *crimes-dataset.zip*.
 +
-
-----
-/usr/bin/unzip crimes-dataset.zip
-----
 
 . The crimes-dataset directory should contain six CSV files. Move these six files to *import* folder for the Docker Neo4j instance.
 . Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
@@ -48,7 +48,7 @@ This is what you should enter (ensure there are no newline characters):
 [sudo] docker exec --interactive neo4j bin/neo4j-admin import --database crimes --nodes /import/crimes_header.csv,/import/crimes.csv --nodes /import/beats.csv --nodes=PrimaryType=/import/primaryTypes.csv --relationships /import/crimesBeats.csv --relationships=PRIMARY_TYPE=/import/crimesPrimaryTypes.csv --trim-strings=true
 ----
 
-This is what you should see in the terminal window if all goes well:
+This import will take a couple of minutes. This is what you should see in the terminal window if all goes well:
 
 image::ImportCrimesDocker1.png[ImportCrimesDocker1,width=500]
 

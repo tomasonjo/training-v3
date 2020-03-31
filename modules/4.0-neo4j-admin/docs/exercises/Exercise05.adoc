@@ -18,9 +18,18 @@ In this exercise, you will use `neo4j-admin` to copy a database and create a dat
 . Invoke `cypher-shell` using *movies.cypher* as input and specify _movies_ as the database.
 +
 
+On OS X or Linux:
+
 ----
-cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified> --database movies
+cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
+
+On Windows:
+
+----
+type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
+----
+
 
 . In `cypher-shell` confirm that the database was loaded. It should contain 171 nodes:
 ----

@@ -76,18 +76,30 @@ mkdir files
 ----
 
 . Download this file: https://data.neo4j.com/admin-neo4j/movies.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
-+
+
+
+On OS X or Linux:
 
 ----
 cd files
 curl -O https://data.neo4j.com/admin-neo4j/movies.cypher
 ----
 
+On Windows, enter the above URL in a Web browser to download it. Then move it to the *files* folder.
+
 . Invoke `cypher-shell` using *movies.cypher* as input.
 +
 
+On OS X or Linux:
+
 ----
 cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
+----
+
+On Windows:
+
+----
+type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
 ----
 
 . Start `cypher-shell`.

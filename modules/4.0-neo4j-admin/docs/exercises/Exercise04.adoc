@@ -42,16 +42,7 @@ With the Docker Neo4j instance, it uses its own internal configuration, but you 
 
 [start=7]
 . Create the *neo4j.conf* file in the *$HOME/docker-neo4j/neo4j/conf* directory created when you created the Docker Neo4j instance.
-. Add the `dbms.default.database` property for *databaseone* to this file.
-
-----
-sudo vi ~/docker-neo4j/neo4j/neo4j.conf
-Enter "i" to enter input mode.
-Enter dbms.default.database=databaseone
-Press ESC to get out of input mode.
-Type ":w" to write the changes to the file.
-Type ":q" to quit the editor
-----
+. Add the `dbms.default_database` property for *databaseone* to this file.
 
 Your neo4j.conf file should be as follows:
 

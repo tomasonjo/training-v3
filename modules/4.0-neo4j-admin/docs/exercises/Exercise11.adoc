@@ -81,8 +81,16 @@ MATCH (n) RETURN count(n);
 . Invoke `cypher-shell` to add nodes to the _movies_ database using the *movies.cypher* file.
 +
 
+On OS X or Linux:
+
 ----
-[sudo] cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified> --database movies
+cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
+----
+
+On Windows:
+
+----
+type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
 
 . In `cypher-shell` confirm that the database contains 342 nodes:
@@ -105,8 +113,16 @@ image::BackupMoviesDocker.png[BackupMoviesDocker,width=1000,align=center]
 . Invoke `cypher-shell` to add more nodes to the _movies_ database using the *movies.cypher* file.
 +
 
+On OS X or Linux:
+
 ----
-[sudo] cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified> --database movies
+cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
+----
+
+On Windows:
+
+----
+type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
 
 . In `cypher-shell` confirm that the database contains 513 nodes:

@@ -55,7 +55,7 @@ docker images
 mkdir $HOME/docker-neo4j
 ----
 
-. Create a script in this new directory named create_neo4j_instance.sh that will have the following content:
+. Create a script in this new directory named *create_neo4j_instance.sh* that will have the following content if you are using OS X or Linux:
 +
 
 ----
@@ -73,14 +73,27 @@ docker run \
     neo4j:4.0.1-enterprise
 ----
 
-. Make sure this script has execute permissions.
-. Run the script to create the Neo4j instance and confirm that it creates the neo4j directory.
+  *Note*: Make sure this script has execute permissions.
+
+. If you are using Windows (assuming you are using the C drive), create a script in this new directory named *create_neo4j_instance.bat*:
 +
-
 ----
-./create_neo4j_instance.sh
+docker run^
+    --name=neo4j^
+    --publish=7474:7474 --publish=7687:7687^
+    --volume=C:%HOMEPATH%\docker-neo4j\neo4j\data\:/data^
+    --volume=C:%HOMEPATH%\docker-neo4j\neo4j\logs\:/logs^
+    --volume=C:%HOMEPATH%\docker-neo4j\neo4j\conf\:/conf^
+    --volume=C:%HOMEPATH%\docker-neo4j\neo4j\plugins\:/plugins^
+    --volume=$C:%HOMEPATH%\docker-neo4j\neo4j\import\:/import^
+    --env NEO4J_dbms_memory_pagecache_size=512m^
+    --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes^
+    --detach^
+    neo4j:4.0.1-enterprise
 ----
+  *Note*: You may see a popup asking if you want Docker to access your local file system which you should respond yes to.
 
+. Run the script to create the Neo4j instance and confirm that it creates the neo4j directory.
 . Run the Docker command to see the running instances.
 
 ----
