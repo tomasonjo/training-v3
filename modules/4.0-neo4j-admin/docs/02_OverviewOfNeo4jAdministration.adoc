@@ -58,7 +58,7 @@ Regardless of which library your application requires, you must ensure that Neo4
 Your application will include at least one Neo4j user database, but it could include multiple user databases that are accessed by different parts of the application.
 A Neo4j instance can support multiple active user databases.
 
-Many deployed applications use Causal Clustering which you will learn about later in this training.
+Many deployed applications use Causal Clustering.
 Causal Clustering is an architecture which provides data safety and performance for critical systems that could be distributed all over the world.
 --
 
@@ -148,11 +148,6 @@ Some decisions you may need to make are:
 * How to route requests in order to obtain optimal performance.
 * Which servers to use as backup servers.
 
-[.notes]
---
-We will cover the configuration, management and monitoring of Causal Clusters in depth later in this training.
---
-
 === Example architecture #4: Using Neo4j standalone for graph analytics 
 
 [.notes]
@@ -225,6 +220,7 @@ The Community Edition is free to download and use and is available from the http
 
 [NOTE]
 Many of the Neo4j 4.0 features covered in this training such as multi-database instances and online backup are only supported in Neo4j Enterprise Edition.
+
 === Enterprise Edition
 
 The Enterprise Edition extends the functionality of the Community Edition to include key features for performance and scalability such as a clustering architecture for high availability and online backup functionality.

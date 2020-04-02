@@ -113,7 +113,8 @@ image::ShowInitialDatabases.png[ShowInitialDatabases,width=900,align=center]
 
 [.small]
 --
-[NOTE] For all commands and cypher statements, you must end them with the `;` character.
+[NOTE]
+For all commands and cypher statements, you must end them with the `;` character.
 --
 
 [.notes]
@@ -208,7 +209,10 @@ All of the above commands are executed as Cypher commands, and the database name
 
 [.small]
 --
+
+[NOTE]
 Once a database is created, you cannot rename it.
+
 --
 
 === Creating a database
@@ -320,7 +324,7 @@ endif::[]
 === Question 1
 
 [.statement]
-What are the names of the default databases that are created when the Neo4j instance starts for the first time?
+By default, what are the names of the databases that are created when the Neo4j instance starts for the first time?
 
 [.statement]
 Select the correct answers.

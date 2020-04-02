@@ -13,7 +13,6 @@ In this exercise you will create a database from a set of CSV files using the im
 == Exercise steps:
 
 . Downloaded the ZIP file containing the CSV files to the *files* directory:
-+
 
 On OS X and Linux:
 
@@ -24,6 +23,7 @@ curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 
 On Windows, open the file in a Web browser to download it.
 
+[start=2]
 . Unzip the contents of the *crimes-dataset.zip*.
 +
 

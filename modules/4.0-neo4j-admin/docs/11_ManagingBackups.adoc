@@ -39,7 +39,7 @@ A best practice is to run the backup process from a different system where the N
 
 [.notes]
 --
-The backup process is done using the neo4j-admin tool's backup functionality.
+The backup process is done using the `neo4j-admin` tool's backup functionality.
 This enables the backup performance to not negatively impact the performance of the Neo4j instance that is servicing clients.
 What that means is that you must install Neo4j on at least two systems.
 You do not configure anything on the server where the backups will be performed from and you do not run a Neo4j instance on that server either.
@@ -65,7 +65,7 @@ In addition, if any backups are to be stored in S3, they should  be encrypted as
 
 [.notes]
 --
-There are other options that you can additionally specify about the backup that you can read about in the _Neo4j Operations Manual_.
+There are other options that you can additionally specify about the backup that you can read about in the https://neo4j.com/docs/operations-manual/4.0/[Neo4j Operations Manual].
 --
 
 == Enabling online backup
@@ -83,7 +83,7 @@ dbms.backup.listen_address=<host-address>:<6362-6372>
 
 [.small]
 --
-Where _host-address_ is the address of a server from which you will run neo4j-admin to perform the backup.
+Where _host-address_ is the address of a server from which you will run `neo4j-admin` to perform the backup.
 You must specify a port number that will not conflict with existing ports used on the server being backed up.
 --
 
@@ -109,7 +109,7 @@ neo4j-admin backup --backup-dir=<backup-directory>
 If a database has previously been backed up to the backup directory, the backup will be for any changes since the last backup.
 
 There are a number of other options you can specify related to performance and specific types of checks.
-See the documentation for details.
+See the https://neo4j.com/docs/operations-manual/4.0/[Neo4j Operations Manual] for details.
 
 If the backup was successful it returns 0.
 If a non-zero value is returned, the backup failed or a consistency check failed, both of which need to be investigated.

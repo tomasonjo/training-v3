@@ -196,10 +196,10 @@ When a Docker Neo4j instance is started, it *is* the Neo4j instance you work wit
 That is, you do not start and stop the Neo4j instance, but rather the Docker Neo4j instance.
 For all hands-on exercises of this training, you will using the Docker Neo4j instance.
 
-With Docker, there is no PID as there are on other systems for checking the status of the Neo4j instance.
+With Docker, there is no PID as there is on other systems for checking the status of the Neo4j instance.
 That is, `systemctl status neo4j` cannot be used to check the status of the Neo4j instance.
 
-Instead, you can view the log to check the status:
+Instead, you can view the log to check the status which is what you will be doing for the hands-on exercises where we have created the Docker Neo4j instance named _neo4j_:
 
 ----
 [sudo] docker logs neo4j

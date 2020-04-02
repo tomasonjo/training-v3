@@ -86,7 +86,7 @@ CREATE DATABASE <targetDB>;
 
 [.notes]
 --
-There are other options you can use to customize what is copied. See the _Neo4j Operations Manual_ for details.
+There are other options you can use to customize what is copied. See the https://neo4j.com/docs/operations-manual/4.0/[Neo4j Operations Manual] for details.
 --
 
 === Creating a dump file from a database

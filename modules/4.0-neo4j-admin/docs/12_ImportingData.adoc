@@ -229,7 +229,7 @@ You should *not* have a space after the "," when specifying a header file with t
 
 [.notes]
 --
-You should refer to the documentation for details for using the import tool.
+You should refer to the https://neo4j.com/docs/operations-manual/4.0/[Neo4j Operations Manual] for details for using the import tool.
 Note that it is possible to specify regular expressions for the files specified when you import.
 --
 
@@ -311,7 +311,4 @@ Select the correct answer.
 [.summary]
 == Summary
 
-You should now be able to:
-
-[square]
-* Import data from a set of CSV files using the neo4j-admin tool.
+You should now be able to import data from a set of CSV files using the `neo4j-admin` tool.

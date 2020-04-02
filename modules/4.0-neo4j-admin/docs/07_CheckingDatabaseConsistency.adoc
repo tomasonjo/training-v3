@@ -13,9 +13,7 @@
 Next, you will learn how to check the consistency of a Neo4j database.
 --
 
-At the end of this module, you should be able to:
-[square]
-* Use neo4j-admin to check the consistency of a Neo4j database.
+At the end of this module, you should be able to use `neo4j-admin` to check the consistency of a Neo4j database.
 
 == Checking the consistency of a database
 
@@ -135,7 +133,4 @@ Select the correct answers.
 
 == Summary
 
-You should now be able to:
-
-[square]
-* Use neo4j-admin to check the consistency of a Neo4j database.
+You should now be able to use `neo4j-admin` to check the consistency of a Neo4j database.

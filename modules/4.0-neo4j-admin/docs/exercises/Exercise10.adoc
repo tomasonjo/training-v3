@@ -56,7 +56,7 @@ endif::[]
 
 . Create a directory *$HOME/docker-neo4j/testhttp*. You will be creating a new container that uses this directory, rather than *neo4j*.
 . Stop the Docker Neo4j instance.
-. Copy the *create_neo4j_instance.sh* or *create_neo4j_instance.bat* to *create_neo4j_instance_http.sh* or *create_neo4j_instance_http.bat* .
+. Copy the *create_neo4j_instance.sh* or *create_neo4j_instance.bat* to *create_neo4j_instance_http.sh* or *create_neo4j_instance_http.bat*.
 . Modify *create_neo4j_instance_http.sh* or *create_neo4j_instance_http.bat* so that it uses the directory *testhttp* rather than *neo4j* and its name is *testhttp*.
 . Modify the port mapping for 7474 to be 9999.
 +

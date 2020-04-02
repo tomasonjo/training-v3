@@ -68,7 +68,7 @@ cat /usr/local/work/AddConstraintsMovies.cypher |
 
 [.small]
 --
-Note that this statement must not have linefeeds in it.
+Note that this statement must [.underline]#not# have linefeeds in it.
 --
 
 === Example: Adding constraints - 3

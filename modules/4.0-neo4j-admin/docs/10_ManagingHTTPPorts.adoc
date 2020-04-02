@@ -46,6 +46,7 @@ Here are the default settings for connector ports:
 
 image::DefaultConnectorPorts.png[DefaultConnectorPorts,width=800,align=center]
 
+
 [.notes]
 --
 Notice that by default the HTTPS connector is disabled, but the default HTTP port is 7474 and the default bolt port is 7687.
@@ -54,6 +55,8 @@ If any of these ports conflict with ports already used on your system, you can c
 
 == Viewing current configuration values
 
+[%unbreakable]
+--
 As you configure a Neo4j instance, either for development, testing, or production, it is very important that you know the existing configuration values.
 For most Neo4j instances, you can view the *neo4j.conf* file.
 Another way that you can view the current configuration values for a Neo4j instance is with a Cypher call:
@@ -66,6 +69,7 @@ CALL dbms.listConfig() YIELD name, value RETURN name, value;
 This is particularly useful when using a Docker Neo4j instance where you do not have access to the *neo4j.conf* file used by the instance:
 
 image::listConfigDocker.png[listConfigDocker,width=800,align=center]
+--
 
 == Viewing specific configuration values
 

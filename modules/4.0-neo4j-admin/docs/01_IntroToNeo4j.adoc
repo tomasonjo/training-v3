@@ -58,6 +58,7 @@ The green node represents a vehicle and that vehicle node has a type of car.
 
 image::GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=center]
 
+
 [.notes]
 --
 Mathematically, a node is defined as “a point where two or more edges (relationships) meet.”
@@ -413,7 +414,7 @@ Neo4j Aura is the simplest way to run the Neo4j DBMS in the cloud.
 Completely automated and fully-managed, Neo4j Aura delivers the world’s most flexible, reliable and developer-friendly graph database as a service.
 With Neo4j Aura, you leave the day-to-day management of your database to the same engineers who built Neo4j, freeing you to focus on building rich graph-powered applications.
 Backups are done automatically for you and the database is available 24X7.
-In addition, the Neo4j will ensure that the database instance is always up-to-date with the latest version of Neo4j.
+In addition, the Neo4j support engineers will ensure that the database instance is always up-to-date with the latest version of Neo4j.
 To use Neo4j Aura, you must pay a monthly subscription fee which is based upon the size of your graph.
 
 Once you create a Neo4j Database at the https://console.neo4j.io[Neo4j Aura site], it will be managed by Neo4j support engineers.
@@ -569,7 +570,7 @@ A library is also called a plug-in as it is used to extend what can be done in C
 Some libraries are available in Neo4j Desktop, while others you must download and install.
 
 In early 2020, some functions and procedures from the Graph Algorithms Library will be officially supported by Neo4j as the Graph Data Science Library (GDSL).
-Before that, support for this library has come from and will continue to come from Neo4j Labs for the algorithms that are no officially supported by Neo4j.
+Before that, support for this library has come from and will continue to come from Neo4j Labs for the algorithms that are not officially supported by Neo4j.
 
 One of the most popular libraries that is used by most developers is Awesome Procedures of Cypher (APOC).
 This library has close to 500 procedures and functions that extend Cypher is ways that make programming in Cypher much easier for complex tasks.
@@ -577,7 +578,7 @@ This library has close to 500 procedures and functions that extend Cypher is way
 Another library that also comes with Neo4j Desktop is GraphQL.
 GraphQL is an open-source query language for querying parts of a graph. It is not as flexible or powerful as Cypher, but it is used by some applications.
 
-A very popular library for graph visualization is neoviz.js, another project in Neo4j Labs.
+A very popular library for graph visualization is _neoviz.js_, another project in Neo4j Labs.
 --
 
 image::Plugins.png[Plugins,width=900,align=center]
@@ -617,7 +618,7 @@ endif::[]
 --
 Neo4j has integrations with many systems in the IOT ecosystem.
 Neo4j can be part of a system that uses GRANDstack, Kettle, Docker, and many others.
-How your organization integrate Neo4j into a larger system will depend on how you intend to use Neo4j.
+How your organization integrates Neo4j into a larger system will depend on how you intend to use Neo4j.
 Neo4j engineers and Community members have worked through some of the challenges of integration and their discussions and work can be found on the http://neo4j.com/slack[Neo4j User slack channel], the https://community.neo4j.com[Neo4j online forum], https://stackoverflow.com/questions/tagged/neo4j[stack overflow], and on https://github.com/neo4j-contrib[Github].
 
 One Neo4j-supported integration that developers can download enables data to be streamed to/from https://neo4j.com/docs/labs/neo4j-streams/current/[Kafka].

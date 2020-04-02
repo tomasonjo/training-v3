@@ -8,7 +8,7 @@
 
 == About this course
 
-This course introduces you to graph databases and how perform basic administration tasks for an installation that supports a group of developers or an installation that is being deployed.
+This course introduces you to graph databases and how to perform basic administration tasks for an installation that supports a group of developers or an installation that is being deployed.
 This course teaches tasks that are available in Neo4j 4.x Enterprise Edition.
 
 [.notes]

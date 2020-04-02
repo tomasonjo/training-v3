@@ -127,7 +127,7 @@ image::DefaultSandboxing.png[DefaultSandboxing,width=600,align=center]
 * The configuration setting `dbms.security.procedures.whitelist` is used to name certain procedures that should be
 available from a library.
 * It defines a comma-separated list of procedures that are to be loaded.
-* The list may contain both fully-qualified procedure names, and partial names with the wildcard *.
+* The list may contain fully-qualified procedure names and partial names with the wildcard *.
 --
 
 == Example: The APOC plugin
@@ -160,7 +160,10 @@ As described on the APOC GitHub page, you have an option of either _sandboxing_ 
 How much of the APOC library is used by your application is determined by the developers so you should use them as a resource for this type of configuration change.
 
 Suppose we want to allow [.underline]#all# APOC procedures to be available to this Neo4j instance.
-We would sandbox the plugin in the *neo4j.conf* file as follows where we specify `dbms.security.procedures.unrestricted=apoc.*`.
+We would sandbox the plugin in the *neo4j.conf* file as follows where we specify:
+
+`dbms.security.procedures.unrestricted=apoc.*`
+
 --
 
 image::APOCConfig.png[APOCConfig,width=950,align=center]
@@ -182,7 +185,7 @@ image::APOCJarLoaded.png[APOCJarLoaded,width=900,align=center]
 
 [.notes]
 --
-You may see some error messages, but you can ignore them as they represent some deprecated functionality of the APOC procedues.
+You may see some warning messages, but you can ignore them as they represent some deprecated functionality of the APOC procedues.
 --
 
 === Step 4: Confirm the plugin procedures are available
@@ -248,7 +251,7 @@ Select the correct answers.
 [%interactive.answers]
 - [x] Change the *.jar* file to have execute permissions.
 - [x] Ensure the *.jar* file is owned by _neo4j:neo4j_.
-- [x] Add the plugin to dbms.security.procedures.unrestricted in *neo4j.conf*.
+- [x] Add the plugin to _dbms.security.procedures.unrestricted_ in *neo4j.conf*.
 - [ ] Specify which databases will use the plugin in *neo4j.conf*.
 
 === Question 3
