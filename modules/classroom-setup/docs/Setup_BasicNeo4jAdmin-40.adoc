@@ -1,0 +1,45 @@
+= Setting up your Neo4j training environment for the course, Basic Neo4j 4.0 Administration
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+
+
+== Overview
+
+You should bring a laptop to the class that is properly set up for the class.
+
+You may choose to use your personal laptop rather than your work laptop for this course if:
+[square]
+* Your work laptop blocks or restricts Internet access.
+* You do not have admin privileges for your work laptop.
+
+This course uses Docker instances.
+The recommended approach for the exercises for this course is to install Docker on your laptop.
+If you cannot install Docker on your laptop, you can use an EC2 instance to access Docker. However to do so on Windows requires that you install PuTTY on your laptop.
+
+To prepare your laptop for this course, you must perform these two Steps:
+
+=== Step 1: Install Docker
+
+Install Docker on your system from https://hub.docker.com/[dockerhub].
+
+If you cannot install Docker and you are using Windows, install https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html[PuTTY].
+This will enable you to access an EC2 instance during the class.
+
+===  Step 2: Download course files
+
+You may not need all of these files for your course work, but it is a good idea to have them on your system. Download these files:
+
+https://data.neo4j.com/admin-neo4j/movies.cypher
+
+https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/4.0.0.5/apoc-4.0.0.5-all.jar
+
+http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
+
+http://data.neo4j.com/admin-neo4j/BasicNeo4jAdministration-40-ExerciseGuide.pdf
+
+=== Getting help
+
+If you have problems with setting up your Neo4j development environment, you can join http://community.neo4j.com/[Neo4j Community] and ask a question https://community.neo4j.com/c/general/online-training[here].
+

@@ -19,6 +19,5 @@ project(':4.0-neo4j-admin').projectDir = file('modules/4.0-neo4j-admin')
 include 'apoc'
 project(':apoc').projectDir = file('modules/apoc')
 
-
-include 'test-images'
-project(':test-images').projectDir = file('modules/test-images')
+include 'classroom-setup'
+project(':classroom-setup').projectDir = file('modules/classroom-setup')
