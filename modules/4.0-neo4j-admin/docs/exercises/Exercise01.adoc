@@ -39,10 +39,10 @@ image::DockerInstalled.png[DockerInstalled,width=600,align=center]
 +
 
 ----
-docker pull neo4j:4.0.1-enterprise
+docker pull neo4j:4.0.2-enterprise
 ----
 
-. Confirm that the docker instance with the TAG, 4.0.1-enterprise is available:
+. Confirm that the docker instance with the TAG, 4.0.2-enterprise is available:
 +
 
 ----
@@ -70,13 +70,14 @@ docker run \
     --env NEO4J_dbms_memory_pagecache_size=512m \
     --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
     --detach \
-    neo4j:4.0.1-enterprise
+    neo4j:4.0.2-enterprise
 ----
 
   *Note*: Make sure this script has execute permissions.
 
 . If you are using Windows (assuming you are using the C drive), create a script in this new directory named *create_neo4j_instance.bat*:
 +
+
 ----
 docker run^
     --name=neo4j^
@@ -89,15 +90,16 @@ docker run^
     --env NEO4J_dbms_memory_pagecache_size=512m^
     --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes^
     --detach^
-    neo4j:4.0.1-enterprise
+    neo4j:4.0.2-enterprise
 ----
+
   *Note*: You may see a popup asking if you want Docker to access your local file system which you should respond yes to.
 
 . Run the script to create the Neo4j instance and confirm that it creates the neo4j directory.
 . Run the Docker command to see the running instances.
 
 ----
-docker ps
+docker ps -a
 ----
 
 image::DockerInstanceStarted.png[DockerInstanceStarted,width=600,align=center]
@@ -131,11 +133,6 @@ yes
 ----
 
 . You should now be logged in to the EC2 instance.
-. Find the Neo4j Operations Manual and confirm that the files on your EC2 instance (Debian) match the locations of files in the Operations Manual.
-
-*Hint*: Confirm that files are installed as described https://neo4j.com/docs/operations-manual/4.0/configuration/file-locations/[here].
-
-image::OSX-AccessEC2Instance.png[OSX-AccessEC2Instance,width=600,align=center]
 
 === Setup steps (Windows):
 
@@ -184,13 +181,11 @@ image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
  sudo ./create_neo4j_instance.sh
 ----
 
-. Run the Docker command to see the running instances.
+. Run the Docker command to see the running instance.
 
 ----
-sudo docker ps
+sudo docker ps -a
 ----
-
-// NOTE: need to get a screenshot on the EC2 instance
 
 image::DockerInstanceStartedEC2.png[DockerInstanceStarted,width=600,align=center]
 
