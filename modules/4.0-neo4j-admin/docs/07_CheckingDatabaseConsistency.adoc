@@ -61,7 +61,7 @@ No report is written to the reports directory because the consistency check pass
 Here is an example of what an unsuccessful run of the consistency checker should produce:
 --
 
-image::Inconsistencies.png[Inconsistencies,width=900,align=center]
+image::Inconsistencies.png[Inconsistencies,width=700,align=center]
 
 [.notes]
 --

@@ -260,7 +260,7 @@ endif::[]
 === Question 1
 
 [.statement]
-Before you will import data using neo4j-admin, what is one thing you must do?
+Before you will import data using `neo4j-admin`, what is one thing you must do?
 
 [.statement]
 Select the correct answer.
@@ -274,7 +274,7 @@ Select the correct answer.
 === Question 2
 
 [.statement]
-Suppose that part of the import command that you issue to neo4j-admin looks like this:
+Suppose that part of the import command that you issue to `neo4j-admin` looks like this:
 
 [source]
 ----

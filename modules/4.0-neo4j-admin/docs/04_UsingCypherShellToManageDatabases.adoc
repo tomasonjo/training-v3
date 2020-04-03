@@ -137,7 +137,7 @@ Then you can create or access the data in this user database.
 For example, we access the user database by creating a node with the label, _Person_ and a _name_ of "John Doe", retrieving it, and then deleting it.
 --
 
-image::AccessUserDatabase.png[AccessUserDatabase,width=1000,align=center]
+image::AccessUserDatabase.png[AccessUserDatabase,width=700,align=center]
 
 === Sending Cypher statements to the `cypher-shell` session
 
@@ -238,7 +238,7 @@ image::DatabaseFiles.png[DatabaseFiles,width=1000,align=center]
 When a database is started, it uses VM resources. If the application is not actively using a database, you can stop it or restart it as needed.
 --
 
-image::StopStartDatabase.png[StopStartDatabase,width=1000,align=center]
+image::StopStartDatabase.png[StopStartDatabase,width=700,align=center]
 
 == Initial database configuration settings
 
@@ -251,7 +251,7 @@ The *neo4j.conf* file contains settings related to the name of the default datab
 `dbms.max_databases` specifies the maximum number of databases the Neo4j instance will allow.
 --
 
-image::ChangeDefaultDatabase.png[ChangeDefaultDatabase,width=1000,align=center]
+image::ChangeDefaultDatabase.png[ChangeDefaultDatabase,width=600,align=center]
 
 [.small]
 --

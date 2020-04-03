@@ -142,7 +142,7 @@ You check the status of the instance as follows:
 Here is an example where we check the status of the Neo4j instance:
 --
 
-image::Neo4j_started.png[Neo4j_started,width=1200,align=center]
+image::Neo4j_started.png[Neo4j_started,width=900,align=center]
 
 [.notes]
 --
@@ -177,7 +177,7 @@ You can view the log file for the instance on Debian as follows:
 Here is the result from `journalctl` where we want to view then end of the log file:
 --
 
-image::JournalEnd.png[JournalEnd,align=center,width=900]
+image::JournalEnd.png[JournalEnd,align=center,width=600]
 
 [.notes]
 --
@@ -192,6 +192,8 @@ For a Docker Neo4j instance, you use the *logs* command.
 
 === About the Docker Neo4j instance
 
+[.notes]
+--
 When a Docker Neo4j instance is started, it *is* the Neo4j instance you work with.
 That is, you do not start and stop the Neo4j instance, but rather the Docker Neo4j instance.
 For all hands-on exercises of this training, you will using the Docker Neo4j instance.
@@ -200,6 +202,7 @@ With Docker, there is no PID as there is on other systems for checking the statu
 That is, `systemctl status neo4j` cannot be used to check the status of the Neo4j instance.
 
 Instead, you can view the log to check the status which is what you will be doing for the hands-on exercises where we have created the Docker Neo4j instance named _neo4j_:
+--
 
 ----
 [sudo] docker logs neo4j
@@ -245,7 +248,7 @@ Select the correct answer.
 You control the Neo4j instance by using the `neo4j` tool which on Debian is accessed using `systemctl`.
 What commands are available for managing the non-Docker Neo4j instance?
 
-[statement]
+[.statement]
 Select the correct answers.
 
 [%interactive.answers]

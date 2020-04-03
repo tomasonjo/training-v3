@@ -62,7 +62,7 @@ Here is an example of a generated *DefaultProcedures.txt* file:
 image::DefaultProcedures.png[DefaultProcedures,width=300,align=center]
 
 [.statement]
-By default, the procedures available to the Neo4j instance are the built-in procedures that are named db.* and dbms.*.
+By default, the procedures available to the Neo4j instance are the built-in procedures that are named _db.*_ and _dbms.*_.
 
 === Adding a plugin to the Neo4j instance
 
@@ -92,12 +92,12 @@ These instructions may change in future releases of Neo4j.
 [.small]
 --
 . Install the plugin:
-.. Download the plugin. If it is a *zip* file unzip the *jar* file.
-.. Place the *jar* file in the *plugins* directory for the Neo4j instance.
-.. Ensure that the *jar* is owned by _neo4j_ and has execute permissions.
+a. Download the plugin. If it is a *zip* file unzip the *jar* file.
+b. Place the *jar* file in the *plugins* directory for the Neo4j instance.
+c. Ensure that the *jar* is owned by _neo4j_ and has execute permissions.
 . Configure the plugin:
-.. Modify *neo4j.conf* to sandbox the procedures of the plugin.
-.. Optionally whitelist the procedures that will be used by the application.
+a. Modify *neo4j.conf* to sandbox the procedures of the plugin.
+b. Optionally whitelist the procedures that will be used by the application.
 . Restart the Neo4j instance.
 . Confirm the procedures of the plugin are available.
 --
@@ -207,7 +207,7 @@ echo "CALL dbms.procedures() YIELD name;" |
 And here is some of what was produced in the report:
 --
 
-image::APOCProcedures.png[APOCProcedures,width=250,align=center]
+image::APOCProcedures.png[APOCProcedures,width=200,align=center]
 
 ifdef::backend-revealjs,backend-pdf[]
 [.student-exercise]

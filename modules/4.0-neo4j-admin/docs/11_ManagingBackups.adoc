@@ -55,7 +55,7 @@ In addition, if any backups are to be stored in S3, they should  be encrypted as
 
 == Backup concepts
 
-[small]
+[.statement]
 --
 [square]
 * When backing up the databases of a Neo4j instance, a best practice is to back up the system database and the user databases.

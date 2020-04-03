@@ -171,7 +171,8 @@ ifdef::backend-html5,backend-revealjs[]
 video::GM9bB4ytGao[youtube,width=560,height=315]
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,backend-revealjs[]
+[.center]
 https://youtu.be/GM9bB4ytGao
 endif::[]
 
@@ -468,7 +469,7 @@ Some graph applications are supported by Neo4j and some are not, so you must be 
 You typically install graph applications from a Neo4j Desktop environment from https://install.graphapp.io/.
 --
 
-image::GraphApps.png[GraphApps,width=900,align=center]
+image::GraphApps.png[GraphApps,width=700,align=center]
 
 === Some Neo4j graph applications
 
@@ -477,6 +478,8 @@ image::GraphApps.png[GraphApps,width=900,align=center]
 Here are [.underline]#some# of the graph applications that users can use:
 --
 
+[small]
+--
 [square]
 * *Neo4j Browser*: UI for testing Cypher queries and visualizing the graph.
 * *Neo4j Bloom*: A tool for exploring graphs and generating Cypher code.
@@ -485,7 +488,7 @@ Here are [.underline]#some# of the graph applications that users can use:
 * *Query Log Analyzer*: Analyze queries that executed on your system.
 * *Neo4j Cloud Tool*: Tools for working with Neo4j Aura
 * *Graph Algos Playground*: Run graph algorithms and generate code for them.
-
+--
 
 == Neo4j Browser
 
@@ -515,7 +518,7 @@ There are two ways that you can use Neo4j Browser functionality:
 . Web browser interface.
 --
 
-image::Neo4jBrowser.png[Neo4jBrowser,width=900,align=center]
+image::Neo4jBrowser.png[Neo4jBrowser,width=600,align=center]
 
 == Neo4j Bloom
 
@@ -549,7 +552,7 @@ image::cypher-shell.png[cypher-shell,width=800,align=center]
 
 [.is-half.right]
 --
-cypher-shell is part of the Neo4j installation and is located in the *bin* directory.
+`cypher-shell` is part of the Neo4j installation and is located in the *bin* directory.
 It is a command-line tool that you can use to connect to a Neo4j DBMS instance and run Cypher statements against the database.
 --
 
@@ -581,11 +584,11 @@ GraphQL is an open-source query language for querying parts of a graph. It is no
 A very popular library for graph visualization is _neoviz.js_, another project in Neo4j Labs.
 --
 
-image::Plugins.png[Plugins,width=900,align=center]
+image::Plugins.png[Plugins,width=700,align=center]
 
 == Drivers and language support
 
-image::Drivers.png[Drivers,width=650,align=center]
+image::Drivers.png[Drivers,width=500,align=center]
 
 [.notes]
 --

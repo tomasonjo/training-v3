@@ -139,7 +139,7 @@ Then, if you want to create a database from any offline backup file to use for a
 /usr/bin/neo4j-admin load --database=<targetDB> --from=<absolute path to dump file>
 ----
 
-. In `cypher-shell' create the database:
+. In `cypher-shell` create the database:
 +
 
 [source]
@@ -187,7 +187,7 @@ Select the correct answer.
 What tools do you use the create a copy of a database within the same Neo4j instance?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
 - [x] `cypher-shell`

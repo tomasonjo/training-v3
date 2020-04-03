@@ -103,7 +103,7 @@ With cloud-hosted microservices, the implementation chosen for the microservice 
 In a cloud-based microservice architecture, there may be a number of services that Neo4j can provide to the end-users.
 --
 
-image::Microservices.png[Microservices,width=900,align=center]
+image::Microservices.png[Microservices,width=700,align=center]
 
 [.notes]
 --
@@ -121,7 +121,7 @@ With Causal Clusters, you configure multiple Neo4j instances that communicate wi
 Causal Clusters are used when data needs to reside in multiple physical locations, or if you want to implement a high availability architecture where access to data will not be affected if a Neo4j instance goes down.
 --
 
-image::ClustersHighLevel.png[ClustersHighLevel,width=700,align=center]
+image::ClustersHighLevel.png[ClustersHighLevel,width=600,align=center]
 
 === Distributed servers in a cluster
 
@@ -285,7 +285,7 @@ This is the most common deployment, and it is recommended for all on-site deploy
 In this architecture, Neo4j runs as a database server and can be accessed through binary and http APIs for data querying and updating.
 --
 
-image::ClientServerDeployment.png[ClientServerDeployment,width=800,align=center]
+image::ClientServerDeployment.png[ClientServerDeployment,width=700,align=center]
 
 ==== Key advantages of server mode
 
@@ -315,7 +315,7 @@ This architecture is more common in OEM setups, where Neo4j runs integrated as p
 This makes it very easy to directly work with the database and get lightning fast performance.
 --
 
-image::EmbeddedDeployment.png[EmbeddedDeployment,width=400,align=center]
+image::EmbeddedDeployment.png[EmbeddedDeployment,width=300,align=center]
 
 ==== Key advantages of embedded mode
 
