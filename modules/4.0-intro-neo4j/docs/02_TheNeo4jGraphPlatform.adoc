@@ -255,7 +255,7 @@ ifdef::backend-html5[]
 .If using OS X
 [%collapsible%open]
 ====
-video::pPhJi9twN9Q[youtube,width=560,height=315]
+video::cTZ_Z3KfLyE[youtube,width=560,height=315]
 ====
 
 .If using Linux
@@ -274,7 +274,7 @@ endif::[]
 ifdef::backend-pdf[]
 If using OS X:
 
-https://youtu.be/pPhJi9twN9Q
+https://youtu.be/cTZ_Z3KfLyE
 
 If using Linux:
 
