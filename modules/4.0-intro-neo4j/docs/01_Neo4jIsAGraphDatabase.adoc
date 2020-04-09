@@ -60,7 +60,7 @@ Based on the above observations, the problem has no solution, because all four o
 
 [.notes]
 --
-But if graphs are an abstract mathematical tool, why do we care about them?
+If graphs are an abstract mathematical tool, why do we care about them?
 
 We care because any dataset can be represented as a graph.
 Any structure or concept, no matter how simple or complex, can be broken down into a set constituent parts that have some relationship to one another.

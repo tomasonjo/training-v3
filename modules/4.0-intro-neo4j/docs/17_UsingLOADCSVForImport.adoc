@@ -73,7 +73,7 @@ When CSV files are created from your relational database, you must determine:
 
 [.notes]
 --
-Including headers in the CSV file reduces syncing issues, but if the size of the CSV files is extremely large, it is sometimes better to separate the headers from the data, especially if multiple files will be split to use the same set of headers.
+Including headers in the CSV file reduces syncing issues. If the size of the CSV files is extremely large, it is sometimes better to separate the headers from the data, especially if multiple files will be split to use the same set of headers.
 --
 
 === Example CSV files

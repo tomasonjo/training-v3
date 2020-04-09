@@ -238,7 +238,8 @@ image::AddRelationshipWithRoles.png[AddRelationshipWithRoles,width=1000,align=ce
 
 [.notes]
 --
-The _roles_ property is a list so we add it as such. If the relationship had multiple properties, we could have added them as a comma separated list or as an object, like can do for node properties.
+The _roles_ property is a list so we add it as such.
+If the relationship had multiple properties, we could have added them as a comma separated list or as an object, like you can do for node properties.
 --
 
 === Example: Adding properties inline

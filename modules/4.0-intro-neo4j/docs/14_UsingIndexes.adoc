@@ -145,7 +145,7 @@ image::TwoStatements.png[TwoStatements,width=1200,align=center]
 
 [NOTE]
 Notice that in the above Cypher statements we use the semi-colon `;` to separate Cypher statements.
-In general, you need not end a Cypher statement with a semi-colon, but if you want to execute multiple Cypher statements, you must separate them. You have already used the semi-colon to separate Cypher statements when you loaded the _Movie_ database in the training exercises.
+In general, you need not end a Cypher statement with a semi-colon. If you want to execute multiple Cypher statements, you must separate them. You have already used the semi-colon to separate Cypher statements when you loaded the _Movie_ database in the training exercises.
 --
 
 === Example: Creating a composite index

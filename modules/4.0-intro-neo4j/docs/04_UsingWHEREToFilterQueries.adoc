@@ -171,7 +171,7 @@ image::TestLabels.png[TestLabels,width=500,align=center]
 
 [.notes]
 --
-Not all node labels need to be tested during a query, but if your graph has multiple labels for the same node, filtering it by the node label will provide better query performance.
+Not all node labels need to be tested during a query. If your graph has multiple labels for the same node, filtering it by the node label will provide better query performance.
 --
 
 == Testing existence of a property

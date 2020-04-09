@@ -48,7 +48,7 @@ h|The result is:
 |If the label already exists for the node, the node is not updated.
 |Property
 |If the node or relationship property already exists, it is updated with the new value.
-*Note:* If you specify a set of properties to be created using `=` rather than `+=`, it could remove existing properties if they are not included in the set.
+*Note:* If you specify a set of properties to be created using `=` rather than `+=`, existing properties are removed if they are not included in the set.
 |Relationship
 |If the relationship exists, a duplicate relationship is created.
 |===

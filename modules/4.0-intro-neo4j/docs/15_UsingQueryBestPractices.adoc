@@ -148,8 +148,15 @@ image::TomCruiseAndTopGun.png[TomCruiseAndTopGun,width=600,align=center]
 
 [.notes]
 --
-If you want to remove an existing parameter from your session, you do by by using the JSON-style syntax and exclude the parameter for your session.
+If you want to remove an existing parameter from your session, you do so by using the JSON-style syntax and exclude the parameter for your session.
 --
+
+If you want to clear all parameters, you can simply type:
+
+[source,cypher]
+----
+:params {}
+----
 
 == Viewing parameters
 
