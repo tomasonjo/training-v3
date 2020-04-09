@@ -67,3 +67,80 @@ i[data-progress-indicator].none::before {
   content: "";
 }
 
+@media screen and (max-width:63.99875em) {
+  .dev-menu-nav:not(.open) {
+    min-width: 2em;
+    max-width: 2em;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .dev-menu-nav:not(.open) > .dev-menu-content {
+    display: none !important;
+  }
+  .dev-menu-nav:not(.open) > i.open {
+    display: initial !important;
+  }
+  .dev-menu-nav:not(.open) > i.close {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width:64em) {
+  .dev-menu-nav:not(.close) > .dev-menu-content {
+    display: initial !important;
+  }
+  .dev-menu-nav:not(.close) > i.open {
+    display: none !important;
+  }
+  .dev-menu-nav:not(.close) > i.close {
+    display: initial !important;
+  }
+}
+
+.dev-menu-nav.close {
+  min-width: 2em;
+  max-width: 2em;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.dev-menu-nav {
+  position: relative;
+}
+
+.dev-menu-nav > i.open,
+.dev-menu-nav > i.close {
+  position: absolute;
+  color: white;
+  cursor: pointer;
+  top: 1.4rem;
+  left: 0.5em;
+}
+
+.dev-menu-nav.open > i.open {
+  display: none !important;
+}
+
+.dev-menu-nav.open > i.close {
+  display: initial !important;
+}
+
+.dev-menu-nav.close > i.open {
+  display: initial !important;
+}
+
+.dev-menu-nav.close > i.close {
+  display: none !important;
+}
+
+.dev-menu-nav.open > .dev-menu-content {
+  display: initial !important;
+}
+
+.dev-menu-nav.close > .dev-menu-content {
+  display: none !important;
+}
+
+.single-course h3.dev-nav-header {
+  padding-left: 20px;
+}

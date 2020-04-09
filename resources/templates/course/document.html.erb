@@ -3,46 +3,50 @@ require 'json'
 %>
 <article id="content" role="main">
   <div class="content-wrapper">
-    <div class="dev-menu-nav large-2 hide-for-medium-only hide-for-small-only columns">
-      <h3 class="dev-nav-header"><strong>Online Course</strong></h3>
-      <ul style="padding-top: 0;" class="side-nav">
-        <% @attributes.select { |k, _| k.start_with?('module-toc-link-') }.each_key do |toc_link_attr| %>
-          <%
-            toc_index = toc_link_attr.sub('module-toc-link-', '')
-            toc_title_attr = "module-toc-title-#{toc_index}"
-            toc_slug_attr = "module-toc-slug-#{toc_index}"
-          %>
-          <a href="../<%= attr(toc_slug_attr) %>">
-            <dl class="menu-list">
-              <dd class="accordion-dev-nav <%= attr(toc_slug_attr) == attr('slug') ? 'active' : '' %>">
-                <i data-progress-indicator data-slug="<%= attr(toc_slug_attr) %>"></i>
-                <%= attr(toc_title_attr) %>
-              </dd>
-            </dl>
-          </a>
-        <% end %>
-      </ul>
-      <div class="c2a-icons">
-        <div>
-          <a href="http://community.neo4j.com" target="_blank" alt="Neo4j Community Site and Forum" rel="noopener noreferrer"><i class="fa fa-comments" aria-hidden="true"></i><br></a>
+    <div class="dev-menu-nav large-2 columns">
+      <i class="fa fa-times close" aria-hidden="true"></i>
+      <i class="fa fa-bars open" aria-hidden="true"></i>
+      <div class="dev-menu-content">
+        <h3 class="dev-nav-header"><strong>Online Course</strong></h3>
+        <ul style="padding-top: 0;" class="side-nav">
+          <% @attributes.select { |k, _| k.start_with?('module-toc-link-') }.each_key do |toc_link_attr| %>
+            <%
+              toc_index = toc_link_attr.sub('module-toc-link-', '')
+              toc_title_attr = "module-toc-title-#{toc_index}"
+              toc_slug_attr = "module-toc-slug-#{toc_index}"
+            %>
+            <a href="../<%= attr(toc_slug_attr) %>">
+              <dl class="menu-list">
+                <dd class="accordion-dev-nav <%= attr(toc_slug_attr) == attr('slug') ? 'active' : '' %>">
+                  <i data-progress-indicator data-slug="<%= attr(toc_slug_attr) %>"></i>
+                  <%= attr(toc_title_attr) %>
+                </dd>
+              </dl>
+            </a>
+          <% end %>
+        </ul>
+        <div class="c2a-icons">
+          <div>
+            <a href="http://community.neo4j.com" target="_blank" alt="Neo4j Community Site and Forum" rel="noopener noreferrer"><i class="fa fa-comments" aria-hidden="true"></i><br></a>
+          </div>
+          <div><a href="http://twitter.com/neo4j" target="_blank" alt="Neo4j on Twitter" rel="noopener noreferrer">
+            <i class="fa fa-twitter" aria-hidden="true"></i><br></a></div>
+          <div>
+            <a href="http://youtube.com/neo4j" target="_blank" alt="Neo4j on YouTube" rel="noopener noreferrer"><i class="fa fa-youtube-play" aria-hidden="true"></i><br></a>
+          </div>
+          <div>
+            <a href="https://meetup.com/Neo4j-Online-Meetup/" target="_blank" alt="Neo4j on Meetup" rel="noopener noreferrer"><i class="fa fa-meetup" aria-hidden="true"></i><br></a>
+          </div>
+          <div>
+            <a href="https://github.com/neo4j/neo4j" target="_blank" alt="Neo4j on GitHub" rel="noopener noreferrer"><i class="fa fa-github" aria-hidden="true"></i><br></a>
+          </div>
+          <div>
+            <a href="http://stackoverflow.com/questions/tagged/neo4j" target="_blank" alt="Neo4j on Stackoverflow" rel="noopener noreferrer"><i class="fa fa-stack-overflow" aria-hidden="true"></i><br></a>
+          </div>
         </div>
-        <div><a href="http://twitter.com/neo4j" target="_blank" alt="Neo4j on Twitter" rel="noopener noreferrer">
-          <i class="fa fa-twitter" aria-hidden="true"></i><br></a></div>
-        <div>
-          <a href="http://youtube.com/neo4j" target="_blank" alt="Neo4j on YouTube" rel="noopener noreferrer"><i class="fa fa-youtube-play" aria-hidden="true"></i><br></a>
+        <div class="promote-speaker-program">
+          Want to Speak? <a href="https://neo4j.com/speaker-program/">Get $ back.</a>
         </div>
-        <div>
-          <a href="https://meetup.com/Neo4j-Online-Meetup/" target="_blank" alt="Neo4j on Meetup" rel="noopener noreferrer"><i class="fa fa-meetup" aria-hidden="true"></i><br></a>
-        </div>
-        <div>
-          <a href="https://github.com/neo4j/neo4j" target="_blank" alt="Neo4j on GitHub" rel="noopener noreferrer"><i class="fa fa-github" aria-hidden="true"></i><br></a>
-        </div>
-        <div>
-          <a href="http://stackoverflow.com/questions/tagged/neo4j" target="_blank" alt="Neo4j on Stackoverflow" rel="noopener noreferrer"><i class="fa fa-stack-overflow" aria-hidden="true"></i><br></a>
-        </div>
-      </div>
-      <div class="promote-speaker-program">
-        Want to Speak? <a href="https://neo4j.com/speaker-program/">Get $ back.</a>
       </div>
     </div>
     <div class="guide-section-content large-8 columns">
@@ -126,6 +130,24 @@ require 'json'
 <style>
   <%= File.new("#{__dir__ }/_extra.css", mode: 'r:UTF-8').read %>
 </style>
+<%# Responsive menu action %>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var menuElement = document.getElementsByClassName('dev-menu-nav')[0]
+    var openMenuElement = menuElement.getElementsByClassName('open')[0]
+    var closeMenuElement = menuElement.getElementsByClassName('close')[0]
+    if (openMenuElement && menuElement && closeMenuElement) {
+      openMenuElement.addEventListener('click', function() {
+        menuElement.classList.remove('close')
+        menuElement.classList.add('open')
+      })
+      closeMenuElement.addEventListener('click', function() {
+        menuElement.classList.remove('open')
+        menuElement.classList.add('close')
+      })
+    }
+  })
+</script>
 <%# Intercom widget %>
 <script>
   /* global Cookies */
