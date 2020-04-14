@@ -34,6 +34,7 @@ gradlePlugin {
     create("wordpressPlugin") {
       id = "com.neo4j.gradle.wordpress.WordPressPlugin"
       implementationClass = "com.neo4j.gradle.wordpress.WordPressPlugin"
+      version = "0.0.2"
     }
   }
 }
@@ -62,7 +63,7 @@ pluginBundle {
       id = "com.neo4j.gradle.wordpress.WordPressPlugin"
       displayName = "Publish posts and pages to WordPress"
       description = "A plugin to publish posts or pages to WordPress from an HTML file and a YAML file that contains metadata"
-      version = "0.0.1"
+      version = "0.0.2"
       tags = listOf("wordpress", "publish", "posts", "pages")
     }
   }
