@@ -20,6 +20,7 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.property
 import org.yaml.snakeyaml.Yaml
 import java.io.FileInputStream
+import java.net.URL
 import java.nio.file.Paths
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -40,7 +41,11 @@ open class WordPressPlugin : Plugin<Project> {
   }
 }
 
-data class DocumentAttributes(val slug: String, val title: String, val tags: List<String>, val content: String)
+data class DocumentAttributes(val slug: String,
+                              val title: String,
+                              val tags: List<String>,
+                              val content: String,
+                              val parentPath: String?)
 
 abstract class WordPressUploadTask : DefaultTask() {
 
@@ -208,8 +213,8 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
         null
       }
     } ?: return false
+    val parentIdsByPath = mutableMapOf<String, WordPressDocument?>()
     for (documentAttributes in documentsWithAttributes) {
-      val wordPressDocument = wordPressDocumentsBySlug[documentAttributes.slug]
       val data = mutableMapOf<String, Any>(
         "date_gmt" to date,
         "slug" to documentAttributes.slug,
@@ -220,9 +225,25 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
         //"tags" to documentAttributes.tags,
         "type" to documentType
       )
+      val parentPath = documentAttributes.parentPath
+      if (documentType == WordPressDocumentType("page") && parentPath != null) {
+        val parentPage = if (parentIdsByPath.containsKey(parentPath)) {
+          parentIdsByPath[parentPath]
+        } else {
+          val parentPage = findParentPage(parentPath, credential)
+          parentIdsByPath[parentPath] = parentPage
+          parentPage
+        }
+        if (parentPage == null) {
+          logger.warn("No page found for path: $parentPath, unable to publish ${documentAttributes.slug} to WordPress")
+          continue
+        }
+        data["parent"] = parentPage.id
+      }
       if (documentTemplate.isNotBlank()) {
         data["template"] = documentTemplate
       }
+      val wordPressDocument = wordPressDocumentsBySlug[documentAttributes.slug]
       if (wordPressDocument != null) {
         // document already exists on WordPress, updating...
         updateDocument(data, wordPressDocument)
@@ -232,6 +253,55 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
       }
     }
     return true
+  }
+
+  private fun findParentPage(parentPath: String, credential: String): WordPressDocument? {
+    // slug is the last part of the path
+    // example:
+    // - path: "/docs/labs/"
+    // - slug: "labs"
+    // the path must _not_ contain the complete URL (ie. "https://neo4j.com/docs/labs")
+    val parentSlug = parentPath
+      .removeSuffix("/")
+      .split("/")
+      .last { it.isNotEmpty() }
+    val searchParentUrl = baseUrlBuilder()
+      .addPathSegment(documentType.urlPath)
+      .addQueryParameter("per_page", "10")
+      .addQueryParameter("slug", parentSlug)
+      .addQueryParameter("status", "publish,future,draft,pending,private")
+      .build()
+    val searchParentRequest = Request.Builder()
+      .url(searchParentUrl)
+      // force the header because WordPress returns a 400 instead of a 401 when the authentication fails...
+      .header("Authorization", credential)
+      .get()
+      .build()
+    return executeRequest(searchParentRequest) { responseBody ->
+      try {
+        val jsonArray = klaxon.parseJsonArray(responseBody.charStream())
+        val documents = jsonArray.value.mapNotNull { item ->
+          if (item is JsonObject) {
+            val link = item.string("link")
+            // extract the path part from the URL
+            val linkPath = URL(link).path.removeSuffix("/")
+            val parentLinkPath = parentPath.removeSuffix("/")
+            if (linkPath == parentLinkPath) {
+              val slug = item.string("slug")!!
+              WordPressDocument(item.int("id")!!, slug, documentType)
+            } else {
+              null
+            }
+          } else {
+            null
+          }
+        }
+        documents.firstOrNull()
+      } catch (e: KlaxonException) {
+        logger.error("Unable to parse the response", e)
+        null
+      }
+    }
   }
 
   private fun updateDocument(data: MutableMap<String, Any>, wordPressDocument: WordPressDocument): Boolean {
@@ -304,7 +374,8 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
           if (slug != null && title != null) {
             // The terms assigned to the object in the post_tag taxonomy.
             val tags = getTags(attributes)
-            DocumentAttributes(slug, title, tags, file.readText(Charsets.UTF_8))
+            val parentPath = getParentPath(attributes)
+            DocumentAttributes(slug, title, tags, file.readText(Charsets.UTF_8), parentPath)
           } else {
             null
           }
@@ -368,6 +439,18 @@ internal class WordPressUpload(val documentType: WordPressDocumentType,
       return value.filterIsInstance<String>()
     }
     return listOf()
+  }
+
+  private fun getParentPath(attributes: Map<*, *>): String? {
+    val name = "parent_path"
+    val value = attributes[name] ?: return null
+    if (value !is String) {
+      return null
+    }
+    if (value.isBlank()) {
+      return null
+    }
+    return value
   }
 
   private fun getTitle(attributes: Map<*, *>, yamlFilePath: String, fileName: String): String? {
