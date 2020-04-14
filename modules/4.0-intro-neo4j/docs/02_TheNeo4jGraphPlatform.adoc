@@ -267,7 +267,7 @@ video::qyu1IHiJh-c[youtube,width=560,height=315]
 .If using Windows
 [%collapsible]
 ====
-video::V8rxwhoxfDw[youtube,width=560,height=315]
+video::RSbhmVF_ccs[youtube,width=560,height=315]
 ====
 endif::[]
 
@@ -282,7 +282,7 @@ https://youtu.be/qyu1IHiJh-c
 
 If using Windows:
 
-https://youtu.be/V8rxwhoxfDw
+https://youtu.be/RSbhmVF_ccs
 endif::[]
 
 ifdef::backend-html5,backend-pdf[]
