@@ -261,7 +261,7 @@ video::cTZ_Z3KfLyE[youtube,width=560,height=315]
 .If using Linux
 [%collapsible]
 ====
-video::qyu1IHiJh-c[youtube,width=560,height=315]
+video::pvjsxc_MdIw[youtube,width=560,height=315]
 ====
 
 .If using Windows
@@ -278,7 +278,7 @@ https://youtu.be/cTZ_Z3KfLyE
 
 If using Linux:
 
-https://youtu.be/qyu1IHiJh-c
+https://youtu.be/pvjsxc_MdIw
 
 If using Windows:
 
