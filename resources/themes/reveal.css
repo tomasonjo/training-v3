@@ -1076,6 +1076,10 @@ span.fragment.check {
   font-size: 0.75em;
 }
 
+.reveal .smaller {
+  font-size: 0.55em;
+}
+
 /* print */
 @media print {
   .slide-background::after {
