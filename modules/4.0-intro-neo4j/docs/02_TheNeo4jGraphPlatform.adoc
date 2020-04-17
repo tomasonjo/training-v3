@@ -408,7 +408,8 @@ https://youtu.be/oHo-lQ79zf0
 endif::[]
 
 ifdef::backend-revealjs[]
-kbd:[https://youtu.be/oHo-lQ79zf0]
+[.center]
+https://youtu.be/oHo-lQ79zf0
 endif::[]
 
 ifdef::backend-html5[]
