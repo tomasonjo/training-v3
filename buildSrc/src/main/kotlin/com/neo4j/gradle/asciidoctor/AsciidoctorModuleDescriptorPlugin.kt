@@ -25,8 +25,6 @@ open class AsciidoctorModuleDescriptorPlugin : Plugin<Project> {
 
 abstract class AsciidoctorModuleDescriptorGenerateTask : DefaultTask() {
 
-  private val TESTING_SLUG_PREFIX = "_testing_"
-
   @InputFiles
   var sources: MutableList<ConfigurableFileTree> = mutableListOf()
 
