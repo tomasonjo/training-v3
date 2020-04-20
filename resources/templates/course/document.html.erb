@@ -90,9 +90,7 @@ require 'json'
         <% end %>
         window.trainingEnrollmentUrl = "<%= attr('module-enrollment-url') %>"
       </script>
-      <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-      <script src="https://neo4jsandbox.com/js/js.cookie-2.1.3.min.js"></script>
-      <script src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/js/jwt-decode.min.js"></script>
+      <script src="https://cdn.auth0.com/js/lock/11.23.0/lock.min.js"></script>
       <!-- fixme: upload _quizzes.js to s3 -->
       <script>
         <%= File.new("#{__dir__ }/_quizzes.js", mode: 'r:UTF-8').read %>
@@ -151,7 +149,6 @@ require 'json'
 </script>
 <%# Intercom widget %>
 <script>
-  /* global Cookies */
   window.intercomSettings = {
     app_id: "<%= attr('intercom-app-id') %>",
     hide_default_launcher: true
@@ -189,21 +186,4 @@ require 'json'
       }
     }
   })()
-  document.addEventListener('DOMContentLoaded', function () {
-    var userInfoIntercom = Cookies.getJSON('com.neo4j.accounts.userInfo')
-    if (userInfoIntercom) {
-      try {
-        Intercom('update', {
-          app_id: '<%= attr('intercom-app-id') %>',
-          name: userInfoIntercom.name,
-          email: userInfoIntercom.email,
-          user_id: userInfoIntercom.sub,
-          hide_default_launcher: true
-        })
-      } catch (err) {
-        console.error('Unable to call Intercom with user info', err)
-      }
-    }
-    Intercom('trackEvent','course-<%= attr('module-name') %>-<%= attr('slug') %>')
-  })
 </script>
