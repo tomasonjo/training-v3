@@ -15,20 +15,19 @@ At the end of this module, you should be able to:
 * Describe the domain for a model.
 * Define the questions for the domain.
 * Identify entities from the questions for the domain.
-* Use the arrows tool to model the domain.
+* Use the Arrow Tool to model the domain.
 * Identify the connections between entities.
 * Describe how to test the initial model.
 
 == Building the initial data model
 
-
-. Understand the domain
-. Create high-level sample data
-. Define specific questions for the application
-. Identify entities
-. Identify connections between entities
-. Test the questions against the model
-. Test scalability
+. Understand the domain.
+. Create high-level sample data.
+. Define specific questions for the application.
+. Identify entities.
+. Identify connections between entities.
+. Test the questions against the model.
+. Test scalability.
 
 [.notes]
 --
@@ -45,13 +44,13 @@ Later in this training, you will learn how to identify weaknesses in a model, an
 Every organization has their own standards for how requirements are documented. You will not be learning how to document requirements, but rather focus on the model itself.
 --
 
-=== Understanding the domain
+== Step 1:  Understanding the domain
 
 [square]
-* Description of the application
-* Identify stakeholders, developers
-* Identify users of the application (people, systems)
-* Enumerate the use cases that are agreed upon by all stakeholders where users are part of the use case
+* Describe the application in detail.
+* Identify the stakeholders and  developers of the application.
+* Identify the users of the application (people, systems).
+* Enumerate the use cases that are agreed upon by all stakeholders where users are part of the use case.
 
 [NOTE]
 No knowledge of the underlying implementation is required!
@@ -75,7 +74,7 @@ In process industries, the BOM is also known as the formula, recipe, or ingredie
 The phrase "bill of material" (or "BOM") is frequently used by engineers as an adjective to refer not to the literal bill, but to the current production configuration of a product, to distinguish it from modified or improved versions under study or in test.
 --
 
-=== Common BOM use cases
+=== Example BOM use cases
 
 [.statement]
 --
@@ -98,15 +97,15 @@ Some parts are made from other parts (sub-assembly).
 This is a [.underline]#very small fraction# of the use cases for the BOM application.
 --
 
-== Steps: Building the initial data model
+== Step 2: Create high-level sample data
 
-. Understand the domain
-. [.big]#*Create high-level sample data*#
-. Define specific questions for the application
-. Identify entities
-. Identify connections between entities
-. Test the questions against the model
-. Test scalability
+. Understand the domain.
+. [.big]#*Create high-level sample data.*#
+. Define specific questions for the application.
+. Identify entities.
+. Identify connections between entities.
+. Test the questions against the model.
+. Test scalability.
 
 [.notes]
 --
@@ -180,15 +179,15 @@ If you want your modeling process to be constructive, you must have enough data 
 The data is typically the "things" described in the use cases. You don't include "system" or "user" as part of the data.
 --
 
-== Steps: Building the initial data model
+== Step 3: Define specific questions for the application
 
-. Understand the domain
-. Create high-level sample data
-. [.big]#*Define specific questions for the application*#
-. Identify entities
-. Identify connections between entities
-. Test the questions against the model
-. Test scalability
+. Understand the domain.
+. Create high-level sample data.
+. [.big]#*Define specific questions for the application.*#
+. Identify entities.
+. Identify connections between entities.
+. Test the questions against the model.
+. Test scalability.
 
 
 === Sample questions for the BOM
@@ -198,17 +197,17 @@ The data is typically the "things" described in the use cases. You don't include
 . What products require a table brace?
 . How much will the parts cost to make product Wood table 60"?
 
-== Steps: Building the initial data model
+== Step 4 : Identify entities
 
-. Understand the domain
-. Create high-level sample data
-. Define specific questions for the application
-. [big]#*Identify entities*#
-. Identify connections between entities
-. Test the questions against the model
-. Test scalability
+. Understand the domain.
+. Create high-level sample data.
+. Define specific questions for the application.
+. [big]#*Identify entities.*#
+. Identify connections between entities.
+. Test the questions against the model.
+. Test scalability.
 
-==== Identify entities from the questions
+=== Identify entities from the questions
 
 [.small]
 --
@@ -217,12 +216,13 @@ Entities are the nouns in your application questions:
 . What [.underline]#ingredients# are used in a [.underline]#recipe#?
 . Who is married to this [.underline]#person#?
 
-image::Entities.png[Entities,width=200,align=center]
+image::Entities.png[Entities,width=100,align=center]
 
 [square]
 * The generic nouns will often become labels in your model.
 * Proper nouns will often become values for properties.
 * Use domain knowledge to decide if entities need to be further grouped or differentiated.
+* In Neo4j Enterprise Edition, there is no limit to the number entities (nodes) in the graph. (Community Edition has a limit of 34B)
 --
 
 [.notes]
@@ -231,7 +231,7 @@ As an example of using domain knowledge, you might happen to know that the disti
 These may not appear clearly in the specific application questions.
 --
 
-=== Identify entities from the questions
+=== Define properties
 
 Properties must serve one of two purposes:
 
@@ -307,7 +307,7 @@ Here is the solution:
 
 endif::[]
 
-== Solution: Exercise 1
+== Exercise 1 solution
 
 [.small]
 --
@@ -427,7 +427,7 @@ If you do not want to do all the clicking and typing, copy this markup:
 --
 endif::[]
 
-== Exercise solution
+== Exercise 2 solution
 
 ifndef::backend-revealjs[]
 Here is the Arrow tool markup for the solution:
@@ -447,17 +447,17 @@ endif::[]
 
 Here is what it should look like in the UI of the Arrow tool:
 
-image::Exercise2Solution.png[Exercise2Solution,width=500,align=center]
+image::Exercise2Solution.png[Exercise2Solution,width=1000,align=center]
 
-== Steps: Building the initial data model
+== Step 5: Identify connections between entities
 
-. Understand the domain
-. Create high-level sample data
-. Define specific questions for the application
-. Identify entities
-. [big]#*Identify connections between entities*#
-. Test the questions against the model
-. Test scalability
+. Understand the domain.
+. Create high-level sample data.
+. Define specific questions for the application.
+. Identify entities.
+. [big]#*Identify connections between entities.*#
+. Test the questions against the model.
+. Test scalability.
 
 === Identify connections between entities
 
@@ -480,13 +480,13 @@ Using “connections are verbs” is a fine shorthand to get started, but there 
 === Naming relationships
 
 [square]
-* Stakeholders must agree upon name.
+* Stakeholders must agree upon name (type for the relationship).
 * Avoid names that could be construed as nouns (for example email).
-* Neo4j has a limit of 16M (64k) relationship types in Enterprise Edition (16M in Community Edition).
+* Neo4j has a limit of 16M relationship types in Enterprise Edition (64K in Community Edition).
 
 [.is-half.left]
 --
-Do not do this:
+Do [.underline]#not# do this:
 
 image::BadRelationshipNames.png[BadRelationshipNames,width=200,align=center]
 --
@@ -510,10 +510,11 @@ You will learn more about later in this training when you learn about the core p
 Direction and type are required in Neo4j.
 
 Choose direction (and type) based on the expected questions:
+
 . What episode follows The Ark in Space? (NEXT)
 . What episode came before Genesis of the Daleks? (PREVIOUS)
 
-image::DrWho.png[DrWho,width=300,align=center]
+image::DrWho.png[DrWho,width=1200,align=center]
 
 [.notes]
 --
@@ -527,9 +528,9 @@ This has no effect on query performance, but the Cypher used for each variant wi
 Choose whichever variant makes the Cypher more intuitive for developers to write, based on your expectations for what people will ask.
 --
 
-=== How much fanout with a node have?
+=== How much fanout will a node have?
 
-image::Fanout.png[Fanout,width=300,align=center]
+image::Fanout.png[Fanout,width=1300,align=center]
 
 [.notes]
 --
@@ -556,8 +557,10 @@ ifdef::backend-revealjs[]
 Follow the instructions on the next slide.
 endif::[]
 
-=== Exercise instructions
+=== Exercise 3 instructions
 
+[small]
+--
 Here are the questions we need to answer for our BOM application that you have already seen:
 
 . What parts are needed to make Wood table 40"?
@@ -566,10 +569,14 @@ Here are the questions we need to answer for our BOM application that you have a
 . How much will the parts cost to make product Wood table 60"?
 
 And here is the entity model:
+--
 
 image::Exercise2Solution.png[Exercise2Solution,width=300,align=center]
 
+[small]
+--
 Using the Arrow tool add the relationships between the entities.
+--
 
 [.notes]
 --
@@ -577,11 +584,11 @@ Focus on type and directions first.  Then check for any qualifiers that will hel
 Should these qualifiers be types or properties?  Why?
 --
 
-=== Exercise solution
+=== Exercise 3 solution
 
 Here is what your graph data model might look like with relationships added:
 
-image::Exercise3Solution.png[Exercise3Solution,width=300,align=center]
+image::Exercise3Solution.png[Exercise3Solution,width=1200,align=center]
 
 [.notes]
 --
@@ -616,9 +623,12 @@ endif::[]
 
 == Example: Detailed sample data for the BOM application
 
-So thus far, you have defined the entities and relationships for the BOM application.
+[.notes]
+--
+Thus far, you have defined the entities and relationships for the BOM application.
 Just to fill in more details for the data model, here is more sample data that might be useful in furthering the design of the model.
 This particular sample data is useful, especially when discussing how well the design addresses the questions and how well the application can scale.
+--
 
 ifndef::backend-revealjs[]
 Here is the Arrow tool markup for the sample data for the BOM application:
@@ -705,9 +715,12 @@ Here is the Arrow tool markup for the sample data for the BOM application:
 ----
 endif::[]
 
+[small]
+--
 Here is what the sample data might look like in the UI of the Arrow tool:
+--
 
-image::SampleDataBOM.png[SampleDataBOM,width=500,align=center]
+image::SampleDataBOM.png[SampleDataBOM,width=800,align=center]
 
 ifdef::backend-revealjs[]
 [.notes]
@@ -792,22 +805,23 @@ Here is the markup for the sample data:
     <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
 </ul>
 --
+endif::[]
 
-== Steps: Building the initial data model
+== Step 6: Test the questions against the model
 
-. Understand the domain
-. Create high-level sample data
-. Define specific questions for the application
-. Identify entities
-. Identify connections between entities
-. [big]#*Test the questions against the model*#
-. Test scalability
+. Understand the domain.
+. Create high-level sample data.
+. Define specific questions for the application.
+. Identify entities.
+. Identify connections between entities.
+. [big]#*Test the questions against the model.*#
+. Test scalability.
 
 === Testing the model - 1
 
 What parts are needed to make Wood table 40"?
 
-image::TestModel1.png[TestModel1,width=500,align=center]
+image::TestModel1.png[TestModel1,width=1000,align=center]
 
 [.notes]
 --
@@ -818,7 +832,7 @@ Multiply by the quantity property as you go.
 
 Do we have enough parts to make 100x Deluxe wood table 60"?
 
-image::TestModel2.png[TestModel2,width=500,align=center]
+image::TestModel2.png[TestModel2,width=1000,align=center]
 
 [.notes]
 --
@@ -841,7 +855,7 @@ If you were maintaining stock data somewhere else anyway, there is no inherent n
 
 What products require a table brace?
 
-image::TestModel3.png[TestModel3,width=500,align=center]
+image::TestModel3.png[TestModel3,width=1000,align=center]
 
 [.notes]
 --
@@ -849,11 +863,11 @@ For this question, the application would anchor on the Part with the name table 
 Then it would traverse backwards along each CONTAINS to find the products that use it.
 --
 
-==== Testing the model = 4
+==== Testing the model - 4
 
 How much will the parts cost to make Wood table 60"?
 
-image::TestModel4.png[TestModel4,width=500,align=center]
+image::TestModel4.png[TestModel4,width=1000,align=center]
 
 [.notes]
 --
@@ -873,22 +887,25 @@ You can guarantee that Price is available exactly one hop away from the anchor n
 This modeler felt that that benefit balanced out the added data maintenance expense.
 --
 
-== Steps: Building the initial data model
+== Step 7: Test scalability
 
-. Understand the domain
-. Create high-level sample data
-. Define specific questions for the application
-. Identify entities
-. Identify connections between entities
-. Test the questions against the model
-. [big}#*Test scalability*#
+. Understand the domain.
+. Create high-level sample data.
+. Define specific questions for the application.
+. Identify entities.
+. Identify connections between entities.
+. Test the questions against the model.
+. [big]#*Test scalability.*#
 
 === Testing scalability
 
-[.is-half.left]
+[.is-one-third.left]
 --
+[.statement]
 Here are some questions you should answer:
+
 [square]
+[small]
 * How many products?
 * How many parts?
 * How often are products added?
@@ -897,9 +914,9 @@ Here are some questions you should answer:
 * Is inventory part of the model?
 --
 
-[.is-half.right]
+[.is-two-thirds.right]
 --
-image::Scalable.png[Scalable,width=500,align=center]
+image::Scalable.png[Scalable,width=900,align=center]
 --
 
 [.notes]
@@ -917,54 +934,54 @@ We also do this at the level of individual query performance during the implemta
 
 === Question 1
 
-//ifndef::backend-pdf[]
 [.statement]
-What elements make up a graph?
-
-[.statement]
-Select the correct answers.
-
-[%interactive.answers]
-- [ ] tuples
-- [x] nodes
-- [ ] documents
-- [x] relationships
-
-=== Question 2
-
-[.statement]
-From a data scientist perspective, which element is key for analyzing the data in the graph?
+What component of a graph data model is used to model the nouns of the questions for the domain?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] node
-- [ ] property
-- [x] relationship
-- [ ] join
+- [ ] Relationship
+- [ ] Property
+- [x] Entity
+- [ ] Data source
+
+=== Question 2
+
+[.statement]
+What component of a graph data model is used to model the verbs of the questions for the domain?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [x] Relationship
+- [ ] Property
+- [ ] Entity
+- [ ] Behavior
 
 === Question 3
 
 [.statement]
-In Neo4j, you can attach properties to the following elements in the graph?
+When you create the model for your application, at a minumum, what must you specify for a relationship?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [ ] label
-- [x] node
-- [x] relationship
-- [ ] direction
+- [x] Type
+- [ ] Weight
+- [x] Direction
+- [x] From and to entities
 
 [.summary]
 == Summary
 
 You should now be able to:
 [square]
-* Describe what a graph is.
-* Describe what a graph database is.
-* Describe some common use cases for using a graph database.
-* Describe the Neo4j property graph model.
-* Whiteboard a graph data model.
+* Describe the domain for a model.
+* Define the questions for the domain.
+* Identify entities from the questions for the domain.
+* Use the Arrows Tool to model the domain.
+* Identify the connections between entities.
+* Describe how to test the initial model.

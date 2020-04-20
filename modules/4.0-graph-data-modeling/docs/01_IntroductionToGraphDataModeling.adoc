@@ -1,0 +1,183 @@
+= Introduction to Graph Data Modeling
+:slug: 01-introduction-graph-data-modeling
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Building the Initial Graph Data Model
+
+== About this module
+
+At the end of this module, you should be able to:
+[square]
+* Describe what graph data modeling is.
+* Describe how Neo4j supports graph data modeling.
+* Describe the tools you can use for graph data modeling.
+* Describe the workflow for graph data modeling.
+
+== What is graph data modeling?
+
+Graph data modeling is a Collaborative effort where the application domain is analyzed by stakeholders and developers to come up with the optimal model for use with Neo4j.
+Stakeholders must understand the domain and be prepared to ask detailed questions about how the business-at-hand operates.
+
+Stakeholders are:
+
+* Business analysts
+* Architects
+* Managers
+* Project leaders
+
+== How does Neo4j support graph data modeling?
+
+* Neo4j is a full-featured graph database that allows you to create *property graphs*.
+* Applications retrieve data for business use cases by *traversing the graph*.
+
+=== Neo4j Property Graph Model
+
+[.is-one-third.left]
+--
+[square]
+* Nodes (Entities)
+* Relationships
+* Properties
+* Labels
+--
+
+[is-two-thirds.right]
+--
+image::Neo4jPropertyGraphModel.png[Neo4jPropertyGraphModel,width=800,align=center]
+--
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+On this slide, do a Concept Check.
+
+Ask questions like:
+
+. What information can be attached to a node?  Which of these are required?
+.. Labels & properties.  None required
+. What information can be attached to a relationship?  Which of these are required?
+.. Direction, type, and properties.  Direction and type are required.
+. What is the difference between a label and property?
+.. Labels are categorical.  Properties are specific.
+--
+endif::[]
+
+ifndef::backend-revealjs[]
+Nodes and relationships are the key components of a graph.
+Nodes should have labels to categorize entities.
+Relationships must have direction and type.
+Nodes and relationships can have properties.
+A label is used to categorize a set of nodes.
+Properties are used to provide specific values to a node or relatiobship.
+endif::[]
+
+=== Traversal in the graph
+
+image::Traversal.png[Traversal,width=700,align=center]
+
+[source,cypher]
+----
+MATCH (r:Residence)<-[:OWNS]-(p:Person)
+WHERE r.address = '475 Broad Street'
+RETURN p
+----
+
+[.notes]
+--
+Traversal means anchoring a query based upon a property, then traversing the graph to satisfy the query.
+In this example, the address property of the Residence node is used to determine where to anchor the query.
+Then, the _OWNS_ relationship is traversed to retrieve the qualifying nodes.
+A relationship is only traversed once in a query.
+--
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+Ask the students these questions:
+. What uniqueness limitations does Cypher enforce?
+.. A query can visit a node any number of times,  but can traverse each relationship only once.
+. Given a Cypher query, how does Neo4j decide where to begin traversing?
+.. Neo4j will predict which of the node sets in the query is smallest.  It will begin there.  In this case, r is likely to be smallest, as it has a property filter.
+
+--
+endif::[]
+
+== Tools for graph data modeling
+
+image::ArrowTool.png[ArrowTool,width=900,align=center]
+
+[.notes]
+--
+There are many ways that developers and stakeholders can work together to build a graph data model for their application.
+Drawing it on a whiteboard may be done initially, but you will need to share your model with others so using a tool is recommended.
+The tool that we use in this course is the Arrow tool which integrates with Neo4j.
+With the Arrow tool, you can generate Cypher statements for creating code to implement the model.
+--
+
+== Workflow for graph data modeling
+
+image::GraphDataModelingWorkflow.png[GraphDataModelingWorkflow,width=1200,align=center]
+
+[.notes]
+--
+Data model maintenance is cyclical and iterative.
+We are comfortable with this idea because updating a graph model is much cheaper and easier than updating the schema of a tabular store.
+Ease-of-updating will be a consistent theme throughout this training.
+--
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What elements of a Neo4j graph are used to categorize entities?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Relationship
+- [ ] Property
+- [ ] Node
+- [x] Label
+
+=== Question 2
+
+[.statement]
+Which statements below are true about Neo4j graph traversal?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Traversal during a query starts at a set of anchor nodes.
+- [ ] Traversal during a query ends at an anchor node.
+- [x] A relationship is only traversed once during a query.
+- [ ] A relationship can be traversed multiple times during a query.
+
+=== Question 3
+
+[.statement]
+What modeling tool is designed specifically for use with Neo4j?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Visio
+- [ ] Sketch
+- [x] Arrow Tool
+- [ ] Neo4j Modeler
+
+[.summary]
+== Summary
+
+You should now be able to:
+[square]
+* Describe what graph data modeling is.
+* Describe how Neo4j supports graph data modeling.
+* Describe the tools you can use for graph data modeling.
+* Describe the workflow for graph data modeling.
