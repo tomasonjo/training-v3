@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var idTokenLocalStorageKey = 'com.neo4j.accounts.idToken'
 
   var backendBaseUrl = window.trainingBackendBaseUrl
+  var enrollmentUrl = window.trainingEnrollmentUrl
 
   var getTimeDiff = function (time1, time2) {
     var hourDiff = time2 - time1
@@ -278,47 +279,63 @@ document.addEventListener('DOMContentLoaded', function () {
   updateProgressIndicators(currentQuizStatus)
 
   var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
-  if (idToken) {
-    // we're authenticated!
-    // check if the token is not expired (or will expire soon)
-    checkTokenExpiration(idToken)
-    // get the current quiz status from the server
-    getQuizStatus()
-      .then(function (response) {
-        var quizStatus = response['quizStatus']
-        if (quizStatus) {
-          var failed = quizStatus['failed']
-          var passed = quizStatus['passed']
-          var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
-          currentQuizStatus = {
-            failed: failed,
-            passed: passed,
-            untried: untried
+  if (typeof trainingPartName !== 'undefined') {
+    if (idToken) {
+      // we're authenticated!
+      // check if the token is not expired (or will expire soon)
+      checkTokenExpiration(idToken)
+      getEnrollmentForClass()
+        .then(function (response) {
+          if (response) {
+            if (response.enrolled === false) {
+              // you should be enrolled, redirect to the enrollment page!
+              window.location = enrollmentUrl
+            }
           }
-          window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
-          updateProgressIndicators(currentQuizStatus)
-          updatePageQuiz()
-        } else {
-          console.warn('Unable to update the current quiz status, response from the server is empty', response)
-        }
-      })
-      .catch(function (error) {
-        console.error('Unable to get quiz status', error)
-      })
+        })
+        .catch(function (error) {
+          console.error('Unable to get enrollment', error)
+        })
 
-    getClassCertificate()
-      .then(function (response) {
-        var certificateResultElement = $('[data-certificate-result]')
-        if ('url' in response) {
-          certificateResultElement.html('<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>')
-        } else {
-          certificateResultElement.html('<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>')
-        }
-      })
-      .catch(function (error) {
-        console.error('Unable to get certificate', error)
-      })
-  } else if (typeof trainingPartName !== 'undefined') {
-    logout()
+      // get the current quiz status from the server
+      getQuizStatus()
+        .then(function (response) {
+          var quizStatus = response['quizStatus']
+          if (quizStatus) {
+            var failed = quizStatus['failed']
+            var passed = quizStatus['passed']
+            var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
+            currentQuizStatus = {
+              failed: failed,
+              passed: passed,
+              untried: untried
+            }
+            window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
+            updateProgressIndicators(currentQuizStatus)
+            updatePageQuiz()
+          } else {
+            console.warn('Unable to update the current quiz status, response from the server is empty', response)
+          }
+        })
+        .catch(function (error) {
+          console.error('Unable to get quiz status', error)
+        })
+
+      // get certificate
+      getClassCertificate()
+        .then(function (response) {
+          var certificateResultElement = $('[data-certificate-result]')
+          if ('url' in response) {
+            certificateResultElement.html('<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>')
+          } else {
+            certificateResultElement.html('<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>')
+          }
+        })
+        .catch(function (error) {
+          console.error('Unable to get certificate', error)
+        })
+    } else {
+      logout()
+    }
   }
 })
