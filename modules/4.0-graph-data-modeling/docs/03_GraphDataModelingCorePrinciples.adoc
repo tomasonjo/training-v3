@@ -1,5 +1,5 @@
-= Building the Initial Graph Data Model
-:slug: 02-building-initial-graph-data-model
+= Graph Data Modeling Core Principles
+:slug: 03-graph-data-modeling-core-principles
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -11,66 +11,191 @@
 
 At the end of this module, you should be able to:
 [square]
-* Describe the domain for a model.
-* Define the questions for the domain.
-* Identify entities from the questions for the domain.
-* Use the Arrow Tool to model the domain.
-* Identify the connections between entities.
-* Describe how to test the initial model.
+* Describe graph data modeling best practices for modeling:
+** Nodes (entities)
+** Relationships
+** Properties
+* Describe data object accessibility
 
-== Building the initial data model
+== Best practices for modeling nodes
 
-. Understand the domain.
-. Create high-level sample data.
-. Define specific questions for the application.
-. Identify entities.
-. Identify connections between entities.
-. Test the questions against the model.
-. Test scalability.
-
-[.notes]
---
-Building the initial model is a multi-step process.
-We find it is extremely important to be disciplined about this.
-If you do, you tend to get to a first model faster, that model better suits your documented needs, and that model is usually simple to understand.
-It will almost certainly not be perfect, and will need to change in response to shifting needs and a deepening understanding of the domain, use case, and capabilities of Neo4j.
-But recall that modifying a data remodel in Neo4j is relatively inexpensive.
-This fact reduces the pain and risk of taking a narrow approach to the first model.
-
-Later in this training, you will learn how to identify weaknesses in a model, and how to improve the existing design.
-
-[NOTE]
-Every organization has their own standards for how requirements are documented. You will not be learning how to document requirements, but rather focus on the model itself.
---
-
-== Step 1:  Understanding the domain
+Your model should address:
 
 [square]
-* Describe the application in detail.
-* Identify the stakeholders and  developers of the application.
-* Identify the users of the application (people, systems).
-* Enumerate the use cases that are agreed upon by all stakeholders where users are part of the use case.
+* Uniqueness of nodes
+* Complex data
 
+=== Uniqueness of nodes: before
+
+image::UniquenessBestPracticeBefore.png[UniquenessBestPracticeBefore,width=900,align=center]
+
+[.small]
 [NOTE]
-No knowledge of the underlying implementation is required!
-
-
-=== Example domain: Bill of Materials
-
-image::BeyondPLM.png[BeyondPLM,width=900,align=center]
+The Country nodes are considered *super nodes* (a node with lots of fan-in or fan-out). You need to be careful about using them in your design and developers in particular need to be mindful of queries that might select all paths in or out of the super node.
 
 [.notes]
 --
-From Wikipedia:
+In models like this one, an address should be uniquely identified because it should represent a single point of data in the graph.
+This is important in fraud detection applications where variations of the same address may be used to make a fraudulent transaction against the application.
 
-A bill of materials or product structure (sometimes bill of material, BOM or associated list) is a list of the raw materials, sub-assemblies, intermediate assemblies, sub-components, parts, and the quantities of each needed to manufacture an end product.
-A BOM may be used for communication between manufacturing partners or confined to a single manufacturing plant.
-A bill of materials is often tied to a production order whose issuance may generate reservations for components in the bill of materials that are in stock and requisitions for components that are not in stock.
+In this particular example, it is clear from the wider context that the various 500 Main St nodes are all distinct places.
+We also see that postal code is not unique and we want to provide uniqueness to it by adding the country.
+--
 
-A BOM can define products as they are designed (engineering bill of materials), as they are ordered (sales bill of materials), as they are built (manufacturing bill of materials), or as they are maintained (service bill of materials).
-The different types of BOMs depend on the business need and use for which they are intended.
-In process industries, the BOM is also known as the formula, recipe, or ingredients list.
-The phrase "bill of material" (or "BOM") is frequently used by engineers as an adjective to refer not to the literal bill, but to the current production configuration of a product, to distinguish it from modified or improved versions under study or in test.
+=== Uniqueness of nodes: after
+
+image::UniquenessBestPracticeAfter.png[UniquenessBestPracticeAfter,width=900,align=center]
+
+[.notes]
+--
+Here is a solution where we have ensured that the Address and PostalCode nodes are unique.
+
+We consider it a best practice to always have a property (or set of properties) that uniquely identify a node.
+Here, we have added a geolocation property to do so.
+The geolocation property will likely never be used in a query, but it can be used to differentiate nodes.
+
+There is a trade-off, however as adding uniqueness to a node such Address as it is harder to anchor just on the Line1 value, and may be more difficult to modify the graph data later.
+--
+
+=== Complex data
+
+image::ComplexData1.png[ComplexData1,width=900,align=center]
+
+
+[.notes]
+--
+You need to strike a balance between number of properties that represent complex data vs. multiple nodes and relationships.
+
+Here we have a property node that contains properties that contain complex data.
+--
+
+=== Use fanout judiciously for complex data
+
+image::ComplexData2.png[ComplexData2,width=900,align=center]
+
+[square]
+[small]
+* Reduce property duplication.
+* Reduce gather-and-inspect.
+
+[.notes]
+--
+Here we show an extreme implementation of fanout.
+For modeling complex data, the previous example with all properties in a node and this example where each property is in its own node are usually suboptimal.
+
+In general, you use fanout to do one of two things.
+
+. Reduce duplication of properties. Instead of having a repeated property on every node, you can instead have all of those nodes connected to a shared node with that property.  This can make data updates massively easier.
+. Reduce gather-and-inspect behavior during a traversal.  In the one node example, if we want to find every address in the city of Axebridge, we would need to check the properties on EVERY Person node, then discard most of them.  This is grossly inefficient.  In this multiple node case, this is a simple matter of locating the singular Axebridge node, and traversing to every Address node connected to it.  This model has no “wasted” hops.
+
+As a result, you generally use fanout for anchors and navigators.
+You almost never see fanout used for output, unique identifier, or decorator properties, because it makes traversal a few hops longer for no real benefit.
+This is why this maximum-fanout case is usually undesirable.
+It is almost never the case that *every* property is an anchor or navigator!
+--
+
+== Best practices for modeling relationships
+
+Your model should address:
+
+[square]
+* Using specific relationship types.
+* Reducing symmetric relationships.
+* Using types vs. properties.
+
+=== Using specific relationship types
+
+image::SpecificRelationships.png[SpecificRelationships,width=900,align=center]
+
+
+[.notes]
+--
+Being specific with property types allows you to reduce gather-and-inspect behavior.
+In this case, if you are only interested in what libraries will be INSTALLED by an app, the specific types on the right saves you some wasted traversal.
+--
+
+=== But... not too specific
+
+image::SpecificRelationships2.png[SpecificRelationships2,width=900,align=center]
+
+
+[.notes]
+--
+But it is possible to be *too* specific!
+The model on the right makes it impossible to write generalized queries.
+If you want to find every person who works at a given address, you would need to write a massive WHERE clause (using OR) to include every person’s name in the relationship type
+--
+
+=== No symmetric relationships
+
+image::SymmetricRelationships.png[SymmetricRelationships,width=900,align=center]
+
+[.notes]
+--
+Semantically symmetric relationships present two problems.
+
+First, they are a form of needless data duplication.
+PARENT_OF and CHILD_OF mean exactly the same thing.
+You cannot have one be true and the other not.
+
+Second, they allow you to violate the Cypher expectation of relationship uniqueness.
+Semantically, you have two identical relationships--they just look different technically.
+This allows you to traverse the *same* relationship twice.
+
+Relationships require space in the graph so minimizing their
+numbers is always a good thing.
+--
+
+=== Semantics of symmetry are important
+
+image::SymmetricRelationships2.png[SymmetricRelationships2,width=900,align=center]
+
+[.notes]
+--
+Not all mutual relationships are semantically symmetric.
+
+Here is an example where the direction of the FOLLOWS relationship on Twitter is significant.
+It matters who has followed who.
+--
+
+=== Using types vs. properties
+
+image::TypesVSProperties.png[TypesVSProperties,width=900,align=center]
+
+[.notes]
+--
+Both of these models represent the same idea in different ways.
+Neither is strictly superior; both are optimized for a certain kind of question.
+
+For example, if you want to find all LOVES relationships, but ignore the weaker LIKES ones, the top model is best.
+Traversal will not involve any gather-and-inspect.
+On the other hand, if you want to rank the strength of all relationships, the below model is better.
+The Cypher string required is much simpler, and we know there will not be any gather-and-inspect discards because we want everything anyway.
+--
+
+== Property best practices
+
+[small]
+[square]
+* Property lookups have a cost.
+* Parsing a complex property adds more cost.
+
+image::ComplexData1.png[ComplexData1,width=900,align=center]
+
+[small]
+[square]
+* Anchors and navigators should be as simple as possible.
+* Identifiers, outputs, and decoration are OK as complex values.
+
+[.notes]
+--
+Both of these models represent the same idea in different ways.
+Neither is strictly superior; both are optimized for a certain kind of question.
+
+For example, if you want to find all LOVES relationships, but ignore the weaker LIKES ones, the top model is best.
+Traversal will not involve any gather-and-inspect.
+On the other hand, if you want to rank the strength of all relationships, the below model is better.
+The Cypher string required is much simpler, and we know there will not be any gather-and-inspect discards because we want everything anyway.
 --
 
 === Example BOM use cases
