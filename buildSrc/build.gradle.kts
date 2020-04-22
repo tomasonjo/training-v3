@@ -39,13 +39,6 @@ gradlePlugin {
         implementationClass = "com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin"
       }
     }
-    if (isPluginEnabled("wordpress")) {
-      create("wordpressPlugin") {
-        id = "com.neo4j.gradle.wordpress.WordPressPlugin"
-        implementationClass = "com.neo4j.gradle.wordpress.WordPressPlugin"
-        version = "0.0.2"
-      }
-    }
   }
 }
 
@@ -71,15 +64,6 @@ pluginBundle {
         description = "A plugin to generate a very specific module descriptor file in a YAML format from and AsciiDoc file."
         version = "0.0.1"
         tags = listOf("neo4j")
-      }
-    }
-    if (isPluginEnabled("wordpress")) {
-      "wordpressPlugin" {
-        id = "com.neo4j.gradle.wordpress.WordPressPlugin"
-        displayName = "Publish posts and pages to WordPress"
-        description = "A plugin to publish posts or pages to WordPress from an HTML file and a YAML file that contains metadata"
-        version = "0.0.2"
-        tags = listOf("wordpress", "publish", "posts", "pages")
       }
     }
   }
