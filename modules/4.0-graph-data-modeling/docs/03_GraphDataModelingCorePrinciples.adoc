@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Understanding Modeling Core Principles
+:module-next-title: Common Graph Structures
 
 == About this module
 
@@ -15,7 +15,7 @@ At the end of this module, you should be able to:
 ** Nodes (entities)
 ** Relationships
 ** Properties
-* Describe data object accessibility
+* Describe data accessibility
 
 == Best practices for modeling nodes
 
@@ -86,12 +86,12 @@ For modeling complex data, the previous example with all properties in a node an
 In general, you use fanout to do one of two things.
 
 . Reduce duplication of properties. Instead of having a repeated property on every node, you can instead have all of those nodes connected to a shared node with that property.  This can make data updates massively easier.
-. Reduce gather-and-inspect behavior during a traversal.  In the one node example, if we want to find every address in the city of Axebridge, we would need to check the properties on EVERY Person node, then discard most of them.  This is grossly inefficient.  In this multiple node case, this is a simple matter of locating the singular Axebridge node, and traversing to every Address node connected to it.  This model has no “wasted” hops.
+. Reduce gather-and-inspect behavior during a traversal.  In the one node example, if we want to find every address in the city of Axebridge, we would need to check the properties on *every* Person node, then discard most of them.  This is grossly inefficient.  In this multiple node case, this is a simple matter of locating the singular Axebridge node, and traversing to every Address node connected to it.  This model has no “wasted” hops.
 
-As a result, you generally use fanout for anchors and navigators.
+As a result, you generally use fanout for anchors and traversing the graph.
 You almost never see fanout used for output, unique identifier, or decorator properties, because it makes traversal a few hops longer for no real benefit.
 This is why this maximum-fanout case is usually undesirable.
-It is almost never the case that *every* property is an anchor or navigator!
+It is almost never the case that *every* property is an anchor or used for the traversal!
 --
 
 == Best practices for modeling relationships
@@ -176,936 +176,133 @@ The Cypher string required is much simpler, and we know there will not be any ga
 == Property best practices
 
 [small]
+--
 [square]
 * Property lookups have a cost.
 * Parsing a complex property adds more cost.
+--
 
-image::ComplexData1.png[ComplexData1,width=900,align=center]
+image::ComplexData1.png[ComplexData1,width=400,align=center]
 
 [small]
+--
 [square]
-* Anchors and navigators should be as simple as possible.
+* Anchors and properties used for traversal should be as simple as possible.
 * Identifiers, outputs, and decoration are OK as complex values.
-
-[.notes]
---
-Both of these models represent the same idea in different ways.
-Neither is strictly superior; both are optimized for a certain kind of question.
-
-For example, if you want to find all LOVES relationships, but ignore the weaker LIKES ones, the top model is best.
-Traversal will not involve any gather-and-inspect.
-On the other hand, if you want to rank the strength of all relationships, the below model is better.
-The Cypher string required is much simpler, and we know there will not be any gather-and-inspect discards because we want everything anyway.
---
-
-=== Example BOM use cases
-
-[.statement]
---
-[square]
-* System produces list of parts to make a product.
-* System produces list of products that can be made with available parts.
-* System produces list of parts that are made with other parts.
-* User picks parts to make a product.
-* System creates a price for a product based upon the part prices.
-* System creates list of parts that need to be ordered.
---
-
-[NOTE]
-A product or part can be made of multiple parts of the same type.
-Some parts are made from other parts (sub-assembly).
-
-
-[.notes]
---
-This is a [.underline]#very small fraction# of the use cases for the BOM application.
---
-
-== Step 2: Create high-level sample data
-
-. Understand the domain.
-. [.big]#*Create high-level sample data.*#
-. Define specific questions for the application.
-. Identify entities.
-. Identify connections between entities.
-. Test the questions against the model.
-. Test scalability.
-
-[.notes]
---
-Sample data need not be expansive, detailed, or even of particularly high quality.
-It simply needs to represent the broad shape of the information you would expect to find in the real data.
-
-Sample data can either be completely made up, or can be a sample pulled from a real dataset.
-If you’ve done the work to properly understand the domain, it should not strongly matter either way.
---
-
-=== BOM high-level sample data
-
-[.smaller]
---
-{set:cellbgcolor:lightgrey}
-[cols="30,20,20,30",stripes=none]
-|===
-h|Products
-h|Parts
-h|Assemblies
-h|Notes
-|Wood table 40"
-{set:cellbgcolor:white}
-|Wood top 40"
-|Leg assembly
-|Has 4 legs
-|Deluxe wood table 40"
-|Glass top 40"
-|Leg assembly
-|Has 4 legs
-|Wood table 60"
-|Wood top 60"
-|Leg assembly
-|Has 6 legs, table brace
-|Deluxe wood table 60"
-|Glass top 60"
-|Leg assembly
-|Has 6 legs, table brace
-|
-|Leg
-|
-|
-|
-|Leg foot
-|
-|
-|
-|M20 bolt
-|
-|
-|
-|M20 nut
-|
-|
-|
-|Leg plate
-|
-|Uses 2 bolts/nuts per leg
-|
-|Table brace
-|
-|
-|===
-{set:cellbgcolor!}
 --
 
 [.notes]
 --
-If you want your modeling process to be constructive, you must have enough data points for your domain so that you can understand the data that will be retrieved when the questions are asked.
+When talking about properties, every best practice has exceptions.
+In the case of property value complexity, it depends on how the property is used.
 
-The data is typically the "things" described in the use cases. You don't include "system" or "user" as part of the data.
+Anchors and traversal paths that use property values need to be parsed at query time.
+If the cost of parsing them is high, querying slows down.
+Other properties, though, just need to be returned as-is because they do not require parsing. Complexity there does not matter much.
+
+In other words, this "bad model" from before might actually  be OK.  If those addresses are never used as an anchor or for determining how to traverse the graph, and only as an output, then their complexity will not be an issue.
 --
 
-== Step 3: Define specific questions for the application
+== Data accessibility
 
-. Understand the domain.
-. Create high-level sample data.
-. [.big]#*Define specific questions for the application.*#
-. Identify entities.
-. Identify connections between entities.
-. Test the questions against the model.
-. Test scalability.
+For each query, how much work must Neo4j do to evaluate if the traversal represents a “good” path or a “bad” one?
 
-
-=== Sample questions for the BOM
-
-. What parts are needed to make Wood table 40"?
-. Do we have enough parts to make 100 Deluxe wood table 60"?
-. What products require a table brace?
-. How much will the parts cost to make product Wood table 60"?
-
-== Step 4 : Identify entities
-
-. Understand the domain.
-. Create high-level sample data.
-. Define specific questions for the application.
-. [big]#*Identify entities.*#
-. Identify connections between entities.
-. Test the questions against the model.
-. Test scalability.
-
-=== Identify entities from the questions
-
-[.small]
---
-Entities are the nouns in your application questions:
-
-. What [.underline]#ingredients# are used in a [.underline]#recipe#?
-. Who is married to this [.underline]#person#?
-
-image::Entities.png[Entities,width=100,align=center]
-
-[square]
-* The generic nouns will often become labels in your model.
-* Proper nouns will often become values for properties.
-* Use domain knowledge to decide if entities need to be further grouped or differentiated.
-* In Neo4j Enterprise Edition, there is no limit to the number entities (nodes) in the graph. (Community Edition has a limit of 34B)
---
+image::AccessibilityOfData.png[AccessibilityOfData,width=900,align=center]
 
 [.notes]
 --
-As an example of using domain knowledge, you might happen to know that the distinction between wet and dry ingredients is important in your use case, or that vegetarian and vegan are important subgroups of recipe.
-These may not appear clearly in the specific application questions.
+Neo4j allows you to put data in labels, properties, and relationship types.
+In most cases, there is a way you can model your graph so that a given data item is in any one of these three locations.
+
+When designing or refactoring a model, you can estimate performance by checking how “accessible” the data items are that represent the important queries of your application.
 --
 
-=== Define properties
-
-Properties must serve one of two purposes:
-
-. Unique identification.
-. Answering one of the application questions.
-
-Otherwise, they are merely decoration.
-
-Properties are used in a Cypher query for:
-[square]
-* Anchoring (where to begin the query)
-* Navigation (traversing the graph)
-* Returning data
-
-[.notes]
---
-Identifiers serve two purposes:
-
-. They can be used to power unique constraints or `MERGE` operations.
-. They can be useful to help a human user understand what they are looking at in query outputs.
-
-There are subtly different best practices for properties serving each of those functions, which you will learn about later.
-For now, we simply group them all into this one generic bucket of usefulness.
-
-Decorators should usually be left out of the initial model.
-If they re not being used to answer questions, they are a waste of storage, and their presence can distract users and developers from the information that is actually important.
-Remember that we endorse a narrow, focused approach to model building, based on the relative ease of modifying a graph data model.
-
-However, it can be beneficial to include decorators when you move to production.
-Not because they will be used, but because, if all information is locally available to Neo4j, refactoring a model later may not require importing data from its original source.
---
-
-[.student-exercise]
-== Exercise 1: Identifying entities for the BOM application
-
-Define the entities and properties from these questions:
-
-. What parts are needed to make Wood table 40"?
-. Do we have enough parts to make 100 Deluxe wood table 60"?
-. What products require a table brace?
-. How much will the parts cost to make product Wood table 60"?
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Prompt the students to identify the entities from these questions as a group.
-
-Direct them to find labels first.  Then, go through the list of entities and ask for identifier and question-answering properties for each.  If someone proposes a decorator, note it as such, and do not keep it.
-
-If anyone start thinking about connections, remind them to stay narrowly focused on entities.  Reinforce the importance of staying disciplined.
-
-Here is the solution:
-
-*Product*
-[square]
-* name
-* productId
-
-
-*Part*
-[square]
-* name
-* partNumber
-* price
-
-
-*Part, Assembly*
-[square]
-* name
-* partNumber
-* price
---
-
-endif::[]
-
-== Exercise 1 solution
-
-[.small]
---
-*Product*
-[square]
-* name
-* productId
-
-
-*Part*
-[square]
-* name
-* partNumber
-* price
-
-
-*Part, Assembly*
-[square]
-* name
-* partNumber
-* price
---
-
-
-[.notes]
---
-Assembly is the tricky one--it does not appear in the questions, and you must use domain knowledge to understand why it is needed.
-
-Remember that your first model is never perfect, and that is OK because modifying the model in its early stages is relatively easy.
---
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Highlight the strengths and weaknesses of their design choices later, when we start to evaluate the model against our questions.
---
-endif::[]
-
-[.slide-title.has-green-background.has-team-background]
-== Guided Exercise: Using the Arrow tool
-
-ifdef::backend-html5,backend-pdf[]
-Follow along with this video to learn how to begin using the Arrow tool for graph data modeling.
-endif::[]
-
-ifdef::backend-pdf[]
-https://youtu.be/NB184T-S46w
-endif::[]
-
-ifdef::backend-revealjs[]
-https://youtu.be/NB184T-S46w
-endif::[]
-
-ifdef::backend-html5[]
-[.center]
-video::NB184T-S46w[youtube,width=560,height=315]
-endif::[]
-
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Show the students how to get started with the Arrow tool and encourage them to follow along on their laptops:
-
-. Go to http://www.apcjones.com/arrows/
-. Double-click the existing node and add a Caption to it of *Person*.
-. Add the properties: *name: "Tom Jones", birthyear: 1990*
-. Add another node by clicking the Node button.
-. Double-click the new node and add a Caption to it of *Person*.
-. Add the properties:  *name: "Mary Jones", birthyear: 1995*
-. Grab the edge of the Tom Jones node and drag it over to the Mary Jones node to create the relationship.
-. Double-click the relationship and add the Type *MARRIED".
-. Add the property:  *since: 2015*
-. Add another node by clicking the Node button.
-. Double-click the new node and add a Caption to it of *Location*
-. Add the property:  *address: "123 Main Street"*
-. Drag the edge of the Tom Jones node to the Location property to create the relationship.
-. Double-click the relationship and add a Caption to it of *LIVES_AT*.
-. Drag the edge of the Mary Jones node to the Location property to create the relationship.
-. Double-click the relationship and add a Caption to it of *LIVES_AT*.
-. Show them that they can download their model to an SVG file.
-. Show them that they can view the markup and save it into a text file.
-
-The resulting model should appear as follows:
-
-image::ArrowsDemo.png[ArrowsDemo,width=500,align=center]
-
-Here is the video:  https://youtu.be/NB184T-S46w
-
---
-endif::[]
-
-[.student-exercise]
-== Exercise 2: Creating the BOM entity model in the Arrow tool
-
-Use the entities you identified earlier for the BOM application and create them in the Arrow tool.
-
-Make sure you include properties for the nodes and specify the types for the properties, rather than values.
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Invite everyone to create the BOM entities on their own in the Arrow tool.
-Do this yourself also.
-For Properties, encourage folks to use “expected data type” as property values; e.g., integer, String, decimal, etc.
-
-If you do not want to do all the clicking and typing, copy this markup:
-
-<ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-262.3812669868761" data-y="-40.13742460863777">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>productID</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-202.58837695145493" data-y="24.371374691303693">
-    <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-</ul>
---
-endif::[]
-
-== Exercise 2 solution
-
-ifndef::backend-revealjs[]
-Here is the Arrow tool markup for the solution:
-
-[source]
-----
-<ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-262.3812669868761" data-y="-40.13742460863777">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>productID</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-202.58837695145493" data-y="24.371374691303693">
-    <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-</ul>
-----
-endif::[]
-
-Here is what it should look like in the UI of the Arrow tool:
-
-image::Exercise2Solution.png[Exercise2Solution,width=1000,align=center]
-
-== Step 5: Identify connections between entities
-
-. Understand the domain.
-. Create high-level sample data.
-. Define specific questions for the application.
-. Identify entities.
-. [big]#*Identify connections between entities.*#
-. Test the questions against the model.
-. Test scalability.
-
-=== Identify connections between entities
-
-Connections are the verbs in your application questions:
-
-. What ingredients are [.underline]#used# in a recipe?
-
-image::Uses.png[Uses,width=300,align=center]
-
-. Who is [.underline]#married# to this person?
-
-image::Married.png[Married,width=300,align=center]
-
-[.notes]
---
-At a glance, connections are straightforward things, but their micro- and macro-design are arguably the most critical factors in graph performance.
-Using “connections are verbs” is a fine shorthand to get started, but there are other important considerations that will be discussed later in this training.
---
-
-=== Naming relationships
-
-[square]
-* Stakeholders must agree upon name (type for the relationship).
-* Avoid names that could be construed as nouns (for example email).
-* Neo4j has a limit of 16M relationship types in Enterprise Edition (64K in Community Edition).
+=== Hierarchy of accessibility
 
 [.is-half.left]
 --
-Do [.underline]#not# do this:
-
-image::BadRelationshipNames.png[BadRelationshipNames,width=200,align=center]
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=900,align=center]
 --
 
 [.is-half.right]
 --
-Instead do this:
-
-image::GoodRelationshipNames.png[GoodRelationshipNames,width=300,align=center]
+. Anchor node label, anchor node properties (indexed)
+. Relationship types
+. Anchor node properties (non-indexed)
+. Downstream node labels
+. Relationship properties, downstream node properties
 --
 
 [.notes]
 --
-Choosing good names is vital.
-It needs to be something that is intuitive to stakeholders and developers alike, cannot be confused as an entity name, and is specific enough to make traversal efficient but general enough to make the Cypher easy to write.
-You will learn more about later in this training when you learn about the core principles of graph data modeling.
+Anchor node data which could be a node label or a node property value is cheapest to access--it involves no traversal at all, and thus no wasted traversal.
+Indexed anchor properties are much more accessible than non-indexed anchor properties.
+
+Neo4j is designed for easy traversal, so relationship types are also very cheap to access.
+In fact, we recommend using types in Cypher queries always, because the cost of the type lookup is minimal.
+And if you do not use a type name in your traversal path, you will likely use something even less accessible, like downstream properties.
+
+Downstream information such as labels and properties further down the traversal path are the most expensive thing to access. The further downstream, the more expensive the are.
+That is not to say they are necessarily deal-breakers, but elevating downstream data via a model change is one of the most reliable ways to improve query performance.
+For example, reduce how far downstream a query traversal must go to get the necessary data, or change the model so that the downstream data is available in a relationship type instead of a node label or property.
+
+Keep in mind, however, that query performance is not the *only* metric that matters!
+Query simplicity, write/update speed, and the human-intuitiveness of a model are also important factors.
+When considering whether to elevate some data along this hierarchy, speed must be weighed against the impact this will have on those other factors.
 --
 
-=== Direction and type
-
-Direction and type are required in Neo4j.
-
-Choose direction (and type) based on the expected questions:
-
-. What episode follows The Ark in Space? (NEXT)
-. What episode came before Genesis of the Daleks? (PREVIOUS)
-
-image::DrWho.png[DrWho,width=1200,align=center]
-
-[.notes]
---
-These are episodes of the Dr. Who BBC series, season 12, aired in 1975.
-
-A relationship can be modeled in either direction, with no effect on performance.
-Naturally, the type would have to differ.
-Here, we have chosen left-to-right relationships of the type NEXT.
-We could equally well have chosen right-to-left relationships of the type PREVIOUS.
-This has no effect on query performance, but the Cypher used for each variant will differ.
-Choose whichever variant makes the Cypher more intuitive for developers to write, based on your expectations for what people will ask.
---
-
-=== How much fanout will a node have?
-
-image::Fanout.png[Fanout,width=1300,align=center]
-
-[.notes]
---
-Here, we have entities (Person, Address) represented not as a single node, but as a network or linked nodes.
-This is an extreme example of fanout, and is almost certainly overkill for any real-life solution, but some amount of fanout can be very useful.
-
-For example, splitting last names onto separate nodes helps answer the question, “Who has the last name Scott?”
-Similarly, having cities as separate nodes assists with the question, “Who lives in the same city as Patrick Scott?”
-
-The main risk about fanout is that it can lead to very dense nodes, or supernodes.
-Supernodes need to be handled carefully.
-
-ifdef::backend-revealjs[]
-Note:
-This model is often troubling to folks deeply immersed in RDBMS thinking.
-Remind them what was discussed in the Index-Free Adjacency module of the Intro course: in a graph database, it is generally better to have lots of small objects than a few large objects.  Fanout like this is emblematic of that.
-endif::[]
---
-
-[.student-exercise]
-== Exercise 3: Adding relationships to the model
-
-ifdef::backend-revealjs[]
-Follow the instructions on the next slide.
-endif::[]
-
-=== Exercise 3 instructions
-
-[small]
---
-Here are the questions we need to answer for our BOM application that you have already seen:
-
-. What parts are needed to make Wood table 40"?
-. Do we have enough parts to make 100 Deluxe wood table 60"?
-. What products require a table brace?
-. How much will the parts cost to make product Wood table 60"?
-
-And here is the entity model:
---
-
-image::Exercise2Solution.png[Exercise2Solution,width=300,align=center]
-
-[small]
---
-Using the Arrow tool add the relationships between the entities.
---
-
-[.notes]
---
-Focus on type and directions first.  Then check for any qualifiers that will help answer questions.
-Should these qualifiers be types or properties?  Why?
---
-
-=== Exercise 3 solution
-
-Here is what your graph data model might look like with relationships added:
-
-image::Exercise3Solution.png[Exercise3Solution,width=1200,align=center]
-
-[.notes]
---
-
-Here is the markup:
-
-[source]
-----
-<ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="283.8195928886757" data-y="-6.306578837493484">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-333.52554559384123" data-y="-6.306578837493484">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>productID</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="9.793659703648462" data-y="191.47083299670058">
-    <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="relationship" data-from="1" data-to="0">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>integer</dd></dl></li>
-  <li class="relationship" data-from="1" data-to="2">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>integer</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="0">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>integer</dd></dl></li>
-</ul>
-----
-
-Again, your model need not exactly match this one.
-Remember, the first model is never perfect.
-
-ifdef::backend-revealjs[]
-Highlight the strengths and weaknesses of their design choices later, when we start to evaluate the model against our questions.
-endif::[]
---
-
-== Example: Detailed sample data for the BOM application
-
-[.notes]
---
-Thus far, you have defined the entities and relationships for the BOM application.
-Just to fill in more details for the data model, here is more sample data that might be useful in furthering the design of the model.
-This particular sample data is useful, especially when discussing how well the design addresses the questions and how well the application can scale.
---
-
-ifndef::backend-revealjs[]
-Here is the Arrow tool markup for the sample data for the BOM application:
-
-[source]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 60"'</dd><dt>productId</dt><dd>600</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-345.4412714640299" data-y="17.62464618682847">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 40"'</dd><dt>productId</dt><dd>401</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-345.4412714640299" data-y="199.74443022410088">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 40"'</dd><dt>productId</dt><dd>400</dd></dl></li>
-  <li class="node" data-node-id="3" data-x="-345.4412714640299" data-y="529.8155937194823">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 60"'</dd><dt>productId</dt><dd>601</dd></dl></li>
-  <li class="node" data-node-id="4" data-x="30.527327269315723" data-y="63.11414146423326">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 40"'</dd><dt>partNumber</dt><dd>100400</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="5" data-x="609.4605747858683" data-y="551.8277514775586">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 nut'</dd><dt>partNumber</dt><dd>220002</dd><dt>price</dt><dd>0.30</dd></dl></li>
-  <li class="node" data-node-id="6" data-x="30.527327269315723" data-y="605.0613317489621">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Table brace'</dd><dt>partNumber</dt><dd>100002</dd><dt>price</dt><dd>43.25</dd></dl></li>
-  <li class="node" data-node-id="7" data-x="188.62522285183277" data-y="310.58522319793684">
-    <span class="caption">Part, Assembly</span><dl class="properties"><dt>name</dt><dd>'Leg assembly'</dd><dt>parNumber</dt><dd>100001</dd><dt>price</dt><dd>40.44</dd></dl></li>
-  <li class="node" data-node-id="8" data-x="609.4605747858683" data-y="429.5683333079018">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 bolt'</dd><dt>partNumber</dt><dd>220001</dd><dt>price</dt><dd>0.55</dd></dl></li>
-  <li class="node" data-node-id="9" data-x="609.4605747858683" data-y="199.74443022410088">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg foot'</dd><dt>partNumber</dt><dd>101002</dd><dt>price</dt><dd>3.25</dd></dl></li>
-  <li class="node" data-node-id="10" data-x="609.4605747858683" data-y="98.58790914217629">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg plate'</dd><dt>partNumber</dt><dd>101001</dd><dt>price</dt><dd>4:50</dd></dl></li>
-  <li class="node" data-node-id="11" data-x="609.4605747858683" data-y="310.58522319793684">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg'</dd><dt>partNumber</dt><dd>100100</dd><dt>price</dt><dd>30.99</dd></dl></li>
-  <li class="node" data-node-id="12" data-x="30.527327269315723" data-y="678.7611147562659">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 60"'</dd><dt>partNumber</dt><dd>100601</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="13" data-x="30.527327269315723" data-y="-14.911466916402228">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 40"'</dd><dt>partNumber</dt><dd>100401</dd><dt>price</dt><dd>250.99</dd></dl></li>
-  <li class="node" data-node-id="14" data-x="30.527327269315723" data-y="529.8155937194823">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 60"'</dd><dt>partNumber</dt><dd>100600</dd><dt>price</dt><dd>800.00</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="13">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="12">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="11">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="10">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="9">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="8">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="5">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-</ul>
-----
-endif::[]
-
-[small]
---
-Here is what the sample data might look like in the UI of the Arrow tool:
---
-
-image::SampleDataBOM.png[SampleDataBOM,width=800,align=center]
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Here is the markup for the sample data:
-
-<ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 60"'</dd><dt>productId</dt><dd>600</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-345.4412714640299" data-y="17.62464618682847">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 40"'</dd><dt>productId</dt><dd>401</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-345.4412714640299" data-y="199.74443022410088">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 40"'</dd><dt>productId</dt><dd>400</dd></dl></li>
-  <li class="node" data-node-id="3" data-x="-345.4412714640299" data-y="529.8155937194823">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 60"'</dd><dt>productId</dt><dd>601</dd></dl></li>
-  <li class="node" data-node-id="4" data-x="30.527327269315723" data-y="63.11414146423326">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 40"'</dd><dt>partNumber</dt><dd>100400</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="5" data-x="609.4605747858683" data-y="551.8277514775586">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 nut'</dd><dt>partNumber</dt><dd>220002</dd><dt>price</dt><dd>0.30</dd></dl></li>
-  <li class="node" data-node-id="6" data-x="30.527327269315723" data-y="605.0613317489621">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Table brace'</dd><dt>partNumber</dt><dd>100002</dd><dt>price</dt><dd>43.25</dd></dl></li>
-  <li class="node" data-node-id="7" data-x="188.62522285183277" data-y="310.58522319793684">
-    <span class="caption">Part, Assembly</span><dl class="properties"><dt>name</dt><dd>'Leg assembly'</dd><dt>parNumber</dt><dd>100001</dd><dt>price</dt><dd>40.44</dd></dl></li>
-  <li class="node" data-node-id="8" data-x="609.4605747858683" data-y="429.5683333079018">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 bolt'</dd><dt>partNumber</dt><dd>220001</dd><dt>price</dt><dd>0.55</dd></dl></li>
-  <li class="node" data-node-id="9" data-x="609.4605747858683" data-y="199.74443022410088">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg foot'</dd><dt>partNumber</dt><dd>101002</dd><dt>price</dt><dd>3.25</dd></dl></li>
-  <li class="node" data-node-id="10" data-x="609.4605747858683" data-y="98.58790914217629">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg plate'</dd><dt>partNumber</dt><dd>101001</dd><dt>price</dt><dd>4:50</dd></dl></li>
-  <li class="node" data-node-id="11" data-x="609.4605747858683" data-y="310.58522319793684">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg'</dd><dt>partNumber</dt><dd>100100</dd><dt>price</dt><dd>30.99</dd></dl></li>
-  <li class="node" data-node-id="12" data-x="30.527327269315723" data-y="678.7611147562659">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 60"'</dd><dt>partNumber</dt><dd>100601</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="13" data-x="30.527327269315723" data-y="-14.911466916402228">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 40"'</dd><dt>partNumber</dt><dd>100401</dd><dt>price</dt><dd>250.99</dd></dl></li>
-  <li class="node" data-node-id="14" data-x="30.527327269315723" data-y="529.8155937194823">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 60"'</dd><dt>partNumber</dt><dd>100600</dd><dt>price</dt><dd>800.00</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="13">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="12">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="11">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="10">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="9">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="8">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="5">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-</ul>
---
-endif::[]
-
-== Step 6: Test the questions against the model
-
-. Understand the domain.
-. Create high-level sample data.
-. Define specific questions for the application.
-. Identify entities.
-. Identify connections between entities.
-. [big]#*Test the questions against the model.*#
-. Test scalability.
-
-=== Testing the model - 1
-
-What parts are needed to make Wood table 40"?
-
-image::TestModel1.png[TestModel1,width=1000,align=center]
-
-[.notes]
---
-To answer the first question, we would anchor on the Wood table 40" node, and iteratively traverse all CONTAINS  until we get all of the parts required to make the product.
-Multiply by the quantity property as you go.
---
-=== Testing the model - 2
-
-Do we have enough parts to make 100x Deluxe wood table 60"?
-
-image::TestModel2.png[TestModel2,width=1000,align=center]
-
-[.notes]
---
-The application code that supports this question would need to come up with the inventory of parts needed to assemble the Deluxe wood table 60" and then multiply the parts list by 100.
-The application would then be integrated with an inventory application to truly answer the question.
-
-Frequently, during the entity identification stage, the question of inventory comes up.
-Different people will advocate for or against it.
-Both cases work, but with different strengths and weaknesses.
-
-If inventory is in the graph, the application architecture can be  simpler--no need to integrate two data sources at query time.
-The downside is that stock numbers change frequently, and whenever they do, you will need to update the graph data.
-Neo4j is not specifically bad for frequent updates, but it offers no benefits in that area relative to other data management solutions.
-
-Ideologically, we at Neo4j see graph databases as a problem-solving complement to the existing data management paradigm.
-If you were maintaining stock data somewhere else anyway, there is no inherent need to move it into Neo4j.
---
-
-=== Testing the model - 3
-
-What products require a table brace?
-
-image::TestModel3.png[TestModel3,width=1000,align=center]
-
-[.notes]
---
-For this question, the application would anchor on the Part with the name table brace.
-Then it would traverse backwards along each CONTAINS to find the products that use it.
---
-
-==== Testing the model - 4
-
-How much will the parts cost to make Wood table 60"?
-
-image::TestModel4.png[TestModel4,width=1000,align=center]
-
-[.notes]
---
-We anchor on the Wood table 60" product, and iteratively  traverse each CONTAINS to the parts that the product contains.
-The application would simply add up the prices of the parts (multiplied by quantity when applicable) to come up with the total price.
-
-During the entity identification stage, there is often a debate about whether Assembly nodes should contain a price, or if price should be kept only on the Part leaf nodes.
-That debate may even extend to whether price should be kept on Product nodes.
-Again, there is no “right” answer, only tradeoffs to be aware of.
-
-If price is only on Parts, then this query needs to traverse further in order to find the answer.
-The benefit is that data updates are easier.
-If Assembly has a price, then that price is affected by any price changes of the sub-parts; ditto if price is on Products.
-The added complexity in data maintenance is generally undesirable.
-However, one big benefit of putting price at the Assembly level is that the Cypher for this question is simpler and more predictable.
-You can guarantee that Price is available exactly one hop away from the anchor node in all cases.
-This modeler felt that that benefit balanced out the added data maintenance expense.
---
-
-== Step 7: Test scalability
-
-. Understand the domain.
-. Create high-level sample data.
-. Define specific questions for the application.
-. Identify entities.
-. Identify connections between entities.
-. Test the questions against the model.
-. [big]#*Test scalability.*#
-
-=== Testing scalability
-
-[.is-one-third.left]
---
-[.statement]
-Here are some questions you should answer:
-
-[square]
-[small]
-* How many products?
-* How many parts?
-* How often are products added?
-* How often do prices change?
-* Are prices based upon time?
-* Is inventory part of the model?
---
-
-[.is-two-thirds.right]
---
-image::Scalable.png[Scalable,width=900,align=center]
---
-
-[.notes]
---
-Scalability questions should be asked by stakeholders and developers.
-Developers will have a better idea of the challenges with implementing the model as it scales so they are a key player in doing the scalability analysis.
-Stakeholders would have a better idea of how many products and parts, how often prices change etc.
-
-Here, we are only looking for conceptual scalability concerns.
-We also do this at the level of individual query performance during the implemtation of the graph data model.
-
---
 [.quiz]
 == Check your understanding
 
 === Question 1
 
 [.statement]
-What component of a graph data model is used to model the nouns of the questions for the domain?
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] Relationship
-- [ ] Property
-- [x] Entity
-- [ ] Data source
-
-=== Question 2
-
-[.statement]
-What component of a graph data model is used to model the verbs of the questions for the domain?
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [x] Relationship
-- [ ] Property
-- [ ] Entity
-- [ ] Behavior
-
-=== Question 3
-
-[.statement]
-When you create the model for your application, at a minumum, what must you specify for a relationship?
+What are some benefits of using fanout for your nodes?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Type
-- [ ] Weight
-- [x] Direction
-- [x] From and to entities
+- [ ] Reduces the number of nodes in the graph.
+- [x] Reduces duplication of property values.
+- [ ] Reduces the number of relationships defined in the graph.
+- [x] Reduces gather-and-inspect traversals during a query.
+
+=== Question 2
+
+[.statement]
+Why is naming relationship types to be as specific as possible a benefit?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [ ] Reduces the number of relationships in the graph.
+- [x] Reduces traversals through nodes that are not necessary for the query.
+- [x] Reduces gather-and-inspect traversals during a query.
+- [ ] Reduces the number of nodes in the graph.
+
+=== Question 3
+
+[.statement]
+Which data should be most accessible for your queries?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Anchor node label
+- [x] Anchor node property that has an index
+- [ ] Node property downstream that has an index
+- [ ] Relationship properties
 
 [.summary]
 == Summary
 
 You should now be able to:
 [square]
-* Describe the domain for a model.
-* Define the questions for the domain.
-* Identify entities from the questions for the domain.
-* Use the Arrows Tool to model the domain.
-* Identify the connections between entities.
-* Describe how to test the initial model.
+* Describe graph data modeling best practices for modeling:
+** Nodes (entities)
+** Relationships
+** Properties
+* Describe data accessibility

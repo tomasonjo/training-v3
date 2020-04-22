@@ -86,7 +86,7 @@ RETURN p
 
 [.notes]
 --
-Traversal means anchoring a query based upon a property, then traversing the graph to satisfy the query.
+Traversal means anchoring a query based upon a property value, then traversing the graph to satisfy the query.
 In this example, the address property of the Residence node is used to determine where to anchor the query.
 Then, the _OWNS_ relationship is traversed to retrieve the qualifying nodes.
 A relationship is only traversed once in a query.

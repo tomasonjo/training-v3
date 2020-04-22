@@ -232,31 +232,31 @@ These may not appear clearly in the specific application questions.
 
 === Define properties
 
-Properties must serve one of two purposes:
+Properties serve one of two purposes:
 
 . Unique identification.
 . Answering one of the application questions.
 
-Otherwise, they are merely decoration.
+Otherwise, they are merely "decoration".
 
 Properties are used in a Cypher query for:
 [square]
 * Anchoring (where to begin the query)
-* Navigation (traversing the graph)
-* Returning data
+* Traversing the graph (navigation)
+* Returning data from the query
 
 [.notes]
 --
 Identifiers serve two purposes:
 
 . They can be used to power unique constraints or `MERGE` operations.
-. They can be useful to help a human user understand what they are looking at in query outputs.
+. They can be useful to help a human user understand what they are looking at in query results.
 
 There are subtly different best practices for properties serving each of those functions, which you will learn about later.
 For now, we simply group them all into this one generic bucket of usefulness.
 
 Decorators should usually be left out of the initial model.
-If they re not being used to answer questions, they are a waste of storage, and their presence can distract users and developers from the information that is actually important.
+If they are not being used to answer questions, they are a waste of storage, and their presence can distract users and developers from the information that is actually important.
 Remember that we endorse a narrow, focused approach to model building, based on the relative ease of modifying a graph data model.
 
 However, it can be beneficial to include decorators when you move to production.

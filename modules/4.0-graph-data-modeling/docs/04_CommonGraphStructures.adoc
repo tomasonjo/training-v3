@@ -1,0 +1,162 @@
+= Common Graph Structures
+:slug: 04-common-graph-structures
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Refactoring/Evolving a Data Model
+
+== About this module
+
+At the end of this module, you should be able to:
+[square]
+* Describe common graph structures used in modeling:
+** Intermediate nodes
+** Linked lists
+** Timeline trees
+** Multiple structures in a single graph
+
+== Intermediate nodes
+
+[.notes]
+--
+You sometimes find cases where you need to connect more data to a relationship than can be fully captured in the properties.
+In other words, you want a relationship that connects more than two nodes.
+Mathematics allows this, with the concept of a hyperedge.
+This is impossible in Neo4j
+--
+
+[small]
+--
+You create intermediate nodes when you need to:
+
+[square]
+* Connect more than two nodes in a single context.
+** Hyperedges (n-ary relationships)
+* Relate something to a relationship.
+--
+
+image::IntermediateNodesBefore.png[IntermediateNodesBefore,width=900,align=center]
+
+[.notes]
+--
+Here we have the _WORKED_AT relationship that has the from and to properties, but we need to associate the role with this period of work.
+In Neo4j, there is no way to create a relationship that connects a relationship to a node.
+Relationships can only connect nodes.
+--
+
+=== Using intermediate nodes
+
+image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=900,align=center]
+
+[.notes]
+--
+The solution is to add a connection point in the middle of the relationship.
+Since nodes are connection points, you simply create a node in the middle of the relationship.
+
+In this example, we replace the WORKED_AT relationship with an Employment intermediate node.
+This provides a connection point that allows us  connect any amount of information to Patrick’s term of employment at Acme.
+--
+
+=== Intermediate nodes: sharing context
+
+image::IntermediateNodesSharingContext.png[IntermediateNodesSharingContext,width=900,align=center]
+
+[.notes]
+--
+This model allows different employment events to share contextual information.
+Person nodes can have a shared Role or Company, and allow us to very easily  trace either the full details of a single person’s career, or the overlap between different individuals.
+--
+
+=== Intermediate nodes: sharing data
+
+image::IntermediateNodesSharingData.png[IntermediateNodesSharingData,width=900,align=center]
+
+[.notes]
+--
+Intermediate nodes also allow you to deduplicate information.
+We mentioned a similar principle when we discussed fanout where splitting a property onto its own node allows you to reference it via a relationship instead of a repeated property.
+
+In this case, the Email intermediate node spares us having to repeat the email content on every single relationship.
+--
+
+=== Intermediate nodes: organizing data
+
+image::IntermediateNodesOrganizingData.png[IntermediateNodesOrganizingData,width=900,align=center]
+
+[.notes]
+--
+In addition, intermediate nodes can be invaluable organizing structures.
+This is a more expansive zoomed-out view of the same data as the previous example.
+The grey nodes are the Email intermediate nodes.
+
+When we model Email as a relationship, as on the left, we encounter two problems.
+First, Sarah’s node becomes extremely dense.
+For every single recipient of any message she writes, she gains another relationship.
+On the right, she only has one relationship per email, regardless of the number of recipients.
+Dense nodes can be tricky to work with.
+
+Second, it is difficult and expensive to determine who in Sarah’s recipient network has received a given message.
+In the left model, we need to traverse every relationship and check the email content to see which messages are shared.
+This specific case requires between six and nine “wasted” hops, depending on whether we are looking for the four-recipient message or the one-recipient message.
+On the right, with the Email intermediate node, we still need to check every message. But having done so, we can guarantee that every node connected to that email is a relevant one.
+There will only ever be three “wasted” hops.
+--
+
+== Linked lists
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What are some benefits of using fanout for your nodes?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [ ] Reduces the number of nodes in the graph.
+- [x] Reduces duplication of property values.
+- [ ] Reduces the number of relationships defined in the graph.
+- [x] Reduces gather-and-inspect traversals during a query.
+
+=== Question 2
+
+[.statement]
+Why is naming relationship types to be as specific as possible a benefit?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [ ] Reduces the number of relationships in the graph.
+- [x] Reduces traversals through nodes that are not necessary for the query.
+- [x] Reduces gather-and-inspect traversals during a query.
+- [ ] Reduces the number of nodes in the graph.
+
+=== Question 3
+
+[.statement]
+Which data should be most accessible for your queries?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Anchor node label
+- [x] Anchor node property that has an index
+- [ ] Node property downstream that has an index
+- [ ] Relationship properties
+
+[.summary]
+== Summary
+
+You should now be able to:
+[square]
+* Describe common graph structures used in modeling:
+** Intermediate nodes
+** Linked lists
+** Timeline trees
+** Multiple structures in a single graph
