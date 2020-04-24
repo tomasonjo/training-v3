@@ -306,7 +306,7 @@ Here is the solution:
 
 endif::[]
 
-== Exercise 1 solution
+=== Exercise 1 solution
 
 [.small]
 --
@@ -426,7 +426,7 @@ If you do not want to do all the clicking and typing, copy this markup:
 --
 endif::[]
 
-== Exercise 2 solution
+=== Exercise 2 solution
 
 ifndef::backend-revealjs[]
 Here is the Arrow tool markup for the solution:

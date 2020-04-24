@@ -36,7 +36,7 @@ You create intermediate nodes when you need to:
 * Relate something to a relationship.
 --
 
-image::IntermediateNodesBefore.png[IntermediateNodesBefore,width=900,align=center]
+image::IntermediateNodesBefore.png[IntermediateNodesBefore,width=600,align=center]
 
 [.notes]
 --
@@ -47,7 +47,7 @@ Relationships can only connect nodes.
 
 === Using intermediate nodes
 
-image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=900,align=center]
+image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=500,align=center]
 
 [.notes]
 --
@@ -104,6 +104,404 @@ There will only ever be three “wasted” hops.
 --
 
 == Linked lists
+
+[.notes]
+--
+Linked lists are useful whenever the sequence of objects matters.
+The typical pattern is to define relationships between sequential items with the names NEXT or PREVIOUS, although those words are not verbs.
+As always, choose one or the other based on the questions you expect to ask.
+--
+
+image::LinkedList1.png[LinkedList1,width=900,align=center]
+
+[.notes]
+--
+Linked lists are not unique to graphs.  They are a common pattern in lots of data modeling paradigms.
+In some of those paradigms, you see both the singly-linked list (above)  and the doubly-linked list (below).
+
+ifndef::backend-revealjs[]
+You should *never* use a doubly-linked list in Neo4j because doubly-linked lists use redundant symmetrical relationships.
+endif::[]
+--
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+Concept check:  Who can tell me why you should never use doubly-linked lists?
+
+Answer: Doubly-linked lists use redundant symmetrical relationships.  We discussed before why those are a bad idea in Neo4j.
+--
+endif::[]
+
+=== Interleaved linked list
+
+[.notes]
+--
+You can add complexity to linked lists.
+Sometimes, there are multiple ways you could sequence a set of items.
+--
+
+image::LinkedList2.png[LinkedList2,width=900,align=center]
+
+[.notes]
+--
+For example, the order in which TV show episodes are shown is not always the same order in which they were created.
+Here, we again have the episodes of Dr. Who season 12, but with two sequences: the order of airing (NEXT) and the order of production (NEXT_IN_PRODUCTION).
+--
+
+=== Head and tail of linked list
+
+[.notes]
+--
+Here is another pattern that uses a linked list.
+When working with linked list, there is generally a “parent” node that is used as the entry point.
+That parent almost always points to the first item in the sequence, using an appropriately named relationship.
+It may also point to the last item.
+For cases where you are tracking progress through the sequence, the parent node may also have a pointer to the “current” item.
+--
+
+image::LinkedList3.png[LinkedList3,width=900,align=center]
+
+[small]
+--
+Some possible use cases:
+[square]
+* Add episodes as they are broadcast.
+* Maintain pointer to first and last episodes.
+* Find all episodes broadcast so far.
+* Find latest episode broadcast so far.
+--
+
+== Timeline tree
+
+[.notes]
+--
+Trees are not complicated, but you will learn about one special kind of tree, the timeline tree.
+Timeline trees can be a useful structure when you want to use time as either an anchor or a navigational aid in your querying, and when the periods of time that interest you vary.
+
+The topmost node in the timeline is an “all time” node.
+That then subdivides into whatever time periods interest you.
+--
+
+image::TimeLineTree.png[TimeLineTree,width=900,align=center]
+
+[.notes]
+--
+Here, we have chosen years, months, and days; we could just have equally chosen quarters, weeks, hours, minutes, or anything else.
+All of our “data” nodes then link into the timeline tree at the appropriate leaf node.
+Here, we have connected every purchase to a day.
+
+With this structure, some otherwise-expensive time questions become easy.
+For example, finding all purchases in a given time periods, where the period of interest might be a day, a month, or a year, depending on circumstances.
+Simply anchor on the timleine at the appropriate time period of interest, then traverse downward through the tree.
+
+What is more interesting, though, is dealing with time when time is part of the traversal, but not the anchor.
+For example, looking for all purchases that happened within a some time period relative to another event.
+You anchor on the specified event, traverse into the timeline tree, traverse to the appropriate time period of interest, then traverse downward.
+Without a timeline structure in the graph, this kind of query frequently involves a lot of property lookups and inefficient gather-and-inspect.
+
+[NOTE]
+That is not to say that timeline trees are the go-to “best” method of expressing time!
+Quite the opposite--timeline trees consume a lot of space relative to the data they contain.
+Most often, even when time is an important part of the answer to a question, a simple property is sufficient.
+
+ifndef::backend-revealjs[]
+But I’m sharing this structure with you so that, in cases where a property alone is not good enough, you do not need to reinvent the concept of a timeline tree yourself.
+endif::[]
+--
+
+== Using multiple structures
+
+[.notes]
+--
+All of the structures you have learned about thus far are not entire models in their own right.
+They are tiny patterns with specific use cases.
+Modeling questions as a whole are usually larger and more complex than that.
+Frequently, you will see multiples of these structures used together in order to fully solve a problem.
+
+Here is one example.
+--
+
+image::MultipleStructures.png[MultipleStructurese,width=900,align=center]
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+In the next slides you will see the different structures within this single model.
+--
+endif::[]
+
+=== Using the timeline tree
+
+[.notes]
+--
+At the top, we have a timeline tree, subdivides into years and months.
+--
+
+image::PartialTimeLineTree.png[PartialTimeLineTree,width=900,align=center]
+
+=== Using intermediate nodes
+
+[.notes]
+--
+The relevant items connected to the timeline are Employment events, which link to the starting and ending months of that employment.
+Employment events themselves are intermediate nodes connecting people, companies, and job roles.
+In this case, the intermediate nodes are serving the dual purposes of reducing the density of Person nodes, and providing an attachment point for the timeline tree.
+--
+
+image::PartialIntermediateNodes.png[PartialIntermediateNodes,width=900,align=center]
+
+=== Using linked list
+
+image::PartialLinkedList.png[PartialLinkedList,width=900,align=center]
+
+[.notes]
+--
+Furthermore, the Employment events themselves are organized into linked lists for each person.  This allows us to represent the sequence of employment events in an individual’s career.
+--
+
+[.student-exercise]
+== Exercise 4: Model a Learning Management System (LMS)
+
+[.small]
+--
+Given a description of the domain, sample data, and the application questions:
+
+. Create the model (entities and connections) using the Arrow tool.
+** Look for any use cases that will use some common patterns you have learned about.
+[start=2]
+. Add sample data to the model using the Arrow tool and confirm questions can be answered using the model.
+--
+
+=== Exercise 4 instructions: The domain
+
+[.statement]
+--
+[square]
+* There are many courses in the LMS, each of which contains a number of lessons that must be completed in a specific order.
+* Every course grants a certificate upon completion.
+* This certificate has a term of validity.  When it expires, students must take the course again.
+* Students can enroll in as many simultaneous courses as they want to.
+* When a student logs in and chooses a course, the LMS must send them to their latest unfinished lesson.
+--
+
+=== Exercise 4 instructions: Sample data
+
+image::Ex4-SampleData.png[Ex4-SampleData,width=900,align=center]
+
+=== Exercise 4 instructions: Application questions
+
+. Which lesson(s) is Dan currently working on?
+. What are Alice’s current certifications?
+. Which lessons are in the Neo4j for Developers course?
+. What is the last lesson in the Introduction to Neo4j course?
+. Which lesson follows Graph Theory in the Neo4j for Developers course?
+. Who has completed Introduction to Neo4j?
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+If students feel overwhelmed, ask them to break down the problem.
+First model the course content, and only then add in the student interaction.
+Ask students to share their model as soon as they have a working “prototype.”
+Emphasize that model-building is iterative.
+If their model is imperfect, rather than telling them the better model, ask them questions that expose the weaknesses of their model relative to the application questions.
+
+Here is the markup for the model:
+<ul class="graph-diagram-markup" data-internal-scale="0.67" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-550.4655813128935" data-y="-1216.8149073094257">
+    <span class="caption">Student</span>
+  </li>
+  <li class="node" data-node-id="1" data-x="592.2255987630683" data-y="-808.4017464284152">
+    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>date</dd></dl></li>
+  <li class="node" data-node-id="2" data-x="1530.5288281421945" data-y="-188.47328130455">
+    <span class="caption">Course</span>
+  </li>
+  <li class="node" data-node-id="3" data-x="696.1411792240782" data-y="475.60253854551536">
+    <span class="caption">Lesson</span>
+  </li>
+  <li class="node" data-node-id="4" data-x="1562.4419933343002" data-y="475.60253854551536">
+    <span class="caption">Lesson</span>
+  </li>
+  <li class="node" data-node-id="5" data-x="2419.99523773733" data-y="475.60253854551536">
+    <span class="caption">Lesson</span>
+  </li>
+  <li class="node" data-node-id="6" data-x="2459.771940162705" data-y="-808.4017464284152">
+    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>integer</dd></dl></li>
+  <li class="relationship" data-from="4" data-to="5">
+    <span class="type">NEXT_&lt;course&gt;</span>
+  </li>
+  <li class="relationship" data-from="3" data-to="4">
+    <span class="type">NEXT_&lt;course&gt;</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="3">
+    <span class="type">FIRST</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="5">
+    <span class="type">LAST</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">HAS_ENROLLMENT</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="2">
+    <span class="type">IN_COURSE</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="6">
+    <span class="type">HAS_CERTIFICATE</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="6">
+    <span class="type">EARNED_CERTIFICATE</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="4">
+    <span class="type">COMPLETED</span>
+  </li>
+</ul>
+--
+endif::[]
+
+=== Exercise 4 solution:  Application model
+
+image::Ex4-Sol1.png[Ex4-Sol1,width=900,align=center]
+
+[.notes]
+--
+The Course and Lessons are structured as a linked list with a parent.
+We include the course name in the NEXT relationship, because some lessons are used by multiple courses, but in a different order.
+In other words, we have an interleaved linked list, and need to distinguish the different sequences.
+
+Courses are associated with a Certificate, which contains, among other things, a term of validity expressed here in months.
+
+Students do not directly interact with courses or lessons.
+Instead, we use an Enrollment intermediate node to organize their interactions.
+Enrollments are linked to a single course and contain a pointer to which lesson was most recently completed.
+When a COMPLETED relationship is created with the lesson marked LAST in a given course, that is  the trigger to create an EARNED_CERTIFICATE relationship.
+At this point, the certExpiration property will be populated by adding the term of validity to the current timestamp.
+This intermediate node allows us to keep track of students’ progress through different concurrent courses, and to differentiate multiple subsequent passes through the same course.
+--
+=== Exercise 4 solution: Sample data
+
+image::Ex4-Sol2.png[Ex4-Sol2,width=900,align=center]
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+Here is the sample data fully fleshed out.  Use the below markup to get it into Arrows.
+
+As a group, prompt students to trace the traversal for each of the application questions, in order to verify that the model serves the questions.
+
+<ul class="graph-diagram-markup" data-internal-scale="0.21" data-external-scale="1">
+  <li class="node" data-node-id="0" data-x="-396.2973779224105" data-y="-1598.542651644388">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd></dl></li>
+  <li class="node" data-node-id="1" data-x="696.1411792240782" data-y="-775.5184522555546">
+    <span class="caption">Enrollment</span>
+  </li>
+  <li class="node" data-node-id="2" data-x="1562.4419933343002" data-y="-301.66353654081996">
+    <span class="caption">Course</span><dl class="properties"><dt>name</dt><dd>Introduction to Neo4j</dd></dl></li>
+  <li class="node" data-node-id="3" data-x="696.1411792240782" data-y="475.60253854551536">
+    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Graph Theory</dd></dl></li>
+  <li class="node" data-node-id="4" data-x="1562.4419933343002" data-y="475.60253854551536">
+    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Graph Databases</dd></dl></li>
+  <li class="node" data-node-id="5" data-x="2419.99523773733" data-y="475.60253854551536">
+    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Basic Cypher</dd></dl></li>
+  <li class="node" data-node-id="6" data-x="2452.0596471356525" data-y="-970.0863461358005">
+    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>24</dd></dl></li>
+  <li class="node" data-node-id="7" data-x="879.8886791627793" data-y="-1253.5663862086055">
+    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>2020</dd></dl></li>
+  <li class="node" data-node-id="8" data-x="1124.3637964049385" data-y="-1683.353885999956">
+    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>2018</dd></dl></li>
+  <li class="node" data-node-id="9" data-x="-591.3704658622172" data-y="-2730.474279887639"></li>
+  <li class="node" data-node-id="10" data-x="-620.4774799631609" data-y="565.4384413761886">
+    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Dan</dd></dl></li>
+  <li class="node" data-node-id="11" data-x="1148.4184037393607" data-y="1678.755606466262">
+    <span class="caption">Course</span><dl class="properties"><dt>name</dt><dd>Neo4j for Developers</dd></dl></li>
+  <li class="node" data-node-id="12" data-x="1148.4184037393607" data-y="1015.6712674382908">
+    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Property Graph</dd></dl></li>
+  <li class="node" data-node-id="13" data-x="-81.87263599082607" data-y="1955.3561577156422"></li>
+  <li class="node" data-node-id="14" data-x="61.062009896806536" data-y="-246.0263961108761">
+    <span class="caption">Enrollment</span>
+  </li>
+  <li class="node" data-node-id="15" data-x="181.74861463859963" data-y="1357.3756722976887">
+    <span class="caption">Enrollment</span>
+  </li>
+  <li class="node" data-node-id="16" data-x="2452.0596471356525" data-y="1507.105178106398">
+    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>6</dd></dl></li>
+  <li class="relationship" data-from="4" data-to="5">
+    <span class="type">NEXT_INTRO</span>
+  </li>
+  <li class="relationship" data-from="3" data-to="4">
+    <span class="type">NEXT_INTRO</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="3">
+    <span class="type">FIRST</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="5">
+    <span class="type">LAST</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="1">
+    <span class="type">HAS_ENROLLMENT</span>
+  </li>
+  <li class="relationship" data-from="1" data-to="2">
+    <span class="type">IN_COURSE</span>
+  </li>
+  <li class="relationship" data-from="2" data-to="6">
+    <span class="type">HAS_CERTIFICATE</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="7">
+    <span class="type">HAS_ENROLLMENT</span>
+  </li>
+  <li class="relationship" data-from="0" data-to="8">
+    <span class="type">HAS_ENROLLMENT</span>
+  </li>
+  <li class="relationship" data-from="7" data-to="2">
+    <span class="type">IN_COURSE</span>
+  </li>
+  <li class="relationship" data-from="8" data-to="2">
+    <span class="type">IN_COURSE</span>
+  </li>
+  <li class="relationship" data-from="8" data-to="6">
+    <span class="type">EARNED_CERTIFICATE</span>
+  </li>
+  <li class="relationship" data-from="7" data-to="6">
+    <span class="type">EARNED_CERTIFICATE</span>
+  </li>
+  <li class="relationship" data-from="3" data-to="12">
+    <span class="type">NEXT_DEV</span>
+  </li>
+  <li class="relationship" data-from="12" data-to="4">
+    <span class="type">NEXT_DEV</span>
+  </li>
+  <li class="relationship" data-from="11" data-to="3">
+    <span class="type">FIRST</span>
+  </li>
+  <li class="relationship" data-from="11" data-to="4">
+    <span class="type">LAST</span>
+  </li>
+  <li class="relationship" data-from="10" data-to="14">
+    <span class="type">HAS_ENROLLMENT</span>
+  </li>
+  <li class="relationship" data-from="10" data-to="15">
+    <span class="type">HAS_ENROLLMENT</span>
+  </li>
+  <li class="relationship" data-from="15" data-to="11">
+    <span class="type">IN_COURSE</span>
+  </li>
+  <li class="relationship" data-from="14" data-to="2">
+    <span class="type">IN_COURSE</span>
+  </li>
+  <li class="relationship" data-from="15" data-to="3">
+    <span class="type">COMPLETED</span>
+  </li>
+  <li class="relationship" data-from="14" data-to="4">
+    <span class="type">COMPLETED</span>
+  </li>
+  <li class="relationship" data-from="11" data-to="16">
+    <span class="type">HAS_CERTIFICATE</span>
+  </li>
+</ul>
+
+--
+
+
 
 [.quiz]
 == Check your understanding

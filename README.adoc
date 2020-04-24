@@ -69,6 +69,16 @@ Or multiple tasks:
 
  $ ./gradlew :demo:convertOnlinePdf :demo:convertSlides
 
+If you want to create a single slide deck for a group of slide asciidoc files, make a folder named "single-slides".
+In that folder include the asciidoc for the group of files you want to combine. (see example in 4.0-intro-neo4j moduile)
+Then use this command to build it:
+
+  $ ./gradlew :demo:convertSingleSlides
+
+There is similar functionality for consolidating PDFs. It uses the folder "single-pdf". The caution with generating a large PDF, however is memory. If you have a large PDF that you want to produce, you may need to install mogrify.
+
+  $ ./gradlew :demo:convertSinglePdf
+
 Gradle will do his best to detect if a task needs to be run again or not.
 If you want to force Gradle to execute a task again, you can remove the `build` directory using the `clean` task:
 
