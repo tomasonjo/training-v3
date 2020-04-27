@@ -205,7 +205,9 @@ In other words, this "bad model" from before might actually  be OK.  If those ad
 
 == Data accessibility
 
-For each query, how much work must Neo4j do to evaluate if the traversal represents a “good” path or a “bad” one?
+[.small]
+
+_For each query, how much work must Neo4j do to evaluate if the traversal represents a “good” path or a “bad” one?_
 
 image::AccessibilityOfData.png[AccessibilityOfData,width=900,align=center]
 
@@ -219,17 +221,26 @@ When designing or refactoring a model, you can estimate performance by checking 
 
 === Hierarchy of accessibility
 
+[.statement]
+_For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
+
 [.is-half.left]
 --
-image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=900,align=center]
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=700,align=center]
 --
 
 [.is-half.right]
 --
+[.statement]
+
 . Anchor node label, anchor node properties (indexed)
+
 . Relationship types
+
 . Anchor node properties (non-indexed)
+
 . Downstream node labels
+
 . Relationship properties, downstream node properties
 --
 

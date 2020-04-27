@@ -47,7 +47,7 @@ Relationships can only connect nodes.
 
 === Using intermediate nodes
 
-image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=500,align=center]
+image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=700,align=center]
 
 [.notes]
 --
@@ -70,7 +70,7 @@ Person nodes can have a shared Role or Company, and allow us to very easily  tra
 
 === Intermediate nodes: sharing data
 
-image::IntermediateNodesSharingData.png[IntermediateNodesSharingData,width=900,align=center]
+image::IntermediateSharingData.png[IntermediateSharingData,width=1100,align=center]
 
 [.notes]
 --
@@ -127,9 +127,9 @@ endif::[]
 ifdef::backend-revealjs[]
 [.notes]
 --
-Concept check:  Who can tell me why you should never use doubly-linked lists?
+*Concept check*:  Who can tell me why you should never use doubly-linked lists?
 
-Answer: Doubly-linked lists use redundant symmetrical relationships.  We discussed before why those are a bad idea in Neo4j.
+*Answer*: Doubly-linked lists use redundant symmetrical relationships.  We discussed before why those are a bad idea in Neo4j.
 --
 endif::[]
 
@@ -222,7 +222,7 @@ Frequently, you will see multiples of these structures used together in order to
 Here is one example.
 --
 
-image::MultipleStructures.png[MultipleStructurese,width=900,align=center]
+image::MultipleStructures.png[MultipleStructurese,width=1100,align=center]
 
 ifdef::backend-revealjs[]
 [.notes]
@@ -235,10 +235,10 @@ endif::[]
 
 [.notes]
 --
-At the top, we have a timeline tree, subdivides into years and months.
+At the top, we have a timeline tree that subdivides into years and months.
 --
 
-image::PartialTimeLineTree.png[PartialTimeLineTree,width=900,align=center]
+image::PartialTimeLineTree.png[PartialTimeLineTree,width=1100,align=center]
 
 === Using intermediate nodes
 
@@ -253,7 +253,7 @@ image::PartialIntermediateNodes.png[PartialIntermediateNodes,width=900,align=cen
 
 === Using linked list
 
-image::PartialLinkedList.png[PartialLinkedList,width=900,align=center]
+image::PartialLinkedList.png[PartialLinkedList,width=1100,align=center]
 
 [.notes]
 --
@@ -308,6 +308,7 @@ Emphasize that model-building is iterative.
 If their model is imperfect, rather than telling them the better model, ask them questions that expose the weaknesses of their model relative to the application questions.
 
 Here is the markup for the model:
+
 <ul class="graph-diagram-markup" data-internal-scale="0.67" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-550.4655813128935" data-y="-1216.8149073094257">
     <span class="caption">Student</span>
@@ -380,7 +381,7 @@ This intermediate node allows us to keep track of students’ progress through d
 --
 === Exercise 4 solution: Sample data
 
-image::Ex4-Sol2.png[Ex4-Sol2,width=900,align=center]
+image::Ex4-Sol2.png[Ex4-Sol2,width=1200,align=center]
 
 ifdef::backend-revealjs[]
 [.notes]
@@ -502,51 +503,50 @@ As a group, prompt students to trace the traversal for each of the application q
 --
 
 
-
 [.quiz]
 == Check your understanding
 
 === Question 1
 
 [.statement]
-What are some benefits of using fanout for your nodes?
+What graph modeling structure can you use to simulate hyperedges where you want to connect two nodes with additional context?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
-- [ ] Reduces the number of nodes in the graph.
-- [x] Reduces duplication of property values.
-- [ ] Reduces the number of relationships defined in the graph.
-- [x] Reduces gather-and-inspect traversals during a query.
+- [ ] Relationship with properties defined.
+- [ ] Linked list.
+- [ ] Timeline tree.
+- [x] Intermediate nodes.
 
 === Question 2
 
 [.statement]
-Why is naming relationship types to be as specific as possible a benefit?
+In Neo4j, which structure is [.underline]#not# recommended as a best practice for representing linked lists?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
-- [ ] Reduces the number of relationships in the graph.
-- [x] Reduces traversals through nodes that are not necessary for the query.
-- [x] Reduces gather-and-inspect traversals during a query.
-- [ ] Reduces the number of nodes in the graph.
+- [ ] Interleaved linked lists with multiple starting points for navigation.
+- [x] Doubly linked lists.
+- [ ] Single linked list.
+- [ ] Linked list with nodes that point to the head and tail of the list.
 
 === Question 3
 
 [.statement]
-Which data should be most accessible for your queries?
+What common structure is used to model data where you need to know when an event occurred in the application and find other events that occurred in the same time-frame?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Anchor node label
-- [x] Anchor node property that has an index
-- [ ] Node property downstream that has an index
-- [ ] Relationship properties
+- [ ] Linked list where each node has a timestamp.
+- [ ] Intermediate nodes where the intermediate nodes have time-related data.
+- [x] Timeline tree
+- [ ] Doubly-linked list where the symmetric relationbship is the timestamp relationship.
 
 [.summary]
 == Summary

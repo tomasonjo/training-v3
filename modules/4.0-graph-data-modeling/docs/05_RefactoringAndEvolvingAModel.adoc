@@ -1,0 +1,434 @@
+= Refactoring and Evolving a Model
+:slug: 05-refactoring-model
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Implementing Your First Model
+
+== About this module
+
+At the end of this module, you should be able to:
+[square]
+* Describe common graph structures used in modeling:
+** Intermediate nodes
+** Linked lists
+** Timeline trees
+** Multiple structures in a single graph
+
+== What is refactoring?
+
+Refactoring is the process of changing the data structure without altering its semantic meaning.
+
+[square]
+* Most of the time, refactoring simply involves moving data from one structure to another within the graph.
+* In some cases, refactoring involves adding more data from other sources.
+
+=== Review: Hierarchy of Accessibility
+
+[.statement]
+_For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
+
+[.is-half.left]
+--
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=700,align=center]
+--
+
+[.is-half.right]
+--
+[.statement]
+
+. Anchor node label, anchor node properties (indexed)
+
+. Relationship types
+
+. Anchor node properties (non-indexed)
+
+. Downstream node labels
+
+. Relationship properties, downstream node properties
+--
+
+[.notes]
+--
+Recall the hierarchy of accessibility.
+In general, refactoring involves moving data around this hierarchy, in order to better answer a question.
+--
+
+== Why refactor?
+
+Data models can be optimized for one of four things:
+
+[square]
+* Query performance
+* Model simplicity & intuitiveness
+* Query simplicity (i.e., simpler Cypher strings)
+* Easy data updates
+
+[NOTE]
+Improving behavior in one of these areas frequently involves sacrifices in others.
+
+Another *important* reason to refactor is to accomodate new application questions in the same model.
+
+== Goal: Eliminate duplicate data in properties
+
+[.notes]
+--
+There may be data that is duplicated in many nodes in your graph.
+In this example the type of currency is a property of a node.
+--
+
+image::ExtractNodeFromPropertyBefore.png[ExtractNodeFromPropertyBefore,width=900,align=center]
+
+[.notes]
+--
+What if we do not want to duplicate the currency type data in all of our Trade nodes?
+--
+
+=== Refactor example: Extracting nodes from properties
+
+image::ExtractNodeFromPropertyAfter.png[ExtractNodeFromPropertyAfter,width=900,align=center]
+
+[.notes]
+--
+With the Currency node label, we can easily answer questions such as how many Trades use the USD currency without having to gather this information from the Trade nodes.
+--
+
+== Goal: Use labels instead of property values
+
+[.notes]
+--
+If many nodes in the model contain the same value for a property, another solution is the use the property value as a label.
+--
+
+image::ExtractLabelFromPropertyBefore.png[ExtractLabelFromPropertyBefore,width=1100,align=center]
+
+[.notes]
+--
+In this example, you see that the Project nodes have a property named _language_ where the property could contain multiple languages.
+What if you wanted to query the graph to find all projects that are written in _java_?
+To do you you would need to retrieve all of the Project nodes and look for _java_ in the language list for each node.
+This is an expensive query on a large graph.
+--
+
+=== Refactor example: Turn property values into labels for nodes
+
+[.notes]
+--
+In this scenario, we would go through all Project nodes in the graph and relabel the Project nodes based upon the values in the _language_ list.
+Then we eliminate completely the _language_ property.
+--
+
+image::ExtractLabelFromPropertyAfter.png[ExtractLabelFromPropertyAfter,width=1100,align=center]
+
+== Goal: Use nodes instead of properties for relationships
+
+[.notes]
+--
+Previously in this training, you learned that intermediate nodes is sometimes a best practice.
+Here is the example we saw earlier with the content of the email as a property for the relationship.
+--
+
+image::ExtractIntermediateNodesBefore.png[ExtractIntermediateNodesBefore,width=1100,align=center]
+
+=== Refactor: Extract nodes from relationship properties
+
+[.notes]
+--
+Here is what the graph would look like after we went through all EMAILED and CCD relationships to create the intermediate nodes for the content.
+--
+
+image::ExtractIntermediateNodesAfter.png[ExtractIntermediateNodesAfter,width=1100,align=center]
+
+[.notes]
+--
+
+Intermediate nodes are also a frequent result of refactoring.
+What was previously a relationship property is now a node property, which is not necessarily any more accessible from a query processing standpoint.
+But it makes the model simpler by reducing the number of relationships connected to each Person node.
+
+Notice that not only is the new node with the label _Email_, but also relationship types are recreated with different types.
+--
+
+== Refactoring example: Modeling airline flights
+
+image::MaxDemarziAirlineModeling.png[MaxDemarziAirlineModeling,width=900,align=center]
+
+[.notes]
+--
+Here is a very good example of how to model and refactor a model.
+--
+
+Credit: Max De Marzi https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/
+
+[.notes]
+--
+We will now walk through an iterative process of graph development and refactoring.
+We will use, as an example, modeling airline flights for an Orbitz-style use case: that is, answering the problem, “I want to fly from Malmo to New York on Friday”.
+
+You can read in depth about this on Max’s blog.
+--
+
+=== Initial question for our model
+
+*Question*: What flights will take me from Malmo to New York on Friday?
+
+Ask yourself:
+
+[square]
+* What are the entities?
+* What are the connections between the entities?
+* What properties do we need?
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+Model this part of the class interactively.
+Pose each stage as questions for the class to answer.
+--
+endif::[]
+
+
+[.notes]
+--
+Here, we begin by following the modeling process: identifying entities and connection based on the question.
+The entities should be Airports, and the connections FLYING_TO, with one connection per flight.
+Airport data like city and flight data like airline, flight number, departure, etc. are necessary properties.
+--
+
+ifdef::backend-revealjs[]
+[.notes]
+--
+This leads us to the model on the next slide.
+--
+endif::[]
+
+
+=== Initial model
+
+*Question*: What flights will take me from Malmo to New York on Friday?
+
+image::InitialAirlineModel.png[InitialAirlineModel,width=900,align=center]
+
+[.notes]
+--
+This model answers the first question just fine.
+But suppose we had to answer a new question?
+--
+
+*New Question*: Mom is on flight AY189.  When will she land?
+
+[.notes]
+--
+What must Neo4j traverse to find this answer?
+
+This is a painful one.To find flight AY189, we need to traverse every relationship in the graph, because it is impossible to anchor on relationships.
+What can we do to make flight data available as an anchor?
+--
+
+=== Refactor: Create intermediate Flight nodes
+
+[.notes]
+--
+This is a perfect use case for adding intermediate nodes.
+Adding Flight nodes allows us to anchor on flight data, dramatically reducing traversal.
+--
+
+image::AirlineRefactor1.png[AirlineRefactor1,width=900,align=center]
+
+*Question 1*: What flights will take me from Malmo to New York on Friday?
+
+*Question 2*: Mom is on flight AY189.  When will she land?
+
+[.notes]
+--
+But we are still not satisfied with the way we are handling Q1.
+Airlines are required to publish flight plans 12 months or more in advance.
+How much work must Neo4j do to answer Q1?
+
+Again, the answer is painful.
+Neo4j must check every flight leaving Malmo, then consult the flight data to see which ones leave on the appropriate day.
+That’s even before we check to see which of those flights land in the desired place!
+How can we elevate the flight date in order to reduce the amount of wasted hops?
+--
+
+=== Refactor: Create AirportDay intermediate nodes
+
+[.notes]
+--
+Again, intermediate nodes come to the rescue.
+AirportDay nodes reduce the density of Airport nodes, as there are many fewer days in the graph than there are flights.
+We still need to check every AirportDay to find the right date, but the scope of wasted traversal is lessened.
+--
+
+image::AirlineRefactor2.png[AirlineRefactor2,width=900,align=center]
+
+*Question 1*: What flights will take me from Malmo to New York on Friday?
+
+*Question 2*: Mom is on flight AY189.  When will she land?
+
+[.notes]
+--
+Whenever we execute a model change, we also need to check that our older queries are not disrupted.
+What about Q2?
+
+As long as we continue to be able to anchor on Flight, Q2 is unaffected.
+This refactor causes no problems.
+
+But thinking more on Q1.
+How might we arrange things to reduce wasted traversal even further?
+In other words, how might we elevate flight date even higher on the hierarchy of accessibility?
+
+There are only two ways to do this:
+
+[square]
+* Anchor somehow on AirportDay.
+* Make date into a relationship type.
+
+We will refactor make date a relationship type.
+--
+
+=== Refactor: Change relationship type to date
+
+image::AirlineRefactor3.png[AirlineRefactor3,width=900,align=center]
+
+*Question 1*: What flights will take me from Malmo to New York on Friday?
+
+*Question 2*: Mom is on flight AY189.  When will she land?
+
+[.notes]
+--
+Date as the relationship type hardly changes the model at all, with drastic performance improvements.
+Now, we can traverse only to the relevant AirportDay.
+Again, Q2 is unaffected.
+
+This is one of the two solutions we had.
+The other was to anchor on AirportDay.
+How would the model need to change to make that possible?
+--
+
+=== Possible refactor: Remove Airport nodes
+
+[.notes]
+--
+We could eliminate the Airport nodes entirely, and store airport data on the AirportDay nodes.
+This shrinks the graph by removing a modest number of Airport nodes, and a large number of Date-typed HAS_DAY relationships.
+This also performs 2 fewer hops per traversal--a tiny improvement, but one that could add up at scale.
+We would need to test this benefit more rigorously in production.
+--
+
+image::AirlineRefactor4.png[AirlineRefactor4,width=900,align=center]
+
+*Question 1*: What flights will take me from Malmo to New York on Friday?
+
+*Question 2*: Mom is on flight AY189.  When will she land?
+
+[.notes]
+--
+The downside to this model is that it is far less intuitive to a human looking at it.
+As mentioned earlier, refactoring is rarely pure positive; the gains you make in one area often involve sacrifices in others.
+
+So we have a model that seems to work well for Q1.
+But we have been making one dangerous assumption: that there is a direct flight available.
+What will Neo4j need to do in order to find an itinerary with 2, 3, 4, or more legs?
+
+This is an expensive problem for this model.
+Neo4j will traverse every flight leaving that day, and look at destinations.
+But in the non-direct case, none of the destinations is the correct one.
+So Neo4j will need to check all the HAS_FLIGHT relationships on those destinations, and see if the second-order destinations include the desired one.
+If that is not the case, repeat until you find the desired destination.
+The size of the traversed graph increases exponentially as more and more layovers are added.
+What can we do to reduce this?
+--
+
+=== Refactor: Add Destination intermediate nodes
+
+[.notes]
+--
+Once again, intermediate nodes come to the rescue!
+In this case, we are doing two things, further subdividing flights based on destination, but more importantly, we are elevating flight destinations form a 3-hop downstream object to a 1-hop downstream object.
+--
+
+image::AirlineRefactor5.png[AirlineRefactor5,width=900,align=center]
+
+*Question 1*: What flights will take me from Malmo to New York on Friday?
+
+*Question 2*: Mom is on flight AY189.  When will she land?
+
+[.notes]
+--
+How does the non-direct traversal work in this case?
+
+First, Neo4j will check every Destination served by that AirportDay.
+If the target destination is not there, follow ONE Flight chain to the Airport Day of the destination, then check the served Destinations of that AirportDay.
+The scope of the graph still grows, but it grows at a rate proportional to the number of Destinations served by an airport, not the number of Flights.
+And airports tend to have multiple flights per destination, leaving at different times of day.
+
+Once an itinerary leading to the target destination is found, Neo4j can branch out and traverse all the flights connecting those AirportDays.
+
+As always, we must consider: how does this refactor affect Q2?
+
+Once again, the answer is that it does not--we can still anchor on Flight, so Q2 is not disrupted.
+
+Note that this model could never have been produced by simply following our “build initial model” paradigm.
+AirportDay and Destination nodes are completely opaque relative to the questions we asked.
+We are OK with that, because, as you will learn that when you implement the model in Cypher, refactoring a graph relatively cheap.
+Moreover, getting a rough first model quickly reduces the total time we would need to reach this more refined version.
+--
+
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What graph modeling structure can you use to simulate hyperedges where you want to connect two nodes with additional context?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Relationship with properties defined.
+- [ ] Linked list.
+- [ ] Timeline tree.
+- [x] Intermediate nodes.
+
+=== Question 2
+
+[.statement]
+In Neo4j, which structure is [.underline]#not# recommended as a best practice for representing linked lists?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Interleaved linked lists with multiple starting points for navigation.
+- [x] Doubly linked lists.
+- [ ] Single linked list.
+- [ ] Linked list with nodes that point to the head and tail of the list.
+
+=== Question 3
+
+[.statement]
+What common structure is used to model data where you need to know when an event occurred in the application and find other events that occurred in the same time-frame?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [ ] Linked list where each node has a timestamp.
+- [ ] Intermediate nodes where the intermediate nodes have time-related data.
+- [x] Timeline tree
+- [ ] Doubly-linked list where the symmetric relationbship is the timestamp relationship.
+
+[.summary]
+== Summary
+
+You should now be able to:
+[square]
+* Describe common graph structures used in modeling:
+** Intermediate nodes
+** Linked lists
+** Timeline trees
+** Multiple structures in a single graph
