@@ -1,0 +1,58 @@
+= Graph Data Modeling for Neo4j 4.0
+:slug: 00-graph-data-modeling-about
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Introduction to Graph Data Modeling
+
+== About this course
+
+This course introduces you to how to develop a graph data model for an application using Neo4j best practices.
+
+[.notes]
+--
+This course is intended for developers and architects.
+You need not have programming experience to take this training, but you should have a solid understanding of what Neo4j is and how graph components are used in a Neo4j database.
+--
+
+In this course, you complete hands-on exercises to gain experience with developing graph data models for use with Neo4j.
+
+To complete the hands-on exercises for this course, you need a Web browser and Internet access.
+
+ifdef::backend-html5[]
+At the end of each lesson are a set of questions that you must answer correctly to mark the lesson as completed.
+If you complete all lessons, you will receive a _Certificate of Completion_.
+
+If you perform the hands-on exercises, this course will take you approximately 4 hours to complete.
+endif::[]
+
+
+This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+
+== Lesson Overview
+
+Here are the lessons of this course:
+
+. Introduction to Graph Data Modeling
+. Building an Initial Graph Data Model
+. Graph Data Modeling Core Principles
+. Common Graph Structures
+. Refactoring and Evolving a Graph Data Model
+
+== Resources
+
+ifndef::backend-revealjs[]
+We have set up a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
+You should register on the Community site where you can view other questions and answers for students taking our online training courses.
+The Neo4j Community Site is an excellent resource for answering many types of questions posed by other users of Neo4j.
+endif::[]
+
+Here are some resources you may use as you go through this course:
+
+[square]
+* https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual]
+* https://neo4j.com/developer/resources/[Neo4j Developer Resources]
+ifndef::backend-revealjs[]
+* https://community.neo4j.com/c/general/online-training[Neo4j Community Site]
+endif::[]

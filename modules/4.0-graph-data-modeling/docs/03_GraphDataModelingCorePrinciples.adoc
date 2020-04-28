@@ -27,11 +27,13 @@ Your model should address:
 
 === Uniqueness of nodes: before
 
-image::UniquenessBestPracticeBefore.png[UniquenessBestPracticeBefore,width=900,align=center]
+image::UniquenessBestPracticeBefore.png[UniquenessBestPracticeBefore,width=600,align=center]
 
 [.small]
+--
 [NOTE]
 The Country nodes are considered *super nodes* (a node with lots of fan-in or fan-out). You need to be careful about using them in your design and developers in particular need to be mindful of queries that might select all paths in or out of the super node.
+--
 
 [.notes]
 --
@@ -73,11 +75,12 @@ Here we have a property node that contains properties that contain complex data.
 
 image::ComplexData2.png[ComplexData2,width=900,align=center]
 
+[.small]
+--
 [square]
-[small]
 * Reduce property duplication.
 * Reduce gather-and-inspect.
-
+--
 [.notes]
 --
 Here we show an extreme implementation of fanout.
@@ -175,7 +178,7 @@ The Cypher string required is much simpler, and we know there will not be any ga
 
 == Property best practices
 
-[small]
+[.small]
 --
 [square]
 * Property lookups have a cost.
@@ -184,7 +187,7 @@ The Cypher string required is much simpler, and we know there will not be any ga
 
 image::ComplexData1.png[ComplexData1,width=400,align=center]
 
-[small]
+[.small]
 --
 [square]
 * Anchors and properties used for traversal should be as simple as possible.
@@ -226,7 +229,7 @@ _For each data object, how much work must Neo4j do to evaluate if this is a “g
 
 [.is-half.left]
 --
-image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=700,align=center]
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
 --
 
 [.is-half.right]

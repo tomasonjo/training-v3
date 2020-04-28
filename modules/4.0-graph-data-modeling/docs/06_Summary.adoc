@@ -1,5 +1,5 @@
-= Introduction to Neo4j: Summary
-:slug: 22-intro-neo4j-summary
+= Graph Data Modeling for Neo4j: Summary
+:slug: 06-graph-data-modeling-summary
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -11,13 +11,11 @@
 In this course, you have learned how to:
 
 [square]
-* Describe what a graph database is.
-* Describe the Neo4j Graph Platform and its components.
-* Write Cypher code to query the database.
-* Write Cypher code to modify the database.
-* Use some Cypher query best practices.
-* Create and use indexes.
-* Import data into Neo4j.
+* Describe what a graph data model is for a Neo4j database.
+* Develop a graph data model using Neo4j best practices.
+* Describe the core principles used for Neo4j graph data modeling.
+* Describe the common structures used in a Neo4j graph data model.
+* Refactor and evolve a graph data model.
 
 ifdef::backend-revealjs[]
 == Resources - 1
@@ -64,7 +62,6 @@ Become a Neo4j certified developer:
 https://neo4j.com/graphacademy/neo4j-certification/
 
 [NOTE]
-The certification exam tests you on content from this course.
 You can take the certification exam multiple times until you pass!
 
 GitHub repository:
@@ -92,6 +89,7 @@ View questions/answers raised about Neo4j:
 https://stackoverflow.com/tags/neo4j/hot
 
 ifndef::backend-revealjs[]
+
 == Course feedback
 
 We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.

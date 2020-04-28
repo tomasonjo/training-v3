@@ -1,0 +1,15 @@
+= Graph Data Modeling for Neo4j: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
+include::{includedir}/01_IntroductionToGraphDataModeling.adoc[leveloffset=+1]
+include::{includedir}/02_BuildingInitialGraphDataModel.adoc[leveloffset=+1]
+include::{includedir}/03_GraphDataModelingCorePrinciples.adoc[leveloffset=+1]
+include::{includedir}/04_CommonGraphStructures.adoc[leveloffset=+1]
+include::{includedir}/05_RefactoringAndEvolvingAModel.adoc[leveloffset=+1]
+include::{includedir}/06_Summary.adoc[leveloffset=+1]
+

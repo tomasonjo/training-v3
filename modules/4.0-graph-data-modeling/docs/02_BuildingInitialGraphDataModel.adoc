@@ -415,6 +415,8 @@ For Properties, encourage folks to use “expected data type” as property valu
 
 If you do not want to do all the clicking and typing, copy this markup:
 
+[source]
+----
 <ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
     <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
@@ -423,6 +425,7 @@ If you do not want to do all the clicking and typing, copy this markup:
   <li class="node" data-node-id="2" data-x="-202.58837695145493" data-y="24.371374691303693">
     <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
 </ul>
+----
 --
 endif::[]
 
@@ -558,7 +561,7 @@ endif::[]
 
 === Exercise 3 instructions
 
-[small]
+[.small]
 --
 Here are the questions we need to answer for our BOM application that you have already seen:
 
@@ -572,7 +575,7 @@ And here is the entity model:
 
 image::Exercise2Solution.png[Exercise2Solution,width=300,align=center]
 
-[small]
+[.small]
 --
 Using the Arrow tool add the relationships between the entities.
 --
@@ -714,7 +717,7 @@ Here is the Arrow tool markup for the sample data for the BOM application:
 ----
 endif::[]
 
-[small]
+[.small]
 --
 Here is what the sample data might look like in the UI of the Arrow tool:
 --
@@ -726,6 +729,8 @@ ifdef::backend-revealjs[]
 --
 Here is the markup for the sample data:
 
+[source]
+----
 <ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">
     <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 60"'</dd><dt>productId</dt><dd>600</dd></dl></li>
@@ -803,6 +808,7 @@ Here is the markup for the sample data:
   <li class="relationship" data-from="7" data-to="5">
     <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
 </ul>
+----
 --
 endif::[]
 
@@ -900,22 +906,27 @@ This modeler felt that that benefit balanced out the added data maintenance expe
 
 [.is-one-third.left]
 --
-[.statement]
 Here are some questions you should answer:
 
 [square]
-[small]
+[.small]
 * How many products?
+[.small]
 * How many parts?
+[.small]
 * How often are products added?
+[.small]
 * How often do prices change?
+[.small]
 * Are prices based upon time?
+[.small]
 * Is inventory part of the model?
+
 --
 
 [.is-two-thirds.right]
 --
-image::Scalable.png[Scalable,width=900,align=center]
+image::Scalable.png[Scalable,width=700,align=center]
 --
 
 [.notes]

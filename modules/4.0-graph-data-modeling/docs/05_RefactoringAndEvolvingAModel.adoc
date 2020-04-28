@@ -10,11 +10,11 @@
 
 At the end of this module, you should be able to:
 [square]
-* Describe common graph structures used in modeling:
-** Intermediate nodes
-** Linked lists
-** Timeline trees
-** Multiple structures in a single graph
+* Describe why you would refactor a graph data model.
+* Refactor a model to:
+** Eliminate duplicate data in nodes.
+** Use node labels rather than properties.
+** Extract property values to create nodes.
 
 == What is refactoring?
 
@@ -31,7 +31,7 @@ _For each data object, how much work must Neo4j do to evaluate if this is a “g
 
 [.is-half.left]
 --
-image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=700,align=center]
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
 --
 
 [.is-half.right]
@@ -78,7 +78,7 @@ There may be data that is duplicated in many nodes in your graph.
 In this example the type of currency is a property of a node.
 --
 
-image::ExtractNodeFromPropertyBefore.png[ExtractNodeFromPropertyBefore,width=900,align=center]
+image::ExtractNodeFromPropertyBefore.png[ExtractNodeFromPropertyBefore,width=700,align=center]
 
 [.notes]
 --
@@ -87,7 +87,7 @@ What if we do not want to duplicate the currency type data in all of our Trade n
 
 === Refactor example: Extracting nodes from properties
 
-image::ExtractNodeFromPropertyAfter.png[ExtractNodeFromPropertyAfter,width=900,align=center]
+image::ExtractNodeFromPropertyAfter.png[ExtractNodeFromPropertyAfter,width=500,align=center]
 
 [.notes]
 --
@@ -101,7 +101,7 @@ With the Currency node label, we can easily answer questions such as how many Tr
 If many nodes in the model contain the same value for a property, another solution is the use the property value as a label.
 --
 
-image::ExtractLabelFromPropertyBefore.png[ExtractLabelFromPropertyBefore,width=1100,align=center]
+image::ExtractLabelFromPropertyBefore.png[ExtractLabelFromPropertyBefore,width=700,align=center]
 
 [.notes]
 --
@@ -119,7 +119,7 @@ In this scenario, we would go through all Project nodes in the graph and relabel
 Then we eliminate completely the _language_ property.
 --
 
-image::ExtractLabelFromPropertyAfter.png[ExtractLabelFromPropertyAfter,width=1100,align=center]
+image::ExtractLabelFromPropertyAfter.png[ExtractLabelFromPropertyAfter,width=600,align=center]
 
 == Goal: Use nodes instead of properties for relationships
 
@@ -129,7 +129,7 @@ Previously in this training, you learned that intermediate nodes is sometimes a 
 Here is the example we saw earlier with the content of the email as a property for the relationship.
 --
 
-image::ExtractIntermediateNodesBefore.png[ExtractIntermediateNodesBefore,width=1100,align=center]
+image::ExtractIntermediateNodesBefore.png[ExtractIntermediateNodesBefore,width=600,align=center]
 
 === Refactor: Extract nodes from relationship properties
 
@@ -138,7 +138,7 @@ image::ExtractIntermediateNodesBefore.png[ExtractIntermediateNodesBefore,width=1
 Here is what the graph would look like after we went through all EMAILED and CCD relationships to create the intermediate nodes for the content.
 --
 
-image::ExtractIntermediateNodesAfter.png[ExtractIntermediateNodesAfter,width=1100,align=center]
+image::ExtractIntermediateNodesAfter.png[ExtractIntermediateNodesAfter,width=800,align=center]
 
 [.notes]
 --
@@ -152,13 +152,14 @@ Notice that not only is the new node with the label _Email_, but also relationsh
 
 == Refactoring example: Modeling airline flights
 
-image::MaxDemarziAirlineModeling.png[MaxDemarziAirlineModeling,width=900,align=center]
+image::MaxDemarziAirlineModeling.png[MaxDemarziAirlineModeling,width=700,align=center]
 
 [.notes]
 --
 Here is a very good example of how to model and refactor a model.
 --
 
+[.smaller]
 Credit: Max De Marzi https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/
 
 [.notes]
@@ -167,6 +168,10 @@ We will now walk through an iterative process of graph development and refactori
 We will use, as an example, modeling airline flights for an Orbitz-style use case: that is, answering the problem, “I want to fly from Malmo to New York on Friday”.
 
 You can read in depth about this on Max’s blog.
+
+ifdef::backend-revealjs[]
+https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/
+endif::[]
 --
 
 === Initial question for our model
@@ -206,6 +211,7 @@ endif::[]
 
 === Initial model
 
+[.statement]
 *Question*: What flights will take me from Malmo to New York on Friday?
 
 image::InitialAirlineModel.png[InitialAirlineModel,width=900,align=center]
@@ -216,6 +222,7 @@ This model answers the first question just fine.
 But suppose we had to answer a new question?
 --
 
+[.statement]
 *New Question*: Mom is on flight AY189.  When will she land?
 
 [.notes]
@@ -236,8 +243,10 @@ Adding Flight nodes allows us to anchor on flight data, dramatically reducing tr
 
 image::AirlineRefactor1.png[AirlineRefactor1,width=900,align=center]
 
+[.statement]
 *Question 1*: What flights will take me from Malmo to New York on Friday?
 
+[.statement]
 *Question 2*: Mom is on flight AY189.  When will she land?
 
 [.notes]
@@ -261,10 +270,12 @@ AirportDay nodes reduce the density of Airport nodes, as there are many fewer da
 We still need to check every AirportDay to find the right date, but the scope of wasted traversal is lessened.
 --
 
-image::AirlineRefactor2.png[AirlineRefactor2,width=900,align=center]
+image::AirlineRefactor2.png[AirlineRefactor2,width=600,align=center]
 
+[.statement]
 *Question 1*: What flights will take me from Malmo to New York on Friday?
 
+[.statement]
 *Question 2*: Mom is on flight AY189.  When will she land?
 
 [.notes]
@@ -290,10 +301,12 @@ We will refactor make date a relationship type.
 
 === Refactor: Change relationship type to date
 
-image::AirlineRefactor3.png[AirlineRefactor3,width=900,align=center]
+image::AirlineRefactor3.png[AirlineRefactor3,width=700,align=center]
 
+[.statement]
 *Question 1*: What flights will take me from Malmo to New York on Friday?
 
+[.statement]
 *Question 2*: Mom is on flight AY189.  When will she land?
 
 [.notes]
@@ -317,10 +330,12 @@ This also performs 2 fewer hops per traversal--a tiny improvement, but one that 
 We would need to test this benefit more rigorously in production.
 --
 
-image::AirlineRefactor4.png[AirlineRefactor4,width=900,align=center]
+image::AirlineRefactor4.png[AirlineRefactor4,width=700,align=center]
 
+[.statement]
 *Question 1*: What flights will take me from Malmo to New York on Friday?
 
+[.statement]
 *Question 2*: Mom is on flight AY189.  When will she land?
 
 [.notes]
@@ -349,10 +364,12 @@ Once again, intermediate nodes come to the rescue!
 In this case, we are doing two things, further subdividing flights based on destination, but more importantly, we are elevating flight destinations form a 3-hop downstream object to a 1-hop downstream object.
 --
 
-image::AirlineRefactor5.png[AirlineRefactor5,width=900,align=center]
+image::AirlineRefactor5.png[AirlineRefactor5,width=700,align=center]
 
+[.statement]
 *Question 1*: What flights will take me from Malmo to New York on Friday?
 
+[.statement]
 *Question 2*: Mom is on flight AY189.  When will she land?
 
 [.notes]
@@ -383,52 +400,52 @@ Moreover, getting a rough first model quickly reduces the total time we would ne
 === Question 1
 
 [.statement]
-What graph modeling structure can you use to simulate hyperedges where you want to connect two nodes with additional context?
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] Relationship with properties defined.
-- [ ] Linked list.
-- [ ] Timeline tree.
-- [x] Intermediate nodes.
-
-=== Question 2
-
-[.statement]
-In Neo4j, which structure is [.underline]#not# recommended as a best practice for representing linked lists?
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] Interleaved linked lists with multiple starting points for navigation.
-- [x] Doubly linked lists.
-- [ ] Single linked list.
-- [ ] Linked list with nodes that point to the head and tail of the list.
-
-=== Question 3
-
-[.statement]
-What common structure is used to model data where you need to know when an event occurred in the application and find other events that occurred in the same time-frame?
+What tasks can be done during the refactoring of a graph data model?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [ ] Linked list where each node has a timestamp.
-- [ ] Intermediate nodes where the intermediate nodes have time-related data.
-- [x] Timeline tree
-- [ ] Doubly-linked list where the symmetric relationbship is the timestamp relationship.
+- [x] Data is moved from one structure in the existing graph to another.
+- [ ] A new graph is created from an existing graph.
+- [ ] Statistics are collected about the numbers of nodes, properties, and relationships.
+- [x] Data may be added to the graph from other sources.
+
+=== Question 2
+
+[.statement]
+Why do you refactor a graph data model?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Improve query performance.
+- [x] Simplify the model to make it more intuitive.
+- [x] Allow for simpler Cypher queries.
+- [x] Make updates to the data in the graph easier.
+
+=== Question 3
+
+[.statement]
+When thinking about refactoring a graph data model. What is the most common type of refactoring you typically do?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Rename node labels.
+- [ ] Duplicate property values where they will be queried most.
+- [x] Extract property values to change the structure of the graph.
+- [ ] Create indexes that will speed up queries for the most important questions.
 
 [.summary]
 == Summary
 
 You should now be able to:
 [square]
-* Describe common graph structures used in modeling:
-** Intermediate nodes
-** Linked lists
-** Timeline trees
-** Multiple structures in a single graph
+* Describe why you would refactor a graph data model.
+* Refactor a model to:
+** Eliminate duplicate data in nodes.
+** Use node labels rather than properties.
+** Extract property values to create nodes.
