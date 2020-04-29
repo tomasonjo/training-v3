@@ -27,7 +27,8 @@ subprojects {
   apply plugin: AsciidoctorModuleDescriptorPlugin
 
   dependencies {
-    asciidoctorGems 'rubygems:rouge:3.13.0'
+    asciidoctorGems 'rubygems:rouge:3.18.0'
+    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.0.3'
   }
 
   repositories {
@@ -76,7 +77,8 @@ subprojects {
       'experimental': '',
       'manual': 'http://neo4j.com/docs/developer-manual/current',
       'manual-cypher': '{manual}/cypher',
-      'module-enrollment-url': enrollmentUrl
+      'module-enrollment-url': enrollmentUrl,
+      'document-metadata-attrs-include': 'author,slug,parent-path,categories*,tags*,taxonomies*<>'
   }
 
   revealjs {
