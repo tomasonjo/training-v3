@@ -10,18 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var trainingPartName = window.trainingPartName
 
   var quizStatusLocalStorageKey = 'com.neo4j.graphacademy.' + trainingName + '.quizStatus'
-  var idTokenLocalStorageKey = 'com.neo4j.accounts.idToken'
 
   var backendBaseUrl = window.trainingBackendBaseUrl
   var enrollmentUrl = window.trainingEnrollmentUrl
-
-  var getTimeDiff = function (time1, time2) {
-    var hourDiff = time2 - time1
-    var diffDays = Math.floor(hourDiff / 86400000)
-    var diffHrs = Math.floor((hourDiff % 86400000) / 3600000)
-    var diffMins = Math.floor(((hourDiff % 86400000) % 3600000) / 60000)
-    return {'days': diffDays, 'hours': diffHrs, 'mins': diffMins}
-  }
 
   function arrayDiff(a, b) {
     return a.filter(function (i) {
@@ -29,8 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  function getQuizStatus() {
-    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
+  function getQuizStatus(accessToken) {
     return $.ajax({
       type: 'GET',
       url: backendBaseUrl + '/getQuizStatus?className=' + trainingName,
@@ -38,13 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
       dataType: 'json',
       async: true,
       headers: {
-        'Authorization': idToken
+        'Authorization': accessToken
       }
     })
   }
 
-  function setQuizStatus(passed, failed) {
-    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
+  function setQuizStatus(passed, failed, accessToken) {
     var data = {
       'className': window.trainingClassName,
       'passed': passed,
@@ -58,13 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
       async: true,
       data: JSON.stringify(data),
       headers: {
-        'Authorization': idToken
+        'Authorization': accessToken
       }
     })
   }
 
-  function getClassCertificate() {
-    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
+  function getClassCertificate(accessToken) {
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/genClassCertificate',
@@ -73,25 +61,23 @@ document.addEventListener('DOMContentLoaded', function () {
       async: true,
       data: JSON.stringify({'className': trainingName}),
       headers: {
-        'Authorization': idToken
+        'Authorization': accessToken
       }
     })
   }
 
-  function getEnrollmentForClass() {
-    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
+  function getEnrollmentForClass(accessToken) {
     return $.ajax({
       type: 'GET',
       url: backendBaseUrl + '/getClassEnrollment?className=' + trainingName,
       async: true,
       headers: {
-        'Authorization': idToken
+        'Authorization': accessToken
       }
     })
   }
 
-  function enrollStudentInClass(firstName, lastName) {
-    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
+  function enrollStudentInClass(firstName, lastName, accessToken) {
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/setClassEnrollment',
@@ -104,13 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
         'lastName': lastName
       }),
       headers: {
-        'Authorization': idToken
+        'Authorization': accessToken
       }
     })
   }
 
-  function logTrainingView() {
-    var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
+  function logTrainingView(accessToken) {
     return $.ajax({
       type: 'POST',
       url: backendBaseUrl + '/logTrainingView',
@@ -122,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'partName': trainingPartName || 'unknown'
       }),
       headers: {
-        'Authorization': idToken
+        'Authorization': accessToken
       }
     })
   }
@@ -193,35 +178,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return quizSuccess
   }
 
-  var attemptRenewToken = function (silent, nextTimeout, nextTimeoutSilent) {
-    console.log('attempting to renew token...')
-    var iframe = document.createElement('iframe')
-    iframe.style.display = 'none'
-    iframe.src = 'https://neo4j.com/accounts/login?targetUrl=' + encodeURI(siteUrl)
-    document.body.appendChild(iframe)
-    if (nextTimeout) {
-      setTimeout(function () {
-        attemptRenewToken(nextTimeoutSilent, nextTimeout, nextTimeoutSilent)
-      }, nextTimeout)
-    }
-  }
-
   var logout = function () {
-    window.location = 'https://neo4j.com/accounts/login/?targetUrl=' + encodeURI(siteUrl)
-  }
-
-  function checkTokenExpiration(idToken) {
-    var decodedToken = jwt_decode(idToken)
-    var expiresIn = getTimeDiff(Date.now(), (decodedToken.exp) * 1000)
-    if (expiresIn.days > 0 || expiresIn.hours > 0) {
-      // token is good.
-    } else if (expiresIn.days === 0 && expiresIn.hours === 0 && expiresIn.mins > 1 && expiresIn.mins < 60) {
-      // expiring soon, let's immediately get a new token
-      attemptRenewToken(true, 1000 * 60 * 30, false)
-    } else {
-      // token is already expired, log user out in UI; token won't work
-      logout()
-    }
+    // todo: use a temporary URL during the Auth0 migration (notice the "login-b" instead of "login")
+    //window.location = 'http://neo4j.com/accounts/login/?targetUrl=' + encodeURI(siteUrl)
+    window.location = 'http://neo4j.com/accounts/login-b/?targetUrl=' + encodeURI(siteUrl)
   }
 
   // events
@@ -254,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // update indicators
     updateProgressIndicators(currentQuizStatus)
-    setQuizStatus(currentQuizStatus['passed'], currentQuizStatus['failed'])
+    setQuizStatus(currentQuizStatus['passed'], currentQuizStatus['failed'], accessToken)
       .then(() => {
         window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
       })
@@ -278,64 +238,111 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   updateProgressIndicators(currentQuizStatus)
 
-  var idToken = window.localStorage.getItem(idTokenLocalStorageKey)
   if (typeof trainingPartName !== 'undefined') {
-    if (idToken) {
-      // we're authenticated!
-      // check if the token is not expired (or will expire soon)
-      checkTokenExpiration(idToken)
-      getEnrollmentForClass()
-        .then(function (response) {
-          if (response) {
-            if (response.enrolled === false) {
-              // you should be enrolled, redirect to the enrollment page!
-              window.location = enrollmentUrl
+    var lock = new Auth0Lock('hoNo6B00ckfAoFVzPTqzgBIJHFHDnHYu', 'login.neo4j.com', {
+        configurationBaseUrl: 'https://cdn.auth0.com',
+        allowedConnections: ['google-oauth2', 'linkedin', 'twitter', 'Username-Password-Authentication'],
+        additionalSignUpFields: [
+          {
+            name: 'first_name',
+            placeholder: 'First Name'
+          },
+          {
+            name: 'last_name',
+            placeholder: 'Last Name'
+          }
+        ],
+        closable: false,
+        languageDictionary: {
+          signUpTerms: "I agree to the <a href='https://neo4j.com/terms/online-trial-agreement/' style='text-decoration: underline' target='_blank'>terms of service</a> of Neo4j."
+        },
+        mustAcceptTerms: true,
+        auth: {
+          redirect: true,
+          redirectUrl: 'https://neo4j.com/accounts/login',
+          responseType: 'token id_token',
+          audience: 'neo4j://accountinfo/',
+          params: {
+            scope: 'read:account-info write:account-info openid email profile user_metadata'
+          }
+        }
+      }
+    )
+    var accessToken
+    lock.checkSession({}, function (err, authResult) {
+      if (err) {
+        console.error('User is not authenticated', err)
+        logout()
+      } else if (authResult && authResult.accessToken) {
+        // we're authenticated!
+        accessToken = authResult.accessToken
+        // get the enrollment status
+        getEnrollmentForClass(accessToken)
+          .then(function (response) {
+            if (response) {
+              if (response.enrolled === false) {
+                // you should be enrolled, redirect to the enrollment page!
+                window.location = enrollmentUrl
+              }
             }
-          }
-        })
-        .catch(function (error) {
-          console.error('Unable to get enrollment', error)
-        })
-
-      // get the current quiz status from the server
-      getQuizStatus()
-        .then(function (response) {
-          var quizStatus = response['quizStatus']
-          if (quizStatus) {
-            var failed = quizStatus['failed']
-            var passed = quizStatus['passed']
-            var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
-            currentQuizStatus = {
-              failed: failed,
-              passed: passed,
-              untried: untried
+          })
+          .catch(function (error) {
+            console.error('Unable to get enrollment', error)
+          })
+        // get the current quiz status from the server
+        getQuizStatus(accessToken)
+          .then(function (response) {
+            var quizStatus = response['quizStatus']
+            if (quizStatus) {
+              var failed = quizStatus['failed']
+              var passed = quizStatus['passed']
+              var untried = arrayDiff(arrayDiff(trainingModules, failed), passed)
+              currentQuizStatus = {
+                failed: failed,
+                passed: passed,
+                untried: untried
+              }
+              window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
+              updateProgressIndicators(currentQuizStatus)
+              updatePageQuiz()
+            } else {
+              console.warn('Unable to update the current quiz status, response from the server is empty', response)
             }
-            window.localStorage.setItem(quizStatusLocalStorageKey, JSON.stringify(currentQuizStatus))
-            updateProgressIndicators(currentQuizStatus)
-            updatePageQuiz()
-          } else {
-            console.warn('Unable to update the current quiz status, response from the server is empty', response)
+          })
+          .catch(function (error) {
+            console.error('Unable to get quiz status', error)
+          })
+        // get the certificate
+        getClassCertificate(accessToken)
+          .then(function (response) {
+            var certificateResultElement = $('[data-certificate-result]')
+            if ('url' in response) {
+              certificateResultElement.html('<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>')
+            } else {
+              certificateResultElement.html('<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>')
+            }
+          })
+          .catch(function (error) {
+            console.error('Unable to get certificate', error)
+          })
+        var userInfo = authResult.idTokenPayload;
+        if (window.intercomSettings && window.intercomSettings.app_id && userInfo) {
+          try {
+            Intercom('update', {
+              app_id: window.intercomSettings.app_id,
+              name: userInfo.name,
+              email: userInfo.email,
+              user_id: userInfo.sub,
+              hide_default_launcher: true
+            })
+          } catch (err) {
+            console.error('Unable to call Intercom with user info', err)
           }
-        })
-        .catch(function (error) {
-          console.error('Unable to get quiz status', error)
-        })
-
-      // get certificate
-      getClassCertificate()
-        .then(function (response) {
-          var certificateResultElement = $('[data-certificate-result]')
-          if ('url' in response) {
-            certificateResultElement.html('<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>')
-          } else {
-            certificateResultElement.html('<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>')
-          }
-        })
-        .catch(function (error) {
-          console.error('Unable to get certificate', error)
-        })
-    } else {
-      logout()
-    }
+        }
+        Intercom('trackEvent', 'course-' + trainingName + '-' + trainingPartName)
+      } else {
+        console.warn('Unable to get the access token from the authentication result', authResult)
+      }
+    })
   }
 })
