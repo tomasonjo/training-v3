@@ -83,11 +83,7 @@ require 'json'
         window.trainingClassName = "<%= attr('module-name') %>"
         window.trainingPartName = "<%= attr('slug') %>"
         window.trainingClassModules = <%= modules.to_json %>
-        <% if attr('stage') === 'production' %>
-          window.trainingBackendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
-        <% else %>
-          window.trainingBackendBaseUrl = 'https://9niagofhzb.execute-api.us-east-1.amazonaws.com/dev'
-        <% end %>
+        window.trainingBackendBaseUrl = 'https://nmae7t4ami.execute-api.us-east-1.amazonaws.com/prod'
         window.trainingEnrollmentUrl = "<%= attr('module-enrollment-url') %>"
       </script>
       <script src="https://cdn.auth0.com/js/lock/11.23.0/lock.min.js"></script>

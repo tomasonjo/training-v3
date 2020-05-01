@@ -77,41 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  function enrollStudentInClass(firstName, lastName, accessToken) {
-    return $.ajax({
-      type: 'POST',
-      url: backendBaseUrl + '/setClassEnrollment',
-      contentType: 'application/json',
-      dataType: 'json',
-      async: true,
-      data: JSON.stringify({
-        'className': trainingName,
-        'firstName': firstName,
-        'lastName': lastName
-      }),
-      headers: {
-        'Authorization': accessToken
-      }
-    })
-  }
-
-  function logTrainingView(accessToken) {
-    return $.ajax({
-      type: 'POST',
-      url: backendBaseUrl + '/logTrainingView',
-      contentType: 'application/json',
-      dataType: 'json',
-      async: true,
-      data: JSON.stringify({
-        'className': trainingName,
-        'partName': trainingPartName || 'unknown'
-      }),
-      headers: {
-        'Authorization': accessToken
-      }
-    })
-  }
-
   function updatePageQuiz() {
     // && is (somehow) encoded as &#38;
     if (currentQuizStatus) {
