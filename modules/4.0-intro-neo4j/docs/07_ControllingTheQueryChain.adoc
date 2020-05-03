@@ -159,7 +159,7 @@ Here is another example where we want to find all actors who have acted in at le
 [source,cypher]
 ----
 MATCH (p:Person)
-WITH p, size((p)-[:ACTED_IN]->(:Movie)) AS movies
+WITH p, size((p)-[:ACTED_IN]->()) AS movies
 WHERE movies >= 5
 OPTIONAL MATCH (p)-[:DIRECTED]->(m:Movie)
 RETURN p.name, m.title

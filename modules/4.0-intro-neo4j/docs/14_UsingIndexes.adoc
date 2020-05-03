@@ -219,8 +219,7 @@ After creating a full-text schema index, you can always get of listing of all ex
 --
 [source,cypher]
 ----
-CALL db.index.fulltext.createNodeIndex(
-     'MovieTitlePersonName',['Movie', 'Person'], ['title', 'name'])
+CALL db.indexes()
 ----
 
 [.statement]

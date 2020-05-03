@@ -23,7 +23,7 @@ At the end of this module, you should be able to write Cypher statements to:
 ** Creating nodes.
 ** Creating relationships.
 
-== Merging data in the graph
+== Creating data in the graph
 [.notes]
 --
 Thus far, you have learned how to create nodes, labels, properties, and relationships in the graph.
@@ -68,10 +68,6 @@ Node creation behaviors:
 *Relationship*: If the relationship exists, a duplicate relationship is created.
 endif::[]
 
-
-[NOTE]
-[.statement]
-You should never create duplicate nodes or relationships in a graph.
 
 == Using `MERGE`
 
@@ -437,6 +433,7 @@ What are your options to process this `MERGE` clause?
 ----
 MATCH (p {name: 'Jane Doe'}),(m:Movie {title:'The Good One'})
 MERGE (p)-[rel:ACTED_IN]->(m)
+SET rel.role=['role']
 ----
 
 [.statement]

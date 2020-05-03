@@ -154,7 +154,7 @@ In this example, we specify that the release date of the movies for _Tom Hanks_ 
 [source,cypher]
 ----
 MATCH (p:Person)-[:DIRECTED | ACTED_IN]->(m:Movie)
-WHERE p.name = 'Tom Hanks'OR p.name = 'Keanu Reeves'
+WHERE p.name = 'Tom Hanks' OR p.name = 'Keanu Reeves'
 RETURN DISTINCT m.title, m.released ORDER BY m.released DESC
 ----
 
@@ -178,7 +178,7 @@ Here we want the rows to be sorted by the release date, descending, and then by 
 [source,cypher]
 ----
 MATCH (p:Person)-[:DIRECTED | ACTED_IN]->(m:Movie)
-WHERE p.name = 'Tom Hanks'OR p.name = 'Keanu Reeves'
+WHERE p.name = 'Tom Hanks' OR p.name = 'Keanu Reeves'
 RETURN DISTINCT m.title, m.released ORDER BY m.released DESC , m.title
 ----
 
@@ -339,7 +339,7 @@ How can you change this code so that a movie title will only be returned once?
 
 [source,cypher]
 ----
-MATCH ()-[:REVIEWED]->(m:Movie)
+MATCH (m:Movie)<-[:REVIEWED]-()
 RETURN  m.title
 ----
 
@@ -347,14 +347,14 @@ RETURN  m.title
 Select the correct answers.
 
 [%interactive.answers]
-- [x] `MATCH ()-[:REVIEWED]->(m:Movie)`
+- [x] `MATCH (m:Movie)<-[:REVIEWED]-()`
        `RETURN  DISTINCT m.title`
-- [ ] `MATCH ()-[:REVIEWED]->(m:Movie)`
+- [ ] `MATCH (m:Movie)<-[:REVIEWED]-()`
        `RETURN  UNIQUE m.title`
-- [x] `MATCH ()-[:REVIEWED]->(m:Movie)`
+- [x] `MATCH (m:Movie)<-[:REVIEWED]-()`
       `WITH DISTINCT m`
        `RETURN  m.title`
-- [ ] `MATCH ()-[:REVIEWED]->(m:Movie)`
+- [ ] `MATCH (m:Movie)<-[:REVIEWED]-()`
        `WITH UNIQUE m`
        `RETURN  m.title`
 
@@ -375,7 +375,7 @@ Select the correct answer.
 === Question 3
 
 [.statement]
-We want to retrieve the names of the five oldest actors in our dataset. What code will do this?
+We want to retrieve the names of the five oldest persons in our dataset. What code will do this?
 
 [.statement]
 Select the correct answers.
@@ -384,13 +384,13 @@ Select the correct answers.
 - [ ] `MATCH (p:Person)-[:ACTED_IN]->()`
       `WITH p LIMIT 5`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born`
-- [x] `MATCH (p:Person)`
+- [ ] `MATCH (p:Person)`
       `WITH p LIMIT 5`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born`
-- [x] `MATCH (p:Person)-[:ACTED_IN]->()`
+- [ ] `MATCH (p:Person)-[:ACTED_IN]->()`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5`
 - [x] `MATCH (p:Person)`
-      `ETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5`
+      `RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5`
 
 [.summary]
 == Summary

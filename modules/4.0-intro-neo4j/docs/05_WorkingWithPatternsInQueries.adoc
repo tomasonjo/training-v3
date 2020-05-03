@@ -60,7 +60,7 @@ In all, six relationships were traversed.
 image::TheReplacementsTraversal.png[TheReplacementsTraversal,width=500,align=center]
 --
 
-== Specifying multiple `MATCH` patterns
+== Specifying multiple patterns in a `MATCH`
 
 [.notes]
 --
@@ -128,7 +128,7 @@ This is useful when you are looking for a specific node in the graph and want to
 You will learn about creating nodes and relationships later in this training. 
 --
 
-=== Example: Using two MATCH patterns
+=== Example: Using two patterns in a `MATCH`
 
 [.notes]
 --
@@ -173,7 +173,7 @@ endif::[]
 image::KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
 --
 
-=== Example: Two `MATCH` patterns required
+=== Example: Two patterns in a `MATCH` required
 
 [.notes]
 --
@@ -426,7 +426,7 @@ For example, here is an example where we want a subgraph of all nodes connected 
 
 [source,cypher]
 ----
-MATCH paths = ((m:Movie)-[rel]-(p:Person))
+MATCH paths = (m:Movie)-[rel]-(p:Person)
 WHERE m.title = 'The Replacements'
 RETURN paths
 ----

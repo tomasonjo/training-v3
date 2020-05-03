@@ -53,7 +53,7 @@ Assuming that you have an agreed-upon data model, here are the basic steps you s
 . Determine how the CSV file will be structured.
 . Determine if normalized or denormalized data.
 . Ensure IDs to be used in the data are unique.
-. Ensure data in CSV files is "clean".]
+. Ensure data in CSV files is "clean".
 . Execute Cypher code to inspect the data.
 . Determine if data needs to be transformed.
 . Ensure constraints are created in the graph.
@@ -422,8 +422,9 @@ In this example, we import the movie data:
 
 [source,cypher]
 ----
+USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM
-  'https://data.neo4j.com/v4.0-intro-neo4j/movie1s.csv' as row
+  'https://data.neo4j.com/v4.0-intro-neo4j/movies1.csv' as row
 MERGE (m:Movie {id:toInteger(row.movieId)})
     ON CREATE SET
           m.title = row.title,
@@ -466,7 +467,7 @@ In this example, we import the data to create the relationships between existing
 [source.fit,cypher]
 ----
 LOAD CSV WITH HEADERS FROM
-https://data.neo4j.com/v4.0-intro-neo4j/directors.csv' AS row
+'https://data.neo4j.com/v4.0-intro-neo4j/directors.csv' AS row
 MATCH (movie:Movie {id:toInteger(row.movieId)})
 MATCH (person:Person {id: toInteger(row.personId)})
 MERGE (person)-[:DIRECTED]->(movie)
