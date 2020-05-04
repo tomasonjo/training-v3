@@ -451,7 +451,7 @@ Select the correct answers.
 - [ ] Scheduling when a load should occur.
 - [x] Executing Cypher code when a condition is true and alternate Cypher code when the condition is false.
 - [ ] An alternative to the `MERGE` clause.
-- [ ] Profiling the execution of a query.
+- [x] Understanding how many operations occurred during the execution.
 
 === Question 3
 
