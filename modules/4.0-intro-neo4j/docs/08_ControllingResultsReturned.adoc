@@ -384,10 +384,10 @@ Select the correct answers.
 - [ ] `MATCH (p:Person)-[:ACTED_IN]->()`
       `WITH p LIMIT 5`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born`
-- [ ] `MATCH (p:Person)`
+- [x] `MATCH (p:Person)`
       `WITH p LIMIT 5`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born`
-- [ ] `MATCH (p:Person)-[:ACTED_IN]->()`
+- [x] `MATCH (p:Person)-[:ACTED_IN]->()`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5`
 - [x] `MATCH (p:Person)`
       `RETURN DISTINCT p.name, p.born ORDER BY p.born LIMIT 5`

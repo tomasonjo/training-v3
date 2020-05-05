@@ -227,22 +227,26 @@ When designing or refactoring a model, you can estimate performance by checking 
 [.statement]
 _For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
 
-[.is-half.left]
+[.is-one-third.left]
 --
 image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
 --
 
-[.is-half.right]
+[.is-two-thirds.right]
 --
-[.statement]
 
-. Anchor node label, anchor node properties (indexed)
+[.small]
+. Anchor node label,  indexed anchor node properties
+
 
 . Relationship types
 
-. Anchor node properties (non-indexed)
+
+. Non-indexed anchor node properties
+
 
 . Downstream node labels
+
 
 . Relationship properties, downstream node properties
 --

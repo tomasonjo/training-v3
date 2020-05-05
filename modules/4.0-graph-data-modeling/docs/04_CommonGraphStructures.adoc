@@ -47,7 +47,7 @@ Relationships can only connect nodes.
 
 === Using intermediate nodes
 
-image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=700,align=center]
+image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=600,align=center]
 
 [.notes]
 --
@@ -70,7 +70,7 @@ Person nodes can have a shared Role or Company, and allow us to very easily  tra
 
 === Intermediate nodes: sharing data
 
-image::IntermediateSharingData.png[IntermediateSharingData,width=1100,align=center]
+image::IntermediateSharingData.png[IntermediateSharingData,width=800,align=center]
 
 [.notes]
 --
@@ -160,7 +160,7 @@ It may also point to the last item.
 For cases where you are tracking progress through the sequence, the parent node may also have a pointer to the “current” item.
 --
 
-image::LinkedList3.png[LinkedList3,width=900,align=center]
+image::LinkedList3.png[LinkedList3,width=700,align=center]
 
 [.small]
 --
@@ -385,7 +385,7 @@ This intermediate node allows us to keep track of students’ progress through d
 
 === Exercise 4 solution: Sample data
 
-image::Ex4-Sol2.png[Ex4-Sol2,width=1200,align=center]
+image::Ex4-Sol2.png[Ex4-Sol2,width=1000,align=center]
 
 ifdef::backend-revealjs[]
 [.notes]
@@ -515,13 +515,13 @@ endif::[]
 === Question 1
 
 [.statement]
-What graph modeling structure can you use to simulate hyperedges where you want to connect two nodes with additional context?
+What graph modeling pattern can you use to add more contextual and organizational information to relationships that is not easily modeled with simple relationship properties?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] Relationship with properties defined.
+- [ ] Sub-relationships.
 - [ ] Linked list.
 - [ ] Timeline tree.
 - [x] Intermediate nodes.
@@ -546,7 +546,7 @@ Select the correct answer.
 What common structure is used to model data where you need to know when an event occurred in the application and find other events that occurred in the same time-frame?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [ ] Linked list where each node has a timestamp.

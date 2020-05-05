@@ -6,7 +6,7 @@ include::{includedir}/00_AboutThisCourse.adoc[]
 include::{includedir}/01_IntroductionToGraphDataModeling.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/02_BuildingInitialGraphDataModel.adoc[leveloffset=+1]
+include::{includedir}/02_DesigningTheInitialGraphDataModel.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
 include::{includedir}/03_GraphDataModelingCorePrinciples.adoc[leveloffset=+1]

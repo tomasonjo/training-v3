@@ -1,5 +1,5 @@
-= Building the Initial Graph Data Model
-:slug: 02-building-initial-graph-data-model
+= Designing the Initial Graph Data Model
+:slug: 02-designing-initial-graph-data-model
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -18,7 +18,7 @@ At the end of this module, you should be able to:
 * Identify the connections between entities.
 * Describe how to test the initial model.
 
-== Building the initial data model
+== Designing the initial data model
 
 . Understand the domain.
 . Create high-level sample data.
@@ -30,7 +30,7 @@ At the end of this module, you should be able to:
 
 [.notes]
 --
-Building the initial model is a multi-step process.
+Designing the initial model is a multi-step process.
 We find it is extremely important to be disciplined about this.
 If you do, you tend to get to a first model faster, that model better suits your documented needs, and that model is usually simple to understand.
 It will almost certainly not be perfect, and will need to change in response to shifting needs and a deepening understanding of the domain, use case, and capabilities of Neo4j.
@@ -257,7 +257,7 @@ For now, we simply group them all into this one generic bucket of usefulness.
 
 Decorators should usually be left out of the initial model.
 If they are not being used to answer questions, they are a waste of storage, and their presence can distract users and developers from the information that is actually important.
-Remember that we endorse a narrow, focused approach to model building, based on the relative ease of modifying a graph data model.
+Remember that we endorse a narrow, focused approach to model design, based on the relative ease of modifying a graph data model.
 
 However, it can be beneficial to include decorators when you move to production.
 Not because they will be used, but because, if all information is locally available to Neo4j, refactoring a model later may not require importing data from its original source.
@@ -345,59 +345,6 @@ Highlight the strengths and weaknesses of their design choices later, when we st
 --
 endif::[]
 
-[.slide-title.has-green-background.has-team-background]
-== Guided Exercise: Using the Arrow tool
-
-ifdef::backend-html5,backend-pdf[]
-Follow along with this video to learn how to begin using the Arrow tool for graph data modeling.
-endif::[]
-
-ifdef::backend-pdf[]
-https://youtu.be/NB184T-S46w
-endif::[]
-
-ifdef::backend-revealjs[]
-https://youtu.be/NB184T-S46w
-endif::[]
-
-ifdef::backend-html5[]
-[.center]
-video::NB184T-S46w[youtube,width=560,height=315]
-endif::[]
-
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Show the students how to get started with the Arrow tool and encourage them to follow along on their laptops:
-
-. Go to http://www.apcjones.com/arrows/
-. Double-click the existing node and add a Caption to it of *Person*.
-. Add the properties: *name: "Tom Jones", birthyear: 1990*
-. Add another node by clicking the Node button.
-. Double-click the new node and add a Caption to it of *Person*.
-. Add the properties:  *name: "Mary Jones", birthyear: 1995*
-. Grab the edge of the Tom Jones node and drag it over to the Mary Jones node to create the relationship.
-. Double-click the relationship and add the Type *MARRIED".
-. Add the property:  *since: 2015*
-. Add another node by clicking the Node button.
-. Double-click the new node and add a Caption to it of *Location*
-. Add the property:  *address: "123 Main Street"*
-. Drag the edge of the Tom Jones node to the Location property to create the relationship.
-. Double-click the relationship and add a Caption to it of *LIVES_AT*.
-. Drag the edge of the Mary Jones node to the Location property to create the relationship.
-. Double-click the relationship and add a Caption to it of *LIVES_AT*.
-. Show them that they can download their model to an SVG file.
-. Show them that they can view the markup and save it into a text file.
-
-The resulting model should appear as follows:
-
-image::ArrowsDemo.png[ArrowsDemo,width=500,align=center]
-
-Here is the video:  https://youtu.be/NB184T-S46w
-
---
-endif::[]
 
 [.student-exercise]
 == Exercise 2: Creating the BOM entity model in the Arrow tool
@@ -826,7 +773,7 @@ endif::[]
 
 What parts are needed to make Wood table 40"?
 
-image::TestModel1.png[TestModel1,width=1000,align=center]
+image::TestModel1.png[TestModel1,width=800,align=center]
 
 [.notes]
 --
@@ -837,7 +784,7 @@ Multiply by the quantity property as you go.
 
 Do we have enough parts to make 100x Deluxe wood table 60"?
 
-image::TestModel2.png[TestModel2,width=1000,align=center]
+image::TestModel2.png[TestModel2,width=800,align=center]
 
 [.notes]
 --
@@ -860,7 +807,7 @@ If you were maintaining stock data somewhere else anyway, there is no inherent n
 
 What products require a table brace?
 
-image::TestModel3.png[TestModel3,width=1000,align=center]
+image::TestModel3.png[TestModel3,width=800,align=center]
 
 [.notes]
 --
@@ -872,7 +819,7 @@ Then it would traverse backwards along each CONTAINS to find the products that u
 
 How much will the parts cost to make Wood table 60"?
 
-image::TestModel4.png[TestModel4,width=1000,align=center]
+image::TestModel4.png[TestModel4,width=800,align=center]
 
 [.notes]
 --

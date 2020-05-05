@@ -24,27 +24,34 @@ Refactoring is the process of changing the data structure without altering its s
 * Most of the time, refactoring simply involves moving data from one structure to another within the graph.
 * In some cases, refactoring involves adding more data from other sources.
 
+The most common type of refactoring of a graph is to use a property value to restructure the graph.
+That is, a property value is used to create a label, a node, or a relationship.
+
 === Review: Hierarchy of Accessibility
 
 [.statement]
 _For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
 
-[.is-half.left]
+[.is-one-third.left]
 --
 image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
 --
 
-[.is-half.right]
+[.is-two-thirds.right]
 --
-[.statement]
 
-. Anchor node label, anchor node properties (indexed)
+[.small]
+. Anchor node label,  indexed anchor node properties
+
 
 . Relationship types
 
-. Anchor node properties (non-indexed)
+
+. Non-indexed anchor node properties
+
 
 . Downstream node labels
+
 
 . Relationship properties, downstream node properties
 --
@@ -299,9 +306,9 @@ There are only two ways to do this:
 We will refactor make date a relationship type.
 --
 
-=== Refactor: Change relationship type to date
+=== Possible refactor: Change relationship type to date
 
-image::AirlineRefactor3.png[AirlineRefactor3,width=700,align=center]
+image::AirlineRefactor3.png[AirlineRefactor3,width=500,align=center]
 
 [.statement]
 *Question 1*: What flights will take me from Malmo to New York on Friday?

@@ -1,0 +1,8 @@
+Next version of Arrow Tool video:
+
+0:10--slight misspeak. "ACP jones" rather than "APC jones"
+
+0:15--Arrows frequently does not initialize with a blank node.  I would start from an empty screen, because adding an extra node is easier to follow and fix than not having one and being unsure of how to start.
+
+------
+
