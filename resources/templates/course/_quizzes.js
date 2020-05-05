@@ -277,19 +277,21 @@ document.addEventListener('DOMContentLoaded', function () {
           .catch(function (error) {
             console.error('Unable to get quiz status', error)
           })
-        // get the certificate
-        getClassCertificate(accessToken)
-          .then(function (response) {
-            var certificateResultElement = $('[data-certificate-result]')
-            if ('url' in response) {
-              certificateResultElement.html('<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>')
-            } else {
-              certificateResultElement.html('<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>')
-            }
-          })
-          .catch(function (error) {
-            console.error('Unable to get certificate', error)
-          })
+        var certificateResultElement = document.querySelector('[data-certificate-result]')
+        if (certificateResultElement) {
+          // get the certificate
+          getClassCertificate(accessToken)
+            .then(function (response) {
+              if ('url' in response) {
+                certificateResultElement.innerHTML = '<p class="paragraph"><a href="' + response['url'] + '">Download Certificate</a></p>'
+              } else {
+                certificateResultElement.innerHTML = '<p class="paragraph">Certificate not available yet. Did you complete the quizzes at the end of each section?</p>'
+              }
+            })
+            .catch(function (error) {
+              console.error('Unable to get certificate', error)
+            })
+        }
         var userInfo = authResult.idTokenPayload;
         if (window.intercomSettings && window.intercomSettings.app_id && userInfo) {
           try {
