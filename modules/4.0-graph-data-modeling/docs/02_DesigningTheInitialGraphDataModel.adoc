@@ -356,6 +356,11 @@ Make sure you include properties for the nodes and specify the types for the pro
 ifdef::backend-revealjs[]
 [.notes]
 --
+
+The students should have downloaded the exercise files here which contain the markup for the Arrow tool:
+
+https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files.zip
+
 Invite everyone to create the BOM entities on their own in the Arrow tool.
 Do this yourself also.
 For Properties, encourage folks to use “expected data type” as property values; e.g., integer, String, decimal, etc.
