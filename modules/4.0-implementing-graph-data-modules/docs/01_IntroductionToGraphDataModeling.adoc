@@ -1,131 +1,131 @@
-= Introduction to Graph Data Modeling
-:slug: 01-introduction-graph-data-modeling
+= Implementing Your First Model
+:slug: 01-implementing-first-model
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Building the Initial Graph Data Model
+:module-next-title: Importing Data into the Graph
 
 == About this module
 
 At the end of this module, you should be able to:
 [square]
-* Describe what graph data modeling is.
-* Describe how Neo4j supports graph data modeling.
-* Describe the tools you can use for graph data modeling.
-* Describe the workflow for graph data modeling.
+* Write Cypher code to implement a simple initial model.
+* Confirm that the starter data is in the graph.
 
-== What is graph data modeling?
+== Domain used for this training
 
-Graph data modeling is a Collaborative effort where the application domain is analyzed by stakeholders and developers to come up with the optimal model for use with Neo4j.
-Stakeholders must understand the domain and be prepared to ask detailed questions about how the business-at-hand operates.
-
-Stakeholders are:
-
-* Business analysts
-* Architects
-* Managers
-* Project leaders
-
-== How does Neo4j support graph data modeling?
-
-* Neo4j is a full-featured graph database that allows you to create *property graphs*.
-* Applications retrieve data for business use cases by *traversing the graph*.
-
-=== Neo4j Property Graph Model
-
-[.is-one-third.left]
+[.notes]
 --
+For this training we will work with a familiar domain, airplane flights.
+We are working in a familiar domain so that we can focus on implementation details, and not be distracted by wider concepts.
+
+Specifically, we will use a dataset from the https://bts.gov/[US Bureau of Transportation].
+--
+
+image::AirlineDomain.png[AirlineDomain,width=900,align=center]
+
+=== Data used for this training
+
+[.notes]
+--
+The airline data itself is quite rich.
+We will not make use of every part of it in the exercises, but you can check it out if you have spare time during the exercises.
+--
+
+[.is-half.left]
+--
+image::AirlineIndustryData1.png[AirlineIndustryData1,width=500,align=center]
+--
+
+[.is-half.right]
+--
+image::AirlineIndustryData2.png[AirlineIndustryData2,width=500,align=center]
+--
+
+image::AirlineIndustryData3.png[AirlineIndustryData3,width=500,align=center]
+
+== Application question for our model
+
+image::InitialQuestionAirports.png[InitialQuestionAirports,width=500,align=center]
+
+[.notes]
+--
+For this question:
+
 [square]
-* Nodes (Entities)
-* Relationships
-* Properties
-* Labels
+* What are the entities?
+* What are the connections between entities?
+* What properties are needed?
 --
 
-[is-two-thirds.right]
+== Sample data for our model
+
+[.notes]
 --
-image::Neo4jPropertyGraphModel.png[Neo4jPropertyGraphModel,width=800,align=center]
+Here is how we might model for this question with some sample data:
 --
+
+ifdef::backend-revealjs[]
+[.is-half.left]
+--
+image::InitialQuestionAirports.png[InitialQuestionAirports,width=500,align=center]
+--
+endif::[]
+
+[.is-half.right]
+--
+image::InitialSampleDataAndModel.png[InitialSampleDataAndModel,width=500,align=center]
+--
+
+== Working with the sample data
+
+[.statement]
+A best practice when creating a graph with Cypher is to use the `MERGE` statement.
+This ensures that you will not create duplicate nodes or relationships in the graph.
+
+In the next exercise, Exercise 1, you will:
+
+. Create three Airport nodes and two CONNECTED_TO relationships per the initial data model by using the `MERGE` statement.
+
+. Query the graph to show the newly-created nodes and relationships.
+
+[.notes]
+--
+Creating the nodes and relationships using the `MERGE` statement and hard-coding values is fine for small sample data, but once you start working with larger amounts of data, you will want to load the data (typically from CSV files).
+--
+
+[.student-exercise]
+== Exercise 1: Getting started with the airport graph data model
+
+Before you start this exercise you must:
+
+. Create a project in Neo4j Desktop.
+. Create a local database in the project using the version of Neo4j 4.x.
+. Start the database.
+. Open a Neo4j Browser window for the database.
+
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-neo4j-modeling-exercises]
+
+and follow the instructions for Exercise 1.
+
+[NOTE]
+This exercise has 3 steps.
+Estimated time to complete: 15 minutes.
 
 ifdef::backend-revealjs[]
 [.notes]
 --
-On this slide, do a Concept Check.
 
-Ask questions like:
-
-. What information can be attached to a node?  Which of these are required?
-.. Labels & properties.  None required
-. What information can be attached to a relationship?  Which of these are required?
-.. Direction, type, and properties.  Direction and type are required.
-. What is the difference between a label and property?
-.. Labels are categorical.  Properties are specific.
---
+While the students are doing this exercise, you can populate your empty database as follows:
+MERGE (a:Airport {code:'LAS'})
+MERGE (b:Airport {code:'LAX'})
+MERGE (c:Airport {code:'ABQ'})
+MERGE (a)-[:`CONNECTED_TO` {airline:'WN',flightNumber:'82',date:'2019-1-3',departure:'1715',arrival:'1820'}]->(b)
+MERGE (a)-[:`CONNECTED_TO` {airline:'WN',flightNumber:'500',date:'2019-1-3',departure:'1445',arrival:'1710'}]->(c)
 endif::[]
-
-ifndef::backend-revealjs[]
-Nodes and relationships are the key components of a graph.
-Nodes should have labels to categorize entities.
-Relationships must have direction and type.
-Nodes and relationships can have properties.
-A label is used to categorize a set of nodes.
-Properties are used to provide specific values to a node or relatiobship.
-endif::[]
-
-=== Traversal in the graph
-
-image::Traversal.png[Traversal,width=700,align=center]
-
-[source,cypher]
-----
-MATCH (r:Residence)<-[:OWNS]-(p:Person)
-WHERE r.address = '475 Broad Street'
-RETURN p
-----
-
-[.notes]
---
-Traversal means anchoring a query based upon a property value, then traversing the graph to satisfy the query.
-In this example, the address property of the Residence node is used to determine where to anchor the query.
-Then, the _OWNS_ relationship is traversed to retrieve the qualifying nodes.
-A relationship is only traversed once in a query.
---
-
-ifdef::backend-revealjs[]
-[.notes]
---
-Ask the students these questions:
-. What uniqueness limitations does Cypher enforce?
-.. A query can visit a node any number of times,  but can traverse each relationship only once.
-. Given a Cypher query, how does Neo4j decide where to begin traversing?
-.. Neo4j will predict which of the node sets in the query is smallest.  It will begin there.  In this case, r is likely to be smallest, as it has a property filter.
-
---
-endif::[]
-
-== Tools for graph data modeling
-
-image::ArrowTool.png[ArrowTool,width=900,align=center]
-
-[.notes]
---
-There are many ways that developers and stakeholders can work together to build a graph data model for their application.
-Drawing it on a whiteboard may be done initially, but you will need to share your model with others so using a tool is recommended.
-The tool that we use in this course is the Arrow tool which integrates with Neo4j.
-With the Arrow tool, you can generate Cypher statements for creating code to implement the model.
---
-
-== Workflow for graph data modeling
-
-image::GraphDataModelingWorkflow.png[GraphDataModelingWorkflow,width=1200,align=center]
-
-[.notes]
---
-Data model maintenance is cyclical and iterative.
-We are comfortable with this idea because updating a graph model is much cheaper and easier than updating the schema of a tabular store.
-Ease-of-updating will be a consistent theme throughout this training.
---
 
 [.quiz]
 == Check your understanding
