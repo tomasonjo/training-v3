@@ -138,7 +138,7 @@ image::KatieRels.png[KatieRels,width=800,align=center]
 The most efficient way to delete a node and its corresponding relationships is to specify `DETACH DELETE`.  
 When you specify `DETACH DELETE` for a node, the relationships to and from the node are deleted, then the node is deleted.
 
-If were were to attempt to delete the _Liam Neeson_ node without first deleting its relationships:
+If we were to attempt to delete the _Liam Neeson_ node without first deleting its relationships:
 --
 
 [source,cypher]

@@ -35,7 +35,7 @@ This Course is published by Neo4j per this https://neo4j.com/docs/license/[Licen
 Here are the lessons of this course:
 
 . Introduction to Graph Data Modeling
-. Building an Initial Graph Data Model
+. Designing the Initial Graph Data Model
 . Graph Data Modeling Core Principles
 . Common Graph Structures
 . Refactoring and Evolving a Graph Data Model

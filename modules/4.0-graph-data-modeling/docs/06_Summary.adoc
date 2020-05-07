@@ -12,7 +12,7 @@ In this course, you have learned how to:
 
 [square]
 * Describe what a graph data model is for a Neo4j database.
-* Develop a graph data model using Neo4j best practices.
+* Design an initial graph data model using Neo4j best practices.
 * Describe the core principles used for Neo4j graph data modeling.
 * Describe the common structures used in a Neo4j graph data model.
 * Refactor and evolve a graph data model.
