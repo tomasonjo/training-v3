@@ -392,16 +392,16 @@ If the number of rows exceeds 100K, then you have two options.
 
 ifdef::backend-revealjs[]
 
-. `USING PERIODIC COMMIT LOAD CSV`.
+. `:auto USING PERIODIC COMMIT LOAD CSV`.
 . Use the APOC library.
 endif::[]
 
 [.notes]
 --
-The first option is to use `USING PERIODIC COMMIT LOAD CSV`.
-Placing `USING PERIODIC COMMIT` enables the load, by default, to commit its transactions every 1000 rows which will enable the entire import of a large file to succeed.
-However, there are certain types of Cypher constructs that will cause `USING PERIODIC COMMIT` to be ignored.
-Cypher statements that use _eager operators_ will prevent you from using `USING PERIODIC COMMIT`.
+The first option is to use `:auto USING PERIODIC COMMIT LOAD CSV`.
+Placing `:auto USING PERIODIC COMMIT` enables the load, by default, to commit its transactions every 1000 rows which will enable the entire import of a large file to succeed.
+However, there are certain types of Cypher constructs that will cause `:auto USING PERIODIC COMMIT` to be ignored.
+Cypher statements that use _eager operators_ will prevent you from using `:auto USING PERIODIC COMMIT`.
 Some examples of these eager operators include:
 
 [square]
@@ -410,7 +410,7 @@ Some examples of these eager operators include:
 * `ORDER BY`
 * `DISTINCT`
 
-If you cannot use `USING PERIODIC COMMIT` because your Cypher include some eager operators, then you can use APOC to import the data, which you will learn about in the the next lesson.
+If you cannot use `:auto USING PERIODIC COMMIT` because your Cypher include some eager operators, then you can use APOC to import the data, which you will learn about in the the next lesson.
 --
 
 == Importing nodes
@@ -422,7 +422,7 @@ In this example, we import the movie data:
 
 [source,cypher]
 ----
-USING PERIODIC COMMIT 500
+:auto USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM
   'https://data.neo4j.com/v4.0-intro-neo4j/movies1.csv' as row
 MERGE (m:Movie {id:toInteger(row.movieId)})

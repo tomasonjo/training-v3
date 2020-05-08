@@ -88,7 +88,7 @@ In Neo4j 4.0, another way that you can clear the graph in Neo4j Browser is to us
 --
 One benefit of using APOC for loading data into the graph is that it can sometimes be faster than `LOAD CSV`.
 In addition, APOC has some procedures that are helpful during the load, one of which is to control conditional processing.
-And as you have already learned, with APOC, you can load large datasets that will fail if using `LOAD CSV` or even `USING PERIODIC COMMIT LOAD CSV`.
+And as you have already learned, with APOC, you can load large datasets that will fail if using `LOAD CSV` or even `:auto USING PERIODIC COMMIT LOAD CSV`.
 
 Just as you inspect the data, determine if data needs to be transformed, and create uniqueness constraints before the import with `LOAD CSV`,
 you must do the same when using APOC for the import.
@@ -239,7 +239,7 @@ image::DoWhenAPOC.png[DoWhenAPOC,width=400,align=center]
 
 [.notes]
 --
-If you cannot load the CSV file with `LOAD CSV` or `USING PERIODIC COMMIT LOAD CSV`, another option is to use APOC for the import.
+If you cannot load the CSV file with `LOAD CSV` or `:auto USING PERIODIC COMMIT LOAD CSV`, another option is to use APOC for the import.
 Previously, you learned how to clear the data from the graph using `apoc.periodic.iterate()`.
 You use this procedure to load large datasets.
 
