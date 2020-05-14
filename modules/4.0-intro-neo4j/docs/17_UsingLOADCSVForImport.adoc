@@ -406,7 +406,7 @@ Some examples of these eager operators include:
 
 [square]
 * `collect()`
-* `ount()`
+* `count()`
 * `ORDER BY`
 * `DISTINCT`
 

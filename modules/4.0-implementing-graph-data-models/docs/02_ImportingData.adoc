@@ -1,0 +1,171 @@
+= Importing Data into the Graph
+:slug: 01-importing-data-graph
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Importing Data into the Graph
+
+== About this module
+
+At the end of this module, you should be able to:
+[square]
+* Write Cypher code to import CSV data with Cypher.
+* Confirm that the data has been loaded.
+
+== Options for importing data into the graph
+
+You have many options for importing data into Neo4j.
+Which option you choose depends on:
+
+[square]
+* How much data you have.
+* What tools you are comfortable using.
+* How much time you have to perform the import.
+
+image::ImportOptions.png[ImportOptions,width=1000,align=center]
+
+[.notes]
+--
+In this training, we will use Cypher to import data into the graph. This will enable us to control and customize how data is created and refactored as our model changes.
+--
+
+== Prepare for the import
+
+[.notes]
+--
+Before you import data into the graph, you should have an idea of the target graph data model you want to achieve.
+You should work with the data architects for your application so that everybody agrees upon:
+--
+
+[square]
+* Names of entities (node labels).
+* Names of relationships.
+* Names of properties for nodes and relationships.
+* Constraints to be defined.
+* Indexes required.
+* The most important queries.
+
+[.notes]
+--
+These graph data model components should be agreed upon before you import the data.
+--
+
+== Review: Steps for loading CSV data with Cypher
+
+[.notes]
+--
+CSV import is commonly used to import data into a graph.
+If you want to import data from CSV, you will need to first develop a model that describes how data from your CSV maps to data in your graph.
+
+Assuming that you have an agreed-upon data model, here are the basic steps you should follow for importing using Cypher and CSV files:
+--
+[.small]
+--
+. Determine how the CSV file will be structured.
+. Determine if normalized or denormalized data.
+. Ensure IDs to be used in the data are unique.
+. Ensure data in CSV files is "clean".
+. Execute Cypher code to inspect the data.
+. Determine if data needs to be transformed.
+. Ensure constraints are created in the graph.
+. Determine the size of the data to be loaded.
+. Execute Cypher code to load the data.
+. Add indexes to the graph.
+--
+
+== Review: Using `LOAD CSV`
+
+Here is the simplified syntax for using `LOAD CSV`:
+
+[source,cypher]
+----
+LOAD CSV     // load csv data
+WITH HEADERS // optionally use first header row as keys in "row" map
+FROM "url"   // file:// URL relative to $NEO4J_HOME/import or http://
+AS row       // return each row of the CSV as list of strings or map
+// ... rest of the Cypher statement ...
+----
+
+[.notes]
+--
+You can use `LOAD CSV` for CSV files that contain fewer than 100k lines.
+--
+
+[.student-exercise]
+== Exercise 2: Loading airport data
+
+[.notes]
+--
+Your first import of airline data will use a CSV file with 1K lines so you will use the standard `LOAD CSV` statement.
+This CSV file has already been cleaned up and is in a normalized format.
+--
+
+[.small]
+--
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-neo4j-modeling-exercises]
+
+and follow the instructions for Exercise 2.
+
+[NOTE]
+This exercise has 7 steps.
+Estimated time to complete: 30 minutes.
+--
+
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What Cypher statement do you use to import data from a CSV file?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] `LOAD DATA`
+- [ ] `IMPORT DATA`
+- [x] `LOAD CSV`
+- [ ] `IMPORT CSV`
+
+=== Question 2
+
+[.statement]
+
+[.statement]
+Up to how many lines can you import data using `LOAD CSV`
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] 1K
+- [ ] 10K
+- [x] 100K
+- [ ] 1M
+
+=== Question 3
+
+[.statement]
+When you import data using `LOAD CSV`, where can the CSV data come from?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] File that has been placed in the *import* folder relative to the database instance.
+- [ ] File that has been placed in the Neo4j Desktop project.
+- [x] File at a network location accessible via http/https.
+- [ ] A JDBC connection that is open.
+
+[.summary]
+== Summary
+
+You should now be able to:
+[square]
+* Write Cypher code to import CSV data with Cypher.
+* Confirm that the data has been loaded.
