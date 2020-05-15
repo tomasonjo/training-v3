@@ -1,10 +1,10 @@
 = Importing Data into the Graph
-:slug: 01-importing-data-graph
+:slug: 02-importing-data-graph
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Importing Data into the Graph
+:module-next-title: Profiling Queries
 
 == About this module
 
@@ -27,7 +27,8 @@ image::ImportOptions.png[ImportOptions,width=1000,align=center]
 
 [.notes]
 --
-In this training, we will use Cypher to import data into the graph. This will enable us to control and customize how data is created and refactored as our model changes.
+In this training, we will use Cypher to import data into the graph.
+Using Cypher enables us to control and customize how data is created and refactored as our model changes.
 --
 
 == Prepare for the import
@@ -46,11 +47,6 @@ You should work with the data architects for your application so that everybody 
 * Indexes required.
 * The most important queries.
 
-[.notes]
---
-These graph data model components should be agreed upon before you import the data.
---
-
 == Review: Steps for loading CSV data with Cypher
 
 [.notes]
@@ -68,10 +64,13 @@ Assuming that you have an agreed-upon data model, here are the basic steps you s
 . Ensure data in CSV files is "clean".
 . Execute Cypher code to inspect the data.
 . Determine if data needs to be transformed.
-. Ensure constraints are created in the graph.
+. If required, ensure constraints are created in the graph.
 . Determine the size of the data to be loaded.
 . Execute Cypher code to load the data.
 . Add indexes to the graph.
+
+[NOTE]
+These steps are covered in the course _Introduction to Neo4j 4.0: Using LOAD CSV for Import_.
 --
 
 == Review: Using `LOAD CSV`
@@ -82,14 +81,49 @@ Here is the simplified syntax for using `LOAD CSV`:
 ----
 LOAD CSV     // load csv data
 WITH HEADERS // optionally use first header row as keys in "row" map
-FROM "url"   // file:// URL relative to $NEO4J_HOME/import or http://
+FROM "url"   // file:/// file relative to $NEO4J_HOME/import or http://
 AS row       // return each row of the CSV as list of strings or map
 // ... rest of the Cypher statement ...
 ----
 
+[NOTE]
+You can use `LOAD CSV` for CSV files that contain fewer than 100k lines.
+
+== Example: Inspecting data from the CSV file on network
+
+image::InspectDataHTTP.png[InspectDataHTTP,width=1000,align=center]
+
+
+== Example: Inspecting data from the CSV file in import folder
+
+image::InspectDataFile.png[InspectDataFile,width=1000,align=center]
+
+== Example: Creating nodes and relationships
+
+You use `LOAD CSV` to read the data from the CSV file as a row to create nodes and relationships, for example:
+
+[source,cypher]
+----
+LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_1k' AS row
+MERGE (origin:Airport {code: row.Origin})
+MERGE (destination:Airport {code: row.Dest})
+MERGE (origin)-[connection:CONNECTED_TO {
+  airline: row.UniqueCarrier,
+  flightNumber: row.FlightNum,
+  date: toInteger(row.Year) + '-' + toInteger(row.Month) + '-' + toInteger(row.DayofMonth)}]->(destination)
+ON CREATE SET connection.departure = toInteger(row.CRSDepTime), connection.arrival = toInteger(row.CRSArrTime)
+----
+
 [.notes]
 --
-You can use `LOAD CSV` for CSV files that contain fewer than 100k lines.
+As each row is read from the file, an Airport nodes are created  with code property values of row.Origin and row.Dest.
+From the row values, we create the connection between the two nodes based upon the airline, flightNumber, and date.
+We use MERGE to ensure that duplicate nodes and relationships are not created with the same property values.
+If the connection is being created, we provide additional properties, departure and arrival.
+
+For *large* datasets, you should ensure that uniqueness constraints (indexes) are created on the Airport code property before you load the data.
+This will dramatically improve the performance of the load as it will use the index during the `MERGE`.
+This dataset is small so load performance is not an issue at this point.
 --
 
 [.student-exercise]
@@ -110,7 +144,7 @@ kbd:[:play 4.0-neo4j-modeling-exercises]
 and follow the instructions for Exercise 2.
 
 [NOTE]
-This exercise has 7 steps.
+This exercise has 9 steps.
 Estimated time to complete: 30 minutes.
 --
 
