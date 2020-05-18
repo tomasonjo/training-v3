@@ -12,6 +12,4 @@ jobs:
       with:
         java-version: 11
     - name: Convert
-      uses: eskatos/gradle-command-action@v1
-      with:
-        arguments: 4.0-intro-neo4j:convert
+      run: ./gradlew 4.0-intro-neo4j:convert
