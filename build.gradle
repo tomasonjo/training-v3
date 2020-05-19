@@ -1,5 +1,6 @@
 import com.neo4j.gradle.s3.S3Plugin
 import com.neo4j.gradle.s3.S3UploadTask
+import com.amazonaws.services.s3.model.CannedAccessControlList
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import com.neo4j.gradle.wordpress.WordPressPlugin
@@ -377,6 +378,7 @@ subprojects {
         source = "${projectDir}/images"
         bucket = "dev.assets.neo4j.com"
         destination = "course/${project.name}/images"
+        acl.set(CannedAccessControlList.PublicRead)
       }
     } else if (stage == 'testing') {
       task s3UploadImages(type: S3UploadTask) {
@@ -384,6 +386,7 @@ subprojects {
         source = "${projectDir}/images"
         bucket = "dev.assets.neo4j.com"
         destination = "test-course/${project.name}/images"
+        acl.set(CannedAccessControlList.PublicRead)
       }
     }
   }
