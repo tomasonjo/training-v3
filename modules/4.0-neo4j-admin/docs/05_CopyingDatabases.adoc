@@ -128,10 +128,10 @@ This will create a  dump file that can now be transferred between systems to cre
 
 [.notes]
 --
-Then, if you want to create a database from any offline backup file to use for a Neo4j instance, you must:
+Then, if you want to create a database from any dump file (offline backup) to use for a Neo4j instance, you must:
 --
 
-. Use the `load` command of the `neo4j-admin` tool as the neo4j users, to create the database from the dump file as follows:
+. Use the `load` command of the `neo4j-admin` tool as the neo4j user, to create the database from the dump file as follows:
 +
 
 [source]

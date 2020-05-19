@@ -24,7 +24,7 @@ At the end of this module, you should be able to:
 --
 As a database administrator, you may need to automate changes to databases.
 The most common types of changes that administrators may want to perform are related to the application.
-As an administrator, you work with architects and developers to created scripts to:
+As an administrator, you work with architects and developers to create scripts to:
 --
 
 [square]

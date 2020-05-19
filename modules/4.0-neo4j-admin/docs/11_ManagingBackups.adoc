@@ -118,7 +118,7 @@ If a non-zero value is returned, the backup failed or a consistency check failed
 [.small]
 --
 One thing that you need to determine is whether the consistency checking will be done during the backup or on the backup image after the backup has completed.
-If you need to speed up the backup process and whether it taxes the Neo4j instance, then it will be better to check the consistency after the backup.
+If you need to speed up the backup process or if it degrades the performance of the Neo4j instance, then it will be better to check the consistency after the backup.
 
 [NOTE]
 In most cases, you will need to set the HEAP_SIZE environment variable before you start the backup process.

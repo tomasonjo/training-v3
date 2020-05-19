@@ -41,7 +41,8 @@ At the end of this module, you should be able to:
 --
 
 [NOTE]
-You can also manage databases using Neo4j Browser connected to the Neo4j instance. Since this training is intended for administrators, we will cover using `cypher-shell`.
+You can also manage databases using Neo4j Browser connected to the Neo4j instance.
+Since this training is intended for administrators, we use `cypher-shell`.
 
 === Example: Using `cypher-shell`
 
@@ -204,7 +205,13 @@ Here are some database naming rules:
 
 [.notes]
 --
-All of the above commands are executed as Cypher commands, and the database name is subject to the standard Cypher restrictions on valid identifiers. In particular, the - (dash) character is not legal in Cypher variables, and therefore names with dashes need to be escaped by enclosing with back-ticks. For example, CREATE DATABASE `main-db`.
+All of the above commands are executed as Cypher commands, and the database name is subject to the standard Cypher restrictions on valid identifiers.
+In particular, the - (dash) character is not legal in Cypher variables, and therefore names with dashes need to be escaped by enclosing with back-ticks.
+For example,
+
+----
+CREATE DATABASE `main-db`.
+----
 --
 
 [.small]

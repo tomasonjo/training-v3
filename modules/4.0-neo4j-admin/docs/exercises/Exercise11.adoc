@@ -27,7 +27,7 @@ dbms.backup.listen_address=localhost:6362
 
 . Start the Docker Neo4j instance.
 . View the logs to make sure it started with no errors.
-. Since we are using Docker for our training exercises, you must create a directory that is accessible from the Docker Neo4j instance. Create the following directory in the $HOME/docker-neo4j/neo4j/logs directory named *backups* and ensure that it has all permissions (chmmod 777 backups).
+. Since we are using Docker for our training exercises, you must create a directory that is accessible from the Docker Neo4j instance. Create the following directory in the $HOME/docker-neo4j/neo4j/logs directory named *backups* and ensure that it has all permissions (chmod 777 backups).
 . In `cypher-shell`, make sure that all database are started. There should be four databases:
 ** system
 ** maindb
@@ -103,7 +103,7 @@ MATCH (n) RETURN count(n);
 . Perform an online backup using these guidelines:
 .. Back up the _movies_ database.
 .. Perform a consistency check.
-.. Use the *backups* directory for the location of the backup
+.. Use the *backups* directory for the location of the backup.
 
 The result of the backup should look as follows:
 

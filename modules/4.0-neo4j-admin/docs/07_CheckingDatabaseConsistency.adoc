@@ -20,7 +20,7 @@ At the end of this module, you should be able to use `neo4j-admin` to check the 
 [.notes]
 --
 A database's consistency could be compromised if a software or hardware failure has occurred that affects the Neo4j database.
-You will learn later in this module about live backups, but if you have reason to believe that a specific database has been corrupted,  you can perform a consistency check on it.
+You will learn later in this training about live backups, but if you have reason to believe that a specific database has been corrupted,  you can perform a consistency check on it.
 --
 
 [.small]

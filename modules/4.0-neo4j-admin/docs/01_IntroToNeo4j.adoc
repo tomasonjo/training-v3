@@ -540,7 +540,7 @@ Visit the https://neo4j.com/bloom/[Bloom page] to learn more about Neo4j Bloom.
 
 [.notes]
 --
-Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that you can use for up to 10 days.
+You can use Bloom from Neo4j Desktop to access a local database. Another way that you can try Neo4j Bloom is to create a Neo4j Bloom Sandbox that you can use for up to 10 days.
 --
 
 == cypher-shell
@@ -584,7 +584,7 @@ GraphQL is an open-source query language for querying parts of a graph. It is no
 A very popular library for graph visualization is _neoviz.js_, another project in Neo4j Labs.
 --
 
-image::Plugins.png[Plugins,width=700,align=center]
+image::Plugins.png[Plugins,width=400,align=center]
 
 == Drivers and language support
 

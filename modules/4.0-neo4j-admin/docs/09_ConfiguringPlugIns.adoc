@@ -66,10 +66,14 @@ By default, the procedures available to the Neo4j instance are the built-in proc
 
 === Adding a plugin to the Neo4j instance
 
-[square]
-* Obtain the *.jar* file.
-* Confirm that the *.jar* file you will use is compatible with the version of Neo4j that you are using.
-* Modify *neo4j.conf*.
+[.notes]
+--
+To add a plugin for use in a Neo4j instance, you must:
+--
+
+. Obtain the *.jar* file.
+. Confirm that the *.jar* file you will use is compatible with the version of Neo4j that you are using.
+. Modify *neo4j.conf*.
 
 [.notes]
 --
@@ -137,7 +141,7 @@ APOC (Awesome Procedures on Cypher) is a very popular plugin used by many applic
 
 [.notes]
 --
-It contains over 450 user-defined procedures that make accessing a graph incredibly efficient and much easier than writing your own Cypher statements to do the same thing.
+It contains almost 500 user-defined procedures that make accessing a graph incredibly efficient and much easier than writing your own Cypher statements to do the same thing.
 
 You obtain the plugin from the APOC https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases[releases] page:
 --

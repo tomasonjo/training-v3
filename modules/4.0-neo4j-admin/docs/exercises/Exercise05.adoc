@@ -11,7 +11,7 @@ In this exercise, you will use `neo4j-admin` to copy a database and create a dat
 
 == Exercise steps:
 
-*Part 1*: First you will create a movies database that will be used in this exercise for copying.
+*Part 1*: First you will create a _movies_ database that will be used in this exercise for copying.
 
 . In `cypher-shell` create a database named _movies_.
 . Exit out of `cypher-shell`.
@@ -55,7 +55,7 @@ image::ConfirmMovieStoppedDocker.png[ConfirmMovieStoppedDocker,width=1000,align=
 image::neo4j-adminCopyDocker.png[neo4j-adminCopyDocker,width=1000,align=center]
 
 [start=4]
-. In `cypher-shell' create _movies2_.
+. In `cypher-shell` create _movies2_.
 . Confirm that this _movies2_ database has 171 nodes.
 ----
 MATCH (n) RETURN count(n);
@@ -85,7 +85,7 @@ This writes the *movies.dump* file to the *$HOME/docker-neo4j/data* directory wh
 [sudo] docker exec --interactive neo4j bin/neo4j-admin load --database=movies3 --from=data/movies.dump
 ----
 
-. In `cypher-shell' create _movies3_.
+. In `cypher-shell` create _movies3_.
 . Confirm that this _movies3_ database has 171 nodes.
 
 image::Verify-neo4j-adminLoadDocker.png[Verify-neo4j-adminLoadDocker,width=1000,align=center]

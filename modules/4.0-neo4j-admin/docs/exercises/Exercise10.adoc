@@ -2,7 +2,7 @@
 // for local preview
 ifndef::imagesdir[:imagesdir: ../../images]
 
-In this Exercise, will modify the HTTP used by your instance. How you change the HTTP port will depend on your host OS.
+In this Exercise, you will modify the HTTP used by your instance. How you change the HTTP port will depend on your host OS.
 On OS X, the port forwarding is not as clean as on Debian so to set up a Docker Neo4j instance that uses a different HTTP port, you must create a new instance.
 
 

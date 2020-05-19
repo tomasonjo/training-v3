@@ -3,7 +3,7 @@
 ifndef::imagesdir[:imagesdir: ../../images]
 
 
-In this exercise you will create a database from a set of CSV files using the import functionality of the neo4j-admin tool.
+In this exercise you will create a database from a set of CSV files using the import functionality of the `neo4j-admin` tool.
 
 == Before you begin
 
@@ -12,7 +12,7 @@ In this exercise you will create a database from a set of CSV files using the im
 
 == Exercise steps:
 
-. Downloaded the ZIP file containing the CSV files to the *files* directory:
+. Download the ZIP file containing the CSV files to the *files* directory:
 
 On OS X and Linux:
 
@@ -30,7 +30,7 @@ On Windows, open the file in a Web browser to download it.
 . The crimes-dataset directory should contain six CSV files. Move these six files to *import* folder for the Docker Neo4j instance.
 . Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
 . Change directory to the *import* directory.
-. Use the `neo4j-admin` tool to import the CSV files using these guidelines:*
+. Use the `neo4j-admin` tool to import the CSV files using these guidelines:
 
 ----
              --database crimes
@@ -53,7 +53,7 @@ This import will take a couple of minutes. This is what you should see in the te
 image::ImportCrimesDocker1.png[ImportCrimesDocker1,width=500]
 
 [start=7]
-. In `cypher-shell` create the crimes database.
+. In `cypher-shell` create the _crimes_ database.
 . Enter the following Cypher statements to view the schema of the database and return the number of nodes.
 
 ----
@@ -68,4 +68,4 @@ image::Afteradmin-toolImportDocker.png[Afteradmin-toolImportDocker,width=600]
 
 == Exercise summary
 
-In this exercise you created a database from a set of CSV files using the import functionality of the neo4j-admin tool.
+In this exercise you created a database from a set of CSV files using the import functionality of the `neo4j-admin` tool.

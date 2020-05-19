@@ -288,16 +288,16 @@ For this part of the import, where does the import process get information about
 Select the correct answers.
 
 [%interactive.answers]
-- [ ] The products_header.csv file must have a field, _USE_LABEL_.
-- [x] The products_header.csv file must have a field, _:LABEL_.
-- [ ] The products.csv file must have the label name in the corresponding _USE_LABEL_ column.
-- [x] The products.csv file must have the label name in corresponding the _:LABEL_ column.
+- [ ] The *products_header.csv* file must have a field, _USE_LABEL_.
+- [x] The *products_header.csv* file must have a field, _:LABEL_.
+- [ ] The *products.csv* file must have the label name in the corresponding _USE_LABEL_ column.
+- [x] The *products.csv* file must have the label name in corresponding the _:LABEL_ column.
 
 === Question 3
 
 [.statement]
 Suppose you want to import data using six node CSV files and eight relationship CSV files.
-How many times must you execute the import process using neo4j-admin?
+How many times must you execute the import process using `neo4j-admin`?
 
 [.statement]
 Select the correct answer.

@@ -50,7 +50,7 @@ image::CreatedCypherScriptDocker.png[CreatedCypherScriptDocker,width=1000,align=
 cat /usr/scripts/AddConstraintsMovies.cypher | /var/lib/neo4j/bin/cypher-shell -u neo4j -p <Neo4j instance password>  --format verbose
 ----
 
-.. Change the text in the clipboard to use your password your set up for your Neo4j instance
+.. Change the text in the clipboard to use your password you set up for your Neo4j instance
 .. Type *cat > AddConstraints.sh*.
 .. Press *ENTER*.
 .. Paste what you have in the clipboard.

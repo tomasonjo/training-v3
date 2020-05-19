@@ -49,7 +49,7 @@ image::Neo4jStarted-newLocation2Docker.png[Neo4jStarted-newLocation2Docker,width
 [sudo] docker exec --interactive neo4j bin/neo4j-admin load --database=movies --from=data/movies.dump
 ----
 
-. In `cypher-shell' create _movies_.
+. In `cypher-shell` create _movies_.
 . Confirm that this _movies_ database has 171 nodes.
 
 == Exercise summary

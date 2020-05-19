@@ -46,7 +46,10 @@ subprojects {
     switch (project.name) {
       case "4.0-intro-neo4j":
         "https://neo4j.com/graphacademy/online-training/introduction-to-neo4j-40/"
-        break
+        break;
+      case "4.0-neo4j-admin":
+        "https://neo4j.com/graphacademy/online-training/basic-neo4j-admin-40/"
+        break;
       default:
         "https://neo4j.com/"
     }
