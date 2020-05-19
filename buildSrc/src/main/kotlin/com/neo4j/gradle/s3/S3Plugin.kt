@@ -6,16 +6,15 @@ import com.amazonaws.auth.EnvironmentVariableCredentialsProvider
 import com.amazonaws.auth.SystemPropertiesCredentialsProvider
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
+import com.amazonaws.services.s3.model.CannedAccessControlList
+import com.amazonaws.services.s3.model.PutObjectRequest
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputFile
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
 import org.gradle.kotlin.dsl.property
 
 
@@ -51,6 +50,10 @@ abstract class S3UploadTask : DefaultTask() {
   @Input
   var region: String = ""
 
+  @Input
+  @Optional
+  val acl: Property<CannedAccessControlList> = project.objects.property()
+
   @TaskAction
   fun task() {
     val s3Extension = project.extensions.findByType(S3Extension::class.java)
@@ -84,16 +87,22 @@ abstract class S3UploadTask : DefaultTask() {
           file.relativeTo(source.dir.parentFile)
         }
         val destinationPath = "${destination}/${relativePath}"
+        val basePutObjectRequest = PutObjectRequest(bucketValue, destinationPath, file)
+        val putObjectRequest = if (acl.isPresent) {
+          basePutObjectRequest.withCannedAcl(acl.get())
+        } else {
+          basePutObjectRequest
+        }
         if (s3Client.doesObjectExist(bucketValue, destinationPath)) {
           if (overwrite) {
             logger.quiet("S3 Uploading $file → s3://${bucketValue}/${destinationPath} with overwrite")
-            s3Client.putObject(bucketValue, destinationPath, file)
+            s3Client.putObject(putObjectRequest)
           } else {
             logger.quiet("s3://${bucketValue}/${destinationPath} exists, not overwriting")
           }
         } else {
           logger.quiet("S3 Uploading $file → s3://${bucketValue}/${destinationPath}")
-          s3Client.putObject(bucketValue, destinationPath, file)
+          s3Client.putObject(putObjectRequest)
         }
       }
     }
