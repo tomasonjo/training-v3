@@ -97,6 +97,11 @@ subprojects {
       repository = 'reveal.js-menu'
       branch = 'master'
     }
+    github 'rajgoel', {
+      organisation = 'rajgoel'
+      repository = 'reveal.js-plugins'
+      branch = 'master'
+    }
   }
 
   task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
@@ -198,7 +203,7 @@ subprojects {
         'revealjs_maxscale': '2'
     }
 
-    plugins 'denehyg/menu.js'
+    plugins 'denehyg/menu.js', 'rajgoel/chalkboard/chalkboard.js'
     pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
 
     baseDirFollowsSourceDir()
@@ -334,7 +339,7 @@ subprojects {
         'revealjs_maxscale': '2'
     }
 
-    plugins 'denehyg/menu.js'
+    plugins 'denehyg/menu.js', 'rajgoel/chalkboard/chalkboard.js'
     pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
 
     baseDirFollowsSourceDir()
