@@ -18,4 +18,3 @@ include::{includedir}/exercises/Exercise09.adoc[leveloffset=+1]
 include::{includedir}/exercises/Exercise10.adoc[leveloffset=+1]
 include::{includedir}/exercises/Exercise11.adoc[leveloffset=+1]
 include::{includedir}/exercises/Exercise12.adoc[leveloffset=+1]
-

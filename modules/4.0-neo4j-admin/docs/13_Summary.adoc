@@ -79,7 +79,7 @@ https://stackoverflow.com/tags/neo4j/hot
 ifndef::backend-revealjs[]
 == Course feedback
 
-We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.
+We want your feedback on this course. Please provide your https://forms.gle/2oJfsxgUEwjUiv2i9[feedback] so we can improve this course.
 endif::[]
 
 ifndef::backend-revealjs,backend-pdf[]

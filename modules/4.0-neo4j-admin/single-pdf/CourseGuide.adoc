@@ -19,4 +19,3 @@ include::{includedir}/10_ManagingHTTPPorts.adoc[leveloffset=+1]
 include::{includedir}/11_ManagingBackups.adoc[leveloffset=+1]
 include::{includedir}/12_ImportingData.adoc[leveloffset=+1]
 include::{includedir}/13_Summary.adoc[leveloffset=+1]
-

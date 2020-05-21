@@ -404,7 +404,7 @@ subprojects {
       dependsOn convertOnlineHtml
       source = convertOnlineHtml.outputs.files
       type = "course"
-      status = "private"
+      status = stage == 'production' ? "publish" : "private"
     }
   }
 
