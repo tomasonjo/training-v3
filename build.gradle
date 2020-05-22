@@ -50,6 +50,9 @@ subprojects {
       case "4.0-neo4j-admin":
         "https://neo4j.com/graphacademy/online-training/basic-neo4j-admin-40/"
         break;
+      case "graph-data-modeling":
+        "https://neo4j.com/graphacademy/online-training/graph-data-modeling/"
+        break;
       default:
         "https://neo4j.com/"
     }
