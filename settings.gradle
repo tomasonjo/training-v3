@@ -22,8 +22,8 @@ project(':apoc').projectDir = file('modules/apoc')
 include 'classroom-setup'
 project(':classroom-setup').projectDir = file('modules/classroom-setup')
 
-include '4.0-graph-data-modeling'
-project(':4.0-graph-data-modeling').projectDir = file('modules/4.0-graph-data-modeling')
+include 'graph-data-modeling'
+project(':graph-data-modeling').projectDir = file('modules/graph-data-modeling')
 
 include '4.0-implementing-graph-data-models'
 project(':4.0-implementing-graph-data-models').projectDir = file('modules/4.0-implementing-graph-data-models')

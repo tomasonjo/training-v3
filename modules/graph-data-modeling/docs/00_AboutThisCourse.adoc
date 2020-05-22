@@ -1,4 +1,4 @@
-= Graph Data Modeling for Neo4j 4.0
+= Graph Data Modeling for Neo4j
 :slug: 00-graph-data-modeling-about
 :doctype: book
 :toc: left

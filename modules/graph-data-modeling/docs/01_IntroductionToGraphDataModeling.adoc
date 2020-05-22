@@ -22,6 +22,7 @@ Stakeholders must understand the domain and be prepared to ask detailed question
 
 Stakeholders are:
 
+[square]
 * Business analysts
 * Architects
 * Managers
@@ -29,6 +30,7 @@ Stakeholders are:
 
 == How does Neo4j support graph data modeling?
 
+[square]
 * Neo4j is a full-featured graph database that allows you to create *property graphs*.
 * Applications retrieve data for business use cases by *traversing the graph*.
 
