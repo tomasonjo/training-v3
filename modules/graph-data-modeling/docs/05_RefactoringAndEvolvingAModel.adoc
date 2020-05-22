@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Implementing Your First Model
+:module-next-title: Summary
 
 == About this module
 
@@ -114,7 +114,7 @@ image::ExtractLabelFromPropertyBefore.png[ExtractLabelFromPropertyBefore,width=7
 --
 In this example, you see that the Project nodes have a property named _language_ where the property could contain multiple languages.
 What if you wanted to query the graph to find all projects that are written in _java_?
-To do you you would need to retrieve all of the Project nodes and look for _java_ in the language list for each node.
+To do this, you would need to retrieve all of the Project nodes and look for _java_ in the language list for each node.
 This is an expensive query on a large graph.
 --
 
@@ -303,7 +303,7 @@ There are only two ways to do this:
 * Anchor somehow on AirportDay.
 * Make date into a relationship type.
 
-We will refactor make date a relationship type.
+We will refactor to make date a relationship type.
 --
 
 === Possible refactor: Change relationship type to date
@@ -368,7 +368,7 @@ What can we do to reduce this?
 [.notes]
 --
 Once again, intermediate nodes come to the rescue!
-In this case, we are doing two things, further subdividing flights based on destination, but more importantly, we are elevating flight destinations form a 3-hop downstream object to a 1-hop downstream object.
+In this case, we are doing two things, further subdividing flights based on destination, but more importantly, we are elevating flight destinations from a 3-hop downstream object to a 1-hop downstream object.
 --
 
 image::AirlineRefactor5.png[AirlineRefactor5,width=700,align=center]
@@ -396,7 +396,7 @@ Once again, the answer is that it does not--we can still anchor on Flight, so Q2
 
 Note that this model could never have been produced by simply following our “build initial model” paradigm.
 AirportDay and Destination nodes are completely opaque relative to the questions we asked.
-We are OK with that, because, as you will learn that when you implement the model in Cypher, refactoring a graph relatively cheap.
+We are OK with that, because, as you will learn that when you implement the model in Cypher, refactoring a graph is relatively inexpensive.
 Moreover, getting a rough first model quickly reduces the total time we would need to reach this more refined version.
 --
 

@@ -17,7 +17,7 @@ At the end of this module, you should be able to:
 
 == What is graph data modeling?
 
-Graph data modeling is a Collaborative effort where the application domain is analyzed by stakeholders and developers to come up with the optimal model for use with Neo4j.
+Graph data modeling is a collaborative effort where the application domain is analyzed by stakeholders and developers to come up with the optimal model for use with Neo4j.
 Stakeholders must understand the domain and be prepared to ask detailed questions about how the business-at-hand operates.
 
 Stakeholders are:

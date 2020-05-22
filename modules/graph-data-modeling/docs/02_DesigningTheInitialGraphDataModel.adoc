@@ -226,7 +226,7 @@ image::Entities.png[Entities,width=100,align=center]
 
 [.notes]
 --
-As an example of using domain knowledge, you might happen to know that the distinction between wet and dry ingredients is important in your use case, or that vegetarian and vegan are important subgroups of recipe.
+As an example of using domain knowledge, you might happen to know that the distinction between wet and dry ingredients is important in your use case, or that vegetarian and vegan are important subgroups of a recipe.
 These may not appear clearly in the specific application questions.
 --
 
@@ -241,9 +241,9 @@ Otherwise, they are merely "decoration".
 
 Properties are used in a Cypher query for:
 [square]
-* Anchoring (where to begin the query)
-* Traversing the graph (navigation)
-* Returning data from the query
+* Anchoring (where to begin the query).
+* Traversing the graph (navigation).
+* Returning data from the query.
 
 [.notes]
 --
