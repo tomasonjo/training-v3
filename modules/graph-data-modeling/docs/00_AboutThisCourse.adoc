@@ -43,7 +43,7 @@ Here are the lessons of this course:
 == Resources
 
 ifndef::backend-revealjs[]
-We have set up a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
+We have created a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
 You should register on the Community site where you can view other questions and answers for students taking our online training courses.
 The Neo4j Community Site is an excellent resource for answering many types of questions posed by other users of Neo4j.
 endif::[]
