@@ -1,5 +1,5 @@
 = Importing Data into the Graph
-:slug: 02-importing-data-graph
+:slug: 02-igdm-40-importing-data-graph
 :doctype: book
 :toc: left
 :toclevels: 4

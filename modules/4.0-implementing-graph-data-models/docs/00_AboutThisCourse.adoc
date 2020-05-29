@@ -1,5 +1,5 @@
 = Implementing Graph Data Models in Neo4j 4.0
-:slug: 00-implementing-graph-data-models-about
+:slug: 00-igdm-40-implementing-graph-data-models-about
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,5 +1,5 @@
 = Profiling Queries
-:slug: 03-profiling-queries
+:slug: 03-igdm-40-profiling-queries
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -163,46 +163,46 @@ In the next lesson, we will implement a refactor to fix this.
 === Question 1
 
 [.statement]
-What Cypher statement do you use to import data from a CSV file?
+What Cypher clause do you use analyze the performance of a query?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] `LOAD DATA`
-- [ ] `IMPORT DATA`
-- [x] `LOAD CSV`
-- [ ] `IMPORT CSV`
+- [ ] `ANALYZE`
+- [ ] `EXPLAIN`
+- [x] `PROFILE`
+- [ ] `SHOW`
 
 === Question 2
 
 [.statement]
 
 [.statement]
-Up to how many lines can you import data using `LOAD CSV`
+When a query executes, the execution plan uses what data structure passes data from one step of the plan to the next?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] 1K
-- [ ] 10K
-- [x] 100K
-- [ ] 1M
+- [ ] b-tree for the anchor node(s)
+- [ ] neo4j-object structure containing nodes visited
+- [ ] linked list of nodes visited
+- [x] row containing node and relationship values
 
 === Question 3
 
 [.statement]
-When you import data using `LOAD CSV`, where can the CSV data come from?
+What are some observations from the profile of a query that would indicate that the graph data model needs improvement, the graph needs an index, or the query needs to be rewritten?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] File that has been placed in the *import* folder relative to the database instance.
-- [ ] File that has been placed in the Neo4j Desktop project.
-- [x] File at a network location accessible via http/https.
-- [ ] A JDBC connection that is open.
+- [x] High number of db hits.
+- [x] Increasing number of db hits as the query executes.
+- [x] Seeing NodeByLabelScan as the first step of the query profile.
+- [x] No rows returned after the first step.
 
 [.summary]
 == Summary

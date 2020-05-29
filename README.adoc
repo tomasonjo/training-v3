@@ -19,6 +19,20 @@ This repo will use the gradle tool chain for building the following for Browser 
 - HTML Neo Browser guides
 - PDF
 
+== Structure of the repo
+
+*modules* each directory is a course or a browser guide which contains:
+  *docs*             the asciidoc source files
+  *images*            the images
+  *single-pdf*        container for generating the course guide or exercise guide
+  *single-slides*     container for generating a single HTML for the entire course
+  *build*             generated when you convert asciidoc which contains these important artifacts
+      *online*        the online HTML and the PDF for each lesson of the course
+      *slides*        the HTML slides for each lesson of the course
+      *single-pdf*    the PDF for the course guide or exercise guide
+      *single-slides* the HTML slides for the entire course
+
+
 == Prerequisites
 
 Since we are using the {uri-gradle-wrapper}[Gradle Wrapper], the only requirement is to have {uri-java-download}[Java] installed.
@@ -62,22 +76,18 @@ If you want to convert all the files at once, you can use the `convert` task:
 
 You can also run a task on a specific module:
 
- $ ./gradlew :demo:convertOnlineHtml
- $ ./gradlew :demo:convert
-
-Or multiple tasks:
-
- $ ./gradlew :demo:convertOnlinePdf :demo:convertSlides
+ $ ./gradlew <nameOfModule>:convertOnlineHtml
+ $ ./gradlew <nameOfModule>:convert
 
 If you want to create a single slide deck for a group of slide asciidoc files, make a folder named "single-slides".
 In that folder include the asciidoc for the group of files you want to combine. (see example in 4.0-intro-neo4j moduile)
 Then use this command to build it:
 
-  $ ./gradlew :demo:convertSingleSlides
+  $ ./gradlew <nameOfModule>:convertSingleSlides
 
 There is similar functionality for consolidating PDFs. It uses the folder "single-pdf". The caution with generating a large PDF, however is memory. If you have a large PDF that you want to produce, you may need to install mogrify.
 
-  $ ./gradlew :demo:convertSinglePdf
+  $ ./gradlew <nameOfModule>:convertSinglePdf
 
 Gradle will do his best to detect if a task needs to be run again or not.
 If you want to force Gradle to execute a task again, you can remove the `build` directory using the `clean` task:
@@ -88,15 +98,7 @@ Once the `build` directory is removed, type the task you want to execute.
 
 You can also clean a particular directory:
 
- $ ./gradlew :demo:clean
-
-== Local development mode
-
-// QUESTION: As far as I understand, in the future, we will only have two stages: testing (private page on WordPress) > production (public page on WordPress)
-// So we should probably update this section because the "local" stage does not exist anymore.
-When converting the online training, you can define the property "stage" to "local" to avoid loading analytics and token validation code in the HTML pages:
-
- $ ./gradlew :demo:convertOnlineHtml -Pstage=local
+ $ ./gradlew <nameOfModule>:clean
 
 == LiveReload
 
@@ -110,14 +112,14 @@ In the first one, type the following command to continuously convert the AsciiDo
 
 [source,console]
 ----
-$ ./gradlew --continuous :demo:convertSlides
+$ ./gradlew --continuous <nameOfModule>:convertSlides
 ----
 
 On the second one, type the following command to start the LiveReload server on the [.path]_demo_ module:
 
 [source,console]
 ----
-$ ./gradlew :demo:liveReload
+$ ./gradlew <nameOfModule>:liveReload
 
 > Task :liveReload
 Enabling LiveReload at port 35729 for /path/to/modules/demo/build
@@ -134,12 +136,6 @@ Notice that the middle circle is now filled in black.
 
 If you edit the corresponding AsciiDoc source (or resources), and wait a few seconds, your browser will automatically be refreshed with your changes.
 
-[NOTE]
-====
-Similarly, you can use LiveReload with the online training using:
-
- $ ./gradlew --continuous :demo:convertOnlineHtml -Penv=dev
-====
 
 == Add a new module
 

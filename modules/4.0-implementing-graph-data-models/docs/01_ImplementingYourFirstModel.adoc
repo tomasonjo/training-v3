@@ -1,5 +1,5 @@
 = Implementing Your First Model
-:slug: 01-implementing-first-model
+:slug: 01-igdm-40-implementing-first-model
 :doctype: book
 :toc: left
 :toclevels: 4
