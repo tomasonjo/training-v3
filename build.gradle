@@ -195,6 +195,8 @@ subprojects {
     }
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
+    // for no transition between slides add this line after imagesdir:
+    //         'revealjs_transition': 'none',
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
       attributes 'revealjs_customtheme': 'themes/reveal.css',
