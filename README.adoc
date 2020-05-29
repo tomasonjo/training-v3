@@ -21,16 +21,17 @@ This repo will use the gradle tool chain for building the following for Browser 
 
 == Structure of the repo
 
-*modules* each directory is a course or a browser guide which contains:
-  *docs*             the asciidoc source files
-  *images*            the images
-  *single-pdf*        container for generating the course guide or exercise guide
-  *single-slides*     container for generating a single HTML for the entire course
-  *build*             generated when you convert asciidoc which contains these important artifacts
-      *online*        the online HTML and the PDF for each lesson of the course
-      *slides*        the HTML slides for each lesson of the course
-      *single-pdf*    the PDF for the course guide or exercise guide
-      *single-slides* the HTML slides for the entire course
+[square]
+* *modules* each directory is a course or a browser guide which contains:
+** *docs*             the asciidoc source files
+** *images*            the images
+** *single-pdf*        container for generating the course guide or exercise guide
+** *single-slides*     container for generating a single HTML for the entire course
+** *build*             generated when you convert asciidoc which contains these important artifacts
+*** *online*        the online HTML and the PDF for each lesson of the course
+*** *slides*        the HTML slides for each lesson of the course
+*** *single-pdf*    the PDF for the course guide or exercise guide
+*** *single-slides* the HTML slides for the entire course
 
 
 == Prerequisites
@@ -76,11 +77,13 @@ If you want to convert all the files at once, you can use the `convert` task:
 
 You can also run a task on a specific module:
 
- $ ./gradlew <nameOfModule>:convertOnlineHtml
- $ ./gradlew <nameOfModule>:convert
+ $ #./gradlew <nameOfModule>:convertSlides
+ $ #for example:
+ $ ./gradlew 4.0-intro-neo4j:convertSlides
+ $ ./gradlew 4.0-intro-neo4j>:convert
 
 If you want to create a single slide deck for a group of slide asciidoc files, make a folder named "single-slides".
-In that folder include the asciidoc for the group of files you want to combine. (see example in 4.0-intro-neo4j moduile)
+In that folder include the asciidoc for the group of files you want to combine. (see example in 4.0-intro-neo4j module)
 Then use this command to build it:
 
   $ ./gradlew <nameOfModule>:convertSingleSlides
