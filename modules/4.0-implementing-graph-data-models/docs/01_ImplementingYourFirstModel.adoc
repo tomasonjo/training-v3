@@ -23,7 +23,7 @@ We are working in a familiar domain so that we can focus on implementation detai
 Specifically, we will use a dataset from the https://bts.gov/[US Bureau of Transportation].
 --
 
-image::AirlineDomain.png[AirlineDomain,width=900,align=center]
+image::AirlineDomain.png[AirlineDomain,width=800,align=center]
 
 === Data used for this training
 
@@ -35,15 +35,16 @@ We will not make use of every part of it in the exercises, but you can check it 
 
 [.is-half.left]
 --
-image::AirlineIndustryData1.png[AirlineIndustryData1,width=500,align=center]
+image::AirlineIndustryData1.png[AirlineIndustryData1,width=600,align=center]
 --
 
 [.is-half.right]
 --
-image::AirlineIndustryData2.png[AirlineIndustryData2,width=500,align=center]
+image::AirlineIndustryData2.png[AirlineIndustryData2,width=600,align=center]
 --
 
-image::AirlineIndustryData3.png[AirlineIndustryData3,width=500,align=center]
+image::AirlineIndustryData3.png[AirlineIndustryData3,width=600,align=center]
+
 
 == Application question for our model
 
@@ -83,13 +84,13 @@ image::InitialSampleDataAndModel.png[InitialSampleDataAndModel,width=500,align=c
 [.statement]
 A best practice when creating a graph with Cypher is to use the `MERGE` statement.
 When creating nodes, you specify the properties in the `MERGE` statement to ensure that nodes with the same property values are not duplicated in the graph.
-For large graphs, the node properties used for the MERGE should have unique indexes on them.
+For large graphs, the node properties used for the MERGE should have uniqueness constraints on them.
 
 [.statement]
 In the next exercise, Exercise 1, you will:
 [.small]
 --
-. Create three Airport nodes and two _CONNECTED_TO_ relationships per the initial data model by using the `MERGE` statement.
+. Create three _Airport_ nodes and two _CONNECTED_TO_ relationships per the initial data model by using the `MERGE` statement.
 . Query the graph to show the newly-created nodes and relationships.
 --
 
@@ -105,8 +106,8 @@ Creating the nodes and relationships using the `MERGE` statement and hard-coding
 --
 Before you start this exercise you must:
 
-. Create a project in Neo4j Desktop.
-. Create a local 4.x database in the project and start it.
+. Create a project in Neo4j Desktop, create a blank sandbox, or create a Neo4j Aura instance.
+. If using Neo4j Desktop, create a local 4.x database in the project and start it.
 . Open a Neo4j Browser window for the database.
 
 In the query edit pane of Neo4j Browser, execute the browser command:

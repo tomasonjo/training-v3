@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: ??
+:module-next-title: Summary
 
 == About this module
 
@@ -35,7 +35,7 @@ To solve this problem, we introduce the intermediate node, Flight that is based 
 Here is how the model will evolve:
 --
 
-image::Refactor1.png[Refactor1,width=1000,align=center]
+image::Refactor1.png[Refactor1,width=1100,align=center]
 
 == Refactoring steps
 
@@ -53,7 +53,7 @@ In most cases, you refactor the the implementation of the graph data model with 
 . PROFILE all queries against the new model.
 
 [NOTE]
-If the new model performs well all queries, delete the old model.
+If the new model performs well for [.underline]#all# queries, delete the old model.
 Otherwise, leave both in place.
 
 === Refactor details
@@ -63,7 +63,7 @@ Otherwise, leave both in place.
 Here are the details that show the _CONNECTED_TO_ relationship properties and how they will be refactored as the Flight properties.
 --
 
-image::Refactor2.png[Refactor2,width=1000,align=center]
+image::Refactor2.png[Refactor2,width=800,align=center]
 
 [.notes]
 --
@@ -72,12 +72,15 @@ Notice that we will be adding a unique identifier for a _Flight_ node, _flightId
 
 === Unique FlightId
 
-Using a unique identifier for a flight enables us to quickly find a flight by its id during a query.
+[.notes]
+--
+Using a unique identifier for a flight enables us to quickly find a flight by its ID during a query.
 We create a uniqueness constraint for that property.
 
-The flight number for a particular airline may not be unique, especially if we take into account the origin and destination Airports.
+The flight number for a particular airline may not be unique, especially if we take into account the origin and destination airports.
 That is, the same flight number may be used for different from and to airports.
 In addition, we want to uniquely identify the date for the flight.
+--
 
 The _Flight.flightId_ property will contain the following data which will be unique for all _Flight_ nodes:
 
@@ -94,7 +97,8 @@ Before we perform the refactoring of the existing graph, we add the uniqueness c
 
 [source,cypher]
 ----
-CREATE CONSTRAINT Flight_flightId_constraint ON (f:Flight) ASSERT f.flightId IS UNIQUE
+CREATE CONSTRAINT Flight_flightId_constraint ON (f:Flight)
+       ASSERT f.flightId IS UNIQUE
 ----
 
 == Refactoring the graph
@@ -119,11 +123,11 @@ MERGE (newFlight)-[:LANDS_IN]->(destination)
 --
 This code looks scary at first, but it relies entirely on Cypher code you already know well.
 
-It exactly follows our refactoring steps:
+It follows our refactoring steps:
 
 [square]
-. Use `MATCH` to fetch the data we wish to move.  We’re looking to move the _CONNECTED_TO_ relationship data, so we create a query that will fetch every such relationship.
-. Use `MERGE` to create the new _Flight_ nodes.  As is always the best practice with `MERGE` we only include the unique identifier, _flightId_ in the `MERGE` statement, where that property is a concatenation of many individually-non-unique things.  All other _Flight_ properties are set in a subsequent `ON CREATE SET` clause, which maps 1:1 from the CONNECTED_TO properties.
+. Use `MATCH` to fetch the data we wish to move.  We are looking to move the _CONNECTED_TO_ relationship data, so we create a query that will fetch every such relationship.
+. Use `MERGE` to create the new _Flight_ nodes.  As is always the best practice with `MERGE`, we only include the unique identifier, _flightId_ in the `MERGE` statement, where that property is a concatenation of many individually-non-unique things.  All other _Flight_ properties are set in a subsequent `ON CREATE SET` clause, which maps 1:1 from the CONNECTED_TO properties.
 . Use `MERGE` to create the relationships connecting the new nodes.  We need to do this twice, since Flights have both an ORIGINATES_FROM and LANDS_IN relationship.
 --
 
@@ -135,7 +139,7 @@ A very common qualifier for a query is the flight number. We want lookups of a _
 A flight number is not unique, but we want to be able to look up all flights with that number quickly.
 --
 
-image::Refactor2.png[Refactor2,width=1000,align=center]
+image::Refactor2.png[Refactor2,width=800,align=center]
 
 [.notes]
 --
@@ -157,11 +161,28 @@ CREATE INDEX Flight_number_index FOR (f:Flight) ON (f.number)
 
 == Profiling the query
 
+[.notes]
+--
 After you have refactored the graph, you then profile the query that you are hoping to improve.
-The query is: What are the airports and flight information for flight number 1016 for airline WN?
+--
+[small]
+--
+Recall that the query is: What are the airports and flight information for flight number 1016 for airline WN?
 
-We must change the query to work with the new model:
+Here is the original query:
+--
+[source, cypher]
+----
+PROFILE
+MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)
+WHERE connection.airline = 'WN' AND connection.flightNumber = '1016'
+RETURN origin.code, destination.code, connection.date, connection.departure, connection.arrival
+----
 
+[small]
+--
+We must change the query to work with the new model as follows:
+--
 [source, cypher]
 ----
 PROFILE
@@ -173,7 +194,14 @@ WHERE flight.airline = 'WN' AND
 
 === Result of the profile
 
-image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=1000,align=center]
+ifndef::backend-revealjs[]
+image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=300,align=center]
+endif::[]
+
+
+ifdef::backend-revealjs[]
+image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=120,align=center]
+endif::[]
 
 [.notes]
 --
@@ -217,6 +245,8 @@ Estimated time to complete: 30 minutes.
 
 == Adding another domain question
 
+[small]
+--
 We need to add another question for our application:
 
 As a frequent traveller I want to find flights from <origin> to <destination> on <date> so that I can book my business flight.
@@ -224,6 +254,7 @@ As a frequent traveller I want to find flights from <origin> to <destination> on
 For example:
 
 Find all the flights going from Los Angeles (LAS) to Chicago Midway International (MDW) on the 3rd January, 2019.
+--
 
 ifdef::backend-revealjs[]
 [.notes]
@@ -233,8 +264,10 @@ Whiteboard what the query might be with the students.
 endif::[]
 
 === Implementing the query
-
+[.notes]
+--
 Here is the query:
+--
 
 [source,cypher]
 ----
@@ -244,9 +277,11 @@ MATCH (origin:Airport {code: 'LAS'})
 WHERE flight.date = '2019-1-3'
 RETURN origin, destination, flight
 ----
-
+[small]
+--
 [NOTE]
 You will work with this query in the next exercise where you have loaded 10k nodes into the graph.
+--
 
 ifdef::backend-revealjs[]
 [.notes]
@@ -258,32 +293,44 @@ endif::[]
 
 === Profiling the query
 
+[.is-two-thirds.left]
+--
 Here is the result of the profile on a graph that contains 10k nodes.
+--
 
-image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=1000,align=center]
+ifndef::backend-revealjs[]
+image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=400,align=center]
+endif::[]
+
+ifdef::backend-revealjs[]
+[.is-one-third.right]
+--
+image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=180,align=center]
+--
+endif::[]
 
 [.notes]
 --
 This query returns 12 flights.
 
-5532 db hits which needs improvement. Adding an index to Flight on date does not improve the query.
+5532 db hits which needs improvement. Adding an index to _Flight_ on date does not improve the query.
 
 Some stats about this graph:
 
-64 airports
-10000 flights
-661 flights that land in MDW; 377 on 2019-1-3
-1624 flights that originate from LAS; 426 on 2019-1-3
-2367 flights on 2019-1-3
+[square]
+* 64 airports
+* 10000 flights
+* 661 flights that land in MDW; 377 on 2019-1-3
+* 1624 flights that originate from LAS; 426 on 2019-1-3
+* 2367 flights on 2019-1-3
 
 Searching for flights by day is a problem.
 
-The query starts by using an index to find MDW but then has to traverse all incoming DESTINATION relationships and check the _Flight.date_ property on the other side.
+The query starts by using an index to find MDW but then has to traverse all incoming _LANDS_IN_ relationships and check the _Flight.date_ property on the other side.
 The more flights an airport has the more we will have to scan through, and since we are only working with 10,000 flights we should probably find a better way to model our data before importing any more data.
 
 This is an opportunity to change the model.
 --
-
 
 == Performing another refactor
 
@@ -296,29 +343,33 @@ This is an instance where we do not want to remove the relationships between air
 
 image::Refactor4.png[Refactor4,width=1000,align=center]
 
+[small]
+--
 [NOTE]
 You only pull out a node if you are going to query through it, otherwise a property will suffice.
+--
 
 [.notes]
 --
-Don't be too aggressive with creating nodes from other nodes.
+You should not be too aggressive with creating nodes from other nodes.
 If you pull out every single property and create nodes then you end up with an RDF model and lose the benefit of the property graph.
 --
 
 === Refactor details
 
-image::Refactor4Details.png[Refactor4Details,width=200,align=center]
+image::Refactor4Details.png[Refactor4Details,width=600,align=center]
 
 [.notes]
 --
 In this case we are adding the _AirportDay_ node that will have date information.
-That way we don't have to go through the _Flight_ nodes to find a date.
+That way we do not have to go through the _Flight_ nodes to find a date.
 Just like the _Flight_ nodes, it will have a unique ID, _AirportDay.airportDayId_ so that it can used it in the query.
 --
 
 [source, cypher]
 ----
-CREATE CONSTRAINT AirportDay_airportDayId_constraint ON (a:AirportDay) ASSERT a.airportDayId IS UNIQUE
+CREATE CONSTRAINT AirportDay_airportDayId_constraint ON (a:AirportDay)
+       ASSERT a.airportDayId IS UNIQUE
 ----
 
 ifdef::backend-revealjs[]
@@ -333,7 +384,7 @@ endif::[]
 Then, you will want to:
 
 [square]
-* `MATCH` the data you want to move
+* `MATCH` the data you want to move.
 * Create the new _AirportDay_ nodes.
 * Connect the new nodes to the existing graph.
 --
@@ -343,12 +394,11 @@ Then, you will want to:
 [source, cypher]
 ----
 MATCH (origin:Airport)<-[:ORIGINATES_FROM]-(flight:Flight)-
-       [:LANDS_IN]->(destination:Airport)
-MERGE (originAirportDay:AirportDay
-      {airportDayId: origin.code + '_' + flight.date})
+      [:LANDS_IN]->(destination:Airport)
+MERGE (originAirportDay:AirportDay {airportDayId: origin.code + '_' + flight.date})
 SET originAirportDay.date = flight.date
 MERGE (destinationAirportDay:AirportDay
-       {airportDayId: destination.code + '_' + flight.date})
+      {airportDayId: destination.code + '_' + flight.date})
 SET destinationAirportDay.date = flight.date
 MERGE (origin)-[:HAS_DAY]->(originAirportDay)
 MERGE (flight)-[:ORIGINATES_FROM]->(originAirportDay)
@@ -358,14 +408,18 @@ MERGE (destination)-[:HAS_DAY]->(destinationAirportDay)
 
 [.notes]
 --
-`MERGE` enables us to add a single AirportDay node per airportDayId value and also ensure that only one relationship is created between a Flight and an AirportDay node.
+`MERGE` enables us to add a single _AirportDay_ node per the  _airportDayId_ value and also ensure that only one relationship is created between a _Flight_ and an _AirportDay_ node.
 --
 
 === Profile our first query
 
+[.notes]
+--
 After a refactor, you should check that all queries perform OK. Here is our first query: What are the airports and flight information for flight number 1016 for airline WN?
+--
 
-
+[.is-two-thirds.left]
+--
 [source,cypher]
 ----
 PROFILE
@@ -374,18 +428,33 @@ MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
 WHERE flight.airline = 'WN' AND
       flight.number = '1016' RETURN origin, destination, flight
 ----
+--
 
+ifdef::backend-revealjs[]
+[is-one-third.right]
+--
 image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=200,align=center]
+--
+endif::[]
+
+ifndef::backend-revealjs[]
+image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=400,align=center]
+endif::[]
 
 [.notes]
 --
-This query previously had 34 db hits, but now has 181. But, we added another 10K nodes to the graph so this is a good outcome.
+This query previously had 34 db hits, but now has 181. But, we added another 10K nodes to the graph so this is a reasonable outcome.
 --
 
 === Profile our original second query
 
+[.notes]
+--
 Then we want to profile our second query after the refactor: Find all the flights going from Los Angeles (LAS) to Chicago Midway International (MDW) on the 3rd January, 2019.
+--
 
+[.is-two-thirds.left]
+--
 [source,cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})
@@ -395,10 +464,18 @@ PROFILE MATCH (origin:Airport {code: 'LAS'})
 WHERE flight.date = '2019-1-3'
 RETURN origin, destination, flight
 ----
+--
 
-With the result:
+ifdef::backend-revealjs[]
+[.is-one-third.right]
+--
+image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=160,align=center]
+--
+endif::[]
 
-image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=200,align=center]
+ifndef::backend-revealjs[]
+image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=400,align=center]
+endif::[]
 
 [.notes]
 --
@@ -408,29 +485,43 @@ This is because we need to incorporate the new model into the query.
 
 === Profile our revised second query
 
-Here is the second query: Find all the flights going from Los Angeles (LAS) to Chicago Midway International (MDW) on the 3rd January, 2019.
+[.notes]
+--
+Here is a rewrite of the second query: Find all the flights going from Los Angeles (LAS) to Chicago Midway International (MDW) on the 3rd January, 2019.
 Due to the change in the model, we must rewrite the  query as:
+--
 
+[.is-two-thirds.left]
+--
 [source,cypher]
 ----
-PROFILE MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->(:AirportDay
-      {date: '2019-1-3'})<-[:ORIGINATES_FROM]-(flight:Flight),
-
-      (flight)-[:LANDS_IN]->(:AirportDay
-      {date: '2019-1-3'})<-[:HAS_DAY]-(destination:Airport {code: 'MDW'})
+PROFILE MATCH (origin:Airport {code: 'LAS'})-
+    [:HAS_DAY]->(:AirportDay {date: '2019-1-3'})<-
+    [:ORIGINATES_FROM]-(flight:Flight),
+    (flight)-[:LANDS_IN]->
+    (:AirportDay {date: '2019-1-3'})<-
+    [:HAS_DAY]-(destination:Airport {code: 'MDW'})
 RETURN origin, destination, flight
 ----
+--
 
-With the result:
+ifndef::backend-revealjs[]
+image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=400,align=center]
+endif::[]
 
-image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=200,align=center]
+ifdef::backend-revealjs[]
+[.is-one-third.right]
+--
+image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=160,align=center]
+--
+endif::[]
 
 [.notes]
 --
 Here we see that the query has 4271 db hits, which is better than the 5532 we had earlier before the refactor.
 As the number of nodes and relationships grows in the graph, these performance differences will be significant.
 
-But what we have learned is that we have to change the model AND the query.
+What we have learned is that we have to change the model [underline]#and# the query.
 --
 
 [.student-exercise]
@@ -451,66 +542,95 @@ Estimated time to complete: 30 minutes.
 
 == More questions for the model?
 
-We now have a model that is performant for these questions?
+[small]
+--
+We now have a model that is performs well for these questions:
 
 . What are the airports and flight information for flight number xx for airline yy?
 . Find all the flights going from xx to yy on the date zz.
 
 What if we added this question: Which airport has the most incoming flights?
+--
 
-image::FinalModel.png[FinalModel,width=200,align=center]
+image::FinalModel.png[FinalModel,width=600,align=center]
 
 [.notes]
 --
 Our latest model serves our two questions very well.
 However, it does not do a good job with the new question.
-That is, we must leave the _ORIGINATED_FROM_ and _LANDED_IN_ relationships between Airport and Flight nodes in the graph.
-In this case, we  eave both models in place, and use each one for the questions it is suited to.
+That is, we must leave the _ORIGINATES_FROM_ and _LANDS_IN_ relationships between _Airport_ and _Flight_ nodes in the graph.
+In this case, we  leave both models in place, and use each one for the questions it is suited to.
 --
+
 == Another question for the model
 
-Suppose we had this question: What are the flights from LAS that arrive at MDW on 2019-1-3?
+[.is-two-thirds.left]
+--
+[.statement]
+Suppose we added this question: What are the flights from LAS that arrive at MDW on 2019-1-3?
+--
 
+[.notes]
+--
 To answer this question with the current model our query would be:
+--
 
+[.is-two-thirds.left]
+--
 [source, cypher]
 ----
 PROFILE
-MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->(originDay:AirportDay),
-(originDay)<-[:ORIGINATES_FROM]-(flight:Flight),
-(flight)-[:LANDS_IN]->(destinationDay),
-(destinationDay:AirportDay)<-[:HAS_DAY]-(destination:Airport {code: 'MDW'})
+MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->
+      (originDay:AirportDay),
+      (originDay)<-[:ORIGINATES_FROM]-(flight:Flight),
+      (flight)-[:LANDS_IN]->(destinationDay),
+      (destinationDay:AirportDay)<-[:HAS_DAY]-
+      (destination:Airport {code: 'MDW'})
 WHERE originDay.date = '2019-1-3' AND
 destinationDay.date = '2019-1-3'
 RETURN flight.date, flight.number, flight.airline,
 flight.departure, flight.arrival
 ORDER BY flight.date, flight.departure
 ----
+--
 
-image::LASToMDWBad.png[LASToMDWBad,width=200,align=center]
+ifndef::backend-revealjs[]
+image::LASToMDWBad.png[LASToMDWBad,width=400,align=center]
+endif::[]
+
+ifdef::backend-revealjs[]
+[.is-one-third.right]
+--
+image::LASToMDWBad.png[LASToMDWBad,width=110,align=center]
+--
+endif::[]
 
 [.notes]
 --
-This query requires 6137 db hits with our current graph. It needs to traverse all the _HAS_DAY_ relationships between the Airport and AirportDay nodes found.
+This query requires 6137 db hits with our current graph. It needs to traverse all the _HAS_DAY_ relationships between the _Airport_ and _AirportDay_ nodes found.
 
 Neo4j is optimized for searching by relationship types.
-As we add more data, the number of HAS_DAY relationships that we have to traverse increases.
+As we add more data, the number of _HAS_DAY_ relationships that we have to traverse increases.
 
-If we have 10 years worth of data we have to traverse 3,650 relationships from the Airport to find the AirportDay that we’re interested in.
+If we have 10 years worth of data we have to traverse 3,650 relationships from the _Airport_ to find the _AirportDay_ that we are interested in.
 --
 
 == Refactoring for specific relationships
 
+[.statement]
 A best practice for graph data modeling is to make relationships more specific if that will help with query performance.
 Here we can modify the _HAS_DAY_ relationship to be _ON_2019-1-3_, _ON_2019_104_, etc.
 
-image::SpecificRelationshipsModel.png[SpecificRelationshipsModel,width=200,align=center]
+image::SpecificRelationshipsModel.png[SpecificRelationshipsModel,width=600,align=center]
 
 === APOC to the rescue!
 
+[small]
+--
 With APOC, you can create relationships based upon data in the graph.
 
 Here is the syntax:
+--
 
 [source, cypher]
 ----
@@ -522,7 +642,11 @@ apoc.create.relationship(startNode(<relationship-variable>),
                          YIELD rel
 ----
 
-Given a relationship variable between two existing nodes, this procedure enables you to create a new, custom relationship that could be based upon property values.  Calling this procedure where rel is returned enables you to either return new relationship created or return a count of the number of relationships created in the graph.
+[.notes]
+--
+Given a relationship variable between two existing nodes, this procedure enables you to create a new, custom relationship that could be based upon property values.
+Calling this procedure where _rel_ is returned enables you to either return the new relationship created or return a count of the number of relationships created in the graph.
+--
 
 == Creating specialized relationships with APOC
 
@@ -540,27 +664,43 @@ RETURN COUNT(*)
 
 === Refactoring result
 
+[.statement]
 Here is the result of the refactoring to create specific relationships:
 
-image::APOCToRefactor.png[APOCToRefactor,width=200,align=center]
+image::APOCToRefactor.png[APOCToRefactor,width=900,align=center]
 
 == Does the query improve?
 
+[.statement]
 Since the model has changed, we need to rewrite the query:
 
+[.is-three-quarters.left]
+--
 [source, cypher]
 ----
 PROFILE
-MATCH (origin:Airport {code: 'LAS'})-[:`ON_2019-1-3`]->(originDay:AirportDay),
-(originDay)<-[:ORIGINATES_FROM]-(flight:Flight),
-(flight)-[:LANDS_IN]->(destinationDay),
-(destinationDay:AirportDay)<-[:`ON_2019-1-3`]-(destination:Airport {code: 'MDW'})
+MATCH (origin:Airport {code: 'LAS'})-[:`ON_2019-1-3`]->
+      (originDay:AirportDay),
+      (originDay)<-[:ORIGINATES_FROM]-(flight:Flight),
+      (flight)-[:LANDS_IN]->(destinationDay),
+      (destinationDay:AirportDay)<-[:`ON_2019-1-3`]
+      -(destination:Airport {code: 'MDW'})
 RETURN flight.date, flight.number, flight.airline,
 flight.departure, flight.arrival
 ORDER BY flight.date, flight.departure
 ----
+--
 
-image::AfterAPOCRefactor.png[AfterAPOCRefactor,width=200,align=center]
+ifndef::backend-revealjs[]
+image::AfterAPOCRefactor.png[AfterAPOCRefactor,width=300,align=center]
+endif::[]
+
+ifdef::backend-revealjs[]
+[.is-one-quarter.right]
+--
+image::AfterAPOCRefactor.png[AfterAPOCRefactor,width=120,align=center]
+--
+endif::[]
 
 [.notes]
 --
@@ -587,24 +727,33 @@ Estimated time to complete: 15 minutes.
 
 == Refactoring large graphs
 
+[.notes]
+--
 Suppose you scale the test data in your graph, or you have a large production graph and a new question must be added that requires a change to the model.
 Refactoring a large graph has its challenges due to the amount of memory required to perform the refactor.
 
 Cypher keeps all transaction state in memory while running a query, which is fine most of the time.
 
-When refactoring the graph, however, this state can get very large and may result in an OutOfMemory exception.
+When refactoring the graph, however, this state can get very large and may result in an _OutOfMemory_ exception.
+--
 
 You must adapt your heap size to match, or operate in batches.
 For example increase these values for the server in the *neo4j.conf* file:
 
-dbms.memory.heap.initial_size=2G (default is 512m)
-dbms.memory.heap.max_size=2G (default is 1G)
+[square]
+* dbms.memory.heap.initial_size=2G (default is 512m)
+* dbms.memory.heap.max_size=2G (default is 1G)
 
 == Batching the refactoring process
 
-Here is on way that you can control how much work is done for a refactoring:
+[.notes]
+--
+Here is one way that you can control how much work is done for a refactoring:
+--
 
-. Tag all the nodes we need to process with a temporary label (for example Process).
+[small]
+--
+. Tag all the nodes we need to process with a temporary label (for example _Process_).
 
 [source,cypher]
 ----
@@ -613,13 +762,20 @@ SET f:Process
 ----
 
 [start=2]
-. Iterate over a subset of nodes flagged with the temporary  label (using LIMIT):
+. Iterate over a subset of nodes flagged with the temporary  label (using `LIMIT`):
 .. Execute the refactoring code.
 .. Remove the temporary label from the nodes.
 .. Return a count of how many rows were processed in the iteration.
-. Once the count reaches 0, then we've finished.
+. Once the count reaches 0, then the refactoring is finished.
+
+--
 
 == Example code for a batch
+
+[.notes]
+--
+Here is code that will process all nodes with the label _Process_:
+--
 
 [source,cypher]
 ----
@@ -645,19 +801,20 @@ RETURN count(*)
 
 [.notes]
 --
-You have previously used this refactoring code to create the AirportDay nodes and their relationships to Airports and Flights.
+You have previously used this refactoring code to create the _AirportDay_ nodes and their relationships to _Airport_  and _Flight_ nodes.
 
-This is a variation of the code we executed previously to create the AirportDay nodes from Flight nodes. The highlighted areas will be part of the iteration where we do batches of 500 Flights at a time and once the creation of the AirportDay node is completed, we remove the Process label from the Flight node.
+This is a variation of the code we executed previously to create the _AirportDay_ nodes from _Flight_ nodes.
+The highlighted areas will be part of the iteration where we do batches of 500 flights at a time and once the creation of the _AirportDay_ node is completed, we remove the _Process_ label from the _Flight_ node.
 --
 
 === Using apoc.periodoc.commit
 
-image::APOCPeriodicCommit.png[APOCPeriodicCommit,width=200,align=center]
+image::APOCPeriodicCommit.png[APOCPeriodicCommit,width=800,align=center]
 
 [.notes]
 --
 APOC currently has 9 procedures that can help you with batching.
-We will focus on using apoc.periodic.commit.
+We will focus on using _apoc.periodic.commit()_.
 --
 
 == Batching with APOC
@@ -690,12 +847,12 @@ RETURN count(*)
 
 [.notes]
 --
-Here we include the refactoring code for creating the AirportDay nodes/relationships in our call to apoc.periodic.commit() where we specify that the refactoring code will create 500 AirportDay nodes in a single transaction.
+Here we include the refactoring code for creating the _AirportDay_ nodes/relationships in our call to _apoc.periodic.commit()_ where we specify that the refactoring code will create 500 _AirportDay_ nodes in a single transaction.
 --
 
 === Result of the batch processing
 
-image::APOCBatchExecution.png[APOCBatchExecution,width=200,align=center]
+image::APOCBatchExecution.png[APOCBatchExecution,width=800,align=center]
 
 [.student-exercise]
 == Exercise 7: Refactoring large graphs
@@ -752,10 +909,10 @@ What is the recommended method for batching refactorings for a large graph?
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] Use the FOREACH clause in Cypher.
-- [ ] Use a DO WHILE clause in Cypher.
-- [ ] Use db.iterate().
-- [x] Use apoc.periodic.commit()
+- [ ] Use the `FOREACH` clause in Cypher.
+- [ ] Use a `DO WHILE` clause in Cypher.
+- [ ] Use _db.iterate()_.
+- [x] Use _apoc.periodic.commit()_.
 
 [.summary]
 == Summary

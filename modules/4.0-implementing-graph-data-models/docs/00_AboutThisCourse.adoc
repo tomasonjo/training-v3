@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Implementing a Simple Graph Data Model
+:module-next-title: Implementing Your First Model
 
 == About this course
 
@@ -14,12 +14,22 @@ In addition, you will gain experience in refactoring an existing graph as the mo
 [.notes]
 --
 This course is intended for developers and architects.
-You need not have programming experience to take this training, but you should have a solid understanding of what Neo4j is and how graph components are used in a Neo4j database.
---
+You should have basic Neo4j experience and Cypher programming skills.
+
 
 In this course, you complete hands-on exercises to gain experience with developing graph data models for use with Neo4j.
 
-To complete the hands-on exercises for this course, you need a Web browser and Internet access.
+To complete the hands-on exercises for this course, you need:
+
+[square]
+* Neo4j 4.0 Instance that is started with one of:
+** Neo4j Desktop
+** Neo4j Sandbox
+** Neo4j Aura
+* A database that is empty.
+* Neo4j Browser window connected to the started Neo4j Server instance.
+* Internet access.
+--
 
 ifdef::backend-html5[]
 At the end of each lesson are a set of questions that you must answer correctly to mark the lesson as completed.
@@ -35,11 +45,10 @@ This Course is published by Neo4j per this https://neo4j.com/docs/license/[Licen
 
 Here are the lessons of this course:
 
-. Introduction to Graph Data Modeling
-. Building an Initial Graph Data Model
-. Graph Data Modeling Core Principles
-. Common Graph Structures
-. Refactoring and Evolving a Graph Data Model
+. Implementing Your First Model
+. Importing Data
+. Profiling Queries
+. Refactoring Graphs
 
 == Resources
 
@@ -55,5 +64,5 @@ Here are some resources you may use as you go through this course:
 * https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual]
 * https://neo4j.com/developer/resources/[Neo4j Developer Resources]
 ifndef::backend-revealjs[]
-* https://community.neo4j.com/c/general/online-training[Neo4j Community Site]
+* https://community.neo4j.com/[Neo4j Community Site]
 endif::[]

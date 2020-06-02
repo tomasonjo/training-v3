@@ -10,20 +10,24 @@
 
 At the end of this module, you should be able to:
 [square]
-* Write Cypher code to import CSV data with Cypher.
+* Write Cypher code to import CSV data into the graph.
 * Confirm that the data has been loaded.
 
 == Options for importing data into the graph
 
+[.statement]
 You have many options for importing data into Neo4j.
 Which option you choose depends on:
 
+[.small]
+--
 [square]
 * How much data you have.
 * What tools you are comfortable using.
 * How much time you have to perform the import.
+--
 
-image::ImportOptions.png[ImportOptions,width=1000,align=center]
+image::ImportOptions.png[ImportOptions,width=600,align=center]
 
 [.notes]
 --
@@ -91,12 +95,12 @@ You can use `LOAD CSV` for CSV files that contain fewer than 100k lines.
 
 == Example: Inspecting data from the CSV file on network
 
-image::InspectDataHTTP.png[InspectDataHTTP,width=1000,align=center]
+image::InspectDataHTTP.png[InspectDataHTTP,width=700,align=center]
 
 
 == Example: Inspecting data from the CSV file in import folder
 
-image::InspectDataFile.png[InspectDataFile,width=1000,align=center]
+image::InspectDataFile.png[InspectDataFile,width=700,align=center]
 
 == Example: Creating nodes and relationships
 
@@ -116,10 +120,10 @@ ON CREATE SET connection.departure = toInteger(row.CRSDepTime), connection.arriv
 
 [.notes]
 --
-As each row is read from the file, an Airport nodes are created  with code property values of row.Origin and row.Dest.
-From the row values, we create the connection between the two nodes based upon the airline, flightNumber, and date.
-We use MERGE to ensure that duplicate nodes and relationships are not created with the same property values.
-If the connection is being created, we provide additional properties, departure and arrival.
+As each _row_ is read from the file,  _Airport_ nodes are created  with _code_ property values of _row.Origin_ and _row.Dest_.
+From the _row_ values, we create the connection between the two nodes based upon the _row.uniqueCarrier_ value for setting the _airline_ property, _row.flightNumber_ for the _FlightNum_ property, and _row.Year_ + _row.Month_ + _row.DayOfMonth_ for the _date_ property.
+We use `MERGE` to ensure that duplicate nodes and relationships are not created with the same property values.
+If the connection is being created, we provide additional properties, _departure_ and _arrival_.
 
 For *large* datasets, you should ensure that uniqueness constraints (indexes) are created on the Airport code property before you load the data.
 This will dramatically improve the performance of the load as it will use the index during the `MERGE`.
@@ -171,7 +175,7 @@ Select the correct answer.
 [.statement]
 
 [.statement]
-Up to how many lines can you import data using `LOAD CSV`
+Up to how many lines can you import data using `LOAD CSV`?
 
 [.statement]
 Select the correct answer.
