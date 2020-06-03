@@ -154,7 +154,7 @@ This is because index maintenance is expensive and you do not want a large refac
 Here is the code to create the index on the flight number property:
 --
 
-[source, cypher]
+[source.center, cypher]
 ----
 CREATE INDEX Flight_number_index FOR (f:Flight) ON (f.number)
 ----
@@ -818,6 +818,7 @@ We will focus on using _apoc.periodic.commit()_.
 --
 
 == Batching with APOC
+
 
 [source,cypher]
 ----

@@ -1,0 +1,3 @@
+make section headers conditional for vertical navigation for optional slides
+------
+

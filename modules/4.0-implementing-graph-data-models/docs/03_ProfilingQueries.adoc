@@ -72,14 +72,14 @@ endif::[]
 [.is-half.right]
 --
 ifdef::backend-revealjs[]
-image::PROFILEExample.png[PROFILEExample,width=450,align=center]
+image::PROFILEExample.png[PROFILEExample,width=400,align=center]
 endif::[]
 --
-
 
 === Analyzing the query profile - 1
 
 image::PROFILEExample1.png[PROFILEExample1,width=1000,align=center]
+
 
 [.notes]
 --

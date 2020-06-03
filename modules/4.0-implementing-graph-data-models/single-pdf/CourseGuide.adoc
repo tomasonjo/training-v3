@@ -1,0 +1,14 @@
+= Implementing Graph Data Models in Neo4j 4.0: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
+include::{includedir}/01_ImplementingYourFirstModel.adoc[leveloffset=+1]
+include::{includedir}/02_ImportingData.adoc[leveloffset=+1]
+include::{includedir}/03_ProfilingQueries.adoc[leveloffset=+1]
+include::{includedir}/04_RefactoringGraphs.adoc[leveloffset=+1]
+include::{includedir}/05_Summary.adoc[leveloffset=+1]
+

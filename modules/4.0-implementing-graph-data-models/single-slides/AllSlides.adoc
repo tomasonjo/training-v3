@@ -1,0 +1,20 @@
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[]
+
+[.title.slide-start-title]
+include::{includedir}/01_ImplementingYourFirstModel.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/02_ImportingData.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/03_ProfilingQueries.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/04_RefactoringGraphs.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/05_Summary.adoc[leveloffset=+1]
+
+
