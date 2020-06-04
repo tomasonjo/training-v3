@@ -484,7 +484,7 @@ Select the correct answer.
 [%interactive.answers]
 - [ ] list
 - [x] map
-- [ ] JSON object
+- [ ] collection
 - [ ] blob
 
 === Question 3
