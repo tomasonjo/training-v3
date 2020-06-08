@@ -218,7 +218,7 @@ The Sandbox is intended as a temporary environment or for learning about the fea
 --
 
 [.statement]
-You create a Sandbox by creating an account at the https://sandbox.neo4j.com[Neo4j Sandbox site].
+You create a Sandbox by creating an account at the https://sandbox.neo4j.com/?ref=graph-academy[Neo4j Sandbox site].
 
 ifdef::backend-html5,backend-pdf[]
 Here is a video that shows how to create a Neo4j Sandbox account and a Neo4j Sandbox instance:

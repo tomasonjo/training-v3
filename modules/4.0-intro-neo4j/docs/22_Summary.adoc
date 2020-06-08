@@ -45,7 +45,8 @@ endif::[]
 
 Neo4j Sandboxes for experimenting with graphs:
 
-https://sandbox.neo4j.com
+https://
+sandbox.neo4j.com/?ref=graph-academy
 
 Videos on  the Neo4j YouTube channel:
 
