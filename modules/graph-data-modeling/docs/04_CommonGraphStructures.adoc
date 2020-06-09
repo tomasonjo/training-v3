@@ -193,7 +193,7 @@ Here, we have connected every purchase to a day.
 
 With this structure, some otherwise-expensive time questions become easy.
 For example, finding all purchases in a given time periods, where the period of interest might be a day, a month, or a year, depending on circumstances.
-Simply anchor on the timleine at the appropriate time period of interest, then traverse downward through the tree.
+Simply anchor on the timeline at the appropriate time period of interest, then traverse downward through the tree.
 
 What is more interesting, though, is dealing with time when time is part of the traversal, but not the anchor.
 For example, looking for all purchases that happened within a some time period relative to another event.
