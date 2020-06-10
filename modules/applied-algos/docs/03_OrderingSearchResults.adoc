@@ -45,7 +45,7 @@ You will update the application to use this new information.
 
 Instead of selecting the reviews for our businesses based on the opinions of users unrelated to `user-name`, we'll show reviews written by similar users.
 
-. In Neo4j Browser, perform the steps in Neo4j Browser guide section *Search Results*. (:play applied_graph_algorithms/03_search_results.html)
+. In Neo4j Browser, perform the steps in Neo4j Browser guide section *Search Results*. (:play gds-applied-graph-algorithms-exercises/03_search_results.html)
 . In CodeSandbox, edit the Cypher query in `src/exercises/exercise2.js` to return businesses.
 . Save this file.
 . In the CodeSandbox Browser, select a user from the *User Profile* drop down. This will set this user for the search.

@@ -32,7 +32,7 @@ One way that we could make things easier for our user is if we let them navigate
 == Exercise
 
 . In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. You should see a very long list of categories. You will use the Overlap Similarity algorithm to create relationships in the graph that will be used to identify the top-level categories.
-. In Neo4j Browser, complete the steps for *Category Hierarchy* (:play applied_graph_algorithms/02_category_hierarchy.html) to add category hierarchy to the graph using the Overlap Similarity algorithm.
+. In Neo4j Browser, complete the steps for *Category Hierarchy* (:play gds-applied-graph-algorithms-exercises/02_category_hierarchy.html) to add category hierarchy to the graph using the Overlap Similarity algorithm.
 . In CodeSandbox, edit the Cypher query in `src/exercises/exercise1.js` to return only top-level categories to populate the Category drop down in Business Search.
 . Save your changes to *exercise1.js*.
 . In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. Is the list of categories smaller?

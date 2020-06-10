@@ -40,7 +40,7 @@ You can access the guides for this course by running this command in Neo4j Brows
 
 [source,cypher]
 ----
-:play gds_applied_graph_algorithms
+:play gds-applied-graph-algorithms-exercises
 ----
 
 == The Neo4j Graph Data Science Plugin
@@ -100,7 +100,7 @@ Your exercise for this module is to get all the tools up and running and talking
 . Create a https://sandbox.neo4j.com/?usecase=yelp[Yelp Neo4j Sandbox instance^].
     *Note*: You must log in to the Neo4j Sandbox site. This may require you to register with Neo4j.
 . In Yelp Sandbox you just created, click the *Open Neo4j Browser* button to open a Neo4j Browser for the Yelp database. You will be using this Neo4j Browser window throughout this course.
-. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play applied_graph_algorithms), *Cypher Refresher*.
+. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play gds-applied-graph-algorithms-exercises), *Cypher Refresher*.
 . Open the https://codesandbox.io/s/github/neo4j-contrib/training-v2/tree/master/Courses/AppliedGraphAlgorithms/react-app[React application in CodeSandbox^]. This is the initial version of our business reviews application. You will be using this Code Sandbox window throughout this course.
 . In CodeSandbox:
 .. Sign in to CodeSandbox with your github credentials.

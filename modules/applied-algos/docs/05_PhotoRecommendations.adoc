@@ -31,7 +31,7 @@ In this section you will use the Label Propagation algorithm to recommend photos
 
 == Exercise
 
-. In Neo4j Browser, perform the steps in the  Neo4j Browser guide section *Photo Recommendations*. (:play applied_graph_algorithms/05_photo_recommendations.html)
+. In Neo4j Browser, perform the steps in the  Neo4j Browser guide section *Photo Recommendations*. (:play gds-applied-graph-algorithms-exercises/05_photo_recommendations.html)
 . In CodeSandbox, edit the `FETCH_PHOTO_RECOMMENDATIONS` Cypher query in `src/exercises/exercise4.js` to recommend businesses whose photos belong to the same community.
 . Save this file.
 . In the CodeSandbox Browser, click *Photos* and select five random photos. Then the application presents restaurants based upon the photos selected.
