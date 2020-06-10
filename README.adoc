@@ -77,19 +77,21 @@ If you want to convert all the files at once, you can use the `convert` task:
 You can also run a task on a specific module:
 
  $ #./gradlew <nameOfModule>:convertSlides
- $ #for example:
+
+For example:
+
  $ ./gradlew 4.0-intro-neo4j:convertSlides
- $ ./gradlew 4.0-intro-neo4j>:convert
+ $ ./gradlew 4.0-intro-neo4j:convert
 
 If you want to create a single slide deck for a group of slide asciidoc files, make a folder named "single-slides".
 In that folder include the asciidoc for the group of files you want to combine. (see example in 4.0-intro-neo4j module)
 Then use this command to build it:
 
-  $ ./gradlew <nameOfModule>:convertSingleSlides
+ $ #./gradlew <nameOfModule>:convertSingleSlides
 
 There is similar functionality for consolidating PDFs. It uses the folder "single-pdf". The caution with generating a large PDF, however is memory. If you have a large PDF that you want to produce, you may need to install mogrify.
 
-  $ ./gradlew <nameOfModule>:convertSinglePdf
+ $ #./gradlew <nameOfModule>:convertSinglePdf
 
 Gradle will do his best to detect if a task needs to be run again or not.
 If you want to force Gradle to execute a task again, you can remove the `build` directory using the `clean` task:
@@ -100,7 +102,7 @@ Once the `build` directory is removed, type the task you want to execute.
 
 You can also clean a particular directory:
 
- $ ./gradlew <nameOfModule>:clean
+ $ #./gradlew <nameOfModule>:clean
 
 == LiveReload
 
@@ -112,16 +114,13 @@ image::livereload-icon.png[]
 Next, you need to open two terminal.
 In the first one, type the following command to continuously convert the AsciiDoc source to a reveal.js presentation:
 
-[source,console]
-----
-$ ./gradlew --continuous <nameOfModule>:convertSlides
-----
+ $ #./gradlew --continuous <nameOfModule>:convertSlides
 
 On the second one, type the following command to start the LiveReload server on the [.path]_demo_ module:
 
 [source,console]
 ----
-$ ./gradlew <nameOfModule>:liveReload
+$ #./gradlew <nameOfModule>:liveReload
 
 > Task :liveReload
 Enabling LiveReload at port 35729 for /path/to/modules/demo/build
