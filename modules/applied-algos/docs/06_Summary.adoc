@@ -1,0 +1,49 @@
+= Summary: Applied Graph Algorithms
+:presenter: Neo4j
+:twitter: neo4j
+:email: info@neo4j.com
+:neo4j-version: 3.5
+:currentyear: 2019
+:doctype: book
+:toc: left
+:toclevels: 3
+:prevsecttitle: Photo Recommendations
+:currsect: 6
+:prevsect: 5
+:experimental:
+:imagedir: ../images
+:manual: http://neo4j.com/docs/operations-manual/3.5
+
+[#module-5.quiz]
+== Quiz Results
+++++
+<span id="quizes-result"></span>
+++++
+
+== Course Completion Certificate
+++++
+<span id="cert-result"></span>
+++++
+
+== Course Summary
+
+In this course, you have learned how to use the:
+
+
+[square]
+* Pearson Similarity graph algorithm
+* Personalized PageRank graph algorithm
+* Jaccard similarity algorithm
+* Label Propagation Community Detection algorithm
+
+== Course feedback
+
+We want your feedback on this course. Please provide your https://forms.gle/retKeTdE8kvKc3jK6[feedback] so we can improve this course.
+
+++++
+<script>
+$( document ).ready(function() {
+  Intercom('trackEvent','training-applied-algos-view-part6');
+});
+</script>
+++++
