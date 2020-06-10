@@ -94,6 +94,7 @@ subprojects {
   }
 
   asciidoctorj {
+    gemPaths "${rootProject.buildDir}/.asciidoctorGems"
     requires "${rootProject.projectDir}/resources/extensions.rb"
     attributes 'allow-uri-read': '',
       'stage': stage != null ? stage : '',
@@ -109,6 +110,10 @@ subprojects {
       'manual-cypher': '{manual}/cypher',
       'module-enrollment-url': enrollmentUrl,
       'document-metadata-attrs-include': 'author,slug,parent-path,categories*,tags*,taxonomies*<>'
+  }
+
+  asciidoctorGemsPrepare.with {
+    outputDir = "${rootProject.buildDir}/.asciidoctorGems"
   }
 
   revealjs {
