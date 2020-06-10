@@ -76,7 +76,7 @@ If you want to convert all the files at once, you can use the `convert` task:
 
 You can also run a task on a specific module:
 
- $ #./gradlew <nameOfModule>:convertSlides
+ $ #./gradlew <nameOfModule>:<task>
  $ #for example:
  $ ./gradlew 4.0-intro-neo4j:convertSlides
  $ ./gradlew 4.0-intro-neo4j>:convert
@@ -98,7 +98,7 @@ If you want to force Gradle to execute a task again, you can remove the `build` 
 
 Once the `build` directory is removed, type the task you want to execute.
 
-You can also clean a particular directory:
+You can also clean a particular directory which removes the *build* folder:
 
  $ ./gradlew <nameOfModule>:clean
 
@@ -141,7 +141,7 @@ If you edit the corresponding AsciiDoc source (or resources), and wait a few sec
 == Add a new module
 
 To add a new module, edit the [.path]_settings.gradle_ file at the root of this project.
-For instance, if we want to add a new module named `browser" located at [.path]_modules/browser-guides_, we need to add the following lines:
+For example, if we want to add a new module named `browser" located at [.path]_modules/browser-guides_, we need to add the following lines:
 
 [source,gradle]
 ----
@@ -149,7 +149,7 @@ include 'browser'
 project(':browser').projectDir = file('modules/browser-guides')
 ----
 
-Now we can execute tasks on this new module, for instance: `./gradlew :browser:convert`
+Now we can execute tasks on this new module, for instance: `./gradlew browser:convert`
 
 == Viewing slides locally
 
