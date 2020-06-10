@@ -76,7 +76,7 @@ If you want to convert all the files at once, you can use the `convert` task:
 
 You can also run a task on a specific module:
 
- $ #./gradlew <nameOfModule>:convertSlides
+ $ #./gradlew <nameOfModule>:<task>
 
 For example:
 
@@ -100,7 +100,7 @@ If you want to force Gradle to execute a task again, you can remove the `build` 
 
 Once the `build` directory is removed, type the task you want to execute.
 
-You can also clean a particular directory:
+You can also clean a particular module which removes the *build* folder for that module:
 
  $ #./gradlew <nameOfModule>:clean
 
@@ -148,7 +148,12 @@ include 'browser'
 project(':browser').projectDir = file('modules/browser-guides')
 ----
 
-Now we can execute tasks on this new module, for instance: `./gradlew :browser:convert`
+Now we can execute tasks on this new module, for instance:
+
+[source,gradle]
+----
+./gradlew browser:convert
+----
 
 == Viewing slides locally
 
