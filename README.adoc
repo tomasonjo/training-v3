@@ -6,15 +6,14 @@
 
 image:https://github.com/neo4j-contrib/training-v3/workflows/CI/badge.svg[GitHub Actions Status, link=https://github.com/neo4j-contrib/training-v3/actions]
 
-
 This repo will use the gradle tool chain for building the following for Courses:
 
 - HTML for online courses
+- HTML for enrollment pages
 - HTML for reveal.js slide presentations
 - PDF
 
-
-This repo will use the gradle tool chain for building the following for Browser Guides:
+This repo will use the Gradle tool chain for building the following for Browser Guides:
 
 - HTML Neo Browser guides
 - PDF
@@ -24,15 +23,15 @@ This repo will use the gradle tool chain for building the following for Browser 
 [square]
 * *modules* each directory is a course or a browser guide which contains:
 ** *docs*             the asciidoc source files
-** *images*            the images
-** *single-pdf*        container for generating the course guide or exercise guide
-** *single-slides*     container for generating a single HTML for the entire course
-** *build*             generated when you convert asciidoc which contains these important artifacts
-*** *online*        the online HTML and the PDF for each lesson of the course
-*** *slides*        the HTML slides for each lesson of the course
-*** *single-pdf*    the PDF for the course guide or exercise guide
-*** *single-slides* the HTML slides for the entire course
-
+** *images*           the images
+** *single-pdf*       container for generating the course guide or exercise guide
+** *single-slides*    container for generating a single HTML for the entire course
+** *build*            generated when you convert asciidoc which contains these important artifacts
+*** *enrollment*      the HTML for the enrollment page
+*** *online*          the online HTML and the PDF for each lesson of the course
+*** *slides*          the HTML slides for each lesson of the course
+*** *single-pdf*      the PDF for the course guide or exercise guide
+*** *single-slides*   the HTML slides for the entire course
 
 == Prerequisites
 
@@ -139,7 +138,6 @@ Notice that the middle circle is now filled in black.
 
 If you edit the corresponding AsciiDoc source (or resources), and wait a few seconds, your browser will automatically be refreshed with your changes.
 
-
 == Add a new module
 
 To add a new module, edit the [.path]_settings.gradle_ file at the root of this project.
@@ -153,15 +151,14 @@ project(':browser').projectDir = file('modules/browser-guides')
 
 Now we can execute tasks on this new module, for instance: `./gradlew :browser:convert`
 
-
 == Viewing slides locally
 
 1. In a terminal window, navigate to the folder where the slides HTML resides, for example:
 
-cd modules/demo/build/slides
+ cd modules/demo/build/slides
 
 2. Open the an HTML page in JS-enabled Browser
-
++
 [square]
 * `ESC` to see summary slides
 * Page down/Page up to move from slide to slide

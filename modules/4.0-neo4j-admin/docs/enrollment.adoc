@@ -1,0 +1,34 @@
+= Basic Neo4j 4.0 Administration Online Course
+:slug: basic-neo4j-admin-40
+:description: Learn how create a database for a graph data model and evolve the graph.
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/BasicNeo4jAdministration-4.0_withTitle.jpg[]
+
+== About the Course
+
+This online course is a collection of lessons and and hands-on exercises which teach you how to manage a Neo4j 4.x DBMS.
+
+== Prerequisites
+
+You need not have extensive programming experience to take this course.
+
+To perform the hands-on exercises, you must install Docker on your system.
+
+==  Duration
+
+If you perform all of the hands-on exercises in this course,
+it will take you one day to complete the course.
+
+== The lessons of this course include:
+
+* Introduction to Neo4j
+* Overview of Neo4j Administration
+* Managing a Neo4j Instance
+* Using cypher-shell to Manage Databases
+* Copying Databases
+* Changing the Database Location
+* Checking Database Consistency
+* Scripting to Manage Databases
+* Configuring Plugins
+* Changing the HTTP Port
+* Importing Data
