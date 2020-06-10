@@ -30,7 +30,7 @@ subprojects {
 
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
-    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.0.3'
+    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
   }
 
   repositories {
@@ -46,17 +46,36 @@ subprojects {
   def enrollmentUrl = {
     switch (project.name) {
       case "4.0-intro-neo4j":
-        "https://neo4j.com/graphacademy/online-training/introduction-to-neo4j-40/"
-        break;
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}introduction-to-neo4j-40/"
+        break
       case "4.0-neo4j-admin":
-        "https://neo4j.com/graphacademy/online-training/basic-neo4j-admin-40/"
-        break;
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}basic-neo4j-admin-40/"
+        break
       case "graph-data-modeling":
-        "https://neo4j.com/graphacademy/online-training/graph-data-modeling/"
-        break;
-      case "4.0-implementing-graph-data-models:":
-        "https://neo4j.com/graphacademy/online-training/implementing-graph-data-models-40/"
-        break;
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}graph-data-modeling/"
+        break
+      case "4.0-implementing-graph-data-models":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}implementing-graph-data-models-40/"
+        break
+      default:
+        "https://neo4j.com/"
+    }
+  }
+
+  def courseUrl = {
+    switch (project.name) {
+      case "4.0-intro-neo4j":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-intro-neo4j-about/"
+        break
+      case "4.0-neo4j-admin":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-basic-neo4j-admin-about/"
+        break
+      case "graph-data-modeling":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-graph-data-modeling-about/"
+        break
+      case "4.0-implementing-graph-data-models":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-igdm-40-implementing-graph-data-models-about/"
+        break
       default:
         "https://neo4j.com/"
     }
@@ -135,6 +154,9 @@ subprojects {
 
     baseDir file("${projectDir}/docs")
     sourceDir file("${projectDir}/docs")
+    sources {
+      exclude 'enrollment.adoc'
+    }
     outputDir file("${projectDir}/build/standalone")
 
     resources {
@@ -183,7 +205,32 @@ subprojects {
 
     baseDir file("${projectDir}/docs")
     sourceDir file("${projectDir}/docs")
+    sources {
+      exclude 'enrollment.adoc'
+    }
     outputDir file("${projectDir}/build/online")
+  }
+
+  task convertEnrollmentHtml(type: AsciidoctorTask) {
+    dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
+
+    inputs.dir "${rootProject.projectDir}/resources/templates/enrollment"
+
+    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
+    asciidoctorj {
+      options template_dirs: ["${rootProject.projectDir}/resources/templates/enrollment"]
+      attributes 'parent-path': '/graphacademy/online-training',
+        'document-metadata-attrs-include': 'author,slug,parent-path',
+        'module-course-url': courseUrl,
+        'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
+    }
+
+    baseDir file("${projectDir}/docs")
+    sourceDir file("${projectDir}/docs")
+    sources {
+      include 'enrollment.adoc'
+    }
+    outputDir file("${projectDir}/build/enrollment")
   }
 
   task convertSlides(type: AsciidoctorJRevealJSTask) {
@@ -199,10 +246,10 @@ subprojects {
     }
 
     //noinspection GroovyAccessibility,GroovyAssignabilityCheck
-    // for no transition between slides add this line after imagesdir:
-    //         'revealjs_transition': 'none',
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
+      // for no transition between slides add this line after imagesdir:
+      // 'revealjs_transition': 'none',
       attributes 'revealjs_customtheme': 'themes/reveal.css',
         'imagesdir': 'images',
         'revealjs_transition': 'none',
@@ -221,6 +268,9 @@ subprojects {
 
     baseDirFollowsSourceDir()
     sourceDir file("${projectDir}/docs")
+    sources {
+      exclude 'enrollment.adoc'
+    }
     outputDir file("${projectDir}/build/slides")
 
     resources {
@@ -257,6 +307,9 @@ subprojects {
 
     baseDir file("${projectDir}/docs")
     sourceDir file("${projectDir}/docs")
+    sources {
+      exclude 'enrollment.adoc'
+    }
     outputDir file("${projectDir}/build/online")
   }
 
@@ -381,6 +434,7 @@ subprojects {
 
   task convert {
     dependsOn convertOnlineHtml
+    dependsOn convertEnrollmentHtml
     dependsOn convertOnlinePdf
     dependsOn convertSlides
   }
@@ -415,6 +469,17 @@ subprojects {
       source = convertOnlineHtml.outputs.files
       type = "course"
       status = stage == 'production' ? "publish" : "private"
+    }
+    task wordPressUploadEnrollment(type: WordPressUploadTask) {
+      dependsOn convertEnrollmentHtml
+      source = convertEnrollmentHtml.outputs.files
+      type = "page"
+      status = stage == 'production' ? "publish" : "private"
+      template = "page-inner-100-mkto.php"
+    }
+    task wordPressUpload {
+      dependsOn wordPressUploadCourse
+      dependsOn wordPressUploadEnrollment
     }
   }
 

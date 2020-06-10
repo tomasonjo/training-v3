@@ -1,5 +1,12 @@
 = Neo4j Training Material: Publish pages
 :uri-wp-rest-api-ref: https://developer.wordpress.org/rest-api/reference/
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
 == Publish to WordPress
 
@@ -82,8 +89,6 @@ A page must have a (unique) `slug` attribute:
 :slug: introduction-cypher
 ----
 
-
-
 === Upload to WordPress
 
 The following command will publish pages to WordPress:
@@ -92,6 +97,12 @@ The following command will publish pages to WordPress:
 
 If the slug already exists, the page will be updated. Otherwise the page will be created.
 This process won't remove pages from WordPress.
+
+You can also upload the enrollment page using the `wordPressUploadEnrollment` task:
+
+ $ ./gradlew 4.0-intro-neo4j:wordPressUploadEnrollment -Pwordpress-username=neo -Pwordpress-host="neo4j.com" -Pwordpress-password="abcd"
+
+TIP: If you want to upload both the courses and the enrollment page you can use the `wordPressUpload` task.
 
 === How?
 
