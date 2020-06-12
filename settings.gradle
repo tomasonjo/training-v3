@@ -28,11 +28,11 @@ project(':graph-data-modeling').projectDir = file('modules/graph-data-modeling')
 include '4.0-implementing-graph-data-models'
 project(':4.0-implementing-graph-data-models').projectDir = file('modules/4.0-implementing-graph-data-models')
 
-include 'data-science'
-project(':data-science').projectDir = file('modules/data-science')
+include 'gds-data-science'
+project(':gds-data-science').projectDir = file('modules/gds-data-science')
 
-include 'applied-algos'
-project(':applied-algos').projectDir = file('modules/applied-algos')
+include 'gds-applied-algos'
+project(':gds-applied-algos').projectDir = file('modules/gds-applied-algos')
 
 include '4.0-intro-graph-algos'
 project(':4.0-intro-graph-algos').projectDir = file('modules/4.0-intro-graph-algos')
