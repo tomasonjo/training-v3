@@ -1,20 +1,10 @@
 = Ordering Search Results
-:presenter: Neo4j
-:twitter: neo4j
-:email: info@neo4j.com
-:neo4j-version: 3.5
-:currentyear: 2019
+:slug: 00-gdsaa-ordering-search-results
 :doctype: book
 :toc: left
-:toclevels: 3
-:nextsecttitle: Most Relevant Reviews
-:prevsecttitle: Category Hierarchy
-:nextsect: 4
-:currsect: 3
-:prevsect: 2
-:experimental:
-:imagedir: ../images
-:manual: http://neo4j.com/docs/operations-manual/3.5
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Most Relevant Reviews
 
 video::FtVQ9iUjA0Q[youtube,width=560,height=315]
 
@@ -26,7 +16,7 @@ Let's look at the part of the application that you will enhance.
 
 In the CodeSandbox Browser, you can select *Business Search*, and search for *Pizza* in the category *Restaurants*.
 
-image::{imagedir}/codesandbox4.png[,width=700,align=center]
+image::codesandbox4.png[,width=700,align=center]
 
 Instead of showing results in alphabetical order you will modify the application to show the most relevant businesses first.
 
@@ -72,51 +62,42 @@ If you get stuck, watch this video for a walk-through of the solution:
 ++++
 _Ordering search results solution_
 
-[#module-3.quiz]
+[.quiz]
 == Check your understanding
 === Question 1
 
 === Algorithm Understanding: Pearson Similarity
 
+[.statement]
 Which of the following are valid values that can be returned by the Pearson Similarity algorithm?
 
+[.statement]
 Select the correct answers.
-[%interactive]
-- [ ] [.required-answer]#0.72#
-- [ ] [.false-answer]#-3.41#
-- [ ] [.false-answer]#2.34#
-- [ ] [.required-answer]#-0.52#
+
+[%interactive.answers]
+- [x] 0.72
+- [ ] -3.41
+- [ ] 2.34
+- [x] -0.52
 
 === Question 2
 === Running the algorithm in Neo4j
 
+[.statement]
 Which of the following are fields returned by the `gds.alpha.similarity.pearson.write` procedure?
 
+[.statement]
 Select the correct answers.
-[%interactive]
-- [ ] [.required-answer]#similarityPairs#
-- [ ] [.false-answer]#relationships#
-- [ ] [.required-answer]#p75#
-- [ ] [.required-answer]#writeRelationshipType#
 
+[%interactive.answers]
+- [x] similarityPairs
+- [ ] relationships
+- [x] p75
+- [x] writeRelationshipType
+
+[.summary]
 == Summary
 
 You should now be able to:
 [square]
 * Use the Pearson Similarity graph algorithm.
-
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-4/">Continue to Module 4</a>
-++++
-
-ifdef::backend-html5[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-applied-algos-view-part3');
-});
-</script>
-++++
-endif::backend-html5[]

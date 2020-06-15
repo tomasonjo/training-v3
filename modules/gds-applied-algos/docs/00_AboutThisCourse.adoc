@@ -1,18 +1,10 @@
 = Applied Graph Algorithms with GDSL for Neo4j
-:presenter: Neo4j
-:twitter: neo4j
-:email: info@neo4j.com
-:neo4j-version: 3.5
-:currentyear: 2019
+:slug: 00-gdsaa-about-this-course
 :doctype: book
 :toc: left
-:toclevels: 3
-:nextsecttitle: Setup And Cypher Refresher
-:nextsect: 1
-:currsect: 0
-:experimental:
-:imagedir: ../images
-:manual: http://neo4j.com/docs/operations-manual/3.5
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
 
 Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
 They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).
@@ -31,7 +23,7 @@ _Introduction to Graph Data Science in Neo4j and overview of this course_
 
 == Course Outline
 
-=== link:../part-1[Setup And Cypher Refresher]
+=== Setup And Cypher Refresher
 
 [square]
 * Review of the dataset used in this course.
@@ -42,7 +34,7 @@ _Introduction to Graph Data Science in Neo4j and overview of this course_
 
 Estimated time: _15 minutes_
 
-=== link:../part-2/[Category Hierarchy]
+=== Category Hierarchy
 
 [square]
 * Learn about the Overlap Similarity algorithm and how to use it in Neo4j to build a hierarchy of categories.
@@ -50,7 +42,7 @@ Estimated time: _15 minutes_
 
 Estimated time: _30 minutes_
 
-=== link:../part-3[Ordering Search Results]
+=== Ordering Search Results
 
 [square]
 * Learn about Similarity algorithms in Neo4j.
@@ -58,7 +50,7 @@ Estimated time: _30 minutes_
 
 Estimated time: _30 minutes_
 
-=== link:../part-4[Most Relevant Reviews]
+=== Most Relevant Reviews
 
 [square]
 * Learn about PageRank and Personalized PageRank.
@@ -66,7 +58,7 @@ Estimated time: _30 minutes_
 
 Estimated time: _30 minutes_
 
-=== link:../part-5[Photo Recommendations]
+=== Photo Recommendations
 
 [square]
 * Learn more about Similarity algorithms in Neo4j.
@@ -75,7 +67,7 @@ Estimated time: _30 minutes_
 
 Estimated time: _30 minutes_
 
-=== link:../part-6[Summary]
+=== Summary
 
 [square]
 * Quiz results.
@@ -91,18 +83,3 @@ This course focuses on using graph algorithms with Neo4j in an applied environme
 * Have completed Introduction to Neo4j course or have equal Cypher proficiency.
 * Be familiar with Neo4j Browser.
 * Be familiar with the concepts of a web application.
-
-++++
-<a class="medium button" href="../part-1/">Start the Course!</a>
-++++
-
-ifdef::backend-html5[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-applied-algos-view-part0');
-});
-</script>
-++++
-//marketo stuff, navigate to next page
-endif::backend-html5[]

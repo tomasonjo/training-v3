@@ -1,20 +1,11 @@
-= Summary: Applied Graph Algorithms
-:presenter: Neo4j
-:twitter: neo4j
-:email: info@neo4j.com
-:neo4j-version: 3.5
-:currentyear: 2019
+= Summary: Applied Graph Algorithms With GDSL
+:slug: 00-gdsaa-summary
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsecttitle: Photo Recommendations
-:currsect: 6
-:prevsect: 5
-:experimental:
-:imagedir: ../images
-:manual: http://neo4j.com/docs/operations-manual/3.5
+:toclevels: 4
+:imagesdir: ../images
 
-[#module-5.quiz]
+[.quiz]
 == Quiz Results
 ++++
 <span id="quizes-result"></span>
@@ -25,6 +16,7 @@
 <span id="cert-result"></span>
 ++++
 
+[.summary]
 == Course Summary
 
 In this course, you have learned how to use the:
@@ -39,11 +31,3 @@ In this course, you have learned how to use the:
 == Course feedback
 
 We want your feedback on this course. Please provide your https://forms.gle/retKeTdE8kvKc3jK6[feedback] so we can improve this course.
-
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-applied-algos-view-part6');
-});
-</script>
-++++

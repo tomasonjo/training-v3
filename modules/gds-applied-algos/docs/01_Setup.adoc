@@ -1,40 +1,36 @@
 = Setup and Cypher Refresher
-:presenter: Neo4j
-:twitter: neo4j
-:email: info@neo4j.com
-:neo4j-version: 3.5
-:currentyear: 2019
+:slug: 00-gdsaa-setup-and-cypher-refresher
 :doctype: book
 :toc: left
-:toclevels: 3
-:nextsecttitle: Category Hierarchy
-:prevsecttitle: About This Course
-:nextsect: 2
-:currsect: 1
-:prevsect: 0
-:experimental:
-:imagedir: ../images
-:manual: http://neo4j.com/docs/operations-manual/3.5
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Category Hierarchy
 
 To complete this course we will make use of the following tools:
 
 == Neo4j Sandbox
 
-[frame="none", cols="^.^,<.^"]
-|===
-a|image::{imagedir}/sandbox.png[Neo4j Sandbox,width=500,align=center]
-a|
+[.is-half.left]
+--
+image::sandbox.png[Neo4j Sandbox,width=500, align=center]
+--
+
+[.is-half.right]
+--
 Neo4j Sandbox is a hosted Neo4j tool that allows you to run private instances of Neo4j without having to install Neo4j locally. You can choose Neo4j Sandbox usecases that come pre-loaded with datasets and your Neo4j Sandbox instances can be accessed over the internet, making them useful for building sample applications. While Neo4j Browser is the primary way to interact with Neo4j instances hosted by Neo4j Sandbox, for this course you will also connect your sandbox instance to a simple web application.
-|===
+--
 
 == Neo4j Browser Guides
 
-[frame="none", cols="^.^,<.^"]
-|===
-a|image::{imagedir}/browserguide2.png[Neo4j Browser Guide,width=500,align=center]
-a|
+[.is-half.left]
+--
+image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
+--
+
+[.is-half.right]
+--
 Neo4j Browser Guides are documents that embed text, images, and Cypher queries inside Neo4j Browser in a carousel-like series of slides. We use Neo4j Browser Guides to show how to use graph algorithms in Cypher and Neo4j. Each module will have a browser guide to help "guide" you through the content.
-|===
+--
 
 You can access the guides for this course by running this command in Neo4j Browser. This command is already set up for you in the Yelp Sandbox you will be using for this course.
 
@@ -45,23 +41,29 @@ You can access the guides for this course by running this command in Neo4j Brows
 
 == The Neo4j Graph Data Science Plugin
 
-[frame="none", cols="^.^,<.^"]
-|===
-a|image::{imagedir}/gdsplugin.png[Neo4j Graph Data Science plugin,width=500,align=center]
-a|
+[.is-half.left]
+--
+image::gdsplugin.png[Neo4j Graph Data Science plugin,width=500,align=center]
+--
+
+[.is-half.right]
+--
 The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Plugin. The plugin implements four types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity. The first three are classic graph algorithms and the fourth can be used on its own or in combination with the other three.
-|===
+--
 
 This plugin is available in the Yelp Sandbox you use for this course, so you need not install it.
 
 == CodeSandbox React Application
 
-[frame="none", cols="^.^,<.^"]
-|===
-a|image::{imagedir}/codesandbox2.png[CodeSandbox,width=500,align=center]
-a|
+[.is-half.left]
+--
+image::codesandbox2.png[CodeSandbox,width=500,align=center]
+--
+
+[.is-half.right]
+--
 Since this an applied course, we want to see how to enhance features of an actual application. You will use an existing React application for this part of the course. CodeSandbox is a hosted environment that allows you to edit, run, and preview JavaScript applications, all in the browser.
-|===
+--
 
 This CodeSandbox contains all the client code for the application that you will build. You will want to have CodeSandbox open in another tab as you work through the application for each module of this course.
 
@@ -129,34 +131,38 @@ If you get stuck, watch this video to see how it all fits together.
 ++++
 _Overview of the application and connecting it to your Neo4j Sandbox instance_
 
-[#module-1.quiz]
+[.quiz]
 == Check your understanding
 === Question 1
 
 === Verify your CodeSandbox React application is connected to Neo4j Sandbox
 
+[.statement]
 Which of the following users appear in the User Profile dropdown?
 
 Select the correct answers.
-[%interactive]
-- [ ] [.false-answer]#Bob Loblaw#
-- [ ] [.false-answer]#William#
-- [ ] [.required-answer]#Dolores#
-- [ ] [.required-answer]#PrincessCandyEmpire#
+[%interactive.answers]
+- [ ] Bob Loblaw
+- [ ] William
+- [x] Dolores
+- [x] PrincessCandyEmpire
 
 === Question 2
 === Cypher refresher
 
+[.statement]
 Using the Neo4j Browser for your Yelp Neo4j Sandbox instance write a Cypher query to find all the businesses connected to the Category "Breweries". How many breweries are there in the dataset?
 
+[.statement]
 Select the correct answer.
-[%interactive]
-- [ ] [.false-answer]#10#
-- [ ] [.required-answer]#38#
-- [ ] [.false-answer]#1142#
-- [ ] [.false-answer]#27455#
 
+[%interactive.answers]
+- [ ] 10
+- [x] 38
+- [ ] 1142
+- [ ] 27455
 
+[.summary]
 == Summary
 
 You should now have:
@@ -166,23 +172,3 @@ You should now have:
 * Completed the Cypher Refresher section in the Neo4j Browser Guide.
 * Opened the businesses reviews application in CodeSandbox.
 * Connected your React CodeSandbox application to your Neo4j Sandbox instance.
-
-
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-2/">Continue to Module 2</a>
-++++
-
-ifdef::backend-html5[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-applied-algos-view-part1');
-});
-</script>
-++++
-
-endif::backend-html5[]
-
-
