@@ -1,29 +1,19 @@
 = Category Hierarchy
-:presenter: Neo4j
-:twitter: neo4j
-:email: info@neo4j.com
-:neo4j-version: 3.5
-:currentyear: 2019
+:slug: 00-gdsaa-category-hierarchy
 :doctype: book
 :toc: left
-:toclevels: 3
-:nextsecttitle: Ordering Search Results
-:prevsecttitle: Setup and Cypher Refresher
-:nextsect: 3
-:currsect: 2
-:prevsect: 1
-:experimental:
-:imagedir: ../images
-:manual: http://neo4j.com/docs/operations-manual/3.5
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Ordering Search Results
 
-video::gHn-F7gQ3dc[youtube,width=560,height=315]
+video::N5LoaXY1Ip0[youtube,width=560,height=315]
 
 _Category Hierarchy Algorithm Overview_
 
 In this module, you will improve navigation for business categories.
 Let's first have a look at the part of the application that you will enhance.
 
-image::{imagedir}/codesandbox3.png[,width=700,align=center]
+image::codesandbox3.png[,width=700,align=center]
 
 We can search for businesses by name and category, but at the moment we have a list of over 100 categories to choose from!
 One way that we could make things easier for our user is if we let them navigate a taxonomy of categories, starting at the top-level. To do this we'll use the Overlap Similarity algorithm to identify a category hierarchy in the data. We'll need to run the algorithm and make some updates to our data in Neo4j, then update the query used in the application to populate the category drop-down.
@@ -60,65 +50,58 @@ If you get stuck, watch this video for a walk-through of the solution:
 ++++
 _Category Hierarchy exercise solution_
 
-[#module-2.quiz]
+[.quiz]
 == Check your understanding
 === Question 1
 
 === Algorithm Understanding: Overlap Similarity
 
+[.statement]
 Which of the following best describes what the Overlap Similarity algorithm computes?
 
+[.statement]
 Select the correct answer.
-[%interactive]
-- [ ] [.required-answer]#The size of the intersection divided by the size of the smaller of the two sets#
-- [ ] [.false-answer]#The number of pairwise disagreements between two ranking lists#
-- [ ] [.false-answer]#The size of the intersection divided by the size of the union of two sets#
-- [ ] [.false-answer]#The minimum number of operations required to transform one string into the other#
+
+[%interactive.answers]
+- [x] The size of the intersection divided by the size of the smaller of the two sets
+- [ ] The number of pairwise disagreements between two ranking lists
+- [ ] The size of the intersection divided by the size of the union of two sets
+- [ ] The minimum number of operations required to transform one string into the other
 
 === Question 2
 
 === Running the algorithm in Neo4j
 
+[.statement]
 Which of the following parameters can be used to control the threshold for overlap similarity?
 
+[.statement]
 Select the correct answer.
-[%interactive]
-- [ ] [.false-answer]#degreeCutoff#
-- [ ] [.required-answer]#similarityCutoff#
-- [ ] [.false-answer]#minimumSimilarity#
-- [ ] [.false-answer]#topK#
+
+[%interactive.answers]
+- [ ] degreeCutoff
+- [x] similarityCutoff
+- [ ] minimumSimilarity
+- [ ] topK
 
 === Question 3
 === Matching Results
 
+[.statement]
 Which of these categories are top-level categories i.e. they don't have any outgoing `NARROWER_THAN` relationships?
 
+[.statement]
 Select the correct answers.
-[%interactive]
-- [ ] [.required-answer]#Shopping#
-- [ ] [.false-answer]#Wine Bars#
-- [ ] [.false-answer]#Doctors#
-- [ ] [.required-answer]#Local Flavor#
 
+[%interactive.answers]
+- [x] Shopping
+- [ ] Wine Bars
+- [ ] Doctors
+- [x] Local Flavor
+
+[.summary]
 == Summary
 
 You should now be able to:
 [square]
 * Use the Overlap Similarity graph algorithm.
-
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-3/">Continue to Module 3</a>
-++++
-
-ifdef::backend-html5[]
-++++
-<script>
-$( document ).ready(function() {
-  Intercom('trackEvent','training-applied-algos-view-part2');
-});
-</script>
-++++
-
-endif::backend-html5[]
