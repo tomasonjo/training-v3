@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Applied Graph Algorithms With GDSL
+:module-next-title: Summary: Applied Graph Data Science for Web Applications
 
 video::DQ7fH0QUg6A[youtube,width=560,height=315]
 

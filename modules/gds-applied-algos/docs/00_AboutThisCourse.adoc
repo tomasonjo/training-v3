@@ -1,4 +1,4 @@
-= Applied Graph Algorithms with GDSL for Neo4j
+= Applied Graph Data Science for Web Applications
 :slug: 00-gdsaa-about-this-course
 :doctype: book
 :toc: left
