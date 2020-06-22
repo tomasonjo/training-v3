@@ -116,3 +116,5 @@ LIMIT 10
 Now that we've computed relationships between categories, let's go back to the CodeSandbox and update the application to only return top level categories.
 
 NOTE: Top level categories don't have an outgoing `NARROWER_THAN` relationship.
+
+pass:a[<a play-topic='{uri-base-exercises}/03.html'>Continue to Exercise 3: Ordering Search Results</a>]

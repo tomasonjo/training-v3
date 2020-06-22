@@ -110,3 +110,5 @@ LIMIT 10
 ----
 
 Now let's go back to our application and use these clusters to make business recommendations.
+
+After you perform the steps described in the course for the application, you are done. Congratulations!

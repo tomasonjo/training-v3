@@ -57,3 +57,5 @@ ORDER BY similarity DESC
 
 Now let's update the application to use this new information.
 Instead of selecting our businesses based on the opinions of users unrelated to `user-name`, we'll show ones reviewed by similar users.
+
+pass:a[<a play-topic='{uri-base-exercises}/05.html'>Continue to Exercise 5: Photo Recommendations</a>]
