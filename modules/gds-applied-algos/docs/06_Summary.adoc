@@ -1,4 +1,4 @@
-= Summary: Applied Graph Algorithms With GDSL
+= Summary: Applied Graph Data Science for Web Applications
 :slug: 00-gdsaa-summary
 :doctype: book
 :toc: left
