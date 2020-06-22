@@ -17,7 +17,7 @@ plugins {
   id 'org.asciidoctor.jvm.revealjs' version '3.1.0' apply false
   id 'org.kordamp.gradle.livereload' version '0.2.1' apply false
   id 'com.neo4j.gradle.wordpress.WordPressPlugin' version '0.0.4' apply false
-  id 'com.neo4j.gradle.s3.S3Plugin' version '0.1.0' apply false
+  id 'com.neo4j.gradle.s3.S3Plugin' version '0.1.1' apply false
 }
 
 subprojects {
@@ -98,7 +98,6 @@ subprojects {
 
   asciidoctorj {
     gemPaths "${rootProject.buildDir}/.asciidoctorGems"
-    requires "${rootProject.projectDir}/resources/extensions.rb"
     attributes 'allow-uri-read': '',
       'stage': stage != null ? stage : '',
       'source-highlighter': 'rouge',
@@ -153,7 +152,6 @@ subprojects {
 
     inputs.dir "${rootProject.projectDir}/resources/templates"
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates"]
       attributes 'imagesdir': 'images',
@@ -179,12 +177,101 @@ subprojects {
     }
   }
 
+  afterEvaluate { Project project ->
+    if (project.hasProperty("browserGuides")) {
+      task convertBrowserGuideHtml(type: AsciidoctorTask) {
+        dependsOn asciidoctorGemsPrepare
+
+        inputs.dir "${rootProject.projectDir}/resources/templates/browser-guide"
+
+        asciidoctorj {
+          options template_dirs: ["${rootProject.projectDir}/resources/templates/browser-guide"]
+          attributes 'imagesdir': "https://guides.neo4j.com/${project.name}/images",
+            'allow-uri-read': '',
+            'guides': "https://guides.neo4j.com/${project.name}",
+            'icons': 'font',
+            'current': "https://guides.neo4j.com/${project.name}",
+            'csv-url': "https://guides.neo4j.com/${project.name}",
+            'leveloffset': '+1',
+            'env-guide': '',
+            'env-training': '',
+            'guide': '',
+            'sectanchors': ''
+        }
+
+        resources {
+          from("${projectDir}/images") {
+            include '**'
+            into 'images'
+          }
+        }
+
+        baseDir file("${projectDir}/docs")
+        sourceDir file("${projectDir}/docs")
+        outputDir file("${projectDir}/build/browser-guide")
+      }
+
+      if (new File("${projectDir}/images").exists()) {
+        if (stage == 'production') {
+          task s3UploadContent(type: S3UploadTask) {
+            dependsOn convertBrowserGuideHtml
+
+            //overwrite = true
+            source = "${projectDir}/build/browser-guide"
+            bucket = "guides.neo4j.com/${project.name}"
+            destination = ""
+            acl.set(CannedAccessControlList.PublicRead)
+          }
+        }
+      }
+    } else {
+      if (new File("${projectDir}/images").exists()) {
+        if (stage == 'production') {
+          task s3UploadImages(type: S3UploadTask) {
+            //overwrite = true
+            source = "${projectDir}/images"
+            bucket = "dev.assets.neo4j.com"
+            destination = "course/${project.name}/images"
+            acl.set(CannedAccessControlList.PublicRead)
+          }
+        } else if (stage == 'testing') {
+          task s3UploadImages(type: S3UploadTask) {
+            //overwrite = true
+            source = "${projectDir}/images"
+            bucket = "dev.assets.neo4j.com"
+            destination = "test-course/${project.name}/images"
+            acl.set(CannedAccessControlList.PublicRead)
+          }
+        }
+      }
+
+      if (stage == 'production' || stage == 'testing') {
+        task wordPressUploadCourse(type: WordPressUploadTask) {
+          dependsOn convertOnlineHtml
+          source = convertOnlineHtml.outputs.files
+          type = "course"
+          status = stage == 'production' ? "publish" : "private"
+        }
+        task wordPressUploadEnrollment(type: WordPressUploadTask) {
+          dependsOn convertEnrollmentHtml
+          source = convertEnrollmentHtml.outputs.files
+          type = "page"
+          status = stage == 'production' ? "publish" : "private"
+          template = "page-inner-100-mkto.php"
+        }
+        task wordPressUpload {
+          dependsOn wordPressUploadCourse
+          dependsOn wordPressUploadEnrollment
+        }
+      }
+    }
+  }
+
   task convertOnlineHtml(type: AsciidoctorTask) {
     dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
 
     inputs.dir "${rootProject.projectDir}/resources/templates/course"
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
       def imagesdir = {
         switch (stage) {
@@ -196,6 +283,7 @@ subprojects {
             return './images'
         }
       }
+      requires "${rootProject.projectDir}/resources/extensions.rb"
       options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
       attributes 'imagesdir': imagesdir,
         'sectanchors': '',
@@ -224,8 +312,8 @@ subprojects {
 
     inputs.dir "${rootProject.projectDir}/resources/templates/enrollment"
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
+      requires "${rootProject.projectDir}/resources/extensions.rb"
       options template_dirs: ["${rootProject.projectDir}/resources/templates/enrollment"]
       attributes 'parent-path': '/graphacademy/online-training',
         'document-metadata-attrs-include': 'author,slug,parent-path',
@@ -253,8 +341,8 @@ subprojects {
       theme = 'white'
     }
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
+      requires "${rootProject.projectDir}/resources/extensions.rb"
       options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
       // for no transition between slides add this line after imagesdir:
       // 'revealjs_transition': 'none',
@@ -306,8 +394,8 @@ subprojects {
 
     inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
+      requires "${rootProject.projectDir}/resources/extensions.rb"
       modules.pdf.version '1.5.2'
       attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
         'imagesdir': '../images'
@@ -373,8 +461,8 @@ subprojects {
 
     inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
+      requires "${rootProject.projectDir}/resources/extensions.rb"
       inProcess 'IN_PROCESS'
       modules.pdf.version '1.5.2'
       attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
@@ -398,8 +486,8 @@ subprojects {
       theme = 'white'
     }
 
-    //noinspection GroovyAccessibility,GroovyAssignabilityCheck
     asciidoctorj {
+      requires "${rootProject.projectDir}/resources/extensions.rb"
       options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
       attributes 'revealjs_customtheme': 'themes/reveal.css',
         'imagesdir': 'images',
@@ -449,46 +537,6 @@ subprojects {
 
   task liveReload(type: LiveReloadTask) {
     docRoot "${projectDir}/build"
-  }
-
-  if (new File("${projectDir}/images").exists()) {
-    if (stage == 'production') {
-      task s3UploadImages(type: S3UploadTask) {
-        //overwrite = true
-        source = "${projectDir}/images"
-        bucket = "dev.assets.neo4j.com"
-        destination = "course/${project.name}/images"
-        acl.set(CannedAccessControlList.PublicRead)
-      }
-    } else if (stage == 'testing') {
-      task s3UploadImages(type: S3UploadTask) {
-        //overwrite = true
-        source = "${projectDir}/images"
-        bucket = "dev.assets.neo4j.com"
-        destination = "test-course/${project.name}/images"
-        acl.set(CannedAccessControlList.PublicRead)
-      }
-    }
-  }
-
-  if (stage == 'production' || stage == 'testing') {
-    task wordPressUploadCourse(type: WordPressUploadTask) {
-      dependsOn convertOnlineHtml
-      source = convertOnlineHtml.outputs.files
-      type = "course"
-      status = stage == 'production' ? "publish" : "private"
-    }
-    task wordPressUploadEnrollment(type: WordPressUploadTask) {
-      dependsOn convertEnrollmentHtml
-      source = convertEnrollmentHtml.outputs.files
-      type = "page"
-      status = stage == 'production' ? "publish" : "private"
-      template = "page-inner-100-mkto.php"
-    }
-    task wordPressUpload {
-      dependsOn wordPressUploadCourse
-      dependsOn wordPressUploadEnrollment
-    }
   }
 
   task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
