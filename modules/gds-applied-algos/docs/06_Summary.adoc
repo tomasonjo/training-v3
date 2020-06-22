@@ -1,5 +1,5 @@
 = Summary: Applied Graph Data Science for Web Applications
-:slug: 00-gdsaa-summary
+:slug: 06-gdsaa-summary
 :doctype: book
 :toc: left
 :toclevels: 4

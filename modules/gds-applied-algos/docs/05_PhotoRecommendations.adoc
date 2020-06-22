@@ -1,5 +1,5 @@
 = Photo Based Gallery Recomendations
-:slug: 00-gdsaa-photo-based-gallery-recommendations
+:slug: 05-gdsaa-photo-based-gallery-recommendations
 :doctype: book
 :toc: left
 :toclevels: 4

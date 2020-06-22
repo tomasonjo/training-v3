@@ -1,5 +1,5 @@
 = Category Hierarchy
-:slug: 00-gdsaa-category-hierarchy
+:slug: 02-gdsaa-category-hierarchy
 :doctype: book
 :toc: left
 :toclevels: 4

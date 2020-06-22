@@ -1,5 +1,5 @@
 = Ordering Search Results
-:slug: 00-gdsaa-ordering-search-results
+:slug: 03-gdsaa-ordering-search-results
 :doctype: book
 :toc: left
 :toclevels: 4
