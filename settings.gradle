@@ -36,3 +36,6 @@ project(':gds-applied-algos').projectDir = file('modules/gds-applied-algos')
 
 include '4.0-intro-graph-algos'
 project(':4.0-intro-graph-algos').projectDir = file('modules/4.0-intro-graph-algos')
+
+include 'gds-applied-algos-exercises'
+project(':gds-applied-algos-exercises').projectDir = file('modules/gds-applied-algos-exercises')

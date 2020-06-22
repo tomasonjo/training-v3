@@ -1,0 +1,18 @@
+= Applied Graph Data Science for Web Applications
+:uri-base-exercises: https://guides.neo4j.com/gds-applied-algos-exercises
+
+== Applied Graph Data Science for Web Applications
+
+. pass:a[<a play-topic='{uri-base-exercises}/01.html'>Cypher Refresher</a>]
+. pass:a[<a play-topic='{uri-base-exercises}/02.html'>Category Hierarchy</a>]
+. pass:a[<a play-topic='{uri-base-exercises}/03.html'>Search Results</a>]
+. pass:a[<a play-topic='{uri-base-exercises}/04.html'>Relevant Reviews</a>]
+. pass:a[<a play-topic='{uri-base-exercises}/05.html'>Photo Recommendations</a>]
+
+== Further Resources
+
+* http://neo4j.com/graphgists[Graph Gist Examples]
+* http://neo4j.com/docs/stable/cypher-refcard/[Cypher Reference Card]
+* http://neo4j.com/docs/developer-manual/current/#cypher-query-lang[Neo4j Developer Manual]
+* http://neo4j.com/developer/resources#_neo4j_cypher_resources[Cypher Resource Collection]
+* http://graphdatabases.com[e-book: Graph Databases (free)]
