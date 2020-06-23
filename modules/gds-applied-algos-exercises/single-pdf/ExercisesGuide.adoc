@@ -1,4 +1,9 @@
 = Applied Graph Data Science for Web Applications
+:doctype: book
+:toclevels: 4
+:guides: https://guides.neo4j.com/gds-applied-algos-exercises
+:includedir: ../docs
+:toc:
 
 == Applied Graph Data Science for Web Applications
 
@@ -6,13 +11,11 @@ Graph algorithms are used to compute metrics for graphs, nodes, or relationships
 They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).
 In this course you will learn how to use Neo4j's Graph Data Science library to enhance your graph based applications.
 
-Here are the exercises you perform for this course:
-
-. pass:a[<a play-topic='{guides}/01.html'>Cypher Refresher</a>]
-. pass:a[<a play-topic='{guides}/02.html'>Category Hierarchy</a>]
-. pass:a[<a play-topic='{guides}/03.html'>Search Results</a>]
-. pass:a[<a play-topic='{guides}/04.html'>Relevant Reviews</a>]
-. pass:a[<a play-topic='{guides}/05.html'>Photo Recommendations</a>]
+include::{includedir}/01.adoc[leveloffset=+1]
+include::{includedir}/02.adoc[leveloffset=+1]
+include::{includedir}/03.adoc[leveloffset=+1]
+include::{includedir}/04.adoc[leveloffset=+1]
+include::{includedir}/05.adoc[leveloffset=+1]
 
 == Further Resources
 
@@ -21,7 +24,3 @@ Here are the exercises you perform for this course:
 * http://neo4j.com/docs/developer-manual/current/#cypher-query-lang[Neo4j Developer Manual]
 * http://neo4j.com/developer/resources#_neo4j_cypher_resources[Cypher Resource Collection]
 * http://graphdatabases.com[e-book: Graph Databases (free)]
-
-ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/01.html'>Continue to Exercise 1: Cypher Refresher</a>]
-endif::[]

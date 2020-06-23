@@ -117,4 +117,6 @@ Now that we've computed relationships between categories, let's go back to the C
 
 NOTE: Top level categories don't have an outgoing `NARROWER_THAN` relationship.
 
-pass:a[<a play-topic='{uri-base-exercises}/03.html'>Continue to Exercise 3: Ordering Search Results</a>]
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/03.html'>Continue to Exercise 3: Ordering Search Results</a>]
+endif::[]

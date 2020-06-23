@@ -452,6 +452,8 @@ subprojects {
     if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpg') }.isEmpty()) {
       commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpg'
     }
+
+    commandLine 'echo'
   }
 
   /* single document */
