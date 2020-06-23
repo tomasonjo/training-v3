@@ -90,4 +90,6 @@ RETURN u {.*} AS user, collect({category: category.name, count: count})[..5] AS 
 
 Now that we're familiar with the data, let's go back to the Graph Academy Page and learn about Graph Data Science and the application that we're going to build.
 
-pass:a[<a play-topic='{uri-base-exercises}/02.html'>Continue to Exercise 2: Category Hierarchy</a>]
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/02.html'>Continue to Exercise 2: Category Hierarchy</a>]
+endif::[]

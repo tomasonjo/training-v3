@@ -120,4 +120,6 @@ ORDER BY score DESC
 Now let's update the application to use this new information.
 Instead of showing reviews based on the date they were written, we want to boost the reviews written by our trusted users.
 
-pass:a[<a play-topic='{uri-base-exercises}/04.html'>Continue to Exercise 4: Most Relevant Reviews</a>]
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/04.html'>Continue to Exercise 4: Most Relevant Reviews</a>]
+endif::[]
