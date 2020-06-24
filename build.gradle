@@ -184,14 +184,36 @@ subprojects {
 
         inputs.dir "${rootProject.projectDir}/resources/templates/browser-guide"
 
+        def baseUrl = {
+          switch (stage) {
+            case 'production':
+              return "https://guides.neo4j.com/${project.name}"
+            case 'preview':
+              return "http://localhost:35729/browser-guide"
+            default:
+              return "./${project.name}"
+          }
+        }
+
+        def imagesDir = {
+          switch (stage) {
+            case 'production':
+              return "https://guides.neo4j.com/${project.name}/images"
+            case 'preview':
+              return "http://localhost:35729/browser-guide/images"
+            default:
+              return "./${project.name}/images"
+          }
+        }
+
         asciidoctorj {
           options template_dirs: ["${rootProject.projectDir}/resources/templates/browser-guide"]
-          attributes 'imagesdir': "https://guides.neo4j.com/${project.name}/images",
+          attributes 'imagesdir': imagesDir,
             'allow-uri-read': '',
-            'guides': "https://guides.neo4j.com/${project.name}",
+            'guides': baseUrl,
             'icons': 'font',
-            'current': "https://guides.neo4j.com/${project.name}",
-            'csv-url': "https://guides.neo4j.com/${project.name}",
+            'current': baseUrl,
+            'csv-url': baseUrl,
             'leveloffset': '+1',
             'env-guide': '',
             'env-training': '',
