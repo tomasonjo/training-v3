@@ -216,7 +216,8 @@ subprojects {
           task s3UploadContent(type: S3UploadTask) {
             dependsOn convertBrowserGuideHtml
 
-            //overwrite = true
+            // uncomment this if you want to replace files in guides.neo4j.com
+            overwrite = true
             source = "${projectDir}/build/browser-guide"
             bucket = "guides.neo4j.com/${project.name}"
             destination = ""
