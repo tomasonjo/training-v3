@@ -98,4 +98,6 @@ In this exercise, you profiled the performance of a couple of queries and found 
 * Add an index to the `Airport.code` property.
 * Model a flight as a `Flight` node.
 
+ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/04.html'>Continue to Exercise 4</a>]
+endif::[]

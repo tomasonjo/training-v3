@@ -252,5 +252,6 @@ You also added the `ORIGINATES_FROM` and `LANDS_IN` relationships between `Fligh
 You profiled queries to confirm that the refactoring improved query performance.
 Finally, you deleted the `CONNECTED_TO` relationship.
 
-
+ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/05.html'>Continue to Exercise 5</a>]
+endif::[]

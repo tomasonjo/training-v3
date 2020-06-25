@@ -146,5 +146,6 @@ If the graph had more data (more data for more days), we would probably see an i
 
 In the next exercise, you will load even more data in to the graph.
 
+ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/07.html'>Continue to Exercise 7</a>]
-
+endif::[]

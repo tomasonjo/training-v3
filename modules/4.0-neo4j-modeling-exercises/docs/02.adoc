@@ -232,4 +232,6 @@ image::Ex2_WN1016.png[Ex2_WN1016,width=600]
 In this exercise, you added more data to the graph representing more airports and 1000 connections between them (flights).
 This graph is still small, but it has enough data that we can start to examine the performance of queries to determine if we can evolve the model (refactor) to yield better query performance.
 
+ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/03.html'>Continue to Exercise 3</a>]
+endif::[]

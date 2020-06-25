@@ -252,5 +252,6 @@ In this exercise, you refactored the nodes and relationships in the graph for a 
 You created the `AirportDay` node from `Flight` and `Airport` nodes so that a date-specfic query will perform better.
 Then, you profiled queries to confirm that they perform better with the refactored graph.
 
+ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/06.html'>Continue to Exercise 6</a>]
-
+endif::[]
