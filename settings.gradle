@@ -39,3 +39,6 @@ project(':4.0-intro-graph-algos').projectDir = file('modules/4.0-intro-graph-alg
 
 include 'gds-applied-algos-exercises'
 project(':gds-applied-algos-exercises').projectDir = file('modules/gds-applied-algos-exercises')
+
+include '4.0-neo4j-modeling-exercises'
+project(':4.0-neo4j-modeling-exercises').projectDir = file('modules/4.0-neo4j-modeling-exercises')
