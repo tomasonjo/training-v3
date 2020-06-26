@@ -28,17 +28,25 @@ subprojects {
   apply plugin: WordPressPlugin
   apply plugin: AsciidoctorModuleDescriptorPlugin
 
-  dependencies {
-    asciidoctorGems 'rubygems:rouge:3.18.0'
-    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
+  configurations {
+    asciidoctorgoogleslides
   }
 
   repositories {
     mavenCentral()
+    maven {
+      url "https://dl.bintray.com/mogztter/io.github.mogztter"
+    }
     jcenter()
     ruby {
       gems()
     }
+  }
+
+  dependencies {
+    asciidoctorGems 'rubygems:rouge:3.18.0'
+    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
+    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.6")
   }
 
   def stage = project.findProperty('stage')
@@ -579,6 +587,26 @@ subprojects {
       }
     }
   }
+
+  // beta!
+  task convertGoogleSlides(type: AsciidoctorTask) {
+    dependsOn asciidoctorGemsPrepare
+
+    asciidoctorj {
+      // must be a web accessible location
+      attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/"
+    }
+
+    inProcess "IN_PROCESS"
+    baseDirFollowsSourceDir()
+    sourceDir file("${projectDir}/single-slides")
+    outputDir file("${projectDir}/build/google-slides")
+    outputOptions {
+      backends = ["googleslides"]
+    }
+  }
+
+  convertGoogleSlides.configurations 'asciidoctorgoogleslides'
 
   task convert {
     dependsOn convertOnlineHtml
