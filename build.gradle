@@ -466,17 +466,21 @@ subprojects {
 
     workingDir "${projectDir}/images"
 
+    def commandsArgs = []
     if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.png') }.isEmpty()) {
-      commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.png'
+      commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.png'])
     }
     if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpeg') }.isEmpty()) {
-      commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpeg'
+      commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpeg'])
     }
     if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpg') }.isEmpty()) {
-      commandLine 'mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpg'
+      commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpg'])
     }
+    commandsArgs.push(['echo'])
 
-    commandLine 'echo'
+    for (commandArgs in commandsArgs) {
+      commandLine commandArgs
+    }
   }
 
   /* single document */
