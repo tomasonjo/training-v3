@@ -5,22 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 
-[.quiz]
-== Quiz Results
-++++
-<span id="quizes-result"></span>
-++++
-
-== Course Completion Certificate
-++++
-<span id="cert-result"></span>
-++++
-
-[.summary]
 == Course Summary
 
 In this course, you have learned how to use the:
-
 
 [square]
 * Pearson Similarity graph algorithm
@@ -28,6 +15,13 @@ In this course, you have learned how to use the:
 * Jaccard similarity algorithm
 * Label Propagation Community Detection algorithm
 
+ifndef::backend-revealjs[]
 == Course feedback
 
 We want your feedback on this course. Please provide your https://forms.gle/retKeTdE8kvKc3jK6[feedback] so we can improve this course.
+endif::[]
+
+ifndef::backend-revealjs,backend-pdf[]
+[.certificate]
+== Certificate
+endif::[]

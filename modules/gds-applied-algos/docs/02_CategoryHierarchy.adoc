@@ -28,16 +28,19 @@ One way that we could make things easier for our user is if we let them navigate
 . In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. Is the list of categories smaller?
 
 [NOTE]
+--
+Remember, you only need to edit the Cypher query in `src/exercises/exercise1.js`, not any other code in the application.
+
+In your new query, be sure to keep the same return structure, or otherwise the client application might not be able to interpret that data.
+--
+
 ====
 .Useful Resources
 
 * https://neo4j.com/docs/graph-data-science/current/alpha-algorithms/overlap/[Overlap Similarity^]
-
-.Tips
-
-* Remember, you only need to edit the Cypher query in `src/exercises/exercise1.js`, not any other code in the application.
-* In your new query, be sure to keep the same return structure, or otherwise the client application might not be able to interpret that data.
 ====
+
+
 
 == Solution
 
@@ -54,8 +57,6 @@ _Category Hierarchy exercise solution_
 == Check your understanding
 === Question 1
 
-=== Algorithm Understanding: Overlap Similarity
-
 [.statement]
 Which of the following best describes what the Overlap Similarity algorithm computes?
 
@@ -70,8 +71,6 @@ Select the correct answer.
 
 === Question 2
 
-=== Running the algorithm in Neo4j
-
 [.statement]
 Which of the following parameters can be used to control the threshold for overlap similarity?
 
@@ -85,7 +84,6 @@ Select the correct answer.
 - [ ] topK
 
 === Question 3
-=== Matching Results
 
 [.statement]
 Which of these categories are top-level categories i.e. they don't have any outgoing `NARROWER_THAN` relationships?

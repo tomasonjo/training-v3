@@ -13,9 +13,9 @@ In this course you will learn how to use Neo4j's Graph Data Science library to e
 We will start with an existing web application (a simple business reviews website written in React.js) populated with data from the Yelp public dataset in Neo4j. We then work to enhance the existing functionality of the application using graph algorithms.
 
 [NOTE]
-====
+--
 Don't worry if you're not familiar with React or web development in general, to enhance our application we'll just be changing the Cypher queries used by the already existing application. But feel free to modify the application if you'd like to add more advanced features!
-====
+--
 
 video::32-FYC07-dU[youtube,width=560,height=315]
 
@@ -81,5 +81,6 @@ Estimated time: _10 minutes_
 This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
 
 * Have completed Introduction to Neo4j course or have equal Cypher proficiency.
+* Have a GitHub account as you will need it to log in to CodeSandbox.
 * Be familiar with Neo4j Browser.
 * Be familiar with the concepts of a web application.

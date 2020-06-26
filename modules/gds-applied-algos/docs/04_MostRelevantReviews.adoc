@@ -15,17 +15,9 @@ In this section you will use the Personalized PageRank algorithm to identify "tr
 
 image::codesandbox5.png[,width=700,align=center]
 
-
-[NOTE]
-====
-.Useful Resources
-
-* https://neo4j.com/docs/graph-data-science/current/algorithms/similarity/[Similarity Algorithms^]
-====
-
 == Exercise
 
-. In Neo4j Browser, perform the steps in the Neo4j Browser guide section *Relevant Reviews*. (:play gds-applied-graph-algorithms-exercises/04_relevant_reviews.html)
+. In Neo4j Browser, perform the steps in the Neo4j Browser guide section *Relevant Reviews*. (:play gds-applied-graph-algos-exercises/04_relevant_reviews.html)
 . In CodeSandbox, edit the Cypher query in `src/exercises/exercise3.js` to return reviews ordered by whether or not the business has been reviewed by a "trusted" user.
 . Save this file.
 . In CodeSandbox Browser:
@@ -33,6 +25,13 @@ image::codesandbox5.png[,width=700,align=center]
 .. Select the *Restaurant* category.
 .. In the search pane, specify the string *Mamma* for the name of the restaurant. This will search for restaurants that start with that name and have reviews that are  most relevant to the user. The remaining reviews are in chronological order.
 .. You can select a restaurant to see the reviews.
+
+
+====
+.Useful Resources
+
+* https://neo4j.com/docs/graph-data-science/current/algorithms/similarity/[Similarity Algorithms^]
+====
 
 == Solution
 
@@ -49,8 +48,6 @@ _Most relevant reviews exercise solution_
 == Check your understanding
 === Question 1
 
-=== Algorithm Understanding: Personalized PR
-
 [.statement]
 Which of the following best describe the Personalized PageRank algorithm?
 
@@ -64,7 +61,6 @@ Select the correct answer.
 - [ ] It is a variation of the PageRank algorithm that reduces the bias that PageRank has towards assigning higher scores to nodes with relationships from nodes that have few outgoing relationships.
 
 === Question 2
-=== Running the algorithm in Neo4j
 
 [.statement]
 What is the default value of the `dampingFactor` used by the PageRank procedure?

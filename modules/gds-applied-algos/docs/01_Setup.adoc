@@ -32,11 +32,11 @@ image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
 Neo4j Browser Guides are documents that embed text, images, and Cypher queries inside Neo4j Browser in a carousel-like series of slides. We use Neo4j Browser Guides to show how to use graph algorithms in Cypher and Neo4j. Each module will have a browser guide to help "guide" you through the content.
 --
 
-You can access the guides for this course by running this command in Neo4j Browser. This command is already set up for you in the Yelp Sandbox you will be using for this course.
+You can access the guides for this course by running this command in Neo4j Browser.
 
 [source,cypher]
 ----
-:play gds-applied-graph-algorithms-exercises
+:play gds-applied-graph-algos-exercises
 ----
 
 == The Neo4j Graph Data Science Plugin
@@ -102,7 +102,7 @@ Your exercise for this module is to get all the tools up and running and talking
 . Create a https://sandbox.neo4j.com/?usecase=yelp[Yelp Neo4j Sandbox instance^].
     *Note*: You must log in to the Neo4j Sandbox site. This may require you to register with Neo4j.
 . In Yelp Sandbox you just created, click the *Open Neo4j Browser* button to open a Neo4j Browser for the Yelp database. You will be using this Neo4j Browser window throughout this course.
-. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play gds-applied-graph-algorithms-exercises), *Cypher Refresher*.
+. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play gds-applied-graph-algos-exercises), *Cypher Refresher*.
 . Open the https://codesandbox.io/s/github/neo4j-contrib/training-v2/tree/master/Courses/AppliedGraphAlgorithms/react-app[React application in CodeSandbox^]. This is the initial version of our business reviews application. You will be using this Code Sandbox window throughout this course.
 . In CodeSandbox:
 .. Sign in to CodeSandbox with your github credentials.
@@ -114,7 +114,7 @@ Your exercise for this module is to get all the tools up and running and talking
 .. Click the refresh icon to connect the CodeSandbox Browser (on the right) to the database.
 .. Confirm that you can now view data in the database by selecting a name in the drop down (initially selected with Dolores). Data should be retrieved for each user.
 
-[NOTE]
+
 ====
 .Useful Resources
 
@@ -123,7 +123,6 @@ Your exercise for this module is to get all the tools up and running and talking
 
 If you get stuck, watch this video to see how it all fits together.
 
-*Note*: The creation of the Yelp Sandbox has changed and you should use the link provided above for creating the Yelp Sandbox, as well as using the *Connection Details* information for the sandbox.
 ++++
 <div style="position: relative; overflow: hidden; padding-top: 56.25%; width: 90%;">
     <iframe src="https://www.youtube.com/embed/cG5oaywCTFg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>

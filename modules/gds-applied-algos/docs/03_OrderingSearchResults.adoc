@@ -20,14 +20,6 @@ image::codesandbox4.png[,width=700,align=center]
 
 Instead of showing results in alphabetical order you will modify the application to show the most relevant businesses first.
 
-[NOTE]
-====
-.Useful Resources
-
-* https://neo4j.com/docs/graph-data-science/current/management-ops/graph-catalog-ops/#catalog-graph-create[Graph Loading^]
-* https://neo4j.com/docs/graph-data-science/current/algorithms/page-rank/[PageRank^]
-====
-
 
 == Exercise
 
@@ -35,7 +27,7 @@ You will update the application to use this new information.
 
 Instead of selecting the reviews for our businesses based on the opinions of users unrelated to `user-name`, we'll show reviews written by similar users.
 
-. In Neo4j Browser, perform the steps in Neo4j Browser guide section *Search Results*. (:play gds-applied-graph-algorithms-exercises/03_search_results.html)
+. In Neo4j Browser, perform the steps in Neo4j Browser guide section *Search Results*. (:play gds-applied-graph-algos-exercises/03_search_results.html)
 . In CodeSandbox, edit the Cypher query in `src/exercises/exercise2.js` to return businesses.
 . Save this file.
 . In the CodeSandbox Browser, select a user from the *User Profile* drop down. This will set this user for the search.
@@ -43,12 +35,19 @@ Instead of selecting the reviews for our businesses based on the opinions of use
 . Select a different user and then search for pizza restaurants. You should see a different set of restaurants.
 
 [NOTE]
-====
+--
 This query should be be in the context of the currently "logged in" user in the application. Since our simple application doesn't have any authentication mechanism we fake this by choosing a user in the dropdown in the "User Profile" section of the application. The id of the currently logged in user will be available as a Cypher parameter `userId` in the query.
 
 So for example, to find the currently logged in user:
 
 `MATCH (me:User {id: $userId})`
+--
+
+====
+.Useful Resources
+
+* https://neo4j.com/docs/graph-data-science/current/management-ops/graph-catalog-ops/#catalog-graph-create[Graph Loading^]
+* https://neo4j.com/docs/graph-data-science/current/algorithms/page-rank/[PageRank^]
 ====
 
 == Solution
@@ -66,8 +65,6 @@ _Ordering search results solution_
 == Check your understanding
 === Question 1
 
-=== Algorithm Understanding: Pearson Similarity
-
 [.statement]
 Which of the following are valid values that can be returned by the Pearson Similarity algorithm?
 
@@ -81,7 +78,6 @@ Select the correct answers.
 - [x] -0.52
 
 === Question 2
-=== Running the algorithm in Neo4j
 
 [.statement]
 Which of the following are fields returned by the `gds.alpha.similarity.pearson.write` procedure?
