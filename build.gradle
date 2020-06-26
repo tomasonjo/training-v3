@@ -79,6 +79,9 @@ subprojects {
       case "4.0-implementing-graph-data-models":
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-igdm-40-implementing-graph-data-models-about/"
         break
+      case "gds-applied-algos":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}00-gdsaa-about-this-course/"
+        break
       default:
         "https://neo4j.com/"
     }

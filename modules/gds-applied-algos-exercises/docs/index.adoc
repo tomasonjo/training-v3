@@ -22,6 +22,8 @@ Here are the exercises you perform for this course:
 * http://neo4j.com/developer/resources#_neo4j_cypher_resources[Cypher Resource Collection]
 * http://graphdatabases.com[e-book: Graph Databases (free)]
 
+This Browser Guide is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/01.html'>Continue to Exercise 1: Cypher Refresher</a>]
 endif::[]

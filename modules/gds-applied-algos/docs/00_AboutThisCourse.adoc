@@ -84,3 +84,5 @@ This course focuses on using graph algorithms with Neo4j in an applied environme
 * Have a GitHub account as you will need it to log in to CodeSandbox.
 * Be familiar with Neo4j Browser.
 * Be familiar with the concepts of a web application.
+
+This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
