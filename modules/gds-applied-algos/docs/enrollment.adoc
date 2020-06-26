@@ -1,0 +1,29 @@
+= Applied Graph Data Science for Web Applications Online Course
+:slug: gds-applied-algos
+:description: Learn how to apply graph algorithms to enhance a Web application.
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/AppliedGDSForWebApps_withTitle.jpg[]
+
+== About the Course
+
+In this course you will learn how to use some graph algorithms in Neo4j.
+This course takes an applied approach - covering not just how to use the graph algorithms in Neo4j, but also how to leverage graph algorithms to enhance the functionality of a web application.
+
+
+== Prerequisites
+
+* Cypher programming.
+* JavaScript for Web applications programming experience.
+
+== Duration
+
+If you perform all of the hands-on exercises in this course, it will take you 4 hours to complete the course.
+
+== What you will learn
+
+* The Neo4j Graph Data Science Plugin
+* Personalized PageRank
+* Similarity metrics
+* Community detection
+* Using all of the above to add functionality in an application such as personalization, recommendations, and enhancing search results.</li>
+

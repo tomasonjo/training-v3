@@ -89,6 +89,7 @@ These are extra exercises that you can complete if you have more time, in order 
 
 == Exercises:
 
+ifdef::env-guide[]
 [cols=1, frame=none]
 |===
 | pass:a[<a play-topic='{guides}/01.html'>Exercise 1</a>] -- Getting started with the airport graph data model
@@ -99,3 +100,17 @@ These are extra exercises that you can complete if you have more time, in order 
 | pass:a[<a play-topic='{guides}/06.html'>Exercise 6</a>] -- Creating specific relationships
 | pass:a[<a play-topic='{guides}/07.html'>Exercise 7</a>] -- Refactoring large graphs
 |===
+endif::[]
+
+ifndef::env-guide[]
+[cols=1, frame=none]
+|===
+| Exercise 1 -- Getting started with the airport graph data model
+| Exercise 2 -- Loading airport data
+| Exercise 3 -- Profiling queries
+| Exercise 4 -- Creating the `Flight` node from the `CONNECTED_TO` relationship
+| Exercise 5 -- Creating the `AirportDay` node from the `Airport` and `Flight` nodes
+| Exercise 6 -- Creating specific relationships
+| Exercise 7 -- Refactoring large graphs
+|===
+endif::[]
