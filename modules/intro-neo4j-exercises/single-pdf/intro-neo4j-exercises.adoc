@@ -1,0 +1,26 @@
+= Introduction to Neo4j 4.0: Exercises
+:doctype: book
+:toclevels: 4
+:guides: https://guides.neo4j.com/intro-neo4j-exercises
+:includedir: ../docs
+:toc:
+
+== Introduction to Neo4j: Exercises
+
+include::{includedir}/index.adoc[leveloffset=+1]
+include::{includedir}/01.adoc[leveloffset=+1]
+include::{includedir}/02.adoc[leveloffset=+1]
+include::{includedir}/03.adoc[leveloffset=+1]
+include::{includedir}/04.adoc[leveloffset=+1]
+include::{includedir}/05.adoc[leveloffset=+1]
+include::{includedir}/06.adoc[leveloffset=+1]
+include::{includedir}/07.adoc[leveloffset=+1]
+include::{includedir}/08.adoc[leveloffset=+1]
+include::{includedir}/09.adoc[leveloffset=+1]
+include::{includedir}/10.adoc[leveloffset=+1]
+include::{includedir}/11.adoc[leveloffset=+1]
+include::{includedir}/12.adoc[leveloffset=+1]
+include::{includedir}/13.adoc[leveloffset=+1]
+include::{includedir}/14.adoc[leveloffset=+1]
+include::{includedir}/15.adoc[leveloffset=+1]
+include::{includedir}/16.adoc[leveloffset=+1]
