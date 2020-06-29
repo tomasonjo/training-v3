@@ -1,0 +1,19 @@
+= Implementing Graph Data Models in Neo4j: Exercises
+:doctype: book
+:toclevels: 4
+:guides: https://guides.neo4j.com/neo4j-modeling-exercises
+:includedir: ../docs
+:toc:
+
+== Implementing Graph Data Models in Neo4j: Exercises
+
+include::{includedir}/index.adoc[leveloffset=+1]
+include::{includedir}/01.adoc[leveloffset=+1]
+include::{includedir}/02.adoc[leveloffset=+1]
+include::{includedir}/03.adoc[leveloffset=+1]
+include::{includedir}/04.adoc[leveloffset=+1]
+include::{includedir}/05.adoc[leveloffset=+1]
+include::{includedir}/06.adoc[leveloffset=+1]
+include::{includedir}/07.adoc[leveloffset=+1]
+include::{includedir}/08.adoc[leveloffset=+1]
+include::{includedir}/09.adoc[leveloffset=+1]

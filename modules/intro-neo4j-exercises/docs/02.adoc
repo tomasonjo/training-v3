@@ -51,9 +51,7 @@ The result returned should be:
 [.thumb]
 image::MoviesReleased2003_Nodes.png[MoviesReleased2003_Nodes,width=500]
 
-++++
-<div style="clear: both;"></div>
-++++
+
 
 == Exercise 2.2: View the retrieved results as a table (Instructions)
 
@@ -68,10 +66,6 @@ You should see this table in the result pane:
 
 [.thumb]
 image::MoviesReleased2003_Table.png[MoviesReleased2003_Table,width=400]
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 2.2: View the retrieved results as a table (Taking it further- optional)
 
@@ -103,10 +97,6 @@ The result returned should be:
 [.thumb]
 image::call_db.PropertyKeys.png[call_db.PropertyKeys,width=600]
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 2.4: Retrieve all Movies released in a specific year, returning their titles (Instructions)
 
 Rather than returning the nodes that satisfy a query, you want to return data from the nodes.
@@ -128,11 +118,6 @@ The result returned should be:
 
 [.thumb]
 image::MoviesReleased2006_titles.png[MoviesReleased2006_titles,width=500]
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 2.4: Retrieve all Movies released in a specific year, returning their titles (Taking it further - optional)
 
@@ -163,12 +148,6 @@ The result returned should be:
 [.thumb]
 image::RetrieveTitleReleasedTagline.png[RetrieveTitleReleasedTagline,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 2.6: Display more user-friendly headers in the table (Instructions)
 
 *Modify the query you just ran so that the headings for the columns of the table returned are more descriptive.*
@@ -186,10 +165,6 @@ The result returned should be:
 
 [.thumb]
 image::UsingAliases.png[UsingAliases,width=600]
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 2: Filtering queries using property values (Summary)
 

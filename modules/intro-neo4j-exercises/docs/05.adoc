@@ -63,12 +63,6 @@ The result returned should be:
 [.thumb]
 image::GeneHackmanMoviesWithDirectorAndCoActors.png[GeneHackmanMoviesWithDirectorAndCoActors,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 5.2: Retrieve particular nodes that have a relationship (Instructions)
 
 Next, you will perform queries for data that is a variable number of hops away.
@@ -92,12 +86,6 @@ The result returned should be:
 
 [.thumb]
 image::JamesThompsonFollows.png[JamesThompsonFollows,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 5.3: Modify the query to retrieve nodes that are exactly three hops away (Instructions)
 
@@ -123,11 +111,6 @@ image::JamesThompson3Hops.png[JamesThompson3Hops,width=500]
 
 Notice here that the relationships between the nodes are not displayed because _James Thompson_ is not connected to _Paul Blythe_.
 
-++++
-<div style="clear: both;"></div>
-++++
-
-
 == Exercise 5.4: Modify the query to retrieve nodes that are one and two hops away (Instructions)
 
 *Modify the query to retrieve nodes that are one and two hops away.*
@@ -147,13 +130,6 @@ The result returned should be:
 
 [.thumb]
 image::JamesThompson1And2Hops.png[JamesThompson1And2Hops,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 5.5: Modify the query to retrieve particular nodes that are connected no matter how many hops are required (Instructions)
 
@@ -176,10 +152,6 @@ The result returned should be:
 [.thumb]
 image::JamesThompsonAllHops.png[JamesThompsonAllHops,width=500]
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 5.6: Specify optional data to be retrieved during the query (Instructions)
 
 *Write a Cypher query to retrieve all people in the graph whose name begins with _Tom_ and optionally retrieve all people named _Tom_ who directed a movie.*
@@ -200,12 +172,6 @@ The result returned should be:
 
 [.thumb]
 image::OptionalMatch.png[OptionalMatch,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 5.7: Retrieve nodes by collecting a list (Instructions)
 
@@ -229,12 +195,6 @@ The result returned should be:
 [.thumb]
 image::ActorMovies.png[ActorMovies,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 5.8: Retrieve all movies that _Tom Cruise_ has acted in and the co-actors that acted in the same movie by collecting a list (Instructions)
 
 *Retrieve all movies that _Tom Cruise_ has acted in and the co-actors that acted in the same movie, returning the movie title and the list of co-actors that _Tom Cruise_ worked with.*
@@ -254,12 +214,6 @@ The result returned should be:
 
 [.thumb]
 image::TomCruiseCoActors.png[TomCruiseCoActors,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 5.9: Retrieve nodes as lists and return data associated with the corresponding lists (Instructions)
 
@@ -282,12 +236,6 @@ The result returned should be:
 [.thumb]
 image::CountReviews.png[CountReviews,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 5.10: Retrieve nodes and their relationships as list (Instructions)
 
 *Retrieve all directors, their movies, and people who acted in the movies, returning the name of the director, the number of actors the director has worked with, and the list of actors.*
@@ -306,12 +254,6 @@ The result returned should be:
 
 [.thumb]
 image::CountActorsWhoWorkedWithDirectors.png[CountActorsWhoWorkedWithDirectors,width=700]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 5.11: Retrieve the actors who have acted in exactly five movies (Instructions)
 
@@ -336,11 +278,6 @@ The result returned should be:
 [.thumb]
 image::FiveMovies.png[FiveMovies,width=600]
 
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 5.12: Retrieve the movies that have at least 2 directors with other optional data (Instructions)
 
 *Retrieve the movies that have at least 2 directors, and optionally the names of people who reviewed the movies.*
@@ -362,12 +299,6 @@ The result returned should be:
 
 [.thumb]
 image::TopDirectorsAndReviewers.png[TopDirectorsAndReviewers,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 5: Controlling query processing (Summary)
 

@@ -53,12 +53,6 @@ The result returned should be:
 [.thumb]
 image::NinetiesMovies1.png[NinetiesMovies1,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 6.2: Modify the query to eliminate duplication (Instructions)
 
 *The results returned from the previous query include multiple rows for a movie released value. Next, modify the query so that the released date records returned are not duplicated. To implement this, you must add the collection of the movie titles to the results returned.*
@@ -78,11 +72,6 @@ The result returned should be:
 
 [.thumb]
 image::NinetiesMovies2.png[NinetiesMovies2,width=700]
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 6.3: Modify the query to eliminate more duplication. (Instructions)
 
@@ -104,12 +93,6 @@ The result returned should be:
 [.thumb]
 image::NinetiesMovies3.png[NinetiesMovies3,width=700]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 6.4: Sort results returned (Instructions)
 
 *Modify the query that you just wrote to order the results returned so that the more recent years are displayed first.*
@@ -130,12 +113,6 @@ The result returned should be:
 
 [.thumb]
 image::OrderBy.png[OrderBy,width=700]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 6.5: Retrieve the top 5 ratings and their associated movies (Instructions)
 
@@ -159,12 +136,6 @@ The result returned should be:
 [.thumb]
 image::Limit1.png[Limit1,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 6.6: Retrieve all actors that have not appeared in more than 3 movies (Instructions)
 
 *Retrieve all actors that have not appeared in more than 3 movies. Return their names and list of movies.*
@@ -185,12 +156,6 @@ The result returned should be:
 
 [.thumb]
 image::AtMost3MoviesPerActor.png[AtMost3MoviesPerActor,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 6: Controlling results returned (Summary)
 

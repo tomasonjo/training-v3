@@ -33,8 +33,6 @@ Here is the starting airport model with sample data:
 [.thumb]
 image::AirportModel-Ex1.png[AirportModel-Ex1,width=600]
 
-{nbsp} +
-
 *Write and execute the Cypher code to create the nodes and relationships for this simple airport model with sample data.*
 
 == Exercise 1.1: Implement the starting model containing `Airport` nodes  (Solution)

@@ -48,3 +48,9 @@ project(':4.0-intro-neo4j-exercises').projectDir = file('modules/4.0-intro-neo4j
 
 include 'intro-neo4j-exercises'
 project(':intro-neo4j-exercises').projectDir = file('modules/intro-neo4j-exercises')
+
+include 'neo4j-modeling-exercises'
+project(':neo4j-modeling-exercises').projectDir = file('modules/neo4j-modeling-exercises')
+
+include 'intro-graph-algos-exercises'
+project(':intro-graph-algos-exercises').projectDir = file('modules/intro-graph-algos-exercises')

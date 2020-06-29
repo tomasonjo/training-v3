@@ -58,12 +58,6 @@ The result returned should be:
 [.thumb]
 image::UsingLists.png[UsingLists,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 7.2: Collect a list (Instructions)
 
 *Write a Cypher query that retrieves all actors that acted in movies, and collects the list of movies for any actor that acted in more than five movies. Return the name of the actor and the list.*
@@ -92,10 +86,6 @@ image::ActorsWithMoreThan5Movies1.png[ActorsWithMoreThan5Movies1,width=700]
 In this view, we are examining the table view where we can see the actor name and the list of movies for each actor.
 The actors should be _Tom Hanks_ and _Keanu Reeves_.
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 7.3: Unwind a list (Instructions)
 
 *Modify the query you just wrote so that before the query processing ends, you unwind the list of movies and then return the name of the actor and the title of the associated movie*
@@ -120,12 +110,6 @@ The result returned should be:
 [.thumb]
 image::ActorsWithMoreThan5Movies2.png[ActorsWithMoreThan5Movies2,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 7.4: Perform a calculation with the date type (Instructions)
 
 *Write a query that retrieves all movies that _Tom Hanks_ acted in, returning the title of the movie, the year the movie was released, the number of years ago that the movie was released, and the age of _Tom_ when the movie was released.*
@@ -146,13 +130,6 @@ The result returned should be:
 
 [.thumb]
 image::AgeCalculations.png[AgeCalculations,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 7: Working with Cypher data (Summary)
 

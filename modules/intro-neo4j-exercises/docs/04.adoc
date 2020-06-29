@@ -67,12 +67,6 @@ The result returned should be:
 [.thumb]
 image::TomCruiseMovies.png[TomCruiseMovies,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.2: Retrieve all people that were born in the 70's (Instructions)
 
 *Retrieve all people that were born in the 70's and return their names and year born.*
@@ -92,12 +86,6 @@ The result returned should be:
 
 [.thumb]
 image::SeventiesActors.png[SeventiesActors,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 4.3: Retrieve the actors who acted in the movie _The Matrix_ who were born after 1960 (Instructions)
 
@@ -119,10 +107,6 @@ The result returned should be:
 [.thumb]
 image::MatrixYoungerActors.png[MatrixYoungerActors,width=600]
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.4: Retrieve all movies  by testing the node label and a property (Instructions)
 
 *Retrieve all movies  released in 2000 by testing the node label and the released property, returning the movie titles.*
@@ -143,12 +127,6 @@ The result returned should be:
 [.thumb]
 image::MatchMovies2000.png[MatchMovies2000,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.5: Retrieve all people that wrote movies by testing the relationship between two nodes (Instructions)
 
 *Retrieve all people that wrote movies by testing the relationship between two nodes, returning the names of the people and the titles of the movies.*
@@ -168,12 +146,6 @@ The result returned should be:
 
 [.thumb]
 image::MatchWritersWhere.png[MatchWritersWhere,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 4.6: Retrieve all people in the graph that do not have a property (Instructions)
 
@@ -197,12 +169,6 @@ The result returned should be:
 [.thumb]
 image::NoYearBorn.png[NoYearBorn,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.7: Retrieve all people related to movies where the relationship has a property (Instructions)
 
 You will write Cypher queries using a `WHERE` clause to test existence.
@@ -224,12 +190,6 @@ The result returned should be:
 
 [.thumb]
 image::RelationshipsWithRatings.png[RelationshipsWithRatings,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 4.8: Retrieve all actors whose name begins with _James_ (Instructions)
 
@@ -253,12 +213,6 @@ The result returned should be:
 [.thumb]
 image::ActorsNamedJames.png[ActorsNamedJames,width=500]
 
-The result returned should be:
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.9: Retrieve all _REVIEWED_ relationships from the graph with filtered results (Instructions)
 
 *Retrieve all _REVIEWED_ relationships from the graph where the _summary_ of the review contains the string _fun_, returning the movie title reviewed and the rating and summary of the relationship.*
@@ -280,12 +234,6 @@ The result returned should be:
 
 [.thumb]
 image::ReviewsWithFun.png[ReviewsWithFun,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 4.9: Retrieve all _REVIEWED_ relationships from the graph where the _summary_ of the review contains the string _fun_ (Taking it further - optional)
 
@@ -316,10 +264,6 @@ The result returned should be:
 [.thumb]
 image::ProducersThatAreNotDirectors.png[ProducersThatAreNotDirectors,width=600]
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.11: Retrieve the movies and their actors where one of the actors also directed the movie (Instructions)
 
 *Retrieve the movies and their actors where one of the actors also directed the movie, returning the actors names, the director's name, and the movie title.*
@@ -339,12 +283,6 @@ The result returned should be:
 
 [.thumb]
 image::ActorsAsDirectors.png[ActorsAsDirectors,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 4.12: Retrieve all movies that were released in a set of years (Instructions)
 
@@ -368,12 +306,6 @@ The result returned should be:
 [.thumb]
 image::MoviesInList.png[MoviesInList,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.13: Retrieve the movies that have an actor's role that is the name of the movie (Instructions)
 
 *Retrieve the movies that have an actor's role that is the name of the movie, return the movie title and the actor's name.*
@@ -393,12 +325,6 @@ The result returned should be:
 
 [.thumb]
 image::RoleNameIsMovieName.png[RoleNameIsMovieName,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 4: Filtering queries using the `WHERE` clause (Summary)
 

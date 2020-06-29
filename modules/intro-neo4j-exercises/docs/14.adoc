@@ -56,12 +56,6 @@ Where the result returned should be:
 [.thumb]
 image::CreatePersonNameUnique.png[CreatePersonNameUnique,width=300]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 14.2: Add an actor to the graph (Instructions)
 
 *Add _Tom Hanks_ to the graph.*
@@ -81,12 +75,6 @@ The result returned should look something like this:
 
 [.thumb]
 image::CreateTomHanksFailed.png[CreateTomHanksFailed,width=700]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 14.3: Attempt to add an existence constraint to the _Person_ nodes in the graph (Instructions)
 
@@ -130,12 +118,6 @@ The result returned should be:
 [.thumb]
 image::CreateTomHanksFailed.png[CreateTomHanksFailed,width=800]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 14.5: Add an existence constraint to the _Person_ nodes in the graph (Instructions)
 
 *Add the existence constraint to the graph for the _born_ property.*
@@ -153,12 +135,6 @@ The result returned should be:
 
 [.thumb]
 image::AddBornExistsConstraint.png[AddBornExistsConstraint,width=300]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 14.6: Add _Sean Penn_ to the graph where you do not specify a value for _born_ (Instructions)
 
@@ -197,12 +173,6 @@ The result returned should be:
 
 [.thumb]
 image::CreateRolesConstraintExists.png[CreateRolesConstraintExists,width=300]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 14.8: Attempt to add a relationship that violates the constraint (Instructions)
 
@@ -257,12 +227,6 @@ The result returned should be:
 [.thumb]
 image::AddNodeKey.png[AddNodeKey,width=500]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 14.10: Add the movie node to the graph (Instructions)
 
 *Add the movie, _Back to the Future_ with a _released_ value of _1985_ and a _tagline_ value of _Our future._.*
@@ -281,12 +245,6 @@ The result returned should be:
 [.thumb]
 image::AddedBackToTheFuture1985.png[AddedBackToTheFuture1985,width=300]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 14.11: Add a similar movie node with slightly different property values(Instructions)
 
 *Add the movie, _Back to the Future_ with a _released_ value of _2018_ and a _tagline_ value of _The future is ours._.*
@@ -304,12 +262,6 @@ The result returned should be:
 
 [.thumb]
 image::AddedBackToTheFuture2018.png[AddedBackToTheFuture2018,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 14.12: Try adding the _2018_ movie again (Instructions)
 
@@ -347,12 +299,6 @@ The result returned should be:
 [.thumb]
 image::listConstraints.png[listConstraints,width=500]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 14.14: Drop an existence constrain (Instructions)
 
 *Drop the constraint that requires the _ACTED_IN_ relationship to have a property, _roles_.*
@@ -370,12 +316,6 @@ The result returned should be:
 
 [.thumb]
 image::dropConstraintRoles.png[dropConstraintRoles,width=300]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 14: Managing constraints and node keys (Summary)
 

@@ -52,12 +52,6 @@ The result returned should be:
 [.thumb]
 image::DeleteHELPED.png[DeleteHELPED,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 10.2: Confirm that the relationship has been deleted (Instructions)
 
 *Query the graph to confirm that the relationship no longer exists.* 
@@ -76,13 +70,6 @@ The result returned should be:
 
 [.thumb]
 image::ConfirmDeleteHELPED.png[ConfirmDeleteHELPED,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 10.3: Retrieve a movie and all of its relationships (Instructions)
 
@@ -103,12 +90,6 @@ The result returned should be:
 
 [.thumb]
 image::QueryForrestGump.png[QueryForrestGump,width=700]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 10.4: Try deleting a node without detaching its relationships (Instructions)
 
@@ -136,12 +117,6 @@ The result returned should be:
 [.thumb]
 image::DeleteNodeFailed.png[DeleteNodeFailed,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 10.5: Delete a _Movie_ node, along with its relationships (Instructions)
 
 *Delete _Forrest Gump_, along with its relationships in the graph.*
@@ -162,12 +137,6 @@ The result returned should be:
 [.thumb]
 image::DetachDelete.png[DetachDelete,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 10.6: Confirm that the _Movie_ node has been deleted (Instructions)
 
 *Query the graph to confirm that the _Forrest Gump_ node has been deleted.*
@@ -187,12 +156,6 @@ The result returned should be:
 
 [.thumb]
 image::NoForrestGump.png[NoForrestGump,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 10: Deleting Nodes and Relationships (Summary)
 

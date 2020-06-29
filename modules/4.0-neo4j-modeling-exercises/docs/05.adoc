@@ -9,8 +9,6 @@ This is what you should see when you click the database icon image:database-icon
 
 image::AfterExercise4.png[AfterExercise4,width=300,role=left]
 
-{nbsp} +
-
 *If your database does not have the same nodes and relationships, you can execute these Cypher statements to reset your graph to what it should be before you start this exercise.*
 
 *Note*: To execute this Cypher code, you [.underline]#must# have the APOC library installed for your database.
@@ -93,8 +91,6 @@ The result returned should be:
 [.thumb]
 image::Ex5_FindFlightsJan3.png[Ex5_FindFlightsJan3,width=200]
 
-{nbsp} +
-
 Here we see 4959 db hits.
 We have increased the number of flights in the database tenfold, but we might be able to do better.
 We will give it a try and create the `AirportDay` node where each `Airport` will be connected by a `HAS_DAY` relationship to an `AirportDay` node for each day.
@@ -133,8 +129,6 @@ Here is the model  you will refactor to:
 
 [.thumb]
 image::Ex5_Model.png[Ex5_Model,width=500]
-
-{nbsp} +
 
 *Write and execute the Cypher statement to go through all `Flights` and how they are connected to `Airports` to create the `AirportDay` nodes.*
 
@@ -180,8 +174,6 @@ The result returned should be:
 [.thumb]
 image::Ex5_Profile1.png[Ex5_Profile1,width=200]
 
-{nbsp} +
-
 This same query with the previous model had 49 db hits.
 This query now has 704 db hits, but we have increased the number of flights by a factor of 10 so this result is expected.
 
@@ -202,8 +194,6 @@ The result returned should be:
 
 [.thumb]
 image::Ex5_Profile2.png[Ex5_Profile2,width=200]
-
-{nbsp} +
 
 This query with the previous model had 40 db hits.
 This query now has 199 db hits, but we have increased the number of flights by a factor of 10 so this result is expected.
@@ -240,8 +230,6 @@ The result returned should be:
 
 [.thumb]
 image::Ex5_FindFlightsJan3New.png[Ex5_FindFlightsJan3New,width=200]
-
-{nbsp} +
 
 The previous query before the refactoring yielded 4959 db hits.
 After the refactoring and rewriting the query, we see 3968 db hits which is an improvement.

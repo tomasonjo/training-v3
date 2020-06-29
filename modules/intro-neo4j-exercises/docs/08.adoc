@@ -63,12 +63,6 @@ The result returned should be:
 [.thumb]
 image::CreateForrestGump.png[CreateForrestGump,width=300]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 8.2: Retrieve the newly-created node (Instructions)
 
 *Retrieve the node you just created by its _title_.*
@@ -95,10 +89,6 @@ image::RetrieveForrestGump.png[RetrieveForrestGump,width=500]
 *Note:* The value for the _id_ property for the newly created node may be different for your graph.
 It this screen shot, it is _741_.
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 8.3: Create a _Person_ node (Instructions)
 
 *Create a _Person_ node for the person with the _name_, _Robin Wright_.*
@@ -117,12 +107,6 @@ The result returned should be:
 
 [.thumb]
 image::CreateRobinWright.png[CreateRobinWright,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 8.4: Retrieve the _Person_ node you just created by its _name_ (Instructions)
 
@@ -143,12 +127,6 @@ The result returned should be:
 
 [.thumb]
 image::RetrieveRobinWright.png[RetrieveRobinWright,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 8.5: Add a label to a node (Instructions)
 
@@ -171,12 +149,6 @@ The result returned should be:
 [.thumb]
 image::AddOlderMovieLabel.png[AddOlderMovieLabel,width=500]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 8.6: Retrieve the node using the new label (Instructions)
 
 *Retrieve all older movie nodes to test that the label was indeed added to these nodes.*
@@ -195,13 +167,6 @@ The result returned should be:
 
 [.thumb]
 image::RetrieveOlderMovies.png[RetrieveOlderMovies,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 8.7: Add the _Female_ label to selected nodes (Instructions)
 
@@ -222,12 +187,6 @@ The result returned should be:
 
 [.thumb]
 image::AddFemaleLabel.png[AddFemaleLabel,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 8.8: Retrieve all _Female_ nodes (Instructions)
 
@@ -255,10 +214,6 @@ image::RetrieveFemales.png[RetrieveFemales,width=400]
 Here we see that there are two _Person_ nodes.
 The _Robin Williams_ node should not have the label _Female_.
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 8.9: Remove the _Female_ label from the nodes that have this label (Instructions)
 
 *We've decided to not use the _Female_ label. Remove the _Female_ label from the nodes that have this label.*
@@ -278,13 +233,6 @@ The result returned should be:
 [.thumb]
 image::RemoveFemales.png[RemoveFemales,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
-
 == Exercise 8.10: View the current schema of the graph (Instructions)
 
 *View the current schema of the graph.*
@@ -302,12 +250,6 @@ The result returned should be:
 
 [.thumb]
 image::SchemaAfterLabelAddition.png[SchemaAfterLabelAddition,width=700]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 8.11: Add properties to a movie (Instructions)
 
@@ -342,12 +284,6 @@ The result returned should be:
 [.thumb]
 image::AddingPropertiesForrestGump.png[AddingPropertiesForrestGump,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 8.12: Retrieve an _OlderMovie_ node to confirm the label and properties (Instructions)
 
 *Retrieve this _OlderMovie_ node to confirm that the properties and label have been properly set.*
@@ -367,12 +303,6 @@ The result returned should be:
 
 [.thumb]
 image::RetrieveForrestGump2.png[RetrieveForrestGump2,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 8.13: Add properties to the person, _Robin Wright_ (Instructions)
 
@@ -400,12 +330,6 @@ The result returned should be:
 [.thumb]
 image::SetRobinWrightProperties.png[SetRobinWrightProperties,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 8.14: Retrieve an updated _Person_ node (Instructions)
 
 *Retrieve this _Person_ node to confirm that the properties have been properly set.*
@@ -425,13 +349,6 @@ The result returned should be:
 
 [.thumb]
 image::RetrieveRobinWrightWithProperties.png[RetrieveRobinWrightWithProperties,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 8.15: Remove a property from a _Movie_ node (Instructions)
 
@@ -456,13 +373,6 @@ The result returned should be:
 [.thumb]
 image::RemoveLengthInMinutes.png[RemoveLengthInMinutes,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
-
 == Exercise 8.16: Retrieve the node to confirm that the property has been removed (Instructions)
 
 *Retrieve the _Forrest Gump_ node to confirm that the property has been removed.*
@@ -482,13 +392,6 @@ The result returned should be:
 
 [.thumb]
 image::DeletedLengthInMinutesQuery.png[DeletedLengthInMinutesQuery,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 8.17: Remove a property from a _Person_ node (Instructions)
 
@@ -510,13 +413,6 @@ The result returned should be:
 [.thumb]
 image::RemovedBirthPlace.png[RemovedBirthPlace,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
-
 == Exercise 8.18: Retrieve the node to confirm that the property has been removed (Instructions)
 
 *Retrieve the _Robin Wright_ node to confirm that the property has been removed.*
@@ -536,12 +432,6 @@ The result returned should be:
 
 [.thumb]
 image::UpdatedRobinWright.png[UpdatedRobinWright,width=500]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 8: Creating Nodes (Taking it further - optional)
 

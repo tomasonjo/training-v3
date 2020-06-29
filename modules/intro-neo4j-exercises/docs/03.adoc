@@ -54,10 +54,6 @@ The result returned should be:
 [.thumb]
 image::call_db.schema.png[call_db.schema,width=600]
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 3.2: Retrieve all people who wrote the movie _Speed Racer_ (Instructions)
 
 *Retrieve all people who wrote the movie _Speed Racer_.*
@@ -79,10 +75,6 @@ image::SpeedRacerWriters.png[SpeedRacerWriters,width=600]
 
 
 Notice here that the _:Movie_ node is an anonymous node because for the query, we do not need information about the _Movie_ node.
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 3.2: Retrieve all people who wrote the movie _Speed Racer_ (Taking it further - optional)
 
@@ -121,10 +113,6 @@ Notice that _Tom Hanks_ has multiple relationships to the movie, "That Thing You
 Also notice that we specify the named node (with a variable) first.
 It is a best practice to put named nodes first in a query.
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 3.3: Retrieve all movies that are connected to the person, _Tom Hanks_ (Taking it further - optional)
 
 * Retrieve all movies connected with another actor.
@@ -147,13 +135,6 @@ The result returned should be:
 
 [.thumb]
 image::TomHanksRelationshipTypes.png[TomHanksRelationshipTypes,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 
 == Exercise 3.4: Retrieve information about the relationships _Tom Hanks_ has with the set of movies retrieved earlier (Taking it further - optional)
 
@@ -181,12 +162,6 @@ The result returned should be:
 
 [.thumb]
 image::TomHanksRoles.png[TomHanksRoles,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 3.5: Retrieve information about the roles that _Tom Hanks_ acted in (Taking it further - optional)
 

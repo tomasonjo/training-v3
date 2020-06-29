@@ -63,12 +63,6 @@ The result returned should be:
 [.thumb]
 image::CreateForrestGump2.png[CreateForrestGump2,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.2: Use `MERGE` to update a node (Instructions)
 
 *Use `MERGE` to update (`ON MATCH`) a node of type _Movie_ with the _title_ property, _Forrest Gump_. If found, set the tagline property to "Life is like a box of chocolates...you never know what you're gonna get.".*
@@ -90,12 +84,6 @@ The result returned should be:
 [.thumb]
 image::MergeForrestGump.png[MergeForrestGump,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.3: Use `MERGE` to create a _Production_ node (Instructions)
 
 *Use `MERGE` to create (`ON CREATE`) a node of type _Production_ with the _title_ property, _Forrest Gump_. If created, set the property _year_ to the value _1994_.*
@@ -115,12 +103,6 @@ The result returned should be:
 
 [.thumb]
 image::MergeProduction.png[MergeProduction,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11.4: Find all labels for nodes with a property value (Instructions)
 
@@ -142,12 +124,6 @@ The result returned should be:
 [.thumb]
 image::AllForrestGumps.png[AllForrestGumps,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.5: Use `MERGE` to update a _Production_ node (Instructions)
 
 *Use `MERGE` to update (`ON MATCH`) the existing _Production_ node for _Forrest Gump_ to add the _company_ property with a value of _Paramount Pictures_.*
@@ -168,12 +144,6 @@ The result returned should be:
 [.thumb]
 image::AddCompany.png[AddCompany,width=600]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.6: Use `MERGE` to add a label to a node (Instructions)
 
 *Use `MERGE` to add the _OlderMovie_ label to the movie, _Forrest Gump_.*
@@ -193,12 +163,6 @@ The result returned should be:
 
 [.thumb]
 image::AddOlderMovieLabelToForrestGump.png[AddOlderMovieLabelToForrestGump,width=600]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11.7: Use `MERGE` to create two nodes and a single relationship (Instructions)
 
@@ -228,12 +192,6 @@ The result returned should be:
 [.thumb]
 image::MergeNodesAndRelationships.png[MergeNodesAndRelationships,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.8: Use the same `MERGE` statement to attempt to create two nodes and a single relationship (Instructions)
 
 *Repeat the execution of the previous statement.*
@@ -254,12 +212,6 @@ The result returned should be:
 
 [.thumb]
 image::MergeNodesAndRelationships2.png[MergeNodesAndRelationships2,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11.9: Find the correct _Person_ node to delete (Instructions)
 
@@ -285,12 +237,6 @@ The result returned should be:
 [.thumb]
 image::FindPersonNodeBeforeDelete.png[FindPersonNodeBeforeDelete,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.10: Delete this _Person_ node, along with its relationships (Instructions)
 
 *Delete this _Person_ node, along with its relationships.*
@@ -311,12 +257,6 @@ The result returned should be:
 [.thumb]
 image::DeletedExtraPerson.png[DeletedExtraPerson,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.11: Find the correct _Forrest Gump_ node to delete (Instructions)
 
 *Find the correct _Forrest Gump_ node to delete by executing this statement:*
@@ -334,12 +274,6 @@ The result returned should be:
 
 [.thumb]
 image::ForrestGumpToDelete.png[ForrestGumpToDelete,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11.12: Delete the _Forrest Gump_ node (Instructions)
 
@@ -363,12 +297,6 @@ The result returned should be:
 [.thumb]
 image::DeletedExtraForrestGump.png[DeletedExtraForrestGump,width=400]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 11.13: Use `MERGE` to create the _DIRECTED_ relationship (Instructions)
 
 *Use `MERGE` to create the _DIRECTED_ relationship between _Robert Zemeckis_ and  the _Movie_, _Forrest Gump_.*
@@ -388,12 +316,6 @@ The result returned should be:
 
 [.thumb]
 image::AddDirectedToForrestGump.png[AddDirectedToForrestGump,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11.14: Use `MERGE` to create the _ACTED_IN_ relationship (Instructions)
 
@@ -415,12 +337,6 @@ The result returned should be:
 
 [.thumb]
 image::ActedInForrestGump.png[ActedInForrestGump,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11.15: Modify the _role_ relationship property (Instructions)
 
@@ -454,12 +370,6 @@ The result returned should be:
 
 [.thumb]
 image::SetActedRoles.png[SetActedRoles,width=400]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 11: Merging Data in the Graph (Summary)
 

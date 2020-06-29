@@ -41,8 +41,6 @@ The *import* folder should appear as follows:
 
 image::ImportFolder.png[ImportFolder,width=400]
 
-{nbsp} +
-
 *Note*: If you are using a Neo4j Sandbox or Neo4j Aura, then you cannot place any files locally for loading.
 
 === Enable multi-statement query editor

@@ -64,11 +64,6 @@ When the result returned should be:
 [.thumb]
 image::EXPLAIN.png[EXPLAIN,width=500]
 
-++++
-<div style="clear: both;"></div>
-++++
-
-
 == Exercise 13.2: View the metrics for the query when a statement executes (Instructions)
 
 *View the metrics for the query when the previous statement executes.*
@@ -89,10 +84,6 @@ The result returned should look something like this:
 
 [.thumb]
 image::PROFILE.png[PROFILE,width=600]
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 13.3: Remove the labels from the nodes and relationships in the query and again view the metrics (Instructions)
 

@@ -43,12 +43,6 @@ The result should be:
 [.thumb]
 image::CreateIndex.png[CreateIndex,width=300]
 
-
-
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 15.2: View index information (Instructions)
 
 *View the indexes defined for the graph.*
@@ -90,12 +84,6 @@ The result returned should be:
 
 [.thumb]
 image::DropIndex.png[DropIndex,width=300]
-
-
-
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 15: Managing indexes (Summary)
 
