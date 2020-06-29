@@ -60,11 +60,6 @@ The result should be:
 [.thumb]
 image::LoadActorsToView.png[LoadActorsToView,width=600]
 
-++++
-<div style="clear: both;"></div>
-
-++++
-
 *Note:* If you have previously downloaded the files for this course and are using Neo4j Desktop, you can place them into the *import* folder:
 
 . In Neo4j Desktop Click *Manage > Open Folder* for the Neo4j instance you are using.

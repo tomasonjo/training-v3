@@ -194,9 +194,6 @@ The result returned should be:
 
 [.thumb]
 image::DropFTIndex.png[DropFTIndex,width=500]
-++++
-<div style="clear: both;"></div>
-++++
 
 == Exercise 14: Creating indexes (Summary)
 

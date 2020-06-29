@@ -53,10 +53,6 @@ The result returned should be:
 [.thumb]
 image::ReturnAllNode.png[ReturnAllNode,width=500]
 
-++++
-<div style="clear: both;"></div>
-
-++++
 *Notes:* 
 
 * If the nodes displayed are not connected, make sure that _Connect result nodes_ is selected in your Neo4j Browser settings.
@@ -99,11 +95,6 @@ The result returned should be:
 [.thumb]
 image::PersonNodes.png[PersonNodes,width=600]
 
-++++
-<div style="clear: both;"></div>
-
-++++
-
 Here we use _p_ as the variable representing all nodes retrieved and what is returned for the query.
 Notice also, that no relationships are displayed.
 That is because most _Person_ nodes have no relationships with other _Person_ nodes.
@@ -125,10 +116,6 @@ The result returned should be:
 
 [.thumb]
 image::MovieNodes.png[MovieNodes,width=600]
-
-++++
-<div style="clear: both;"></div>
-++++
 
 Here we use _m_ as the variable representing all nodes retrieved and what is returned for the query.
 Notice also, that no relationships are displayed.

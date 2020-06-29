@@ -345,21 +345,11 @@ When you first execute the query in the original Neo4j Browser window, you shoul
 [.thumb]
 image::LongRunningReturn1.png[LongRunningReturn1,width=900]
 
-++++
-<div style="clear: both;"></div>
-
-++++
-
 Initially, the query is running in the server.
 After a few moments, you will see that in the original Neo4j Browser window, the query appears to be running, but it has completed on the server:
 
 [.thumb]
 image::LongRunningReturn2.png[LongRunningReturn2,width=900]
-
-++++
-<div style="clear: both;"></div>
-
-++++
 
 This is because the graph engine has completed the query and the results are still being streamed to the client.
 
@@ -396,11 +386,6 @@ You should see this when you first start the query:
 [.thumb]
 image::LongQuery1.png[LongQuery1,width=900]
 
-++++
-<div style="clear: both;"></div>
-
-++++
-
 It takes a VERY long time to complete on the server.
 
 After a while you will want to kill this long-running query.
@@ -419,11 +404,6 @@ Here is where you select in the UI that you want to kill the running query:
 
 [.thumb]
 image::LongQuery2.png[LongQuery2,width=900]
-
-++++
-<div style="clear: both;"></div>
-
-++++
 
 You should now see this in the original Neo4j Browser window:
 

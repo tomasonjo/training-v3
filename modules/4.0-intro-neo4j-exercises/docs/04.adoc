@@ -109,10 +109,6 @@ The result returned should be:
 [.thumb]
 image::MatrixYoungerActors.png[MatrixYoungerActors,width=500]
 
-++++
-<div style="clear: both;"></div>
-++++
-
 == Exercise 4.4: Retrieve all movies  by testing the node label and a property (Instructions)
 
 *Retrieve all movies  released in 2000 by testing the node label and the released property, returning the movie titles.*

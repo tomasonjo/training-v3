@@ -128,11 +128,6 @@ The result returned should be:
 [.thumb]
 image::ForrestGumpRelationships.png[ForrestGumpRelationships,width=700]
 
-++++
-<div style="clear: both;"></div>
-
-++++
-
 Notice here that the _HELPED_ relationship is also shown because _Tom Hanks_ and _Gary Sinise_ are connected and we have _Connect result nodes_ selected in our Neo4j Browser settings.
 
 == Exercise 10.5: Add properties to relationships (Instructions)
