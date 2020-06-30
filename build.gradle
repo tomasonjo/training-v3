@@ -46,7 +46,7 @@ subprojects {
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
     asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
-    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.6")
+    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.7")
   }
 
   def stage = project.findProperty('stage')
