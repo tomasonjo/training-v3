@@ -1,0 +1,261 @@
+= Exercise 1
+:icons: font
+
+== Exercise 1: Traversing the graph (Preparations)
+
+The database you start with should contain no nodes or relationships.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::Empty_database.png[Empty_database,width=300,role=left]
+
+*Regardless of what is in  your graph, run the following script to remove all nodes and relationships from the graph and load the graph with the "mini movie" data:*
+
+[source, cypher]
+----
+include::scripts/initialDatabase.cypher[]
+----
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::InitialDatabase.png[InitialDatabase,300, role=left]
+
+*Verify that your Neo4j Browser session has access to the APOC library by executing the Cypher below*:
+
+[source, cypher]
+----
+CALL dbms.procedures()
+YIELD name
+WHERE name STARTS WITH 'apoc.'
+RETURN name ORDER BY name ASC
+----
+
+If this code does not return the list of APOC procedures, then you must ensure that the APOC library is available by installing the plugin (Neo4j Desktop) and restarting the database.
+
+== Exercise 1: Traversing the graph (Overview)
+
+In this exercise, you write some Cypher statements that help you understand traversal in Neo4j.
+
+* *Exercise 1.1*: Determine the anchor and the number of paths traversed.
+* *Exercise 1.2*: Determine the anchors and number of paths traversed.
+* *Exercise 1.3:* Modify the previous query to use only one anchor.
+* *Exercise 1.4:* Using WITH to chain clauses in a query.
+* *Exercise 1.5:* Uniqueness of relationship path traversal.
+* *Exercise 1.6:* Find the shortest path between two nodes.
+
+
+Go to the next page to start this exercise.
+
+== Exercise 1.1: Determine the anchor and the number of paths traversed. (Instructions)
+
+*1. Execute this cypher code and then answer these questions*:
+
+[source, cypher]
+----
+MATCH (p:Person)-[:REVIEWED]->(m:Movie)<-[:REVIEWED]-(p2:Person)
+WHERE p.name = 'Jessica Thompson'
+RETURN p, p2, m
+----
+
+*2. What is the anchor of this query?*
+
+*3. How many paths are traversed during this query?*
+
+== Exercise 1.1: Determine the anchor and the number of paths traversed. (Solution)
+
+*1. Execute this cypher code and then answer these questions*:
+
+*2. What is the anchor of this query?*
+
+*Answer*: The Person node with the name property, Jessica Thompson.
+
+*3. How many paths are traversed during this query?*
+
+*Answer*: Three paths are traversed
+
+[.thumb]
+image::EX1.1.png[EX1.1,width=500]
+
+== Exercise 1.2: Determine the anchors and number of paths traversed. (Instructions)
+
+*1. Execute this cypher code and then answer these questions*:
+
+[source, cypher]
+----
+MATCH (a1:Person)-[:ACTED_IN]->(m:Movie)
+MATCH (a2:Person)-[:ACTED_IN]->(m)
+   WHERE a1.name = 'Rita Wilson'
+RETURN m, a2
+----
+
+*2. What are the anchors for each MATCH clause?*
+
+*3. How many paths are traversed during this query?*
+
+
+== Exercise 1.2: Determine the anchors and number of paths traversed. (Solution)
+
+*1. Execute this cypher code and then answer these questions*:
+
+*2. What are the anchors for each MATCH clause?*
+
+*Answer*: The first MATCH uses the Person node with the name, Rita Wilson. The second MATCH uses the found movie node with the title, Sleepless in Seattle.
+
+*3. How many paths are traversed during this query?*
+
+*Answer*: One path is traversed for the first MATCH clause. Six paths are traversed for the second MATCH clause. Notice that the path from Rita Wilson to the movie Sleepless in Seattle is traversed twice.
+
+[.thumb]
+image::EX1.2.png[EX1.2,width=400]
+
+== Exercise 1.3: Modify the previous query to use only one anchor. (Instructions)
+
+*Modify the previous query use a single anchor and thus reduce the number of paths traversed.*
+
+== Exercise 1.3: Modify the previous query to use only one anchor. (Solution)
+
+*Modify the previous query to use a single anchor and thus reduce the number of paths traversed.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (a1:Person)-[:ACTED_IN]->(m:Movie),
+      (a2:Person)-[:ACTED_IN]->(m)
+WHERE a1.name = 'Rita Wilson'
+RETURN m, a2
+----
+
+Notice that for this query, the node, Rita Wilson is not visited twice.
+
+[.thumb]
+image::EX1.3.png[EX1.3,width=300]
+
+== Exercise 1.4: Using WITH to chain clauses in a query. (Instructions)
+
+We want a query that finds all people who have acted in at least 5 movies. If this found person has also directed a movie, display the person's name and the title of the movie. This code is not correct.
+
+[source, cypher]
+----
+MATCH (p:Person)
+WITH  size((p)-[:ACTED_IN]->(:Movie)) AS movies
+WHERE movies >= 5
+OPTIONAL MATCH (p)-[:DIRECTED]->(m:Movie)
+RETURN p.name, m.title
+----
+
+*Modify this code so that it returns the correct results.*
+
+== Exercise 1.4: Using WITH to chain clauses in a query.  (Solution)
+
+We want a query that finds all people who have acted in at least 5 movies. If this found person has also directed a movie, display the person's name and the title of the movie. This code is not correct.
+
+[source, cypher]
+----
+MATCH (p:Person)
+WITH  size((p)-[:ACTED_IN]->(:Movie)) AS movies
+WHERE movies >= 5
+OPTIONAL MATCH (p)-[:DIRECTED]->(m:Movie)
+RETURN p.name, m.title
+----
+
+*Modify this code so that it returns the correct results.*
+
+Here is the solution code. We also want to carry the p variable for the optional match. These actors acted in at least 5 movies, but only Tom Hanks also directed a movie.
+
+[source, cypher]
+----
+MATCH (p:Person)
+WITH  p, size((p)-[:ACTED_IN]->(:Movie)) AS movies
+WHERE movies >= 5
+OPTIONAL MATCH (p)-[:DIRECTED]->(m:Movie)
+RETURN p.name, m.title
+----
+
+The result returned should be:
+
+[.thumb]
+image::EX1.4.png[EX1.4,width=600]
+
+== Exercise 1.5: Uniqueness of relationship path traversal. (Instructions)
+
+Here is query to retrieve the movies and co-actors of Rita Wilson. This query does not return the Rita Wilson node as a coactor. This is because Neo4j does not traverse a relationship path more than once.
+
+*Modify this query so that the Rita Wilson node will also be returned.*
+
+[source, cypher]
+----
+MATCH (actor:Person {name:'Rita Wilson'})
+       -[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(coActor:Person)
+RETURN m.title, coActor.name
+----
+
+== Exercise 1.5: Uniqueness of relationship path traversal.  (Solution)
+
+Here is query to retrieve the movies and co-actors of Rita Wilson. This query does not return the Rita Wilson node as a coactor. This is because Neo4j does not traverse a relationship path more than once.
+
+*Modify this query so that the Rita Wilson node will also be returned.*
+
+Here is one way that you can modify the query to traverse the `:ACTED_IN` relationship twice to return Rita Wilson in the set of coactors.
+
+[source, cypher]
+----
+MATCH (actor:Person {name:'Rita Wilson'})-[:ACTED_IN]->(m:Movie)
+MATCH  (m)<-[:ACTED_IN]-(coActor:Person)
+RETURN m.title, coActor.name
+----
+
+The result returned should be:
+
+[.thumb]
+image::EX1.5.png[EX1.5,width=600]
+
+
+== Exercise 1.6: Find the shortest path between two nodes. (Instructions)
+
+*1. Write a query to return the shortest path between the actors Meg Ryan and Al Pacino.*
+
+*2. PROFILE the query to see how the query executes.*
+
+== Exercise 1.6: Find the shortest path between two nodes. (Solution)
+
+*1. Write a query to return the shortest path between the actors Meg Ryan and Al Pacino.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (start:Person { name: 'Al Pacino' }),
+      (end:Person { name: 'Meg Ryan' }),
+      p = shortestPath((start)-[*]-(end))
+WITH p WHERE length(p) > 1
+RETURN p
+----
+
+The result returned should be:
+
+[.thumb]
+image::EX1.6.png[EX1.6,width=300]
+
+*2. PROFILE the query to see how the query executes.*
+
+The PROFILE should be:
+
+[.thumb]
+image::EX1.6B.png[EX1.6B,width=300]
+
+Notice that for this query a Cartesion product is specified. The Cartesion product, each with a single node is nothing to be concerned about. When Cartesian products become a problem is when each part of the query has thousands+ of nodes.
+
+== Exercise 1: Taking it further
+
+. Create other queries that chain clauses together with WITH.
+. Find the shortest path between two movie nodes.
+
+== Exercise 1: Implementing your first model (Summary)
+
+
+In this exercise, you performed a variety of queries to help you better understand traversals in Neo4j. You most important job as a developer will be to minimize traversals.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/02.html'>Continue to Exercise 2</a>]
+endif::[]

@@ -1,0 +1,327 @@
+= Exercise 8
+:icons: font
+
+== Exercise 8: Aggregating data (Preparations)
+
+*1. Verify that your Neo4j Browser session has access to the APOC library by executing the Cypher below*:
+
+[source, cypher]
+----
+CALL dbms.procedures()
+YIELD name
+WHERE name STARTS WITH 'apoc.'
+RETURN name ORDER BY name ASC
+----
+
+If this code does not return the list of APOC procedures, then you must ensure that the APOC library is available by installing the plugin (Neo4j Desktop) and restarting the database as follows:
+
+. Make sure Neo4j Desktop is online.
+. In Neo4j Desktop for the project you are working with, click  *Add Plugin*.
+. Select the install button for APOC.
+. Click the Install button.
+. Close the Add Plugin window.
+. Start or restart the database.
+
+*2. Ensure that the virtual memory for Neo4j is set back to its defaults:
+dbms.memory.heap.initial_size=512m
+dbms.memory.heap.max_size=1G*
+
+*3. This exercise assumes that you have a fully-loaded movie database without the `Genre` nodes. Execute this code to reset the database:*
+
+[source, cypher]
+----
+include::scripts/AfterImportDenormalizedDataWithoutGenreNodes.cypher[]
+----
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::AfterImportDenormalizedDataWithoutGenreNodes.png[AfterImportDenormalizedDataWithoutGenreNodes,300, role=left]
+
+== Exercise 8: Aggregating data (Overview)
+
+In this exercise, you will gain more experience aggregating data and using aggregated data with Cypher.
+
+In this exercise, you will:
+
+* *Exercise 8.1*: Profile the collection of data.
+* *Exercise 8.2*: Use APOC to work with collections.
+* *Exercise 8.3*: Use the properties of a relationship to create a map.
+* *Exercise 8.4*: Use pattern comprehension to customize data returned.
+* *Exercise 8.5*: Use APOC to group data returned.
+
+Go to the next page to start this exercise.
+
+== Exercise 8.1: Profile the collection of data. (Instructions)
+
+*1. Profile and write a query to return any five movies and their ratings (avgVote).*
+
+*2. Profile and write a query to return the top five movies based upon their ratings. Do not use APOC.*
+
+== Exercise 8.1: Profile the collection of data. (Solution)
+
+*1. Profile and write a query to return any five movies and their ratings (avgVote).*
+
+Here is the solution code:
+
+[source, cypher]
+----
+PROFILE MATCH (m:Movie)
+WITH m LIMIT 5
+WITH m, collect (m.title) AS t, collect(m.avgVote) AS r
+UNWIND t as titles
+UNWIND r as ratings
+RETURN titles, ratings
+----
+
+The result of performing this code should look something like this:
+
+[.thumb]
+image::EX8.1.png[EX8.1,width=600]
+
+The profile is:
+
+[.thumb]
+image::EX8.1B.png[EX8.1B,width=600]
+
+*2. Profile and write a query to return the top five movies based upon their ratings. Do not use APOC.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+PROFILE MATCH (m:Movie)
+WITH m ORDER BY m.avgVote DESC LIMIT 5
+WITH m, collect (m.title) AS t, collect(m.avgVote) AS r
+UNWIND t as titles
+UNWIND r as ratings
+RETURN titles, ratings
+----
+
+The result of performing this code should be:
+
+[.thumb]
+image::EX8.1C.png[EX8.1C,width=600]
+
+The profile is:
+
+[.thumb]
+image::EX8.1D.png[EX8.1D,width=300]
+
+Because the data needed to be sorted, all records needed to be read before they could be limited to 5.
+
+== Exercise 8.2: Use APOC to work with collections. (Instructions)
+
+Here is Cypher code to collect the list of genres from each movie.
+
+[source, cypher]
+----
+MATCH (m:Movie)
+WITH collect(m.genres) AS genres
+RETURN genres, size(genres)
+----
+
+*1. Execute this code.*
+
+*2. Rewrite this code to use APOC to remove the embedded lists and also remove duplicates.*
+
+== Exercise 8.2: Use APOC to work with collections. (Solution)
+
+Here is Cypher code to collect the list of genres from each movie.
+
+[source, cypher]
+----
+MATCH (m:Movie)
+WITH collect(m.genres) AS genres
+RETURN genres, size(genres)
+----
+
+*1. Execute this code.*
+
+The result returned should be:
+
+[.thumb]
+image::EX8.2.png[EX8.2,width=600]
+
+*2. Rewrite this code to use APOC to remove the embedded lists and also remove duplicates.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (m:Movie)
+WITH collect(m.genres) AS genres
+// remove embedded lists
+WITH apoc.coll.flatten(genres) AS allGenres
+// remove duplicates
+WITH apoc.coll.toSet(allGenres) AS genreList
+RETURN genreList, size(genreList)
+----
+
+The result returned should be:
+
+[.thumb]
+image::EX8.2B.png[EX8.2B,width=600]
+
+== Exercise 8.3: Use the properties of a relationship to create a map. (Instructions)
+
+Suppose you want to create a map for every Actor which looks as follows:
+
+....
+{
+  name: <name of actor>,
+  born: <year actor born>,
+  roles: [roles that this actor has played in all of his/her movies]
+  movies: [titles of the movies this actor has acted in]
+}
+....
+
+*Write a Cypher query to return this data as a  map for every actor who was born after the year 1970.*
+
+== Exercise 8.3: Use the properties of a relationship to create a map. (Solution)
+
+Suppose you want to create a map for every Actor which looks as follows:
+
+....
+{
+  name: <name of actor>,
+  born: <year actor born>,
+  roles: [roles that this actor has played in all of his/her movies]
+  movies: [titles of the movies this actor has acted in]
+}
+....
+
+*Write a Cypher query to return this data as a map for every actor who was born after the year 1970.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (m:Movie)<-[act:ACTED_IN]-(p:Person)
+WHERE p.born > 1970
+WITH p, collect(act.roles) AS roleList, collect(m) AS movieList
+WITH p, movieList, apoc.coll.flatten(roleList) AS allRoles
+// remove duplicates
+WITH p,  movieList, apoc.coll.toSet(allRoles) AS trimmedRoleList
+RETURN p { .name, .born,  roles: trimmedRoleList, movies: [x in movieList | x.title] } AS actor
+----
+
+The results should be:
+
+[.thumb]
+image::EX8.3.png[EX8.3,width=500]
+
+This load which you were able to do previously with the default virtual memory settings now fails due to out of memory. No data is written to the database.
+
+== Exercise 8.4: Use pattern comprehension to customize data returned. (Instructions)
+
+*1. Execute this code to add the `Genre` nodes and relationships to the graph:*
+
+[source, cypher]
+----
+MATCH (m:Movie)
+UNWIND m.genres as names
+WITH DISTINCT names, m
+SET m.genres = null
+MERGE (g:Genre {name:names})
+WITH g, m
+MERGE (g)<-[:IS_GENRE]-(m)
+----
+
+*2. Write a query that retrieves all Genre nodes and returns the following map:*
+
+....
+{
+Genre: <genre name>,
+Movies: [<titles of movies for this genre released in the year 2010>]
+}
+{
+<next genre>}
+}
+....
+
+*Use pattern comprehension for the `:IS_GENRE` relationship to assemble the list of movie titles with the release year of 2010.*
+
+== Exercise 8.4: Use pattern comprehension to customize data returned. (Solution)
+
+*1. Execute this code to add the `Genre` nodes and relationships to the graph:*
+
+[source, cypher]
+----
+MATCH (m:Movie)
+UNWIND m.genres as names
+WITH DISTINCT names, m
+SET m.genres = null
+MERGE (g:Genre {name:names})
+WITH g, m
+MERGE (g)<-[:IS_GENRE]-(m)
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX8.4.png[EX8.4,width=600]
+
+*2. Write a query that retrieves all Genre nodes and returns the following map:*
+
+....
+{
+Genre: <genre name>,
+Movies: [<titles of movies for this genre released in the year 2010>]
+}
+{
+<next genre>}
+}
+....
+
+*Use pattern comprehension for the `:IS_GENRE` relationship to assemble the list of movie titles with the release year of 2010.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (g:Genre)
+RETURN  {Genre: g.name, Movies: [(g)<-[:IS_GENRE]-(m) WHERE m.releaseYear = 2010| m.title]}
+----
+
+Here are the results returned:
+
+[.thumb]
+image::EX8.4B.png[EX8.4B,width=600]
+
+
+== Exercise 8.5: Use APOC to group data returned. (Instructions)
+
+*Write a query that retrieves all directors born after 1980 and returns their properties grouped by the year they were born.*
+
+
+== Exercise 8.5: Use APOC to group data returned. (Solution)
+
+*Write a query that retrieves all directors born after 1980 and returns their properties grouped by the year they were born.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (d:Director)
+WHERE d.born > 1980
+WITH collect(properties(d)) AS directors
+RETURN apoc.map.groupByMulti(directors,"born")
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX8.5.png[EX8.5,width=600]
+
+== Exercise 8: Taking it further
+
+. Explore and write other queries that use APOC map functions.
+. PROFILE some of the queries  you have written and see if you can improve them.
+
+== Exercise 8: Aggregating data   (Summary)
+
+In this exercise, you gained more experience aggregating data and using aggregated data with Cypher.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/09.html'>Continue to Exercise 9</a>]
+endif::[]

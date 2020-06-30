@@ -1,0 +1,154 @@
+= Exercise 2
+:icons: font
+
+== Exercise 2: Traversing the graph with APOC (Preparations)
+
+The database you start with should contain the "movie" data that you loaded in the previous exercise.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::InitialDatabase.png[InitialDatabase,width=300,role=left]
+
+*1. If your database does not look like this, run the following script which removes all nodes and relationships from the graph and loads the graph with the "mini movie" data:*
+
+[source, cypher]
+----
+include::scripts/initialDatabase.cypher[]
+----
+
+*2. Verify that your Neo4j Browser session has access to the APOC library by executing the Cypher below*:
+
+[source, cypher]
+----
+CALL dbms.procedures()
+YIELD name
+WHERE name STARTS WITH 'apoc.'
+RETURN name ORDER BY name ASC
+----
+
+If this code does not return the list of APOC procedures, then you must ensure that the APOC library is available by installing the plugin (Neo4j Desktop) and restarting the database as follows:
+
+. Make sure Neo4j Desktop is online.
+. In Neo4j Desktop for the project you are working with, click  *Add Plugin*.
+. Select the install button for APOC.
+. Click the Install button.
+. Close the Add Plugin window.
+. Start or restart the database.
+
+== Exercise 2: Traversing the graph with APOC (Overview)
+
+In this exercise, you write some Cypher statements that use APOC for graph traversal.
+
+* *Exercise 2.1*: Obtain movies that are up to 3 hops away from the actor Hugo Weaving using Cypher.
+* *Exercise 2.2*: Obtain movies that are up to 3 hops away from the actor Hugo Weaving using Cypher with APOC.
+* *Exercise 2.3*: Modify a query to use APOC.
+
+Go to the next page to start this exercise.
+
+== Exercise 2.1: Obtain movies that are up to 3 hops away from the actor Hugo Weaving using Cypher. (Instructions)
+
+*Write the Cypher code to return all movies that are up to 3 hops away from the actor Hugo Weaving.*
+
+== Exercise 2.1: Obtain movies that are up to 3 hops away from the actor Hugo Weaving using Cypher. (Solution)
+
+*Write the Cypher code to return all movies that are up to 3 hops away from the actor Hugo Weaving.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (p:Person {name: 'Hugo Weaving'})-[*3]-(m:Movie)
+WITH DISTINCT m
+RETURN  m.title
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX2.1.png[EX2.1,width=600]
+
+== Exercise 2.2: Obtain movies that are up to 3 hops away from the actor Hugo Weaving using Cypher with APOC. (Instructions)
+
+*Write the Cypher code that uses APOC to return all movies that are up to 3 hops away from the actor Hugo Weaving.*
+
+== Exercise 2.2: Obtain movies that are up to 3 hops away from the actor Hugo Weaving using Cypher with APOC. (Solution)
+
+*Write the Cypher code that uses APOC to return all movies that are up to 3 hops away from the actor Hugo Weaving.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (p:Person {name: 'Hugo Weaving'})
+WITH p
+CALL apoc.path.subgraphNodes(p, {labelFilter:'>Movie',maxLevel:3}) YIELD node AS movie
+RETURN  movie.title
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX2.2.png[EX2.2,width=600]
+
+== Exercise 2.3: Modify a query to use APOC. (Instructions)
+
+Here is a Cypher query that retrieves four movies and for each movie, return the :ACTED_IN path to at most three actors.
+
+[source, cypher]
+----
+MATCH (m:Movie) WITH m LIMIT 4
+RETURN m, [path = (m)<-[:ACTED_IN]-(:Person) | path][0..3] as paths
+----
+
+*1. Run this query. The results should be:*
+
+[.thumb]
+image::EX2.3.png[EX2.3,width=600]
+
+*2. Rewrite this query to use APOC.*
+
+== Exercise 2.3: Modify a query to use APOC. (Solution)
+
+Here is a Cypher query that retrieves four movies and for each movie, return the :ACTED_IN path to at most three actors.
+
+[source]
+----
+MATCH (m:Movie) WITH m LIMIT 4
+RETURN m, [path = (m)<-[:ACTED_IN]-(:Person) | path][0..3] as paths
+----
+*1. Run this query. The results should be:*
+
+[.thumb]
+image::EX2.3.png[EX2.3,width=600]
+
+*2. Rewrite this query to use APOC.*
+
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (m:Movie) WITH m LIMIT 4
+CALL apoc.path.expandConfig(m,{relationshipFilter:'<ACTED_IN',labelFilter:'/Person',limit:3,maxLevel:1}) YIELD path
+RETURN path
+----
+
+The results should be:
+
+[.thumb]
+image::EX2.3C.png[EX2.3C,width=600]
+
+
+== Exercise 2: Taking it further
+
+. Explore the APOC documentation.
+. Write code to perform different types of graph traversal.
+
+== Exercise 2: Traversing the graph with APOC (Summary)
+
+
+In this exercise, you performed and compared the execution of queries using Cypher for path traversal with the same queries using APOC procedures.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/03.html'>Continue to Exercise 3</a>]
+endif::[]
