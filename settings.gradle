@@ -60,3 +60,9 @@ project(':intro-exercises').projectDir = file('modules/intro-exercises')
 
 include 'advanced-cypher-exercises'
 project(':advanced-cypher-exercises').projectDir = file('modules/advanced-cypher-exercises')
+
+include 'gds-paysim-demo'
+project(':gds-paysim-demo').projectDir = file('modules/gds-paysim-demo')
+
+include 'intro-neo4j'
+project(':intro-neo4j').projectDir = file('modules/intro-neo4j')

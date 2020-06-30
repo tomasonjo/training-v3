@@ -1,0 +1,95 @@
+= Introduction to Neo4j
+:slug: 00-introneo-intro-neo4j-about
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Introduction to Graph Databases
+
+== About this course
+
+This course introduces you to graph databases and how to use Neo4j and Cypher to query and update a Neo4j database.
+
+This course is intended for developers, administrators, architects, data scientists, and data analysts. You need not have programming experience to take this training.
+
+This self-paced training should take you 12 hours to complete if you perform all of the hands-on exercises in the course.
+
+We have set up a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance. You should register on the community site  where you can view other questions and answers for students taking our online training courses. The _Neo4j Community Site_ is an  excellent resource for answering many types of questions posed by other users of Neo4j.
+
+There are seven lessons in this course. Most lessons have hands-on exercises you should complete and all lessons have a set of review questions at the end. The hands-on exercises in this course can be completed in a Neo4j Sandbox, Neo4j Aura, or in Neo4j Desktop. We have provided an estimate of how long each lesson should take you to complete if you perform the hands-on exercises.
+
+If you answer the review questions at the end of a lesson you will see a checkmark for that lesson. If you correctly answer all questions for all lessons, you will qualify to receive a Certificate of Completion for this course.
+
+== Lessons of this course
+
+=== Introduction to Graph Databases
+
+[square]
+* Describe what a graph database is.
+* Describe how to model relational data in a property graph model.
+
+Estimated time: _30 minutes_
+
+=== Introduction to Neo4j
+
+[square]
+* Describe the Neo4j Graph Platform and its components.
+* Describe the features and benefits of Neo4j.
+
+Estimated time: _30 minutes_
+
+=== Setting Up Your Development Environment
+
+[square]
+* Set up your development environment for performing the hands-on exercises of this course which is one of:
+** Neo4j Sandbox
+** Neo4j Desktop
+
+Estimated time: _60 minutes_
+
+=== Introduction to Cypher
+
+[square]
+* Use `MATCH` to retrieve nodes from the graph.
+* Use `MATCH` to retrieve relationships from the graph.
+* Use `MATCH` to retrieve properties from the graph.
+
+Estimated time: _120 minutes_
+
+=== Getting More Out of Queries
+
+[square]
+* Use the `WHERE` clause for queries.
+* Control query processing.
+* Control how results are returned.
+* Work with Cypher dates and lists.
+
+Estimated time: _120 minutes_
+
+=== Creating Nodes and Relationships
+
+[square]
+* Create, update, and delete nodes and properties of nodes.
+* Create, update, and delete relationships and properties of relationships.
+* Merge data in the graph.
+
+Estimated time: _120 minutes_
+
+=== Getting More Out of Neo4j
+
+[square]
+* Use parameters.
+* Define constraints in the graph.
+* Profile and monitor query execution.
+* Define indexes in the graph.
+* Import relational data into the graph.
+
+Estimated time: _120 minutes_
+
+=== Summary
+
+[square]
+* Obtain Certificate of Completion.
+* Resources to learn more.
+* Course feedback.
+

@@ -1,0 +1,18 @@
+= Introduction to Neo4j: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
+include::{includedir}/01_IntroductionToGraphDatabases.adoc[leveloffset=+1]
+include::{includedir}/02_IntroductionToNeo4j.adoc[leveloffset=+1]
+include::{includedir}/03_SettingUpYourDevelopmentEnvironment.adoc[leveloffset=+1]
+include::{includedir}/04_IntroductionToCypher.adoc[leveloffset=+1]
+include::{includedir}/05_GettingMoreOutOfnQueries.adoc[leveloffset=+1]
+include::{includedir}/06_CreatingNodesAndRelationships.adoc[leveloffset=+1]
+include::{includedir}/07_GettingMoreOutOfNeo4jadoc[leveloffset=+1]
+include::{includedir}/08_Summary.adoc[leveloffset=+1]
+
+

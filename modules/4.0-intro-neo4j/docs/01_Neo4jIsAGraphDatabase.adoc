@@ -416,7 +416,6 @@ We recommend that you take our training course, _Graph Data Modeling for Neo4j_,
 
 === Question 1
 
-//ifndef::backend-pdf[]
 [.statement]
 What elements make up a graph?
 
