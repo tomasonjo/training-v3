@@ -60,6 +60,9 @@ subprojects {
       case "gds-applied-algos":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}applied-gds-web-apps/"
         break
+      case "online-training-v2":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}introduction-to-neo4j/"
+        break
       default:
         "https://neo4j.com/"
     }
@@ -81,6 +84,9 @@ subprojects {
         break
       case "gds-applied-algos":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}00-gdsaa-about-this-course/"
+        break
+      case "online-training-v2":
+        "https://neo4j.com/graphacademy/online-training/v3/${stage != 'production' ? '_testing_' : ''}00-introneo-intro-neo4j-about/"
         break
       default:
         "https://neo4j.com/"

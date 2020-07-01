@@ -64,5 +64,5 @@ project(':advanced-cypher-exercises').projectDir = file('modules/advanced-cypher
 include 'gds-paysim-demo'
 project(':gds-paysim-demo').projectDir = file('modules/gds-paysim-demo')
 
-include 'intro-neo4j'
-project(':intro-neo4j').projectDir = file('modules/intro-neo4j')
+include 'online-training-v2'
+project(':online-training-v2').projectDir = file('modules/online-training-v2')

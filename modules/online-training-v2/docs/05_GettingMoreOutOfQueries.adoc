@@ -76,7 +76,7 @@ RETURN p.name, m.title, m.released
 Here is the result:
 
 [.thumb]
-image::{imagedir}/MoviesBetween2003And2004.png[MoviesBetween2003And2004,width=800]
+image::MoviesBetween2003And2004.png[MoviesBetween2003And2004,width=800]
 
 You can also specify the same query as:
 
@@ -151,7 +151,7 @@ RETURN m.title, m.tagline
 Here is the result:
 
 [.thumb]
-image::{imagedir}/JackNicholsonMoviesWithTaglines.png[JackNicholsonMoviesWithTaglines,width=900]
+image::JackNicholsonMoviesWithTaglines.png[JackNicholsonMoviesWithTaglines,width=900]
 
 ==== Testing strings
 
@@ -170,7 +170,7 @@ RETURN p.name
 Here is the result:
 
 [.thumb]
-image::{imagedir}/ActorsNamedMichael.png[ActorsNamedMichael,width=800]
+image::ActorsNamedMichael.png[ActorsNamedMichael,width=800]
 
 Note that the comparison of strings is case-sensitive.
 There are a number of string-related functions you can use to further test strings.
@@ -205,7 +205,7 @@ RETURN p.name
 Here is the result:
 
 [.thumb]
-image::{imagedir}/MatchTomsRegex.png[MatchTomsRegex,width=800]
+image::MatchTomsRegex.png[MatchTomsRegex,width=800]
 
 [NOTE]
 If you specify a regular expression. The index will never be used. In addition, the property value must fully match the regular expression.
@@ -225,7 +225,7 @@ RETURN p.name, m.title
 Here is the result:
 
 [.thumb]
-image::{imagedir}/WroteMovies.png[WroteMovies,width=800]
+image::WroteMovies.png[WroteMovies,width=800]
 
 Next, we modify this query to exclude people who directed that movie:
 
@@ -239,7 +239,7 @@ RETURN p.name, m.title
 Here is the result:
 
 [.thumb]
-image::{imagedir}/WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=800]
+image::WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=800]
 
 Here is another example where we want to find _Gene Hackman_ and the movies that he acted in with another person who also directed the movie.
 
@@ -254,7 +254,7 @@ RETURN  gene, other, m
 Here is the result:
 
 [.thumb]
-image::{imagedir}/ExistsPattern.png[ExistsPattern,width=700]
+image::ExistsPattern.png[ExistsPattern,width=700]
 
 ==== Testing with list values
 
@@ -277,7 +277,7 @@ RETURN p.name as name, p.born as yearBorn
 Here is the result:
 
 [.thumb]
-image::{imagedir}/UsingIN.png[UsingIN,width=800]
+image::UsingIN.png[UsingIN,width=800]
 
 You can also compare a value to an existing list in the graph.
 
@@ -294,13 +294,13 @@ RETURN p.name
 Here is the result:
 
 [.thumb]
-image::{imagedir}/UsingINRoles.png[UsingINRoles,width=800]
+image::UsingINRoles.png[UsingINRoles,width=800]
 
 [NOTE]
 There are a number of syntax elements of Cypher that we have not covered in this training. For example, you can specify `CASE` logic in your conditional testing for your `WHERE` clauses. You can learn more about these syntax elements in the _Neo4j Cypher Manual_ and the _Cypher Refcard_.
 
 [.student-exercise]
-=== *Exercise 4: Filtering queries using the `WHERE` clause*
+=== Exercise 4: Filtering queries using the `WHERE` clause
 
 In the query edit pane of Neo4j Browser, execute the browser command:
 
@@ -359,12 +359,12 @@ When you perform this type of query, you may see a warning in the query edit pan
 You should only perform these types of queries if you know the data well and the implications of doing the query.
 
 [.thumb]
-image::{imagedir}/CartesionProductWarning.png[CartesionProductWarning,width=800]
+image::CartesionProductWarning.png[CartesionProductWarning,width=800]
 
 Here is the result of executing this query:
 
 [.thumb]
-image::{imagedir}/KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=700]
+image::KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=700]
 
 ==== Example 2: Using two MATCH patterns
 
@@ -383,7 +383,7 @@ RETURN m.title as movie, d.name AS director , other.name AS `co-actors`
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/MegsCoActors.png[MegsCoActors,width=800]
+image::MegsCoActors.png[MegsCoActors,width=800]
 
 ==== Setting path variables
 
@@ -400,7 +400,7 @@ RETURN megPath
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/MegPath.png[MegPath,width=800]
+image::MegPath.png[MegPath,width=800]
 
 ==== Specifying varying length paths
 
@@ -409,7 +409,7 @@ Think of the _connected_ relationship in _LinkedIn_ and how connections are made
 The _Movie_ database for this training does not have much depth of relationships, but it does have the _:FOLLOWS_ relationship that you learned about earlier:
 
 [.thumb]
-image::{imagedir}/FollowsRelationships.png[FollowsRelationships,width=400]
+image::FollowsRelationships.png[FollowsRelationships,width=400]
 
 You write a `MATCH` clause where  you want to find all of the followers of the followers of a _Person_ by specifying a numeric value for the number of hops in the path.
 Here is an example where we want to retrieve all _Person_ nodes that are exactly two hops away:
@@ -424,7 +424,7 @@ RETURN p
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/TwoHopRelationship.png[TwoHopRelationship,width=700]
+image::TwoHopRelationship.png[TwoHopRelationship,width=700]
 
 If we had specified `[:FOLLOWS*]` rather than `[:FOLLOWS*2]`, the query would return all _Person_ nodes that are in the `:FOLLOWS` path from _Paul Blythe_.
 
@@ -477,7 +477,7 @@ RETURN  p
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/ShortestPath1.png[ShortestPath1,width=800]
+image::ShortestPath1.png[ShortestPath1,width=800]
 
 Notice that the graph engine has traversed many types of relationships to get to the end node.
 
@@ -505,7 +505,7 @@ RETURN p.name, type(r), m.title
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/OptionalMatch.png[OptionalMatch,width=800]
+image::OptionalMatch.png[OptionalMatch,width=800]
 
 Notice that for all rows that do not have the _:REVIEWED_ relationship, a _null_ value is returned for the movie part of the query, as well as the relationship.
 
@@ -525,7 +525,7 @@ RETURN a.name, d.name, count(*)
 With this result returned:
 
 [.thumb]
-image::{imagedir}/Aggregation.png[Aggregation,width=800]
+image::Aggregation.png[Aggregation,width=800]
 
 ==== Collecting results
 
@@ -542,7 +542,7 @@ RETURN collect(m.title) AS `movies for Tom Cruise`
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=800]
+image::TomCruiseMovieCollection.png[TomCruiseMovieCollection,width=800]
 
 In Cypher, there is no "GROUP BY" clause as there is in SQL. The graph engine uses non-aggregated columns as an automatic grouping key.
 
@@ -564,7 +564,7 @@ RETURN actor.name, director.name, count(m) AS collaborations, collect(m.title) A
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900]
+image::ActorDirectorCollaborations.png[ActorDirectorCollaborations,width=900]
 
 There are more aggregating functions such as `min()` or `max()` that you can also use in your queries.
 These are described in the _Aggregating Functions_ section of the _Neo4j Cypher Manual_.
@@ -590,7 +590,7 @@ RETURN a.name, numMovies, movies
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/ActorsWith2or3Movies.png[ActorsWith2or3Movies,width=800]
+image::ActorsWith2or3Movies.png[ActorsWith2or3Movies,width=800]
 
 When you use the `WITH` clause, you specify the variables from the previous part of the query you want to pass on to the next part of the query.
 In this example, the variable _a_ is specified to be passed on in the query, but _m_ is not. Since _m_ is not specified to be passed on, _m_ will not be available later in the query.
@@ -613,12 +613,12 @@ RETURN p.name, m.title
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/PopularActorsWithAtLeast5Movies.png[PopularActorsWithAtLeast5Movies,width=800]
+image::PopularActorsWithAtLeast5Movies.png[PopularActorsWithAtLeast5Movies,width=800]
 
 In this example, we first retrieve all people, but then specify a pattern in the `WITH` clause where we calculate the number of `:ACTED_IN` relationships retrieved using the `size()` function. If this value is greater than five, we then also retrieve the `:DIRECTED` paths to return the name of the person and the title of the movie they directed. In the result, we see that these actors acted in more than five movies, but _Tom Hanks_ is the only actor who directed a movie and thus the only person to have a value for the movie.
 
 [.student-exercise]
-=== *Exercise 5: Controlling query processing*
+=== Exercise 5: Controlling query processing
 
 In the query edit pane of Neo4j Browser, execute the browser command:
 
@@ -649,7 +649,7 @@ RETURN m.released, collect(m.title) AS movies
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/Duplication.png[Duplication,width=800]
+image::Duplication.png[Duplication,width=800]
 
 We can eliminate the duplication by specifying the DISTINCT keyword as follows:
 
@@ -663,7 +663,7 @@ RETURN m.released, collect(DISTINCT m.title) AS movies
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/NoDuplication.png[NoDuplication,width=800]
+image::NoDuplication.png[NoDuplication,width=800]
 
 ==== Using WITH and DISTINCT to eliminate duplication
 
@@ -680,7 +680,7 @@ RETURN m.released, m.title
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/NoDuplication2.png[NoDuplication2,width=800]
+image::NoDuplication2.png[NoDuplication2,width=800]
 
 ==== Ordering results
 
@@ -701,7 +701,7 @@ RETURN m.released, collect(DISTINCT m.title) AS movies ORDER BY m.released DESC
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/Ordering.png[Ordering,width=800]
+image::Ordering.png[Ordering,width=800]
 
 ==== Limiting the number of results
 
@@ -721,7 +721,7 @@ RETURN m.title as title, m.released as year ORDER BY m.released DESC LIMIT 10
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/Limit.png[Limit,width=600]
+image::Limit.png[Limit,width=600]
 
 ==== Controlling the number of results using WITH
 
@@ -740,10 +740,10 @@ RETURN a.name, numMovies, movies
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/Count5Movies.png[Count5Movies,width=900]
+image::Count5Movies.png[Count5Movies,width=900]
 
 [.student-exercise]
-=== *Exercise 6: Controlling results returned*
+=== Exercise 6: Controlling results returned
 
 In the query edit pane of Neo4j Browser, execute the browser command: kbd:
 
@@ -777,7 +777,7 @@ RETURN m.title, cast, numCast ORDER BY size(cast)
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/CastList.png[CastList,width=900]
+image::CastList.png[CastList,width=900]
 
 You can read more about working with lists in the _List Functions_ section of the _Neo4j Cypher Manual_.
 
@@ -797,7 +797,7 @@ RETURN list, row
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/Unwind3.png[Unwind3,width=700]
+image::Unwind3.png[Unwind3,width=700]
 
 Notice that there is no `MATCH` clause. You need not query the database to execute Cypher statements, but you do need the `RETURN` clause here to return the calculated values from the Cypher query.
 
@@ -824,7 +824,7 @@ RETURN actor.name, age as `age today`
 Here is the result returned:
 
 [.thumb]
-image::{imagedir}/Age.png[Age,width=800]
+image::Age.png[Age,width=800]
 
 Consult the _Neo4j Cypher Manual_ for more information about the built-in functions available for working with data of all types:
 [square]
@@ -837,7 +837,7 @@ Consult the _Neo4j Cypher Manual_ for more information about the built-in functi
 * Spatial
 
 [.student-exercise]
-=== *Exercise 7: Working with Cypher data*
+=== Exercise 7: Working with Cypher data
 
 In the query edit pane of Neo4j Browser, execute the browser command:
 

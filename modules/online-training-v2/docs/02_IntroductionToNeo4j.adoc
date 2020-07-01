@@ -29,7 +29,7 @@ In addition, Neo4j provides APIs and drivers that enable you to create applicati
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/IndexFreeAdjacency.png[IndexFreeAdjancency,width=300,align=center]
+a|image::IndexFreeAdjacency.png[IndexFreeAdjancency,width=300,align=center]
 a|
 With index free adjacency, when a node or relationship is written to the database, it is stored in the database as connected and any subsequent access to the data is done using pointer navigation which is very fast. Since Neo4j is a native graph database (i.e. it has a graph as its core data model), it supports very large graphs where connected data can be traversed in constant time without the need for an index.
 |===
@@ -38,7 +38,7 @@ With index free adjacency, when a node or relationship is written to the databas
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/ACID.png[ACID,width=400,align=center]
+a|image::ACID.png[ACID,width=400,align=center]
 a|
 Transactionality is very important for robust applications that require an ACID (atomicity, consistency, isolation, and durability) guarantees for their data.
 If a relationship between nodes is created, not only is the relationship created, but the nodes are updated as connected.
@@ -49,7 +49,7 @@ All of these updates to the database must [.underline]#all# succeed or fail.
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/Clustering.png[Neo4j Clustering,width=300,align=center]
+a|image::Clustering.png[Neo4j Clustering,width=300,align=center]
 a|
 Neo4j supports clusters that provide high availability, scalability for read access to the data, and failover which is important to many enterprises.
 |===
@@ -77,7 +77,7 @@ You can also extend the functionality of Neo4j by creating user defined function
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/GraphAlgorithms.png[GraphAlgorithm,width=500,align=center]
+a|image::GraphAlgorithms.png[GraphAlgorithm,width=500,align=center]
 a|
 Neo4j has a published, open source Cypher library, Awesome Procedures on Cypher (APOC) that contain many useful procedures you can call from Cypher. Another Cypher library is the Graph Algorithms library, shown here, that can help you to analyze data in your graphs.
 Graph analytics are important because with Neo4j, the technology can expose questions about the data that you never thought to ask. And finally, you can use the GraphQL library (tree-based subset of a graph) to access a Neo4j Database. These libraries are available as plug-ins to your Neo4j development environment, but there are many other libraries that have been written by users for accessing Neo4j.
@@ -87,7 +87,7 @@ Graph analytics are important because with Neo4j, the technology can expose ques
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/Neo4jTooling.png[Neo4jTooling,width=500,align=center]
+a|image::Neo4jTooling.png[Neo4jTooling,width=500,align=center]
 a|
 In a development environment, you will use the Neo4j Browser or a Web browser to access data and test your Cypher statements, most of which will be used as part of your application code.
 Neo4j Browser is an application that uses the JavaScript Bolt driver to access the graph engine of the Neo4j database server.
@@ -119,14 +119,14 @@ Even after the graph has been defined and populated with data, it is  easy to mo
 
 [frame="none", cols="^.^,^.^,^.^"]
 |===
-a|image::{imagedir}/Whiteboard1.png[Whiteboard1,width=300,align=center]
-a|image::{imagedir}/Whiteboard2.png[Whiteboard2,width=300,align=center]
-a|image::{imagedir}/Whiteboard3.png[Whiteboard3,width=300,align=center]
+a|image::Whiteboard1.png[Whiteboard1,width=300,align=center]
+a|image::Whiteboard2.png[Whiteboard2,width=300,align=center]
+a|image::Whiteboard3.png[Whiteboard3,width=300,align=center]
 |===
 
 === Neo4j Graph Platform architecture
 
-image::{imagedir}/Neo4jPlatform.png[Neo4jPlatform,width=800,align=center]
+image::Neo4jPlatform.png[Neo4jPlatform,width=800,align=center]
 
 Here is the big picture of the Neo4j Graph Platform.
 The Neo4j Database provides support for graph transactions and analytics.

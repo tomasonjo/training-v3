@@ -1,30 +1,9 @@
-= Summary: Introduction to Neo4j
-:presenter: Neo Technology
-:twitter: neo4j
-:email: info@neotechnology.com
-:neo4j-version: 3.4.4
-:currentyear: 2018
+= Introduction to Neo4j: Summary
+:slug: 07-introneo-summary
 :doctype: book
 :toc: left
-:toclevels: 3
-:prevsect: 7
-:prevsecttitle: More
-:currsect: 8
-:experimental:
-:imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
-:manual: http://neo4j.com/docs/developer-manual/current
-:manual-cypher: {manual}/cypher
-
-[#module-8.quiz]
-== Quiz Results
-++++
-<span id="quizes-result"></span>
-++++
-
-== Course Completion Certificate
-++++
-<span id="cert-result"></span>
-++++
+:toclevels: 4
+:imagesdir: ../images
 
 == Course Summary
 
@@ -113,3 +92,8 @@ https://stackoverflow.com/tags/neo4j/hot
 == Course feedback
 
 We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.
+
+ifndef::backend-revealjs,backend-pdf[]
+[.certificate]
+== Certificate
+endif::[]

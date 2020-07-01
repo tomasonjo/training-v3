@@ -28,7 +28,7 @@ At the end of this module, you should be able to:
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/Neo4jDesktop.1.1.8.png[Neo4jDesktop,width=500,align=center]
+a|image::Neo4jDesktop.1.1.8.png[Neo4jDesktop,width=500,align=center]
 a|
 The Neo4j Desktop includes the Neo4j Database server which has a graph engine and kernel so that Cypher statements can be executed to access a database on your system.
 It includes an application called  Neo4j Browser.
@@ -43,7 +43,7 @@ The Neo4j Desktop runs on OS X, Linux, and Windows.
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/Neo4jAura-v1.0.png[Neo4j Aura,width=500,align=center]
+a|image::Neo4jAura-v1.0.png[Neo4j Aura,width=500,align=center]
 a|
 Neo4j Aura enables you to create a Neo4j Database instance in the Cloud using a monthly subscription model.
 The amount per month depends on the amount of memory required for the database.
@@ -57,7 +57,7 @@ In addition, the Neo4j will ensure that the database instance is always up-to-da
 
 [frame="none", cols="^.^,<.^"]
 |===
-a|image::{imagedir}/Neo4jSandbox.png[Neo4jSandbox,width=300,align=center]
+a|image::Neo4jSandbox.png[Neo4jSandbox,width=300,align=center]
 a|
 The Neo4j Sandbox is another way that you can begin development with Neo4j.
 It is a temporary, cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser. The database in a Sandbox may be blank or it may be pre-populated. It is started automatically for you when you create the Sandbox.
@@ -90,7 +90,7 @@ The Sandbox is intended as a temporary environment or for learning about the fea
 . Click the link to access Neo4j Browser.
 
 
-=== *Guided Exercise: Getting Started with Neo4j Desktop*
+=== Guided Exercise: Getting Started with Neo4j Desktop
 
 [NOTE]
 In order to perform the hands-on exercises for this training, you must install Neo4j Desktop, create a Database in Neo4j Aura, or create a Neo4j Sandbox.
@@ -132,7 +132,7 @@ https://youtu.be/V8rxwhoxfDw
 
 endif::backend-pdf[]
 
-=== *Guided Exercise: Creating a Database in Neo4j Aura*
+=== Guided Exercise: Creating a Database in Neo4j Aura
 
 [NOTE]
 In order to perform the hands-on exercises for this training, you must install Neo4j Desktop, create a Database in Neo4j Aura, or create a Neo4j Sandbox.
@@ -152,7 +152,7 @@ https://youtu.be/lnoxoAsWguM
 endif::backend-pdf[]
 
 
-=== *Guided Exercise: Creating a Neo4j Sandbox*
+=== Guided Exercise: Creating a Neo4j Sandbox
 
 [NOTE]
 In order to perform the hands-on exercises for this training, you must install Neo4j Desktop, create a Database in Neo4j Aura, or create a Neo4j Sandbox.
@@ -183,11 +183,11 @@ There are two ways that you can use Neo4j Browser functionality:
 * Open the Neo4j Browser application from Neo4j Desktop (database is local)
 * Use the Neo4j Browser Web interface by specifying a URL in a Web browser using port 7474 (database is local, in Neo4j Aura, or in Neo4j Sandbox)
 
-image:{imagedir}/Neo4jBrowser.png[Neo4jBrowser,width=800]
+image:Neo4jBrowser.png[Neo4jBrowser,width=800]
 
 The user interface and behavior for the Neo4j Browser application and Neo4j Browser Web interface is identical, except that in the Web interface, you have the option of syncing your settings and scripts to the cloud.
 
-=== *Guided Exercise: Getting Started with Neo4j Browser*
+=== Guided Exercise: Getting Started with Neo4j Browser
 
 ifdef::backend-html5[]
 Follow along with this video to become familiar with common tasks in Neo4j Browser.
