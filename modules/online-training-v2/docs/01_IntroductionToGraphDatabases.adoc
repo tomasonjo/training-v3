@@ -195,8 +195,8 @@ In Neo4j, the data model might evolve to something like this:
 image::GraphModel.png[GraphModel,width=1000,align=center]
 
 === How does Neo4j support the property graph model?
-[
-square]
+
+[square]
 * Neo4j is a *Database* - use it to reliably *store information* and *find it later*.
 * Neo4j's data model is a *Graph*, in particular a *Property Graph*.
 * *Cypher* is Neo4j's graph query language (*SQL for graphs!*).

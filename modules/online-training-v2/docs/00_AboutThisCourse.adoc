@@ -89,7 +89,7 @@ Estimated time: _120 minutes_
 === Summary
 
 [square]
-* Obtain Certificate of Completion.
+* Download Certificate of Completion.
 * Resources to learn more.
 * Course feedback.
 

@@ -367,7 +367,7 @@ Here is the result:
 image::CreateDuplicateJessicaFailure.png[CreateDuplicateJessicaFailure,width=800]
 
 [.student-exercise]
-===*Exercise 14: Managing constraints and node keys
+=== Exercise 14: Managing constraints and node keys
 
 In the query edit pane of Neo4j Browser, execute the browser command:
 

@@ -63,6 +63,9 @@ subprojects {
       case "online-training-v2":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}introduction-to-neo4j/"
         break
+      case "neo4j-administration":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}neo4j-administration/"
+        break
       default:
         "https://neo4j.com/"
     }
@@ -88,7 +91,9 @@ subprojects {
       case "online-training-v2":
         "https://neo4j.com/graphacademy/online-training/v3/${stage != 'production' ? '_testing_' : ''}00-introneo-intro-neo4j-about/"
         break
-      default:
+      case "neo4j-administration":
+        "https://neo4j.com/graphacademy/online-training/v3/${stage != 'production' ? '_testing_' : ''}00-neo4jadmin-about/"
+        break      default:
         "https://neo4j.com/"
     }
   }

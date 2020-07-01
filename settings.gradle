@@ -66,3 +66,6 @@ project(':gds-paysim-demo').projectDir = file('modules/gds-paysim-demo')
 
 include 'online-training-v2'
 project(':online-training-v2').projectDir = file('modules/online-training-v2')
+
+include 'neo4j-administration'
+project(':neo4j-administration').projectDir = file('modules/neo4j-administration')
