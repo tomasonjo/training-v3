@@ -1,5 +1,5 @@
 = Introduction to Neo4j
-:slug: 02-introneo-intro--neo4j
+:slug: 02-introneo-intro-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4

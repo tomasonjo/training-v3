@@ -727,7 +727,7 @@ RETURN p, m
 Here is the result of executing this Cypher statement. It went through all the nodes and added the relationship to the nodes that didn't already have the relationship.
 
 [.thumb]
-image::MergeRelationships.png[MergeRelationships,width=800]
+= image::MergeRelationships.png[MergeRelationships,width=800]
 
 You must be aware of the  behavior of the `MERGE` clause and how it will automatically create nodes and relationships. `MERGE` tries to find a full pattern and if it doesn't find it, it creates that full pattern. That's why in most cases you should first `MERGE` your nodes and then your relationship afterwards.
 
