@@ -1,0 +1,83 @@
+= Setup
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+== Preparing you development environment
+
+lorem ipsum
+
+- each data model in each database
+
+=== Neo4j Desktop with GDSL and APOC
+// Change the picture
+image::local-global-computation.png[local and global graph analytics,width=500, align=center]
+
+
+You must create a project and graph you will work with for this course.
+
+Note: APOC is also required to perform the exercises of this course, specifically, loading the Game of Thrones (GOT) data.
+
+check with dbms.procedures if it working
+
+link to docs
+
+=== Yelp dataset
+
+In preparing for this course, you should have already loaded the Yelp dataset into your graph. In the next exercise you will load the Game of Thrones (GOT) and European Roads dataset.
+
+
+=== Enter the Neuler
+
+image::enter-neuler.png[local and global graph analytics,width=500, align=center]
+
+
+NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+
+To install NEuler, go to install.graphapp.io
+
+Select the Graph Algorithms Playground.
+
+Loading datasets from Neuler
+
+== Load datasets
+
+an image
+
+== Datasets overview
+
+=== Game of Thrones
+
+The INTERACTS_SEASONx relationship has a property, weight to indicate the number of interactions.
+
+The Character node has two properties, name and id where id is the capitalized value of name.
+
+=== European roads 
+
+The EROAD relationship has three properties, distance, road_number, and watercrossing.
+
+The Place node has multiple properties, name and countryCode. 
+
+
+=== Recipes 
+
+Recipe and ingredients
+
+== Exercise: Setup
+
+Before coming to this training, you should have:
+Installed Neo4j Desktop.
+Downloaded the Yelp dataset. (Note: This database is 1G and will take a while to download) https://s3.amazonaws.com/neo4j-sandbox-usecase-datastores/v3_5/yelp.db.zip and unzip.
+Created a project and a local graph, providing a password you will remember.  (Do not start the database!)
+Installed APOC, Graph Algorithms, and Graph Algorithms Playground  in the project.
+Copied the Yelp database to your local graph:
+Click the Manage button for the local graph you just created.
+Click Open Folder.
+Navigate to data/databases.
+Copy the yelp.db  folder that you unzipped to databases.
+Rename the yelp.db folder to graph.db.
+Started the database.
+:play intro-graph-algos-exercises  (Set up your Development Environment)

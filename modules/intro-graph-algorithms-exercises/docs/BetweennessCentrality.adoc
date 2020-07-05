@@ -1,0 +1,102 @@
+= Betweenness Centrality
+:icons: font
+
+== Betweenness Centrality (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+The roads network should be projected in graph catalog as well.
+
+This is what you should see when you execute the following query:
+
+[source, cypher]
+----
+CALL gds.graph.list()
+YIELD graphName
+----
+
+image::LoadedRoadGraph.png[LoadedDatabase,width=150]
+
+If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+
+== Betweenness Centrality (Overview)
+
+The Betweenness centrality algorithm detects the amount of influence a node has over the flow of information in a graph.
+It is often used to find nodes that serve as a bridge from one part of a graph to another.
+
+The algorithm calculates the shortest path between all pairs of nodes in the graph, and the nodes that most frequently occur on these paths will have the highest score.
+
+In this exercise, you will execute betweenness centrality algorithm on the European Roads dataset:
+
+* *Part 1*: Perform Betweenness Centrality analysis.
+* *Part 2*: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes.
+
+Go to the next page to start this exercise.
+
+== Part 1: Perform Betweenness Centrality analysis. (Instructions)
+
+Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return a score value.
+
+*Hint*: Call `gds.betweenness.stream` with no special configuration values.
+
+== Part 2: Perform Betweenness Centrality analysis. (Solution)
+
+Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm.
+
+*Hint*: Call `gds.betweenness.stream` with no special configuration values. It will return a score value.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.betweenness.stream('roads')
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name AS place, score
+ORDER BY score DESC
+LIMIT 10
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX8.7.png[EX8.7,width=400]
+
+== Part 8: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Instructions/Solution)
+
+On very large graphs it is not really feasible to run all these shortest path computations, so we might choose to use an approximate version of the algorithm.
+
+The following query runs the RA-Brandes algorithm which calculates betweenness based on sampling parts of the graph. Run this analysis:
+[source, cypher]
+----
+CALL gds.betweenness.stream('roads', {
+    samplingSize:100})
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name AS place, score
+ORDER BY score DESC
+LIMIT 10
+----
+
+You should see similar results as with the normal version, but will see a different result each time.
+
+Try running this algorithm a few times to see how the results change.
+
+== Betweenness Centrality: Taking it further
+
+Try the Randomized-Approximate Brandes analysis with different values for:
+
+* samplingSize
+* samplingSeed
+
+== Betweenness Centrality (Summary)
+
+Betweenness centrality is one of the centrality measures to help you identify important nodes in the graph.
+
+In this exercise, you ran a betweenness centrality algorithm for the European Roads dataset.
