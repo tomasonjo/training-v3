@@ -1,0 +1,117 @@
+= Label Propagation
+:icons: font
+
+== Label Propagation (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+The roads network should be projected in graph catalog as well.
+
+This is what you should see when you execute the following query:
+
+[source, cypher]
+----
+CALL gds.graph.list()
+YIELD graphName
+----
+
+image::LoadedRoadGraph.png[LoadedDatabase,width=150]
+
+If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+
+== Label Propagation (Overview)
+
+In the Weakly Connected components exercise, you used the weakly connected components algorithm to write component information to each *Place* node.
+This property was named *wcc_partition*. In this exercise, you will gain some experience with writing Cypher to implement the Label Propagation algorithm using the European Roads dataset.
+This algorithm enables you to determine discreet sets of nodes that form clusters based upon how they are connected, as well as the weight of the connections.
+
+In this exercise, you will:
+
+* *Part 1*: Add a community property to each node using Label Propagation.
+* *Part 2*: Verify the results of executing the algorithm.
+
+Go to the next page to start this exercise.
+
+== Part 1: Add a community property to each node using Label Propagation. (Instructions)
+
+Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
+
+* The algorithm will perform a maximum of 10 iterations.
+* The analysis will be done *roads* network we projected in the Graph Catalog section.
+* The algorithm will write a property named *community_lpa* to each node with the computed value.
+* The weight property name is *inverse_distance*.
+
+*Hint*: You will call `gds.labelPropagation.write`.
+
+== Part 1: Add a community property to each node using Label Propagation. (Solution)
+
+Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
+
+* The algorithm will perform a maximum of 10 iterations.
+* The analysis will be done *roads* network we projected in the Graph Catalog section.
+* The algorithm will write a property named *community_lpa* to each node with the computed value.
+* The weight property name is *inverse_distance*.
+
+*Hint*: You will call `gds.labelPropagation.write`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.labelPropagation.write('roads',{
+    maxIterations: 10,
+    writeProperty: "community_lpa", 
+    relationshipWeightProperty: "inverse_distance" })
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX4.1.png[EX4.1,width=400]
+
+== Part 2: Verify the results of executing the algorithm. (Instructions)
+
+Write a query to return all *community_lpa* values in the graph containing *Place* nodes.
+For each distinct community value, return the list of places and the size of the community.
+
+== Part 2: Verify the results of executing the algorithm. (Solution)
+
+Write a query to return all *community_lpa* values in the graph containing *Place* nodes.
+For each distinct community value, return the list of places and the size of the community.
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (node:Place)
+RETURN node.community_lpa as communityId,
+       count(*) as communitySize,
+       collect(node.name) AS places
+ORDER BY communitySize DESC 
+LIMIT 10
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX4.2.png[EX4.2,width=400]
+
+== Label Propagation: Taking it further
+
+. Try using the stream version of the algorithm.
+. Try different configuration values, for example number of iterations.
+. Try using the *seedProperty* parameter.
+
+== Label Propagation (Summary)
+
+In this exercise, you gained some experience with writing Cypher to implement the Label Propagation algorithm using the European Roads dataset.
+This algorithm enables you to determine discreet sets of nodes that form clusters based upon how they are connected, as well as the weight of the connections.
+

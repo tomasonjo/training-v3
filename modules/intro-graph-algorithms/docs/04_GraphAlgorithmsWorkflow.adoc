@@ -1,0 +1,54 @@
+= Introduction to Graph Data Science library
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+== How do graph algorithms work?
+
+image::projected-graph-model.png[Projected graph model,width=500, align=center]
+
+
+Stored to project graph
+
+For large graphs,  you should:
+Use the explicit graph loader
+Load label/relationship - not based on a cypher projection
+
+== Graph management
+
+lorem ipsum
+
+Decide where to put cypher and native projections
+
+=== Native projection
+
+=== Cypher projection
+
+inferred relationships
+
+image::inferred-relationships.png[local and global graph analytics,width=500, align=center]
+
+Russian trolls?
+https://www.nbcnews.com/tech/social-media/russian-trolls-went-attack-during-key-election-moments-n827176
+
+== How to use graph algorithms
+
+Important: With the stream version of the procedure, no updates occur in the graph. This method is preferable for large graphs because nothing is written to the graph,  but very useful for using results externally.
+
+Mention that you can use some of the algorithms as functions (see the doc).
+
+=== Stream mode
+
+lorem ipsum
+
+=== Write mode
+
+lorem ipsum
+
+=== Mutate mode
+
+lorem ipsum
+

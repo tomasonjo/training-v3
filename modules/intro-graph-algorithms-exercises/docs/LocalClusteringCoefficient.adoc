@@ -1,0 +1,138 @@
+= Local Clustering Coefficient
+:icons: font
+
+== Local Clustering Coefficient (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:{guides}/img/database-icon.png[].
+
+image::{guides}/img/LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+The roads network should be projected in graph catalog as well.
+
+This is what you should see when you execute the following query:
+
+[source, cypher]
+----
+CALL gds.graph.list()
+YIELD graphName
+----
+
+image::LoadedRoadGraph.png[LoadedDatabase,width=150]
+
+If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+
+== Local Clustering Coefficient (Overview)
+
+The Local Clustering Coefficient algorithm computes the local clustering coefficient for each node in the graph.
+The local clustering coefficient of a node describes the likelihood that the neighbours of the node are also connected.
+It is used to determine how tightly-knit the nodes in a network are.
+
+In this exercise, you will gain some experience with writing Cypher to implement the local clustering coefficient algorithm using the European Roads dataset.
+
+* *Part 1*: Retrieve the average local clustering coefficient.
+* *Part 1*: Determine the local clustering coeffienct for node.
+* *Part 2*: Determine the triangle count for each *Place* node.
+
+Go to the next page to start this exercise.
+
+== Part 1: Determine the average local clustering coefficient (Instructions)
+
+Write a query to determine the average local clustering coeffient for the European road network.
+
+* Use the roads projected graph
+* No other parameters are needed
+
+*Hint*: You will call `gds.localClusteringCoefficient.stats`.
+
+== Part 1: Determine the average local clustering coefficient (Solution)
+
+Write a query to determine the average local clustering coeffient for the European road network.
+
+* Use the roads projected graph
+* No other parameters are needed
+
+*Hint*: You will call `gds.localClusteringCoefficient.stats`.
+
+[source, cypher]
+----
+CALL gds.localClusteringCoefficient.stats('roads')
+YIELD averageClusteringCoefficient
+----
+
+The average clustering coefficient has a fairly low value.
+
+== Part 2: Determine the local clustering coeffienct for node (Instructions)
+
+Write a query to determine the local clustering coeffient for each *Place* node in the European road network.
+
+* Use the roads projected graph
+* No other parameters are needed
+
+*Hint*: You will call `gds.localClusteringCoefficient.stream`.
+
+== Part 2: Determine the local clustering coeffienct for node (Solution)
+
+Write a query to determine the local clustering coeffient for each *Place* node in the European road network.
+
+* Use the roads projected graph
+* No other parameters are needed
+
+*Hint*: You will call `gds.localClusteringCoefficient.stream`.
+
+[source, cypher]
+----
+CALL gds.localClusteringCoefficient.stream('roads')
+YIELD nodeId, localClusteringCoefficient
+RETURN gds.util.asNode(nodeId).name as place, localClusteringCoefficient
+ORDER BY localClusteringCoefficient DESC
+LIMIT 10
+----
+
+== Part 3: Verify results of the clustering coefficient.  (Instructions)
+
+Write a query to confirm that the clustering coefficient scores of 1 for the *Bradford* node is correct.
+
+*Hint* You will need to look at the neighbors of *Bradford* node and check if they are also connected between each other.
+
+== Part 3: Verify results of the clustering coefficient.  (Solution)
+
+Write a query to confirm that the clustering coefficient scores of 1 are correct.
+
+Here is the solution code for verifying the clustering coefficient for the *Bradford* node:
+
+[source, cypher]
+----
+MATCH (p1:Place {name: "Bradford"})-[:EROAD]-(neighbor)
+WITH p1, collect(neighbor) AS neighbors
+UNWIND neighbors AS node1
+UNWIND neighbors AS node2
+WITH p1, node1, node2
+WHERE node1 <> node2
+OPTIONAL MATCH neighborPath = (node1)-[:EROAD]-(node2)
+OPTIONAL MATCH nodePath = (node1)-[:EROAD]-(p1)-[:EROAD]-(node2)
+RETURN neighborPath, nodePath
+----
+
+The results should be:
+
+[.thumb]
+image::EX3.3.png[EX3.3,width=300]
+
+{nbsp} +
+
+Check out other nodes with a clustering coefficient of 1.
+
+
+== Local Clustering Coefficient: Taking it further
+
+. Try using the non-stream version of the algorithms.
+
+== Local Clustering Coefficient (Summary)
+
+In this exercise, you gained some experience with writing Cypher to implement the Local Clustering coefficient algorithm to return the clustering coefficient for the *Place* nodes of the European Roads dataset.

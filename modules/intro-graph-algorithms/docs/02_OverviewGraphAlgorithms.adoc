@@ -1,0 +1,141 @@
+= Overview of graph algorithms
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+== Graph analytics and algorithms
+
+Connections are the most prevalent attribute of networks in our world. 
+
+And the reason why graph algorithms are so exciting is because they are the methods we use to understand real-world networks. They help us uncover the essence of the complex systems with live among - through analyzing their connections
+
+
+
+Graph Analytics is the use of a graph based approach to analyzing data. There are two approaches, one where you know what you are looking for and make decisions based upon what you find. The other approach is where you are learning about the data and use it to predict outcomes.
+
+image::local-global-computation.png[local and global graph analytics,width=500, align=center]
+
+Note when not to use graph algorithms!
+
+* Questions with just a few connections or flat (not nested). 
+* Questions solved with specific, well-crafted queries. 
+* Simple statistical results (sums, averages, ratios).
+* Example: 
+** Regular reporting based on defined criteria and well-organized data
+
+
+In general, very organized data that follows a regular schema and has relatively few connections between its data elements does not warrant graph specific storage and computation.
+
+=== What do people do with graph algorithms
+
+Connections are the most prevalent attribute of networks in our world. 
+
+And the reason why graph algorithms are so exciting is because they are the methods we use to understand real-world networks. They help us uncover the essence of the complex systems with live among - through analyzing their connections
+
+Organizations use these insights to model processes and make valuable predictions as well as prescribe particular actions. 
+
+==== Explore, plan, measure
+
+[.is-half.left]
+--
+image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
+--
+
+[.is-half.right]
+--
+Find significant patterns and plan for optimal structures
+--
+
+==== Machine learning
+
+[.is-half.left]
+--
+image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
+--
+
+[.is-half.right]
+--
+Use the measures as features to train an ML model
+--
+
+=== Example: Propagation pathways
+
+image::propagation-pathways.png[Propagation pathways,width=500,align=center]
+
+This is a very practical example of analyzing Propagation paths; trying to understand the routes taken by network failure,
+
+This data is from a serious US 2010 Airline congestion failure.  With the purple dots showing serious delays and the greens dots doing ok. If I had a time sequence you’d see the cascading, rippling failures and the key connections that spread the delay for east to west. 
+
+Of course this is just one example. This would very well be an IT network where you’re trying to contain infection or an electrical grid. Or perhaps you want to encourage the spread of something, like information, and you’ll need to understand the best path to promote.. 
+
+
+Another very practical example:
+
+Flight delays in the U.S. have an economic impact of over $40 billion per year [28], caused by the need for enhanced operations, passenger loss of time, decreased productivity and missed business and leisure opportunities.U.S. aviation map showing congested airports as purple nodes, while those with normal traffic as green nodes. The lines correspond to the direct flights between them on March 12, 2010. The clustering of the congested airports indicate that the delays are not independent of each other, but cascade through the airport network
+
+Report -Fleurquin, Ramasco, Eguiluz. Systemic delay propagation in the US airport network. Scientific Reports, 3: 1159, 2013 –
+ Characterization of Delay Propagation in the US Air-Transportation Network - https://ifisc.uib-csic.es/~jramasco/text/characterization_delays.pdf
+
+=== Example: Flow and dynamics
+
+image::flow-and-dynamics.png[Flow and dynamics,width=500,align=center]
+
+This time, looking at Flow and Dynamics to Understand capacity and optimize movement of resources. 
+
+This Telecom example shows the complexity in just one challenge, Least Cost Routing: You have to a call from point A to B but there are various different routes, costs by time of day, quality service levels that must be met and even priority calling to be factored in.  
+
+But Evaluating flow options is very common for planning in general and we could just as well be looking at the flow for shipping, maybe getting your goods to customer in the most efficient manner.  Or perhaps you need to provide services for emergencies – and you need to understand the time impacts of dynamic changes to flow.
+
+=== Example: Group resiliency
+
+image::group-resiliency.png[Group resiliency,width=500,align=center]
+
+Group resilience and influence is a fascinating area of study because you’re looking at things like how a group might break apart, or how you might bring them together, what’s the stability overtime and what are the influence points. 
+
+This diagram is from a really interesting study of a Belgian telecom network with the items in red being calls from French speakers and the items in Green being calls from Dutch speakers.  The first thing you notice is the high call volume within their own groups and they say this affinity among languages EXCEPT for that small little group that’s amplified.  In that cluster there was no significant preference to call mostly owns language and this this very group that acts as a communication bridge between the other majority French and majority Dutch speakers.  And if we wanted to bring these two groups closer together, we might focus on communications within that bridge group.
+
+Now kind of analyses is done for all sorts of scenarios such as fraud, perhaps you’re looking for a key middle man, or in biology to understand how to better target a disease. 
+
+Paper: Fast unfolding of communities in large networks: https://arxiv.org/pdf/0803.0476.pdf
+
+=== Common graph data science applications
+
+image::common-applications.png[Common graph data science applications,width=500,align=center]
+
+
+lorem ipsum
+
+== Types of graphs
+
+image::types-of-graphs.png[Types of graphs,width=500,align=center]
+
+lorem ipsum
+
+== Types of graph algorithms
+
+image::types-of-algorithms.png[Types of algorithms,width=500,align=center]
+
+lorem ipsum
+
+== Random network
+
+image::random-network.png[Random network,width=500,align=center]
+
+== Structured network
+
+image::structured-network.png[Structured network,width=500,align=center]
+
+== Structure and density
+
+image::structure-density.png[Structure and density,width=500,align=center]
+
+== Understanding graph complexity
+
+image::graph-complexity.png[Understanding graph complexity,width=500,align=center]
+
+== Summary
+
+Beatiful

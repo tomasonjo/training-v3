@@ -1,0 +1,17 @@
+= Summary
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+== Summary
+
+
+Beatiful
+
+== Resources
+
+
+== Quiz esse

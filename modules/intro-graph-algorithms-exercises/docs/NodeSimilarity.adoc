@@ -1,0 +1,159 @@
+= Node Similarity
+:icons: font
+
+== Node Similarity (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:{guides}/img/database-icon.png[].
+
+image::DatabaseAfterExercise9.png[DatabaseAfterExercise9,width=150]
+
+{nbsp} +
+
+Your database should contain more relationships that were created in Exercise 9. These new relationships are not required for the remainder of these exercises, but you should, at a minimum, have the nodes and relationships that you set up earlier for this course.
+
+== Node Similarity (Overview)
+
+Similarity algorithms are useful for analyzing datasets to determine how alike nodes are based upon their properties.
+
+In this exercise, you will execute some Similarity algorithms on the Yelp dataset:
+
+* *Part 1*: Run the Jaccard Similarity algorithm for photos that have been similarly tagged.
+
+Go to the next page to start this exercise.
+
+
+== Part 1: Run the Jaccard Similarity algorithm for photos that have been similarly tagged. (Instructions)
+
+The photos in this graph have been run through Google’s Image Labeling service and those labels are connected to photos by the *HAS_LABEL* relationship.
+Run the following query to explore this part of the graph:
+
+[source, cypher]
+----
+MATCH path = (p:Photo)-[:HAS_LABEL]->(label)
+RETURN path
+LIMIT 25
+----
+
+We want to determine which photos are similar to each other based on the labels they have been tagged with.
+You can do this using the Jaccard Similarity algorithm. Here is the starting template for the code:
+
+[source, cypher]
+----
+// Change this part of the query
+MATCH (p:Person)-[likes:LIKES]->(cuisine)
+WITH {item:id(p), categories: collect(id(cuisine))} as userData
+
+WITH collect(userData) as data
+
+// Fill in the config in this part of the query
+CALL algo.similarity.jaccard(data, {
+
+})
+
+YIELD p25, p50, p90, p99, p999, p100,  write
+RETURN p25, p50, p90, p99, p999, p100, write
+----
+
+Modify this code to:
+
+* Compute similarity between photos based on the labels they have.
+  *Hint*: Use the *HAS_LABEL* relationship.
+
+* Find the top 3 most similar photos.
+  *Hint*: Use the *topK* configuration parameter.
+
+* Store the results in the graph.
+  *Hint*: Use the *write* configuration parameter.
+
+== Part 1: Run the Jaccard Similarity algorithm for photos that have been similarly tagged. (Solution)
+
+The photos in this graph have been run through Google’s Image Labeling service and those labels are connected to photos by the *HAS_LABEL* relationship.
+Run the following query to explore this part of the graph:
+
+[source, cypher]
+----
+MATCH path = (p:Photo)-[:HAS_LABEL]->(label)
+RETURN path
+LIMIT 25
+----
+
+We want to determine which photos are similar to each other based on the labels they have been tagged with.
+You can do this using the Jaccard Similarity algorithm. Here is the starting template for the code:
+
+[source, cypher]
+----
+// Change this part of the query
+MATCH (p:Person)-[likes:LIKES]->(cuisine)
+WITH {item:id(p), categories: collect(id(cuisine))} as userData
+
+WITH collect(userData) as data
+
+// Fill in the config in this part of the query
+CALL algo.similarity.jaccard(data, {
+
+})
+
+YIELD p25, p50, p90, p99, p999, p100,  write
+RETURN p25, p50, p90, p99, p999, p100, write
+----
+
+Modify this code to:
+
+* Compute similarity between photos based on the labels they have.
+  *Hint*: Use the *HAS_LABEL* relationship.
+
+* Find the top 3 most similar photos.
+  *Hint*: Use the *topK* configuration parameter.
+
+* Store the results in the graph.
+  *Hint*: Use the *write* configuration parameter.
+
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (p:Photo)-[:HAS_LABEL]->(label)
+WITH {item:id(p), categories: collect(id(label))} as userData
+
+WITH collect(userData) as data
+
+CALL algo.similarity.jaccard(data, {topK: 3, similarityCutoff: 0.9, write: true})
+
+YIELD p25, p50, p90, p99, p999, p100,  write
+RETURN p25, p50, p90, p99, p999, p100, write
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX10.5A.png[EX10.5A,width=500]
+
+{nbsp} +
+
+Run this query to find the *SIMILAR* relationships created:
+
+[source, cypher]
+----
+MATCH path = (p1:Photo)-[r:SIMILAR]->(p2:Photo)
+RETURN path
+LIMIT 20
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::{guides}/img/EX10.5B.png[EX10.5B,width=500]
+
+== Node Similarity: Taking it further
+
+Use the similarity scores written to the graph to perform Community Detection analysis.
+
+== Node Similarity (Summary)
+
+Similarity algorithms are useful for analyzing datasets to determine how alike nodes are based upon their properties.
+
+In this exercise, you gained experience with some Similarity algorithms on the Yelp dataset.
+

@@ -1,0 +1,78 @@
+= Triangle Count
+:icons: font
+
+== Triangle Count (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:{guides}/img/database-icon.png[].
+
+image::{guides}/img/LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+The roads network should be projected in graph catalog as well.
+
+This is what you should see when you execute the following query:
+
+[source, cypher]
+----
+CALL gds.graph.list()
+YIELD graphName
+----
+
+image::LoadedRoadGraph.png[LoadedDatabase,width=150]
+
+If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+
+== Triangle Count (Overview)
+
+In this exercise, you will gain some experience with writing Cypher to implement the Triangle count algorithm using the European Roads dataset.
+
+
+* *Part 1*: Retrieve the triangles in the European Roads dataset.
+* *Part 2*: Determine the triangle count and clustering coefficient for each *Place* node.
+* *Part 3*: Verify results of the clustering coefficient.
+
+Go to the next page to start this exercise.
+
+== Part 1: Retrieve the triangles in the European Roads dataset. (Instructions)
+
+Write a query to return the set of triangles in the graph between *Place* node using the *EROAD* relationship.
+
+*Hint*: You will call `algo.triangle.stream`.
+
+== Part 1: Retrieve the triangles in the European Roads dataset. (Solution)
+
+Write a query to return the set of triangles in the graph between *Place* node using the *EROAD* relationship.
+
+*Hint*: You will call `algo.triangle.stream`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.triangleCount.stream('roads')
+YIELD nodeId, triangleCount
+RETURN gds.util.asNode(nodeId).name as place,
+       triangleCount
+ORDER BY triangleCount
+DESC LIMIT 10
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::{guides}/img/EX3.1.png[EX3.1,width=400]
+
+
+== Triangle Count: Taking it further
+
+. Write code to add the coefficient property to the *Place* nodes.
+. Try using the non-stream version of the algorithms.
+
+== Triangle Count (Summary)
+
+In this exercise, you gained some experience with writing Cypher to implement the Triangle count algorithm to return the triangle count and clustering coefficient for the *Place* nodes of  the European Roads dataset.

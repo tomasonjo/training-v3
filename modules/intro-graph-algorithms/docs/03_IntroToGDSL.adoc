@@ -1,0 +1,40 @@
+= Introduction to Graph Data Science library
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+== Neo4j Platform
+
+assad
+
+image::neo4j-platform.png[Neo4j Platform,width=500,align=center]
+
+
+asd
+
+== Neo4j for Graph Data Science
+
+image::neo4j-for-graph-data-science.png[Neo4j for graph data science,width=500,align=center]
+
+
+== Graph Data Science library
+
+Graph Data science library combined with Neo4j 
+
+lorem ipsum
+
+Product alpha beta tier etc...
+
+whole bunch of supported graph algorithms
+
+at least mention graph embeddings
+
+== Graph data science steps
+
+image::gds-steps.png[Graph data science steps,width=500,align=center]
+
+
+== Graph data science algorithms

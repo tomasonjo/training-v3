@@ -1,0 +1,62 @@
+= Additional information
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+
+== Monopartite graph
+
+Here be dragons…                            (warning!)
+
+The algorithms are built for monopartite graphs
+Monopartite = only one type of node 
+Solution: project a monopartite graph (but this only sometimes makes sense)
+The algorithms will run … even when they shouldn’t
+Most similarity algorithms rely on feature vectors that are the same length
+May not always return meaningful results
+
+== Neo4j Cluster
+
+GraphDatabase.driver( "bolt+routing://server?policy=OLAP" )
+
+// neo4j.conf
+causal_clustering.server_groups=olap1
+causal_clustering.load_balancing.config.server_policies.OLAP=groups(olap1)
+
+
+== Types of graphs
+
+Tie the flavors of graph back to what it means for running algorithms:
+
+Directed and weighted graphs have more data that can be used as inputs for your algorithms to tune their performance.
+
+Graph density is going to impact your performance (but is also not really a type of graph) but isn't an input.
+
+Cyclic/Acyclic graphs have implementations for some algorithms, but we don't implement any algorithms that require acyclic graphs.
+
+== Other tips
+
+Streaming lots of results with the Neo4j Drivers can be very slow. 
+Lots of results = easier to store those and query them afterwards. 
+Or, wrap a streamed result in apoc.export.csv.
+Avoid writing to core cluster members.
+Stream data in a cluster, use snapshot to write results.
+Avoid running graph algorithms on a transactional graph
+May get unexpected behavior when you write back to the graph.
+Similarity algorithms return nonsensical results when vectors are of different lengths.
+
+
+== Common concerns
+
+Why stream vs store results?
+Algorithm takes really long to run.
+Betweenness Centrality is slow (all pairs shortest path).
+Community Detection gives different results each time.
+Resolved by using a "seeding" parameter in Label Propagation and unionFind
+Do relationship directions matter?
+Triangle Count - ignores direction.
+PageRank - an outgoing relationship means you give credibility to the other node.
+What about weights? Which algorithms cans I use?

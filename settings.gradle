@@ -72,3 +72,9 @@ project(':neo4j-administration').projectDir = file('modules/neo4j-administration
 
 include '4.0-cypher-query-tuning'
 project(':4.0-cypher-query-tuning').projectDir = file('modules/4.0-cypher-query-tuning')
+
+include 'intro-graph-algorithms'
+project(':intro-graph-algorithms').projectDir = file('modules/intro-graph-algorithms')
+
+include 'intro-graph-algorithms-exercises'
+project(':intro-graph-algorithms-exercises').projectDir = file('modules/intro-graph-algorithms-exercises')

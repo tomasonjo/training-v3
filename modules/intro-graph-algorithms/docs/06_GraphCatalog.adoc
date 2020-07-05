@@ -1,0 +1,21 @@
+= Graph Catalog
+:slug: 00-gdsaa-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Setup and Cypher Refresher
+
+== Graph Catalog
+
+we store yes, truly truly
+
+
+=== Native projection
+
+yes
+
+=== Cypher projection
+
+yep
+=== Utility functions
