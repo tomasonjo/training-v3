@@ -1,5 +1,5 @@
 = Summary: Neo4j 3.5 Administration
-:slug: 07-neo4jadmin-summary
+:slug: 07-neo4jadmin-3-5-summary
 :doctype: book
 :toc: left
 :toclevels: 4

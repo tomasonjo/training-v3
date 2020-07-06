@@ -1,5 +1,5 @@
 = Getting More Out of Queries
-:slug: 05-introneo-getting-more-out-of-queries
+:slug: 05-introneo-3-5-getting-more-out-of-queries
 :doctype: book
 :toc: left
 :toclevels: 4

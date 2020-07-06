@@ -1,5 +1,5 @@
 = Introduction to Graph Databases
-:slug: 01-introneo-intro-graph-databases
+:slug: 01-introneo-3-5-intro-graph-databases
 :doctype: book
 :toc: left
 :toclevels: 4

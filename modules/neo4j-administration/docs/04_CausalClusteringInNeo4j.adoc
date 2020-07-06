@@ -1,5 +1,5 @@
 = Causal Clustering in Neo4j
-:slug: 04-neo4jadmin-causal-clustering-neo4j
+:slug: 04-neo4jadmin-3-5-causal-clustering-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4

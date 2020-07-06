@@ -1,5 +1,5 @@
 = Neo4j 3.5 Administration
-:slug: 00-neo4jadmin-about
+:slug: 00-neo4jadmin-3-5-about
 :doctype: book
 :toc: left
 :toclevels: 4

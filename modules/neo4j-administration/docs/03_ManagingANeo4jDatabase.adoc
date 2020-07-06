@@ -1,5 +1,5 @@
 = Managing a Neo4j Database
-:slug: 03-neo4jadmin-managing-neo4j-database
+:slug: 03-neo4jadmin-3-5-managing-neo4j-database
 :doctype: book
 :toc: left
 :toclevels: 4

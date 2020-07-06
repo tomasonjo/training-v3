@@ -1,5 +1,5 @@
 = Creating Nodes and Relationships
-:slug: 06-introneo-creating-nodes-and-relationships
+:slug: 06-introneo-3-5-creating-nodes-and-relationships
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,5 +1,5 @@
 = Setting Up Your Development Environment
-:slug: 03-introneo-setup
+:slug: 03-introneo-3-5-setup
 :doctype: book
 :toc: left
 :toclevels: 4

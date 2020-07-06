@@ -1,5 +1,5 @@
 = Introduction to Cypher
-:slug: 04-introneo-intro-cypher
+:slug: 04-introneo-3-5-intro-cypher
 :doctype: book
 :toc: left
 :toclevels: 4

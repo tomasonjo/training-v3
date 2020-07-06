@@ -86,13 +86,13 @@ subprojects {
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-igdm-40-implementing-graph-data-models-about/"
         break
       case "gds-applied-algos":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}00-gdsaa-about-this-course/"
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-gdsaa-about-this-course/"
         break
       case "online-training-v2":
-        "https://neo4j.com/graphacademy/online-training/v3/${stage != 'production' ? '_testing_' : ''}00-introneo-intro-neo4j-about/"
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-introneo-3-5-about/"
         break
       case "neo4j-administration":
-        "https://neo4j.com/graphacademy/online-training/v3/${stage != 'production' ? '_testing_' : ''}00-neo4jadmin-about/"
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-neo4jadmin-3-5-about/"
         break      default:
         "https://neo4j.com/"
     }

@@ -1,5 +1,5 @@
 = Security in Neo4j
-:slug: 05-neo4jadmin-security-in-neo4j
+:slug: 05-neo4jadmin-3-5-security-in-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4

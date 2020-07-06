@@ -1,5 +1,5 @@
 = Monitoring  Neo4j
-:slug: 06-neo4jadmin-monitoring-neo4j
+:slug: 06-neo4jadmin-3-5-monitoring-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4
