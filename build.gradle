@@ -155,7 +155,7 @@ subprojects {
   }
 
   task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
-    source = "${projectDir}/docs"
+    source = fileTree(dir: "${projectDir}/docs", include: '**/*.adoc', exclude: 'enrollment.adoc')
     outputDir "${projectDir}/build/online"
     moduleName stage != 'production' ? "_testing_${project.name}" : project.name
   }
