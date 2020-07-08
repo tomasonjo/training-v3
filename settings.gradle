@@ -77,7 +77,7 @@ include 'intro-graph-algorithms'
 project(':intro-graph-algorithms').projectDir = file('modules/intro-graph-algorithms')
 
 include 'gds-intro-graph-algorithms'
-project(':gds-intro-gds-graph-algorithms').projectDir = file('modules/gds-intro-gds-graph-algorithms')
+project(':gds-intro-graph-algorithms').projectDir = file('modules/gds-intro-graph-algorithms')
 
-include 'gds-intro-gds-graph-algorithms-exercises'
-project(':gds-intro-gds-graph-algorithms-exercises').projectDir = file('modules/gds-intro-graph-algorithms-exercises')
+include 'gds-intro-graph-algorithms-exercises'
+project(':gds-intro-graph-algorithms-exercises').projectDir = file('modules/gds-intro-graph-algorithms-exercises')
