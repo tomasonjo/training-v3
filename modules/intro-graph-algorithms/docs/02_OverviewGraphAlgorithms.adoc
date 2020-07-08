@@ -112,13 +112,24 @@ lorem ipsum
 
 image::types-of-graphs.png[Types of graphs,width=500,align=center]
 
+=== Monopartite graph
+
+All centrality measures and community detection algorihms are designed to run on monopartite graph.
+A common mistake is to run the centrality measure on a bipartite graph. Let's look at an example.
 lorem ipsum
 
 == Types of graph algorithms
 
 image::types-of-algorithms.png[Types of algorithms,width=500,align=center]
 
+=== Pathfinding algorithms
+
+=== Community detection (Clustering) algorithms
+
+=== Centrality measures
 lorem ipsum
+
+=== Similarity algorithms
 
 == Random network
 
