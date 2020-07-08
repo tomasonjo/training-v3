@@ -46,8 +46,32 @@ project(':4.0-neo4j-modeling-exercises').projectDir = file('modules/4.0-neo4j-mo
 include '4.0-intro-neo4j-exercises'
 project(':4.0-intro-neo4j-exercises').projectDir = file('modules/4.0-intro-neo4j-exercises')
 
-include 'intro-graph-algorithms'
-project(':intro-graph-algorithms').projectDir = file('modules/intro-graph-algorithms')
+include 'intro-neo4j-exercises'
+project(':intro-neo4j-exercises').projectDir = file('modules/intro-neo4j-exercises')
+g
+include 'neo4j-modeling-exercises'
+project(':neo4j-modeling-exercises').projectDir = file('modules/neo4j-modeling-exercises')
 
-include 'intro-graph-algorithms-exercises'
-project(':intro-graph-algorithms-exercises').projectDir = file('modules/intro-graph-algorithms-exercises')
+include 'intro-graph-algos-exercises'
+project(':intro-graph-algos-exercises').projectDir = file('modules/intro-graph-algos-exercises')
+
+include 'intro-exercises'
+project(':intro-exercises').projectDir = file('modules/intro-exercises')
+
+include 'advanced-cypher-exercises'
+project(':advanced-cypher-exercises').projectDir = file('modules/advanced-cypher-exercises')
+
+include 'gds-paysim-demo'
+project(':gds-paysim-demo').projectDir = file('modules/gds-paysim-demo')
+
+include 'online-training-v2'
+project(':online-training-v2').projectDir = file('modules/online-training-v2')
+
+include 'neo4j-administration'
+project(':neo4j-administration').projectDir = file('modules/neo4j-administration')
+
+include 'gds-intro-graph-algorithms'
+project(':gds-intro-gds-graph-algorithms').projectDir = file('modules/gds-intro-gds-graph-algorithms')
+
+include 'gds-intro-gds-graph-algorithms-exercises'
+project(':gds-intro-gds-graph-algorithms-exercises').projectDir = file('modules/gds-intro-graph-algorithms-exercises')
