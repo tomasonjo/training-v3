@@ -13,17 +13,19 @@ image::LoadedDatabase.png[LoadedDatabase,width=150]
 
 If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
 
-The roads network should be projected in graph catalog as well.
+== Label Propagation (Graph Catalog)
+
+The projected graph *roads* should be stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
 [source, cypher]
 ----
 CALL gds.graph.list()
-YIELD graphName
+YIELD graphName, nodeCount, relationshipCount
 ----
 
-image::LoadedRoadGraph.png[LoadedDatabase,width=150]
+image::LoadedRoadsGraph.png[LoadedDatabase]
 
 If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
 

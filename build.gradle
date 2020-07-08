@@ -223,7 +223,7 @@ subprojects {
             case 'preview':
               return "http://localhost:35729/browser-guide/images"
             default:
-              return "./${project.name}/images"
+              return "http://localhost:3000/images/"
           }
         }
 
