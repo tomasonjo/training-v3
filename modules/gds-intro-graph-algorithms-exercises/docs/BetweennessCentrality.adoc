@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Betweenness Centrality (Graph Catalog)
 
-The projected graph *roads* should be stored in the GDS graph catalog.
+The projected graph *roads* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -45,15 +45,21 @@ Go to the next page to start this exercise.
 
 == Part 1: Perform Betweenness Centrality analysis. (Instructions)
 
-Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return a score value.
+Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return nodeId and score value.
 
-*Hint*: Call `gds.betweenness.stream` with no special configuration values.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 
-== Part 2: Perform Betweenness Centrality analysis. (Solution)
+*Hint*: Call `gds.betweenness.stream` with no other special configuration values.
 
-Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm.
+== Part 1: Perform Betweenness Centrality analysis. (Solution)
 
-*Hint*: Call `gds.betweenness.stream` with no special configuration values. It will return a score value.
+Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return nodeId and score value.
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+
+*Hint*: Call `gds.betweenness.stream` with no other special configuration values.
 
 Here is the solution code:
 
@@ -69,13 +75,35 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX8.7.png[EX8.7,width=400]
+image::EXBC.1.png[EXBC.1,width=400]
 
-== Part 8: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Instructions/Solution)
+== Part 2: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Instructions)
 
 On very large graphs it is not really feasible to run all these shortest path computations, so we might choose to use an approximate version of the algorithm.
+Write the Cypher code to perform the Randomized-Approximate variation of the Betweenness Centrality algorithm.
+It will return nodeId and score value.
 
-The following query runs the RA-Brandes algorithm which calculates betweenness based on sampling parts of the graph. Run this analysis:
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Add the *samplingSize* parameter
+* Specify the sampling size of 100
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+
+*Hint*: Call `gds.betweenness.stream`
+
+== Part 2: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Solution)
+
+On very large graphs it is not really feasible to run all these shortest path computations, so we might choose to use an approximate version of the algorithm.
+Write the Cypher code to perform the Randomized-Approximate variation of the Betweenness Centrality algorithm.
+It will return nodeId and score value.
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Add the *samplingSize* parameter
+* Specify the sampling size of 100
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+
+*Hint*: Call `gds.betweenness.stream`
+
+The following query runs the RA-Brandes algorithm which calculates betweenness based on sampling parts of the graph:
 [source, cypher]
 ----
 CALL gds.betweenness.stream('roads', {
@@ -86,7 +114,7 @@ ORDER BY score DESC
 LIMIT 10
 ----
 
-You should see similar results as with the normal version, but will see a different result each time.
+You should see similar results as with the normal version. Due to randomness, each result will be slightly different.
 
 Try running this algorithm a few times to see how the results change.
 
@@ -101,4 +129,4 @@ Try the Randomized-Approximate Brandes analysis with different values for:
 
 Betweenness centrality is one of the centrality measures to help you identify important nodes in the graph.
 
-In this exercise, you ran a betweenness centrality algorithm for the European Roads dataset.
+In this exercise, you ran a betweenness centrality algorithm on the European Roads dataset.
