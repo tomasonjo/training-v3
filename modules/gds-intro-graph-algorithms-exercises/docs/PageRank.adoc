@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == PageRank (Graph Catalog)
 
-The projected graph *roads* should be stored in the GDS graph catalog.
+The projected graph *roads* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -34,7 +34,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the graph
 PageRank measures the transitive influence or connectivity of nodes.
 It can be computed by iteratively distributing one node’s rank (originally based on degree) over its neighbors.
 
-In this exercise, you will analyze PageRank for the European Roads dataset:
+In this exercise, you will execute PageRank on the European Roads dataset:
 
 * *Part 1*: Perform the PageRank algorithm.
 * *Part 2*: Perform the weighted variant of the PageRank algorithm.
@@ -44,27 +44,23 @@ Go to the next page to start this exercise.
 
 == Part 1: Perform the PageRank algorithm. (Instructions)
 
-Write Cypher code to perform PageRank analysis on the roads networks using these guidelines:
+Write Cypher code to perform PageRank analysis using these guidelines:
 
-* Use the stream variation of the algorithm.
-* Use the graph from the graph catalog
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify a maximum of 20 iterations.
-* Specify a dampening factor of .85.
 * Return the results ordering by *score*.
-* Limit the top ten results
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 
 *Hint*: Call `gds.pageRank.stream`.
 
 == Part 1: Perform the PageRank algorithm. (Solution)
 
-Write Cypher code to perform PageRank analysis on the *Place* nodes using the *EROADS* relationship using these guidelines:
+Write Cypher code to perform PageRank analysis using these guidelines:
 
-* Use the stream variation of the algorithm.
-* Use the graph from the graph catalog
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify a maximum of 20 iterations.
-* Specify a dampening factor of .85.
 * Return the results ordering by *score*.
-* Limit the top ten results
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 
 *Hint*: Call `gds.pageRank.stream`.
 
@@ -73,7 +69,7 @@ Here is the solution code:
 [source, cypher]
 ----
 CALL gds.pageRank.stream('roads', 
-    {maxIterations:20, dampingFactor:0.85})
+    {maxIterations:20})
 YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name AS place, score
 ORDER BY score DESC
@@ -83,7 +79,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX7.1.png[EX7.1,width=400]
+image::EXP.1.png[EXP.1,width=400]
 
 {nbsp} +
 
@@ -91,25 +87,30 @@ Here we see that Berlin, Budapest, and Praha are the most popular places.
 
 == Perform the weighted variant of the PageRank algorithm. (Instructions)
 
-Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+Write Cypher code to perform the weighted variant of the PageRank analysis using these guidelines:
 
-* Use the stream variation of the algorithm.
-* Use the same parameters as before.
-* Add the *relationshipWeightProperty* parameter
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Specify a maximum of 20 iterations.
+* Add the *relationshipWeightProperty* parameter.
+* The relationship weight property name is *inverse_distance*.
 
+*Hint*: Call `gds.pageRank.stream`.
 
 == Perform the weighted variant of the PageRank algorithm. (Solution)
 
-Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+Write Cypher code to perform the weighted variant of the PageRank analysis using these guidelines:
 
-* Use the stream variation of the algorithm.
-* Use the same parameters as before.
-* Add the *relationshipWeightProperty* parameter
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Specify a maximum of 20 iterations.
+* Add the *relationshipWeightProperty* parameter.
+* The relationship weight property name is *inverse_distance*.
+
+*Hint*: Call `gds.pageRank.stream`.
 
 [source, cypher]
 ----
 CALL gds.pageRank.stream('roads',{
-    maxIterations:20, dampingFactor:0.85, 
+    maxIterations:20, 
     relationshipWeightProperty:'inverse_distance'})
 YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name AS place, score
@@ -117,30 +118,22 @@ ORDER BY score DESC
 LIMIT 10
 ----
 
-The results are quite different to before when we take the inverse distance into account.
+Here we see that with the weighted variant of PageRank, the most popular places are Rio, Albania, and Tornio.
 
-== Perform the Personalized PageRank algorithm. (Instructions)
+== Perform the Personalized PageRank algorithm. (Instructions/Solution)
 
-Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+Write Cypher code to perform the Personalized PageRank analysis using these guidelines:
 
-* Use the stream variation of the algorithm.
-* Use the same parameters as before.
-* Input the Madrid node as the input of the *sourceNodes* parameter
-
-== Perform the Personalized PageRank. (Solution)
-
-Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
-
-* Use the stream variation of the algorithm.
-* Use the same parameters as before.
-* Input the Madrid node as the input of the *sourceNodes* parameter
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Add the *sourceNodes* parameter.
+* Specify *Madrid* as the source node.
+* Exclude *Madrid* from results
 
 [source, cypher]
 ----
 MATCH (p:Place)
 WHERE p.name = 'Madrid'
 CALL gds.pageRank.stream('roads', {
-    maxIterations:20, dampingFactor:0.85, 
     sourceNodes:[p]})
 YIELD nodeId, score
 WHERE nodeId <> id(p)
@@ -149,7 +142,7 @@ ORDER BY score DESC
 LIMIT 10
 ----
 
-We expect that the neighbouring places of Madrid will have a higher rank due to personalization.
+We expect that the neighbouring places of Madrid will have a higher rank.
 
 == PageRank: Taking it further
 

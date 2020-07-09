@@ -49,6 +49,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Return the results ordering by *score*.
 
 *Hint*: Call `gds.betweenness.stream` with no other special configuration values.
 
@@ -58,6 +59,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Return the results ordering by *score*.
 
 *Hint*: Call `gds.betweenness.stream` with no other special configuration values.
 
@@ -87,6 +89,8 @@ It will return nodeId and score value.
 * Add the *samplingSize* parameter
 * Specify the sampling size of 100
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Limit the top ten results
+
 
 *Hint*: Call `gds.betweenness.stream`
 
@@ -100,6 +104,8 @@ It will return nodeId and score value.
 * Add the *samplingSize* parameter
 * Specify the sampling size of 100
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Limit the top ten results
+
 
 *Hint*: Call `gds.betweenness.stream`
 
