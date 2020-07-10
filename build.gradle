@@ -66,6 +66,9 @@ subprojects {
       case "neo4j-administration":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}neo4j-administration/"
         break
+      case "4.0-cypher-query-tuning":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}cypher-query-tuning-40/"
+        break
       default:
         "https://neo4j.com/"
     }
@@ -93,7 +96,11 @@ subprojects {
         break
       case "neo4j-administration":
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-neo4jadmin-3-5-about/"
-        break      default:
+        break
+      case "4.0-cypher-query-tuning":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-cqt-40-about/"
+        break
+      default:
         "https://neo4j.com/"
     }
   }

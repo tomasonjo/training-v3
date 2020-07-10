@@ -1,0 +1,217 @@
+= How Queries Work in Neo4j
+:slug: 01-cqt-40-how-queries-work-in-neo4j
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Preparing for Query Tuning
+
+== About this module
+
+At the end of this module, you should be able to:
+[square]
+* Describe the components of query processing.
+* Use `EXPLAIN` to view the query plan.
+* Use `PROFILE` to view the query plan and execution.
+* Describe how information is used for query processing:
+** node labels
+** node degree
+** count store
+** indexes
+** relationships
+** properties
+
+== Components of query
+
+When you execute a Cypher statement that is a query against the graph, the following steps occur:
+
+. Query is compiled into an execution plan in the Neo4j DBMS if it is not already in the Query Cache.
+. The execution plan executes in the Neo4j DBMS to retrieve data. This is where the Page Cache is used as it holds the data in memory.
+. Neo4j DBMS returns results to the client.
+
+Each of these steps takes time and your goal is to minimize these times.
+
+=== Query Cache
+
+The Query Cache is an in-memory data structure that keeps track of queries and their associated execution plans that have been executed against the DBMS.
+
+[square]
+* Each unique query is stored as a hash value.
+** It is case-sensitive:
+*** `MATCH (a:Actor)` is different from `MATCH(A:Actor)`.
+** Literal values are part of the hash value:
+*** `MATCH (a:Actor {name: 'Joe'})` is different from `MATCH (a:Actor {name: 'Alice'})`.
+** *Best Practice*: Always use parameters for literal values in your queries.
+*** `MATCH (a:Actor {name: $actorName})`
+* If the graph has changed significantly, an execution plan could become stale. In this case it is removed from the Query Cache.
+* If the Query Cache is full, it removes a least recently used query to make room for a different query.
+
+=== Page Cache
+
+The Page Cache is an in-memory copy of part or all of the graph.
+Ideally, you want as much of the graph to be in memory as possible, but this will depend upon the size of the graph and the amount of RAM on the system where the Neo4j instance is running.
+Later in this course, you will see how the page cache is used in the steps of a query plan when it executes.
+
+You use the `:sysinfo` Neo4j Browser command to examine the usage of the Page Cache:
+
+image::Sysinfo.png[Sysinfo,width=800,align=center]
+
+Ideally, you  want the utilization of the Page Cache to be as close to 100% as possible.
+If you see that in your application, there are a lot of flushes of the Page Cache, then you should consider adding more RAM to the system.
+
+== Execution plan
+
+The compilation of the Cypher query results in the execution plan.
+The execution plan is a series of steps (operators) that execute, some in sequence and some in parallel, depending on the steps.
+
+
+=== Using `EXPLAIN`
+
+You use the `EXPLAIN` feature of Cypher to view the estimated execution plan for the query.
+When using `EXPLAIN`, Neo4j provides information based upon what is in the Page Cache.
+This information, however may not match what is in the database.
+
+You can use `EXPLAIN` to identify any queries that have mistakes in them.
+
+==== Example: Query using the wrong property name
+
+A Cypher query may compile with no problem and even execute, but is it constructed correctly?
+Suppose we have this query:
+
+image::FullNameWrong.png[FullNameWrong,width=800,align=center]
+
+The Person nodes in this graph do not have a property, _fullName_ that is indexed.
+In most cases, you want the starting point for retrieval (the anchor) to use an index.
+Here we see that the execution plan will do a scan of all nodes (NodeByLabelScan) with the label _Person_ to find those with the value for fullName.
+You don't want to see NodeByLabelScan steps in your execution plan.
+Seeing this will raise two questions:
+
+. Should _fullName_ have an index?
+. Is the property _fullName_ correct as we would expect to be using an index.
+
+In our graph, we have the following indexes and constraints:
+
+image::Indexes.png[Indexes,width=800,align=center]
+
+Clearly, this query should have used the _name_ property, rather than the _fullName_ property if we want to use an existing index.
+
+Here is the corrected execution plan that will use the index:
+
+image::CorrectedFullName.png[CorrectedFullName,width=800,align=center]
+
+The first step of the execution plan is to use _NodeIndexSeek_ which is what we want to see.
+
+==== Example: Query using the wrong relationship type
+
+In most well-designed graph data models, relationships can be the most efficient way to retrieve data.
+Suppose we have this query:
+
+image::RelationshipWrong.png[RelationshipWrong,width=800,align=center]
+
+Here we see that a variable, _DIRECTED_ is specified for the relationship.
+That is, we are not specifying a particular relationship type in the query.
+We can see in the execution plan that no relationship type is used.
+The query is missing the ":" to specify the relationship type.
+
+Here is the corrected query:
+
+image::CorrectedRelationship.png[CorrectedRelationship,width=800,align=center]
+
+And we see the correct syntax for the relationship in the _Expand_ step.
+
+== Using `PROFILE`
+
+Using `PROFILE` is what you use to understand the real work done in a query as it shows the execution plan, but also show the actual number of rows retrieved and passed between steps.
+
+Let's take a deeper look at an execution plan shown using `PROFILE`.
+
+
+//Elaine resume here refer to doc; create video/animation for how to follow the query in the execution plan like Andrew did
+
+== Information used during query processing
+
+=== Node labels
+
+=== Node degree
+
+=== Count store
+
+=== Index use
+
+=== Traversing relationships
+
+=== Accessing properties
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What Cypher statement is a best practice for adding nodes and relationships to the graph?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] `CREATE`
+- [ ] `ADD`
+- [x] `MERGE`
+- [ ] `INSERT`
+
+=== Question 2
+
+[.statement]
+Given this code:
+[source,cypher]
+----
+CREATE (:Person {name:"Joe"}
+CREATE (:Person {name:"Jane"}
+MERGE (:Person {name:"Bob"}
+MERGE (:Person {name:"Joe"}
+----
+
+[.statement]
+How many nodes are created in the graph?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] 0
+- [ ] 2
+- [x] 3
+- [ ] 4
+
+=== Question 3
+
+[.statement]
+Given this code:
+
+[source,cypher]
+----
+MERGE (a:Airport {code:'LAS'})
+MERGE (b:Airport {code:'LAX'})
+MERGE (c:Airport {code:'ABQ'})
+MERGE (a)-[:CONNECTED_TO {airline:'WN',flightNumber:'82',date:'2019-1-3',departure:'1715',arrival:'1820'}]->(b)
+MERGE (a)-[:CONNECTED_TO {airline:'WN',flightNumber:'500',date:'2019-1-3',departure:'1445',arrival:'1710'}]->(c)
+----
+
+[.statement]
+What is the implied entity for this domain?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [x] Airport
+- [ ] code
+- [ ] airline
+- [ ] CONNECTED_TO
+
+[.summary]
+== Summary
+
+You should now be able to:
+[square]
+* Write Cypher code to implement a simple initial graph data model.
+* Confirm that the starter data is in the graph.

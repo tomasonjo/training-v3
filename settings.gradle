@@ -69,3 +69,6 @@ project(':online-training-v2').projectDir = file('modules/online-training-v2')
 
 include 'neo4j-administration'
 project(':neo4j-administration').projectDir = file('modules/neo4j-administration')
+
+include '4.0-cypher-query-tuning'
+project(':4.0-cypher-query-tuning').projectDir = file('modules/4.0-cypher-query-tuning')
