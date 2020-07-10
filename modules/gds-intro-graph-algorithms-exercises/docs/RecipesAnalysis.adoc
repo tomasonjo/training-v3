@@ -15,6 +15,8 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Recipe analysis (Overview)
 
+Combine the knowledge esse
+
 PageRank measures the transitive influence or connectivity of nodes.
 It can be computed by iteratively distributing one node’s rank (originally based on degree) over its neighbors.
 

@@ -35,8 +35,6 @@ In this exercise, you will gain some experience with writing Cypher to implement
 
 
 * *Part 1*: Retrieve the triangles in the European Roads dataset.
-* *Part 2*: Determine the triangle count and clustering coefficient for each *Place* node.
-* *Part 3*: Verify results of the clustering coefficient.
 
 Go to the next page to start this exercise.
 
@@ -49,6 +47,7 @@ Write a query to return the set of triangles in the graph between *Place* node u
 == Part 1: Retrieve the triangles in the European Roads dataset. (Solution)
 
 Write a query to return the set of triangles in the graph between *Place* node using the *EROAD* relationship.
+Triangle is a crossroad obv.
 
 *Hint*: You will call `algo.triangle.stream`.
 
@@ -56,18 +55,39 @@ Here is the solution code:
 
 [source, cypher]
 ----
-CALL gds.triangleCount.stream('roads')
-YIELD nodeId, triangleCount
-RETURN gds.util.asNode(nodeId).name as place,
-       triangleCount
-ORDER BY triangleCount
-DESC LIMIT 10
+CALL gds.triangleCount.write('roads',
+   {writeProperty:'triangles'}))
+YIELD globalTriangleCount, nodeCount
+RETURN globalTriangleCount, nodeCount
 ----
 
 The results returned should look like this:
 
 [.thumb]
 image::{guides}/img/EX3.1.png[EX3.1,width=400]
+
+== Part 2: Look at the results
+
+[source, cypher]
+----
+MATCH (p:Place)
+RETURN p.name as place,
+       p.triangles as triangles
+ORDER BY triangles DESC
+LIMIT 10
+----
+
+Really sparse graph
+
+== Check out DACH
+
+CALL gds.triangleCount.stream('dach-region')
+YIELD nodeId, triangleCount
+RETURN gds.util.asNode(nodeId).name as place, triangleCount
+ORDER BY triangleCount DESC 
+LIMIT 10
+
+Graph is really sparse
 
 
 == Triangle Count: Taking it further

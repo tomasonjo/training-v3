@@ -18,6 +18,8 @@ The algorithms will run … even when they shouldn’t
 Most similarity algorithms rely on feature vectors that are the same length
 May not always return meaningful results
 
+== Multigraph
+
 == Neo4j Cluster
 
 GraphDatabase.driver( "bolt+routing://server?policy=OLAP" )

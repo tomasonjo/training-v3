@@ -112,6 +112,8 @@ lorem ipsum
 
 image::types-of-graphs.png[Types of graphs,width=500,align=center]
 
+=== Weighted graph
+
 === Monopartite graph
 
 All centrality measures and community detection algorihms are designed to run on monopartite graph.

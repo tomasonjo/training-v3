@@ -212,7 +212,7 @@ subprojects {
             case 'preview':
               return "http://localhost:35729/browser-guide"
             default:
-              return "./${project.name}"
+              return "http://localhost:3000/"
           }
         }
 

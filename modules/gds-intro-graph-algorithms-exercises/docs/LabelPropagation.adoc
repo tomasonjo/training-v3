@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Label Propagation (Graph Catalog)
 
-The projected graph *roads* should be stored in the GDS graph catalog.
+The projected graph *roads* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -32,15 +32,54 @@ If you do not see this in your Neo4j Browser, you will need to perform the graph
 == Label Propagation (Overview)
 
 In the Weakly Connected components exercise, you used the weakly connected components algorithm to write component information to each *Place* node.
-This property was named *wcc_partition*. In this exercise, you will gain some experience with writing Cypher to implement the Label Propagation algorithm using the European Roads dataset.
+This property was named *wcc_component*. In this exercise, you will gain some experience with writing Cypher to implement the Label Propagation algorithm using the European Roads dataset.
 This algorithm enables you to determine discreet sets of nodes that form clusters based upon how they are connected, as well as the weight of the connections.
 
 In this exercise, you will:
 
-* *Part 1*: Add a community property to each node using Label Propagation.
-* *Part 2*: Verify the results of executing the algorithm.
+* *Part 1*: Stats mode
+* *Part 1*: Inspect the weight statistics
+* *Part 2*: Stats mode
+* *Part 3*: Add a community property to each node using Label Propagation.
+* *Part 4*: Verify the results of executing the algorithm.
 
 Go to the next page to start this exercise.
+
+== Stats mode
+
+CALL gds.labelPropagation.stats('roads')
+YIELD communityCount, communityDistribution
+RETURN communityCount, communityDistribution
+
+== Part 1: Inspect weight statistics (Instructions/Solution)
+
+*Hint*: You will use `apoc.agg.statistics`.
+
+[source, cypher]
+----
+UNWIND ['distance','inverse_distance'] as prop
+MATCH (:Place)-[r:EROAD]->(:Place)
+WITH prop, apoc.agg.statistics(r[prop]) as stats
+RETURN prop, stats.total as total, stats.min as min, stats.max as max,
+       stats["0.5"] as p50, stats["0.75"] as p75, stats["0.9"] as p90,
+       stats["0.95"] as p95, stats.stdev as stdev
+----
+
+Values of *distance* property are in kilometers. More than half of the distances are below 100km.
+The longest road connecting Moskva and Rostov-na-Donu is 1066km long.
+On the other hand, most of the *inverse_distance* values have a value of less than 0.02.
+
+The results returned should look like this:
+
+== Weighted Stats mode
+
+CALL gds.labelPropagation.stats('roads',
+   {relationshipWeightProperty:'inverse_distance'})
+YIELD communityCount, communityDistribution
+RETURN communityCount, communityDistribution
+
+What enormous difference does it make!
+
 
 == Part 1: Add a community property to each node using Label Propagation. (Instructions)
 

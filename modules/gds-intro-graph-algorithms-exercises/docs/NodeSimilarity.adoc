@@ -19,7 +19,10 @@ Similarity algorithms are useful for analyzing datasets to determine how alike n
 
 In this exercise, you will execute some Similarity algorithms on the Yelp dataset:
 
-* *Part 1*: Run the Jaccard Similarity algorithm for photos that have been similarly tagged.
+* *Part 1*: Stats
+* *Part 2*: Run the Jaccard Similarity algorithm for photos that have been similarly tagged.
+* *Part 3*: Inspect results
+* *Part 4*: Create item recommendation
 
 Go to the next page to start this exercise.
 

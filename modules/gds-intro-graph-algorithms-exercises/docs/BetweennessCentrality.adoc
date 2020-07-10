@@ -74,6 +74,17 @@ ORDER BY score DESC
 LIMIT 10
 ----
 
+== Part 2: Dach Region
+
+[source, cypher]
+----
+CALL gds.betweenness.stream('dach-region')
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name AS place, score
+ORDER BY score DESC
+LIMIT 10
+----
+
 The results returned should look like this:
 
 [.thumb]

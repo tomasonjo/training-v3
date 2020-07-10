@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Weakly Connected Components (Graph Catalog)
 
-The projected graph *roads* should be stored in the GDS graph catalog.
+The projected graph *roads* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -31,14 +31,13 @@ If you do not see this in your Neo4j Browser, you will need to perform the graph
 
 == Weakly Connected Components (Overview)
 
-In this exercise, you will gain some experience with writing Cypher for weakly connected graph algorithm using the European Roads dataset.
+Weakly connected components algorithm is used to find disconnected components or islands in a graph.
 
+In this exercise, you will gain some experience with writing Cypher for weakly connected graph algorithm using the European Roads dataset.
 
 * *Part 1*: View the European Roads dataset schema.
 * *Part 2*: Find all connected places, writing unionFind partition information to the graph.
 * *Part 3*: Verify results of the weakly connected nodes execution.
-* *Part 4*: Execute the weighted Weakly connected component algorithm
-
 
 Go to the next page to start this exercise.
 
@@ -61,7 +60,7 @@ RETURN p LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX2.1.png[EX2.1,width=300]
+image::EXWCC.1.png[EXWCC.1,width=300]
 
 {nbsp} +
 
@@ -71,8 +70,11 @@ The properties for an *EROAD* relationship are *distance*, *road_number*, and *w
 
 == Part 2: Find all weakly connected places, writing their weakly component information to the graph. (Instructions)
 
-A  weakly connected node is one where there is a path in any direction from one node another node in the graph.
+A weakly connected component is one where there is a path in any direction between all nodes in the component.
 Write the Cypher code to find all weakly connected *Place* nodes and set the property, *wcc_component* for each node based upon the result of the algorithm.
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+
 
 *Hint*: You will use `gds.wcc.write`.
 
@@ -97,12 +99,12 @@ The results returned should look like this:
 image::EX2.4.png[EX2.4,width=400]
 
 
-== Part 3: Verify results of the connected  nodes execution. (Instructions)
+== Part 3: Verify results of the connected nodes execution. (Instructions)
 
 Write a query to return all *wcc_component* values in the graph containing *Place* nodes.
 For each distinct component value, return the list of places.
 
-== Part 3: Verify results of the connected  nodes execution. (Solution)
+== Part 3: Verify results of the connected nodes execution. (Solution)
 
 Write a query to return all *wcc_component* values in the graph containing *Place* nodes.
 For each distinct component value, return the list of places.
@@ -124,29 +126,16 @@ The results returned should look like this:
 [.thumb]
 image::EX2.5.png[EX2.5,width=400]
 
+*Note*: Your component ids can have a different value due to randomness
+
 {nbsp} +
 
 Notice that most of the nodes are in the same partition.
 
-== Part 4: Execute the weighted Weakly connected component algorithm (Instructions/ Solution)
-
-maybe add something?
-
-[source, cypher]
-----
-CALL gds.wcc.stream('roads',{
-    relationshipWeightProperty:'inverse_distance',
-    threshold:0.2})
-YIELD nodeId, componentId
-RETURN componentId, 
-       count(*) as component_size, 
-       collect(gds.util.asNode(nodeId).name) as places
-----
-
 == Weakly Connected Components: Taking it further
 
 . Try using different configuration values.
-. Try using the stream version of the algorithm.
+. Try different cypher filtering combinations.
 
 == Weakly Connected Components (Summary)
 

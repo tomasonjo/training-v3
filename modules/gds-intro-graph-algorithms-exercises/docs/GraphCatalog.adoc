@@ -65,6 +65,24 @@ CALL gds.graph.create('roads','Place',
 })
 ----
 
+== Cypher Projection
+
+DACH region
+useful for filtering, among other things
+
+We will use them throughout the series
+
+[source, cypher]
+----
+CALL gds.graph.create.cypher('dach-region',
+   'MATCH (p:Place) 
+    WHERE p.countryCode in ["D", "A", "CH"]
+    RETURN id(p) as id',
+   'MATCH (s:Place)-[r:EROAD]->(t:Place)
+    RETURN id(s) as source,id(t) as target, r.inverse_distance as inverse_distance'
+    , {validateRelationships:false})
+----
+
 == Graph Catalog: Taking it further
 
 . Try projecting the Game of Thrones network.
