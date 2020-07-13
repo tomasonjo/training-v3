@@ -1,8 +1,8 @@
+import com.amazonaws.services.s3.model.CannedAccessControlList
+import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
+import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
 import com.neo4j.gradle.s3.S3Plugin
 import com.neo4j.gradle.s3.S3UploadTask
-import com.amazonaws.services.s3.model.CannedAccessControlList
-import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
-import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import com.neo4j.gradle.wordpress.WordPressPlugin
 import com.neo4j.gradle.wordpress.WordPressUploadTask
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
@@ -46,7 +46,7 @@ subprojects {
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
     asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
-    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.11")
+    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.18")
   }
 
   def stage = project.findProperty('stage')
@@ -592,13 +592,18 @@ subprojects {
   task convertGoogleSlides(type: AsciidoctorTask) {
     dependsOn asciidoctorGemsPrepare
 
+    // disable up-to-date
+    outputs.upToDateWhen { false }
+
     asciidoctorj {
       // must be a web accessible location
       attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
+        'env-slides': '',
+        'experimental': '',
         'google-slides-copy-id': '1aR6dlFmu6ssBuf1yQJm8I_cfTOOpSBHIfjqCQzuDsdQ',
         'google-slides-credentials-path': "${rootProject.rootDir}/tokens/credentials.json",
-        'google-slides-layout-student-exercise': "TITLE_ONLY_1",
-        'google-slides-layout-quiz': "TITLE_ONLY_1_1"
+        'google-slides-layout-student-exercise': "CUSTOM_2",
+        'google-slides-layout-quiz': "CUSTOM_1"
     }
 
     inProcess "IN_PROCESS"
