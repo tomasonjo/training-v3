@@ -89,7 +89,7 @@ And if we attempt to create a _Movie_ with the _title_, _The Matrix_, the Cypher
 CREATE (:Movie {title: 'The Matrix'})
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement on the _Movie_ graph:
 endif::[]
 
@@ -109,7 +109,7 @@ MATCH (m:Movie {title: 'The Matrix'})
 SET m.title = 'Top Gun'
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement on the _Movie_ graph:
 endif::[]
 
@@ -150,7 +150,7 @@ Here is an example for adding the existence constraint to the _tagline_ property
 CREATE CONSTRAINT ExistsMovieTagline ON (m:Movie) ASSERT exists(m.tagline)
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
@@ -219,7 +219,7 @@ WHERE p.name = 'Jessica Thompson'
 REMOVE rel.rating
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -235,7 +235,7 @@ You can query for the set of constraints defined in the graph as follows:
 CALL db.constraints()
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 And here is what is returned from the graph:
 endif::[]
 
@@ -255,7 +255,7 @@ Here we drop the existence constraint named _ExistsREVIEWEDRating_:
 DROP CONSTRAINT ExistsREVIEWEDRating
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -279,7 +279,7 @@ CREATE CONSTRAINT UniqueNameBornConstraint
        ON (p:Person) ASSERT (p.name, p.born) IS NODE KEY
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement on our Movie graph:
 endif::[]
 
@@ -305,7 +305,7 @@ WHERE NOT exists(p.born)
 SET p.born = 0
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With this result:
 endif::[]
 
@@ -334,7 +334,7 @@ For example, executing this Cypher statement will fail:
 CREATE (:Person {name: 'Jessica Thompson', born: 0})
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 

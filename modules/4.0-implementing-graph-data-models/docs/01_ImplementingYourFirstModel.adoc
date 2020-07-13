@@ -67,7 +67,7 @@ For this question:
 Here is how we might model for this question with some sample data:
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::InitialQuestionAirports.png[InitialQuestionAirports,width=500,align=center]
@@ -121,7 +121,7 @@ This exercise has 3 steps.
 Estimated time to complete: 15 minutes.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 While the students are doing this exercise, you can populate your empty graph as follows:

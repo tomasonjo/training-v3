@@ -176,7 +176,7 @@ We will use, as an example, modeling airline flights for an Orbitz-style use cas
 
 You can read in depth about this on Max’s blog.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/
 endif::[]
 --
@@ -192,7 +192,7 @@ Ask yourself:
 * What are the connections between the entities?
 * What properties do we need?
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Model this part of the class interactively.
@@ -208,7 +208,7 @@ The entities should be Airports, and the connections FLYING_TO, with one connect
 Airport data like city and flight data like airline, flight number, departure, etc. are necessary properties.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 This leads us to the model on the next slide.

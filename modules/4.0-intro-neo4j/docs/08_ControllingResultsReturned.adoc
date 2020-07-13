@@ -39,7 +39,7 @@ WHERE p.name = 'Tom Hanks'
 RETURN m.title, m.released
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -57,7 +57,7 @@ WHERE p.name = 'Tom Hanks'
 RETURN DISTINCT m.title, m.released
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -85,7 +85,7 @@ WHERE m.released = 2003
 RETURN m.title, collect(p.name) AS credits
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -108,7 +108,7 @@ WHERE m.released = 2003
 RETURN m.title, collect(DISTINCT p.name) AS credits
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -132,7 +132,7 @@ WITH DISTINCT m
 RETURN m.released, m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -158,7 +158,7 @@ WHERE p.name = 'Tom Hanks' OR p.name = 'Keanu Reeves'
 RETURN DISTINCT m.title, m.released ORDER BY m.released DESC
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -208,7 +208,7 @@ MATCH (m:Movie)
 RETURN m.title as title, m.released as year ORDER BY m.released DESC LIMIT 10
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -233,7 +233,7 @@ WITH m, p LIMIT 6
 RETURN collect(p.name), m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -304,7 +304,7 @@ RETURN a.name, movies
 --
 
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 

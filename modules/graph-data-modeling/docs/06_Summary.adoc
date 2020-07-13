@@ -17,11 +17,11 @@ In this course, you have learned how to:
 * Describe the common structures used in a Neo4j graph data model.
 * Refactor and evolve a graph data model.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 1
 endif::[]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 == Resources
 endif::[]
 
@@ -37,7 +37,7 @@ Neo4j documentation:
 
 https://neo4j.com/docs/
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 2
 endif::[]
 
@@ -53,7 +53,7 @@ Neo4j online and classroom training:
 
 https://neo4j.com/graphacademy/
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 3
 endif::[]
 
@@ -72,7 +72,7 @@ Neo4j events all over the world:
 
 https://neo4j.com/events/world/all/
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 4
 endif::[]
 
@@ -88,7 +88,7 @@ View questions/answers raised about Neo4j:
 
 https://stackoverflow.com/tags/neo4j/hot
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 
 == Course feedback
 

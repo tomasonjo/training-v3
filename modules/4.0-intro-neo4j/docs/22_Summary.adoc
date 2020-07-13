@@ -19,11 +19,11 @@ In this course, you have learned how to:
 * Create and use indexes.
 * Import data into Neo4j.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 1
 endif::[]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 == Resources
 endif::[]
 
@@ -39,7 +39,7 @@ Neo4j documentation:
 
 https://neo4j.com/docs/
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 2
 endif::[]
 
@@ -56,7 +56,7 @@ Neo4j online and classroom training:
 
 https://neo4j.com/graphacademy/
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 3
 endif::[]
 
@@ -76,7 +76,7 @@ Neo4j events all over the world:
 
 https://neo4j.com/events/world/all/
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 == Resources - 4
 endif::[]
 
@@ -92,7 +92,7 @@ View questions/answers raised about Neo4j:
 
 https://stackoverflow.com/tags/neo4j/hot
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 == Course feedback
 
 We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.

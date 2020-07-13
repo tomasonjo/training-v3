@@ -106,7 +106,7 @@ Notice that just as for constraints, a best practice is to specify a name for th
 In this case, the name is _MovieReleased_.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -134,7 +134,7 @@ WHERE m.released < 2000
 SET m.videoFormat = 'VHS'
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -160,7 +160,7 @@ Now that the graph has _Movie_ nodes with both the properties, _released_ and _v
 CREATE INDEX MovieReleasedVideoFormat FOR (m:Movie) ON (m.released, m.videoFormat)
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -202,7 +202,7 @@ CALL db.index.fulltext.createNodeIndex(
       'MovieTitlePersonName',['Movie', 'Person'], ['title', 'name'])
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned shows nothing exceptional:
 endif::[]
 
@@ -256,7 +256,7 @@ Notice that we specify `YIELD` after calling the procedure. This enables us to u
 In this case, we return all nodes that are found in the graph that have either a _title_ property or _name_ property containing the string, _Jerry_.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 And here is the result:
 endif::[]
 
@@ -300,7 +300,7 @@ CALL db.index.fulltext.queryNodes(
 RETURN node
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is what is returned:
 endif::[]
 
@@ -321,7 +321,7 @@ You have already seen the three types of indexes in our database thus far using 
 CALL db.indexes()
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is what is returned:
 endif::[]
 
@@ -339,7 +339,7 @@ To drop an index on a property, you simply use the `DROP INDEX` clause, specifyi
 DROP INDEX MovieReleasedVideoFormat
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -359,7 +359,7 @@ To drop a full-text schema index, you must call the procedure. Here we drop the 
 CALL db.index.fulltext.drop('MovieTitlePersonName')
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -376,7 +376,7 @@ You must list the indexes to confirm that it was dropped:
 CALL db.indexes()
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is what is returned:
 endif::[]
 

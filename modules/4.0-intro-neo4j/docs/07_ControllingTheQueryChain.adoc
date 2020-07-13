@@ -34,7 +34,7 @@ RETURN a.name, count(a) AS numMovies,
        collect(m.title) as movies
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -68,7 +68,7 @@ WHERE 1 < numMovies < 4
 RETURN a.name, numMovies, movies
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -111,7 +111,7 @@ The `UNWIND` clause turns the list of actors into rows of actors.
 Then the query returns the _title_ of the movie, the actor count, and the actor name for each row of the _actors_ collection.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -142,7 +142,7 @@ For the second `MATCH` clause, we use the found movie nodes, _m_.
 The `RETURN` clause has access to the movie, rating by that reviewer, the name of the reviewer, and the collection of director names for that movie.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -165,7 +165,7 @@ OPTIONAL MATCH (p)-[:DIRECTED]->(m:Movie)
 RETURN p.name, m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -198,7 +198,7 @@ MATCH (m) WHERE m.released=2000
 RETURN m.title, m.released
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 

@@ -44,7 +44,7 @@ WHERE p.name = 'Jane Doe'
 DELETE p
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -80,7 +80,7 @@ MATCH (a)-[rel]-()
 RETURN type(rel)
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of executing this code:
 endif::[]
 
@@ -105,7 +105,7 @@ DELETE rel
 RETURN a, m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of executing this code:
 endif::[]
 
@@ -125,7 +125,7 @@ WHERE a.name = 'Katie Holmes'
 RETURN count(rel) AS `Number of Katie Holmes relationships:`
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of executing this code:
 endif::[]
 
@@ -167,7 +167,7 @@ WHERE p.name = 'Liam Neeson'
 DETACH DELETE  p
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 

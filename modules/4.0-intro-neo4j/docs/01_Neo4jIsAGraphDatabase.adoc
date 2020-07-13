@@ -208,7 +208,7 @@ ifdef::backend-html5,backend-pdf[]
 In this video, you will see the benefits of using the native graph database, Neo4j.
 endif::[]
 
-ifdef::backend-html5,backend-revealjs[]
+ifdef::backend-html5,env-slides[]
 [.center]
 video::GM9bB4ytGao[youtube,width=560,height=315]
 endif::[]
@@ -217,7 +217,7 @@ ifdef::backend-pdf[]
 https://youtu.be/GM9bB4ytGao
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 kbd:[https://youtu.be/GM9bB4ytGao]
 endif::[]
 

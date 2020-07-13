@@ -39,7 +39,7 @@ MATCH (p:Person)-[:REVIEWED]->(m:Movie)
 RETURN  p.name, m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Returns the following:
 endif::[]
 
@@ -70,7 +70,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, d.name, count(m)
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With this result returned:
 endif::[]
 
@@ -105,7 +105,7 @@ WHERE p.name ='Tom Cruise'
 RETURN collect(m.title) AS `movies for Tom Cruise`
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -170,7 +170,7 @@ RETURN actor.name, director.name,
        count(m) AS collaborations, collect(m.title) AS movies
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -215,7 +215,7 @@ image::MovieNodeinTable.png[MovieNodeinTable,width=400,align=center]
 [.statement]
 Here we see that the Movie nodes have three properties, two of them are of type String while the other is of type Integer.
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 You have also learned that the `collect()` function can create lists of values or objects where a list is comma-separated and you can use the `IN` keyword to search for a value in a list. 
 Next, you will learn more about working with lists and dates in Cypher.
 endif::[]
@@ -238,7 +238,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a) as cast, size(collect(a)) as castSize
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -263,7 +263,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a.name) as cast, size(collect(a.name)) as castSize
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -288,7 +288,7 @@ RETURN m.title, collect(a.name)[0] as `A cast member`,
        size(collect(a.name)) as castSize
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -319,7 +319,7 @@ RETURN {Jan: 31, Feb: 28, Mar: 31, Apr: 30 , May: 31, Jun: 30 ,
        Jul: 31, Aug: 31, Sep: 30, Oct: 31, Nov: 30, Dec: 31}['Feb'] AS DaysInFeb
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 

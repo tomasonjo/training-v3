@@ -166,12 +166,12 @@ ifdef::backend-html5,backend-pdf[]
 In this video, you will see the benefits of using the native graph database, Neo4j.
 endif::[]
 
-ifdef::backend-html5,backend-revealjs[]
+ifdef::backend-html5,env-slides[]
 [.center]
 video::GM9bB4ytGao[youtube,width=560,height=315]
 endif::[]
 
-ifdef::backend-pdf,backend-revealjs[]
+ifdef::backend-pdf,env-slides[]
 [.center]
 https://youtu.be/GM9bB4ytGao
 endif::[]
@@ -289,7 +289,7 @@ image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Next, you will learn about some features of Neo4j DBMS that make it different from traditional RDBMS.
 endif::[]
 
@@ -338,7 +338,7 @@ image::IFA-2.png[IFA-2,width=300,align=center]
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 In a RDBMS world, the pie-delivery process would go like this:
 endif::[]
 
@@ -500,7 +500,7 @@ In addition to executing Cypher statements, you can execute a number of system c
 For example, you can retrieve the list of queries that are currently running in the server.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [square]
 * Graphical UI that connects to Neo4j Server instance.
 * Execute Cypher code to retrieve or create data.
@@ -609,7 +609,7 @@ Developers can also extend the functionality of Neo4j by creating user defined f
 
 == Neo4j integration
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [square]
 * GRANDstack
 * Kettle

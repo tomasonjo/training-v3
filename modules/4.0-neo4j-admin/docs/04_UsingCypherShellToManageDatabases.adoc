@@ -168,7 +168,7 @@ ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 
-ifndef::backend-pdf,backend-revealjs[]
+ifndef::backend-pdf,env-slides[]
 
 include::exercises/Exercise03.adoc[]
 endif::[]
@@ -320,7 +320,7 @@ ifdef::backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 
-ifndef::backend-pdf,backend-revealjs[]
+ifndef::backend-pdf,env-slides[]
 
 include::exercises/Exercise04.adoc[]
 endif::[]

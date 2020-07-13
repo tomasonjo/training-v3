@@ -42,7 +42,7 @@ Here are the lessons of this course:
 
 == Resources
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 We have created a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
 You should register on the Community site where you can view other questions and answers for students taking our online training courses.
 The Neo4j Community Site is an excellent resource for answering many types of questions posed by other users of Neo4j.
@@ -53,6 +53,6 @@ Here are some resources you may use as you go through this course:
 [square]
 * https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual]
 * https://neo4j.com/developer/resources/[Neo4j Developer Resources]
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 * https://community.neo4j.com/c/general/online-training[Neo4j Community Site]
 endif::[]
