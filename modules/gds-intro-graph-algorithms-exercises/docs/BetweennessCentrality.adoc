@@ -74,6 +74,11 @@ ORDER BY score DESC
 LIMIT 10
 ----
 
+The results returned should look like this:
+
+[.thumb]
+image::EXBC.1.png[EXBC.1,width=400]
+
 == Part 2: Dach Region
 
 [source, cypher]
@@ -88,7 +93,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EXBC.1.png[EXBC.1,width=400]
+image::EXBC.2.png[EXBC.1,width=400]
 
 == Part 2: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Instructions)
 
@@ -130,6 +135,9 @@ RETURN gds.util.asNode(nodeId).name AS place, score
 ORDER BY score DESC
 LIMIT 10
 ----
+
+[.thumb]
+image::EXBC.3.png[EXBC.1,width=400]
 
 You should see similar results as with the normal version. Due to randomness, each result will be slightly different.
 

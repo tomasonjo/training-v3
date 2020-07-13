@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Weakly Connected Components (Graph Catalog)
 
-The projected graph *roads* should be created and stored in the GDS graph catalog.
+The projected graphs *roads* and *dach-region* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -26,6 +26,8 @@ YIELD graphName, nodeCount, relationshipCount
 ----
 
 image::LoadedRoadsGraph.png[LoadedRoadsGraph]
+
+{nbsp} +
 
 If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
 
@@ -104,6 +106,8 @@ The results returned should look like this:
 [.thumb]
 image::EXWCC.2.png[EXWCC.2,width=400]
 
+{nbsp} +
+
 The algorithm found six components in the graph.
 The largest one has 882 members, while the smallest has only two members.
 
@@ -113,6 +117,7 @@ Write a query to return all *wcc_component* values of the *Place* nodes.
 For each component id, return the size of the component, and the list of *Place* names.
 
 * Order the results by component size ascending.
+* Limit the top ten results
 
 == Part 3: Inspect results of the weakly connected nodes. (Solution)
 
@@ -120,6 +125,7 @@ Write a query to return all *wcc_component* values of the *Place* nodes.
 For each component id, return the size of the component, and the list of *Place* names.
 
 * Order the results by component size ascending.
+* Limit the top ten results
 
 Here is the solution code:
 
@@ -137,6 +143,8 @@ The results returned should look like this:
 
 [.thumb]
 image::EXWCC.3.png[EXWCC.3,width=400]
+
+{nbsp} +
 
 The component ids can have different values due to random assignment of ids.
 Notice that most of the nodes are in the same component.
@@ -192,6 +200,8 @@ The results returned should look like this:
 
 [.thumb]
 image::EXWCC.4.png[EXWCC.4,width=400]
+
+{nbsp} +
 
 One would assume that all the roads in Europe are connected, or at least those in the mainland like Germany and France.
 The results show otherwise.

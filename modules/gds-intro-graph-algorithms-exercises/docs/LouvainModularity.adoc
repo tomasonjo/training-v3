@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Louvain Modularity (Graph Catalog)
 
-The projected graph *roads* should be stored in the GDS graph catalog.
+The projected graphs *roads* and *dach-region* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -26,6 +26,8 @@ YIELD graphName, nodeCount, relationshipCount
 ----
 
 image::LoadedRoadsGraph.png[LoadedDatabase]
+
+{nbsp} +
 
 If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
 
@@ -39,32 +41,32 @@ It also reveals a hierarchy of communities at different scales, which is useful 
 In this exercise, you will perform the following with the European Roads dataset:
 
 * *Part 1*: Run the Louvain Modularity algorithm to add a community property to each node.
-* *Part 2*: Examine the results of executing the algorithm.
-* *Part 3*: Run the Louvain Modularity algorithm to discover a hierarchy of communities within the graph.
-* *Part 4*: Examine the results of executing the algorithm.
-* *Part 5*: View the partitioning of the data.
-* *Part 6*: View finer-grained data of communities.
+* *Part 2*: Inspect the results of the algorithm.
+* *Part 3*: Run the Louvain Modularity algorithm to discover the hierarchical structure of communities.
+* *Part 4*: Inspect the hierarchical results of the algorithm.
+* *Part 5*: View the communities on different hierarchical levels.
+* *Part 6*: Examine the communities at each level for a single place.
 
 Go to the next page to start this exercise.
 
 == Part 1: Run the Louvain Modularity algorithm to add a community property to each node. (Instructions)
 
-Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
+Write Cypher code to perform the weighted Louvain Modularity algorithm on the European road network using these guidelines:
 
-* The analysis will be done on the projected in-memory graph *roads*.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * The algorithm will write a property named *community_louvain* to each node with the computed value.
-* The weight property name is *inverse_distance*.
+* The relationship weight property name is *inverse_distance*.
 * `YIELD` the following results: modularity, ranLevels, communityCount.
 
 *Hint*: You will call `gds.louvain.write`.
 
 == Part 1: Run the Louvain Modularity algorithm to add a community property to each node. (Solution)
 
-Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
+Write Cypher code to perform the weighted Louvain Modularity algorithm on the European road network using these guidelines:
 
-* The analysis will be done on the projected in-memory graph *roads*.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * The algorithm will write a property named *community_louvain* to each node with the computed value.
-* The weight property name is *inverse_distance*.
+* The relationship weight property name is *inverse_distance*.
 * `YIELD` the following results: modularity, ranLevels, communityCount.
 
 *Hint*: You will call `gds.louvain.write`.
@@ -84,26 +86,33 @@ The results returned should look like this:
 [.thumb]
 image::EXLM.1.png[EX5.1,width=400]
 
-Algorithm found a total of 24 communities and has 3 hierarchical levels deep.
+{nbsp} +
 
-== Part 2: Verify the results of executing the algorithm. (Instructions)
+Algorithm found three hierarchical levels of communities with a total of 24 communities on the last level.
 
-Write a query to return all *community_louvain* values in the graph containing *Place* nodes.
-For each distinct community value, return the list of places and the size of community.
-
-== Part 2: Verify the results of executing the algorithm. (Solution)
+== Part 2: Inspect the results of the algorithm. (Instructions)
 
 Write a query to return all *community_louvain* values in the graph containing *Place* nodes.
-For each distinct community value, return the list of places and the size of community.
+For each distinct communities value, return the list of places and the community size.
+
+* Order the results by community size descending.
+
+== Part 2: Inspect the results of the algorithm. (Solution)
+
+Write a query to return all *community_louvain* values in the graph containing *Place* nodes.
+For each distinct communities value, return the list of places and the community size.
+
+* Order the results by community size descending.
+* Limit the top ten results
 
 Here is the solution code:
 
 [source, cypher]
 ----
-MATCH (node:Place)
-RETURN node.community_louvain AS communityId,
+MATCH (place:Place)
+RETURN place.community_louvain AS communityId,
        count(*) AS communitySize,
-       collect(node.name) AS places
+       collect(place.name) AS places
 ORDER BY communitySize DESC
 LIMIT 10
 ----
@@ -115,28 +124,29 @@ image::EXLM.2.png[EXLM.2,width=400]
 
 {nbsp} +
 
-As you can see, the algorithm found 25 different communities.
+The largest community has 75 members.
+It contains places from Belgium, Netherlands, France, and Germany.
 
 == Part 3: Run the Louvain Modularity algorithm to discover a hierarchy of communities within the graph. (Instructions)
 
 Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
 
-* The analysis will be done on the projected in-memory graph *roads*.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify that intermediate communities are to be analyzed.
 * The algorithm will write a property named *communities_louvain* to each node with the computed value for intermediate communities.
-* The weight property name is *inverse_distance*.
+* The relationship weight property name is *inverse_distance*.
 * `YIELD` the following results: modularity, ranLevels, communityCount.
 
 *Hint*: You will call `gds.louvain.write`.
 
-== Part 3: Run the Louvain Modularity algorithm to discover a hierarchy of communities within the graph. (Solution)
+== Part 3: Run the Louvain Modularity algorithm to discover the hierarchal structure of communities. (Solution)
 
 Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
 
-* The analysis will be done on the projected in-memory graph *roads*.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify that intermediate communities are to be analyzed.
 * The algorithm will write a property named *communities_louvain* to each node with the computed value for intermediate communities.
-* The weight property name is *inverse_distance*.
+* The relationship weight property name is *inverse_distance*.
 * `YIELD` the following results: modularity, ranLevels, communityCount.
 
 *Hint*: You will call `gds.louvain.write`.
@@ -150,7 +160,6 @@ CALL gds.louvain.write('roads',{
     relationshipWeightProperty: 'inverse_distance',
     includeIntermediateCommunities: true})
 YIELD modularity, ranLevels, communityCount
-
 ----
 
 The results returned should look like this:
@@ -158,12 +167,12 @@ The results returned should look like this:
 [.thumb]
 image::EXLM.1.png[EXLM.1,width=400]
 
-== Part 4: Verify the results of executing the algorithm. (Instructions)
+== Part 4: Inspect the hierarchical results of the algorithm. (Instructions)
 
 Write a query to return all *communities_louvain* values in the graph containing *Place* nodes.
 For each distinct communities value, return the list of places and the community size.
 
-== Part 4: Verify the results of executing the algorithm. (Solution)
+== Part 4: Inspect the hierarchical results of the algorithm. (Solution)
 
 Write a query to return all *communities_louvain* values in the graph containing *Place* nodes.
 For each distinct communities value, return the list of places and the community size.
@@ -172,10 +181,10 @@ Here is the solution code:
 
 [source, cypher]
 ----
-MATCH (node:Place)
-RETURN node.communities_louvain AS communities,
+MATCH (place:Place)
+RETURN place.communities_louvain AS communities,
        count(*) AS communitiesSize,
-       collect(node.name) AS places
+       collect(place.name) AS places
 ORDER BY communitiesSize DESC
 LIMIT 10
 ----
@@ -185,12 +194,14 @@ The results returned should look like this:
 [.thumb]
 image::EXLM.4.png[EX5.4,width=400]
 
-== Part 5: View the partitioning of the data. (Instructions/Solution)
+{nbsp} +
 
-You can then query the graph to find which nodes are in each partition.
-Let’s start with the final (and most coarse grained partition):
+Antwerpen, Gent, Bruxelles, and six other places share the same community through all the hierarchical levels.
 
-The results will be the same as before
+== Part 5: View the communities on different hierarchical levels. (Instructions/Solution)
+
+You can then query the graph to find which communities form at each hierarchical level.
+Let’s start with the final level (and most coarse-grained communities).
 
 Execute this code:
 
@@ -211,7 +222,12 @@ image::EXLM.2.png[EXLM.2,width=400]
 
 {nbsp} +
 
-If you want to find one of the intermediate partitions you can execute this code:
+The results are identical to before when we ran the Louvain Modularity algorithm in Part 2.
+The algorithm returns the last hierarchical level by default if we use the following parameter: `includeIntermediateCommunities:false`.
+
+{nbsp} +
+
+If you want to find one of the intermediate communities, you can execute this code:
 
 [source, cypher]
 ----
@@ -223,21 +239,22 @@ ORDER BY communitiesSize DESC
 LIMIT 10
 ----
 
-The results returned should look like this:
-
 [.thumb]
 image::EXLM.5.png[EXLM.5,width=400]
 
-== Part 6: View finer-grained community data. (Instructions/Solution)
+{nbsp} +
 
-It may be easier to see how the algorithm works if we look at the intermediate communities for a single place.
-Let’s explore the clusters that London was assigned to.
+Communities on the first hierarchical level are the most fine-grained (smallest).
 
-You can find the first (and finest-grained) partition by running the following query:
+== Part 6: Examine the communities at each level for a single place. (Instructions/Solution)
+
+It may be easier to see how the algorithm progresses through levels if we look at all the intermediate communities for a single place.
+
+You can examine the communities on each hiearchical level for London by running the following query:
 
 [source, cypher]
 ----
-UNWIND range(0,4) as level
+UNWIND range(0,2) as level
 MATCH (home:Place {name: "London"})
 MATCH (place:Place) WHERE place.communities_louvain[level] = home.communities_louvain[level]
 RETURN level,
@@ -253,10 +270,10 @@ image::EXLM.6.png[EXLM.6,width=400]
 
 {nbsp} +
 
-If we want to find the coarser-grained partitions we can change the first line of the query to look at different indexes in the array.
-Try changing it to 1, 2, and 3 to see the clusters that London ends up in.
+The first level community is relatively small and contains only London, Colchester, and Harwich.
+On the next level, it already constains 22 members, and grows to 50 members on the third and final level.
 
-Try looking up the partitions for another place. e.g. Berlin, Paris, Amsterdam.
+Try looking up the communities for another place. e.g. Berlin, Paris, Amsterdam.
 
 == Louvain Modularity: Taking it further
 
@@ -265,6 +282,6 @@ Try looking up the partitions for another place. e.g. Berlin, Paris, Amsterdam.
 
 == Louvain Modularity (Summary)
 
-In this exercise, you gained some experience with writing Cypher to implement the Louvain Modularity algorithm using the European Roads dataset.
+In this exercise, you gained some experience writing Cypher to implement the Louvain Modularity algorithm using the European Roads dataset.
 The Louvain Modularity algorithm finds clusters by comparing community density as it assigns nodes to different groups.
 

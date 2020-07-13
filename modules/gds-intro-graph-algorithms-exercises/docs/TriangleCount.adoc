@@ -5,9 +5,9 @@
 
 The database you start with should contain all of the data you loaded in the setup for this course.
 
-This is what you should see when you click the database icon image:{guides}/img/database-icon.png[].
+This is what you should see when you click the database icon image:database-icon.png[].
 
-image::{guides}/img/LoadedDatabase.png[LoadedDatabase,width=150]
+image:LoadedDatabase.png[LoadedDatabase,width=150]
 
 {nbsp} +
 
@@ -15,7 +15,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Triangle Count (Graph Catalog)
 
-The projected graph *roads* should be stored in the GDS graph catalog.
+The projected graphs *roads* and *dach-region* should be created and stored in the GDS graph catalog.
 
 This is what you should see when you execute the following query:
 
@@ -25,38 +25,51 @@ CALL gds.graph.list()
 YIELD graphName, nodeCount, relationshipCount
 ----
 
+{nbsp} +
+
 image::LoadedRoadsGraph.png[LoadedDatabase]
 
 If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
 
 == Triangle Count (Overview)
 
-In this exercise, you will gain some experience with writing Cypher to implement the Triangle count algorithm using the European Roads dataset.
+The Triangle Count algorithm counts the number of triangles for each node in the graph.
+A triangle is a set of three nodes where each node has a relationship to the other two.
+The implementation in the GDS library only finds triangles in undirected graphs.
 
+In this exercise, you will gain some experience with writing Cypher code to implement the Triangle count algorithm using the European Roads dataset.
 
-* *Part 1*: Retrieve the triangles in the European Roads dataset.
+* *Part 1*: Run the Triangle Count algorithm to add a triangles property to each node.
+* *Part 2*: Inspect the results of the algorithm.
+* *Part 3*: Examine the triangles of a single place.
+* *Part 4*: Run the Triangle Count algorithm on the DACH subgraph.
 
 Go to the next page to start this exercise.
 
-== Part 1: Retrieve the triangles in the European Roads dataset. (Instructions)
+== Part 1: Run the Triangle Count algorithm to add a triangles property to each node. (Instructions)
 
-Write a query to return the set of triangles in the graph between *Place* node using the *EROAD* relationship.
+Write a query to perform the Triangle Count algorithm on the European road network using these guidelines:
 
-*Hint*: You will call `algo.triangle.stream`.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* The algorithm will write a property named *triangles* to each node with the computed value.
+
+*Hint*: You will call `algo.triangleCount.write`.
 
 == Part 1: Retrieve the triangles in the European Roads dataset. (Solution)
 
-Write a query to return the set of triangles in the graph between *Place* node using the *EROAD* relationship.
-Triangle is a crossroad obv.
+Write a query to perform the Triangle Count algorithm on the European road network using these guidelines:
 
-*Hint*: You will call `algo.triangle.stream`.
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* The algorithm will write a property named *triangles* to each node with the computed value.
+
+*Hint*: You will call `algo.triangleCount.write`.
 
 Here is the solution code:
 
 [source, cypher]
 ----
 CALL gds.triangleCount.write('roads',
-   {writeProperty:'triangles'}))
+   {writeProperty:'triangles'})
 YIELD globalTriangleCount, nodeCount
 RETURN globalTriangleCount, nodeCount
 ----
@@ -64,9 +77,25 @@ RETURN globalTriangleCount, nodeCount
 The results returned should look like this:
 
 [.thumb]
-image::{guides}/img/EX3.1.png[EX3.1,width=400]
+image::EXTC.1.png[EXTC.1,width=400]
 
-== Part 2: Look at the results
+{nbsp} +
+
+There are 894 nodes and only 22 triangles in the whole graph.
+This indicates that the European roads network is very sparse.
+
+== Part 2: Inspect the results of the algorithm (Instructions)
+
+Write a query to return all *Place* nodes and their triangle count property.
+
+* Order the results by triangles descending.
+
+== Part 2: Inspect the results of the algorithm (Solution)
+
+Write a query to return all *Place* nodes and their triangle count property.
+
+* Order the results by triangles descending.
+* Limit the top ten results
 
 [source, cypher]
 ----
@@ -77,24 +106,81 @@ ORDER BY triangles DESC
 LIMIT 10
 ----
 
-Really sparse graph
+The results returned should look like this:
 
-== Check out DACH
+[.thumb]
+image::EXTC.2.png[EXTC.2,width=400]
 
+{nbsp} +
+
+Antwerpen has the most triangles.
+
+== Part 3: Examine the triangles of a single place (Instructions/Solution)
+
+Write a query to match Antwerpen and its neighbours.
+Include connections between neighbours.
+
+*Hint*: Use the variable-length pattern matching
+
+[source, cypher]
+----
+MATCH path=(p:Place{name:'Antwerpen'})-[*..2]-(neighbour)
+WHERE (p)--(neighbour)
+RETURN path
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXTC.3.png[EXTC.3,width=400]
+
+{nbsp} +
+
+Breda, Eindhoven, and Antwerpen form a triangle.
+Zeebrugge does not form any triangles with Antwerpen as it has no connections to any of its neighbours.
+
+== Run the Triangle Count algorithm on the DACH subgraph (Instructions)
+
+Write a query to perform the Triangle Count algorithm on the DACH subregion of the European road network using these guidelines:
+
+* The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Limit the top ten results
+
+*Hint*: Call `gds.triangleCount.stream`
+
+== Run the Triangle Count algorithm on the DACH subgraph (Solution)
+
+Write a query to perform the Triangle Count algorithm on the DACH subregion of the European road network using these guidelines:
+
+* The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Limit the top ten results
+
+*Hint*: Call `gds.triangleCount.stream`
+
+[source, cypher]
+----
 CALL gds.triangleCount.stream('dach-region')
 YIELD nodeId, triangleCount
 RETURN gds.util.asNode(nodeId).name as place, triangleCount
 ORDER BY triangleCount DESC 
 LIMIT 10
+----
 
-Graph is really sparse
+The results returned should look like this:
 
+[.thumb]
+image::EXTC.4.png[EXTC.3,width=400]
+
+{nbsp} +
+
+There are only six triangles in the DACH region of the European roads network.
 
 == Triangle Count: Taking it further
 
-. Write code to add the coefficient property to the *Place* nodes.
-. Try using the non-stream version of the algorithms.
+. Try different configuration values.
 
 == Triangle Count (Summary)
 
-In this exercise, you gained some experience with writing Cypher to implement the Triangle count algorithm to return the triangle count and clustering coefficient for the *Place* nodes of  the European Roads dataset.
+In this exercise, you gained some experience with writing Cypher to implement the Triangle count algorithm to return the count of triangles for the *Place* nodes of the European Roads dataset.
