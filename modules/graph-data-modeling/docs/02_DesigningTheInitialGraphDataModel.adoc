@@ -925,7 +925,7 @@ Select the correct answer.
 === Question 3
 
 [.statement]
-When you create the model for your application, at a minumum, what must you specify for a relationship?
+When you create the model for your application, at a minimum, what must you specify for a relationship?
 
 [.statement]
 Select the correct answers.
