@@ -120,7 +120,7 @@ Antwerpen has the most triangles.
 Write a query to match Antwerpen and its neighbours.
 Include connections between neighbours.
 
-*Hint*: Use the variable-length pattern matching
+*Hint*: Use the variable-length pattern matching.
 
 [source, cypher]
 ----
@@ -141,21 +141,23 @@ Zeebrugge does not form any triangles with Antwerpen as it has no connections to
 
 == Run the Triangle Count algorithm on the DACH subgraph (Instructions)
 
-Write a query to perform the Triangle Count algorithm on the DACH subregion of the European road network using these guidelines:
+Write a query to perform the Triangle Count algorithm on the DACH region of the European road network using these guidelines:
 
 * The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
-* Limit the top ten results
+* Order the results by triangles count descending.
+* Limit the top ten results.
 
 *Hint*: Call `gds.triangleCount.stream`
 
 == Run the Triangle Count algorithm on the DACH subgraph (Solution)
 
-Write a query to perform the Triangle Count algorithm on the DACH subregion of the European road network using these guidelines:
+Write a query to perform the Triangle Count algorithm on the DACH region of the European road network using these guidelines:
 
 * The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
-* Limit the top ten results
+* Order the results by triangles count descending.
+* Limit the top ten results.
 
 *Hint*: Call `gds.triangleCount.stream`
 
