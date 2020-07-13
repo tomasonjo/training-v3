@@ -120,12 +120,12 @@ If you’ve done the work to properly understand the domain, it should not stron
 [.smaller]
 --
 {set:cellbgcolor:lightgrey}
-[cols="30,20,20,30",stripes=none]
+[cols="30,20,20,30",stripes=none,options=header]
 |===
-h|Products
-h|Parts
-h|Assemblies
-h|Notes
+|Products
+|Parts
+|Assemblies
+|Notes
 |Wood table 40"
 {set:cellbgcolor:white}
 |Wood top 40"
