@@ -25,7 +25,7 @@ CALL gds.graph.list()
 YIELD graphName, nodeCount, relationshipCount
 ----
 
-image::LoadedRoadsGraph.png[LoadedDatabase]
+image::LoadedRoadsGraph.png[LoadedRoadsGraph]
 
 If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
 
@@ -33,11 +33,12 @@ If you do not see this in your Neo4j Browser, you will need to perform the graph
 
 Weakly connected components algorithm is used to find disconnected components or islands in a graph.
 
-In this exercise, you will gain some experience with writing Cypher for weakly connected graph algorithm using the European Roads dataset.
+In this exercise, you will gain some experience with writing Cypher code to execute weakly connected graph algorithm using the European Roads dataset.
 
 * *Part 1*: View the European Roads dataset schema.
-* *Part 2*: Find all connected places, writing unionFind partition information to the graph.
-* *Part 3*: Verify results of the weakly connected nodes execution.
+* *Part 2*: Find all connected places, writing weakly connected components information to the graph.
+* *Part 3*: Inspect results of the weakly connected nodes.
+* *Part 4*: Inspect smaller disconnected components.
 
 Go to the next page to start this exercise.
 
@@ -66,22 +67,25 @@ image::EXWCC.1.png[EXWCC.1,width=300]
 
 The properties for a *Place* node are *name* and *countryCode*.
 
-The properties for an *EROAD* relationship are *distance*, *road_number*, and *watercrossing*.
+The properties for an *EROAD* relationship are *distance*, *inverse_distance*, *road_number*, and *watercrossing*.
 
 == Part 2: Find all weakly connected places, writing their weakly component information to the graph. (Instructions)
 
 A weakly connected component is one where there is a path in any direction between all nodes in the component.
-Write the Cypher code to find all weakly connected *Place* nodes and set the property, *wcc_component* for each node based upon the result of the algorithm.
+Write the Cypher code to find all weakly connected nodes and set the property *wcc_component* for each node based upon the result of the algorithm.
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
-
+* `YIELD` the following results: nodePropertiesWritten, componentCount, componentDistribution.
 
 *Hint*: You will use `gds.wcc.write`.
 
 == Part 2: Find all connected places, writing their weakly component information to the graph. (Solution)
 
-A  weakly connected node is one where there is a path in any direction from one node another node in the graph.
-Write the Cypher code to find all weakly connected *Place* nodes and set the property, *wcc_component* for each node based upon the result of the algorithm.
+A weakly connected component is one where there is a path in any direction between all nodes in the component.
+Write the Cypher code to find all weakly connected nodes and set the property *wcc_component* for each node based upon the result of the algorithm.
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: nodePropertiesWritten, componentCount, componentDistribution.
 
 *Hint*: You will use `gds.wcc.write`.
 
@@ -90,33 +94,41 @@ Here is the solution code:
 [source, cypher]
 ----
 CALL gds.wcc.write('roads',{
-    writeProperty:"component_wcc"})
+    writeProperty:"wcc_component"})
+YIELD nodePropertiesWritten, componentCount, componentDistribution
+RETURN nodePropertiesWritten, componentCount, componentDistribution
 ----
 
 The results returned should look like this:
 
 [.thumb]
-image::EX2.4.png[EX2.4,width=400]
+image::EXWCC.2.png[EXWCC.2,width=400]
 
+The algorithm found six components in the graph.
+The largest one has 882 members, while the smallest has only two members.
 
-== Part 3: Verify results of the connected nodes execution. (Instructions)
+== Part 3: Inspect results of the weakly connected nodes. (Instructions)
 
-Write a query to return all *wcc_component* values in the graph containing *Place* nodes.
-For each distinct component value, return the list of places.
+Write a query to return all *wcc_component* values of the *Place* nodes.
+For each component id, return the size of the component, and the list of *Place* names.
 
-== Part 3: Verify results of the connected nodes execution. (Solution)
+* Order the results by component size ascending.
 
-Write a query to return all *wcc_component* values in the graph containing *Place* nodes.
-For each distinct component value, return the list of places.
+== Part 3: Inspect results of the weakly connected nodes. (Solution)
+
+Write a query to return all *wcc_component* values of the *Place* nodes.
+For each component id, return the size of the component, and the list of *Place* names.
+
+* Order the results by component size ascending.
 
 Here is the solution code:
 
 [source, cypher]
 ----
-MATCH (node:Place)
-RETURN node.component_wcc, 
-       count(*) as componentSize,
-       collect(node.name) AS places
+MATCH (place:Place)
+RETURN place.wcc_component AS componentId, 
+       count(*) AS componentSize,
+       collect(place.name) AS places
 ORDER BY componentSize ASC
 LIMIT 10
 ----
@@ -124,18 +136,70 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX2.5.png[EX2.5,width=400]
+image::EXWCC.3.png[EXWCC.3,width=400]
 
-*Note*: Your component ids can have a different value due to randomness
+The component ids can have different values due to random assignment of ids.
+Notice that most of the nodes are in the same component.
 
-{nbsp} +
+== Part 4: Inspect smaller disconnected components. (Instructions)
 
-Notice that most of the nodes are in the same partition.
+Write to query to return all components with 10 or less members.
+For each component id, return the size of the component, the list of *Place* names, and also their country code.
+
+Update the query to:
+
+* Collect distinct country codes.
+* Filter communities with 10 or less members.
+
+[source, cypher]
+----
+MATCH (place:Place)
+WITH place.wcc_component AS component_id, 
+     count(*) AS componentSize,
+     collect(place.name) AS places,
+    // collect distinct country codes
+
+// filter communities with 10 or less members
+
+RETURN component_id, componentSize, places, countryCodes
+
+----
+
+== Part 4: Inspect smaller disconnected components. (Solution)
+
+Write to query to return all components with 10 or less members.
+For each component id, return the size of the component, the list of *Place* names, and also their country code.
+
+Update the query to:
+
+* Collect distinct country codes.
+* Filter communities with 10 or less members.
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (place:Place)
+WITH place.wcc_component AS component_id, 
+     count(*) AS componentSize,
+     collect(place.name) AS places,
+     collect(distinct place.countryCode) AS countryCodes
+WHERE componentSize <= 10
+RETURN component_id, componentSize, places, countryCodes
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXWCC.4.png[EXWCC.4,width=400]
+
+One would assume that all the roads in Europe are connected, or at least those in the mainland like Germany and France.
+The results show otherwise.
 
 == Weakly Connected Components: Taking it further
 
-. Try using different configuration values.
-. Try different cypher filtering combinations.
+. Try different configuration values.
+. Try the weighted variant of the weakly connected component algorithm.
 
 == Weakly Connected Components (Summary)
 

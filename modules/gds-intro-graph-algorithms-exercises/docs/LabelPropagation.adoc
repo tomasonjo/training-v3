@@ -33,55 +33,107 @@ If you do not see this in your Neo4j Browser, you will need to perform the graph
 
 In the Weakly Connected components exercise, you used the weakly connected components algorithm to write component information to each *Place* node.
 This property was named *wcc_component*. In this exercise, you will gain some experience with writing Cypher to implement the Label Propagation algorithm using the European Roads dataset.
-This algorithm enables you to determine discreet sets of nodes that form clusters based upon how they are connected, as well as the weight of the connections.
+This algorithm enables you to determine discreet sets of nodes that form communities or clusters based upon how they are connected, as well as the optional weight of the connections.
 
 In this exercise, you will:
 
-* *Part 1*: Stats mode
-* *Part 1*: Inspect the weight statistics
-* *Part 2*: Stats mode
-* *Part 3*: Add a community property to each node using Label Propagation.
-* *Part 4*: Verify the results of executing the algorithm.
+* *Part 1*: Run the Label Propagation to determine the number of communities and their sizes.
+* *Part 2*: Analyze the relationship weight statistics.
+* *Part 3*: Run the weighted Label Propagation to determine the number of communities and their sizes.
+* *Part 4*: Add a community property to each node using Label Propagation.
+* *Part 5*: Inspect the results of the algorithm.
 
 Go to the next page to start this exercise.
 
-== Stats mode
+== Part 1: Run the Label Propagation to determine the number of communities and their sizes (Instructions)
 
+Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: communityCount, communityDistribution.
+
+*Hint*: You will use `gds.labelPropagation.stats`.
+
+== Part 1: Run the Label Propagation to determine the number of communities and their sizes (Solution)
+
+Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: communityCount, communityDistribution.
+
+*Hint*: You will use `gds.labelPropagation.stats`.
+
+[source, cypher]
+----
 CALL gds.labelPropagation.stats('roads')
 YIELD communityCount, communityDistribution
 RETURN communityCount, communityDistribution
+----
 
-== Part 1: Inspect weight statistics (Instructions/Solution)
+The results returned should look like this:
+
+[.thumb]
+image::EXLPA.1.png[EXLPA.1,width=400]
+
+The algorithm found a total of 32 communities in the graph.
+The largest community has 219 members, while most of the other communities have less than 50 members.
+
+== Part 2: Analyze the relationship weight statistics (Instructions/Solution)
+
+To get a better understanding of the values of the relationship weight properties we will examine their basic statistics.
 
 *Hint*: You will use `apoc.agg.statistics`.
 
 [source, cypher]
 ----
-UNWIND ['distance','inverse_distance'] as prop
+UNWIND ['distance','inverse_distance'] as property
 MATCH (:Place)-[r:EROAD]->(:Place)
-WITH prop, apoc.agg.statistics(r[prop]) as stats
-RETURN prop, stats.total as total, stats.min as min, stats.max as max,
-       stats["0.5"] as p50, stats["0.75"] as p75, stats["0.9"] as p90,
-       stats["0.95"] as p95, stats.stdev as stdev
+RETURN property, apoc.agg.statistics(r[property]) as stats
 ----
-
-Values of *distance* property are in kilometers. More than half of the distances are below 100km.
-The longest road connecting Moskva and Rostov-na-Donu is 1066km long.
-On the other hand, most of the *inverse_distance* values have a value of less than 0.02.
 
 The results returned should look like this:
 
-== Weighted Stats mode
+[.thumb]
+image::EXLPA.2.png[EXLPA.2,width=400]
 
+Values of *distance* property are in kilometers. More than half of the distances are below 100km.
+The longest road connecting Moskva to Rostov-na-Donu is 1066km long.
+On the other hand, most of the *inverse_distance* values have a value of less than 0.02.
+
+== Part 3: Weighted Stats mode (Instructions)
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: communityCount, communityDistribution.
+* The relationship weight property name is *inverse_distance*.
+
+*Hint*: You will use `gds.labelPropagation.stats`.
+
+
+== Part 3: Weighted Stats mode (Solution)
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: communityCount, communityDistribution.
+* The relationship weight property name is *inverse_distance*.
+
+*Hint*: You will use `gds.labelPropagation.stats`.
+
+[source, cypher]
+----
 CALL gds.labelPropagation.stats('roads',
    {relationshipWeightProperty:'inverse_distance'})
 YIELD communityCount, communityDistribution
 RETURN communityCount, communityDistribution
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXLPA.3.png[EXLPA.3,width=400]
 
 What enormous difference does it make!
 
 
-== Part 1: Add a community property to each node using Label Propagation. (Instructions)
+== Part 4: Add a community property to each node using Label Propagation. (Instructions)
 
 Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
 
@@ -89,10 +141,11 @@ Write Cypher code to perform the Label Propagation algorithm on the European roa
 * The analysis will be done *roads* network we projected in the Graph Catalog section.
 * The algorithm will write a property named *community_lpa* to each node with the computed value.
 * The weight property name is *inverse_distance*.
+* `YIELD` the following results: nodePropertiesWritten, communityCount, ranIterations, didConverge.
 
 *Hint*: You will call `gds.labelPropagation.write`.
 
-== Part 1: Add a community property to each node using Label Propagation. (Solution)
+== Part 4: Add a community property to each node using Label Propagation. (Solution)
 
 Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
 
@@ -100,6 +153,8 @@ Write Cypher code to perform the Label Propagation algorithm on the European roa
 * The analysis will be done *roads* network we projected in the Graph Catalog section.
 * The algorithm will write a property named *community_lpa* to each node with the computed value.
 * The weight property name is *inverse_distance*.
+* `YIELD` the following results: nodePropertiesWritten, communityCount, ranIterations, didConverge.
+
 
 *Hint*: You will call `gds.labelPropagation.write`.
 
@@ -111,22 +166,28 @@ CALL gds.labelPropagation.write('roads',{
     maxIterations: 10,
     writeProperty: "community_lpa", 
     relationshipWeightProperty: "inverse_distance" })
+YIELD nodePropertiesWritten, communityCount, ranIterations, didConverge
+RETURN nodePropertiesWritten, communityCount, ranIterations, didConverge
 ----
 
 The results returned should look like this:
 
 [.thumb]
-image::EX4.1.png[EX4.1,width=400]
+image::EXLPA.4.png[EXLPA.4,width=400]
 
-== Part 2: Verify the results of executing the algorithm. (Instructions)
+== Part 5: Verify results of the algorithm. (Instructions)
 
-Write a query to return all *community_lpa* values in the graph containing *Place* nodes.
-For each distinct community value, return the list of places and the size of the community.
+Write a query to return all *community_lpa* values of the *Place* nodes.
+For each community id, return the size of the community, and the list of *Place* names.
 
-== Part 2: Verify the results of executing the algorithm. (Solution)
+* Order the results by component size descending.
 
-Write a query to return all *community_lpa* values in the graph containing *Place* nodes.
-For each distinct community value, return the list of places and the size of the community.
+== Part 5: Verify results of the algorithm. (Solution)
+
+Write a query to return all *community_lpa* values of the *Place* nodes.
+For each community id, return the size of the community, and the list of *Place* names.
+
+* Order the results by component size descending.
 
 Here is the solution code:
 
@@ -143,7 +204,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX4.2.png[EX4.2,width=400]
+image::EXLPA.5.png[EXLPA.5,width=400]
 
 == Label Propagation: Taking it further
 

@@ -43,7 +43,7 @@ In this exercise, you will perform the following with the European Roads dataset
 * *Part 3*: Run the Louvain Modularity algorithm to discover a hierarchy of communities within the graph.
 * *Part 4*: Examine the results of executing the algorithm.
 * *Part 5*: View the partitioning of the data.
-* *Part 6*: View finer-grained partition data.
+* *Part 6*: View finer-grained data of communities.
 
 Go to the next page to start this exercise.
 
@@ -82,7 +82,9 @@ YIELD modularity, ranLevels, communityCount
 The results returned should look like this:
 
 [.thumb]
-image::EX5.1.png[EX5.1,width=400]
+image::EXLM.1.png[EX5.1,width=400]
+
+Algorithm found a total of 24 communities and has 3 hierarchical levels deep.
 
 == Part 2: Verify the results of executing the algorithm. (Instructions)
 
@@ -99,8 +101,8 @@ Here is the solution code:
 [source, cypher]
 ----
 MATCH (node:Place)
-RETURN node.community_louvain as communityId,
-       count(*) as communitySize,
+RETURN node.community_louvain AS communityId,
+       count(*) AS communitySize,
        collect(node.name) AS places
 ORDER BY communitySize DESC
 LIMIT 10
@@ -109,7 +111,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX5.2.png[EX5.2,width=400]
+image::EXLM.2.png[EXLM.2,width=400]
 
 {nbsp} +
 
@@ -154,7 +156,7 @@ YIELD modularity, ranLevels, communityCount
 The results returned should look like this:
 
 [.thumb]
-image::EX5.3.png[EX5.3,width=400]
+image::EXLM.1.png[EXLM.1,width=400]
 
 == Part 4: Verify the results of executing the algorithm. (Instructions)
 
@@ -171,8 +173,8 @@ Here is the solution code:
 [source, cypher]
 ----
 MATCH (node:Place)
-RETURN node.communities_louvain as communities,
-       count(*) as communitiesSize,
+RETURN node.communities_louvain AS communities,
+       count(*) AS communitiesSize,
        collect(node.name) AS places
 ORDER BY communitiesSize DESC
 LIMIT 10
@@ -181,7 +183,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EX5.4.png[EX5.4,width=400]
+image::EXLM.4.png[EX5.4,width=400]
 
 == Part 5: View the partitioning of the data. (Instructions/Solution)
 
@@ -205,7 +207,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::{guides}/img/EX5.5A.png[EX5.5A,width=400]
+image::EXLM.2.png[EXLM.2,width=400]
 
 {nbsp} +
 
@@ -224,11 +226,11 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::{guides}/img/EX5.5B.png[EX5.5B,width=400]
+image::EXLM.5.png[EXLM.5,width=400]
 
-== Part 6: View finer-grained partition data. (Instructions/Solution)
+== Part 6: View finer-grained community data. (Instructions/Solution)
 
-It may be easier to see how the algorithm works if we look at the intermediate partitions for a single place.
+It may be easier to see how the algorithm works if we look at the intermediate communities for a single place.
 Let’s explore the clusters that London was assigned to.
 
 You can find the first (and finest-grained) partition by running the following query:
@@ -247,7 +249,7 @@ RETURN level,
 The results returned should look like this:
 
 [.thumb]
-image::EX5.6.png[EX5.6,width=400]
+image::EXLM.6.png[EXLM.6,width=400]
 
 {nbsp} +
 

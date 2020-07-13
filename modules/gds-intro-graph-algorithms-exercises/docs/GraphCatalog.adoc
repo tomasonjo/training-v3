@@ -5,9 +5,9 @@
 
 The database you start with should contain all of the data you loaded in the setup for this course.
 
-This is what you should see when you click the database icon image:{guides}/img/database-icon.png[].
+This is what you should see when you click the database icon image:database-icon.png[].
 
-image::{guides}/img/LoadedDatabase.png[LoadedDatabase,width=150]
+image::LoadedDatabase.png[LoadedDatabase,width=150]
 
 {nbsp} +
 
@@ -15,35 +15,37 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Graph Catalog (Overview)
 
-Because we will be running a lot of algorithms on the European Road network it is best to project it in memory with the native projection.
+The graph catalog is a concept within the GDS library that allows managing multiple graph projections by name.
+Using its name, a created graph can be used many times in the analytical workflow.
 
-In this exercise, you will gain some experience with writing Cypher to project the in-memory graph using the European Roads dataset.
+In this exercise, you will gain some experience with writing Cypher to create a graph in the Graph Catalog.
 
-
-* *Part 1*: Project the European Roads network to Graph Catalog.
-
+* *Part 1*: Project a graph to Graph Catalog with native projection.
+* *Part 2*: Project a subgraph to Graph Catalog with cypher projection.
 
 Go to the next page to start this exercise.
 
-== Part 1: Project the European Roads network to Graph Catalog. (Instructions)
+== Part 1: Project a graph to Graph Catalog with native projection. (Instructions)
 
-Write a query to project the European Road network in memory.
+Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
+* The created graph should be named *roads*.
 * Project all nodes labeled *Place*.
 * Project all relationships with a type *EROAD*.
-* Relationships projection should use the *UNDIRECTED* orientation.
+* Relationships should use the *UNDIRECTED* orientation.
 * Include *inverse_distance* property as a relationship property.
 * Set the default value for *inverse_distance* relationship property to be 1.0.
 
 *Hint*: You will call `gds.graph.create`.
 
-== Part 1: Project the European Roads network to Graph Catalog. (Solution)
+== Part 1: Project a graph to Graph Catalog with native projection. (Solution)
 
-Write a query to project the European Road network in memory.
+Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
+* The created graph should be named *roads*.
 * Project all nodes labeled *Place*.
 * Project all relationships with a type *EROAD*.
-* Relationships projection should use the *UNDIRECTED* orientation.
+* Relationships should use the *UNDIRECTED* orientation.
 * Include *inverse_distance* property as a relationship property.
 * Set the default value for *inverse_distance* relationship property to be 1.0.
 
@@ -65,12 +67,17 @@ CALL gds.graph.create('roads','Place',
 })
 ----
 
-== Cypher Projection
+== Part 2: Project a subgraph to Graph Catalog with cypher projection. (Instructions/Solution)
 
-DACH region
-useful for filtering, among other things
+Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
-We will use them throughout the series
+* The created graph should be named *dach-region*.
+* Project all nodes labeled *Place* that have one of the following country codes: *D*, *A*, or *CH*
+* Project all relationships with a type *EROAD* and treat them as *UNDIRECTED*.
+* Include *inverse_distance* property as a relationship property.
+* Set the default value for *inverse_distance* relationship property to be 1.0.
+
+*Hint*: You will call `gds.graph.create.cypher`.
 
 [source, cypher]
 ----
@@ -78,18 +85,18 @@ CALL gds.graph.create.cypher('dach-region',
    'MATCH (p:Place) 
     WHERE p.countryCode in ["D", "A", "CH"]
     RETURN id(p) as id',
-   'MATCH (s:Place)-[r:EROAD]->(t:Place)
-    RETURN id(s) as source,id(t) as target, r.inverse_distance as inverse_distance'
+   'MATCH (s:Place)-[r:EROAD]-(t:Place)
+    RETURN id(s) as source,id(t) as target, coalesce(r.inverse_distance,1.0) as inverse_distance'
     , {validateRelationships:false})
 ----
 
 == Graph Catalog: Taking it further
 
 . Try projecting the Game of Thrones network.
-. Try using the cypher projection
+. Try using different filters with cypher projection
 
 == Graph Catalog (Summary)
 
-In this exercise, you gained some experience with writing Cypher to project the in-memory graph using the European Roads dataset.
-This procedure enables you to determine to run multiple graph algorithms on the same in-memory graph without projecting it for each algorithm separately.
+In this exercise, you gained some experience with writing Cypher code to store the projected graph in Graph Catalog using the European Roads dataset.
+This procedure enables you to reuse the same projected graph in the analytical workflow.
 

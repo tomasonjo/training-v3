@@ -79,7 +79,7 @@ LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EXP.1.png[EXP.1,width=400]
+image::EXPR.1.png[EXPR.1,width=400]
 
 {nbsp} +
 
@@ -118,6 +118,11 @@ ORDER BY score DESC
 LIMIT 10
 ----
 
+The results returned should look like this:
+
+[.thumb]
+image::EXPR.2.png[EXPR.2,width=400]
+
 Here we see that with the weighted variant of PageRank, the most popular places are Rio, Albania, and Tornio.
 
 == Perform the Personalized PageRank algorithm. (Instructions/Solution)
@@ -141,6 +146,8 @@ RETURN gds.util.asNode(nodeId).name AS place, score
 ORDER BY score DESC
 LIMIT 10
 ----
+[.thumb]
+image::EXPR.3.png[EXPR.3,width=400]
 
 We expect that the neighbouring places of Madrid will have a higher rank.
 
