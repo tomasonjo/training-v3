@@ -70,14 +70,10 @@ Recipe and ingredients
 
 Before coming to this training, you should have:
 Installed Neo4j Desktop.
-Downloaded the Yelp dataset. (Note: This database is 1G and will take a while to download) https://s3.amazonaws.com/neo4j-sandbox-usecase-datastores/v3_5/yelp.db.zip and unzip.
-Created a project and a local graph, providing a password you will remember.  (Do not start the database!)
+se!)
 Installed APOC, Graph Algorithms, and Graph Algorithms Playground  in the project.
 Copied the Yelp database to your local graph:
 Click the Manage button for the local graph you just created.
 Click Open Folder.
-Navigate to data/databases.
-Copy the yelp.db  folder that you unzipped to databases.
-Rename the yelp.db folder to graph.db.
 Started the database.
 :play intro-graph-algos-exercises  (Set up your Development Environment)

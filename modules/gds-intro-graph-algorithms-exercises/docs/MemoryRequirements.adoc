@@ -5,16 +5,35 @@
 
 The database you start with should contain all of the data you loaded in the setup for this course.
 
-This graph should at a minimum contain the data for Yelp, Graph of Thrones, and European Roads.
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+== Memory Requirements (Graph Catalog)
+
+The projected graphs *roads* and *dach-region* should be created and stored in the GDS graph catalog.
+
+This is what you should see when you execute the following query:
+
+[source, cypher]
+----
+CALL gds.graph.list()
+YIELD graphName, nodeCount, relationshipCount
+----
+
+image::LoadedRoadsGraph.png[LoadedDatabase]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
 
 == Memory Requirements (Overview)
 
-Before you run a graph algorithm, it is helpful to understand what the memory requirements will be for loading the data for the analysis, as well as the memory that will be required to run the algorithm. The memrec() function is used to provide you with this information and is available for the support algorithms:
-
-* Weakly Connected Components (unionFind)
-* Label Propagation
-* Louvain Modularity
-* PageRank
+Before you run a graph algorithm, it is helpful to understand what the memory requirements will be for loading the data for the analysis, as well as the memory that will be required to run the algorithm. The `estimate()` function is used to provide you with this information and is available for the production-quality tier algorithms.
 
 In this exercise, you will determine the memory requirements for each algorithm on the datasets you have been working with:
 
@@ -27,10 +46,10 @@ Go to the next page to start this exercise.
 
 Write the Cypher code to determine the memory requirements for loading these graphs:
 
-* EROADS dataset using the *Place* nodes and the *EROAD* relationships.
 * Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships.
-* Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON5* relationships.
-* Yelp dataset using the *Business* nodes and the *IN_CATEGORY* relationships.
+* Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships with included relationship weight property.
+* European roads dataset using the *Place* nodes and the *EROADS* relationships with included relationship weight property.
+
 
 == Part 1: Determine the memory requirements for loading each of the datasets. (Solution)
 
@@ -46,45 +65,48 @@ CALL gds.graph.create.estimate('Character', 'INTERACTS_SEASON1')
 YIELD requiredMemory
 ----
 
-This load requires 27Kb of memory.
+This load requires 299 KiB of memory.
 
-* EROADS dataset using the *Place* nodes and the *EROAD* relationships.
+* Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships with included relationship weight property.
 
 Here is the solution code:
 
 [source, cypher]
 ----
-CALL gds.graph.create.estimate('Place',
-    {"EROAD":{
-        "type":"EROAD",
-        "orientation":"UNDIRECTED",
-        "properties":{
-            "inverse_distance":{
-                "property":"inverse_distance",
-                "defaultValue":1.0
-            }
-        }
-    }
-})
-YIELD reqiredMemory
+CALL gds.graph.create.estimate('Character', 'INTERACTS_SEASON1', 
+    {relationshipProperties:'weight'})
+YIELD requiredMemory
 ----
 
-This load requires 59Kb of memory.
+This load requires 563 KiB of memory.
+
+* European roads dataset using the *Place* nodes and the *EROADS* relationships with included relationship weight property.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.graph.create.estimate('Place', 'EROAD', 
+    {relationshipProperties:'inverse_distance'})
+YIELD requiredMemory
+----
+
+This load requires 567 KiB of memory.
 
 == Part 2: Determine the memory requirements for running algorithms on these graphs. (Instructions)
 
 Write the Cypher code to determine the memory requirements for running these algorithms on these graphs:
 
-* PageRank on the EROADS dataset using the *Place* nodes and the *EROAD* relationships.
+* PageRank on the European roads dataset.
+* Betweenness centrality on the DACH region of the European roads dataset.
 * Weakly Connected Components on the Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships.
 * Louvain Modularity on the Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON5* relationships.
-* Louvain Modularity on the Yelp dataset using the *Business* nodes and the *IN_CATEGORY* relationships.
 
 == Part 2: Determine the memory requirements for running algorithms on these graphs. (Solution)
 
 Write the Cypher code to determine the memory requirements for running these algorithms on these graphs:
 
-* PageRank on the EROADS dataset using the *Place* nodes and the *EROAD* relationships.
+* PageRank on the European roads dataset.
 
 Here is the solution code:
 
@@ -94,7 +116,19 @@ CALL gds.pageRank.stream.estimate('roads')
 YIELD requiredMemory
 ----
 
-This algorithm requires 104Kb of memory.
+This algorithm requires 29 KiB of memory.
+
+* Betweenness centrality on the DACH region of the European roads dataset.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.betweenness.stream.estimate('dach-region')
+YIELD requiredMemory
+----
+
+This algorithm requires 37 KiB of memory.
 
 * Weakly Connected Components on the Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships.
 
@@ -108,7 +142,7 @@ CALL gds.wcc.write.estimate({nodeProjection:'Character',
 YIELD requiredMemory
 ----
 
-This algorithm requires 31Kb of memory.
+This algorithm requires 302 KiB of memory.
 
 * Louvain Modularity on the Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON5* relationships.
 
@@ -122,7 +156,7 @@ CALL gds.louvain.stream.estimate({
 YIELD requiredMemory
 ----
 
-This algorithm requires 120Kb - 148Kb of memory.
+This algorithm requires 329 KiB to 951 KiB of memory.
 
 == Memory Requirements: Taking it further
 
@@ -130,5 +164,5 @@ Calculate memory requirements for different combinations of graphs and algorithm
 
 == Memory Requirements (Summary)
 
-In this exercise, you gained some experience estimating the memory requirements for loading graphs into memory and executing some supported algorithms.
+In this exercise, you gained some experience estimating the memory requirements for loading graphs into memory and executing some production-tier algorithms.
 

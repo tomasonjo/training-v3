@@ -9,16 +9,30 @@
 == Graph analytics and algorithms
 
 Connections are the most prevalent attribute of networks in our world. 
+And the reason why graph algorithms are so exciting is because they are the methods we use to understand real-world networks.
+They help us uncover the essence of the complex systems with live among - through analyzing their connections.
 
-And the reason why graph algorithms are so exciting is because they are the methods we use to understand real-world networks. They help us uncover the essence of the complex systems with live among - through analyzing their connections
-
-
-
-Graph Analytics is the use of a graph based approach to analyzing data. There are two approaches, one where you know what you are looking for and make decisions based upon what you find. The other approach is where you are learning about the data and use it to predict outcomes.
+Graph Analytics is the use of a graph based approach to analyzing data.
+There are two approaches, one where you know what you are looking for and make decisions based upon what you find.
+The other approach is where you are learning about the data and use it to predict outcomes.
 
 image::local-global-computation.png[local and global graph analytics,width=500, align=center]
 
-Note when not to use graph algorithms!
+[.notes]
+--
+Most of the local patterns can be matched using only cypher query language.
+Graph algorithms are computationally expensive, because they do calculation on the whole graph, which can be millions and millions of nodes.
+To optimize performance of the global graph operations we have a special library just for that named Neo4j Graph Data Science library.
+--
+
+=== When not to use graphs
+
+Note when not to use graph and graph algorithms!
+
+[.notes]
+--
+In general, very organized data that follows a regular schema and has relatively few connections between its data elements does not warrant graph specific storage and computation.
+--
 
 * Questions with just a few connections or flat (not nested). 
 * Questions solved with specific, well-crafted queries. 
@@ -26,19 +40,25 @@ Note when not to use graph algorithms!
 * Example: 
 ** Regular reporting based on defined criteria and well-organized data
 
+[.is-half.left]
+--
+image::average-rainfall-chart.png[Average rainfall chart,width=500,align=center]
+_Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate._
+--
 
-In general, very organized data that follows a regular schema and has relatively few connections between its data elements does not warrant graph specific storage and computation.
+
+[.is-half.right]
+--
+Average rainfall for a country is an example for a simple statistical result, where no graph analytics is required
+--
 
 === What do people do with graph algorithms
 
 Connections are the most prevalent attribute of networks in our world. 
-
-And the reason why graph algorithms are so exciting is because they are the methods we use to understand real-world networks. They help us uncover the essence of the complex systems with live among - through analyzing their connections
-
+And the reason why graph algorithms are so exciting is because they are the methods we use to understand real-world networks.
+They help us uncover the essence of the complex systems with live among - through analyzing their connections
 Organizations use these insights to model processes and make valuable predictions as well as prescribe particular actions. 
 
-==== Explore, plan, measure
-
 [.is-half.left]
 --
 image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
@@ -46,19 +66,7 @@ image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
 
 [.is-half.right]
 --
-Find significant patterns and plan for optimal structures
---
-
-==== Machine learning
-
-[.is-half.left]
---
 image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
---
-
-[.is-half.right]
---
-Use the measures as features to train an ML model
 --
 
 === Example: Propagation pathways
@@ -114,11 +122,23 @@ image::types-of-graphs.png[Types of graphs,width=500,align=center]
 
 === Weighted graph
 
-=== Monopartite graph
+image::weighted-graph.png[Weighted graph,width=500,align=center]
+
+
+=== Multipartite graph
+
+image::multipartite-graph.png[Multipartite graph,width=500,align=center]
 
 All centrality measures and community detection algorihms are designed to run on monopartite graph.
 A common mistake is to run the centrality measure on a bipartite graph. Let's look at an example.
 lorem ipsum
+
+image::monopartite-projection.png[Monopartite projection,width=500,align=center]
+
+=== Multigraph
+
+image::multigraph.png[Multigraph,width=500,align=center]
+
 
 == Types of graph algorithms
 
@@ -132,6 +152,8 @@ image::types-of-algorithms.png[Types of algorithms,width=500,align=center]
 lorem ipsum
 
 === Similarity algorithms
+
+=== Node embeddings
 
 == Random network
 
@@ -151,4 +173,4 @@ image::graph-complexity.png[Understanding graph complexity,width=500,align=cente
 
 == Summary
 
-Beatiful
+Beatiful res

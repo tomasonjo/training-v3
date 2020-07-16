@@ -4,20 +4,15 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Setup and Cypher Refresher
+:module-next-title: Overview of graph algorithms
 
 Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
 They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).
 In this course you will learn how to use Neo4j's Graph Data Science library to enhance your graph based applications.
 
-We will start with an existing web application (a simple business reviews website written in React.js) populated with data from the Yelp public dataset in Neo4j. We then work to enhance the existing functionality of the application using graph algorithms.
+asdasd
 
-[NOTE]
---
-Don't worry if you're not familiar with React or web development in general, to enhance our application we'll just be changing the Cypher queries used by the already existing application. But feel free to modify the application if you'd like to add more advanced features!
---
-
-video::32-FYC07-dU[youtube,width=560,height=315]
+We will start with an existing web application (a simple business reviews website written in React.js) populated with data from the Yelp public dataset ssin Neo4j. We then work to enhance the existing functionality of the application using graph algorithms.
 
 _Introduction to Graph Data Science in Neo4j and overview of this course_
 
@@ -126,8 +121,6 @@ Estimated time: _10 minutes_
 This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
 
 * Have completed Introduction to Neo4j course or have equal Cypher proficiency.
-* Have a GitHub account as you will need it to log in to CodeSandbox.
 * Be familiar with Neo4j Browser.
-* Be familiar with the concepts of a web application.
 
 This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
