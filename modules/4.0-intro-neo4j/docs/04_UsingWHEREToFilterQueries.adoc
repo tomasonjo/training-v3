@@ -412,7 +412,7 @@ You can learn more about these syntax elements in the https://neo4j.com/docs/cyp
 
 --
 
-[.slide-title.has-green-background.has-team-background]
+[.student-exercise]
 == Exercise 4: Filtering queries using the `WHERE` clause
 
 In the query edit pane of Neo4j Browser, execute the browser command:

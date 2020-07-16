@@ -59,6 +59,7 @@ Here are some resources you will use as you learn about Neo4j and Cypher for thi
 [square]
 * https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual]
 * https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard]
+* https://neo4j.com/developer/kb/[Cypher Knowledge Base]
 * https://neo4j.com/docs/labs/apoc/current/[APOC Documentation]
 ifndef::backend-revealjs[]
 * https://community.neo4j.com/c/general/online-training[Neo4j Community Site]

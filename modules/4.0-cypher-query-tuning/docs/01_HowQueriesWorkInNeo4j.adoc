@@ -9,27 +9,36 @@
 == About this module
 
 At the end of this module, you should be able to:
+
 [square]
 * Describe the components of query processing.
-* Use `EXPLAIN` to view the query plan.
-* Use `PROFILE` to view the query plan and execution.
-* Describe how information is used for query processing:
-** node labels
-** node degree
-** count store
-** indexes
-** relationships
-** properties
+* Describe an execution plan.
+* Describe the cost of accessing nodes, labels, properties, and relationships
+* Understand the graph you will be working with:
+** Data Model
+** Indexes and Constraints
+** DB Stats
 
 == Components of query
 
-When you execute a Cypher statement that is a query against the graph, the following steps occur:
+When you execute a Cypher statement that is a query against the graph, the following resources are used:
 
-. Query is compiled into an execution plan in the Neo4j DBMS if it is not already in the Query Cache.
+. If the query is not already in the Query Cache, the query is compiled into an execution plan in the Neo4j DBMS.
 . The execution plan executes in the Neo4j DBMS to retrieve data. This is where the Page Cache is used as it holds the data in memory.
 . Neo4j DBMS returns results to the client.
 
 Each of these steps takes time and your goal is to minimize these times.
+
+There are other factors that affect the performance of a query:
+
+[square]
+* Version of Cypher you are using.
+* Cypher runtime you are using. Note that the runtime used may depend on the operations used for a query.
+* Cypher replanning settings.
+
+These are described in the https://neo4j.com/docs/cypher-manual/4.1/query-tuning/query-options/[Query Tuning Documentation].
+
+For this course, we use the defaults that come with Neo4j Desktop which supports Neo4j Enterprise for development.
 
 === Query Cache
 
@@ -57,161 +66,502 @@ You use the `:sysinfo` Neo4j Browser command to examine the usage of the Page Ca
 image::Sysinfo.png[Sysinfo,width=800,align=center]
 
 Ideally, you  want the utilization of the Page Cache to be as close to 100% as possible.
-If you see that in your application, there are a lot of flushes of the Page Cache, then you should consider adding more RAM to the system.
+If you see that in your application, there are a lot of flushes of the Page Cache, then you should consider, if possible, adding more RAM to the system.
 
-== Execution plan
+=== Execution plan
 
 The compilation of the Cypher query results in the execution plan.
-The execution plan is a series of steps (operators) that execute, some in sequence and some in parallel, depending on the steps.
+The execution plan is shown using the `PROFILE` clause in a Cypher query.
+The execution plan is a tree structure of steps (operators) that execute, some in sequence and some in parallel, depending on the steps.
+A leaf step is typically the beginning (anchor) of the query.
+A step in the execution plan takes zero or more "rows" of data to produce "rows" of data that are passed to the next step in the execution plan.
+
+When a query executes, the metrics shown with `PROFILE` include these values:
+
+[square]
+* *rows*: This is probably the most important metric you should aim to reduce in a query. The rows passed from one step of a query to the next require both memory and CPU resources. What  you want to watch for are spikes in the number of rows passed between steps as these may be areas where you can tune.
+* *db hits*: You can think of a db hit as an abstract unit of work. Db hits from one step to another cannot really be compared due to the complexity of how data is stored physically. You may not always be able to reduce the number of db hits. You also want to reduce the amount of data that needs to be retrieved from the graph. If you can confine retrievals to what is in indexes, the less data needs to be retrieved from the graph.
+* *elapsed time*: Elapsed time includes the time to run the query as well as return results. Whether data needs to cross a network may also impact the elapsed time.
+
+=== Result set
+
+The result of a query is returned to the client with the `RETURN` clause. In many cases the data is sent over a network so minimizing the amount of data that needs to be formatted and sent back to the client should be a goal.
+
+== Understanding execution plans
+
+The most important task for you as a developer is to understand what an execution plan is, how to interpret it, and most importantly, how to make it performant.
+To understand the execution plan, you must understand how a query starts and then how it is processed ad the nodes are traversed in the graph.
+
+=== Anchor of a query
+
+When the execution plan is created, it determines the set of nodes that will be the anchor for the query.
+The anchor for a query will typically be based upon one or more MATCH clauses.
+The anchor is typically determined by meta-data that is stored in the graph or a filter that is provided inline or in a `WHERE` clause.
+This meta-data is the count store that you will learn about later in this lesson.
+The anchor for a query will be based upon the fewest number of nodes that need to be retrieved into memory.
+
+Here are three simple queries for a graph that hs 6231 _Movie_ nodes and 18,776 _Person_ nodes:
+
+image::Anchoring.png[Anchoring,width=800,align=center]
+
+In the first statement, the _Person_ nodes will be the anchor for the query. This is because there are a total of 24,993 nodes in the graph which is what _m_ represents. There are only 18,776 _Person_ nodes so the execution will retrieve fewer nodes if it anchors with the _Person_ nodes.
+
+In the second statement the _Movie_ nodes will be the anchor for the query because there are fewer _Movie_ nodes than _Person_ nodes.
+
+In the third statement, a filter is specified which reduces the number of nodes that will be retrieve so the _Person_ node satisfying the filter is the anchor for the query.
+
+=== Expand to follow paths
+
+After the anchor nodes have been retrieved, the next step if the query specifies a path is to follow the path.
+The in-memory nodes that are part of the anchor set have pointers to nodes on the other end of the relationships.
+
+The goal here is to eliminate paths from the nodes in memory to nodes that will need to be retrieved.
+This is where specificity in the relationship types is important in your data model.
+
+For example:
+
+[source,cypher]
+----
+MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
+WHERE p.name = $actorName
+RETURN  m.title
+----
+
+Will expand to fewer _Movie_ nodes  than this statement which retrieve _Movie_ nodes with both the _ACTED_IN_ and _DIRECTED_ relationships:
+
+[source,cypher]
+----
+MATCH (m:Movie)<-[]-(p:Person)
+WHERE p.name = $actorName
+RETURN  m.title
+----
+
+In addition, the expansion may lead to the need to inspect properties of the relationship and/or the properties of the _Movie_ node.
+This inspection means that the nodes are brought into memory and possibly eliminated from the nodes in memory after they have been retrieved.
+
+=== Example 1: A simple execution plan
+
+Here is a simple example rendered in Neo4j Browser where we use `PROFILE` to display the execution plan and execute the query:
+
+[source,cypher]
+----
+PROFILE MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
+WHERE p.name = $actorName
+RETURN  m.title
+----
+
+Here is the execution plan:
+
+image::FirstExecutionPlan.png[FirstExecutionPlan,width=800,align=center]
+
+The first step is the _NodeIndexSeek_ operator.
+This is the operator used to anchor the starting point in the query.
+This first step takes no rows as input, but produces one row based upon the  value specified in the `WHERE` clause.
+Because our graph has an index on that property, the index is used.
+You want all of your query anchor steps to use an index if possible.
+
+The next operator in the execution plan is _Expand(All)_.
+This operator traverses all _DIRECTED_ relationships from the single _Person_ node retrieved in the first step and returns three rows where the first element in each row is the _Person_ node and the second element in the row is the _Movie_ node that is on the other end of the relationship traversed.
+
+The next step in the execution plan is _CacheProperties_. In this step, if any nodes in the rows have properties stored with the nodes, those properties are cached in memory.
+In this case the _title_ property of the _Movie_ node is cached, as well as the _name_ property of the _Person_ node.
+
+The next operator, _Filter_ is used to finalize the rows that have been passed in from the previous step to ensure that all predicates for filtering are true.
+In this case, all 3 rows are passed to the next step.
+
+The next operator, _Projection_ is where the results are prepared to be returned to the client.
+In this example, the rows that contain the _Person_ and _Movie_ nodes are transformed to rows that contain only the _title_ property as that is the property specified in the `RETURN` clause.
+
+And the final operator, _ProduceResults_ prepares to send the results back to the client.
+In this query, it will be three rows, each containing the _title_ of a _Movie_ node.
+
+Notice also that steps that incur db hits are highlighted in orange.
+Observing db hits is important as it may show areas of the query that could be improved.
+
+You can also examine the execution plan in cypher-shell:
+
+image::FirstExecutionPlanCypherShell.png[FirstExecutionPlanCypherShell,width=800,align=center]
+
+When interpreting the execution plan in cypher-shell, you begin at the bottom and move to the top, but you can see that it shows the same information as what you see in Neo4j Browser.
+
+=== Example 2: A more complex execution plan
+
+Here is another execution plan to illustrate how it is executed.
+Here is the Cypher code where the graph contains _Movie_ nodes with a _genres_ property, but no _Genere_ nodes.
+This code extracts the genre information from the _Movie_ nodes, creates the _Genere_ nodes and the _:IS_GENRE_ relationships between _Movie_ nodes and _Genre_ nodes.
+
+[source,cypher]
+----
+PROFILE MATCH (m:Movie)
+UNWIND m.genres as name
+WITH DISTINCT name, m
+MERGE (g:Genre {name:name})
+WITH g, m
+MERGE (g)<-[:IS_GENRE]-(m)
+----
+
+Here is the execution plan:
+
+image::SecondExecutionPlan.png[SecondExecutionPlan,width=800,align=center]
+
+This query is a little different because it is modifying the graph, but the point of this example is to illustrate how the execution plan works.
+It first executes the three operations under (1). It cannot execute (5), until the operations execute under (1) and (4).
+It cannot execute (4) until all of the operations under (2) and (3) execute, etc.
+
+Viewing a complex execution plan is sometimes easier in cypher-shell because the steps are presented in tabular format.
+
+image::SecondExecutionPlanCypherShell.png[SecondExecutionPlanCypherShell,width=800,align=center]
+
+For a more complex execution plan, there are parts of the plan where all steps must execute a a given level before you go to the next step.
+For example, all steps under the first _AntiConditionalApply_  which are _Argument_ and  _MergeCreateNode_ must execute first before the _AntiConditionbalApply_ step executes.
+
+You can use either Neo4j Browser or cypher-shell for your query tuning analyses.
+Some things render better in cypher-shell while others can only be easily viewed in Neo4j Browser.
+For example, viewing execution plans is easier in cypher-shell because you need not navigate the tree, you simnply follow the steps from bottom to top.
+
+During this course, you will see some of the most commonly used operators in an execution plan.
+These operators are described https://neo4j.com/docs/cypher-manual/current/execution-plans/operator-summary/[here] in the documentation.
+
+=== Eager operations
+
+The execution plan will execute steps of the query on sets of data (rows) retrieved from the graph.
+
+Here is the order that operations execute when the query contains no _eager_ operators:
+
+image::NonEagerGraphic.png[NonEagerGraphic,width=800,align=center]
+
+A row is retrieved, then the next operator uses that row, and so on until the result is produced. Then the next row is retrieved and processed.
+
+Eager operations requires that all rows are retrieved and operations are performed on all rows until the result is produced.
+
+Here is the order that operations execute when the query includes _eager_ operators:
+
+image::EagerGraphic.png[EagerGraphic,width=800,align=center]
+
+Cypher clauses and functions that force eager operations are:
+
+[square]
+* ORDER BY (if not using an index)
+* DISTINCT (for row selection)
+* aggregating functions such as collect(), count(), avg(), min(), max() etc.
+* FOREACH
 
 
-=== Using `EXPLAIN`
+Here is an example of an eager operator in an execution plan:
 
-You use the `EXPLAIN` feature of Cypher to view the estimated execution plan for the query.
-When using `EXPLAIN`, Neo4j provides information based upon what is in the Page Cache.
-This information, however may not match what is in the database.
+[source,cypher]
+----
+PROFILE
+MATCH (m:Movie)
+WITH avg(m.avgVote) as averageVote
+MATCH (m2:Movie)
+WHERE m2.releaseYear = 2010 AND m2.avgVote > averageVote
+RETURN  averageVote AS OverallAverageVote, m2.title as Title , m2.avgVote as AverageVote
+----
 
-You can use `EXPLAIN` to identify any queries that have mistakes in them.
+Here is the execution plan in Neo4j Browser:
 
-==== Example: Query using the wrong property name
+image::EagerExampleBrowser.png[EagerExampleBrowser,width=800,align=center]
 
-A Cypher query may compile with no problem and even execute, but is it constructed correctly?
-Suppose we have this query:
+Any eager operator is shown in dark blue to call it out.
 
-image::FullNameWrong.png[FullNameWrong,width=800,align=center]
+And here is the same execution plan in cypher-shell:
 
-The Person nodes in this graph do not have a property, _fullName_ that is indexed.
-In most cases, you want the starting point for retrieval (the anchor) to use an index.
-Here we see that the execution plan will do a scan of all nodes (NodeByLabelScan) with the label _Person_ to find those with the value for fullName.
-You don't want to see NodeByLabelScan steps in your execution plan.
-Seeing this will raise two questions:
+image::EagerExampleCypherShell.png[EagerExampleCypherShell,width=800,align=center]
 
-. Should _fullName_ have an index?
-. Is the property _fullName_ correct as we would expect to be using an index.
+=== Goal for improving the execution plan
 
-In our graph, we have the following indexes and constraints:
+As you gain experience with query tuning and viewing execution plans, your goals should be:
 
-image::Indexes.png[Indexes,width=800,align=center]
+[square]
 
-Clearly, this query should have used the _name_ property, rather than the _fullName_ property if we want to use an existing index.
+* Avoid redundant work and operations.
+* Early in the query, eliminate data that is going to be filtered out later in the execution.
+* Recognize less expensive ways to do what you want:
+** Improve the Cypher statement.
+** Will APOC perform better for some processing?
+** Will a stored procedure perform better?
 
-Here is the corrected execution plan that will use the index:
-
-image::CorrectedFullName.png[CorrectedFullName,width=800,align=center]
-
-The first step of the execution plan is to use _NodeIndexSeek_ which is what we want to see.
-
-==== Example: Query using the wrong relationship type
-
-In most well-designed graph data models, relationships can be the most efficient way to retrieve data.
-Suppose we have this query:
-
-image::RelationshipWrong.png[RelationshipWrong,width=800,align=center]
-
-Here we see that a variable, _DIRECTED_ is specified for the relationship.
-That is, we are not specifying a particular relationship type in the query.
-We can see in the execution plan that no relationship type is used.
-The query is missing the ":" to specify the relationship type.
-
-Here is the corrected query:
-
-image::CorrectedRelationship.png[CorrectedRelationship,width=800,align=center]
-
-And we see the correct syntax for the relationship in the _Expand_ step.
-
-== Using `PROFILE`
-
-Using `PROFILE` is what you use to understand the real work done in a query as it shows the execution plan, but also show the actual number of rows retrieved and passed between steps.
-
-Let's take a deeper look at an execution plan shown using `PROFILE`.
-
-
-//Elaine resume here refer to doc; create video/animation for how to follow the query in the execution plan like Andrew did
+In this course we cover some useful APOC procedures. We do not cover writing custom store procedures.
 
 == Information used during query processing
 
-=== Node labels
+[square]
 
-=== Node degree
+* *Node labels* provide a way to group nodes to make the query more specific. Neo4j automatically creates indexes for faster access to Node in a group.
+* *Node degree* is a count of the relationships to or from a node. The degree of a node is used to determine if it is a good anchor starting point for traversal, especially if one end of the pattern's nodes have a higher degree.
+* *Count store* contains metrics about the labels and node degrees that can be used to estimate which plan is the best at runtime. You will learn more about the count store later in this lesson.
+* *Indexes* are used only for the initial anchoring of the query (beginning `MATCH` pattern). You can use one or more indexes to anchor the query, but by default only one index is used.
+* *Relationships* are traversed to discover and collect nodes that satisfy all or part of the query.
+* *Properties* are initially accessed to filter a query or refine the number of rows processed in the execution plan. Some properties are in the same physical location as the node or relationship, but there is no guarantee of this proximity. Properties are also used to collect information during the retrieval, or to collect information to return to the client.
 
-=== Count store
+=== Hierarchy of accessibility
 
-=== Index use
+[.statement]
+For each data object, how much work must Neo4j do to retrieve the data?
 
-=== Traversing relationships
+[.is-one-third.left]
+--
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
+--
 
-=== Accessing properties
+[.is-two-thirds.right]
+--
+
+[.small]
+. Anchor node label,  indexed anchor node properties
+
+. Relationship types
+
+. Non-indexed anchor node properties
+
+. Downstream node labels
+
+. Relationship properties, downstream node properties
+--
+
+[.notes]
+--
+When analyzing queries, you must always remember how expensive nodes, relationships, and properties are to access.
+--
+
+== Understanding the graph you are working with
+
+To understand the work that is required to execute a query, you must know:
+
+[square]
+* The data model for the graph.
+* What indexes exist in the graph.
+* DB Stats for the graph.
+
+=== Data model for the graph
+
+To inspect how nodes and relationships are used in the graph you simply execute:
+
+[source,cypher]
+----
+CALL db.schema.visualization()
+----
+
+This is obviously best viewed in Neo4j Browser.
+
+image::db.schema.visualization.png[db.schema.visualization,width=800,align=center]
+
+This shows the node labels defined in the graph as well as how nodes of these types are related to other nodes in the graph.
+
+You cannot tell from this output the number of nodes of each type or the number of relationships of each type.
+
+===  Indexes and Constraints
+
+Part of understanding the performance of Cypher queries is to know what indexes are in the graph that are used during query execution.
+You learned that node labels are automatically indexed in the graph so the graph engine has efficient access to nodes of a particular type.
+You must understand what indexes exist for the properties in the graph. The index is only used for determining the anchor nodes for a query (`MATCH/WHERE` clauses.
+
+As a starting point, you should query to graph to learn about all of the indexes defined:
+
+[source,cypher]
+----
+CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties
+----
+
+image::indexes.png[indexes,width=800,align=center]
+
+Here we see that in this graph, a unique index exists for the Genre.name property and indexes exist for the Movie.title and Person.name properties.
+Having these indexes will make anchoring a query much faster.
+
+=== DB Stats for the graph
+
+You can certainly perform Cypher queries to retrieve information about the number of nodes or relationships of each type, but the easiest way to learn about this meta-data is by retrieving the count store data.
+You can retrieve count store information with this statement:
+
+[source,cypher]
+----
+CALL apoc.meta.stats()
+----
+
+image::meta-stats.png[meta-stats,width=800,align=center]
+
+This procedure returns very useful information, all of which is used to create the execution plan for a query.
+
+==== Count store
+
+The count store is updated as nodes and relationships are added to the graph.
+The meta-data in the count store is used to determine whether it is faster to use an index or the count.
+
+Here is a summary of when the count store is used for an execution plan.
+
+[cols=2]
+|===
+|*Count information stored*
+|*Example of use*
+|Number of nodes
+|(n)
+|Number of nodes with a specific label (single label only)
+|(n:Label)
+|Number of directed relationships
+|()-[]->()
+|Number of directed relationships of a specific type
+|()-[r:REL_TYPE]->()
+|Number of outgoing relationships of a specific type from a node with the label
+|(n:Label)-[r:REL_TYPE]->()
+|Number of incoming relationships of a specific type to a  node with the label
+|(n:Label)<-[r:REL_TYPE]-()
+|===
+
+[IMPORTANT]
+Relationship counts with labels on the start and end nodes are not recorded in the count store.
+
+==== Using the count store
+
+Here is a query where the count store will [underline]#never# be used because direction is not specified in the relationship:
+
+[source,cypher]
+----
+PROFILE MATCH ()-[:ACTED_IN]-()
+RETURN count(*)
+----
+
+image::NoCountStoreUsed.png[NoCountStoreUsed,width=800,align=center]
+
+We see a retrieval of all nodes (24,992 rows), as well as a total of 169954 db hits.
+
+Here is a query where the count store is used, rather than retrieving the nodes and incurring db hits:
+
+[source,cypher]
+----
+PROFILE MATCH ()-[:ACTED_IN]->()
+RETURN count(*)
+----
+
+image::CountStoreUsed.png[CountStoreUsed,width=800,align=center]
+
+Seeing the _RelationshipCountFromCountStore_ is a good thing for your execution plans.
+
+==== Alternative to using the count store
+
+The count store is very useful, but not in all cases. Here is a query where we hoped to get some leverage from using the count store, but  because we also need to retrieve the name of the person, there is a high db hit overhead:
+
+[source,cypher]
+----
+PROFILE MATCH (a:Actor)-[:ACTED_IN]->()
+RETURN a.name, count(*) AS count
+----
+
+image::CountStoreUsed2.png[CountStoreUsed2,width=800,align=center]
+
+Here we see 143,980 db hits.
+
+Here is an example we execute the same type of query,but the count store is not be used. We use size() to retrieve the number of relationships from each _Actor_ node:
+
+[source,cypher]
+----
+PROFILE MATCH (a:Actor)
+RETURN a.name, size((a)-[:ACTED_IN]->()) AS count
+----
+
+image::NoCountStoreUsed2.png[NoCountStoreUsed2,width=800,align=center]
+
+In this Cypher query, size()m calls GetDegree() which in this case is more efficient than using the count store.
+
+==== Controlling DB Stats updates
+
+DB Stats (count store) are updated when a certain threshold of changes occur to the graph.
+You can control when the DB Stats are updated, keeping in mind that more resources will be required if the DB Stats are in 100% synchronization with the indexes in the graph.
+
+One way that you can control when DB Stats will be updated is to adjust these settings in the Neo4j configuration:
+
+[source]
+----
+dbms.index_sampling.background_enabled=true
+dbms.index_sampling.update_percentage=n
+----
+
+Where the default used by Neo4j for the percentage is 5.
+That is, if more than 5% of the indexes have changes, then the DB Stats in the count store are updated.
+
+You can also force the update to the DB Stats with these calls:
+
+[source, cypher]
+----
+/update DB Stats for a specific index
+CALL db.resampleIndex(':Person(name)')
+
+//update DB Stats for all indexes
+CALL db.resampleOutdatedIndexes()
+----
+
+[.student-exercise]
+== Exercise 1: Answer Some Query Tuning Questions
+
+[.small]
+--
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-query-tuning-exercises]
+
+and follow the instructions for Exercise 1.
+
+[NOTE]
+This exercise has xx steps.
+Estimated time to complete: 15 minutes.
+--
+
 [.quiz]
 == Check your understanding
 
 === Question 1
 
 [.statement]
-What Cypher statement is a best practice for adding nodes and relationships to the graph?
+When analyzing the execution plan as part of your query tuning work, what metric shown in the execution plan is most important to decrease when the query executes?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] `CREATE`
-- [ ] `ADD`
-- [x] `MERGE`
-- [ ] `INSERT`
+- [ ] db hits
+- [ ] compile time
+- [x] rows
+- [ ] elapsed time
 
 === Question 2
 
 [.statement]
-Given this code:
-[source,cypher]
-----
-CREATE (:Person {name:"Joe"}
-CREATE (:Person {name:"Jane"}
-MERGE (:Person {name:"Bob"}
-MERGE (:Person {name:"Joe"}
-----
-
-[.statement]
-How many nodes are created in the graph?
+By default, when are the DB Stats (count store) for a graph updated?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] 0
-- [ ] 2
-- [x] 3
-- [ ] 4
+- [ ] Whenever a node is added to the graph.
+- [ ] Whenever a relationship is added to the graph.
+- [ ] Whenever an index is updated in the graph.
+- [ ] Whenever 5% of the index data has been updated in the graph.
 
 === Question 3
 
 [.statement]
-Given this code:
-
-[source,cypher]
-----
-MERGE (a:Airport {code:'LAS'})
-MERGE (b:Airport {code:'LAX'})
-MERGE (c:Airport {code:'ABQ'})
-MERGE (a)-[:CONNECTED_TO {airline:'WN',flightNumber:'82',date:'2019-1-3',departure:'1715',arrival:'1820'}]->(b)
-MERGE (a)-[:CONNECTED_TO {airline:'WN',flightNumber:'500',date:'2019-1-3',departure:'1445',arrival:'1710'}]->(c)
-----
+Which Cypher clauses and procedures below will require eager operators?
 
 [.statement]
-What is the implied entity for this domain?
-
-[.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [x] Airport
-- [ ] code
-- [ ] airline
-- [ ] CONNECTED_TO
+- [x] collect()
+- [x] FOREACH
+- [ ] MATCH
+- [ ] LIMIT
 
 [.summary]
 == Summary
 
 You should now be able to:
+
 [square]
-* Write Cypher code to implement a simple initial graph data model.
-* Confirm that the starter data is in the graph.
+* Describe the components of query processing.
+* Describe an execution plan.
+* Describe the cost of accessing nodes, labels, properties, and relationships
+* Understand the graph you will be working with:
+** Data Model
+** Indexes and Constraints
+** DB Stats
+

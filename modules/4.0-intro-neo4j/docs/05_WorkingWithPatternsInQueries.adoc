@@ -580,10 +580,10 @@ What Cypher `MATCH` clause would you use to find all people in this graph that a
 Select the correct answer.
 
 [%interactive.answers]
-- [x] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2..4]->(p2.Person)`
-- [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2-4]->(p2.Person)`
-- [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2.Person)`
-- [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2,4]->(p2.Person)`
+- [x] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2..4]->(p2:Person)`
+- [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH*2-4]->(p2:Person)`
+- [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2-4]->(p2:Person)`
+- [ ] `MATCH (p:Person)-[:IS_FRIENDS_WITH,2,4]->(p2:Person)`
 
 [.summary]
 == Summary
