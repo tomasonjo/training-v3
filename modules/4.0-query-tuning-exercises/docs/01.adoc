@@ -37,51 +37,154 @@ You are now ready to start this exercise.
 
 In this exercise, you will gain some experience with viewing execution plans and answer some questions about the graph.
 
-* *Exercise 1.1*: Retrieve all nodes from the database.
-* *Exercise 1.2*: Examine the data model for the graph.
-* *Exercise 1.3*: Retrieve all _Person_ nodes.
-* *Exercise 1.4*: Retrieve all _Movie_ nodes.
+* *Exercise 1.1*: How much of the Page Cache is being used?
+* *Exercise 1.2*: Set some parameters that you will be using.
+* *Exercise 1.3*: How many operations are in execution plan for this first query?
+* *Exercise 1.4*: Are there any eager operations in this second query?
+* *Exercise 1.5*: How many unique indexes are there in this graph?
+* *Exercise 1.6*: Display the data model for this graph.
+* *Exercise 1.7*: Answer some questions about the DB Stats for this graph.
 
 Go to the next page to start this exercise.
 
-== Exercise 1.1: Retrieve all nodes from the database (Instructions)
+== Exercise 1.1: How much of the Page Cache is being used? (Instructions)
 
-*Write a query to retrieve _all_ nodes from the database.*
+In Neo4j Browser, write and execute the command to view information about the Page Cache.
 
-. Write the query in the query pane at the top of Neo4j Browser.
-. Click the _Run_ button image:run-button.png[] in order to execute the code.
+== Exercise 1.1: How much of the Page Cache is being used? (Solution)
 
-== Exercise 1.1: Retrieve all nodes from the database (Solution)
+In Neo4j Browser, write and execute the command to view information about the Page Cache.
 
+You should see something like this when you enter the `:sysinfo` command:
 
-*Write a query to retrieve _all_ nodes from the database.*
+[.thumb]
+image::sysinfo.png[sysinfo,width=500]
+
+== Exercise 1.2: Set some parameters that you will be using (Instructions)
+
+A best practice is to always use parameters in your queries.
+For the queries you will be executing in this exercise, set the following parameter values:
+
+actorName: "Meryl Streep"
+year: 2006
+lookup: "The"
+
+*Hint*: Use :params, providing the map values.
+
+== Exercise 1.2: Set some parameters that you will be using (Solution)
+
+A best practice is to always use parameters in your queries.
+For the queries you will be executing in this exercise, set the following parameter values:
+
+actorName: "Meryl Streep"
+year: 2006
+lookup: "The"
+
+*Hint*: Use :params, providing the map values.
 
 [source, cypher]
 ----
-MATCH (n) RETURN n 
+:params {actorName: "Meryl Streep", year: 2006, lookup: "The"}
 ----
-
-You should now see all nodes in the graph in the result pane.
-In this query, _n_ is a variable, which is a container that holds the result.
 
 The result returned should be:
 
 [.thumb]
-image::ReturnAllNode.png[ReturnAllNode,width=500]
+image::params.png[params,width=800]
 
-*Notes:* 
+== Exercise 1.3: How many operations are in execution plan for this first query? (Instructions)
 
-* If the nodes displayed are not connected, make sure that _Connect result nodes_ is selected in your Neo4j Browser settings.
-* If no nodes are returned, then perhaps you did not load the _Movie_ database (see _Preparations_).
+Produce the execution plan for this query:
 
-== Exercise 1.2: Examine the data model for the graph (Instructions)
+[source,cypher]
+----
+MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
+WHERE a.name = $actorName
+WITH m
+MATCH (m)-[:DIRECTED]-(d:Director)
+RETURN collect(d.name) AS Directors
+----
 
-*Write a query to display the _schema_ of your database.*
+How many operators are used?
+
+== Exercise 1.3: How many operations are in execution plan for this first query? (Solution)
+
+Produce the execution plan for this query:
+
+[source,cypher]
+----
+PROFILE
+MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
+WHERE a.name = $actorName
+WITH m
+MATCH (m)-[:DIRECTED]-(d:Director)
+RETURN collect(d.name) AS Directors
+----
+
+How many operators are used?
+
+Answer: 8
+
+== Exercise 1.4: Are there any eager operators in this this second query? (Instructions)
+
+Produce the execution plan for this query:
+
+[source,cypher]
+----
+MATCH (g:Genre)-[]-(m:Movie)
+WHERE m.title STARTS WITH $lookup
+WITH m,  collect (DISTINCT g.name) as genres
+return m.title, genres
+----
+
+Are there any eager operators used?
+
+== Exercise 1.4: Are there any eager operators in this this second query? (Solution)
+
+Produce the execution plan for this query:
+
+[source,cypher]
+----
+PROFILE
+MATCH (g:Genre)-[]-(m:Movie)
+WHERE m.title STARTS WITH $lookup
+WITH m,  collect (DISTINCT g.name) as genres
+return m.title, genres
+----
+
+Are there any eager operators used?
+
+Answer: yes
+
+== Exercise 1.5: Are there any unique indexes in this graph? (Instructions)
+
+Write and execute the Cypher statement to show the indexes and determine the number of unique indexes defined.
 
 
-== Exercise 1.2: Examine the data model for the graph (Solution)
+== Exercise 1.5: Are there any unique indexes in this graph?  (Solution)
 
-*Write a query to display the _schema_ of your database.*
+Write and execute the Cypher statement to show the indexes and determine the number of unique indexes defined.
+
+[source, cypher]
+----
+CALL db.indexes()
+----
+
+The result returned should be:
+
+[.thumb]
+image::db.indexes.png[db.indexes,width=600]
+
+This graph has three unique indexes defined.
+
+== Exercise 1.6: Display the data model for this graph (Instructions)
+
+Write and execute the Cypher statement to show the data model for the graph.
+
+
+== Exercise 1.6: Display the data model for this graph (Solution)
+
+Write and execute the Cypher statement to show the data model for the graph.
 
 [source, cypher]
 ----
@@ -91,57 +194,46 @@ CALL db.schema.visualization()
 The result returned should be:
 
 [.thumb]
-image::call_db.schema.png[call_db.schema,width=800]
+image::db.schema.png[db.schema,width=600]
 
-== Exercise 1.3: Retrieve all _Person_ nodes (Instructions)
 
-*Write a query to retrieve all _Person_ nodes.*
+== Exercise 1.7: Answer some questions about the DB Stats for this graph (Instructions)
 
-== Exercise 1.3: Retrieve all _Person_ nodes (Solution)
+Write and execute the Cypher statement to show the DB Stats for the graph and answer these questions:
 
-*Write a query to retrieve all _Person_ nodes.*
+. How many Director nodes are there?
+. How many Actor nodes are there?
+. How many IS_GENRE relationships are there?
+
+
+== Exercise 1.7: Answer some questions about the DB Stats for this graph (Solution)
+
+Write and execute the Cypher statement to show the DB Stats for the graph and answer these questions:
+
+. How many Director nodes are there?  Answer: 3099
+. How many Actor nodes are there?  Answer: 16,089
+. How many IS_GENRE relationships are there?  Answer 17,304
+
 
 [source, cypher]
 ----
-MATCH (p:Person) RETURN p 
+CALL apoc.meta.stats()
 ----
 
 The result returned should be:
 
 [.thumb]
-image::PersonNodes.png[PersonNodes,width=600]
+image::meta.stats[meta.stats,width=600]
 
-Here we use _p_ as the variable representing all nodes retrieved and what is returned for the query.
-Notice also, that no relationships are displayed.
-That is because most _Person_ nodes have no relationships with other _Person_ nodes.
+== Exercise 1: Answer Some Query Tuning Question (Taking it Further)
 
-== Exercise 1.4: Retrieve all _Movie_ nodes (Instructions)
-
-*Write a query to retrieve all _Movie_ nodes.*
-
-== Exercise 1.4: Retrieve all _Movie_ nodes (Solution)
-
-*Write a query to retrieve all _Movie_ nodes.*
-
-[source, cypher]
-----
-MATCH (m:Movie) RETURN m
-----
-
-The result returned should be:
-
-[.thumb]
-image::MovieNodes.png[MovieNodes,width=600]
-
-Here we use _m_ as the variable representing all nodes retrieved and what is returned for the query.
-Notice also, that no relationships are displayed.
-That is because a _Movie_ node has no relationships with another _Movie_ node.
-
-== Exercise 1: Retrieving Nodes (Summary)
+Try executing `PROFILE` statements in cypher-shell to get used to reading the execution plan in a tabular format.
 
 
-In this exercise, you performed some basic retrievals from the Movie database.
-You also called the method to examine the schema of the graph.
+== Exercise 1:Answer Some Query Tuning Question (Summary)
+
+
+In this exercise, you executed some commands and Cypher statements to familiarize yourself with the graph you will be working with and also the viewing of execution plans.
 
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/02.html'>Continue to Exercise 2</a>]
