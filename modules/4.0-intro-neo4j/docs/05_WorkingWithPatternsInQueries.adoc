@@ -26,7 +26,7 @@ At the end of this module, you should be able to write Cypher statements to:
 [.statement]
 Suppose we want to find all of the followers of people who reviewed the movie, _The Replacements_.
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the query to do this:
 endif::[]
 
@@ -37,7 +37,7 @@ WHERE m.title = 'The Replacements'
 RETURN follower.name, reviewer.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -94,7 +94,7 @@ RETURN a.name, m.title, d.name
 It returns a _Person_ nodes for people who acted in these three movies and using that same movie node,_m_  it retrieves the _Person_ node who is the director for that movie, _m_.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of executing this query:
 endif::[]
 
@@ -164,7 +164,7 @@ If you click the warning symbol in the top left corner, it produces an explanati
 image::CartesianProductWarning.png[CartesianProductWarning,width=500,align=center]
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of executing this query:
 endif::[]
 
@@ -191,7 +191,7 @@ WHERE meg.name = 'Meg Ryan'
 RETURN m.title as movie, d.name AS director , other.name AS `co-actors`
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -233,7 +233,7 @@ When the query engine traverses the graph for these `MATCH` clauses, we see that
 image::ValKilmerCoActorsMultipleMatchTraversal.png[ValKilmerCoActorsMultipleMatchTraversal,width=400,align=center]
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -313,7 +313,7 @@ WHERE follower.name = 'Paul Blythe'
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -494,7 +494,7 @@ OPTIONAL MATCH (p)-[r:REVIEWED]->(m:Movie)
 RETURN p.name, type(r), m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 

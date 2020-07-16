@@ -136,7 +136,7 @@ CREATE
 ----
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
@@ -336,7 +336,7 @@ SET  m = {title: 'Batman Begins',
 RETURN m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
@@ -380,7 +380,7 @@ WHERE m.title = 'Batman Begins'
 RETURN properties(m)
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -402,7 +402,7 @@ SET  m += { grossMillions: 300,
 RETURN m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 

@@ -15,7 +15,7 @@ In this course, you have learned how to use the:
 * Jaccard similarity algorithm
 * Label Propagation Community Detection algorithm
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 == Course feedback
 
 We want your feedback on this course. Please provide your https://forms.gle/retKeTdE8kvKc3jK6[feedback] so we can improve this course.

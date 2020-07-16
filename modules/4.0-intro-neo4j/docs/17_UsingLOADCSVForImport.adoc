@@ -277,7 +277,7 @@ image::TransformMovieData3.png[TransformMovieData3,width=700,align=center]
 [.notes]
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 Have the student follow you through these steps to make sure they can all create a new database.
 
 Note: They should do the import in the hands-on exercise at the end of the lesson.
@@ -293,28 +293,28 @@ Here are the steps to create a new database, _Movies_:
 . In Neo4j Browser, select the system database.
 +
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 
 image::CreateMoviesDB1.png[CreateMoviesDB1,width=900,align=center]
 endif::[]
 
 . Create the new movies database in the query edit pane with `CREATE DATABASE Movies`
 +
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 
 image::CreateMoviesDB2.png[CreateMoviesDB2,width=900,align=center]
 endif::[]
 
 . Enter the browser command `:dbs` in the query edit pane to see the list of existing databases.
 +
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 
 image::CreateMoviesDB3.png[CreateMoviesDB3,width=900,align=center]
 endif::[]
 
 . Enter the browser command `:use movies` to switch to this newly created, empty database.
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 
 image::CreateMoviesDB4.png[CreateMoviesDB4,width=900,align=center]
 endif::[]
@@ -390,7 +390,7 @@ Here we see that the largest file, *people.csv* has fewer that 100K rows so it c
 
 If the number of rows exceeds 100K, then you have two options.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 
 . `:auto USING PERIODIC COMMIT LOAD CSV`.
 . Use the APOC library.
@@ -442,7 +442,7 @@ We use built-in functions to transform the string data in the row into values th
 We use `split()` to set the value for the genres property which will be a list.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -489,7 +489,7 @@ The final step after all nodes and relationships have been created in the graph 
 These indexes are based upon the most important queries for the graph.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 So for example:
 endif::[]
 
@@ -567,7 +567,7 @@ Select the correct answer.
 [.summary]
 == Summary
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 You should now be able to:
 endif::[]
 

@@ -40,7 +40,7 @@ Cypher is designed to be a human-friendly query language, suitable for both deve
 The guiding goal is to make the simple things easy, and the complex things possible.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [square]
 * Declarative query language.
 * Query the graph.
@@ -412,7 +412,7 @@ MATCH (m:Movie {released: 2003, tagline: 'Free your mind'})
 RETURN m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
@@ -483,7 +483,7 @@ MATCH (p:Person {born: 1965})
 RETURN p.name, p.born
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -524,7 +524,7 @@ MATCH (p:Person {born: 1965})
 RETURN p.name AS name, p.born AS `birth year`
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -546,14 +546,14 @@ Estimated time to complete: 15 minutes.
 
 == Relationships
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Relationships are what make Neo4j graphs such a powerful tool for connecting complex and deep data.
 A relationship is a *directed* connection between two nodes that has a *relationship type* (name).
 In addition, a relationship can have properties, just like nodes.
 In a graph where you want to retrieve nodes, you can use relationships between nodes to filter a query.
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [square]
 * Directed connection between two nodes.
 * Relationships have a type (name).
@@ -599,7 +599,7 @@ RETURN node1, node2
 MATCH (node1)-[:REL_TYPEA | REL_TYPEB]->(node2)
 RETURN node1, node2
 ----
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 _where:_
 {set:cellbgcolor:white}
 [frame="none",,width="80%"cols="20,80",stripes=none]
@@ -648,7 +648,7 @@ MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'The Matrix'})
 RETURN p, rel, m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -687,7 +687,7 @@ MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN|DIRECTED]->(m:Movie)
 RETURN p.name, m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -716,7 +716,7 @@ MATCH (p:Person)-[:ACTED_IN]->(:Movie {title: 'The Matrix'})
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -745,7 +745,7 @@ MATCH (p:Person)-->(m:Movie {title: 'The Matrix'})
 RETURN p, m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -802,7 +802,7 @@ MATCH (p:Person)-[rel]->(:Movie {title:'The Matrix'})
 RETURN p.name, type(rel)
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -840,7 +840,7 @@ MATCH (p:Person)-[:REVIEWED {rating: 65}]->(:Movie {title: 'The Da Vinci Code'})
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -877,7 +877,7 @@ RETURN p
 
 [.is-half.left]
 --
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -907,7 +907,7 @@ MATCH  (p:Person)<-[:FOLLOWS]-(:Person {name:'Angela Scope'})
 RETURN p
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -965,7 +965,7 @@ RETURN p
 
 [.is-half.right]
 --
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -1004,7 +1004,7 @@ RETURN p.name, p2.name, p3.name
 For this query, although the query engine traverses the path from _Jessica Thompson_ to _James Thompson_, it finds that the _James Thompson_ node does not match the entire path specified.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -1027,7 +1027,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, m.title, d.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -1050,7 +1050,7 @@ MATCH  path = (:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessic
 RETURN  path
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 The result returned is:
 endif::[]
 
@@ -1089,7 +1089,7 @@ Later in this course, you will learn other ways to query data and how to control
 
 == Cypher style recommendations
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here are the *Neo4j-recommended* Cypher coding standards that we use in this training:
 
 [square]
@@ -1103,7 +1103,7 @@ Here are the *Neo4j-recommended* Cypher coding standards that we use in this tra
 * Specify anonymous relationships with `+-->+`, `--`, or `+<--+`.
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.small]
 --
 [square]

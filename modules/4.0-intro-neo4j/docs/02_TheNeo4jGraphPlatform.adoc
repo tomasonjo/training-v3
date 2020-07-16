@@ -80,7 +80,7 @@ image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 [.statement]
 Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Next, you will learn about some features of Neo4j DBMS that make it different from traditional relational database management system (RDBMS).
 endif::[]
 
@@ -337,7 +337,7 @@ In addition to executing Cypher statements, you can execute a number of system c
 For example, you can retrieve the list of queries that are currently running in the server.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [square]
 * Graphical UI that connects to Neo4j Server instance.
 * Execute Cypher code to retrieve or create data.
@@ -381,7 +381,7 @@ In addition, when using the Web browser interface to Neo4j Browser, you can use 
 
 [.notes]
 --
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 Show the students the basics of using Neo4j Browser and have them do the same on their systems:
 
 . Show the various panes, including the left panel for database information and apps available.
@@ -407,7 +407,7 @@ ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -516,7 +516,7 @@ You can also extend the functionality of Neo4j by creating user defined function
 
 == Neo4j integration
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [square]
 * GRANDstack
 * Kettle

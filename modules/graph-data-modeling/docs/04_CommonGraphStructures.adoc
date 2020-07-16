@@ -119,12 +119,12 @@ image::LinkedList1.png[LinkedList1,width=900,align=center]
 Linked lists are not unique to graphs.  They are a common pattern in lots of data modeling paradigms.
 In some of those paradigms, you see both the singly-linked list (above)  and the doubly-linked list (below).
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 You should *never* use a doubly-linked list in Neo4j because doubly-linked lists use redundant symmetrical relationships.
 endif::[]
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 *Concept check*:  Who can tell me why you should never use doubly-linked lists?
@@ -205,7 +205,7 @@ That is not to say that timeline trees are the go-to “best” method of expres
 Quite the opposite--timeline trees consume a lot of space relative to the data they contain.
 Most often, even when time is an important part of the answer to a question, a simple property is sufficient.
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 But we are sharing this structure with you so that, in cases where a property alone is not good enough, you do not need to reinvent the concept of a timeline tree yourself.
 endif::[]
 --
@@ -224,7 +224,7 @@ Here is one example.
 
 image::MultipleStructures.png[MultipleStructurese,width=1100,align=center]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 In the next slides you will see the different structures within this single model.
@@ -298,7 +298,7 @@ image::Ex4-SampleData.png[Ex4-SampleData,width=900,align=center]
 . Which lesson follows Graph Theory in the Neo4j for Developers course?
 . Who has completed Introduction to Neo4j?
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 If students feel overwhelmed, ask them to break down the problem.
@@ -384,7 +384,7 @@ At this point, the certExpiration property will be populated by adding the term 
 This intermediate node allows us to keep track of students’ progress through different concurrent courses, and to differentiate multiple subsequent passes through the same course.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the markup for the model:
 
 [source]
@@ -444,7 +444,7 @@ endif::[]
 
 image::Ex4-Sol2.png[Ex4-Sol2,width=1000,align=center]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Here is the sample data fully fleshed out.  Use the below markup to get it into Arrows.
@@ -566,7 +566,7 @@ As a group, prompt students to trace the traversal for each of the application q
 --
 endif::[]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the sample data fully fleshed out.  Use the below markup to get it into Arrows.
 
 [source]

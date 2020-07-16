@@ -36,7 +36,7 @@ Constraints can be used to eliminate duplication of nodes and you will learn abo
 Here are some facts about creating nodes and relationships in the graph when no constraints have been defined.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,width="90%"cols="40,60",stripes=none]
 |===
@@ -55,7 +55,7 @@ h|The result is:
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 Node creation behaviors:
 
 [.statement]
@@ -216,7 +216,7 @@ MATCH (p {name: 'Michael Caine'})-[*0..1]-(m)
 RETURN p, m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -234,7 +234,7 @@ MERGE (p)-[:ACTED_IN]->(m)
 RETURN p,m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this code:
 endif::[]
 

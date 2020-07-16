@@ -122,7 +122,7 @@ You can also use the JSON-style syntax to set [.underline]#all# of the parameter
 :params {actorName: 'Tom Cruise', movieName: 'Top Gun'}
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 
@@ -140,7 +140,7 @@ WHERE p.name = $actorName AND m.title = $movieName
 RETURN p, m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 With the result:
 endif::[]
 

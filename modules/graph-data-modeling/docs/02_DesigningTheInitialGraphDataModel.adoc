@@ -273,7 +273,7 @@ Define the entities and properties from these questions:
 . What products require a table brace?
 . How much will the parts cost to make product Wood table 60"?
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Prompt the students to identify the entities from these questions as a group.
@@ -338,7 +338,7 @@ Assembly is the tricky one--it does not appear in the questions, and you must us
 Remember that your first model is never perfect, and that is OK because modifying the model in its early stages is relatively easy.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Highlight the strengths and weaknesses of their design choices later, when we start to evaluate the model against our questions.
@@ -353,7 +353,7 @@ Use the entities you identified earlier for the BOM application and create them 
 
 Make sure you include properties for the nodes and specify the types for the properties, rather than values.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 
@@ -383,7 +383,7 @@ endif::[]
 
 === Exercise 2 solution
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the Arrow tool markup for the solution:
 
 [source]
@@ -497,7 +497,7 @@ Similarly, having cities as separate nodes assists with the question, “Who liv
 The main risk about fanout is that it can lead to very dense nodes, or supernodes.
 Supernodes need to be handled carefully.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 Note:
 This model is often troubling to folks deeply immersed in RDBMS thinking.
 Remind them what was discussed in the Index-Free Adjacency module of the Intro course: in a graph database, it is generally better to have lots of small objects than a few large objects.  Fanout like this is emblematic of that.
@@ -507,7 +507,7 @@ endif::[]
 [.student-exercise]
 == Exercise 3: Adding relationships to the model
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 Follow the instructions on the next slide.
 endif::[]
 
@@ -570,7 +570,7 @@ Here is the markup:
 Again, your model need not exactly match this one.
 Remember, the first model is never perfect.
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 Highlight the strengths and weaknesses of their design choices later, when we start to evaluate the model against our questions.
 endif::[]
 --
@@ -584,7 +584,7 @@ Just to fill in more details for the data model, here is more sample data that m
 This particular sample data is useful, especially when discussing how well the design addresses the questions and how well the application can scale.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the Arrow tool markup for the sample data for the BOM application:
 
 [source]
@@ -676,7 +676,7 @@ Here is what the sample data might look like in the UI of the Arrow tool:
 
 image::SampleDataBOM.png[SampleDataBOM,width=800,align=center]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Here is the markup for the sample data:

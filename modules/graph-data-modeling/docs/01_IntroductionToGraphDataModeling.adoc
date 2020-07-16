@@ -50,7 +50,7 @@ Stakeholders are:
 image::Neo4jPropertyGraphModel.png[Neo4jPropertyGraphModel,width=800,align=center]
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 On this slide, do a Concept Check.
@@ -66,7 +66,7 @@ Ask questions like:
 --
 endif::[]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Nodes and relationships are the key components of a graph.
 Nodes should have labels to categorize entities.
 Relationships must have direction and type.
@@ -94,7 +94,7 @@ Then, the _OWNS_ relationship is traversed to retrieve the qualifying nodes.
 A relationship is only traversed once in a query.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Ask the students these questions:
@@ -129,7 +129,7 @@ ifdef::backend-pdf[]
 https://youtu.be/NB184T-S46w
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 https://youtu.be/NB184T-S46w
 endif::[]
 
@@ -139,7 +139,7 @@ video::NB184T-S46w[youtube,width=560,height=315]
 endif::[]
 
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Show the students how to get started with the Arrow tool and encourage them to follow along on their laptops:

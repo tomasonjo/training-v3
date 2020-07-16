@@ -120,7 +120,7 @@ You should read the _Neo4j Cypher Manual's_ section _Working with null_ to under
 
 == Testing labels
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Thus far, you have used the node labels to filter queries in a `MATCH` clause. 
 You can filter node labels in the `WHERE` clause also:
 endif::[]
@@ -162,7 +162,7 @@ WHERE p:Person AND m:Movie AND m.title='The Matrix'
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this second query:
 endif::[]
 
@@ -193,7 +193,7 @@ WHERE p.name='Jack Nicholson' AND exists(m.tagline)
 RETURN m.title, m.tagline
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -217,7 +217,7 @@ WHERE p.name STARTS WITH 'Michael'
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -367,7 +367,7 @@ WHERE p.born IN [1965, 1970]
 RETURN p.name as name, p.born as yearBorn
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
@@ -393,13 +393,13 @@ WHERE  'Neo' IN r.roles AND m.title='The Matrix'
 RETURN p.name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 
 image::UsingINRoles.png[UsingINRoles,width=600,align=center]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Later in this course, you will learn how to create lists from your queries by aggregating data in the graph.
 endif::[]
 

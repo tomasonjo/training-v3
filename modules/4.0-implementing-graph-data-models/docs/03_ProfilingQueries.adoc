@@ -65,13 +65,13 @@ Execution time is important, but that is generally a result of administrative fa
 *db hits*, on the other hand, are entirely a function of the data model and query.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::PROFILEExample.png[PROFILEExample,width=1000,align=center]
 endif::[]
 
 [.is-half.right]
 --
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 image::PROFILEExample.png[PROFILEExample,width=400,align=center]
 endif::[]
 --

@@ -194,12 +194,12 @@ WHERE flight.airline = 'WN' AND
 
 === Result of the profile
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=300,align=center]
 endif::[]
 
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=120,align=center]
 endif::[]
 
@@ -256,7 +256,7 @@ For example:
 Find all the flights going from Los Angeles (LAS) to Chicago Midway International (MDW) on the 3rd January, 2019.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Whiteboard what the query might be with the students.
@@ -283,7 +283,7 @@ RETURN origin, destination, flight
 You will work with this query in the next exercise where you have loaded 10k nodes into the graph.
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 Before you execute the query, show the students that you now have 10K flight nodes in the database.
@@ -298,11 +298,11 @@ endif::[]
 Here is the result of the profile on a graph that contains 10k nodes.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=400,align=center]
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.is-one-third.right]
 --
 image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=180,align=center]
@@ -372,7 +372,7 @@ CREATE CONSTRAINT AirportDay_airportDayId_constraint ON (a:AirportDay)
        ASSERT a.airportDayId IS UNIQUE
 ----
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.notes]
 --
 On the whiteboard, come up with the Cypher code to:
@@ -430,14 +430,14 @@ WHERE flight.airline = 'WN' AND
 ----
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [is-one-third.right]
 --
 image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=200,align=center]
 --
 endif::[]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=400,align=center]
 endif::[]
 
@@ -466,14 +466,14 @@ RETURN origin, destination, flight
 ----
 --
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.is-one-third.right]
 --
 image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=160,align=center]
 --
 endif::[]
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=400,align=center]
 endif::[]
 
@@ -505,11 +505,11 @@ RETURN origin, destination, flight
 ----
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=400,align=center]
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.is-one-third.right]
 --
 image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=160,align=center]
@@ -594,11 +594,11 @@ ORDER BY flight.date, flight.departure
 ----
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::LASToMDWBad.png[LASToMDWBad,width=400,align=center]
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.is-one-third.right]
 --
 image::LASToMDWBad.png[LASToMDWBad,width=110,align=center]
@@ -691,11 +691,11 @@ ORDER BY flight.date, flight.departure
 ----
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 image::AfterAPOCRefactor.png[AfterAPOCRefactor,width=300,align=center]
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::env-slides[]
 [.is-one-quarter.right]
 --
 image::AfterAPOCRefactor.png[AfterAPOCRefactor,width=120,align=center]

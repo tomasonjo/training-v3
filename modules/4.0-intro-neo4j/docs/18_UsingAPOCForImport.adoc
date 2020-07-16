@@ -368,7 +368,7 @@ UNWIND data.items as q
 RETURN q.question_id, q.title, q.tags, q.is_answered, q.owner.display_name
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result:
 endif::[]
 

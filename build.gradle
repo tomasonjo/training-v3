@@ -392,6 +392,7 @@ subprojects {
       // 'revealjs_transition': 'none',
       attributes 'revealjs_customtheme': 'themes/reveal.css',
         'imagesdir': 'images',
+        'env-slides': '',
         'revealjs_transition': 'none',
         'revealjs_center': 'false',
         'revealjs_width': '1280',
@@ -541,6 +542,7 @@ subprojects {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
       attributes 'revealjs_customtheme': 'themes/reveal.css',
         'imagesdir': 'images',
+        'env-slides': '',
         'revealjs_center': 'false',
         'revealjs_width': '1280',
         'revealjs_height': '720',

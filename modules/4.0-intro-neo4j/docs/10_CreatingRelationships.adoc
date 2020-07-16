@@ -79,7 +79,7 @@ If you are familiar with the data in the graph and can be sure that the `MATCH` 
 In our case, we are simply looking up a particular _Person_ node and a particular _Movie_ node so we can create the relationship.
 --
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
@@ -107,7 +107,7 @@ CREATE (a)-[:ACTED_IN]->(m)<-[:PRODUCED]-(p)
 RETURN a, m, p
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
@@ -134,7 +134,7 @@ CREATE (a)-[rel:ACTED_IN {roles: ['Rachel','Rachel Dawes']}->(m)
 RETURN a.name, rel, m.title
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this code:
 endif::[]
 
@@ -157,7 +157,7 @@ SET a.name = 'Gary Oldman', a.born=1958
 RETURN a, m, p
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
@@ -230,7 +230,7 @@ SET rel.roles = ['Bruce Wayne','Batman']
 RETURN a, rel, m
 ----
 
-ifndef::backend-revealjs[]
+ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
