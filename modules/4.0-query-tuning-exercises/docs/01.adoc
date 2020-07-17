@@ -44,6 +44,7 @@ In this exercise, you will gain some experience with viewing execution plans and
 * *Exercise 1.5*: How many unique indexes are there in this graph?
 * *Exercise 1.6*: Display the data model for this graph.
 * *Exercise 1.7*: Answer some questions about the DB Stats for this graph.
+* *Exercise 1.8*: Is the count store used for this query?
 
 Go to the next page to start this exercise.
 
@@ -66,7 +67,6 @@ A best practice is to always use parameters in your queries.
 For the queries you will be executing in this exercise, set the following parameter values:
 
 actorName: "Meryl Streep"
-year: 2006
 lookup: "The"
 
 *Hint*: Use :params, providing the map values.
@@ -77,14 +77,13 @@ A best practice is to always use parameters in your queries.
 For the queries you will be executing in this exercise, set the following parameter values:
 
 actorName: "Meryl Streep"
-year: 2006
 lookup: "The"
 
 *Hint*: Use :params, providing the map values.
 
 [source, cypher]
 ----
-:params {actorName: "Meryl Streep", year: 2006, lookup: "The"}
+:params {actorName: "Meryl Streep", lookup: "The"}
 ----
 
 The result returned should be:
@@ -225,12 +224,55 @@ The result returned should be:
 [.thumb]
 image::meta.stats[meta.stats,width=600]
 
+
+== Exercise 1.8: Is the count store used for this query? (Instructions)
+
+Profile this query to see to see that the count store is not used:
+
+[source, cypher]
+----
+MATCH (p:Person)-[:DIRECTED]->(m:Movie)
+WITH count(*) as TotalDirectorRelationships
+RETURN TotalDirectorRelationships
+----
+
+Change this query so that the count store will be used.
+
 == Exercise 1: Answer Some Query Tuning Question (Taking it Further)
 
 Try executing `PROFILE` statements in cypher-shell to get used to reading the execution plan in a tabular format.
 
+Profile this query to see to see that the count store is not used:
 
-== Exercise 1:Answer Some Query Tuning Question (Summary)
+[source, cypher]
+----
+PROFILE
+MATCH (p:Person)-[:DIRECTED]->(m:Movie)
+WITH count(*) as TotalDirectorRelationships
+RETURN TotalDirectorRelationships
+----
+
+Here is what you should see in your execution plan:
+
+[.thumb]
+image::NoCountStore[NoCountStore,width=600]
+
+Change this query so that the count store will be used.
+
+[source, cypher]
+----
+PROFILE
+MATCH (p:Person)-[:DIRECTED]->()
+WITH count(*) as TotalDirectorRelationships
+RETURN TotalDirectorRelationships
+----
+
+Here is what you should see in your execution plan:
+
+[.thumb]
+image::CountStore[CountStore,width=600]
+
+== Exercise 1: Answer Some Query Tuning Question (Summary)
 
 
 In this exercise, you executed some commands and Cypher statements to familiarize yourself with the graph you will be working with and also the viewing of execution plans.

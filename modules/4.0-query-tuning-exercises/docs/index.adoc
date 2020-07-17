@@ -66,11 +66,12 @@ These are extra exercises that you can complete if you have more time.
 
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/01.html'>Exercise 1</a>] --  Answer Some Query Tuning Questions
+pass:a[<a play-topic='{guides}/02.html'>Exercise 2</a>] --  Preparing for Query Tuning
 
 endif::[]
 
 
 ifndef::env-guide[]
 Exercise 1 -- Answer Some Query Tuning Questions
-
+Exercise 2 -- Preparing for Query Tuning
 endif::[]

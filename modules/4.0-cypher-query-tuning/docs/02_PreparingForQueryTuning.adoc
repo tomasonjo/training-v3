@@ -1,174 +1,263 @@
 = Preparing for Query Tuning
-:slug: 01-cqt-40-how-queries-work-in-neo4j
+:slug: 02-cqt-40-preparing-for-query-tuning
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Preparing for Query Tuning
+:module-next-title: ???
 
 == About this module
 
+In this module you will learn about the steps you should take before you begin your query tuning work.
+
 At the end of this module, you should be able to:
+
 [square]
-* Describe the components of query processing.
-* Use `EXPLAIN` to view the query plan.
-* Use `PROFILE` to view the query plan and execution.
-* Describe how information is used for query processing:
-** node labels
-** node degree
-** count store
-** indexes
-** relationships
-** properties
+* Ensure you have the appropriate system hardware and settings that can affect performance.
+* Prepare Neo4j configuration settings for query tuning.
+* Use a representative data set for your queries.
+* Pre-test all queries to ensure expected rows based upon DB Stats.
+* Ensure the Page Cache is warmed up.
 
-== Using `EXPLAIN`
+== System performance factors
 
-You use the `EXPLAIN` feature of Cypher to view the estimated execution plan for the query.
-When using `EXPLAIN`, Neo4j provides information based upon what is in the Page Cache.
-This information, however may not match what is in the database.
+The hardware and system settings required for executing Cypher queries in a Neo4j instance are the typical ones required by most applications:
 
-You can use `EXPLAIN` to identify any queries that have mistakes in them.
+[square]
+* Disk - Ensure that you either use SSD or you have enough IOPs on the system.
+** On linux, configure disk scheduler to *noop* or *deadline*, mount the database volume with *noatime*.
+* RAM - Ideally you want to fit your entire graph in memory.
+* CPU cores - The more cores, the more concurrent operations can occur.
+* Number of open files - It is recommended that you set it to 40000 if many indexes and users connect.
+* Neo4j version - You should use the latest GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
 
-==== Example: Query using the wrong property name
+In addition, you should be prepared to monitor system bottlenecks:
 
-A Cypher query may compile with no problem and even execute, but is it constructed correctly?
-Suppose we have this query:
+[square]
+* *top* or *htop* for CPU and memory usage
+* *iotop* for disk usage
 
-image::FullNameWrong.png[FullNameWrong,width=800,align=center]
+== Neo4j configuration settings
 
-The Person nodes in this graph do not have a property, _fullName_ that is indexed.
-In most cases, you want the starting point for retrieval (the anchor) to use an index.
-Here we see that the execution plan will do a scan of all nodes (NodeByLabelScan) with the label _Person_ to find those with the value for fullName.
-You don't want to see NodeByLabelScan steps in your execution plan.
-Seeing this will raise two questions:
+To prepare for query tuning, you should examine and modify these settings in *neo4j.conf*:
 
-. Should _fullName_ have an index?
-. Is the property _fullName_ correct as we would expect to be using an index.
+[cols="25,50,25"]
+|====
+|*Property*
+|*Description*
+|*Default value*
+|dbms.memory.pagecache.size
+|The amount of memory to use for mapping the store files, in bytes (or kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
+If possible, set to the size of the graph (:sysinfo).
+|512m, but if not set, Neo4j uses 50% of RAM.
+|dbms.memory.heap.initial_size
+|In most cases 8G - 16G is sufficient, but this should never exceed the amount of physical RAM. It should match what you configure for dbms.memory.heap.max_size.
+|512m
+|dbms.memory.heap.max_size
+|In most cases 8G - 16G is sufficient, but this should never exceed the amount of physical RAM
+|1G
+|====
 
-In our graph, we have the following indexes and constraints:
+Changes to these properties requires a restart of the Neo4j instance.
 
-image::Indexes.png[Indexes,width=800,align=center]
+You can also query the graph for what these settings are with this Cypher:
 
-Clearly, this query should have used the _name_ property, rather than the _fullName_ property if we want to use an existing index.
+[source, cypher]
+----
+CALL dbms.listConfig() YIELD name, value
+WHERE name STARTS WITH 'dbms.memory'
+RETURN name, value
+----
 
-Here is the corrected execution plan that will use the index:
+image::listConfig.png[listConfig,width=800,align=center]
 
-image::CorrectedFullName.png[CorrectedFullName,width=800,align=center]
+== Using a representative dataset
 
-The first step of the execution plan is to use _NodeIndexSeek_ which is what we want to see.
+It is extremely important that the dataset you are performing the queries against has the same characteristics your real data will have.
+How the execution plan is created depends upon the DB Stats as well as the indexes defined for the database.
 
-==== Example: Query using the wrong relationship type
+You should always:
 
-In most well-designed graph data models, relationships can be the most efficient way to retrieve data.
-Suppose we have this query:
+[square]
+* Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
+* Understand the data model with `CALL db.schema.visualization()`.
+* Understand the DB Stats with `CALL apoc.meta.stats()`.
+* Understand the indexes in the graph `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`.
 
-image::RelationshipWrong.png[RelationshipWrong,width=800,align=center]
+== Pre-test all queries
 
-Here we see that a variable, _DIRECTED_ is specified for the relationship.
-That is, we are not specifying a particular relationship type in the query.
-We can see in the execution plan that no relationship type is used.
-The query is missing the ":" to specify the relationship type.
+Before you begin query tuning, make sure that all queries are properly formed:
 
-Here is the corrected query:
+[square]
+* Is the implied syntax correct?
+* Are indexes being used as expected?
+* Is there minimal to no use of literals in queries?
 
-image::CorrectedRelationship.png[CorrectedRelationship,width=800,align=center]
+As you learned in the previous lesson, you should aim to always use parameters in your queries, rather than literals. This will ensure that the Query Cache is used to your advantage.
+If a literal is used, it should be one that is always used in the queries.
 
-And we see the correct syntax for the relationship in the _Expand_ step.
+Let's look at some other examples where the queries could be written incorrectly.
 
+=== Check all implied syntax
 
-== Using `PROFILE`
+You can use `EXPLAIN` to help you when examining queries you will be tuning.
 
-Using `PROFILE` is what you use to understand the real work done in a query as it shows the execution plan, but also show the actual number of rows retrieved and passed between steps.
+Suppose we had this query:
 
-Let's take a deeper look at an execution plan shown using `PROFILE`.
+[source,cypher]
+----
+EXPLAIN
+MATCH (p:Person)
+WHERE p.fullName = $actorName
+RETURN p
+----
 
+image::propertyWrong.png[propertyWrong,width=800,align=center]
 
-//Elaine resume here refer to doc; create video/animation for how to follow the query in the execution plan like Andrew did
+The problem we see with this query is that we know that there is an index on the Person nodes using the _name_ property.
+With this query we would expect the index to be used.
+As we see in the image, no index is used to perform the query.
+_p.fullName_ should have been specified as _.name_.
 
-== Information used during query processing
+Furthermore, we can see that _fullName_ is not a valid property key.
+You can execute this statement to get a list of all valid property names in the graph or you can simply view the keys in the left panel of Neo4j Browser.
 
-=== Node labels
+[source,cypher]
+----
+CALL db.propertyKeys() YIELD propertyKey
+RETURN collect(propertyKey)
+----
 
-=== Node degree
+image::propertyKeys.png[propertyKeys,width=800,align=center]
 
-=== Count store
+=== Check correct variable use
 
-=== Index use
+From our knowledge of DB Stats, we know that there are 56,914 (:Person)-(:_ACTED_IN_)->() relationships in the graph.
 
-=== Traversing relationships
+Suppose we will be tuning this query:
 
-=== Accessing properties
+[source, cypher]
+----
+EXPLAIN
+MATCH (p:Person)-[ACTED_IN]->(m)
+RETURN p, m
+----
+
+image::missingRel.png[missingRel,width=800,align=center]
+
+When we look at the expected number of rows, we see 63,790.
+This is not correct because the query had an error in it.
+It should have been written as follows:
+
+[source, cypher]
+----
+EXPLAIN
+MATCH (p:Person)-[:ACTED_IN]->(m)
+RETURN p, m
+----
+
+When we look at the expected rows now, we now what we expect from the DB Stats:
+
+image::missingRelCorrected.png[missingRelCorrected,width=800,align=center]
+
+== Warm up the Query and Page Caches
+
+After you have confirmed that the queries are properly formed and use the expected resources to perform the queries, you are ready to begin tuning.
+
+You want the query times to not include time for compilation.
+That is, you want to measure only the query execution time and the time it takes to return the results.
+To warm up the Query Cache, make sure you execute all queries you will be tuning.
+This will ensure that they are compiled and in the Query Cache.
+
+There are different ways that you can warm up the Page Cache.
+Depending on the size of your graph and the size of RAM on your system, you may not be able to keep the entire graph in Page Cache.
+
+Here are some ways that you can warm up the Page Cache:
+
+[source, cypher]
+----
+MATCH (n) RETURN max(id(n))
+MATCH ()-[rel]->() RETURN max(id(rel))
+// or
+CALL apoc.warmup.run() //nodes and relationships
+CALL apoc.warmup.run(true) // include properties
+CALL apoc.warmup.run(true,true) // include large strings and arrays
+CALL apoc.warmup.run(true,true,true) // include indexes
+----
+
+Part of your query tuning work should be to monitor the hit percentages in the Page Cache:
+
+image::pageCacheHits.png[pageCacheHits,width=800,align=center]
+
+[.student-exercise]
+== Exercise 2: Prepare for Query Tuning
+
+[.small]
+--
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-query-tuning-exercises]
+
+and follow the instructions for Exercise 2.
+
+[NOTE]
+This exercise has 6 steps.
+Estimated time to complete: 15 minutes.
+--
+
 [.quiz]
 == Check your understanding
 
 === Question 1
 
 [.statement]
-What Cypher statement is a best practice for adding nodes and relationships to the graph?
+Which of the following will impact your query tuning work?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [ ] `CREATE`
-- [ ] `ADD`
-- [x] `MERGE`
-- [ ] `INSERT`
+- [x] RAM
+- [x] Version of Neo4j
+- [x] Disk hardware and software
+- [x] Number of Cores
 
 === Question 2
 
 [.statement]
-Given this code:
-[source,cypher]
-----
-CREATE (:Person {name:"Joe"}
-CREATE (:Person {name:"Jane"}
-MERGE (:Person {name:"Bob"}
-MERGE (:Person {name:"Joe"}
-----
-
-[.statement]
-How many nodes are created in the graph?
+Which Cypher statement will provide you with count information that you can use to explain the behaviour of the queries you will be tuning?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] 0
-- [ ] 2
-- [x] 3
-- [ ] 4
+- [ ] CALL db.countInfo()
+- [ ] CALL db.count-store()
+- [ ] CALL apoc.count-store()
+- [x] CALL apoc.meta.stats()
 
 === Question 3
 
 [.statement]
-Given this code:
-
-[source,cypher]
-----
-MERGE (a:Airport {code:'LAS'})
-MERGE (b:Airport {code:'LAX'})
-MERGE (c:Airport {code:'ABQ'})
-MERGE (a)-[:CONNECTED_TO {airline:'WN',flightNumber:'82',date:'2019-1-3',departure:'1715',arrival:'1820'}]->(b)
-MERGE (a)-[:CONNECTED_TO {airline:'WN',flightNumber:'500',date:'2019-1-3',departure:'1445',arrival:'1710'}]->(c)
-----
-
-[.statement]
-What is the implied entity for this domain?
+Why do you warm up the Page Cache?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [x] Airport
-- [ ] code
-- [ ] airline
-- [ ] CONNECTED_TO
+- [x] You want as much data from the graph in memory for your queries.
+- [ ] You want to make sure the DB Stats are updated.
+- [ ] You want the execution plans for queries you will be tuning to be in memory.
+- [ ] You want lock all data so that it cannot be modified during query tuning.
 
 [.summary]
 == Summary
 
 You should now be able to:
+
 [square]
-* Write Cypher code to implement a simple initial graph data model.
-* Confirm that the starter data is in the graph.
+* Ensure you have the appropriate system hardware and settings that can affect performance.
+* Prepare Neo4j configuration settings for query tuning.
+* Use a representative data set for your queries.
+* Pre-test all queries to ensure expected rows based upon DB Stats.
+* Ensure the Page Cache is warmed up.

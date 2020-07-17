@@ -502,7 +502,7 @@ kbd:[:play 4.0-query-tuning-exercises]
 and follow the instructions for Exercise 1.
 
 [NOTE]
-This exercise has xx steps.
+This exercise has 8 steps.
 Estimated time to complete: 15 minutes.
 --
 
@@ -535,7 +535,7 @@ Select the correct answer.
 - [ ] Whenever a node is added to the graph.
 - [ ] Whenever a relationship is added to the graph.
 - [ ] Whenever an index is updated in the graph.
-- [ ] Whenever 5% of the index data has been updated in the graph.
+- [x] Whenever 5% of the index data has been updated in the graph.
 
 === Question 3
 

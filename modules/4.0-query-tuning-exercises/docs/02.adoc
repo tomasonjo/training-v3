@@ -1,0 +1,237 @@
+= Exercise 2
+:icons: font
+
+== Exercise 2: Prepare for Query Tuning (Preparations)
+
+Before you begin this exercise, you should have completed the setup instructions in the previous exercise.
+That is, you must  have a database that has access to the APOC library.
+
+If you have not populated the database yet, execute this Cypher code to populate the database:
+
+[source,cypher]
+----
+include::scripts/initialDatabase.cypher[]
+----
+
+This is what you should see in the left panel for the database:
+
+[.thumb]
+image::InitialDatabase.png[InitialDatabase,width=300]
+
+You are now ready to start this exercise.
+
+== Exercise 2: Prepare for Query Tuning (Overview)
+
+In this exercise, you will gain some experience with the things you would do to prepare for query tuning.
+
+* *Exercise 2.1*: Determine the size of the graph.
+* *Exercise 2.2*: View some Neo4j configuration settings for memory.
+* *Exercise 2.3*: Inspect a query for expected behavior.
+* *Exercise 2.4*: Inspect another query for expected behavior.
+* *Exercise 2.5*: Warm up the Page Cache.
+* *Exercise 2.6*: View the Page Cache information.
+
+Go to the next page to start this exercise.
+
+== Exercise 2.1: Determine the size of the graph (Instructions)
+
+In Neo4j Browser, write and execute the command to view information the graph. In particular, how large it is.
+
+== Exercise 2.1: Determine the size of the graph (Solution)
+
+In Neo4j Browser, write and execute the command to view information the graph. In particular, how large it is.
+
+You should see something like this when you enter the `:sysinfo` command:
+
+[.thumb]
+image::sysinfo-dbsize.png[sysinfo-dbsize,width=500]
+
+The default database, neo4j is ~38 Mb.
+
+== Exercise 2.2: View some Neo4j configuration settings for memory (Instructions)
+
+The database we use for this course is relatively small so we can safely utilize the default settings.
+That is, you need not modify any of the configuration settings for memory and can use defaults.
+For your real application graph, you may need to adjust them.
+
+Write and execute the Cypher statement to show the values for the dbms memory-related properties.
+
+== Exercise 2.2: View and some Neo4j configuration settings for memory (Solution)
+
+The database we use for this course is relatively small so we can safely utilize the default settings.
+That is, you need not modify any of the configuration settings for memory and can use defaults.
+For your real application graph, you may need to adjust them.
+
+Write and execute the Cypher statement to show the values for the dbms memory-related properties.
+
+[source, cypher]
+----
+CALL dbms.listConfig() YIELD name, value
+WHERE name STARTS WITH 'dbms.memory'
+RETURN name, value
+----
+
+The result returned should be:
+
+[.thumb]
+image::listConfig.png[listConfig,width=800]
+
+In your real application environment, you can modify these values in the *neo4j.conf* file.
+You must restart the Neo4j instance for them to be in effect.
+
+== Exercise 2.3: Inspect a query for expected behavior (Instructions)
+
+Here is a query that you may be tuning. Check it out to make sure that it will perform correctly using the `EXPLAIN` clause:
+
+*Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
+
+[source,cypher]
+----
+MATCH (m:Movie)-[:ACTED_IN]->(a)
+WHERE m.name = $title
+RETURN collect(a.name) AS Actors
+----
+
+Did you find any problems?
+
+If so, correct the query.
+
+== Exercise 2.3: Inspect a query for expected behavior (Solution)
+
+Here is a query that you may be tuning. Check it out to make sure that it will perform correctly using the `EXPLAIN` clause:
+
+*Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
+
+[source,cypher]
+----
+MATCH (m:Movie)-[:ACTED_IN]->(a)
+WHERE m.name = $title
+RETURN collect(a.name) AS Actors
+----
+
+Here is what the `EXPLAIN` yields:
+
+image::explain1.png[explain1,width=800]
+
+Did you find any problems?
+
+*Answer*: This query was intending to use the title of the movie which is indexed. No index will be used. There is no such property, _name_ for a _Movie_ node.
+
+If so, correct the query.
+
+Here is what the query should be:
+
+[source,cypher]
+----
+MATCH (m:Movie)-[:ACTED_IN]->(a)
+WHERE m.title = $title
+RETURN collect(a.name) AS Actors
+----
+
+Here is what the `EXPLAIN` yields:
+
+image::explain2.png[explain2,width=800]
+
+== Exercise 2.4: Inspect another query for expected behavior (Instructions)
+
+Here is another query that you may be tuning. Check it out to make sure that it will perform correctly using the `EXPLAIN` clause:
+
+*Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
+
+[source,cypher]
+----
+MATCH (m)-[IS_GENRE]->(g)
+RETURN collect(m.title) AS Movies, g.name
+----
+
+Did you find any problems?
+
+Correct the problem and rerun.
+
+== Exercise 2.4: Are there any eager operators in this this second query? (Solution)
+
+Here is another query that you may be tuning. Check it out to make sure that it will perform correctly using the `EXPLAIN` clause:
+
+*Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
+
+[source,cypher]
+----
+EXPLAIN
+MATCH (m)-[IS_GENRE]->(g)
+RETURN collect(m.title) AS Movies, g.name
+----
+
+Here is what the `EXPLAIN` yields:
+
+image::explain3.png[explain3,width=800]
+
+Did you find any problems?
+
+*Answer*: For starters, this query will retrieve all nodes in the graph.
+It then does the expansion to 81,094 rows. We know that this graph has 17,304 _IS_GENRE_ relationships total so the number of rows is not what we want.
+
+Correct the problem and rerun.
+
+[source,cypher]
+----
+EXPLAIN
+MATCH (m)-[:IS_GENRE]->(g:Genre)
+RETURN collect(m.title) AS Movies, g.name
+----
+
+Here is what the `EXPLAIN` yields:
+
+image::explain4.png[explain4,width=800]
+
+We can use the count store to estimate rows to the _Genre_ nodes as the anchor of the query.
+We know that there are only 35 _Genre_ nodes in the graph.
+Furthermore, correcting the relationship enables us to focus only on _IS_GENRE_ relationships.
+This is a much better execution plan.
+
+== Exercise 2.5: Warm up the Page Cache (Instructions)
+
+Write and execute a Cypher statement to warm up the Page Cache.
+
+== Exercise 2.5: Warm up the Page Cache (Solution)
+
+Write and execute a Cypher statement to warm up the Page Cache.
+
+[source, cypher]
+----
+CALL apoc.warmup.run(true,true,true)
+----
+
+The result returned should be:
+
+[.thumb]
+image::warmUp.png[warmUp,width=600]
+
+== Exercise 2.6: View the Page Cache information (Instructions)
+
+Write and execute the Neo4j Browser command to view the Page Cache information.
+
+== Exercise 2.6: Display the data model for this graph (Solution)
+
+Write and execute the Neo4j Browser command to view the Page Cache information.
+
+[source, cypher]
+----
+:sysinfo
+----
+
+The result returned should be:
+
+[.thumb]
+image::pagecache-sysinfo.png[pagecache-sysinfo,width=600]
+
+You are now ready to begin query tuning!
+
+
+== Exercise 2: Prepare for Query Tuning (Summary)
+
+
+In this exercise, you executed some Neo4j Browser commands and Cypher statements to to prepare for query tuning.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/03.html'>Continue to Exercise 3</a>]
+endif::[]
