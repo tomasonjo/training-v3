@@ -145,7 +145,7 @@ But it makes the model simpler by reducing the number of relationships connected
 Notice that not only is the new node with the label _Email_, but also relationship types are recreated with different types.
 --
 
-[.half-row]
+[.five-sixths-one-sixth-row]
 == Refactoring example: Modeling airline flights
 
 image::MaxDemarziAirlineModeling.png[MaxDemarziAirlineModeling,width=700,align=center]

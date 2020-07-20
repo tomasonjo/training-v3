@@ -607,7 +607,8 @@ subprojects {
         'google-slides-layout-one-sixth-five-sixths-row': "CUSTOM_3", // one sixth + fix sixths row
         'google-slides-layout-half-row': "CUSTOM_4", // half row
         'google-slides-layout-half-column': "CUSTOM_5", // half column
-        'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6" // one third + two thirds column
+        'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6", // one third + two thirds column
+        'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7" // five sixths one sixth row
     }
 
     inProcess "IN_PROCESS"
