@@ -25,6 +25,7 @@ Your model should address:
 * Uniqueness of nodes
 * Complex data
 
+[.half-row]
 === Uniqueness of nodes: before
 
 image::UniquenessBestPracticeBefore.png[UniquenessBestPracticeBefore,width=600,align=center]
@@ -71,6 +72,7 @@ You need to strike a balance between number of properties that represent complex
 Here we have a property node that contains properties that contain complex data.
 --
 
+[.half-row]
 === Use fanout judiciously for complex data
 
 image::ComplexData2.png[ComplexData2,width=900,align=center]
@@ -81,6 +83,7 @@ image::ComplexData2.png[ComplexData2,width=900,align=center]
 * Reduce property duplication.
 * Reduce gather-and-inspect.
 --
+
 [.notes]
 --
 Here we show an extreme implementation of fanout.
@@ -176,6 +179,7 @@ On the other hand, if you want to rank the strength of all relationships, the be
 The Cypher string required is much simpler, and we know there will not be any gather-and-inspect discards because we want everything anyway.
 --
 
+[.half-row]
 == Property best practices
 
 [.small]
@@ -206,6 +210,7 @@ Other properties, though, just need to be returned as-is because they do not req
 In other words, this "bad model" from before might actually  be OK.  If those addresses are never used as an anchor or for determining how to traverse the graph, and only as an output, then their complexity will not be an issue.
 --
 
+[.one-sixth-five-sixths-row]
 == Data accessibility
 
 [.small]
@@ -222,32 +227,20 @@ In most cases, there is a way you can model your graph so that a given data item
 When designing or refactoring a model, you can estimate performance by checking how “accessible” the data items are that represent the important queries of your application.
 --
 
+[.one-third-two-thirds-column]
 === Hierarchy of accessibility
 
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
+
+--
 [.statement]
 _For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
 
-[.is-one-third.left]
---
-image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
---
-
-[.is-two-thirds.right]
---
-
 [.small]
-. Anchor node label,  indexed anchor node properties
-
-
+. Anchor node label, indexed anchor node properties
 . Relationship types
-
-
 . Non-indexed anchor node properties
-
-
 . Downstream node labels
-
-
 . Relationship properties, downstream node properties
 --
 

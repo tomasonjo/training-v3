@@ -34,21 +34,16 @@ Stakeholders are:
 * Neo4j is a full-featured graph database that allows you to create *property graphs*.
 * Applications retrieve data for business use cases by *traversing the graph*.
 
+[.one-third-two-thirds-column]
 === Neo4j Property Graph Model
 
-[.is-one-third.left]
---
 [square]
 * Nodes (Entities)
 * Relationships
 * Properties
 * Labels
---
 
-[is-two-thirds.right]
---
 image::Neo4jPropertyGraphModel.png[Neo4jPropertyGraphModel,width=800,align=center]
---
 
 ifdef::env-slides[]
 [.notes]
@@ -75,6 +70,7 @@ A label is used to categorize a set of nodes.
 Properties are used to provide specific values to a node or relatiobship.
 endif::[]
 
+[.half-row]
 === Traversal in the graph
 
 image::Traversal.png[Traversal,width=700,align=center]

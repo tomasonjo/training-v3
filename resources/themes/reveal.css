@@ -393,6 +393,17 @@ body {
   font-weight: 700;
 }
 
+.one-third-two-thirds-column > .slide-content {
+  display: flex;
+}
+
+.one-third-two-thirds-column > .slide-content > :first-child {
+  width: 30%;
+}
+
+.one-third-two-thirds-column > .slide-content > :nth-child(2) {
+  width: 70%;
+}
 
 .is-full {
   width: 100%;
