@@ -1,5 +1,5 @@
 = How Queries Work in Neo4j
-:slug: 01-cqt-40-how-queries-work-in-neo4j
+:slug: 03-cqt-40-how-queries-work-in-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -100,7 +100,7 @@ The anchor is typically determined by meta-data that is stored in the graph or a
 This meta-data is the count store that you will learn about later in this lesson.
 The anchor for a query will be based upon the fewest number of nodes that need to be retrieved into memory.
 
-Here are three simple queries for a graph that hs 6231 _Movie_ nodes and 18,776 _Person_ nodes:
+Here are three simple queries for a graph that has 6231 _Movie_ nodes and 18,776 _Person_ nodes:
 
 image::Anchoring.png[Anchoring,width=800,align=center]
 
@@ -138,6 +138,9 @@ RETURN  m.title
 
 In addition, the expansion may lead to the need to inspect properties of the relationship and/or the properties of the _Movie_ node.
 This inspection means that the nodes are brought into memory and possibly eliminated from the nodes in memory after they have been retrieved.
+
+[NOTE]
+Cypher queries with multiple `MATCH` statements may execute differently than what you may expect. This is covered in a later lesson of this course.
 
 === Example 1: A simple execution plan
 
