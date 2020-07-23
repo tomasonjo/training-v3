@@ -38,7 +38,12 @@ There are other factors that affect the performance of a query:
 
 These are described in the https://neo4j.com/docs/cypher-manual/4.1/query-tuning/query-options/[Query Tuning Documentation].
 
+[IMPORTANT]
+How query execution plans are created by the query planner is very much dependent on the version of Neo4j you are using.
+That is, you must re-measure your query performance and possibly change queries with each version of Neo4j.
+
 For this course, we use the defaults that come with Neo4j Desktop which supports Neo4j Enterprise for development.
+We are using Nero4j 4.1 for all query executions.
 
 === Query Cache
 
@@ -393,7 +398,7 @@ The meta-data in the count store is used to determine whether it is faster to us
 
 Here is a summary of when the count store is used for an execution plan.
 
-[cols=2]
+[cols="<.^,<.^", options="header",stripes="none"]
 |===
 |*Count information stored*
 |*Example of use*

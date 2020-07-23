@@ -1,10 +1,10 @@
-= Reducing cardinality
-:slug: 03-cqt-40-Reducing cardinality
+= Monitoring Queries
+:slug: 05-cqt-40-monitoring-queries
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Delaying Property Access
+:module-next-title: Summary
 
 == About this module
 
@@ -15,10 +15,15 @@ In this module, you will learn how to modify queries to reduce the amount of dup
 At the end of this module, you should be able to:
 
 [square]
-* Rewrite a query to reduce the duplication of data in the rows.
 *
 
-== Understanding row cardinality
+== Index-based property access (especially with ORDER BY)
+
+== Collect nodes not properties
+
+== Save property values used later
+
+== Only return what you need
 
 Here is a query that we will be looking to improve where the value of _movieTitle_ is "The Matrix":
 
@@ -262,6 +267,7 @@ We see that to execute this query, we need many rows (6231,56914,7).
 This spike in rows needed is something you never want to see in an execution plan.
 This query requires 182,583 db hits!
 
+////
 If this query is one that the application uses frequently, you will want to modify things so that it performs better.
 
 ==== Example: Refactoring the graph

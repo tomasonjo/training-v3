@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Avoiding Redundant Work
+:module-next-title: Reducing Cardinality
 
 == About this module
 
@@ -41,7 +41,7 @@ In addition, you should be prepared to monitor system bottlenecks:
 
 To prepare for query tuning, you should examine and modify these settings in *neo4j.conf*:
 
-[cols="25,50,25"]
+[cols="25,50,25",options="header",stripes="none"]
 |====
 |*Property*
 |*Description*

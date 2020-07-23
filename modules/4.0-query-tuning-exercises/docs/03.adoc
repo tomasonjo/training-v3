@@ -1,0 +1,231 @@
+= Exercise 3
+:icons: font
+
+== Exercise 3: Reducing Cardinality with Aggregation (Preparations)
+
+Before you begin this exercise, you should have completed the steps in the previous exercise.
+
+That is, you must:
+
+. Have a database that has access to the APOC library.
+
+. If you have not populated the database yet, execute this Cypher code to populate the database:
+
+[source,cypher]
+----
+include::scripts/initialDatabase.cypher[]
+----
+
+This is what you should see in the left panel for the database:
+
+[.thumb]
+image::InitialDatabase.png[InitialDatabase,width=300]
+
+[start=3]
+. Modify the virtual memory and pagecache settings have been adjusted to be:
+[square]
+* dbms.memory.heap.initial_size=4G
+* dbms.memory.heap.max_size=4G
+* dbms.memory.pagecache.size=1G
+
+[start=4]
+. Warmed up the Page cache (`CALL apoc.warmup.run(true,true,true)`)
+
+You are now ready to start this exercise.
+
+== Exercise 3: Reducing Cardinality with Aggregation (Overview)
+
+In this exercise, you profile queries and optimize them using some best practices.
+
+In this exercise, you will:
+
+* *Exercise 3.1*: Reduce rows processed by collecting intermediate results during the query.
+* *Exercise 3.2*: Reduce cardinalities for variable-length paths.
+* *Exercise 3.3*: Rewrite a query to collect data using pattern comprehension.
+
+Go to the next page to start this exercise.
+
+== Exercise 3.1: Reduce rows processed by collecting intermediate results during the query. (Instructions)
+
+Here is a query that retrieves the genres and directors for a movie.
+
+[source, cypher]
+----
+PROFILE MATCH (movie:Movie {title: $titleExcerpt})-[:IS_GENRE]-(genre)
+MATCH (movie)<-[:DIRECTED]-(director)
+RETURN genre, director, movie
+----
+
+where the $titleExcerpt parameter is set to "Up"
+
+1. Execute this query (twice) and note how many rows are processed.
+
+*IMPORTANT*: For all query tuning measurements, you should always run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the metrics for the execution plan do not include the cost of compilation.
+
+2. Rewrite this query to reduce the number of rows processed by collection results during the query.
+
+*NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
+
+== Exercise 3.1: Reduce rows processed by collecting intermediate results during the query. (Solution)
+
+Here is a query that retrieves the genres and directors for a movie.
+
+[source, cypher]
+----
+PROFILE MATCH (movie:Movie {title: $titleExcerpt})-[:IS_GENRE]-(genre)
+MATCH (movie)<-[:DIRECTED]-(director)
+RETURN genre, director, movie
+----
+
+where the $titleExcerpt parameter is set to "Up"
+
+1. Execute this query and note how many rows are processed.
+
+*IMPORTANT*: For all query tuning measurements, you should always run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the metrics for the execution plan do not include the cost of compilation.
+
+The profile when executing this code should be:
+
+[.thumb]
+image::EX3.1.png[EX3.1,width=800]
+
+The result of executing this code should be:
+
+[.thumb]
+image::EX3.1B.png[EX3.1B,width=600]
+
+2. Rewrite this query to reduce the number of rows processed by collection results during the query.
+
+Here is the solution code:
+
+[source, cypher]
+----
+PROFILE MATCH (movie:Movie {title: $titleExcerpt})-[:IS_GENRE]->(g)
+WITH movie, collect(g) as genres
+MATCH (movie)<-[:DIRECTED]-(director)
+WITH movie, genres, collect(director) as directors
+RETURN genres, movie, directors
+----
+
+The profile when executing this code should show fewer rows processed:
+
+*NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
+
+[.thumb]
+image::EX3.1C.png[EX3.1C,width=800]
+
+The result of executing this code should be:
+
+[.thumb]
+image::EX3.1D.png[EX3.1D,width=600]
+
+== Exercise 3.2: Reduce cardinalities for variable-length paths. (Instructions)
+
+*1. Execute this Cypher code to retrieve the titles of all movies that are up to 5 hops away from Tom Hanks.*
+
+[source, cypher]
+----
+PROFILE
+MATCH (:Person{name: $actor})-[:ACTED_IN*..5]-(movie)
+RETURN movie.title
+----
+
+where the $actor parameter is set to "Tom Hanks"
+
+*2. Modify this query to reduce the number of rows processed.*
+
+== Exercise 3.2: Reduce cardinalities for variable-length paths.  (Solution)
+
+*1. Execute this Cypher code to retrieve the titles of all movies that are up to 5 hops away from Tom Hanks.*
+
+[source, cypher]
+----
+PROFILE
+MATCH (:Person{name: $actor})-[:ACTED_IN*..5]-(movie)
+RETURN movie.title
+----
+
+where the $actor parameter is set to "Tom Hanks"
+
+The result of executing this code should be:
+
+[.thumb]
+image::EX3.2.png[EX3.2,width=200]
+
+*2. Modify this query to reduce the number of rows processed.*
+
+Here is a solution:
+
+[source, cypher]
+----
+PROFILE
+MATCH (:Person{name: $actor})-[:ACTED_IN*..5]-(movie)
+WITH DISTINCT movie
+RETURN movie.title
+----
+
+The result of executing this code should be:
+
+[.thumb]
+image::EX3.2B.png[EX3.2B,width=200]
+
+== Exercise 3.3: Rewrite a query to collect data using pattern comprehension. (Instructions)
+
+*1. Execute this Cypher code to retrieve the titles of of movies that an young actor (born after 1990) has acted in in the three year period of 2010 to 2012.*
+
+[source, cypher]
+----
+PROFILE MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+WHERE $relYear1 <= m.releaseYear <= relYear2 AND a.born > $yearBorn
+RETURN a.name as actor, a.born as born,
+collect(DISTINCT m.title) AS titles ORDER BY actor
+----
+
+where the $relYear1 parameter is set to 2010, the $relYear2 parameter is set to 2012, and the $yearBorn parameter is set to 1990
+
+*2. Rewrite this query to collect data using pattern comprehension to collect the titles.*
+
+== Exercise 3.4: Rewrite a query to collect data using pattern comprehension.  (Solution)
+
+*1. Execute this Cypher code to retrieve the titles of of movies that an young actor (born after 1990) has acted in in the three year period of 2010 to 2012.*
+
+[source, cypher]
+----
+PROFILE MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+WHERE $relYear1 <= m.releaseYear <= relYear2 AND a.born > $yearBorn
+RETURN a.name as actor, a.born as born,
+collect(DISTINCT m.title) AS titles ORDER BY actor
+----
+
+where the $relYear1 parameter is set to 2010, the $relYear2 parameter is set to 2012, and the $yearBorn parameter is set to 1990
+
+The result of executing this query should be the following:
+
+[.thumb]
+image::EX3.4.png[EX3.4,width=200]
+
+*2. Rewrite this query to collect data using pattern comprehension to collect the titles.*
+
+Here is the solution code:
+
+[source, cypher]
+----
+PROFILE MATCH (a:Actor)
+WHERE a.born > $yearBorn
+RETURN a.name AS actor,  a.born AS born,
+[(a)-->(x) WHERE $relYear1 <= x.releaseYear <= $relYear2 | x.title] AS titles ORDER BY actor
+----
+
+The result of executing this query should be the following:
+
+[.thumb]
+image::EX3.4B.png[EX3.4B,width=300]
+
+If you look at the rows returned with this code, you will notice that empty titles collections are produced which is not the case in the previous query.
+
+== Exercise 3: Reducing Cardinality with Aggregation (Summary)
+
+In this exercise, you modified queries to perform better by aggregating earlier and using pattern comnprehension.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/04.html'>Continue to Exercise 04</a>]
+endif::[]
