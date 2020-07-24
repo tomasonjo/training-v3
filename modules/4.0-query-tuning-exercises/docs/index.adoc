@@ -12,13 +12,15 @@ If you have used Neo4j Browser Guides before, you can skip to the last page.
 
 This Browser Guide is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
 
+*IMPORTANT*: Because this course teaches Cypher query tuning, you must have a Neo4j instance that can support up to 4G heap for Neo4j. You cannot use a Neo4j Sandbox for the query tuning exercises. We recommend that you use Neo4j Desktop or you can use a Neo4j Aura instance if it has at least 8G of memory.
+
 == Before you start
 
 === Ensure the database is started
 
 If you are using Neo4j Desktop, ensure that the project you have selected for use with Neo4j Browser is connected to a database that is started.
 
-If you are using a Neo4j Sandbox or Neo4j Aura, the Neo4j Browser is already connected to a started database.
+If you are using a Neo4j Aura, the Neo4j Browser is already connected to a started database.
 
 === Enable multi-statement query editor
 
@@ -68,6 +70,7 @@ ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/01.html'>Exercise 1</a>] --  Answer Some Query Tuning Questions
 pass:a[<a play-topic='{guides}/02.html'>Exercise 2</a>] --  Preparing for Query Tuning
 pass:a[<a play-topic='{guides}/03.html'>Exercise 3</a>] --  Reducing Cardinality with Aggregation
+pass:a[<a play-topic='{guides}/04.html'>Exercise 4</a>] --  Reducing Cardinality with Anchor Selectivity
 endif::[]
 
 
@@ -75,4 +78,5 @@ ifndef::env-guide[]
 Exercise 1 -- Answer Some Query Tuning Questions
 Exercise 2 -- Preparing for Query Tuning
 Exercise 3 -- Reducing Cardinality with Aggregation
+Exercise 4 -- Resuding Cardinality with Anchor Selectivity
 endif::[]

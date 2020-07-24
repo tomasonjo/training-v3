@@ -290,7 +290,7 @@ As you gain experience with query tuning and viewing execution plans, your goals
 ** Will APOC perform better for some processing?
 ** Will a stored procedure perform better?
 
-In this course we cover some useful APOC procedures. We do not cover writing custom store procedures.
+In this course we do not cover writing Cypher queries using APOC or writing custom store procedures.
 
 == Information used during query processing
 

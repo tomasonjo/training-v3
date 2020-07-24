@@ -4,9 +4,8 @@
 == Exercise 1: Answer Some Query Tuning Questions (Preparations)
 
 Before you begin the exercises for this course, you must  have a database that has access to the APOC library.
-If you are using a  (blank) Neo4j Sandbox or Neo4j Aura, it automatically is configured to use the APOC library.
 
-If you are using Neo4j Desktop you must:
+In Neo4j Desktop you must:
 
 . Create a Query Tuning Project you will use for this course.
 . Create a local 4.x database.
@@ -17,7 +16,6 @@ If you are using Neo4j Desktop you must:
 
 
 Next, you must populate your graph.
-If you are using Neo4j Sandbox or Neo4j Aura, you should start with a graph that has no data, indexes, or constraints in it.
 
 Execute this Cypher code to populate the database:
 

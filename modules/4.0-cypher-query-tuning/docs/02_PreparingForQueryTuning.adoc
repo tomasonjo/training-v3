@@ -71,6 +71,8 @@ RETURN name, value
 
 image::listConfig.png[listConfig,width=800,align=center]
 
+In the next lesson, when you begin query tuning, you will be setting these properties to use more heap.
+
 == Using a representative dataset
 
 It is extremely important that the dataset you are performing the queries against has the same characteristics your real data will have.
