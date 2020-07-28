@@ -533,9 +533,9 @@ We can make a slight improvement by moving `DISTINCT` earlier in the query:
 PROFILE
 MATCH (p:Person)-[:ACTED_IN| DIRECTED]->(m)
 WHERE m.title contains $titleMatch
-WITH p
+WITH DISTINCT p
 MATCH (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(p2:Person)
-RETURN DISTINCT p.name, p2.name
+RETURN p.name, p2.name
 ----
 
 image::DistinctEarly.png[DistinctEarly,width=800,align=center]
@@ -620,7 +620,7 @@ image::Cartesian2.png[Cartesian2,width=800,align=center]
 It is about the same number of db hits, but it performs much faster.
 
 [.student-exercise]
-== Exercise 2: Prepare for Query Tuning
+== Exercise 5: Reducing Cardinality with `LIMIT`, `DISTINCT`
 
 [.small]
 --
@@ -628,11 +628,11 @@ In the query edit pane of Neo4j Browser, execute the browser command:
 
 kbd:[:play 4.0-query-tuning-exercises]
 
-and follow the instructions for Exercise 2.
+and follow the instructions for Exercise 5.
 
 [NOTE]
-This exercise has 6 steps.
-Estimated time to complete: 15 minutes.
+This exercise has 3 steps.
+Estimated time to complete: 20 minutes.
 --
 
 [.quiz]

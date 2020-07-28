@@ -283,7 +283,6 @@ RETURN [n IN nodes(path) | coalesce(n.title, n.name)]
 
 Here is the execution plan:
 
-// Elaine resume here get screenshot
 
 [.thumb]
 image::EX4.3A.png[EX4.3A,width=200]
