@@ -6,7 +6,6 @@
 :imagesdir: ../images
 :module-next-title: Setup and Cypher Refresher
 
-
 == Monopartite graph
 
 Here be dragons…                            (warning!)
@@ -64,3 +63,5 @@ Do relationship directions matter?
 Triangle Count - ignores direction.
 PageRank - an outgoing relationship means you give credibility to the other node.
 What about weights? Which algorithms cans I use?
+
+== Summary

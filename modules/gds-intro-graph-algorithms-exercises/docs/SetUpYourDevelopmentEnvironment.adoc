@@ -29,9 +29,6 @@ Go to the next page to begin setup.
 
 == Step 1: Prepare project for development.
 
-. Download the Yelp dataset. (*Note*: This database is 1G and will take a while to download)
-https://s3.amazonaws.com/neo4j-sandbox-usecase-datastores/v3_5/yelp.db.zip
-. Unzip the zip file. It will create a *yelp.db* folder.
 . In Neo4j Desktop, create a project and a local graph, providing a password you will remember.
 {nbsp} +
     *Note*: Do *not* start the database!
@@ -48,20 +45,6 @@ https://s3.amazonaws.com/neo4j-sandbox-usecase-datastores/v3_5/yelp.db.zip
 This is what you should now see for your project:
 
 image::PluginsAppInstalled.png[PluginsAppInstalled,width=150,role=left]
-
-[start = 6]
-. Copy the *yelp.db* folder to your local graph:
-.. Click the *Manage* button for the local graph you just created.
-.. Click the *Open Folder* button.
-.. Navigate to *data/databases*.
-.. Copy the *yelp.db*  folder that you unzipped to *databases*.
-.. Rename the *yelp.db* folder to *graph.db*.
-. Start the database.
-. Open Neo4j Browser for the project.
-
-This is what you should see when you click the database icon image:{guides}/img/database-icon.png[].
-
-image::YelpLoaded.png[YelpLoaded,width=150,role=left]
 
 {nbsp} +
 
@@ -110,6 +93,8 @@ In Graph Applications Playground (NEuler):
 .  Close NEuler.
 .  Open NEuler.
 .  Load the European Roads data.
+.  Close NEuler.
+.  Load the Recipes data.
 .  Close NEuler.
 
 *Note*: Do not load the Twitter data as it conflicts with other data in the graph.

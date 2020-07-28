@@ -8,6 +8,8 @@
 
 == Preparing you development environment
 
+Download Neo4j Desktop
+
 lorem ipsum
 
 - each data model in each database
@@ -24,11 +26,6 @@ Note: APOC is also required to perform the exercises of this course, specificall
 check with dbms.procedures if it working
 
 link to docs
-
-=== Yelp dataset
-
-In preparing for this course, you should have already loaded the Yelp dataset into your graph. In the next exercise you will load the Game of Thrones (GOT) and European Roads dataset.
-
 
 === Enter the Neuler
 
@@ -55,12 +52,20 @@ The INTERACTS_SEASONx relationship has a property, weight to indicate the number
 
 The Character node has two properties, name and id where id is the capitalized value of name.
 
-=== European roads 
+image::got.png[Game of Thrones,width=500, align=center]
+
+Network of thrones site.
+
+=== European roads
 
 The EROAD relationship has three properties, distance, road_number, and watercrossing.
 
-The Place node has multiple properties, name and countryCode. 
+The Place node has multiple properties, name and countryCode.
 
+
+image::european-roads.png[European Roads,width=500, align=center]
+
+European roads site
 
 === Recipes 
 
@@ -76,4 +81,5 @@ Copied the Yelp database to your local graph:
 Click the Manage button for the local graph you just created.
 Click Open Folder.
 Started the database.
+
 :play intro-graph-algos-exercises  (Set up your Development Environment)

@@ -9,6 +9,16 @@
 
 == Similarity algorithms
 
+Product supported:
+Node Similarity (Jaccard Index)
+
+Labs implementations:
+Cosine Similarity
+Euclidean Similarity
+Overlap Similarity
+Pearson Similarity
+Approximate Nearest Neighbors
+
 Evaluates how alike nodes are at an individual level either based on node attributes, neighboring nodes, or relationship properties
 
 == Node Similarity algorithm

@@ -9,3 +9,5 @@
 == Memory reqirements estimation
 
 on big graphs you need memory
+
+== Summary

@@ -12,6 +12,16 @@ Determines the importance of distinct nodes in the network.
 
 Developed for distinct uses or types of importance. 
 
+Product supported:
+PageRank
+Betweenness Centrality
+
+Labs implementations:
+ArticleRank
+Closeness Centrality
+Harmonic Centrality
+Degree Centrality
+Eigenvector Centrality
 
 == PageRank
 
