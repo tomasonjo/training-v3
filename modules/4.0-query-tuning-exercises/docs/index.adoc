@@ -71,6 +71,7 @@ pass:a[<a play-topic='{guides}/01.html'>Exercise 1</a>] --  Answer Some Query Tu
 pass:a[<a play-topic='{guides}/02.html'>Exercise 2</a>] --  Preparing for Query Tuning
 pass:a[<a play-topic='{guides}/03.html'>Exercise 3</a>] --  Reducing Cardinality with Aggregation
 pass:a[<a play-topic='{guides}/04.html'>Exercise 4</a>] --  Reducing Cardinality with Anchor Selectivity
+pass:a[<a play-topic='{guides}/04.html'>Exercise 5</a>] --  Reducing Cardinality with `LIMIT`, `DISTINCT`
 endif::[]
 
 
@@ -78,5 +79,6 @@ ifndef::env-guide[]
 Exercise 1 -- Answer Some Query Tuning Questions
 Exercise 2 -- Preparing for Query Tuning
 Exercise 3 -- Reducing Cardinality with Aggregation
-Exercise 4 -- Resuding Cardinality with Anchor Selectivity
+Exercise 4 -- Reducing Cardinality with Anchor Selectivity
+Exercise 5 -- Reducing Cardinality with `LIMIT`, `DISTINCT`
 endif::[]
