@@ -27,32 +27,20 @@ Refactoring is the process of changing the data structure without altering its s
 The most common type of refactoring of a graph is to use a property value to restructure the graph.
 That is, a property value is used to create a label, a node, or a relationship.
 
+[.one-third-two-thirds-column]
 === Review: Hierarchy of Accessibility
 
+image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
+
+--
 [.statement]
 _For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
 
-[.is-one-third.left]
---
-image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
---
-
-[.is-two-thirds.right]
---
-
 [.small]
 . Anchor node label,  indexed anchor node properties
-
-
 . Relationship types
-
-
 . Non-indexed anchor node properties
-
-
 . Downstream node labels
-
-
 . Relationship properties, downstream node properties
 --
 
@@ -75,7 +63,7 @@ Data models can be optimized for one of four things:
 [NOTE]
 Improving behavior in one of these areas frequently involves sacrifices in others.
 
-Another *important* reason to refactor is to accomodate new application questions in the same model.
+Another *important* reason to refactor is to accommodate new application questions in the same model.
 
 == Goal: Eliminate duplicate data in properties
 
@@ -157,6 +145,7 @@ But it makes the model simpler by reducing the number of relationships connected
 Notice that not only is the new node with the label _Email_, but also relationship types are recreated with different types.
 --
 
+[.five-sixths-one-sixth-row]
 == Refactoring example: Modeling airline flights
 
 image::MaxDemarziAirlineModeling.png[MaxDemarziAirlineModeling,width=700,align=center]
@@ -215,7 +204,7 @@ This leads us to the model on the next slide.
 --
 endif::[]
 
-
+[.half-row]
 === Initial model
 
 [.statement]
@@ -240,6 +229,7 @@ This is a painful one.To find flight AY189, we need to traverse every relationsh
 What can we do to make flight data available as an anchor?
 --
 
+[.half-row]
 === Refactor: Create intermediate Flight nodes
 
 [.notes]
@@ -268,6 +258,7 @@ That’s even before we check to see which of those flights land in the desired 
 How can we elevate the flight date in order to reduce the amount of wasted hops?
 --
 
+[.half-row]
 === Refactor: Create AirportDay intermediate nodes
 
 [.notes]
@@ -306,6 +297,7 @@ There are only two ways to do this:
 We will refactor to make date a relationship type.
 --
 
+[.half-row]
 === Possible refactor: Change relationship type to date
 
 image::AirlineRefactor3.png[AirlineRefactor3,width=500,align=center]
@@ -327,6 +319,7 @@ The other was to anchor on AirportDay.
 How would the model need to change to make that possible?
 --
 
+[.half-row]
 === Possible refactor: Remove Airport nodes
 
 [.notes]
@@ -363,6 +356,7 @@ The size of the traversed graph increases exponentially as more and more layover
 What can we do to reduce this?
 --
 
+[.half-row]
 === Refactor: Add Destination intermediate nodes
 
 [.notes]
@@ -399,7 +393,6 @@ AirportDay and Destination nodes are completely opaque relative to the questions
 We are OK with that, because, as you will learn that when you implement the model in Cypher, refactoring a graph is relatively inexpensive.
 Moreover, getting a rough first model quickly reduces the total time we would need to reach this more refined version.
 --
-
 
 [.quiz]
 == Check your understanding

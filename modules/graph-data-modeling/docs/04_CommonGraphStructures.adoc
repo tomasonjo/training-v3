@@ -16,6 +16,7 @@ At the end of this module, you should be able to:
 ** Timeline trees
 ** Multiple structures in a single graph
 
+[.half-row]
 == Intermediate nodes
 
 [.notes]

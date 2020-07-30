@@ -1,8 +1,8 @@
+import com.amazonaws.services.s3.model.CannedAccessControlList
+import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
+import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
 import com.neo4j.gradle.s3.S3Plugin
 import com.neo4j.gradle.s3.S3UploadTask
-import com.amazonaws.services.s3.model.CannedAccessControlList
-import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
-import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import com.neo4j.gradle.wordpress.WordPressPlugin
 import com.neo4j.gradle.wordpress.WordPressUploadTask
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
@@ -28,17 +28,25 @@ subprojects {
   apply plugin: WordPressPlugin
   apply plugin: AsciidoctorModuleDescriptorPlugin
 
-  dependencies {
-    asciidoctorGems 'rubygems:rouge:3.18.0'
-    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
+  configurations {
+    asciidoctorgoogleslides
   }
 
   repositories {
     mavenCentral()
+    maven {
+      url "https://dl.bintray.com/mogztter/io.github.mogztter"
+    }
     jcenter()
     ruby {
       gems()
     }
+  }
+
+  dependencies {
+    asciidoctorGems 'rubygems:rouge:3.18.0'
+    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
+    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.26")
   }
 
   def stage = project.findProperty('stage')
@@ -579,6 +587,41 @@ subprojects {
       }
     }
   }
+
+  // beta!
+  task convertGoogleSlides(type: AsciidoctorTask) {
+    dependsOn asciidoctorGemsPrepare
+
+    // disable up-to-date
+    outputs.upToDateWhen { false }
+
+    asciidoctorj {
+      // must be a web accessible location
+      attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
+        'env-slides': '',
+        'experimental': '',
+        'google-slides-copy-id': '1aR6dlFmu6ssBuf1yQJm8I_cfTOOpSBHIfjqCQzuDsdQ',
+        'google-slides-credentials-path': "${rootProject.rootDir}/tokens/credentials.json",
+        'google-slides-layout-student-exercise': "CUSTOM_2", // Title gold with body
+        'google-slides-layout-quiz': "CUSTOM_1", // Title purple
+        'google-slides-layout-one-sixth-five-sixths-row': "CUSTOM_3", // one sixth + fix sixths row
+        'google-slides-layout-half-row': "CUSTOM_4", // half row
+        'google-slides-layout-half-column': "CUSTOM_5", // half column
+        'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6", // one third + two thirds column
+        'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7", // five sixths one sixth row
+        'google-slides-layout-two-thirds-one-third-column': "CUSTOM_8" // two thirds + one third column
+    }
+
+    inProcess "IN_PROCESS"
+    baseDirFollowsSourceDir()
+    sourceDir file("${projectDir}/single-slides")
+    outputDir file("${projectDir}/build/google-slides")
+    outputOptions {
+      backends = ["googleslides"]
+    }
+  }
+
+  convertGoogleSlides.configurations 'asciidoctorgoogleslides'
 
   task convert {
     dependsOn convertOnlineHtml

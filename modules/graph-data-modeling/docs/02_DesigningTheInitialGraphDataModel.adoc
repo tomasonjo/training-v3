@@ -120,12 +120,12 @@ If you’ve done the work to properly understand the domain, it should not stron
 [.smaller]
 --
 {set:cellbgcolor:lightgrey}
-[cols="30,20,20,30",stripes=none]
+[cols="30,20,20,30",stripes=none,options=header]
 |===
-h|Products
-h|Parts
-h|Assemblies
-h|Notes
+|Products
+|Parts
+|Assemblies
+|Notes
 |Wood table 40"
 {set:cellbgcolor:white}
 |Wood top 40"
@@ -206,6 +206,7 @@ The data is typically the "things" described in the use cases. You don't include
 . Test the questions against the model.
 . Test scalability.
 
+[.half-column]
 === Identify entities from the questions
 
 [.small]
@@ -381,6 +382,7 @@ If you do not want to do all the clicking and typing, copy this markup:
 --
 endif::[]
 
+[.one-sixth-five-sixths-row]
 === Exercise 2 solution
 
 ifndef::env-slides[]
@@ -413,6 +415,7 @@ image::Exercise2Solution.png[Exercise2Solution,width=1000,align=center]
 . Test the questions against the model.
 . Test scalability.
 
+[.half-row]
 === Identify connections between entities
 
 Connections are the verbs in your application questions:
@@ -438,19 +441,23 @@ Using “connections are verbs” is a fine shorthand to get started, but there 
 * Avoid names that could be construed as nouns (for example email).
 * Neo4j has a limit of 16M relationship types in Enterprise Edition (64K in Community Edition).
 
-[.is-half.left]
---
+ifdef::env-slides[]
+[.one-sixth-five-sixths-row]
+=== Naming relationships: DON'T
+endif::[]
+
 Do [.underline]#not# do this:
 
 image::BadRelationshipNames.png[BadRelationshipNames,width=200,align=center]
---
 
-[.is-half.right]
---
+ifdef::env-slides[]
+[.one-sixth-five-sixths-row]
+=== Naming relationships: DO
+endif::[]
+
 Instead do this:
 
 image::GoodRelationshipNames.png[GoodRelationshipNames,width=300,align=center]
---
 
 [.notes]
 --
@@ -459,14 +466,17 @@ It needs to be something that is intuitive to stakeholders and developers alike,
 You will learn more about later in this training when you learn about the core principles of graph data modeling.
 --
 
+[.half-row]
 === Direction and type
 
+--
 Direction and type are required in Neo4j.
 
 Choose direction (and type) based on the expected questions:
 
 . What episode follows The Ark in Space? (NEXT)
 . What episode came before Genesis of the Daleks? (PREVIOUS)
+--
 
 image::DrWho.png[DrWho,width=1200,align=center]
 
@@ -511,6 +521,7 @@ ifdef::env-slides[]
 Follow the instructions on the next slide.
 endif::[]
 
+[.half-column]
 === Exercise 3 instructions
 
 [.small]
@@ -522,22 +533,21 @@ Here are the questions we need to answer for our BOM application that you have a
 . What products require a table brace?
 . How much will the parts cost to make product Wood table 60"?
 
+Using the Arrow tool add the relationships between the entities.
+
 And here is the entity model:
 --
 
 image::Exercise2Solution.png[Exercise2Solution,width=300,align=center]
 
-[.small]
---
-Using the Arrow tool add the relationships between the entities.
---
-
 [.notes]
 --
-Focus on type and directions first.  Then check for any qualifiers that will help answer questions.
-Should these qualifiers be types or properties?  Why?
+Focus on type and directions first.
+Then check for any qualifiers that will help answer questions.
+Should these qualifiers be types or properties? Why?
 --
 
+[.one-sixth-five-sixths-row]
 === Exercise 3 solution
 
 Here is what your graph data model might look like with relationships added:
@@ -575,6 +585,7 @@ Highlight the strengths and weaknesses of their design choices later, when we st
 endif::[]
 --
 
+[.one-sixth-five-sixths-row]
 == Example: Detailed sample data for the BOM application
 
 [.notes]
@@ -774,6 +785,7 @@ endif::[]
 . [big]#*Test the questions against the model.*#
 . Test scalability.
 
+[.one-sixth-five-sixths-row]
 === Testing the model - 1
 
 What parts are needed to make Wood table 40"?
@@ -785,6 +797,8 @@ image::TestModel1.png[TestModel1,width=800,align=center]
 To answer the first question, we would anchor on the Wood table 40" node, and iteratively traverse all CONTAINS  until we get all of the parts required to make the product.
 Multiply by the quantity property as you go.
 --
+
+[.one-sixth-five-sixths-row]
 === Testing the model - 2
 
 Do we have enough parts to make 100x Deluxe wood table 60"?
@@ -808,6 +822,7 @@ Ideologically, we at Neo4j see graph databases as a problem-solving complement t
 If you were maintaining stock data somewhere else anyway, there is no inherent need to move it into Neo4j.
 --
 
+[.one-sixth-five-sixths-row]
 === Testing the model - 3
 
 What products require a table brace?
@@ -820,6 +835,7 @@ For this question, the application would anchor on the Part with the name table 
 Then it would traverse backwards along each CONTAINS to find the products that use it.
 --
 
+[.one-sixth-five-sixths-row]
 ==== Testing the model - 4
 
 How much will the parts cost to make Wood table 60"?
@@ -854,32 +870,22 @@ This modeler felt that that benefit balanced out the added data maintenance expe
 . Test the questions against the model.
 . [big]#*Test scalability.*#
 
+[.one-third-two-thirds-column]
 === Testing scalability
 
-[.is-one-third.left]
 --
 Here are some questions you should answer:
 
-[square]
-[.small]
+[square.small]
 * How many products?
-[.small]
 * How many parts?
-[.small]
 * How often are products added?
-[.small]
 * How often do prices change?
-[.small]
 * Are prices based upon time?
-[.small]
 * Is inventory part of the model?
-
 --
 
-[.is-two-thirds.right]
---
 image::Scalable.png[Scalable,width=700,align=center]
---
 
 [.notes]
 --
