@@ -36,6 +36,7 @@ Here is the workflow you should use:
 [NOTE]
 The new query will be different due to the change in the graph data model.
 
+[.half-column]
 == Example: Profiling a query
 
 [smaller]
@@ -69,12 +70,12 @@ ifndef::env-slides[]
 image::PROFILEExample.png[PROFILEExample,width=1000,align=center]
 endif::[]
 
+ifdef::env-slides[]
 [.is-half.right]
 --
-ifdef::env-slides[]
 image::PROFILEExample.png[PROFILEExample,width=400,align=center]
-endif::[]
 --
+endif::[]
 
 === Analyzing the query profile - 1
 
@@ -138,6 +139,7 @@ This exercise has 2 steps.
 Estimated time to complete: 15 minutes.
 --
 
+[.half-row]
 == Do we need to change the model?
 
 In the previous exercise, we asked this question:
@@ -147,6 +149,11 @@ What are the airports and flight information for flight number 1016 for airline 
 This is our current model:
 
 image::OriginalAirportModel.png[OriginalAirportModel,width=1000,align=center]
+
+ifdef::env-slides[]
+[.two-thirds-one-third-column]
+== Do we need to change the model?
+ifdef::env-slides[]
 
 Here is the query:
 
@@ -172,8 +179,8 @@ The query executed reasonably quickly in terms of milliseconds,  that is largely
 Hence our insistence on using db hits as a measure--from that, we can tell that this query is grossly inefficient on this data model!
 
 In the next lesson, we will implement a refactor to fix this.
-
 --
+
 [.quiz]
 == Check your understanding
 

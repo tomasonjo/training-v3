@@ -46,7 +46,7 @@ subprojects {
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
     asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
-    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.24")
+    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.25")
   }
 
   def stage = project.findProperty('stage')
@@ -608,7 +608,8 @@ subprojects {
         'google-slides-layout-half-row': "CUSTOM_4", // half row
         'google-slides-layout-half-column': "CUSTOM_5", // half column
         'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6", // one third + two thirds column
-        'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7" // five sixths one sixth row
+        'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7", // five sixths one sixth row
+        'google-slides-layout-two-thirds-one-third-column': "CUSTOM_8" // two thirds + one third column
     }
 
     inProcess "IN_PROCESS"

@@ -18,7 +18,9 @@ At the end of this module, you should be able to:
 * Refactor a graph by specializing relationships.
 * Perform batch processing to refactor a large graph.
 
+[.half-row]
 == Evolving the model
+
 [.notes]
 --
 After profiling queries and determining that they are not performing optimally, you should rethink your graph data model.
@@ -198,7 +200,6 @@ ifndef::env-slides[]
 image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=300,align=center]
 endif::[]
 
-
 ifdef::env-slides[]
 image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=120,align=center]
 endif::[]
@@ -210,6 +211,7 @@ Notice also that the index is being used at the beginning of the query execution
 It is much better than doing a NodeByLabelScan.
 --
 
+[.half-row]
 == Cleaning up the graph
 
 [.notes]
@@ -291,6 +293,7 @@ You should have 3 indexes: :Flight(number), :Flight(id), and :Airport(code).
 --
 endif::[]
 
+[.one-sixth-five-sixths-row]
 === Profiling the query
 
 [.is-two-thirds.left]
@@ -332,6 +335,7 @@ The more flights an airport has the more we will have to scan through, and since
 This is an opportunity to change the model.
 --
 
+[.five-sixths-one-sixth-row]
 == Performing another refactor
 
 [.notes]
@@ -355,6 +359,7 @@ You should not be too aggressive with creating nodes from other nodes.
 If you pull out every single property and create nodes then you end up with an RDF model and lose the benefit of the property graph.
 --
 
+[.half-row]
 === Refactor details
 
 image::Refactor4Details.png[Refactor4Details,width=600,align=center]
@@ -411,6 +416,7 @@ MERGE (destination)-[:HAS_DAY]->(destinationAirportDay)
 `MERGE` enables us to add a single _AirportDay_ node per the  _airportDayId_ value and also ensure that only one relationship is created between a _Flight_ and an _AirportDay_ node.
 --
 
+[.two-thirds-one-third-column]
 === Profile our first query
 
 [.notes]
@@ -446,6 +452,7 @@ endif::[]
 This query previously had 34 db hits, but now has 181. But, we added another 10K nodes to the graph so this is a reasonable outcome.
 --
 
+[.two-thirds-one-third-column]
 === Profile our original second query
 
 [.notes]
@@ -483,6 +490,7 @@ Here we see that the query has 5982 db hits, which is worse than the 5532 we had
 This is because we need to incorporate the new model into the query.
 --
 
+[.two-thirds-one-third-column]
 === Profile our revised second query
 
 [.notes]
@@ -540,6 +548,7 @@ This exercise has 7 steps.
 Estimated time to complete: 30 minutes.
 --
 
+[.half-column]
 == More questions for the model?
 
 [small]
@@ -562,6 +571,7 @@ That is, we must leave the _ORIGINATES_FROM_ and _LANDS_IN_ relationships betwee
 In this case, we  leave both models in place, and use each one for the questions it is suited to.
 --
 
+[.two-thirds-one-third-column]
 == Another question for the model
 
 [.is-two-thirds.left]
@@ -615,6 +625,7 @@ As we add more data, the number of _HAS_DAY_ relationships that we have to trave
 If we have 10 years worth of data we have to traverse 3,650 relationships from the _Airport_ to find the _AirportDay_ that we are interested in.
 --
 
+[.one-sixth-five-sixths-row]
 == Refactoring for specific relationships
 
 [.statement]
@@ -669,6 +680,7 @@ Here is the result of the refactoring to create specific relationships:
 
 image::APOCToRefactor.png[APOCToRefactor,width=900,align=center]
 
+[.two-thirds-one-third-column]
 == Does the query improve?
 
 [.statement]

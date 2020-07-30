@@ -13,6 +13,7 @@ At the end of this module, you should be able to:
 * Write Cypher code to import CSV data into the graph.
 * Confirm that the data has been loaded.
 
+[.half-row]
 == Options for importing data into the graph
 
 [.statement]
