@@ -1,0 +1,393 @@
+= Exercise 6
+:icons: font
+
+== Exercise 6: Optimizing Property Access (Preparations)
+
+Before you begin this exercise, you should have this environment:
+
+. Have a database that has access to the APOC library.
+
+. If you have not populated the database yet, execute this Cypher code to populate the database:
+
+[source,cypher]
+----
+include::scripts/AfterExercise4.cypher[]
+----
+
+This is what you should see in the left panel for the database:
+
+[.thumb]
+image::InitialDatabase.png[InitialDatabase.,width=300]
+
+[start=3]
+. If using Neo4j Desktop, modify the virtual memory and pagecache settings have been adjusted to be (server restart required:
+[square]
+* dbms.memory.heap.initial_size=4G
+* dbms.memory.heap.max_size=4G
+* dbms.memory.pagecache.size=1G
+
+[start=4]
+. If using Neo4j Aura, confirm that your settings are at least as large by running this:
+[source,cypher]
+----
+CALL dbms.listConfig() YIELD name, value
+WHERE name STARTS WITH 'dbms.memory'
+RETURN name, value
+----
+
+[start=5]
+. Warm up the Page cache (`CALL apoc.warmup.run(true,true,true)`)
+
+You are now ready to start this exercise.
+
+== Exercise 6: Optimizing Property Access (Overview)
+
+In this exercise, you will tune queries to reduce how many properties need to be accessed.
+
+In this exercise, you will:
+
+* *Exercise 6.1*: Use indexed-based property access.
+* *Exercise 6.2*: Optimize a "top 10" query.
+* *Exercise 6.3*: Putting it all together: Tune a query.
+
+Go to the next page to start this exercise.
+
+== Exercise 6.1: Use index-based property access (Instructions)
+
+Assume that the _firstName_ parameter is set to "William". Here is a query that retrieves actors whose names begin with the string "William".
+The results are ordered by the name of the actor.
+
+[source, cypher]
+----
+PROFILE
+MATCH (p:Actor)
+WHERE p.name STARTS WITH $firstName
+RETURN p.name ORDER BY p.name
+----
+
+1. Execute this query (twice) and note how many rows are processed.
+
+*IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
+
+2. Optimize this query to use an index for property access.
+
+*NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
+
+== Exercise 6.1: Use index-based property access (Solution)
+
+Assume that the _firstName_ parameter is set to "William". Here is a query that retrieves actors whose names begin with the string "William".
+The results are ordered by the name of the actor.
+
+[source, cypher]
+----
+:params firstName=>"William"
+----
+
+[source, cypher]
+----
+PROFILE
+MATCH (p:Actor)
+WHERE p.name STARTS WITH $firstName
+RETURN p.name ORDER BY p.name
+----
+
+1. Execute this query (twice) and note how many rows are processed.
+
+*IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
+
+Here is the execution plan:
+
+[.thumb]
+image::EX6.1.png[EX6.1,width=800]
+
+2. Optimize this query to use an index for property access.
+
+*NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
+
+Here is the optimized query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (p:Person)
+WHERE p.name STARTS WITH $firstName
+RETURN p.name
+----
+
+We know that there is an index on _Person.name_ so we take advantage of it.
+In addition, the results are already sorted for us due to the index.
+
+[.thumb]
+image::EX6.1A.png[EX6.1A,width=800]
+
+== Exercise 6.2: Optimize a "top ten" query (Instructions)
+
+Here is a query that retrieves the 10 oldest actors and their movies. actors.
+
+[source, cypher]
+----
+PROFILE
+MATCH (movie)<-[:ACTED_IN]-(actor:Actor)
+WITH actor, collect(movie) AS movies
+RETURN actor.name as Actor, actor.born as YearBorn, movies ORDER BY actor.born LIMIT 10
+----
+
+1. Execute this query (twice) and note how many rows are processed.
+
+*IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
+
+2. Rewrite this query to reduce the the number of rows processed.
+
+*NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
+
+== Exercise 6.2: Optimize a "top ten" query (Solution)
+
+Here is a query that retrieves the 10 oldest actors and their movies. actors.
+
+[source, cypher]
+----
+PROFILE
+MATCH (movie)<-[:ACTED_IN]-(actor:Actor)
+WITH actor, collect(movie) AS movies
+RETURN actor.name as Actor, actor.born as YearBorn, movies ORDER BY actor.born LIMIT 10
+----
+
+1. Execute this query (twice) and note how many rows are processed.
+
+*IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
+
+This is what you should see for the execution plan:
+
+[.thumb]
+image::EX6.2.png[EX6.2,width=800]
+
+2. Rewrite this query to reduce the the number of rows processed.
+
+*NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
+
+The improved query should be:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Actor)
+WITH actor ORDER BY actor.born LIMIT 10
+MATCH (movie)<-[:ACTED_IN]-(actor)
+WITH actor, collect(movie) AS movies
+RETURN actor.name as Actor, actor.born as YearBorn, movies
+----
+
+The result should be:
+
+[.thumb]
+image::EX6.2A.png[EX2.2A,width=800]
+
+== Exercise 6.3: Putting it all together: Tune a query (Instructions)
+
+1. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
+It finds all movies that are three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
+We also fins the directors who directed the movie that is 3 hops away from _$actorName_. It then returns the data and sorts the data by movie title.
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor {name: $actorName})-[:ACTED_IN*..3]-(movie:Movie)
+WHERE NOT (actor)-[:ACTED_IN]->(movie:Movie)
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie:Movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors ORDER BY Title LIMIT 20
+----
+
+What do you notice in the execution plan?
+
+
+2. Rewrite this query to use an index to anchor the query.
+
+
+3. The first _Movie_ label is necessary so that we only retrieve _Movie_ nodes, but later in the query, we use the _Movie_ label in two places.
+This will slow things down.
+Rewrite the query to not use the _Movie_ label later on in the query.
+
+4. In the execution plan at the expansion, we see 39,373 rows returned and we know that we do not have this many movies in the graph.
+Modify the query so that before after we do the initial query, we will be working with distinct movie nodes.
+
+
+5. In the execution plan at the expansion, that there are still a lot of db hits around filtering out the movies that the actor did not act in.
+Modify the query to use pattern comprehension to come up with the movies the actor has acted, _actorMovies_ in and carry that collection of rows down in the query in the `WITH DISTINCT` clause.
+Also modify the query to do the `WHERE NOT` check on membership in the actorMovies collection, rather than a path.
+
+
+6. We can still do more to optimize this query. Move the `LIMIT` and `ORDER BY` up in the query.
+
+
+7. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
+
+
+== Exercise 6.3: Putting it all together: Tune a query (Solution)
+
+1. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
+It finds all movies that are three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
+We also fins the directors who directed the movie that is 3 hops away from _$actorName_. It then returns the data and sorts the data by movie title.
+
+[source,cypher]
+----
+:params actorName=>"Keanu Reeves"
+----
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor {name: $actorName})-[:ACTED_IN*..3]-(movie:Movie)
+WHERE NOT (actor)-[:ACTED_IN]->(movie:Movie)
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie:Movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors ORDER BY Title LIMIT 20
+----
+
+What do you notice in the execution plan?
+
+Here is what the execution plan looks like:
+
+[.thumb]
+image::EX6.3.png[EX6.3,width=800]
+
+2. Rewrite this query to use an index to anchor the query.
+
+Here is the revised query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Person {name: $actorName})-[:ACTED_IN*..3]-(movie:Movie)
+WHERE NOT (actor)-[:ACTED_IN]->(movie:Movie)
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie:Movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors ORDER BY Title LIMIT 20
+----
+
+Here is the new execution plan:
+
+[.thumb]
+image::EX6.3A.png[EX6.3A,width=800]
+
+3. The first _Movie_ label is necessary so that we only retrieve _Movie_ nodes, but later in the query, we use the _Movie_ label in two places.
+This will slow things down.
+Rewrite the query to not use the _Movie_ label later on in the query.
+
+Here is the revised query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Person {name: $actorName})-[:ACTED_IN*..3]-(movie:Movie)
+WHERE NOT (actor)-[:ACTED_IN]->(movie)
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors ORDER BY Title LIMIT 20
+----
+
+Here is the new execution plan:
+
+[.thumb]
+image::EX6.3B.png[EX6.3B,width=800]
+
+4. In the execution plan at the expansion, we see 39,373 rows returned and we know that we do not have this many movies in the graph.
+Modify the query so that before after we do the initial query, we will be working with distinct movie nodes.
+
+Here is the revised query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Person {name: $actorName})-[:ACTED_IN*..3]-(movie:Movie)
+WITH DISTINCT actor, movie
+WHERE NOT (actor)-[:ACTED_IN]->(movie)
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors ORDER BY Title LIMIT 20
+----
+
+Here is the new execution plan:
+
+[.thumb]
+image::EX6.3C.png[EX6.3C,width=800]
+
+5. In the execution plan at the expansion, that there are still a lot of db hits around filtering out the movies that the actor did not act in.
+Modify the query to use pattern comprehension to come up with the movies the actor has acted, _actorMovies_ in and carry that collection of rows down in the query in the `WITH DISTINCT` clause.
+Also modify the query to do the `WHERE NOT` check on membership in the actorMovies collection, rather than a path.
+
+Here is the revised query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Person {name: $actorName})
+WITH actor, [(actor)-[:ACTED_IN]->(movie) | movie] as actorMovies
+MATCH (actor)-[:ACTED_IN*..3]-(movie:Movie)
+WITH DISTINCT  movie, actorMovies
+WHERE NOT movie in actorMovies
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors ORDER BY Title LIMIT 20
+----
+
+Here is the new execution plan:
+
+[.thumb]
+image::EX6.3D.png[EX6.3D,width=800]
+
+6. We can still do more to optimize this query. Move the `LIMIT` and `ORDER BY` up in the query.
+
+Here is the revised query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Person {name: $actorName})
+WITH actor, [(actor)-[:ACTED_IN]->(movie) | movie] as actorMovies
+MATCH (actor)-[:ACTED_IN*..3]-(movie:Movie)
+WITH DISTINCT actor, movie, actorMovies
+WHERE NOT movie in actorMovies
+WITH  movie
+ORDER BY movie.title LIMIT 20
+MATCH (actor2:Actor)-[:ACTED_IN]->(movie)
+OPTIONAL MATCH (movie)<-[:DIRECTED]-(dir:Director)
+RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DISTINCT dir.name) AS Directors
+----
+
+
+Here is the new execution plan:
+
+[.thumb]
+image::EX6.3E.png[EX6.3E,width=800]
+
+7. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
+
+Here is the revised query:
+
+[source, cypher]
+----
+PROFILE
+MATCH (actor:Person {name: $actorName})
+WITH actor, [(actor)-[:ACTED_IN]->(movie) | movie] as actorMovies
+MATCH (actor)-[:ACTED_IN*..3]-(movie:Movie)
+WITH DISTINCT actor, movie, actorMovies
+WHERE NOT movie in actorMovies
+WITH  movie
+ORDER BY movie.title LIMIT 20
+RETURN movie.title AS Title, [(a:Actor)-[:ACTED_IN]->(movie) | a.name] AS Actors, [(movie)<-[:DIRECTED]-(dir:Director) | dir.name] AS Directors
+----
+
+Here is the new execution plan:
+
+[.thumb]
+image::EX6.3F.png[EX6.3F,width=800]
+
+
+== Exercise 6: Optimizing Property Access (Summary)
+
+In this exercise, you modified queries to perform better by reducing property access.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/07.html'>Continue to Exercise 07</a>]
+endif::[]

@@ -15,7 +15,8 @@ This lesson includes a number of tips for optimizing property access in a query.
 At the end of this module, you should be able to:
 
 [square]
-* ??
+* Describe when properties are accessed in a query.
+* Optimize queries by minimizing property access.
 
 == When are properties accessed?
 
@@ -97,6 +98,31 @@ RETURN actor.name, movie.title
 image::returnSome.png[returnSome,width=800,align=center]
 
 The number of db hits is greater, but the elapsed time is smaller. You can imagine that over a network, you would see greater differences in performance.
+
+In addition, you should strive to limit the number of rows returned as accessing fewer rows to obtain property values will be faster.
+
+Here we limit the number of rows returned by only returning movies
+that have greater than _$maxActors_ actors.
+This will be a subset of all movies.
+
+[source,cypher]
+----
+PROFILE
+MATCH (m:Movie)<-[:ACTED_IN]-(a)
+WITH  m, collect(a) as actors
+WHERE size(actors) > $maxActors
+RETURN  m.title, m.releaseYear, actors
+----
+
+Here is another example where we want to only return _$numResults_
+
+[source, cypher]
+----
+PROFILE
+MATCH (m:Movie)<-[:ACTED_IN]-(a)
+WITH  m, collect(a) as actors LIMIT $numResults
+RETURN  m.title, m.releaseYear, actors
+----
 
 == Index-based property access (especially with ORDER BY)
 
@@ -250,6 +276,9 @@ image::AggregateByNode.png[AggregateByNode,width=800,align=center]
 
 == Delay access until node is distinct
 
+Delaying the minimum number of properties accessed by reducing the number of nodes is a good thing.
+Even better is accessing a distinct node.
+
 This is a variation of getting at the property value before expansion.
 Here is an example:
 
@@ -307,12 +336,9 @@ RETURN  m.title, m.releaseYear, actors
 
 image::PropertyAccessAfterAggregation.png[PropertyAccessAfterAggregation,width=800,align=center]
 
-== Delay access until fewer nodes???
-
-
 
 [.student-exercise]
-== Exercise 2: Prepare for Query Tuning
+== Exercise 6: Optimizing Property Access
 
 [.small]
 --
@@ -320,12 +346,14 @@ In the query edit pane of Neo4j Browser, execute the browser command:
 
 kbd:[:play 4.0-query-tuning-exercises]
 
-and follow the instructions for Exercise 2.
+and follow the instructions for Exercise 6.
 
 [NOTE]
 This exercise has 6 steps.
 Estimated time to complete: 15 minutes.
 --
+
+// Elaine resume here
 
 [.quiz]
 == Check your understanding
@@ -378,8 +406,5 @@ Select the correct answer.
 You should now be able to:
 
 [square]
-* Ensure you have the appropriate system hardware and settings that can affect performance.
-* Prepare Neo4j configuration settings for query tuning.
-* Use a representative data set for your queries.
-* Pre-test all queries to ensure expected rows based upon DB Stats.
-* Ensure the Page Cache is warmed up.
+* Describe when properties are accessed in a query.
+* Optimize queries by minimizing property access.
