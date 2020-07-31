@@ -1,7 +1,7 @@
 = Exercise 6
 :icons: font
 
-== Exercise 6: Optimizing Property Access (Preparations)
+== Exercise 6: More Query Tuning (Preparations)
 
 Before you begin this exercise, you should have this environment:
 
@@ -40,15 +40,16 @@ RETURN name, value
 
 You are now ready to start this exercise.
 
-== Exercise 6: Optimizing Property Access (Overview)
+== Exercise 6: More Query Tuning (Overview)
 
 In this exercise, you will tune queries to reduce how many properties need to be accessed.
+The final exercise will be to tune a complex query iteratively, improving it with each step.
 
 In this exercise, you will:
 
 * *Exercise 6.1*: Use indexed-based property access.
 * *Exercise 6.2*: Optimize a "top 10" query.
-* *Exercise 6.3*: Putting it all together: Tune a query.
+* *Exercise 6.3*: Putting it all together: Tune a complex query.
 
 Go to the next page to start this exercise.
 
@@ -182,11 +183,12 @@ The result should be:
 [.thumb]
 image::EX6.2A.png[EX2.2A,width=800]
 
-== Exercise 6.3: Putting it all together: Tune a query (Instructions)
+== Exercise 6.3: Putting it all together: Tune a complex query (Instructions)
 
 1. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
-It finds all movies that are three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
-We also fins the directors who directed the movie that is 3 hops away from _$actorName_. It then returns the data and sorts the data by movie title.
+It finds all movies that are up to three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
+We also find the directors who directed the movie that is up to 3 hops away from _$actorName_.
+It then returns the data and sorts the data by movie title.
 
 [source, cypher]
 ----
@@ -222,12 +224,14 @@ Also modify the query to do the `WHERE NOT` check on membership in the actorMovi
 
 7. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
 
+*Taking it further*: Change the original query and the final query to query actors that are up to 7 hops away.
 
 == Exercise 6.3: Putting it all together: Tune a query (Solution)
 
 1. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
-It finds all movies that are three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
-We also fins the directors who directed the movie that is 3 hops away from _$actorName_. It then returns the data and sorts the data by movie title.
+It finds all movies that are up to three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
+We also find the directors who directed the movie that is up to 3 hops away from _$actorName_.
+It then returns the data and sorts the data by movie title.
 
 [source,cypher]
 ----
@@ -383,10 +387,12 @@ Here is the new execution plan:
 [.thumb]
 image::EX6.3F.png[EX6.3F,width=800]
 
+*Taking it further*: Change the original query and the final query to query actors that are up to 7 hops away.
 
 == Exercise 6: Optimizing Property Access (Summary)
 
 In this exercise, you modified queries to perform better by reducing property access.
+Then you tuned a complex query iteratively.
 
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/07.html'>Continue to Exercise 07</a>]

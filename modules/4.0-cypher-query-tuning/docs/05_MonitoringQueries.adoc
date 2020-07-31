@@ -8,376 +8,101 @@
 
 == About this module
 
-As you examine execution plans for your queries, you will see that rows are processed and passed through to the next step of the execution plan.
-Even though much of the data resides in the Page Cache, you want to reduce the number of rows that the query needs to execute.
-In this module, you will learn how to modify queries to reduce the amount of duplicate information that may be passed from the steps of the execution plan.
+You have learned how to measure the performance of queries by profiling them in your development enviromnent.
+In your real application you will need to have a more rigorous and documented approach to testing the performance of queries in a test environment.
+
+Even in a production environment, it may be necessary to monitor queries.
+You monitor queries to discover any problems in the queries that run during a specific time-period.
+For example, if there may be a spike in access to the data, you may want to monitor how it is affecting queries over a period of time.
 
 At the end of this module, you should be able to:
 
 [square]
-*
+* Monitor queries that are currently running.
+* Monitor historical metrics around queries.
 
-== Index-based property access (especially with ORDER BY)
 
-== Collect nodes not properties
+== Review: Query components
 
-== Save property values used later
+You have profiled queries that have these primary components:
 
-== Only return what you need
+. Create the execution plan (compile the  query).
+. Execute the query.
+. Return results to the client.
 
-Here is a query that we will be looking to improve where the value of _movieTitle_ is "The Matrix":
+== Monitoring current queries
 
-[source,cypher]
-----
-PROFILE
-MATCH (m:Movie {title: $movieTitle})
-MATCH (dir:Person)-[:DIRECTED]->(m)
-MATCH (actor:Person)-[:ACTED_IN]->(m)
-RETURN m.title AS Title,
-collect(DISTINCT actor.name) AS Actors,
-collect(DISTINCT dir.name) AS Directors
-----
-
-Here is the resulting execution plan:
-
-image::theMatrixStarter.png[theMatrixStarter,width=800,align=center]
-
-=== Query execution is not what you might expect
-
-Here is how you might expect the query to execute:
-
-. We find all Movies with the title "The Matrix", where one row is returned.
-. We then find all directors associated with that one movie. There are two rows returned.
-. We also find all actors associated with that one movie. There are 13 rows returned.
-. Then we return the title of the movie, the list of 2 unique directors, and the list of 13 unique actors.
-
-image::theMatrixNot.png[theMatrixNot,width=800,align=center]
-
-=== Actual query explained
-
-But this is NOT how the steps in the execution plan work. This is what really happens in the query.
-
-. We find all Movies with the title "The Matrix", where one row is returned.
-. We then find all directors associated with that one movie. There are two rows returned.
-. We then find all actors associated with that one movie and a director. There are 26 rows returned, for each director/actor combination.
-. Then we return the title of the movie, the list of 2 unique directors, and the list of 13 unique actors.
-
-image::theMatrixActual.png[theMatrixActual,width=800,align=center]
-
-In reality, we are processing twice as many rows as we need to when matching the actors. There is duplicate work that we need to eliminate.
-We do see the correct result because we are specifying DISTINCT for the names of the actors and directors.
-
-=== Making the query worse
-
-Our query could be even worse if we matched the actors first and then the directors:
-
-image::theMatrixWorse.png[theMatrixWorse,width=800,align=center]
-
-Even though this query returns the same number of rows, the match of the directors is performed 13 times.
-This is more work than we need to do.
-
-=== Combining paths does not help
-
-Here is a revised query:
-
-[source,cypher]
-----
-PROFILE
-MATCH (dir:Person)-[:DIRECTED]->(m:Movie {title: $movieTitle})<-[:ACTED_IN]-(actor:Person)
-RETURN m.title AS Title,
-collect(DISTINCT actor.name) AS Actors,
-collect(DISTINCT dir.name) AS Directors
-----
-
-And here we see the same execution plan:
-
-image::CombineMatchAttempt.png[CombineMatchAttempt,width=800,align=center]
-
-== What increases cardinality?
-
-Here are some things to keep in mind that typically increase the cardinality of your queries:
-
-[square]
-* Multiple `MATCH` and `OPTIONAL MATCH` statements that are back-to back (even with a `WITH`) in between
-* `UNWIND` operations because each el`ement of the list becomes a row
-* Procedure results (when they `YIELD something)
-* Lack of selectivity for the anchor nodes
-
-== How to reduce cardinality?
-
-Here are some tips:
-
-[square]
-* Aggregation earlier where the grouping key will become distinct
-* Use pattern comprehension
-* Use labels or indexes to select anchor nodes
-* `WITH DISTINCT` applies to the entire row, not just a single variable
-* `LIMIT` reduces all rows, not results per row
-
-[IMPORTANT]
-`WITH` on its own does not shrink cardinality.
-
-== Reducing cardinality with early aggregation
-
-In our original query:
-
-[source,cypher]
-----
-PROFILE
-MATCH (m:Movie {title: $movieTitle})
-MATCH (dir:Person)-[:DIRECTED]->(m)
-MATCH (actor:Person)-[:ACTED_IN]->(m)
-RETURN m.title AS Title,
-collect(DISTINCT actor.name) AS Actors,
-collect(DISTINCT dir.name) AS Directors
-----
-
-We see that the problems are that we have back-to-back `MATCH` statements and we aggregate too late in the query.
-We can improve this query buy moving the aggregation up:
-
-[source,cypher]
-----
-PROFILE
-MATCH (m:Movie {title: $movieTitle})
-MATCH (dir:Person)-[:DIRECTED]->(m)
-WITH m, collect(dir.name) AS Directors
-MATCH (actor:Person)-[:ACTED_IN]->(m)
-WITH m, Directors, collect(actor.name) AS Actors
-RETURN m.title AS Title, Directors, Actors
-----
-
-With this revised query, as soon as we match the directors, we will collect the names which will be unique.
-Then when we execute the final `MATCH`, we are not passing two director rows to be processed, but simply the single row with the movie and list of directors.
-
-Here is the execution plan:
-
-image::ImprovedMatrixQuery.png[ImprovedMatrixQuery,width=800,align=center]
-
-Here we see that the number of rows has been reduced and subsequently we also see that the number of db hits has been reduced.
-
-== Reducing cardinality with pattern comprehension
-
-Pattern comprehension is a very powerful way to reduce cardinality. It behaves like an `OPTIONAL MATCH` combined with collect().
-
-Here is a rewrite of the original query using pattern comprehension:
+There may be situations where a user/client performs a query that does not return or perhaps takes an extremely long time to return.
+In this case, you can run this procedure to view all currently running queries:
 
 [source, cypher]
 ----
-PROFILE
-MATCH (m:Movie {title: $movieTitle})
-RETURN m.title,
-[(dir:Person)-[:DIRECTED]->(m)| dir.name] AS Directors,
-[(actor:Person)-[:ACTED_IN]->(m) | actor.name] AS Actors
+CALL dbms.listQueries()
 ----
 
-In the `RETURN` statement, we are returning two lists, but they are created using pattern comprehension.
-A match pattern is specified that creates the lists by performing an implicit match and in this case, extracts the name property from the nodes retrieved.
+This procedure returns information about all running queries owned by _neo4j_.
+In this example, the only query that is running is the one to list the queries.
 
-Here is the execution plan for this query:
+image::listQueries.png[listQueries,width=800,align=center]
 
-image::PatternComprehension.png[PatternComprehension,width=800,align=center]
-
-Here we see that the query retrieves the _Movie_ row and finds 2 rows for directors. With the pattern comprehension, these 2 rows are collected and 1 row is then passed to the next pattern comprehension specified for actors. The 13 rows are collected into 1 row so that the final number of rows returned is 1.
-The use of pattern comprehension is slightly better and reduces the number of db hits.
-
-== Reducing cardinality with anchor node selectivity
-
-In your `MATCH` statement patterns, you should strive to create execution plans that either use an index or label (which is also an index).
-
-In your execution plans, you should see these operators at the leaf steps:
-
-[square]
-* NodeByLabelScan
-* Operators that use an index:
-** NodeIndexSeek
-** NodeUniqueIndexSeek
-** MultiNodeIndexSeek
-** NodeIndexSeekByRange
-** NodeUniqueIndexSeekByRange
-** NodeIndexContainsScan
-** NodeIndexEndsWithScan
-** NodeIndexScan
-
-You never want to see _AllNodesScan_ in an execution plan.
-
-=== Reducing cardinality with labels
-
-You want to see NodeByLabelScan in your execution plans if an index will cannot be used.
-You must be familiar with how labels are used.
-Ideally you want the greatest selectivity for the anchor nodes.
-
-For example, here is a query that will use NodeByLabelScan:
+You can also specify what values you want returned from the procedure:
 
 [source,cypher]
 ----
-PROFILE
-MATCH (p:Person)
-RETURN p.name
+CALL dbms.listQueries() YIELD  queryId, username, metaData, query, planner , runtime , indexes , startTime , protocol , clientAddress , requestUri , status , resourceInformation , activeLockCount , elapsedTimeMillis , cpuTimeMillis , waitTimeMillis , idleTimeMillis , allocatedBytes , pageHits , pageFaults
 ----
 
-It returns 18,726 rows.
+image::listQueries2.png[listQueries2,width=800,align=center]
 
-image::PersonNodes.png[PersonNodes,width=800,align=center]
+=== Queries that return too much data
 
-==== Use more specific labels
-
-But if you are only really interested in directors, you should anchor your query with this node label:
+Here is an example of a query that takes a long time to execute because it returns a lot of data:
 
 [source,cypher]
 ----
-PROFILE
-MATCH (p:Director)
-RETURN p.name
+PROFILE MATCH (a)--(b)--(c)--(d)--(e)--(f) RETURN a,b,c,d,e,f
 ----
 
-image::DirectorNodes.png[DirectorNodes,width=800,align=center]
+This query both processes a lot of data, but also returns a lot of data.
 
-=== Reducing cardinality with indexes
+Here is the explanation of the query:
 
-A really big win for reducing cardinality is to ensure that indexes can be used for your queries.
-If a query is performed frequently by the application, you should add an index for the property that is used for the query.
-The type of index-related step in the execution plan will depend upon the type of filtering your query requires.
+image::ExplainReturnAlotOfData.png[ExplainReturnAlotOfData,width=800,align=center]
 
-Another type of index you can create in the database is the _full-text schema index_ which provides additional indexing capabilities that you do not get from regular indexes:
+When this query runs (on left) , you can see it running when you run listQueries() (:queries) (on right):
 
-[square]
-* multiple labels
-* properties of relationships
-* support for case-insensitive lookup
-* wildcard lookup
-* custom lucene analyzers
+image::ProfileReturnAlotOfData.png[ProfileReturnAlotOfData,width=800,align=center]
 
-==== Example: A query that needs improvement
+This query can be killed by the client (on left) by closing the Neo4j browser pane where it is running.
+However, in the Neo4j Browser session on the right, we cannot kill it.
+Because of the type of query, it has completed executing, but it is now streaming results back to the client.
+In this case, it cannot be killed, except for the client that initiated it.
 
-Here is an example where a full-text schema index helps. We want to query the roles in the _ACTED_IN_ relationships.
+=== Queries that take too long to run
 
-[source, cypher]
-----
-PROFILE
-MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
-WHERE ANY (role IN r.roles WHERE toUpper(role) CONTAINS $testString)
-return m.title, r.roles, a.name
-----
-
-Here is the execution plan for this query:
-
-image::CabbieExample.png[CabbieExample,width=800,align=center]
-
-We see that to execute this query, we need many rows (6231,56914,7).
-This spike in rows needed is something you never want to see in an execution plan.
-This query requires 182,583 db hits!
-
-////
-If this query is one that the application uses frequently, you will want to modify things so that it performs better.
-
-==== Example: Refactoring the graph
-
-We know that full-text schema indexes allow you to create indexes on relationship properties.
-This is what we want to do to improve the query.
-
-The caveat, however is that the _roles_ property of the _ACTED_IN_ relationship contains a list of roles and we cannot create a full-text schema index on a list of strings.
-To solve this problem, we will refactor the graph to have 2 properties for the _ACTED_IN_ relationship:
-
-[square]
-* primaryRole
-* secondaryRole
-
-We refactor the graph as follows, keeping the roles property as is:
-
-[source, cypher]
-----
-MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
-set r.primaryRole = r.roles[0], r.secondaryRole = r.roles[1]
-----
-
-As you learn about graph data modeling and implementing graphs, you will find that sometimes you will need to refactor the graph to improve query performance.
-
-So the previous query with this change is:
+Here is an example of a query that takes a long time to execute because it returns a lot of data:
 
 [source,cypher]
 ----
-PROFILE
-MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
-WHERE toUpper(r.primaryRole) CONTAINS $testString OR
-toUpper(r.secondaryRole) CONTAINS $testString
-return m.title, r.roles, a.name
+EXPLAIN MATCH (a), (b), (c), (d), (e) RETURN count(id(a))
 ----
 
-And we see an execution plan that is still not performing well:
+Here is the explanation of the query:
 
-image::CabbieExample2.png[CabbieExample2,width=800,align=center]
+image::ExplainTooLongToRun.png[ExplainTooLongToRun,width=800,align=center]
 
-It has even more db hits, 407,041 because the properties are stored in different physical locations and require greater db access.
+Notice that is does a lot of cartesian products, but only returns one row.
 
-==== Example: Adding a full-text schema index
+This query can be killed by the client (on left) by closing the Neo4j browser pane where it is running.
+However, in the Neo4j Browser session on the right, we cannot kill it.
 
-Now that we have separated out the values for the roles, we can add a full-text schema index for these properties:
+image::OutOfMemoryTooLongToRun.png[OutOfMemoryTooLongToRun,width=800,align=center]
 
-[source,cypher]
-----
-CALL db.index.fulltext.createRelationshipIndex(
-      'ActedInRoleIndex',['ACTED_IN'], ['primaryRole','secondaryRole'])
-----
-
-After adding this type of index, we can query the graph, but the query will change.
-Because it is a full-text schema index, it must be called differently and the query changes to something like this:
-
-[source,cypher]
-----
-PROFILE
-CALL db.index.fulltext.queryRelationships(
-     'ActedInRoleIndex', 'Cabbie') YIELD relationship
-WITH relationship AS rel
-MATCH (a:Actor)-[rel]->(m:Movie)
-RETURN a.name, m.title, rel.roles
-----
-
-Here is the execution plan for this query:
-
-image::CabbieExample3.png[CabbieExample3,width=800,align=center]
-
-Although the number of db hits has been reduced to 288,461, we see that the execution plan is doing a _NodeByLabelScan_ which is producing a lot of rows.
-We have already determined from the call to queryRelationships which particular relationships are associated with the index.
-The problem, however is that the execution plan scans for all relationships between _Actors_ and _Movies_.
-This is a problem.
-
-The solution to this is the remove the labels from the `MATCH` statement so that only the found relationships will be used to retrieve the appropriate _Actor_ and _Movie_ nodes.
-
-Here is the improved query:
-
-[source,cypher]
-----
-PROFILE
-CALL db.index.fulltext.queryRelationships(
-     'ActedInRoleIndex', 'Cabbie') YIELD relationship
-WITH relationship AS rel
-MATCH (a)-[rel]->(m)
-RETURN a.name, m.title, rel.roles
-----
-
-In this special case, we do not want the NodeByLabel scan to occur.
-Here is the execution plan:
-
-image::CabbieExample4.png[CabbieExample4,width=800,align=center]
-
-This is much better. We see far fewer rows, no NodeByLabelScan, and a total of 96 db hits.
-
-Full-text schema indexes can be used in these special cases where you want to optimize access to a property of a relationship.
-They are also good for optimizing case-insensitive searches on any node or relationship property string.
-
-== Explicitly specifying indexes
-
-== Aggregating earlier
-
-== Limiting earlier
-
-
-We cannot create a reqular index on a property of a relationship.
-
-==== Explicity specifying indexes
+In this case, it cannot be killed, except for the client that initiated it.
+If it is not killed by the client, it will eventually run out of memory.
 
 [.student-exercise]
-== Exercise 2: Prepare for Query Tuning
+== Exercise 7: Monitoring Running Queries
 
 [.small]
 --

@@ -24,6 +24,7 @@ During a query, a node or relationship property is accessed when it is used to f
 Here are some examples.
 
 Here, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results.
+The _title_ property need not be accessed in the `RETURN` clause because it is cached from the query.
 If the _title_ property is indexed, then the node property need not be accessed as the value is in the index:
 
 [source,cypher]
@@ -86,6 +87,14 @@ image::returnAll.png[returnAll,width=800,align=center]
 
 If the client is accessing the database over a network, the elapsed time for the query will be longer.
 
+If we view the table returned in Neo4j Browser, we see more information:
+
+image::returnAll2.png[returnAll2,width=800,align=center]
+
+Notice that the query really only took 1 ms, but the streaming of the results back to the client took the 16 ms.
+From this we can infer that the streaming time was 15 ms.
+If the client were on a different system, this streaming time would be greater.
+
 Contrast the previous query with this one:
 
 [source,cypher]
@@ -98,6 +107,10 @@ RETURN actor.name, movie.title
 image::returnSome.png[returnSome,width=800,align=center]
 
 The number of db hits is greater, but the elapsed time is smaller. You can imagine that over a network, you would see greater differences in performance.
+
+And in the table view, we see that the query took the same amount of time and the streaming of the results was faster because there is less data to stream.
+
+image::returnSome2.png[returnSome2,width=800,align=center]
 
 In addition, you should strive to limit the number of rows returned as accessing fewer rows to obtain property values will be faster.
 
@@ -124,7 +137,7 @@ WITH  m, collect(a) as actors LIMIT $numResults
 RETURN  m.title, m.releaseYear, actors
 ----
 
-== Index-based property access (especially with ORDER BY)
+== Index-based property access
 
 If an index was used for the query, then that property value for that node will be cached and you need not go to the database to retrieve it.
 Furthermore, if you use `ORDER BY` for a property that was retrieved with the index, it will be very fast because the index already provides the ordering.
@@ -170,6 +183,39 @@ RETURN p.name ORDER BY p.name
 ----
 
 image::retrieveTomsAsActorSorted.png[retrieveTomsAsActorSorted,width=800,align=center]
+
+=== Avoiding aggregation with indexes
+
+You learned earlier that eager operators can be expensive.
+You can perform operations such as `min()` and `max()` without needing to aggregate, provide there is a supporting index.
+
+Here is an example where we do not have an index on the _Movie.releaseYear_ property.
+
+[source,cypher]
+----
+PROFILE
+MATCH (m:Movie)
+WHERE m.releaseYear < $year
+RETURN min(m.releaseYear) AS Year
+----
+
+image::min1.png[min1,width=800,align=center]
+
+In the execution plan, we see that we need to aggregate all _Movie_ nodes to perform the `min()` operation.
+
+If we had a query that used an index, the aggregation would be avoided because we can get the data we need to find the smallest length title in the index.
+
+[source,cypher]
+----
+PROFILE
+MATCH (m:Movie)
+WHERE m.title STARTS WITH $titleString
+RETURN min(m.title) AS Title
+----
+
+image::min2.png[min2,width=800,align=center]
+
+In the execution plan, we see no aggregation to find the minimum value.
 
 == Tuning "top ten" types of queries
 
@@ -224,7 +270,10 @@ Here is the execution plan:
 
 image::ProjectAfterExpansion.png[ProjectAfterExpansion,width=800,align=center]
 
-A slightly better way to do this is the project the movie title when you know that node is unique, then do the expansion to retrieve the _Actor_ nodes:
+You will notice, however in this execution plan that the _title_ property is actually cached so that it need not be accessed in the `RETURN` clause.
+This is an improvement in the query planner for 4.x.
+
+If you were using an earlier release of Neo4j, a slightly better way to do this would be to project the movie title when you know that node is unique, then do the expansion to retrieve the _Actor_ nodes:
 
 [source, cypher]
 ----
@@ -238,6 +287,9 @@ RETURN Title, actor.name AS Actor
 Here is the execution plan:
 
 image::ProjectBeforeExpansion.png[ProjectBeforeExpansion,width=800,align=center]
+
+[NOTE]
+As stated earlier in this course, with every release of Neo4j, you must measure your query performance. This is because the Cypher query planner could change and perhaps make your queries perform faster (or slower).
 
 == Aggregate by nodes not properties
 
@@ -338,7 +390,7 @@ image::PropertyAccessAfterAggregation.png[PropertyAccessAfterAggregation,width=8
 
 
 [.student-exercise]
-== Exercise 6: Optimizing Property Access
+== Exercise 6: More Query Tuning
 
 [.small]
 --
@@ -353,52 +405,70 @@ This exercise has 6 steps.
 Estimated time to complete: 15 minutes.
 --
 
-// Elaine resume here
-
 [.quiz]
 == Check your understanding
 
 === Question 1
 
 [.statement]
-Which of the following will impact your query tuning work?
+Given this query:
+
+[source, cypher]
+----
+MATCH (m:Movie)
+WHERE m.title = $movieTitle
+RETURN m.title, m.releaseYear
+----
+
+[.statement]
+When are the _title_ and _releaseYear_ properties accessed?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] RAM
-- [x] Version of Neo4j
-- [x] Disk hardware and software
-- [x] Number of Cores
+- [x] If there are no indexes on _Movie.title_ or _Movie.releaseYear_, the _Movie.title_ property is accessed during the query and the _Movie.releaseYear_ property is accessed in the `RETURN` clause.
+- [x] If there is an index only on _Movie.title_, the _Movie.releaseYear_ property is accessed in the `RETURN` clause.
+- [x] If there is an index only on _Movie.releaseYear_, the _Movie.title_ property is accessed during the query and the _Movie.releaseYear_ property is accessed in the `RETURN` clause.
+- [ ] If there are indexes on both _Movie.title_ and _Movie.releaseYear_, the properties are not accessed, but gotten only from the indexes.
 
 === Question 2
 
 [.statement]
-Which Cypher statement will provide you with count information that you can use to explain the behaviour of the queries you will be tuning?
+For a given query, what metrics can you observe related to time?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [ ] CALL db.countInfo()
-- [ ] CALL db.count-store()
-- [ ] CALL apoc.count-store()
-- [x] CALL apoc.meta.stats()
+- [x] total elapsed ms for the query
+- [x] ms for the query execution, that does not include results returned
+- [ ] ms for the index lookup
+- [x] ms for the streaming of the results to the client
 
 === Question 3
 
 [.statement]
-Why do you warm up the Page Cache?
+Suppose you have an index on the _Movie.releaseYear_ property. With this code:
+
+[source,cypher]
+----
+MATCH (m:Movie)
+WHERE m.releaseYear > $year
+RETURN m.title, m.releaseYear
+----
 
 [.statement]
-Select the correct answer.
+Which statements are true about this code?
+
+[.statement]
+Select the correct answers.
 
 [%interactive.answers]
-- [x] You want as much data from the graph in memory for your queries.
-- [ ] You want to make sure the DB Stats are updated.
-- [ ] You want the execution plans for queries you will be tuning to be in memory.
-- [ ] You want lock all data so that it cannot be modified during query tuning.
+- [x] The _title_ property is accessed for the return.
+- [ ] The _releaseYear_ property is accessed for the return.
+- [x] The records returned are sorted by _releaseYear_.
+- [ ] The records returned are in random order.
 
 [.summary]
 == Summary
