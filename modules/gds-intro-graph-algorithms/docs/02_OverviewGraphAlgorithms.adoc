@@ -189,36 +189,38 @@ Paper: https://arxiv.org/pdf/0803.0476.pdf[Fast unfolding of communities in larg
 
 == Types of graphs
 
-On the Twitter you can follow someone, but they don't necessarily need to follow you back.
-This is an example of a directed graph, where the direction of the relationship matters.
-While on Facebook, you can either be a friend or not, there is no one way relationship.
-Facebook is an example of an unweighted graph.
-
-A task workflow is usually a directed acyclic graph, where tasks follow one another in different steps.
-If there are lot of relationships between the nodes in the graph we call that a dense graph, and is there are few relationships we call that a sparse graph.
+Graphs come in various shapes and forms.
+For example, on Twitter you can follow someone, but they don't necessarily follow you back.
+On other social media platforms a friendship link exists only if both parties agree to it.
+Sometimes, the strength of a relationship plays an important factor.
+We might also differentiate between different types of nodes in a network.
 
 === Directed Versus Undirected Graphs
 
 [.is-half.left]
 --
 image::directed-graph.png[Directed graph,width=500,align=center]
-
 --
 
 [.is-half.right]
 --
+In the case of a directed graph, the direction of a relationship does matter.
+In our example, both Aaliyah and Phillip's feed will contain posts from Sam.
+On the other hand, Sam's feed will contain only posts from Phillip as he does not follow Aaliyah.
 --
-
-Neo4j knows only directed relationships. We infer treat bidirected on undirected relationships the same.
-If we project a two relationships one in each direction, we are effectively treating that relationship as undirected.
 
 [.is-half.left]
 --
-image::bidirected-graph.png[Bidirected graph,width=500,align=center]
+image::undirected-graph.png[Undirected graph,width=500,align=center]
 --
 
 [.is-half.right]
 --
+In an undirected graph, a single relationship represents a link between nodes in both directions.
+For example, Aaliyah and Sam can either be friends or not.
+A scenario, where Aaliyah is friends with Sam, but Sam is not friends with Aaliyah, is not possible.
+
+An undirected relationship can also be represented as two directed relationships, where one relationship points in the opposite direction of another.
 --
 
 === Unweighted Versus Weighted Graphs
@@ -230,7 +232,8 @@ image::unweighted-graph.png[Unweighted graph,width=500,align=center]
 
 [.is-half.right]
 --
-We can have a number representing the strength of the relationship. This is called a weighted graph.
+In an unweighted network, a relationship between a pair of nodes can either exist or not.
+It has no associated cost or weight assigned to it, and therefore, no notion of the strength of relationship exists.
 --
 
 [.is-half.left]
@@ -240,9 +243,9 @@ image::weighted-graph.png[Weighted graph,width=500,align=center]
 
 [.is-half.right]
 --
-It's important to see that sometimes a bigger number means a stronger relationships like the LIKES relationship in example.
-Community detection and centrality algorithms treat higher values of weights as stronger relationships.
-On the other hand for pathfinding algorithms, the smaller value of a weight is better, as we are mostly looking for shortest weighted paths.
+When dealing with a weighted network, we assign each relationship a weight, that represents the strength or cost of traversing the relationship.
+The weight must be a number.
+A common application for using a weighted network is a transportation network, where we are searching for the shortest weighted path between a pair of nodes.
 --
 === Monopartite versus Multipartite Graphs
 
@@ -270,9 +273,6 @@ This is an example of a monopartite projection, where we infer that if two perso
 A monopartite projection can be understood as a process of translating indirect relationship to direct relationships.
 
 === Multigraph Versus Simple graph
-
-image::singlegraph.png[SingleGraph,width=500,align=center]
-
 
 In mathematics, and more specifically in graph theory, a multigraph is a graph which is permitted to have multiple edges (also called parallel edges), that is, edges that have the same end nodes. Thus two vertices may be connected by more than one edge.
 There are two distinct notions of multiple edges:
@@ -304,8 +304,7 @@ image::community-detection.png[Community Detection,width=300,align=center]
 --
 Community detection algorithms are used to find clusters of communities that the nodes form in a network.
 They are also used to examine how tightly-knit some of those communities are.
-
-cluster your graph based on relationships to find communities where members have more significant interactions. This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures. This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
+This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures. This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
 --
 
 === Centrality algorithms
@@ -317,10 +316,9 @@ image::centrality.png[Community Detection,width=300,align=center]
 
 [.is-half.right]
 --
-Centrality algorithms are used to find the most influental nodes in a network.
-The most known algorithm is PageRank, implemented by Google.
-
-Reveal which nodes are important based on graph topology to uncover the roles of individual nodes and their impact. They identify influential nodes based on their position in the network and include the famous PageRank algorithm. These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
+Centrality algorithms are used to find the most influental nodes and their role in a network based on the graph topology. 
+These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
+The most famous algorithm in this category is PageRank.
 --
 
 === Pathfinding algorithms
@@ -332,10 +330,9 @@ image::pathfinding.png[Pathfinding,width=300,align=center]
 
 [.is-half.right]
 --
-Pathfinding algorithms usually are used to find the shortest path between nodes in a network.
-The most common algorithm is the Dijkstra algorithm for finding the shortest weighted paths.
-
-find the most efficient or shortest paths to traverse between nodes. The A* and Dijkstra’s algorithms are included in this category, which are used to evaluate routes for uses such as physical logistics and least-cost call or IP routing.
+Pathfinding algorithms are usually used to find the shortest path between nodes in a network.
+The most common algorithm is the Dijkstra algorithm.
+They are used to evaluate routes for uses such as physical logistics and least-cost call or IP routing.
 --
 
 === Similarity algorithms
@@ -347,11 +344,10 @@ image::similarity.png[Similarity,width=300,align=center]
 
 [.is-half.right]
 --
-Similarity algorithms are used to find similar nodes in a network based on graph topology or for example cosine similarity of an embedding.
-The most commonly used is the Jaccard similarity index.
-They are also used to project a monopartite graph from a bipartite, like we saw in the example above.
-
-employ set comparisons to score how alike individual nodes are based on their neighbors or properties. This approach is used in applications such as personalized recommendations and developing categorical hierarchies.
+Similarity algorithms are used to find similar nodes in a network based on graph topology or their properties.
+This approach is used in applications such as personalized recommendations and developing categorical hierarchies.
+The most common algorithms in this category are Jaccard similarity and Cosine similarity algorithm.
+They can also be used to infer a monopartite projection of a bipartite graph.
 --
 
 === Link prediction
@@ -364,9 +360,8 @@ image::link-prediction.png[Link prediction,width=300,align=center]
 [.is-half.right]
 --
 Link prediction algorithms help determine the closeness of a pair of nodes.
-The computed scores can then be used to predict new relationships between them.
-
-consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships. Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
+They consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships.
+Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
 --
 
 
@@ -380,7 +375,7 @@ image::node-embedding.png[Node embedding,width=300,align=center]
 [.is-half.right]
 --
 Node embedding algorithms compute low-dimensional vector representations of nodes in a graph.
-These vectors, also called embeddings, can be used for machine learning.
+These vectors, also called embeddings, can be used as a machine learning input.
 --
 
 == Summary
