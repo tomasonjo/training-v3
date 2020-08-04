@@ -19,8 +19,8 @@ At the end of this module, you should be able to:
 
 [square]
 * Monitor queries that are currently running.
-* Monitor historical metrics around queries.
-
+* Configure query logging.
+* Monitor historical metrics for queries.
 
 == Review: Query components
 
@@ -74,13 +74,12 @@ When this query runs (on left) , you can see it running when you run listQueries
 image::ProfileReturnAlotOfData.png[ProfileReturnAlotOfData,width=800,align=center]
 
 This query can be killed by the client (on left) by closing the Neo4j browser pane where it is running.
-However, in the Neo4j Browser session on the right, we cannot kill it.
-Because of the type of query, it has completed executing, but it is now streaming results back to the client.
-In this case, it cannot be killed, except for the client that initiated it.
+However, in the Neo4j Browser session on the right, we cannot kill it in the UI.
+Later in this lesson, you will learn how to kill it from another session.
 
 === Queries that take too long to run
 
-Here is an example of a query that takes a long time to execute because it returns a lot of data:
+Here is an example of a query that takes a long time to execute:
 
 [source,cypher]
 ----
@@ -94,12 +93,58 @@ image::ExplainTooLongToRun.png[ExplainTooLongToRun,width=800,align=center]
 Notice that is does a lot of cartesian products, but only returns one row.
 
 This query can be killed by the client (on left) by closing the Neo4j browser pane where it is running.
-However, in the Neo4j Browser session on the right, we cannot kill it.
+However, in the Neo4j Browser session on the right, we cannot kill it in the UI.
+If it is not killed by the client, it will eventually run out of memory.
 
 image::OutOfMemoryTooLongToRun.png[OutOfMemoryTooLongToRun,width=800,align=center]
 
-In this case, it cannot be killed, except for the client that initiated it.
-If it is not killed by the client, it will eventually run out of memory.
+[NOTE]
+A query may also take a long time to execute because of lock contention. This course does not cover multi-user query issues.
+
+=== Killing a query from a different session
+
+The _neo4j_ user has admin privileges. In your real application environment, you may create other users with admin role.
+As a user with the admin role, you can view queries of all users and you can also kill their queries by calling a Cypher procedure.
+
+If you know that a query is running too long and you want to kill it, you do the following:
+
+[source,cypher]
+----
+CALL dbms.listQueeries() YIELD query, queryId
+// followed by
+CALL dbms.killQuery('<queryid value>')
+----
+
+Here is how we kill the query that returns a lot of data:
+
+image::killQuery1.png[killQuery1,width=800,align=center]
+
+Here is how we kill the query that executes too long:
+
+image::killQuery1.png[killQuery1,width=800,align=center]
+
+The result of killing these queries has a different side-effect on the client.
+
+=== Automating the killing of long-running queries
+
+Some queries against the Neo4j instance are not simply queries, but are Cypher statements that
+load data from CSV files. These types of Cypher statements could take a considerable amount of
+time to complete. One option for you to help automate the killing of long-running queries is to
+create a script that executes a Cypher statement such as the following:
+
+[source, cypher]
+----
+CALL dbms.listQueries() YIELD query, elapsedTimeMillis, queryId, username
+WHERE NOT query CONTAINS toLower('LOAD')
+AND elapsedTimeMillis > 30000
+WITH query, collect(queryId) AS q
+CALL dbms.killQueries(q) YIELD queryId
+RETURN query, queryId
+----
+
+This Cypher statement will retrieve all queries that are running for longer than 30000 ms that do
+not perform a `LOAD` operation and kill them. You could place this code into a script that is run at
+regular intervals.
 
 [.student-exercise]
 == Exercise 7: Monitoring Running Queries
@@ -110,11 +155,71 @@ In the query edit pane of Neo4j Browser, execute the browser command:
 
 kbd:[:play 4.0-query-tuning-exercises]
 
-and follow the instructions for Exercise 2.
+and follow the instructions for Exercise 7.
 
 [NOTE]
-This exercise has 6 steps.
+This exercise has one step.
 Estimated time to complete: 15 minutes.
+--
+
+== Configuring query logging
+
+In addition to monitoring currently-running queries, you can also configure Neo4j to automatically kill queries that run too long or log information about queries.
+
+You can configure Neo4j to log an event if a query runs more than xx milliseconds. There is no
+standard for what a reasonable period of time is for a query, but in most databases, a query that
+runs for minutes is not a good thing! At a minimum, you should enable logging for queries and set a
+threshold for the length of time queries take. Then, as part of your monitoring, you could regularly
+inspect the query.log file to determine if a certain set of queries or users are possibly performing
+queries that tax the resources of the Neo4j instance.
+
+For example, here are the properties you would set in the Neo4j configuration to log a message and
+provide information when a query takes more than 1000ms to complete:
+
+[source]
+----
+dbms.logs.query.enabled=INFO
+dbms.logs.query.threshold=1000ms
+dbms.logs.query.parameter_logging_enabled=true
+dbms.logs.query.time_logging_enabled=true
+dbms.logs.query.allocation_logging_enabled=true
+dbms.logs.query.page_logging_enabled=true
+dbms.track_query_cpu_time=true
+dbms.track_query_allocation=true
+----
+
+Upon restart of the Neo4j instance, these logging settings will take effect.
+
+== Using Neo4j Query Log Analyzer
+
+Another tool that helps you to understand your application queries is Neo4j Query Log Analyzer.
+This tool is installed in Neo4j Desktop and enables you to examine the query log file to understand historical performance trends.
+
+With this tool, you specify a query log file and then you can look at the metrics for all queries in the query log file.
+
+Here is an example of the query stats display in the tool:
+
+image::QueryLogAnalyzerQueryStats.png[QueryLogAnalyzerQueryStats,width=800,align=center]
+
+This tool is an evolving _work in progress_ by a Neo4j engineer. You can read more about it https://medium.com/neo4j/meet-the-query-log-analyzer-30b3eb4b1d6[here].
+
+In the next exercise, you will install and start using Neo4j Query Log Analyzer.
+
+[.student-exercise]
+== Exercise 8: Getting Started with Neo4j Query Log Analyzer
+
+[.small]
+--
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-query-tuning-exercises]
+
+and follow the instructions for Exercise 8.
+
+[NOTE]
+You can only perform this exercises if you are using Neo4j Desktop.
+This exercise has 4 steps.
+Estimated time to complete: 30 minutes.
 --
 
 [.quiz]
@@ -123,44 +228,44 @@ Estimated time to complete: 15 minutes.
 === Question 1
 
 [.statement]
-Which of the following will impact your query tuning work?
+Suppose you have a query that is not returning in a Neo4j Browser session. How can you kill the query?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] RAM
-- [x] Version of Neo4j
-- [x] Disk hardware and software
-- [x] Number of Cores
+- [x] Close the result pane for the query that is running in the current session.
+- [ ] Type `:kill` in the query pane for the Browser session that is running.
+- [ ] In a different Neo4j Browser session that has admin privileges call killQuery() providing the query string.
+- [x] In a different Neo4j Browser session that has admin privileges call killQuery() providing the query ID.
 
 === Question 2
 
 [.statement]
-Which Cypher statement will provide you with count information that you can use to explain the behaviour of the queries you will be tuning?
+What are some reasons why a query would take a long time to return?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [ ] CALL db.countInfo()
-- [ ] CALL db.count-store()
-- [ ] CALL apoc.count-store()
-- [x] CALL apoc.meta.stats()
+- [x] The query requires a lot of memory to execute completely.
+- [x] The query returns a lot of data.
+- [ ] There is more than one client trying to read the same data.
+- [x] There is another client that has write locks on the same data.
 
 === Question 3
 
 [.statement]
-Why do you warm up the Page Cache?
+What does Neo4j Query Log Analyzer help you to do?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [x] You want as much data from the graph in memory for your queries.
-- [ ] You want to make sure the DB Stats are updated.
-- [ ] You want the execution plans for queries you will be tuning to be in memory.
-- [ ] You want lock all data so that it cannot be modified during query tuning.
+- [x] Observe queries that have completed.
+- [ ] Monitor queries that are currently running.
+- [x] Analyze query trends in your application.
+- [ ] Raise alerts for long-running queries.
 
 [.summary]
 == Summary
@@ -168,8 +273,6 @@ Select the correct answer.
 You should now be able to:
 
 [square]
-* Ensure you have the appropriate system hardware and settings that can affect performance.
-* Prepare Neo4j configuration settings for query tuning.
-* Use a representative data set for your queries.
-* Pre-test all queries to ensure expected rows based upon DB Stats.
-* Ensure the Page Cache is warmed up.
+* Monitor queries that are currently running.
+* Configure query logging.
+* Monitor historical metrics for queries.
