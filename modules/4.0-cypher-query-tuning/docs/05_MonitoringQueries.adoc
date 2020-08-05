@@ -45,7 +45,7 @@ In this example, the only query that is running is the one to list the queries.
 
 image::listQueries.png[listQueries,width=800,align=center]
 
-You can also specify what values you want returned from the procedure:
+You can also specify what values you want returned from this procedure:
 
 [source,cypher]
 ----
@@ -73,7 +73,7 @@ When this query runs (on left) , you can see it running when you run listQueries
 
 image::ProfileReturnAlotOfData.png[ProfileReturnAlotOfData,width=800,align=center]
 
-This query can be killed by the client (on left) by closing the Neo4j browser pane where it is running.
+This query can be killed by the client (on left) by closing the Neo4j Browser pane where it is running.
 However, in the Neo4j Browser session on the right, we cannot kill it in the UI.
 Later in this lesson, you will learn how to kill it from another session.
 
@@ -170,7 +170,7 @@ You can configure Neo4j to log an event if a query runs more than xx millisecond
 standard for what a reasonable period of time is for a query, but in most databases, a query that
 runs for minutes is not a good thing! At a minimum, you should enable logging for queries and set a
 threshold for the length of time queries take. Then, as part of your monitoring, you could regularly
-inspect the query.log file to determine if a certain set of queries or users are possibly performing
+inspect the *query.log* file to determine if a certain set of queries or users are possibly performing
 queries that tax the resources of the Neo4j instance.
 
 For example, here are the properties you would set in the Neo4j configuration to log a message and
@@ -259,7 +259,7 @@ Select the correct answers.
 What does Neo4j Query Log Analyzer help you to do?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
 - [x] Observe queries that have completed.

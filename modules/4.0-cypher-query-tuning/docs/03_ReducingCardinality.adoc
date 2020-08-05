@@ -30,7 +30,7 @@ At the end of this module, you should be able to:
 
 == Understanding row cardinality
 
-Here is a query that we will be looking to improve where the value of _$movieTitle_ is "The Matrix":
+Here is a query that we will be looking to improve. The value of _$movieTitle_ is "The Matrix":
 
 [source,cypher]
 ----
@@ -113,12 +113,12 @@ Here are some things to keep in mind that typically increase the cardinality of 
 Here are some tips:
 
 [square]
-* Aggregation earlier where the grouping key will become distinct
-* Use pattern comprehension
-* Use labels or indexes to select anchor nodes
-* Take advantage of indexes
-* `WITH DISTINCT` applies to the entire row, not just a single variable
-* `LIMIT` reduces all rows, not results per row
+* Aggregate earlier where the grouping key will become distinct.
+* Use pattern comprehension.
+* Use labels or indexes to select anchor nodes.
+* Take advantage of indexes.
+* `WITH DISTINCT` applies to the entire row, not just a single variable.
+* `LIMIT` reduces all rows, not results per row.
 
 [IMPORTANT]
 `WITH` on its own does not shrink cardinality.
@@ -153,7 +153,7 @@ RETURN m.title AS Title, Directors, Actors
 ----
 
 With this revised query, as soon as we match the directors, we will collect the names which will be unique.
-Then when we execute the final `MATCH`, we are not passing two director rows to be processed, but simply the single row with the movie and list of directors.
+Then when we execute the final `MATCH`. We are not passing two director rows to be processed, but simply the single row with the movie and list of directors.
 
 Here is the execution plan:
 
@@ -163,7 +163,7 @@ Here we see that the number of rows has been reduced and subsequently we also se
 
 == Reducing cardinality with pattern comprehension
 
-Pattern comprehension is a very powerful way to reduce cardinality. It behaves like an `OPTIONAL MATCH` combined with collect().
+Pattern comprehension is a very powerful way to reduce cardinality. It behaves like an `OPTIONAL MATCH` combined with `collect()`.
 
 Here is a rewrite of the original query using pattern comprehension:
 
@@ -183,7 +183,8 @@ Here is the execution plan for this query:
 
 image::PatternComprehension.png[PatternComprehension,width=800,align=center]
 
-Here we see that the query retrieves the _Movie_ row and finds 2 rows for directors. With the pattern comprehension, these 2 rows are collected and 1 row is then passed to the next pattern comprehension specified for actors. The 13 rows are collected into 1 row so that the final number of rows returned is 1.
+Here we see that the query retrieves the movie row and finds 2 rows for directors.
+With pattern comprehension, these 2 rows are collected and 1 row is then passed to the next pattern comprehension specified for actors. The 13 rows are collected into 1 row so that the final number of rows returned is 1.
 The use of pattern comprehension is slightly better and reduces the number of db hits.
 
 [.student-exercise]
@@ -419,7 +420,7 @@ In this example, we are interested in all possible paths of this length. If you 
 
 === Using query hints
 
-You can force the use of more than one index so that an index is used to find _p1_ nodes and _p2_nodes:
+You can force the use of more than one index so that an index is used to find _p1_ nodes and _p2_ nodes:
 
 [source,cypher]
 ----
@@ -469,7 +470,7 @@ This exercise has 3 steps.
 Estimated time to complete: 20 minutes.
 --
 
-== Move `LIMIT` up
+== Moving `LIMIT` up
 
 If the query is written so that a limited number of results are returned, it is best to move the `LIMIT` up in the query.
 
@@ -496,7 +497,7 @@ MATCH (m:Movie)
 WITH m LIMIT 10
 MATCH (m)<-[:ACTED_IN]-(a)
 WITH m, collect(a) AS Actors
-RETURN m.title as Title, Actors
+RETURN m.title AS Title, Actors
 ----
 
 We know ahead of time that we want 10 rows, one for each movie so expanding after we have retrieved the 10 rows is better.
@@ -505,7 +506,7 @@ image::LimitEarly.png[LimitEarly,width=800,align=center]
 
 == Use distinct nodes
 
-Distinct is another way that you can reduce rows in the execution plan. Just like you just saw how to move `LIMIT` earlier in the query, you can move `DISTINCT` up to reduce rows required.
+`DISTINCT` is another way that you can reduce rows in the execution plan. Just like you just saw how to move `LIMIT` earlier in the query, you can move `DISTINCT` up to reduce rows required.
 
 Here is another example where we have set _$titleMatch_ to "Matrix"
 
@@ -513,13 +514,13 @@ Here is another example where we have set _$titleMatch_ to "Matrix"
 ----
 PROFILE
 MATCH (p:Person)-[:ACTED_IN| DIRECTED]->(m)
-WHERE m.title contains $titleMatch
+WHERE m.title CONTAINS $titleMatch
 WITH p
 MATCH (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(p2:Person)
 RETURN DISTINCT p.name, p2.name
 ----
 
-This query finds all people who acted in or directed a movie with _titleMatch_ in the title.
+This query finds all people who acted in or directed a movie with _$titleMatch_ in the title.
 This query will return duplicate _Person_ nodes because some people both acted in and directed movies.
 Then we have a subsequent query where we use the returned people to find other people who have acted in a movie with the first actor, _p_.
 We then use DISTINCT to ensure that we have distinct rows in our return.
@@ -548,7 +549,7 @@ It has slightly better execution time and we definitely see fewer rows in the ex
 Sometimes `UNWIND` is useful, especially if you are creating relationships or refactoring nodes in the graph.
 
 Here is an example where we do a query to find all _Movie_ nodes that are between two _Person_ nodes by at most 4 hops.
-In this example _$actor1_ is "Tom Cruise" and _$actor2_ is "Kevin Bacon".
+In this example _$actor1_ is Tom Cruise and _$actor2_ is Kevin Bacon.
 We use `UNWIND` to create the rows for all nodes visited:
 
 [source,cypher]
@@ -593,7 +594,7 @@ This version of the query produces fewer rows from the `UNWIND` and had better p
 == Eliminating cartesian products
 
 Cartesian products are useful when you are creating relationships between nodes.
-But for queries, you should aim to eliminate cartesian products in you queries.
+But for read-only queries, you should aim to eliminate cartesian products in your queries.
 
 Here is an example where we have set _$year_ to 1990:
 

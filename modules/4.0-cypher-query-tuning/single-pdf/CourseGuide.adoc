@@ -1,0 +1,14 @@
+= Cypher Query Tuning in Neo4j 4.0: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
+include::{includedir}/01_HowQueriesWorkInNeo4j.adoc[leveloffset=+1]
+include::{includedir}/02_PreparingForQueryTuning.adoc[leveloffset=+1]
+include::{includedir}/03_ReducingCardinality.adoc[leveloffset=+1]
+include::{includedir}/04_OptimizingPropertyAccess.adoc[leveloffset=+1]
+include::{includedir}/05_MonitoringQueries.adoc[leveloffset=+1]
+include::{includedir}/06_Summary.adoc[leveloffset=+1]

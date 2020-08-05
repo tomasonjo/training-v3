@@ -28,6 +28,7 @@ image::InitialDatabase.png[InitialDatabase.,width=300]
 
 [start=4]
 . If using Neo4j Aura, confirm that your settings are at least as large by running this:
+
 [source,cypher]
 ----
 CALL dbms.listConfig() YIELD name, value
@@ -64,11 +65,12 @@ WITH m, collect(a.name) AS Actors
 RETURN m.title as Title, Actors LIMIT 10
 ----
 
-1. Execute this query (twice) and note how many rows are processed.
+. Execute this query (twice) and note how many rows are processed.
 
 *IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
 
-2. Rewrite this query to reduce the the number of rows processed.
+[start=2]
+. Rewrite this query to reduce the the number of rows processed.
 
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
@@ -84,16 +86,17 @@ WITH m, collect(a.name) AS Actors
 RETURN m.title as Title, Actors LIMIT 10
 ----
 
-1. Execute this query (twice) and note how many rows are processed.
+. Execute this query (twice) and note how many rows are processed.
 
 *IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
 
 This is what you should see for the execution plan:
 
 [.thumb]
-image::EX5.1.png[EX5.1,width=800]
+image::EX5.1.png[EX5.1,width=700]
 
-2. Rewrite this query to reduce the the number of rows processed.
+[start=2]
+. Rewrite this query to reduce the the number of rows processed.
 
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
@@ -111,12 +114,11 @@ RETURN m.title as Title, Actors
 The result should be:
 
 [.thumb]
-image::EX5.1A.png[EX5.1A,width=800]
+image::EX5.1A.png[EX5.1A,width=700]
 
 == Exercise 5.2: Tune a query (Instructions)
 
-1. Execute this Cypher code to return the names of directors of movies of each type of genre:
-
+. Execute this Cypher code to return the names of directors of movies of each type of genre:
 
 [source, cypher]
 ----
@@ -127,38 +129,14 @@ RETURN   g.name, collect(d.name) AS Directors, count(d) as NumDirectors
 
 What do you notice in the execution plan?
 
-Here is what the execution plan looks like:
-
-[.thumb]
-image::EX5.2.png[EX5.2,width=800]
-
 If you examine the collections returned, you will notice that there is duplication of the names of directors. We do not want that. Also notice that the query does an AllNodesScan which is not good.
 
-2. Rewrite this query to return collections with no duplication. Also make changes to it to reduce the number of rows in the execution plan.
-
-Here is the revised query:
-
-[source, cypher]
-----
-PROFILE
-MATCH (d)-[:DIRECTED]-()-[:IS_GENRE]-(g:Genre)
-WITH DISTINCT d, g.name AS GenreName
-RETURN  GenreName, collect(d.name) AS Directors, count(d) as NumDirectors
-----
-
-We specify `DISTINCT` to elminate duplicate nodes. We also specify the _Genre_ label to eliminate the _AllNodesScan_.
-
-Here is the new execution plan:
-
-[.thumb]
-image::EX5.2A.png[EX5.2A,width=800]
-
-We have reduced the cardinality in the execution plan.
+[start=2]
+. Rewrite this query to return collections with no duplication. Also make changes to it to reduce the number of rows in the execution plan.
 
 == Exercise 5.2: Tune a query (Solution)
 
-1. Execute this Cypher code to return the names of directors of movies of each type of genre:
-
+. Execute this Cypher code to return the names of directors of movies of each type of genre:
 
 [source, cypher]
 ----
@@ -172,11 +150,12 @@ What do you notice in the execution plan?
 Here is what the execution plan looks like:
 
 [.thumb]
-image::EX5.2.png[EX5.2,width=800]
+image::EX5.2.png[EX5.2,width=700]
 
 If you examine the collections returned, you will notice that there is duplication of the names of directors. We do not want that. Also notice that the query does an AllNodesScan which is not good.
 
-2. Rewrite this query to return collections with no duplication. Also make changes to it to reduce the number of rows in the execution plan.
+[start=2]
+. Rewrite this query to return collections with no duplication. Also make changes to it to reduce the number of rows in the execution plan.
 
 Here is the revised query:
 
@@ -193,13 +172,13 @@ We specify `DISTINCT` to elminate duplicate nodes. We also specify the _Genre_ l
 Here is the new execution plan:
 
 [.thumb]
-image::EX5.2A.png[EX5.2A,width=800]
+image::EX5.2A.png[EX5.2A,width=700]
 
 We have reduced the cardinality in the execution plan.
 
 == Exercise 5.3: Improve a query that returns unrelated data (Instructions)
 
-1. Execute this Cypher code to retrieve the titles of all movies  released before 1950 and people born before 1920.
+. Execute this Cypher code to retrieve the titles of all movies  released before 1950 and people born before 1920.
 
 [source, cypher]
 ----
@@ -208,13 +187,14 @@ WHERE  p.born < $bornYear AND m.releaseYear < $releaseYear
 RETURN p, m
 ----
 
-where the $bornYear parameter is set to  1920 and the $releaseYear parameter is set to 1950.
+The $bornYear parameter should be set to  1920 and the $releaseYear parameter is set to 1950.
 
-2. What is wrong with this query? Modify this query to optimize it.
+[start=2]
+. What is wrong with this query? Modify this query to optimize it.
 
 == Exercise 5.3: Improve a query that returns unrelated data   (Solution)
 
-1. Execute this Cypher code to retrieve the titles of all movies released before 1920 and people born before 1920.
+. Execute this Cypher code to retrieve the titles of all movies released before 1920 and people born before 1920.
 
 [source, cypher]
 ----
@@ -229,14 +209,15 @@ WHERE p.born < $bornYear AND m.releaseYear < $releaseYear
 RETURN collect(DISTINCT p.name), collect(DISTINCT m.title)
 ----
 
-where the $bornYear parameter is set to  1920 and the $releaseYear parameter is set to 1950.
+The $bornYear parameter should be set to  1920 and the $releaseYear parameter is set to 1950.
 
 The result of executing this query should be the following where we see a cartesian product:
 
 [.thumb]
-image::EX5.3.png[EX5.3,width=300]
+image::EX5.3.png[EX5.3,width=700]
 
-2. What is wrong with this query? Modify this query to optimize it.
+[start=2]
+. What is wrong with this query? Modify this query to optimize it.
 
 Here is the solution code:
 
@@ -254,12 +235,12 @@ RETURN people, movies
 The result of executing this code should be:
 
 [.thumb]
-image::EX5.3A.png[EX5.3A,width=300]
+image::EX5.3A.png[EX5.3A,width=700]
 
 == Exercise 5: Reducing Cardinality with `LIMIT`, `DISTINCT` (Summary)
 
 In this exercise, you modified queries to perform better by further limiting the number of rows processed.
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/06.html'>Continue to Exercise 06</a>]
+pass:a[<a play-topic='{guides}/06.html'>Continue to Exercise 6</a>]
 endif::[]

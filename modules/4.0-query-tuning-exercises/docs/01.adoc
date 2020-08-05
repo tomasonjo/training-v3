@@ -43,6 +43,7 @@ In this exercise, you will gain some experience with viewing execution plans and
 * *Exercise 1.6*: Display the data model for this graph.
 * *Exercise 1.7*: Answer some questions about the DB Stats for this graph.
 * *Exercise 1.8*: Is the count store used for this query?
+* *Exercise 1.9*: Which runtime is used for this query?
 
 Go to the next page to start this exercise.
 
@@ -64,8 +65,8 @@ image::sysinfo.png[sysinfo,width=500]
 A best practice is to always use parameters in your queries.
 For the queries you will be executing in this exercise, set the following parameter values:
 
-actorName: "Meryl Streep"
-lookup: "The"
+* actorName: "Meryl Streep"
+* lookup: "The"
 
 *Hint*: Use :params, providing the map values.
 
@@ -74,8 +75,8 @@ lookup: "The"
 A best practice is to always use parameters in your queries.
 For the queries you will be executing in this exercise, set the following parameter values:
 
-actorName: "Meryl Streep"
-lookup: "The"
+* actorName: "Meryl Streep"
+* lookup: "The"
 
 *Hint*: Use :params, providing the map values.
 
@@ -87,7 +88,7 @@ lookup: "The"
 The result returned should be:
 
 [.thumb]
-image::params.png[params,width=800]
+image::params.png[params,width=500]
 
 == Exercise 1.3: How many operations are in execution plan for this first query? (Instructions)
 
@@ -170,7 +171,7 @@ CALL db.indexes()
 The result returned should be:
 
 [.thumb]
-image::db.indexes.png[db.indexes,width=600]
+image::db.indexes.png[db.indexes,width=900]
 
 This graph has three unique indexes defined.
 
@@ -220,7 +221,7 @@ CALL apoc.meta.stats()
 The result returned should be:
 
 [.thumb]
-image::meta.stats[meta.stats,width=600]
+image::meta.stats.png[meta.stats,width=900]
 
 
 == Exercise 1.8: Is the count store used for this query? (Instructions)
@@ -235,6 +236,111 @@ RETURN TotalDirectorRelationships
 ----
 
 Change this query so that the count store will be used.
+
+== Exercise 1.8: Is the count store used for this query? (Solution)
+
+Profile this query to see to see that the count store is not used:
+
+[source, cypher]
+----
+PROFILE
+MATCH (p:Person)-[:DIRECTED]->(m:Movie)
+WITH count(*) as TotalDirectorRelationships
+RETURN TotalDirectorRelationships
+----
+
+You should see this in the execution plan:
+
+[.thumb]
+image::EX1.8.png[EX1.8,width=900]
+
+The count store is not used because we specified a label for each end of the pattern.
+
+Change this query so that the count store will be used.
+
+Here is a solution:
+
+[source, cypher]
+----
+PROFILE
+MATCH (p:Person)-[:DIRECTED]->(m)
+WITH count(*) as TotalDirectorRelationships
+RETURN TotalDirectorRelationships
+----
+
+You should see this in the execution plan:
+
+[.thumb]
+image::EX1.8A.png[EX1.8A,width=600]
+
+== Exercise 1.9: Which runtime is used for this query? (Instructions)
+
+Set these parameters:
+
+movie1: "The Matrix"
+movie2: "Top Gun"
+
+Profile this query to see to see which runtime is used:
+
+[source, cypher]
+----
+MATCH (a:Actor)
+WHERE (a)-[:ACTED_IN]->(:Movie {title:$movie1})
+OR (a)-[:ACTED_IN]->(:Movie {title:$movie2})
+RETURN a.name
+----
+
+Change this query so that the count store will be used.
+
+== Exercise 1.9: Which runtime is used for this query? (Solution)
+
+Set these parameters:
+
+movie1: "The Matrix"
+movie2: "Top Gun"
+
+[source, cypher]
+----
+:params {movie1: "The Matrix", movie2: "Top Gun"}
+----
+
+[.thumb]
+image::EX1.9.png[EX1.9,width=900]
+
+Profile this query to see to see that the count store is not used:
+
+[source, cypher]
+----
+PROFILE
+MATCH (a:Actor)
+WHERE (a)-[:ACTED_IN]->(:Movie {title:$movie1})
+OR (a)-[:ACTED_IN]->(:Movie {title:$movie2})
+RETURN a.name
+----
+
+You should see this in the execution plan:
+
+[.thumb]
+image::EX1.9A.png[EX1.9A,width=900]
+
+You should see here that SLOTTED is used.
+
+Change this query so that SLOTTED will not be used.
+
+Here is a solution:
+
+[source, cypher]
+----
+PROFILE
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE m.title = $movie1 OR m.title = $movie2
+RETURN  a.name
+----
+
+You should see this in the execution plan:
+
+[.thumb]
+image::EX1.9B.png[EX1.9B,width=900]
 
 == Exercise 1: Answer Some Query Tuning Question (Taking it Further)
 
@@ -253,7 +359,7 @@ RETURN TotalDirectorRelationships
 Here is what you should see in your execution plan:
 
 [.thumb]
-image::NoCountStore[NoCountStore,width=600]
+image::NoCountStore.png[NoCountStore,width=600]
 
 Change this query so that the count store will be used.
 
@@ -268,7 +374,7 @@ RETURN TotalDirectorRelationships
 Here is what you should see in your execution plan:
 
 [.thumb]
-image::CountStore[CountStore,width=600]
+image::CountStore.png[CountStore,width=600]
 
 == Exercise 1: Answer Some Query Tuning Question (Summary)
 

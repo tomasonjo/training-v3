@@ -24,12 +24,12 @@ At the end of this module, you should be able to:
 The hardware and system settings required for executing Cypher queries in a Neo4j instance are the typical ones required by most applications:
 
 [square]
-* Disk - Ensure that you either use SSD or you have enough IOPs on the system.
+* *Disk* - Ensure that you either use SSD or you have enough IOPs on the system.
 ** On linux, configure disk scheduler to *noop* or *deadline*, mount the database volume with *noatime*.
-* RAM - Ideally you want to fit your entire graph in memory.
-* CPU cores - The more cores, the more concurrent operations can occur.
-* Number of open files - It is recommended that you set it to 40000 if many indexes and users connect.
-* Neo4j version - You should use the latest GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
+* *RAM* - Ideally you want to fit your entire graph in memory.
+* *CPU cores* - The more cores, the more concurrent operations can occur.
+* *Number of open files* - It is recommended that you set it to 40000 if many indexes and users connect.
+* *Neo4j version* - You should use the latest GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
 
 In addition, you should be prepared to monitor system bottlenecks:
 

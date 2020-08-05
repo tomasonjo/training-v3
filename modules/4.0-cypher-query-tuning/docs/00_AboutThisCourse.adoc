@@ -18,12 +18,11 @@ This course does not cover optimizing Cypher statements for modifying the graph,
 --
 
 In this course, you complete hands-on exercises to analyze and improve queries.
-You can complete the hands-on exercises in one of three ways, using:
+You can complete the hands-on exercises using:
 
 [square]
 [.statement]
 * Neo4j Desktop
-* Neo4j Sandbox
 * Neo4j Aura
 
 ifdef::backend-html5[]
@@ -43,7 +42,8 @@ Here are the lessons of this course:
 
 . How Queries Work in Neo4j
 . Preparing for Query Tuning
-. Query Tuning
+. Reducing Cardinality
+. Optimizing Property Access
 . Monitoring Queries
 
 == Resources

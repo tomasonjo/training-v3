@@ -19,13 +19,14 @@ In this exercise, you will:
 
 Go to the next page to start this exercise.
 
-== Exercise 8.1: Prepare for query logging. (Instructions)
+== Exercise 8.1: Prepare for query logging (Instructions)
 
 Add these settings to enable query logging:
 
 *Hint*: You can add them to the end of the settings file.
 
-....
+
+----
 dbms.logs.query.enabled=true
 # If the execution of query takes more time than this threshold,
 # the query is logged. If set to zero then all queries
@@ -36,9 +37,9 @@ dbms.logs.query.allocation_logging_enabled=true
 dbms.logs.query.page_logging_enabled=true
 dbms.track_query_cpu_time=true
 dbms.track_query_allocation=true
-....
+----
 
-== Exercise 8.1: Prepare for query logging.  (Solution)
+== Exercise 8.1: Prepare for query logging  (Solution)
 
 Add these settings to enable query logging:
 
@@ -48,7 +49,8 @@ Add these settings to enable query logging:
 . Click the *Settings* tab.
 . Add the following code to the end of this file.
 
-....
+
+----
 dbms.logs.query.enabled=true
 # If the execution of query takes more time than this threshold,
 # the query is logged. If set to zero then all queries
@@ -59,33 +61,33 @@ dbms.logs.query.allocation_logging_enabled=true
 dbms.logs.query.page_logging_enabled=true
 dbms.track_query_cpu_time=true
 dbms.track_query_allocation=true
-....
+----
 
 [start=4]
 . Click *Apply* which will restart the database.
 
-== Exercise 8.2: Install the Query Log Analyzer Tool. (Instructions/Solution)
+== Exercise 8.2: Install the Query Log Analyzer Tool (Guided Exercise: Instructions + Solution)
 
 . In Neo4j Desktop, for the project your are working with for this course, click  the *Graph Apps* icon in the left panel.
 . Click the *Graph Apps Gallery*.
 
 [.thumb]
-image::1-QLA-GraphAppsGallery.png[1-QLA-GraphAppsGallery,width=700]
+image::1-QLA-GraphAppsGallery.png[1-QLA-GraphAppsGallery,width=600]
 
 [start=3]
 . Click the link for the Query Log Analyzer Tool which will open a window to https://neo.jfrog.io/neo/api/npm/npm/query-log-analyzer. This is the install location for this app.
 
 [.thumb]
-image::2-QLA-nstallQueryLogAnalyzer.png[2-QLA-nstallQueryLogAnalyzer,width=700]
+image::2-QLA-nstallQueryLogAnalyzer.png[2-QLA-nstallQueryLogAnalyzer,width=600]
 
 [start=4]
 . Back in Neo4j Desktop, paste this address in the Install field, and then click *Install*.
 
 [.thumb]
-image::3-QLA-InstallQueryLogAnalyzer2.png[3-QLA-InstallQueryLogAnalyzer2,width=700]
+image::3-QLA-InstallQueryLogAnalyzer2.png[3-QLA-InstallQueryLogAnalyzer2,width=600]
 
 [start=5]
-. An window will appear about the digital certificate for this app. You can click *OK* to continue the installation.
+. A window will appear about the digital certificate for this app. You can click *OK* to continue the installation.
 
 [.thumb]
 image::4-QLA-OKToInstallQueryLogAnalyzer.png[4-QLA-OKToInstallQueryLogAnalyzer,width=700]
@@ -94,54 +96,55 @@ image::4-QLA-OKToInstallQueryLogAnalyzer.png[4-QLA-OKToInstallQueryLogAnalyzer,w
 . You should now see Neo4j Query Log Analyzer as an available Graph App. Click it to start it.
 
 [.thumb]
-image::5-QLA.png[5-QLA,width=700]
+image::5-QLA.png[5-QLA,width=600]
 
 You are now ready to analyze queries that are logged. (Completed queries).
 
-== Exercise 8.3: Execute some queries that will be logged. (Instructions)
+== Exercise 8.3: Execute some queries that will be logged (Instructions)
 
-1. From your main Neo4j Browser session, type `:history` to view many of your past queries. Select a set of them to execute.
+. From your main Neo4j Browser session, type `:history` to view many of your past queries. Select a set of them to execute.
 
-2. Confirm that the queries have been written to the query.log file.
+. Confirm that the queries have been written to the query.log file.
 
-3. Make a note of the location of the query.log file as you will be opening it in the Query Log Analyzer Tool.
+. Make a note of the location of the query.log file as you will be opening it in the Query Log Analyzer Tool.
 
-== Exercise 8.3: Execute some queries that will be logged.  (Solution)
+== Exercise 8.3: Execute some queries that will be logged (Solution)
 
-1. From your main Neo4j Browser session, type `:history` to view many of your past queries. Select a set of them to execute.
+. From your main Neo4j Browser session, type `:history` to view many of your past queries. Select a set of them to execute.
 
-2. Confirm that the queries have been written to the query.log file.
+. Confirm that the queries have been written to the query.log file.
 
-a. Go to *Manage* for the database in Neo4j Desktop.
-b. Click the *Open Folder* button.
-c. Ensure that *query.log* exists in the *log* folder.
+.. Go to *Manage* for the database in Neo4j Desktop.
+.. Click the *Open Folder* button.
+.. Ensure that *query.log* exists in the *log* folder.
 
-3. Make a note of the location of the query.log file as you will be opening it in the Query Log Analyzer Tool.
+. Make a note of the location of the query.log file as you will be opening it in the Query Log Analyzer Tool.
 
-== Exercise 8.4: View the queries logged using the Query Log Analyzer Tool. (Instructions)
+== Exercise 8.4: View the queries logged using the Query Log Analyzer Tool (Instructions)
 
-1. Go to Neo4j Query Log Analyzer Tool.
+. Go to Neo4j Query Log Analyzer Tool.
 
-2. Select the query.log file.
+. Select the query.log file.
 
-3. Click Analyze File.
+. Click Analyze File.
 
-4. Explore the queries logged.
+. Explore the queries logged.
 
-== Exercise 8.4: View the queries logged using the Query Log Analyzer Tool. (Solution)
+== Exercise 8.4: View the queries logged using the Query Log Analyzer Tool (Solution)
 
-1. From Neo4j Desktop, open the Neo4j Query Log Analyzer Tool.
+. From Neo4j Desktop, open the Neo4j Query Log Analyzer Tool.
 
-2. Select the query.log file.
+. Select the query.log file.
 
-3. Click Analyze File.
+. Click Analyze File.
 
 Depending on what queries were logged, you should now see this:
 
 [.thumb]
 image::EX8.4.png[EX8.4,width=800]
 
-4. Explore the queries logged.
+[start=4]
+. Explore the queries logged.
 
 == Exercise 8: Getting Started with Neo4j Query Log Analyzer (Summary)
 

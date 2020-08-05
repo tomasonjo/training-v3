@@ -44,7 +44,7 @@ In Neo4j Browser, write and execute the command to view information the graph. I
 You should see something like this when you enter the `:sysinfo` command:
 
 [.thumb]
-image::sysinfo-dbsize.png[sysinfo-dbsize,width=500]
+image::sysinfo-dbsize.png[sysinfo-dbsize,width=700]
 
 The default database, neo4j is ~38 Mb.
 
@@ -74,7 +74,7 @@ RETURN name, value
 The result returned should be:
 
 [.thumb]
-image::listConfig.png[listConfig,width=800]
+image::listConfig.png[listConfig,width=600]
 
 In your real application environment, you can modify these values in the *neo4j.conf* file.
 You must restart the Neo4j instance for them to be in effect.
@@ -111,7 +111,7 @@ RETURN collect(a.name) AS Actors
 
 Here is what the `EXPLAIN` yields:
 
-image::explain1.png[explain1,width=800]
+image::explain1.png[explain1,width=700]
 
 Did you find any problems?
 
@@ -130,7 +130,7 @@ RETURN collect(a.name) AS Actors
 
 Here is what the `EXPLAIN` yields:
 
-image::explain2.png[explain2,width=800]
+image::explain2.png[explain2,width=700]
 
 == Exercise 2.4: Inspect another query for expected behavior (Instructions)
 
@@ -148,7 +148,7 @@ Did you find any problems?
 
 Correct the problem and rerun.
 
-== Exercise 2.4: Are there any eager operators in this this second query? (Solution)
+== Exercise 2.4: Inspect another query for expected behavior (Solution)
 
 Here is another query that you may be tuning. Check it out to make sure that it will perform correctly using the `EXPLAIN` clause:
 
@@ -163,7 +163,7 @@ RETURN collect(m.title) AS Movies, g.name
 
 Here is what the `EXPLAIN` yields:
 
-image::explain3.png[explain3,width=800]
+image::explain3.png[explain3,width=700]
 
 Did you find any problems?
 
@@ -181,7 +181,7 @@ RETURN collect(m.title) AS Movies, g.name
 
 Here is what the `EXPLAIN` yields:
 
-image::explain4.png[explain4,width=800]
+image::explain4.png[explain4,width=700]
 
 We can use the count store to estimate rows to the _Genre_ nodes as the anchor of the query.
 We know that there are only 35 _Genre_ nodes in the graph.
@@ -228,7 +228,6 @@ You are now ready to begin query tuning!
 
 
 == Exercise 2: Prepare for Query Tuning (Summary)
-
 
 In this exercise, you executed some Neo4j Browser commands and Cypher statements to to prepare for query tuning.
 

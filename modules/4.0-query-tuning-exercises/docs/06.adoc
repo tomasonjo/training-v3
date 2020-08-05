@@ -28,6 +28,7 @@ image::InitialDatabase.png[InitialDatabase.,width=300]
 
 [start=4]
 . If using Neo4j Aura, confirm that your settings are at least as large by running this:
+
 [source,cypher]
 ----
 CALL dbms.listConfig() YIELD name, value
@@ -66,11 +67,12 @@ WHERE p.name STARTS WITH $firstName
 RETURN p.name ORDER BY p.name
 ----
 
-1. Execute this query (twice) and note how many rows are processed.
+. Execute this query (twice) and note how many rows are processed.
 
 *IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
 
-2. Optimize this query to use an index for property access.
+[start=2]
+. Optimize this query to use an index for property access.
 
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
@@ -92,16 +94,17 @@ WHERE p.name STARTS WITH $firstName
 RETURN p.name ORDER BY p.name
 ----
 
-1. Execute this query (twice) and note how many rows are processed.
+. Execute this query (twice) and note how many rows are processed.
 
 *IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
 
 Here is the execution plan:
 
 [.thumb]
-image::EX6.1.png[EX6.1,width=800]
+image::EX6.1.png[EX6.1,width=700]
 
-2. Optimize this query to use an index for property access.
+[start=2]
+. Optimize this query to use an index for property access.
 
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
@@ -119,7 +122,7 @@ We know that there is an index on _Person.name_ so we take advantage of it.
 In addition, the results are already sorted for us due to the index.
 
 [.thumb]
-image::EX6.1A.png[EX6.1A,width=800]
+image::EX6.1A.png[EX6.1A,width=700]
 
 == Exercise 6.2: Optimize a "top ten" query (Instructions)
 
@@ -133,11 +136,12 @@ WITH actor, collect(movie) AS movies
 RETURN actor.name as Actor, actor.born as YearBorn, movies ORDER BY actor.born LIMIT 10
 ----
 
-1. Execute this query (twice) and note how many rows are processed.
+. Execute this query (twice) and note how many rows are processed.
 
 *IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
 
-2. Rewrite this query to reduce the the number of rows processed.
+[start=2]
+. Rewrite this query to reduce the the number of rows processed.
 
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
@@ -153,16 +157,17 @@ WITH actor, collect(movie) AS movies
 RETURN actor.name as Actor, actor.born as YearBorn, movies ORDER BY actor.born LIMIT 10
 ----
 
-1. Execute this query (twice) and note how many rows are processed.
+. Execute this query (twice) and note how many rows are processed.
 
 *IMPORTANT*: For all query tuning measurements, you must [underline]#always# run the query twice. The first time ensures that the compiled query is in the Query Cache. The second time ensures that the reported metrics for the execution plan do not include the cost of compilation.
 
 This is what you should see for the execution plan:
 
 [.thumb]
-image::EX6.2.png[EX6.2,width=800]
+image::EX6.2.png[EX6.2,width=700]
 
-2. Rewrite this query to reduce the the number of rows processed.
+[start=2]
+. Rewrite this query to reduce the the number of rows processed.
 
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
@@ -181,11 +186,11 @@ RETURN actor.name as Actor, actor.born as YearBorn, movies
 The result should be:
 
 [.thumb]
-image::EX6.2A.png[EX2.2A,width=800]
+image::EX6.2A.png[EX2.2A,width=700]
 
 == Exercise 6.3: Putting it all together: Tune a complex query (Instructions)
 
-1. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
+. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
 It finds all movies that are up to three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
 We also find the directors who directed the movie that is up to 3 hops away from _$actorName_.
 It then returns the data and sorts the data by movie title.
@@ -202,33 +207,29 @@ RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DI
 
 What do you notice in the execution plan?
 
+[start=2]
+. Rewrite this query to use an index to anchor the query.
 
-2. Rewrite this query to use an index to anchor the query.
-
-
-3. The first _Movie_ label is necessary so that we only retrieve _Movie_ nodes, but later in the query, we use the _Movie_ label in two places.
+. The first _Movie_ label is necessary so that we only retrieve _Movie_ nodes, but later in the query, we use the _Movie_ label in two places.
 This will slow things down.
 Rewrite the query to not use the _Movie_ label later on in the query.
 
-4. In the execution plan at the expansion, we see 39,373 rows returned and we know that we do not have this many movies in the graph.
+. In the execution plan at the expansion, we see 39,373 rows returned and we know that we do not have this many movies in the graph.
 Modify the query so that before after we do the initial query, we will be working with distinct movie nodes.
 
-
-5. In the execution plan at the expansion, that there are still a lot of db hits around filtering out the movies that the actor did not act in.
+. In the execution plan at the expansion, that there are still a lot of db hits around filtering out the movies that the actor did not act in.
 Modify the query to use pattern comprehension to come up with the movies the actor has acted, _actorMovies_ in and carry that collection of rows down in the query in the `WITH DISTINCT` clause.
 Also modify the query to do the `WHERE NOT` check on membership in the actorMovies collection, rather than a path.
 
+. We can still do more to optimize this query. Move the `LIMIT` and `ORDER BY` up in the query.
 
-6. We can still do more to optimize this query. Move the `LIMIT` and `ORDER BY` up in the query.
-
-
-7. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
+. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
 
 *Taking it further*: Change the original query and the final query to query actors that are up to 7 hops away.
 
 == Exercise 6.3: Putting it all together: Tune a query (Solution)
 
-1. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
+. Here is a complex Cypher query that finds all actors named _$actorName_ where this paramater is set to "Keanu Reeves".
 It finds all movies that are up to three hops away. We don't want any duplicate actors so we test this with the `WHERE` clause.
 We also find the directors who directed the movie that is up to 3 hops away from _$actorName_.
 It then returns the data and sorts the data by movie title.
@@ -253,9 +254,10 @@ What do you notice in the execution plan?
 Here is what the execution plan looks like:
 
 [.thumb]
-image::EX6.3.png[EX6.3,width=800]
+image::EX6.3.png[EX6.3,width=700]
 
-2. Rewrite this query to use an index to anchor the query.
+[start=2]
+. Rewrite this query to use an index to anchor the query.
 
 Here is the revised query:
 
@@ -272,9 +274,10 @@ RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DI
 Here is the new execution plan:
 
 [.thumb]
-image::EX6.3A.png[EX6.3A,width=800]
+image::EX6.3A.png[EX6.3A,width=700]
 
-3. The first _Movie_ label is necessary so that we only retrieve _Movie_ nodes, but later in the query, we use the _Movie_ label in two places.
+[start=3]
+. The first _Movie_ label is necessary so that we only retrieve _Movie_ nodes, but later in the query, we use the _Movie_ label in two places.
 This will slow things down.
 Rewrite the query to not use the _Movie_ label later on in the query.
 
@@ -293,9 +296,10 @@ RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DI
 Here is the new execution plan:
 
 [.thumb]
-image::EX6.3B.png[EX6.3B,width=800]
+image::EX6.3B.png[EX6.3B,width=700]
 
-4. In the execution plan at the expansion, we see 39,373 rows returned and we know that we do not have this many movies in the graph.
+[start=4]
+. In the execution plan at the expansion, we see 39,373 rows returned and we know that we do not have this many movies in the graph.
 Modify the query so that before after we do the initial query, we will be working with distinct movie nodes.
 
 Here is the revised query:
@@ -314,9 +318,10 @@ RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DI
 Here is the new execution plan:
 
 [.thumb]
-image::EX6.3C.png[EX6.3C,width=800]
+image::EX6.3C.png[EX6.3C,width=700]
 
-5. In the execution plan at the expansion, that there are still a lot of db hits around filtering out the movies that the actor did not act in.
+[start=5]
+. In the execution plan at the expansion, that there are still a lot of db hits around filtering out the movies that the actor did not act in.
 Modify the query to use pattern comprehension to come up with the movies the actor has acted, _actorMovies_ in and carry that collection of rows down in the query in the `WITH DISTINCT` clause.
 Also modify the query to do the `WHERE NOT` check on membership in the actorMovies collection, rather than a path.
 
@@ -338,9 +343,10 @@ RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DI
 Here is the new execution plan:
 
 [.thumb]
-image::EX6.3D.png[EX6.3D,width=800]
+image::EX6.3D.png[EX6.3D,width=700]
 
-6. We can still do more to optimize this query. Move the `LIMIT` and `ORDER BY` up in the query.
+[start=6]
+. We can still do more to optimize this query. Move the `LIMIT` and `ORDER BY` up in the query.
 
 Here is the revised query:
 
@@ -363,9 +369,10 @@ RETURN movie.title AS Title, collect(DISTINCT actor2.name) AS Actors, collect(DI
 Here is the new execution plan:
 
 [.thumb]
-image::EX6.3E.png[EX6.3E,width=800]
+image::EX6.3E.png[EX6.3E,width=700]
 
-7. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
+[start=7]
+. We still have two back-to-back matches near the end of the query. In most cases a movie only has one director, but we can still gain something by using pattern comprehension, rather than the `MATCH` clauses. Replace them with pattern comprehension in the `RETURN` clause.
 
 Here is the revised query:
 
@@ -385,7 +392,7 @@ RETURN movie.title AS Title, [(a:Actor)-[:ACTED_IN]->(movie) | a.name] AS Actors
 Here is the new execution plan:
 
 [.thumb]
-image::EX6.3F.png[EX6.3F,width=800]
+image::EX6.3F.png[EX6.3F,width=700]
 
 *Taking it further*: Change the original query and the final query to query actors that are up to 7 hops away.
 
@@ -395,5 +402,5 @@ In this exercise, you modified queries to perform better by reducing property ac
 Then you tuned a complex query iteratively.
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/07.html'>Continue to Exercise 07</a>]
+pass:a[<a play-topic='{guides}/07.html'>Continue to Exercise 7</a>]
 endif::[]

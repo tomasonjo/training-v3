@@ -25,6 +25,8 @@ image::InitialDatabase.png[InitialDatabase.,width=300]
 You are now ready to start this exercise.
 .. If you are using *Neo4j Aura*, simply open a new Neo4j Browser session to the same database.
 
+You are now ready to start this exercise.
+
 == Exercise 7: Monitoring Running Queries(Overview)
 
 In this exercise, you gain some experience with monitoring and killing a long-running query.
@@ -40,11 +42,11 @@ Here is a query that will run for a long time:
 MATCH (a), (b), (c), (d), (e) RETURN count(id(a))
 ----
 
-1. Execute this query in the Neo4j Browser session (main session) you have used throughout this training.
+. Execute this query in the Neo4j Browser session (main session) you have used throughout this training.
 
-2. In the monitoring Neo4j Browser session you started in a different window, monitor the queries using the `:queries` command.
+. In the monitoring Neo4j Browser session you started in a different window, monitor the queries using the `:queries` command.
 
-3. In the monitoring Neo4j Browser session, call the cypher procedure to kill the query.
+. In the monitoring Neo4j Browser session, call the cypher procedure to kill the query.
 
 == Exercise 7.1: Monitor and kill a long-running query. (Solution)
 
@@ -55,16 +57,17 @@ Here is a query that will run for a long time:
 MATCH (a), (b), (c), (d), (e) RETURN count(id(a))
 ----
 
-1. Execute this query in the Neo4j Browser session (main session) you have used throughout this training.
+. Execute this query in the Neo4j Browser session (main session) you have used throughout this training.
 
-2. In the monitoring Neo4j Browser session you started in a different window, monitor the queries using the `:queries` command.
+. In the monitoring Neo4j Browser session you started in a different window, monitor the queries using the `:queries` command.
 
 This is what you should see:
 
 [.thumb]
 image::EX7.1.png[EX7.1,width=700]
 
-3. In the monitoring Neo4j Browser session, call the cypher procedure to kill the query.
+[start=3]
+. In the monitoring Neo4j Browser session, call the cypher procedure to kill the query.
 
 Here is the solution code:
 
@@ -88,5 +91,5 @@ And again you should see the failure in your main Neo4j Browser session.
 In this exercise, gained experience monitoring a long-running query and killing it.
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/08.html'>Continue to Exercise 08</a>]
+pass:a[<a play-topic='{guides}/08.html'>Continue to Exercise 8</a>]
 endif::[]

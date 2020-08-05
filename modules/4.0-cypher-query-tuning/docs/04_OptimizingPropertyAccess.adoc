@@ -9,8 +9,7 @@
 == About this module
 
 You have learned some of the ways that you can tune queries by reducing the cardinality of the rows that are passed between the steps of an execution plan.
-In this module, you will learn how further rewrite queries so that property access is optimized.
-This lesson includes a number of tips for optimizing property access in a query.
+In this module, you will learn how to rewrite queries so that property access is optimized.
 
 At the end of this module, you should be able to:
 
@@ -23,7 +22,7 @@ At the end of this module, you should be able to:
 During a query, a node or relationship property is accessed when it is used to filter a query and to return results.
 Here are some examples.
 
-Here, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results.
+In the code below, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results.
 The _title_ property need not be accessed in the `RETURN` clause because it is cached from the query.
 If the _title_ property is indexed, then the node property need not be accessed as the value is in the index:
 
@@ -42,7 +41,7 @@ WHERE m.title = $movieTitle
 RETURN m.title, m.releaseYear
 ----
 
-Here, the _primaryRole_ and _secondaryRole_ properties  are accessed for the query and the _name_, _title_, and _roles_ properties are accessed when returning the query results.
+In the coe below, the _primaryRole_ and _secondaryRole_ properties  are accessed for the query and the _name_, _title_, and _roles_ properties are accessed when returning the query results.
 You cannot define an "regular" index on a relationship property so for this query, every _ACTED_IN_ relationship's _roles_ property values need to be accessed.
 This can be very expensive which is why full-text schema indexes are useful.
 
