@@ -93,7 +93,7 @@ RETURN m.title as Title, Actors LIMIT 10
 This is what you should see for the execution plan:
 
 [.thumb]
-image::EX5.1.png[EX5.1,width=700]
+image::EX5.1.png[EX5.1,width=500]
 
 [start=2]
 . Rewrite this query to reduce the the number of rows processed.
@@ -114,7 +114,7 @@ RETURN m.title as Title, Actors
 The result should be:
 
 [.thumb]
-image::EX5.1A.png[EX5.1A,width=700]
+image::EX5.1A.png[EX5.1A,width=500]
 
 == Exercise 5.2: Tune a query (Instructions)
 
@@ -150,7 +150,7 @@ What do you notice in the execution plan?
 Here is what the execution plan looks like:
 
 [.thumb]
-image::EX5.2.png[EX5.2,width=700]
+image::EX5.2.png[EX5.2,width=500]
 
 If you examine the collections returned, you will notice that there is duplication of the names of directors. We do not want that. Also notice that the query does an AllNodesScan which is not good.
 
@@ -172,7 +172,7 @@ We specify `DISTINCT` to elminate duplicate nodes. We also specify the _Genre_ l
 Here is the new execution plan:
 
 [.thumb]
-image::EX5.2A.png[EX5.2A,width=700]
+image::EX5.2A.png[EX5.2A,width=500]
 
 We have reduced the cardinality in the execution plan.
 
@@ -214,7 +214,7 @@ The $bornYear parameter should be set to  1920 and the $releaseYear parameter is
 The result of executing this query should be the following where we see a cartesian product:
 
 [.thumb]
-image::EX5.3.png[EX5.3,width=700]
+image::EX5.3.png[EX5.3,width=500]
 
 [start=2]
 . What is wrong with this query? Modify this query to optimize it.
@@ -235,7 +235,7 @@ RETURN people, movies
 The result of executing this code should be:
 
 [.thumb]
-image::EX5.3A.png[EX5.3A,width=700]
+image::EX5.3A.png[EX5.3A,width=500]
 
 == Exercise 5: Reducing Cardinality with `LIMIT`, `DISTINCT` (Summary)
 

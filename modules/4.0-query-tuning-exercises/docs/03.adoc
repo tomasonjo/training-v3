@@ -101,12 +101,12 @@ RETURN genre, director, movie
 The profile when executing this code should be:
 
 [.thumb]
-image::EX3.1.png[EX3.1,width=700]
+image::EX3.1.png[EX3.1,width=600]
 
 The result of executing this code should be:
 
 [.thumb]
-image::EX3.1B.png[EX3.1B,width=700]
+image::EX3.1B.png[EX3.1B,width=600]
 
 [start=2]
 . Rewrite this query to reduce the number of rows processed by collection results during the query.
@@ -129,7 +129,7 @@ The profile when executing this code should show fewer rows processed and a bett
 *NOTE*: Remember to run the query twice to ensure no compilation time is included in the metrics the second time it is run.
 
 [.thumb]
-image::EX3.1C.png[EX3.1C,width=700]
+image::EX3.1C.png[EX3.1C,width=500]
 
 == Exercise 3.2: Reduce cardinalities for variable-length paths (Instructions)
 
@@ -168,7 +168,7 @@ where the $actor parameter is set to "Tom Hanks"
 The result of executing this code should be:
 
 [.thumb]
-image::EX3.2.png[EX3.2,width=700]
+image::EX3.2.png[EX3.2,width=600]
 
 [start=2]
 . Modify this query to reduce the number of rows processed.
@@ -186,7 +186,7 @@ RETURN movie.title
 The result of executing this code should be:
 
 [.thumb]
-image::EX3.2B.png[EX3.2B,width=700]
+image::EX3.2B.png[EX3.2B,width=600]
 
 == Exercise 3.3: Rewrite a query to collect data using pattern comprehension (Instructions)
 
@@ -229,7 +229,7 @@ where the $relYear1 parameter is set to 2010, the $relYear2 parameter is set to 
 The result of executing this query should be the following:
 
 [.thumb]
-image::EX3.3.png[EX3.3,width=700]
+image::EX3.3.png[EX3.3,width=500]
 
 [start=2]
 . Rewrite this query to collect data using pattern comprehension to collect the titles.
@@ -248,12 +248,12 @@ RETURN a.name AS actor,  a.born AS born,
 The result of executing this query should be the following:
 
 [.thumb]
-image::EX3.3B.png[EX3.3B,width=700]
+image::EX3.3B.png[EX3.3B,width=500]
 
 If you look at the rows returned with this code, you will notice that empty titles collections are produced which is not the case in the previous query.
 
 [.thumb]
-image::EX3.3C.png[EX3.3C,width=700]
+image::EX3.3C.png[EX3.3C,width=600]
 
 == Exercise 3: Reducing Cardinality with Aggregation (Summary)
 

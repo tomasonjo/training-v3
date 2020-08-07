@@ -221,7 +221,7 @@ CALL apoc.meta.stats()
 The result returned should be:
 
 [.thumb]
-image::meta.stats.png[meta.stats,width=900]
+image::meta.stats.png[meta.stats,width=600]
 
 
 == Exercise 1.8: Is the count store used for this query? (Instructions)
@@ -252,7 +252,7 @@ RETURN TotalDirectorRelationships
 You should see this in the execution plan:
 
 [.thumb]
-image::EX1.8.png[EX1.8,width=900]
+image::EX1.8.png[EX1.8,width=500]
 
 The count store is not used because we specified a label for each end of the pattern.
 
@@ -305,7 +305,7 @@ movie2: "Top Gun"
 ----
 
 [.thumb]
-image::EX1.9.png[EX1.9,width=900]
+image::EX1.9.png[EX1.9,width=600]
 
 Profile this query to see to see that the count store is not used:
 
@@ -321,7 +321,7 @@ RETURN a.name
 You should see this in the execution plan:
 
 [.thumb]
-image::EX1.9A.png[EX1.9A,width=900]
+image::EX1.9A.png[EX1.9A,width=600]
 
 You should see here that SLOTTED is used.
 
@@ -340,7 +340,7 @@ RETURN  a.name
 You should see this in the execution plan:
 
 [.thumb]
-image::EX1.9B.png[EX1.9B,width=900]
+image::EX1.9B.png[EX1.9B,width=600]
 
 == Exercise 1: Answer Some Query Tuning Question (Taking it Further)
 

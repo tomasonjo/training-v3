@@ -102,7 +102,7 @@ Then execute the query (twice):
 The result should be:
 
 [.thumb]
-image::EX4.1.png[EX4.1,width=700]
+image::EX4.1.png[EX4.1,width=600]
 
 [start=2]
 . What is wrong with the query? Rewrite this query to reduce the the number of rows retrieved for the anchor.
@@ -125,7 +125,7 @@ RETURN m.title
 The profile when executing this code should be:
 
 [.thumb]
-image::EX4.1B.png[EX4.1B,width=700]
+image::EX4.1B.png[EX4.1B,width=600]
 
 
 == Exercise 4.2: Ensure that an index is used (Instructions)
@@ -181,12 +181,12 @@ What do you notice in the execution plan? The value of $testString could be a se
 Here is the result:
 
 [.thumb]
-image::EX4.2.png[EX4.2,width=700]
+image::EX4.2.png[EX4.2,width=500]
 
 And here is an excerpt of the results returned (66 rows):
 
 [.thumb]
-image::EX4.2A.png[EX4.2A,width=700]
+image::EX4.2A.png[EX4.2A,width=600]
 
 How can you modify the graph to support this type of query that will use an index?
 
@@ -222,7 +222,7 @@ RETURN movie.title, collect(a.name) as Actors
 Here is the execution plan:
 
 [.thumb]
-image::EX4.2B.png[EX4.2B,width=700]
+image::EX4.2B.png[EX4.2B,width=500]
 
 It is now using the index. Can you make this query faster?
 
@@ -238,7 +238,7 @@ return movie.title, collect(a.name) as Actors
 ----
 
 [.thumb]
-image::EX4.2C.png[EX4.2C,width=700]
+image::EX4.2C.png[EX4.2C,width=500]
 
 == Exercise 4.3: Using query hints (Instructions)
 
@@ -281,7 +281,7 @@ How many indexes are used here?
 Here is the execution plan:
 
 [.thumb]
-image::EX4.3.png[EX4.3,width=700]
+image::EX4.3.png[EX4.3,width=500]
 
 [start=2]
 . Modify the query to use two indexes, one for p1 and one for p2.
@@ -302,7 +302,7 @@ RETURN [n IN nodes(path) | coalesce(n.title, n.name)]
 Here is the execution plan:
 
 [.thumb]
-image::EX4.3A.png[EX4.3A,width=700]
+image::EX4.3A.png[EX4.3A,width=500]
 
 == Exercise 4: Reducing Cardinality with Anchor Selectivity (Summary)
 

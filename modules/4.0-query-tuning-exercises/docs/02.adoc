@@ -111,7 +111,7 @@ RETURN collect(a.name) AS Actors
 
 Here is what the `EXPLAIN` yields:
 
-image::explain1.png[explain1,width=700]
+image::explain1.png[explain1,width=600]
 
 Did you find any problems?
 
@@ -130,7 +130,7 @@ RETURN collect(a.name) AS Actors
 
 Here is what the `EXPLAIN` yields:
 
-image::explain2.png[explain2,width=700]
+image::explain2.png[explain2,width=600]
 
 == Exercise 2.4: Inspect another query for expected behavior (Instructions)
 
@@ -163,7 +163,7 @@ RETURN collect(m.title) AS Movies, g.name
 
 Here is what the `EXPLAIN` yields:
 
-image::explain3.png[explain3,width=700]
+image::explain3.png[explain3,width=600]
 
 Did you find any problems?
 
@@ -181,7 +181,7 @@ RETURN collect(m.title) AS Movies, g.name
 
 Here is what the `EXPLAIN` yields:
 
-image::explain4.png[explain4,width=700]
+image::explain4.png[explain4,width=600]
 
 We can use the count store to estimate rows to the _Genre_ nodes as the anchor of the query.
 We know that there are only 35 _Genre_ nodes in the graph.

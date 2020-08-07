@@ -78,7 +78,7 @@ image::1-QLA-GraphAppsGallery.png[1-QLA-GraphAppsGallery,width=600]
 . Click the link for the Query Log Analyzer Tool which will open a window to https://neo.jfrog.io/neo/api/npm/npm/query-log-analyzer. This is the install location for this app.
 
 [.thumb]
-image::2-QLA-nstallQueryLogAnalyzer.png[2-QLA-nstallQueryLogAnalyzer,width=600]
+image::2-QLA-nstallQueryLogAnalyzer.png[2-QLA-nstallQueryLogAnalyzer,width=500]
 
 [start=4]
 . Back in Neo4j Desktop, paste this address in the Install field, and then click *Install*.
@@ -90,7 +90,7 @@ image::3-QLA-InstallQueryLogAnalyzer2.png[3-QLA-InstallQueryLogAnalyzer2,width=6
 . A window will appear about the digital certificate for this app. You can click *OK* to continue the installation.
 
 [.thumb]
-image::4-QLA-OKToInstallQueryLogAnalyzer.png[4-QLA-OKToInstallQueryLogAnalyzer,width=700]
+image::4-QLA-OKToInstallQueryLogAnalyzer.png[4-QLA-OKToInstallQueryLogAnalyzer,width=600]
 
 [start=6]
 . You should now see Neo4j Query Log Analyzer as an available Graph App. Click it to start it.
@@ -141,7 +141,7 @@ You are now ready to analyze queries that are logged. (Completed queries).
 Depending on what queries were logged, you should now see this:
 
 [.thumb]
-image::EX8.4.png[EX8.4,width=800]
+image::EX8.4.png[EX8.4,width=700]
 
 [start=4]
 . Explore the queries logged.
