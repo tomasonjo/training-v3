@@ -29,7 +29,12 @@ When you execute a Cypher statement that is a query against the graph, the follo
 
 Each of these steps takes time and your goal is to minimize these times.
 
+=== Query performance factors
+
+[.notes]
+--
 There are other factors that affect the performance of a query:
+--
 
 [square]
 * Version of Cypher you are using.
@@ -38,12 +43,16 @@ There are other factors that affect the performance of a query:
 
 These are described in the https://neo4j.com/docs/cypher-manual/4.1/query-tuning/query-options/[Query Tuning Documentation].
 
+
 [IMPORTANT]
 How query execution plans are created by the query planner is very much dependent on the version of Neo4j you are using.
 That is, you must re-measure your query performance and possibly change queries with each version of Neo4j.
 
+[.notes]
+--
 For this course, we use Neo4j Desktop which supports Neo4j Enterprise for development.
 We are using Neo4j 4.1 for all query executions.
+--
 
 === Query Cache
 
@@ -60,33 +69,59 @@ The Query Cache is an in-memory data structure that keeps track of queries and t
 * If the graph has changed significantly, an execution plan could become stale. In this case, the execution plan is removed from the Query Cache.
 * If the Query Cache is full, Neo4j removes a least recently used query to make room for a different query.
 
+[.one-sixth-five-sixths-row]
 === Page Cache
 
+[.notes]
+--
 The Page Cache is an in-memory copy of part or all of the graph.
 Ideally, you want as much of the graph to be in memory as possible (Hit Ratio), but this will depend upon the size of the graph and the amount of RAM on the system where the Neo4j instance is running.
 Later in this course, you will see how the page cache is used in the steps of a query plan when it executes.
+--
 
 You use the `:sysinfo` Neo4j Browser command to examine the usage of the Page Cache:
 
 image::Sysinfo.png[Sysinfo,width=800,align=center]
 
+[.notes]
+--
 Ideally, you  want the utilization of the Page Cache to be as close to 100% as possible.
 If you see that in your application, there are a lot of flushes of the Page Cache, then you should consider, if possible, adding more RAM to the system.
+--
 
 === Execution plan
 
+[.notes]
+--
 The compilation of the Cypher query results in the execution plan.
 The execution plan is shown using the `PROFILE` clause in a Cypher query.
 The execution plan is a tree structure of steps (operators) that execute, some in sequence and some in parallel, depending on the steps.
 A leaf step is typically the beginning (anchor) of the query.
 A step in the execution plan takes zero or more "rows" of data to produce "rows" of data that are passed to the next step in the execution plan.
+--
 
 When a query executes, the metrics shown with `PROFILE` include these values:
 
+ifndef::env-slides[]
 [square]
 * *rows*: This is probably the most important metric you should aim to reduce in a query. The rows passed from one step of a query to the next require both memory and CPU resources. What  you want to watch for are spikes in the number of rows passed between steps as these may be areas where you can tune.
 * *db hits*: You can think of a db hit as an abstract unit of work. Db hits from one step to another cannot really be compared due to the complexity of how data is stored physically. You may not always be able to reduce the number of db hits. You also want to reduce the amount of data that needs to be retrieved from the graph. If you can confine retrievals to what is in indexes, the less data needs to be retrieved from the graph.
 * *elapsed time*: Elapsed time includes the time to run the query as well as return results. Whether data needs to cross a network may also impact the elapsed time.
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* rows
+* db hits
+* elapsed time
+
+[.notes]
+--
+* *rows*: This is probably the most important metric you should aim to reduce in a query. The rows passed from one step of a query to the next require both memory and CPU resources. What  you want to watch for are spikes in the number of rows passed between steps as these may be areas where you can tune.
+* *db hits*: You can think of a db hit as an abstract unit of work. Db hits from one step to another cannot really be compared due to the complexity of how data is stored physically. You may not always be able to reduce the number of db hits. You also want to reduce the amount of data that needs to be retrieved from the graph. If you can confine retrievals to what is in indexes, the less data needs to be retrieved from the graph.
+* *elapsed time*: Elapsed time includes the time to run the query as well as return results. Whether data needs to cross a network may also impact the elapsed time.
+--
+endif::[]
 
 === Result set
 
@@ -94,29 +129,49 @@ The result of a query is returned to the client with the `RETURN` clause. In man
 
 == Understanding execution plans
 
+[.notes]
+--
 The most important task for you as a developer is to understand what an execution plan is, how to interpret it, and most importantly, how to make it performant.
 To understand the execution plan, you must understand how a query starts and then how it is processed ad the nodes are traversed in the graph.
+--
 
+Next, you will learn about:
+
+* Anchoring
+* Expansion
+* Eager operators
+* Query runtimes
+* Goals for improving query performance
+
+[.one-sixth-five-sixths-row]
 === Anchor of a query
 
+[.notes]
+--
 When the execution plan is created, it determines the set of nodes that will be the anchor for the query.
 The anchor for a query is based upon a MATCH clause.
 The anchor is typically determined by meta-data that is stored in the graph or a filter that is provided inline or in a `WHERE` clause.
 This meta-data is the count store that you will learn about later in this lesson.
 The anchor for a query will be based upon the fewest number of nodes that need to be retrieved into memory.
+--
 
 Here are three simple queries for a graph that has 6231 _Movie_ nodes and 18,776 _Person_ nodes:
 
 image::Anchoring.png[Anchoring,width=800,align=center]
 
+[.notes]
+--
 In the first statement, the _Person_ nodes will be the anchor for the query. This is because there are a total of 24,993 nodes in the graph which is what _m_ represents. There are only 18,776 _Person_ nodes so the execution will retrieve fewer nodes if it anchors with the _Person_ nodes.
 
 In the second statement the _Movie_ nodes will be the anchor for the query because there are fewer _Movie_ nodes than _Person_ nodes.
 
 In the third statement, a filter is specified which reduces the number of nodes that will be retrieved for the _Person_ node satisfying the filter is the anchor for the query.
+--
 
 === Expand to follow paths
 
+[.notes]
+--
 After the anchor nodes have been retrieved, the next step if the query specifies a path is to follow the path.
 The in-memory nodes that are part of the anchor set have pointers to nodes on the other end of the relationships.
 
@@ -124,6 +179,7 @@ The goal here is to eliminate paths from the nodes in memory to nodes that will 
 This is where specificity in the relationship types is important in your data model.
 
 For example:
+--
 
 [source,cypher]
 ----
@@ -141,15 +197,22 @@ WHERE p.name = $actorName
 RETURN  m.title
 ----
 
+[.notes]
+--
 In addition, the expansion may lead to the need to inspect properties of the relationship and/or the properties of the _Movie_ node.
 This inspection means that the nodes are brought into memory and possibly eliminated from the nodes in memory after they have been retrieved.
+--
 
 [NOTE]
 Cypher queries with multiple `MATCH` statements may execute differently than what you may expect. This is covered in a later lesson of this course.
 
+[.one-third-two-thirds-column]
 === Example 1: A simple execution plan
 
+[.notes]
+--
 Here is a simple example rendered in Neo4j Browser where we use `PROFILE` to display the execution plan and execute the query:
+--
 
 [source,cypher]
 ----
@@ -158,10 +221,14 @@ WHERE p.name = $actorName
 RETURN  m.title
 ----
 
+ifndef::env-slides[]
 Here is the execution plan:
+endif::[]
 
 image::FirstExecutionPlan.png[FirstExecutionPlan,width=800,align=center]
 
+[.notes]
+--
 The first step is the _NodeIndexSeek_ operator.
 This is the operator used to anchor the starting point in the query.
 This first step takes no rows as input, but produces one row based upon the  value specified in the `WHERE` clause.
@@ -185,18 +252,31 @@ In this query, it will be three rows, each containing the _title_ of a _Movie_ n
 
 Notice also that steps that incur db hits are highlighted in orange.
 Observing db hits is important as it may show areas of the query that could be improved.
+--
 
+=== Example 1: A simple execution plan (cypher-shell)
+
+[.notes]
+--
 You can also examine the execution plan in cypher-shell:
+--
 
 image::FirstExecutionPlanCypherShell.png[FirstExecutionPlanCypherShell,width=800,align=center]
 
+[.notes]
+--
 When interpreting the execution plan in cypher-shell, you begin at the bottom and move to the top, but you can see that it shows the same information as what you see in Neo4j Browser.
+--
 
+[.one-third-two-thirds-column]
 === Example 2: A more complex execution plan
 
+[.notes]
+--
 Here is another execution plan to illustrate how it is executed.
 Here is the Cypher code where the graph contains _Movie_ nodes with a _genres_ property, but no _Genere_ nodes.
 This code extracts the genre information from the _Movie_ nodes, creates the _Genere_ nodes and the _:IS_GENRE_ relationships between _Movie_ nodes and _Genre_ nodes.
+--
 
 [source,cypher]
 ----
@@ -208,18 +288,30 @@ WITH g, m
 MERGE (g)<-[:IS_GENRE]-(m)
 ----
 
+ifndef::env-slides[]
 Here is the execution plan:
+endif::[]
 
 image::SecondExecutionPlan.png[SecondExecutionPlan,width=800,align=center]
 
+[.notes]
+--
 This query is a little different because it is modifying the graph, but the point of this example is to illustrate how the execution plan works.
 It first executes the three operations under (1). It cannot execute (5), until the operations execute under (1) and (4).
 It cannot execute (4) until all of the operations under (2) and (3) execute, etc.
+--
 
+=== Example 2: A more complex execution plan (cypher shell)
+
+[.notes]
+--
 Viewing a complex execution plan is sometimes easier in cypher-shell because the steps are presented in tabular format.
+--
 
 image::SecondExecutionPlanCypherShell.png[SecondExecutionPlanCypherShell,width=800,align=center]
 
+[.notes]
+--
 For a more complex execution plan, there are parts of the plan where all steps must execute at a given level before you go to the next step.
 For example, all steps under the first _AntiConditionalApply_  which are _Argument_ and  _MergeCreateNode_ must execute first before the _AntiConditionbalApply_ step executes.
 
@@ -228,20 +320,34 @@ Some things render better in cypher-shell while others can only be easily viewed
 
 During this course, you will see some of the most commonly used operators in an execution plan.
 These operators are described https://neo4j.com/docs/cypher-manual/current/execution-plans/operator-summary/[here] in the documentation.
+--
 
-=== Eager operations
+[.one-sixth-five-sixths-row]
+=== No Eager operations
 
+[.notes]
+--
 The execution plan will execute steps of the query on sets of data (rows) retrieved from the graph.
+--
 
 Here is the order that operations execute when the query contains no _eager_ operators:
 
 image::NonEagerGraphic.png[NonEagerGraphic,width=800,align=center]
 
+[.notes]
+--
 A row is retrieved, then the next operator uses that row, and so on until the result is produced. Then the next row is retrieved and processed.
+--
 
+[.half-column]
+=== Eager operations
+
+[.notes]
+--
 Eager operations requires that all rows are retrieved and operations are performed on all rows until the result is produced.
 
 Here is the order that operations execute when the query includes _eager_ operators:
+--
 
 image::EagerGraphic.png[EagerGraphic,width=800,align=center]
 
@@ -253,8 +359,13 @@ Cypher clauses and functions that force eager operations are:
 * aggregating functions such as collect(), count(), avg(), min(), max() etc.
 * FOREACH
 
+[.half-column]
+==== Example: Eager operator
 
+[.notes]
+--
 Here is an example of an eager operator in an execution plan where the call to `avg()` requires the eager operator:
+--
 
 [source,cypher]
 ----
@@ -266,18 +377,31 @@ WHERE m2.releaseYear = 2010 AND m2.avgVote > averageVote
 RETURN  averageVote AS OverallAverageVote, m2.title as Title , m2.avgVote as AverageVote
 ----
 
+ifndef::env-slides[]
 Here is the execution plan in Neo4j Browser:
+endif::[]
 
 image::EagerExampleBrowser.png[EagerExampleBrowser,width=800,align=center]
 
+[.notes]
+--
 Any eager operator is shown in dark blue to call it out.
+--
 
+==== Example: Eager operator (cypher-shell)
+
+[.notes]
+--
 And here is the same execution plan in cypher-shell:
+--
 
 image::EagerExampleCypherShell.png[EagerExampleCypherShell,width=800,align=center]
 
+[.half-column]
 === SLOTTED vs. PIPELINED operators
 
+[.notes]
+--
 In Neo4j 4.1, many performance improvements have been made to the Cypher runtime by implementing the PIPELINED runtime for many operators.
 Most read-only operators use PIPELINED runtime by default, but there are some that still use SLOTTED.
 Which runtime used by each operator is in the https://neo4j.com/docs/cypher-manual/4.1/execution-plans/operators/[Cypher Reference Manual].
@@ -287,6 +411,7 @@ Part of your query tuning exercise is to identify queries that do not use PIPELI
 
 Here is an example where we want to return the titles of the movies directed by two people.
 _$actor1_ is 'Tom Hanks' and _$actor2_ is 'Clint Eastwood':
+--
 
 [source,cypher]
 ----
@@ -301,8 +426,14 @@ Here is the execution plan, where we see that SLOTTED is used because we require
 
 image::LetSemiApply.png[LetSemiApply,width=800,align=center]
 
+[.half-column]
+==== Rewrite query to use PIPELINED
+
+[.notes]
+--
 You should strive to eliminate SLOTTED from your (read-only) execution plans by rewriting the query to not use operators that must use SLOTTED.
 For example, this query can be rewritten to:
+--
 
 [source,cypher]
 ----
@@ -312,16 +443,22 @@ WHERE p.name = $actor1 OR p.name = $actor2
 RETURN m.title
 ----
 
+[.notes]
+--
 This has a much better execution plan:
+--
 
 image::PIPELINED.png[PIPELINED,width=800,align=center]
 
 === Goals for improving execution plans
 
+[.notes]
+--
 As you gain experience with query tuning and viewing execution plans, your goals should be:
+--
 
+ifndef::env-slides[]
 [square]
-
 * Avoid redundant work and operations.
 * Early in the query, eliminate data that is going to be filtered out later in the execution.
 * Recognize less expensive ways to do what you want:
@@ -329,44 +466,71 @@ As you gain experience with query tuning and viewing execution plans, your goals
 ** Can you ensure query is using PIPELINED?
 ** Will APOC perform better for some processing?
 ** Will a stored procedure perform better?
+endif::[]
 
+ifdef::env-slides[]
+[square]
+* Avoid redundant work and operations.
+* Early in the query, eliminate data that is going to be filtered out later in the execution.
+* Recognize less expensive ways to do what you want:
+* Improve the Cypher statement.
+* Can you ensure query is using PIPELINED?
+* Will APOC perform better for some processing?
+* Will a stored procedure perform better?
+endif::[]
+
+[.notes]
+--
 In this course we do not cover writing Cypher queries using APOC or writing custom store procedures.
+--
 
 == Information used during query processing
 
+ifndef::env-slides[]
 [square]
-
 * *Node labels* provide a way to group nodes to make the query more specific. Neo4j automatically creates indexes for faster access to node in a group.
 * *Node degree* is a count of the relationships to or from a node. The degree of a node is used to determine if it is a good anchor starting point for traversal, especially if one end of the pattern's nodes have a higher degree.
 * *Count store* contains metrics about the labels and node degrees that can be used to estimate which plan is the best at runtime. You will learn more about the count store later in this lesson.
 * *Indexes* are used only for the initial anchoring of the query (beginning `MATCH` pattern). You can use one or more indexes to anchor the query, but by default only one index is used.
 * *Relationships* are traversed to discover and collect nodes that satisfy all or part of the query.
 * *Properties* are initially accessed to filter a query or refine the number of rows processed in the execution plan. Some properties are in the same physical location as the node or relationship, but there is no guarantee of this proximity. Properties are also used to collect information during the retrieval, or to collect information to return to the client.
+endif::[]
 
+ifdef::env-slides[]
+[square]
+* Node labels
+* Node degree
+* Count store
+* Indexes
+* Relationships
+* Properties
+endif::[]
+
+[.notes]
+--
+* *Node labels* provide a way to group nodes to make the query more specific. Neo4j automatically creates indexes for faster access to node in a group.
+* *Node degree* is a count of the relationships to or from a node. The degree of a node is used to determine if it is a good anchor starting point for traversal, especially if one end of the pattern's nodes have a higher degree.
+* *Count store* contains metrics about the labels and node degrees that can be used to estimate which plan is the best at runtime. You will learn more about the count store later in this lesson.
+* *Indexes* are used only for the initial anchoring of the query (beginning `MATCH` pattern). You can use one or more indexes to anchor the query, but by default only one index is used.
+* *Relationships* are traversed to discover and collect nodes that satisfy all or part of the query.
+* *Properties* are initially accessed to filter a query or refine the number of rows processed in the execution plan. Some properties are in the same physical location as the node or relationship, but there is no guarantee of this proximity. Properties are also used to collect information during the retrieval, or to collect information to return to the client.
+--
+
+[.half-column]
 === Hierarchy of accessibility
 
-[.statement]
+[.notes]
+--
 For each data object, how much work must Neo4j do to retrieve the data?
-
-[.is-one-third.left]
 --
+
 image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=center]
---
 
-[.is-two-thirds.right]
---
-
-[.small]
 . Anchor node label,  indexed anchor node properties
-
 . Relationship types
-
 . Non-indexed anchor node properties
-
 . Downstream node labels
-
 . Relationship properties, downstream node properties
---
 
 [.notes]
 --
@@ -382,30 +546,44 @@ To understand the work that is required to execute a query, you must know:
 * What indexes exist in the graph.
 * DB Stats for the graph.
 
+[.one-sixth-five-sixths-row]
 === Data model for the graph
 
+[.notes]
+--
 To inspect how nodes and relationships are used in the graph you simply execute:
+--
 
 [source,cypher]
 ----
 CALL db.schema.visualization()
 ----
 
+[.notes]
+--
 This is obviously best viewed in Neo4j Browser.
+--
 
 image::db.schema.visualization.png[db.schema.visualization,width=800,align=center]
 
+[.notes]
+--
 This shows the node labels defined in the graph as well as how nodes of these types are related to other nodes in the graph.
 
 You cannot tell from this output the number of nodes of each type or the number of relationships of each type.
+--
 
+[.one-sixth-five-sixths-row]
 ===  Indexes and Constraints
 
+[.notes]
+--
 Part of understanding the performance of Cypher queries is to know what indexes are in the graph that are used during query execution.
 You learned that node labels are automatically indexed in the graph so the graph engine has efficient access to nodes of a particular type.
 You must understand what indexes exist for the properties in the graph. The index is only used for determining the anchor nodes for a query (`MATCH/WHERE`) clauses.
 
 As a starting point, you should query to graph to learn about all of the indexes defined:
+--
 
 [source,cypher]
 ----
@@ -414,13 +592,20 @@ CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties
 
 image::indexes.png[indexes,width=800,align=center]
 
+[.notes]
+--
 Here we see that in this graph, a unique index exists for the _Genre.name_ property and indexes exist for the _Movie.title_ and _Person.name_ properties.
 Having these indexes will make anchoring a query much faster.
+--
 
+[.one-sixth-five-sixths-row]
 === DB Stats for the graph
 
+[.notes]
+--
 You can certainly perform Cypher queries to retrieve information about the number of nodes or relationships of each type, but the easiest way to learn about this meta-data is by retrieving the count store data.
 You can retrieve count store information with this statement:
+--
 
 [source,cypher]
 ----
@@ -429,19 +614,31 @@ CALL apoc.meta.stats()
 
 image::meta-stats.png[meta-stats,width=800,align=center]
 
+[.notes]
+--
 This procedure returns very useful information, all of which is used to create the execution plan for a query.
+--
 
 ==== Count store
 
+[.notes]
+--
 The count store is updated as nodes and relationships are added to the graph.
 The meta-data in the count store is used to determine whether it is faster to use an index or the count.
 
 Here is a summary of when the count store is used for an execution plan.
+--
 
-[cols="<.^,<.^", options="header",stripes="none"]
+[cols="a,a", options="header",stripes="none"]
 |===
+ifndef::env-slides[]
 |*Count information stored*
 |*Example of use*
+endif::[]
+ifdef::env-slides[]
+|Count information stored
+|Example of use
+endif::[]
 |Number of nodes
 |(n)
 |Number of nodes with a specific label (single label only)
@@ -456,10 +653,14 @@ Here is a summary of when the count store is used for an execution plan.
 |(n:Label)<-[r:REL_TYPE]-()
 |===
 
+[.notes]
+--
 [IMPORTANT]
 Relationship counts with labels on the start and end nodes are not recorded in the count store.
+--
 
-==== Using the count store
+[.half-row]
+==== Example: Count store is not used
 
 Here is a query where the count store will [underline]#never# be used because direction is not specified in the relationship:
 
@@ -471,7 +672,13 @@ RETURN count(*)
 
 image::NoCountStoreUsed.png[NoCountStoreUsed,width=800,align=center]
 
+[.notes]
+--
 We see a retrieval of all nodes (24,992 rows), as well as a total of 169954 db hits.
+--
+
+[.half-row]
+==== Example: Count store is used
 
 Here is a query where the count store is used, rather than retrieving the nodes and incurring db hits:
 
@@ -483,11 +690,18 @@ RETURN count(*)
 
 image::CountStoreUsed.png[CountStoreUsed,width=800,align=center]
 
+[.notes]
+--
 Seeing the _RelationshipCountFromCountStore_ is a good thing for your execution plans.
+--
 
-==== Alternative to using the count store
+[.one-sixth-five-sixths-row]
+==== Example: Is count store useful?
 
+[.notes]
+--
 The count store is very useful, but not in all cases. Here is a query where we hoped to get some leverage from using the count store, but  because we also need to retrieve the name of the person, there is a high db hit overhead:
+--
 
 [source,cypher]
 ----
@@ -497,9 +711,18 @@ RETURN a.name, count(*) AS count
 
 image::CountStoreUsed2.png[CountStoreUsed2,width=800,align=center]
 
+[.notes]
+--
 Here we see 143,980 db hits.
+--
 
+[.one-sixth-five-sixths-row]
+==== Example: Alternative to using count store
+
+[.notes]
+--
 Here is an example we execute the same type of query,but the count store is not be used. We use `size()` to retrieve the number of relationships from each _Actor_ node:
+--
 
 [source,cypher]
 ----
@@ -509,14 +732,20 @@ RETURN a.name, size((a)-[:ACTED_IN]->()) AS count
 
 image::NoCountStoreUsed2.png[NoCountStoreUsed2,width=800,align=center]
 
+[.notes]
+--
 In this Cypher query, `size()` calls `GetDegree()`, which in this case, is more efficient than using the count store.
+--
 
-==== Controlling DB Stats updates
+==== Controlling DB Stats updates - configuration
 
+[.notes]
+--
 DB Stats (count store) are updated when a certain threshold of changes occur to the graph.
 You can control when the DB Stats are updated, keeping in mind that more resources will be required if the DB Stats are in 100% synchronization with the indexes in the graph.
 
 One way that you can control when DB Stats will be updated is to adjust these settings in the Neo4j configuration:
+--
 
 [source]
 ----
@@ -524,10 +753,18 @@ dbms.index_sampling.background_enabled=true
 dbms.index_sampling.update_percentage=n
 ----
 
+[.notes]
+--
 Where the default used by Neo4j for the percentage is 5.
 That is, if more than 5% of the indexes have changes, then the DB Stats in the count store are updated.
+--
 
+==== Controlling DB Stats updates - programatically
+
+[.notes]
+--
 You can also force the update to the DB Stats with these calls:
+--
 
 [source, cypher]
 ----

@@ -35,7 +35,6 @@ endif::[]
 
 This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
 
-ifndef::env-slides[]
 == Lesson Overview
 
 Here are the lessons of this course:

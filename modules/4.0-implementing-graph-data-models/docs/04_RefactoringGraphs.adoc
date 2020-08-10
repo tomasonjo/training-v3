@@ -293,24 +293,12 @@ You should have 3 indexes: :Flight(number), :Flight(id), and :Airport(code).
 --
 endif::[]
 
-[.one-sixth-five-sixths-row]
+[.one-third-two-thirds-column]
 === Profiling the query
 
-[.is-two-thirds.left]
---
 Here is the result of the profile on a graph that contains 10k nodes.
---
 
-ifndef::env-slides[]
 image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=400,align=center]
-endif::[]
-
-ifdef::env-slides[]
-[.is-one-third.right]
---
-image::ProfileBeforeRefactor4.png[ProfileBeforeRefactor4,width=180,align=center]
---
-endif::[]
 
 [.notes]
 --
@@ -436,6 +424,7 @@ WHERE flight.airline = 'WN' AND
 ----
 --
 
+////
 ifdef::env-slides[]
 [is-one-third.right]
 --
@@ -444,8 +433,9 @@ image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=200,align=cen
 endif::[]
 
 ifndef::env-slides[]
+////
 image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=400,align=center]
-endif::[]
+//endif::[]
 
 [.notes]
 --

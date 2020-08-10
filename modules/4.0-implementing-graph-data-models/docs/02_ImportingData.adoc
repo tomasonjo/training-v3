@@ -20,13 +20,10 @@ At the end of this module, you should be able to:
 You have many options for importing data into Neo4j.
 Which option you choose depends on:
 
-[.small]
---
 [square]
 * How much data you have.
 * What tools you are comfortable using.
 * How much time you have to perform the import.
---
 
 image::ImportOptions.png[ImportOptions,width=600,align=center]
 
@@ -91,8 +88,15 @@ AS row       // return each row of the CSV as list of strings or map
 // ... rest of the Cypher statement ...
 ----
 
+ifndef::env-slides[]
 [NOTE]
 You can use `LOAD CSV` for CSV files that contain fewer than 100k lines.
+endif::[]
+
+ifdef::env-slides[]
+[NOTE]
+You can use LOAD CSV for CSV files that contain fewer than 100k lines.
+endif::[]
 
 == Example: Inspecting data from the CSV file on network
 

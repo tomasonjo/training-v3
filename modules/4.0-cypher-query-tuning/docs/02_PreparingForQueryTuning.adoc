@@ -8,9 +8,12 @@
 
 == About this module
 
+[.notes]
+--
 In this module you will learn about the steps you should take before you begin your query tuning work.
 
 At the end of this module, you should be able to:
+--
 
 [square]
 * Ensure you have the appropriate system hardware and settings that can affect performance.
@@ -23,6 +26,7 @@ At the end of this module, you should be able to:
 
 The hardware and system settings required for executing Cypher queries in a Neo4j instance are the typical ones required by most applications:
 
+ifndef::env-slides[]
 [square]
 * *Disk* - Ensure that you either use SSD or you have enough IOPs on the system.
 ** On linux, configure disk scheduler to *noop* or *deadline*, mount the database volume with *noatime*.
@@ -30,22 +34,57 @@ The hardware and system settings required for executing Cypher queries in a Neo4
 * *CPU cores* - The more cores, the more concurrent operations can occur.
 * *Number of open files* - It is recommended that you set it to 40000 if many indexes and users connect.
 * *Neo4j version* - You should use the latest GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* Disk
+  - On linux, configure disk scheduler to *noop* or *deadline*, mount the database volume with *noatime*.
+[square]
+* RAM
+* CPU cores
+* Number of open files
+* Neo4j version
+
+[.notes]
+--
+[square]
+* *Disk* - Ensure that you either use SSD or you have enough IOPs on the system.
+  - On linux, configure disk scheduler to *noop* or *deadline*, mount the database volume with *noatime*.
+[square]
+* *RAM* - Ideally you want to fit your entire graph in memory.
+* *CPU cores* - The more cores, the more concurrent operations can occur.
+* *Number of open files* - It is recommended that you set it to 40000 if many indexes and users connect.
+* *Neo4j version* - You should use the latest GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
+--
+endif::[]
 
 In addition, you should be prepared to monitor system bottlenecks:
 
 [square]
-* *top* or *htop* for CPU and memory usage
-* *iotop* for disk usage
+* top or htop for CPU and memory usage
+* iotop for disk usage
 
 == Neo4j configuration settings
 
+[.notes]
+--
 To prepare for query tuning, you should examine and modify these settings in *neo4j.conf*:
+--
+
 
 [cols="25,50,25",options="header",stripes="none"]
 |====
+ifndef::env-slides[]
 |*Property*
 |*Description*
 |*Default value*
+endif::[]
+ifdef::env-slides[]
+|Property
+|Description
+|Default value
+endif::[]
 |dbms.memory.pagecache.size
 |The amount of memory to use for mapping the store files, in bytes (or kilobytes with the 'k' suffix, megabytes with 'm' and gigabytes with 'g').
 If possible, set to the size of the graph (:sysinfo).
@@ -58,9 +97,18 @@ If possible, set to the size of the graph (:sysinfo).
 |1G
 |====
 
+[.notes]
+--
 Changes to these properties requires a restart of the Neo4j instance.
+--
 
+[.half-column]
+=== Querying configuration settings
+
+[.notes]
+--
 You can also query the graph for what these settings are with this Cypher:
+--
 
 [source, cypher]
 ----
@@ -71,21 +119,47 @@ RETURN name, value
 
 image::listConfig.png[listConfig,width=800,align=center]
 
+[.notes]
+--
 In the next lesson, when you begin query tuning, you will be setting these properties to use more heap.
+--
 
 == Using a representative dataset
 
+[.notes]
+--
 It is extremely important that the dataset you are performing the queries against has the same characteristics your real data will have.
 How the execution plan is created depends upon the DB Stats as well as the indexes defined for the database.
 
 You should always:
+--
 
+ifndef::env-slides[]
 [square]
 * Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
-* Understand the data model with `CALL db.schema.visualization()`.
-* Understand the DB Stats with `CALL apoc.meta.stats()`.
-* Understand the indexes in the graph `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`.
+* Understand the data model with `CALL db.schema.visualization()`
+* Understand the DB Stats with `CALL apoc.meta.stats()`
+* Understand the indexes in the graph with `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`
+endif::[]
 
+
+ifdef::env-slides[]
+[square]
+* Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
+* Understand the data model with
+
+  `CALL db.schema.visualization()`
+
+[square]
+* Understand the DB Stats with
+
+  `CALL apoc.meta.stats()`
+
+[square]
+* Understand the indexes in the graph with
+
+  `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`
+endif::[]
 == Pre-test all queries
 
 Before you begin query tuning, make sure that all queries are properly formed:
@@ -95,16 +169,23 @@ Before you begin query tuning, make sure that all queries are properly formed:
 * Are indexes being used as expected?
 * Is there minimal to no use of literals in queries?
 
+[.notes]
+--
 As you learned in the previous lesson, you should aim to always use parameters in your queries, rather than literals. This will ensure that the Query Cache is used to your advantage.
 If a literal is used, it should be one that is always used in the queries.
 
 Let's look at some other examples where the queries could be written incorrectly.
+--
 
+[.half-column]
 === Check all implied syntax
 
+[.notes]
+--
 You can use `EXPLAIN` to help you when examining queries you will be tuning.
 
 Suppose we had this query:
+--
 
 [source,cypher]
 ----
@@ -116,13 +197,23 @@ RETURN p
 
 image::propertyWrong.png[propertyWrong,width=800,align=center]
 
+[.notes]
+--
 The problem we see with this query is that we know that there is an index on the Person nodes using the _name_ property.
 With this query we would expect the index to be used.
 As we see in the image, no index is used to perform the query.
 _p.fullName_ should have been specified as _.name_.
 
 Furthermore, we can see that _fullName_ is not a valid property key.
+--
+
+[.one-sixth-five-sixths-row]
+=== Verify property keys
+
+[.notes]
+--
 You can execute this statement to get a list of all valid property names in the graph or you can simply view the keys in the left panel of Neo4j Browser.
+--
 
 [source,cypher]
 ----
@@ -132,11 +223,15 @@ RETURN collect(propertyKey)
 
 image::propertyKeys.png[propertyKeys,width=800,align=center]
 
+[.half-row]
 === Check correct variable use
 
+[.notes]
+--
 From our knowledge of DB Stats, we know that there are 56,914 (:Person)-(:_ACTED_IN_)->() relationships in the graph.
 
 Suppose we will be tuning this query:
+--
 
 [source, cypher]
 ----
@@ -147,9 +242,19 @@ RETURN p, m
 
 image::missingRel.png[missingRel,width=800,align=center]
 
+[.notes]
+--
 When we look at the expected number of rows, we see 63,790.
 This is not correct because the query had an error in it.
+--
+
+[.half-row]
+=== Corrected query
+
+[.notes]
+--
 It should have been written as follows:
+--
 
 [source, cypher]
 ----
@@ -158,12 +263,17 @@ MATCH (p:Person)-[:ACTED_IN]->(m)
 RETURN p, m
 ----
 
+[.notes]
+--
 When we look at the expected rows now, we now what we expect from the DB Stats:
+--
 
 image::missingRelCorrected.png[missingRelCorrected,width=800,align=center]
 
 == Warm up the Query and Page Caches
 
+[.notes]
+--
 After you have confirmed that the queries are properly formed and use the expected resources to perform the queries, you are ready to begin tuning.
 
 You want the query times to not include time for compilation.
@@ -175,6 +285,7 @@ There are different ways that you can warm up the Page Cache.
 Depending on the size of your graph and the size of RAM on your system, you may not be able to keep the entire graph in Page Cache.
 
 Here are some ways that you can warm up the Page Cache:
+--
 
 [source, cypher]
 ----
@@ -187,7 +298,12 @@ CALL apoc.warmup.run(true,true) // include large strings and arrays
 CALL apoc.warmup.run(true,true,true) // include indexes
 ----
 
+=== Monitor hit percentages in the Page Cache
+
+[.notes]
+--
 Part of your query tuning work should be to monitor the hit percentages in the Page Cache:
+--
 
 image::pageCacheHits.png[pageCacheHits,width=800,align=center]
 

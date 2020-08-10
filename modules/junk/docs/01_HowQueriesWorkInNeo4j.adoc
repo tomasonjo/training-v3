@@ -1,0 +1,64 @@
+= How Queries Work in Neo4j
+:slug: 03-cqt-40-how-queries-work-in-neo4j
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Preparing for Query Tuning
+
+
+== Count store
+
+[.notes]
+--
+The count store is updated as nodes and relationships are added to the graph.
+The meta-data in the count store is used to determine whether it is faster to use an index or the count.
+
+Here is a summary of when the count store is used for an execution plan.
+--
+
+ifndef::env-slides[]
+[cols="a,a", options="header",stripes="none"]
+|===
+|*Count information stored*
+|*Example of use*
+|Number of nodes
+|(n)
+|Number of nodes with a specific label (single label only)
+|(n:Label)
+|Number of directed relationships
+|()-[]->()
+|Number of directed relationships of a specific type
+|()-[r:REL_TYPE]->()
+|Number of outgoing relationships of a specific type from a node with the label
+|(n:Label)-[r:REL_TYPE]->()
+|Number of incoming relationships of a specific type to a  node with the label
+|(n:Label)<-[r:REL_TYPE]-()
+|===
+endif::[]
+
+ifdef::env-slides[]
+[cols="a,a", options="header",stripes="none"]
+|===
+|Count information stored
+|Example of use
+|Number of nodes
+|(n)
+|Number of nodes with a specific label (single label only)
+|(n:Label)
+|Number of directed relationships
+|()-[]->()
+|Number of directed relationships of a specific type
+|()-[r:REL_TYPE]->()
+|Number of outgoing relationships of a specific type from a node with the label
+|(n:Label)-[r:REL_TYPE]->()
+|Number of incoming relationships of a specific type to a  node with the label
+|(n:Label)<-[r:REL_TYPE]-()
+|===
+endif::[]
+[.notes]
+--
+[IMPORTANT]
+Relationship counts with labels on the start and end nodes are not recorded in the count store.
+--
+

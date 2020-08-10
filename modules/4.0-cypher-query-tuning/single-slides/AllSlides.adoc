@@ -1,0 +1,23 @@
+:includedir: ../docs
+
+include::{includedir}/00_AboutThisCourse.adoc[]
+
+[.title.slide-start-title]
+include::{includedir}/01_HowQueriesWorkInNeo4j.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/02_PreparingForQueryTuning.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/03_ReducingCardinality.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/04_OptimizingPropertyAccess.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/05_MonitoringQueries.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/06_Summary.adoc[leveloffset=+1]
+
+
