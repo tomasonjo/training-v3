@@ -75,7 +75,3 @@ project(':4.0-cypher-query-tuning').projectDir = file('modules/4.0-cypher-query-
 
 include '4.0-query-tuning-exercises'
 project(':4.0-query-tuning-exercises').projectDir = file('modules/4.0-query-tuning-exercises')
-
-
-include 'junk'
-project(':junk').projectDir = file('modules/junk')

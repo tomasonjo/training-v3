@@ -8,6 +8,8 @@
 
 == About this module
 
+[.notes]
+--
 You have learned how to measure the performance of queries by profiling them in your development enviromnent.
 In your real application you will need to have a more rigorous and documented approach to testing the performance of queries in a test environment.
 
@@ -16,6 +18,7 @@ You monitor queries to discover any problems in the queries that run during a sp
 For example, if there may be a spike in access to the data, you may want to monitor how it is affecting queries over a period of time.
 
 At the end of this module, you should be able to:
+--
 
 [square]
 * Monitor queries that are currently running.
@@ -30,22 +33,35 @@ You have profiled queries that have these primary components:
 . Execute the query.
 . Return results to the client.
 
+[.one-sixth-five-sixths-row]
 == Monitoring current queries
 
+[.notes]
+--
 There may be situations where a user/client performs a query that does not return or perhaps takes an extremely long time to return.
 In this case, you can run this procedure to view all currently running queries:
+--
 
 [source, cypher]
 ----
 CALL dbms.listQueries()
 ----
 
+[.notes]
+--
 This procedure returns information about all running queries owned by _neo4j_.
 In this example, the only query that is running is the one to list the queries.
+--
 
 image::listQueries.png[listQueries,width=800,align=center]
 
+[.half-row]
+=== Returning specific query values
+
+[.notes]
+--
 You can also specify what values you want returned from this procedure:
+--
 
 [source,cypher]
 ----
@@ -54,83 +70,122 @@ CALL dbms.listQueries() YIELD  queryId, username, metaData, query, planner , run
 
 image::listQueries2.png[listQueries2,width=800,align=center]
 
+[.half-column]
 === Queries that return too much data
 
+[.notes]
+--
 Here is an example of a query that takes a long time to execute because it returns a lot of data:
+--
 
 [source,cypher]
 ----
 PROFILE MATCH (a)--(b)--(c)--(d)--(e)--(f) RETURN a,b,c,d,e,f
 ----
 
-This query both processes a lot of data, but also returns a lot of data.
+[.notes]
+--
+This query processes a lot of data, but also returns a lot of data.
 
 Here is the explanation of the query:
+--
 
 image::ExplainReturnAlotOfData.png[ExplainReturnAlotOfData,width=800,align=center]
+
+[.one-sixth-five-sixths-row]
+==== Monitoring the long-running query
 
 When this query runs (on left) , you can see it running when you run listQueries() (:queries) (on right):
 
 image::ProfileReturnAlotOfData.png[ProfileReturnAlotOfData,width=800,align=center]
 
+[.notes]
+--
 This query can be killed by the client (on left) by closing the Neo4j Browser pane where it is running.
 However, in the Neo4j Browser session on the right, we cannot kill it in the UI.
 Later in this lesson, you will learn how to kill it from another session.
+--
 
+[.half-column]
 === Queries that take too long to run
 
+[.notes]
+--
 Here is an example of a query that takes a long time to execute:
+--
 
 [source,cypher]
 ----
 EXPLAIN MATCH (a), (b), (c), (d), (e) RETURN count(id(a))
 ----
 
+ifndef::env-slides[]
 Here is the explanation of the query:
+endif::[]
 
 image::ExplainTooLongToRun.png[ExplainTooLongToRun,width=800,align=center]
 
+[.notes]
+--
 Notice that is does a lot of cartesian products, but only returns one row.
+--
 
+==== Monitoring the long-running query
+
+[.notes]
+--
 This query can be killed by the client (on left) by closing the Neo4j browser pane where it is running.
 However, in the Neo4j Browser session on the right, we cannot kill it in the UI.
 If it is not killed by the client, it will eventually run out of memory.
+--
 
 image::OutOfMemoryTooLongToRun.png[OutOfMemoryTooLongToRun,width=800,align=center]
 
+[.notes]
+--
 [NOTE]
 A query may also take a long time to execute because of lock contention. This course does not cover multi-user query issues.
+--
 
 === Killing a query from a different session
 
+[.notes]
+--
 The _neo4j_ user has admin privileges. In your real application environment, you may create other users with admin role.
 As a user with the admin role, you can view queries of all users and you can also kill their queries by calling a Cypher procedure.
+--
 
 If you know that a query is running too long and you want to kill it, you do the following:
 
 [source,cypher]
 ----
-CALL dbms.listQueeries() YIELD query, queryId
+CALL dbms.listQueries() YIELD query, queryId;
 // followed by
 CALL dbms.killQuery('<queryid value>')
 ----
 
-Here is how we kill the query that returns a lot of data:
+==== Killing a query that returns a lot of data
 
 image::killQuery1.png[killQuery1,width=800,align=center]
 
-Here is how we kill the query that executes too long:
+==== Killing a query that executes too long
 
-image::killQuery1.png[killQuery1,width=800,align=center]
+image::killQuery2.png[killQuery2,width=800,align=center]
 
-The result of killing these queries has a different side-effect on the client.
+[.notes]
+--
+The result of killing queries has a different side-effect on the client, depending on whether it is query that returns a lot of data or whether it is a query that executes for a long time.
+--
 
 === Automating the killing of long-running queries
 
+[.notes]
+--
 Some queries against the Neo4j instance are not simply queries, but are Cypher statements that
 load data from CSV files. These types of Cypher statements could take a considerable amount of
 time to complete. One option for you to help automate the killing of long-running queries is to
 create a script that executes a Cypher statement such as the following:
+--
 
 [source, cypher]
 ----
@@ -142,9 +197,12 @@ CALL dbms.killQueries(q) YIELD queryId
 RETURN query, queryId
 ----
 
+[.notes]
+--
 This Cypher statement will retrieve all queries that are running for longer than 30000 ms that do
 not perform a `LOAD` operation and kill them. You could place this code into a script that is run at
 regular intervals.
+--
 
 [.student-exercise]
 == Exercise 7: Monitoring Running Queries
@@ -164,6 +222,8 @@ Estimated time to complete: 15 minutes.
 
 == Configuring query logging
 
+[.notes]
+--
 In addition to monitoring currently-running queries, you can also configure Neo4j to automatically kill queries that run too long or log information about queries.
 
 You can configure Neo4j to log an event if a query runs more than xx milliseconds. There is no
@@ -172,8 +232,9 @@ runs for minutes is not a good thing! At a minimum, you should enable logging fo
 threshold for the length of time queries take. Then, as part of your monitoring, you could regularly
 inspect the *query.log* file to determine if a certain set of queries or users are possibly performing
 queries that tax the resources of the Neo4j instance.
+--
 
-For example, here are the properties you would set in the Neo4j configuration to log a message and
+Here are the properties you would set in the Neo4j configuration to log a message and
 provide information when a query takes more than 1000ms to complete:
 
 [source]
@@ -192,18 +253,24 @@ Upon restart of the Neo4j instance, these logging settings will take effect.
 
 == Using Neo4j Query Log Analyzer
 
+[.notes]
+--
 Another tool that helps you to understand your application queries is Neo4j Query Log Analyzer.
 This tool is installed in Neo4j Desktop and enables you to examine the query log file to understand historical performance trends.
 
 With this tool, you specify a query log file and then you can look at the metrics for all queries in the query log file.
 
 Here is an example of the query stats display in the tool:
+--
 
 image::QueryLogAnalyzerQueryStats.png[QueryLogAnalyzerQueryStats,width=800,align=center]
 
+[.notes]
+--
 This tool is an evolving _work in progress_ by a Neo4j engineer. You can read more about it https://medium.com/neo4j/meet-the-query-log-analyzer-30b3eb4b1d6[here].
 
 In the next exercise, you will install and start using Neo4j Query Log Analyzer.
+--
 
 [.student-exercise]
 == Exercise 8: Getting Started with Neo4j Query Log Analyzer

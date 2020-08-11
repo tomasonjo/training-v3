@@ -160,6 +160,7 @@ ifdef::env-slides[]
 
   `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`
 endif::[]
+
 == Pre-test all queries
 
 Before you begin query tuning, make sure that all queries are properly formed:
@@ -287,7 +288,7 @@ Depending on the size of your graph and the size of RAM on your system, you may 
 Here are some ways that you can warm up the Page Cache:
 --
 
-[source, cypher]
+[source.center, cypher]
 ----
 MATCH (n) RETURN max(id(n))
 MATCH ()-[rel]->() RETURN max(id(rel))

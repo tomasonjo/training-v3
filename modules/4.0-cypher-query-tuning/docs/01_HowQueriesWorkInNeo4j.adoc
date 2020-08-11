@@ -8,6 +8,7 @@
 
 == About this module
 
+ifndef::env-slides[]
 At the end of this module, you should be able to:
 
 [square]
@@ -18,6 +19,18 @@ At the end of this module, you should be able to:
 ** Data Model
 ** Indexes and Constraints
 ** DB Stats
+endif::[]
+
+ifndef::env-slides[]
+[square]
+* Describe the components of query processing.
+* Describe an execution plan.
+* Describe the cost of accessing nodes, labels, properties, and relationships
+* Understand the graph you will be working with:
+* Data Model
+* Indexes and Constraints
+* DB Stats
+endif::[]
 
 == Components of a query
 
@@ -737,7 +750,7 @@ image::NoCountStoreUsed2.png[NoCountStoreUsed2,width=800,align=center]
 In this Cypher query, `size()` calls `GetDegree()`, which in this case, is more efficient than using the count store.
 --
 
-==== Controlling DB Stats updates - configuration
+==== Controlling DB Stats (configuration)
 
 [.notes]
 --
@@ -747,7 +760,7 @@ You can control when the DB Stats are updated, keeping in mind that more resourc
 One way that you can control when DB Stats will be updated is to adjust these settings in the Neo4j configuration:
 --
 
-[source]
+[.center]
 ----
 dbms.index_sampling.background_enabled=true
 dbms.index_sampling.update_percentage=n
@@ -759,14 +772,14 @@ Where the default used by Neo4j for the percentage is 5.
 That is, if more than 5% of the indexes have changes, then the DB Stats in the count store are updated.
 --
 
-==== Controlling DB Stats updates - programatically
+==== Controlling DB Stats (with Cypher)
 
 [.notes]
 --
 You can also force the update to the DB Stats with these calls:
 --
 
-[source, cypher]
+[source.center, cypher]
 ----
 /update DB Stats for a specific index
 CALL db.resampleIndex(':Person(name)')

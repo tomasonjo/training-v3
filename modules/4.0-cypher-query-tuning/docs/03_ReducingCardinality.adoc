@@ -8,10 +8,14 @@
 
 == About this module
 
+[.notes]
+--
 As you examine execution plans for your queries, you will see that rows are processed and passed through to the next step of the execution plan.
 Even though much of the data resides in the Page Cache, you want to reduce the number of rows that the query needs to execute.
 In this module, you will learn how to modify queries to reduce the amount of duplicate information that may be passed from the steps of the execution plan.
+--
 
+ifndef::env-slides[]
 At the end of this module, you should be able to:
 
 [square]
@@ -27,10 +31,32 @@ At the end of this module, you should be able to:
 ** Use `DISTINCT` early in the query.
 ** Use `UNWIND` to your advantage.
 ** Avoid cartesian products.
+endif::[]
 
+
+ifdef::env-slides[]
+[square]
+* Describe cardinality in an execution plan.
+* Tune and rewrite queries to:
+* Aggregate early.
+* Use pattern comprehension.
+* Anchor node through selectivity by label.
+* Use indexes.
+* Use full-text schema indexes.
+* Use query hints for index usage.
+* Use `LIMIT` early in the query.
+* Use `DISTINCT` early in the query.
+* Use `UNWIND` to your advantage.
+* Avoid cartesian products.
+endif::[]
+
+[.half-column]
 == Understanding row cardinality
 
+[.notes]
+--
 Here is a query that we will be looking to improve. The value of _$movieTitle_ is "The Matrix":
+--
 
 [source,cypher]
 ----
@@ -43,10 +69,13 @@ collect(DISTINCT actor.name) AS Actors,
 collect(DISTINCT dir.name) AS Directors
 ----
 
+ifndef::env-slides[]
 Here is the resulting execution plan:
+endif::[]
 
 image::theMatrixStarter.png[theMatrixStarter,width=800,align=center]
 
+[.half-column]
 === Query execution is not what you might expect
 
 Here is how you might expect the query to execute:
@@ -58,6 +87,7 @@ Here is how you might expect the query to execute:
 
 image::theMatrixNot.png[theMatrixNot,width=800,align=center]
 
+[.half-column]
 === Actual query explained
 
 But this is NOT how the steps in the execution plan work. This is what really happens in the query.
@@ -69,21 +99,31 @@ But this is NOT how the steps in the execution plan work. This is what really ha
 
 image::theMatrixActual.png[theMatrixActual,width=800,align=center]
 
+[.notes]
+--
 In reality, we are processing twice as many rows as we need to when matching the actors. There is duplicate work that we need to eliminate.
 We do see the correct result because we are specifying DISTINCT for the names of the actors and directors.
+--
 
+[.one-sixth-five-sixths-row]
 === Making the query worse
 
 Our query could be even worse if we matched the actors first and then the directors:
 
 image::theMatrixWorse.png[theMatrixWorse,width=800,align=center]
 
+[.notes]
+--
 Even though this query returns the same number of rows, the match of the directors is performed 13 times.
 This is more work than we need to do.
+--
 
+[.half-column]
 === Combining paths does not help
 
+ifndef::env-slides[]
 Here is a revised query:
+endif::[]
 
 [source,cypher]
 ----
@@ -94,13 +134,18 @@ collect(DISTINCT actor.name) AS Actors,
 collect(DISTINCT dir.name) AS Directors
 ----
 
+ifndef::env-slides[]
 And here we see the same execution plan:
+endif::[]
 
 image::CombineMatchAttempt.png[CombineMatchAttempt,width=800,align=center]
 
 == What increases cardinality?
 
+[.notes]
+--
 Here are some things to keep in mind that typically increase the cardinality of your queries:
+--
 
 [square]
 * Multiple `MATCH` and `OPTIONAL MATCH` statements that are back-to back (even with a `WITH`) in between
@@ -110,7 +155,10 @@ Here are some things to keep in mind that typically increase the cardinality of 
 
 == How to reduce cardinality?
 
+[.notes]
+--
 Here are some tips:
+--
 
 [square]
 * Aggregate earlier where the grouping key will become distinct.
@@ -120,12 +168,24 @@ Here are some tips:
 * `WITH DISTINCT` applies to the entire row, not just a single variable.
 * `LIMIT` reduces all rows, not results per row.
 
+ifndef::env-slides[]
 [IMPORTANT]
 `WITH` on its own does not shrink cardinality.
+endif::[]
 
-== Reducing cardinality with early aggregation
+ifndef::env-slides[]
+[IMPORTANT]
+WITH on its own does not shrink cardinality.
+endif::[]
 
-In our original query:
+
+[.half-column]
+== Cardinality is a problem
+
+[.notes]
+--
+Here is our original query:
+--
 
 [source,cypher]
 ----
@@ -138,9 +198,20 @@ collect(DISTINCT actor.name) AS Actors,
 collect(DISTINCT dir.name) AS Directors
 ----
 
-We see that the problems are that we have back-to-back `MATCH` statements and we aggregate too late in the query.
-We can improve this query buy moving the aggregation up:
+image::MatrixQuery.png[MatrixQuery,width=800,align=center]
 
+[.notes]
+--
+We see that the problems are that we have back-to-back `MATCH` statements and we aggregate too late in the query.
+We are passing 26 rows through the query.
+--
+
+[.half-column]
+=== Reducing cardinality by aggregating earlier
+[.notes]
+--
+We can improve this query buy moving the aggregation up:
+--
 [source,cypher]
 ----
 PROFILE
@@ -152,20 +223,30 @@ WITH m, Directors, collect(actor.name) AS Actors
 RETURN m.title AS Title, Directors, Actors
 ----
 
+[.notes]
+--
 With this revised query, as soon as we match the directors, we will collect the names which will be unique.
 Then when we execute the final `MATCH`. We are not passing two director rows to be processed, but simply the single row with the movie and list of directors.
 
 Here is the execution plan:
+--
 
 image::ImprovedMatrixQuery.png[ImprovedMatrixQuery,width=800,align=center]
 
+[.notes]
+--
 Here we see that the number of rows has been reduced and subsequently we also see that the number of db hits has been reduced.
+--
 
+[.half-column]
 == Reducing cardinality with pattern comprehension
 
+[.notes]
+--
 Pattern comprehension is a very powerful way to reduce cardinality. It behaves like an `OPTIONAL MATCH` combined with `collect()`.
 
 Here is a rewrite of the original query using pattern comprehension:
+--
 
 [source, cypher]
 ----
@@ -176,16 +257,22 @@ RETURN m.title,
 [(actor:Person)-[:ACTED_IN]->(m) | actor.name] AS Actors
 ----
 
+[.notes]
+--
 In the `RETURN` statement, we are returning two lists, but they are created using pattern comprehension.
 A match pattern is specified that creates the lists by performing an implicit match and in this case, extracts the name property from the nodes retrieved.
 
 Here is the execution plan for this query:
+--
 
 image::PatternComprehension.png[PatternComprehension,width=800,align=center]
 
+[.notes]
+--
 Here we see that the query retrieves the movie row and finds 2 rows for directors.
 With pattern comprehension, these 2 rows are collected and 1 row is then passed to the next pattern comprehension specified for actors. The 13 rows are collected into 1 row so that the final number of rows returned is 1.
 The use of pattern comprehension is slightly better and reduces the number of db hits.
+--
 
 [.student-exercise]
 == Exercise 3: Reducing cardinality with aggregation
@@ -205,10 +292,14 @@ Estimated time to complete: 20 minutes.
 
 == Reducing cardinality with anchor node selectivity
 
+[.notes]
+--
 In your `MATCH` statement patterns, you should strive to create execution plans that either use an index or label (which is also an index).
+--
 
 In your execution plans, you should see these operators at the leaf steps:
 
+ifndef::env-slides[]
 [square]
 * NodeByLabelScan
 * Operators that use an index:
@@ -220,16 +311,35 @@ In your execution plans, you should see these operators at the leaf steps:
 ** NodeIndexContainsScan
 ** NodeIndexEndsWithScan
 ** NodeIndexScan
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* NodeByLabelScan
+* Operators that use an index:
+* NodeIndexSeek
+* NodeUniqueIndexSeek
+* MultiNodeIndexSeek
+* NodeIndexSeekByRange
+* NodeUniqueIndexSeekByRange
+* NodeIndexContainsScan
+* NodeIndexEndsWithScan
+* NodeIndexScan
+endif::[]
 
 You never want to see _AllNodesScan_ in an execution plan.
 
+[.half-colunm]
 === Reducing cardinality with labels
 
+[.notes]
+--
 You want to see NodeByLabelScan in your execution plans if an index will cannot be used.
 You must be familiar with how labels are used.
 Ideally you want the greatest selectivity for the anchor nodes.
 
 For example, here is a query that will use NodeByLabelScan:
+--
 
 [source,cypher]
 ----
@@ -238,13 +348,20 @@ MATCH (p:Person)
 RETURN p.name
 ----
 
+[.notes]
+--
 It returns 18,726 rows.
+--
 
 image::PersonNodes.png[PersonNodes,width=800,align=center]
 
+[.half-column]
 ==== Use more specific labels
 
+[.notes]
+--
 But if you are only really interested in directors, you should anchor your query with this node label:
+--
 
 [source,cypher]
 ----
@@ -257,9 +374,12 @@ image::DirectorNodes.png[DirectorNodes,width=800,align=center]
 
 === Reducing cardinality with indexes
 
+[.notes]
+--
 A really big win for reducing cardinality is to ensure that indexes can be used for your queries.
 If a query is performed frequently by the application, you should add an index for the property that is used for the query.
 The type of index-related step in the execution plan will depend upon the type of filtering your query requires.
+--
 
 Another type of index you can create in the database is the _full-text schema index_ which provides additional indexing capabilities that you do not get from regular indexes:
 
@@ -270,10 +390,14 @@ Another type of index you can create in the database is the _full-text schema in
 * wildcard lookup
 * custom lucene analyzers
 
+[.half-column]
 ==== Example: A query that needs improvement
 
+[.notes]
+--
 Here is an example where a full-text schema index helps. We want to query the roles in the _ACTED_IN_ relationships.
 For this example, the value of _$testString_ is "CABBIE".
+--
 
 [source, cypher]
 ----
@@ -283,20 +407,28 @@ WHERE ANY (role IN r.roles WHERE toUpper(role) CONTAINS $testString)
 return m.title, r.roles, a.name
 ----
 
+ifndef::env-slides[]
 Here is the execution plan for this query:
+endif::[]
 
 image::CabbieExample.png[CabbieExample,width=800,align=center]
 
+[.notes]
+--
 We see that to execute this query, we need many rows (6231,6231,56914,7).
 This spike in rows needed is something you never want to see in an execution plan.
 This query requires 185,771 db hits!
 
 If this query is one that the application uses frequently, you will want to modify things so that it performs better.
+--
 
 ==== Example: Refactoring the graph
 
+[.notes]
+--
 We know that full-text schema indexes allow you to create indexes on relationship properties.
 This is what we want to do to improve the query.
+--
 
 The caveat, however is that the _roles_ property of the _ACTED_IN_ relationship contains a list of roles and we cannot create a full-text schema index on a list of strings.
 To solve this problem, we will refactor the graph to have 2 properties for the _ACTED_IN_ relationship:
@@ -313,10 +445,17 @@ MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
 SET r.primaryRole = r.roles[0], r.secondaryRole = r.roles[1]
 ----
 
+[.notes]
+--
 As you learn about graph data modeling and implementing graphs, you will find that sometimes you will need to refactor the graph to improve query performance.
+--
 
+[.half-column]
+==== Example: Rewritten query with the refactored graph?
 
+ifndef::env-slides[]
 So the previous query with this change is:
+endif::[]
 
 [source,cypher]
 ----
@@ -327,24 +466,39 @@ toUpper(r.secondaryRole) CONTAINS $testString
 RETURN m.title, r.roles, a.name
 ----
 
+[.notes]
+--
 And we see an execution plan that is still not performing well:
+--
 
 image::CabbieExample2.png[CabbieExample2,width=800,align=center]
 
+[.notes]
+--
 It has even more db hits, 407,041 because the properties are stored in different physical locations and require greater db access.
+--
 
-==== Example: Adding a full-text schema index
+==== Solution: Adding a full-text schema index
 
+[.notes]
+--
 Now that we have separated out the values for the roles, we can add a full-text schema index for these properties:
+--
 
-[source,cypher]
+[source.center,cypher]
 ----
 CALL db.index.fulltext.createRelationshipIndex(
       'ActedInRoleIndex',['ACTED_IN'], ['primaryRole','secondaryRole'])
 ----
 
+[.half-column]
+==== Example: Using the full-text schema index
+
+[.notes]
+--
 After adding this type of index, we can query the graph, but the query will change.
 Because it is a full-text schema index, it must be called differently and the query changes to something like this:
+--
 
 [source,cypher]
 ----
@@ -356,18 +510,29 @@ MATCH (a:Actor)-[rel]->(m)
 RETURN a.name, m.title, rel.roles
 ----
 
+ifndef::env-slides[]
 Here is the execution plan for this query:
+endif::[]
 
 image::CabbieExample3.png[CabbieExample3,width=800,align=center]
 
+[.notes]
+--
 We can't really compare db hits here because we are calling a procedures for the full-text schema search, but we do see fewer rows in the execution plan. We see that the execution plan is doing a _NodeByLabelScan_ which is producing a lot of rows.
 We have already determined from the call to queryRelationships which particular relationships are associated with the index.
 The problem, however is that the execution plan scans for all relationships between _Actors_ and _Movies_.
 This is a problem.
+--
 
+[.half-column]
+==== Example: Improved query using full-text schema index
+
+[.notes]
+--
 The solution to this is the remove the labels from the `MATCH` statement so that only the found relationships will be used to retrieve the appropriate _Actor_ and _Movie_ nodes.
 
 Here is the improved query:
+--
 
 [source,cypher]
 ----
@@ -379,11 +544,16 @@ MATCH (a)-[rel]->(m)
 RETURN a.name, m.title, rel.roles
 ----
 
+[.notes]
+--
 In this special case, we do not want the NodeByLabel scan to occur.
 Here is the execution plan:
+--
 
 image::CabbieExample4.png[CabbieExample4,width=800,align=center]
 
+[.notes]
+--
 This is much better. We see far fewer rows, no NodeByLabelScan, much fewer db hits, and a smaller elapsed time.
 
 [NOTE]
@@ -391,11 +561,16 @@ When you call a procedure in Cypher, the execution plan shows zero db hits. When
 
 Full-text schema indexes can be used in these special cases where you want to optimize access to a property of a relationship.
 They are also good for optimizing case-insensitive searches on any node or relationship property string.
+--
 
+[.half-column]
 == Reducing cardinality with query hints
 
+[.notes]
+--
 If the database has indexes, you should strive to ensure that execution plans use them.
 By default, the execution plan will use a single index.
+--
 
 Here is a query that uses an index _$actor1_ is "Tom Cruise" and _$actor2_ is "Kevin Bacon".
 
@@ -408,16 +583,23 @@ WHERE p1.name = $actor1
 RETURN [n IN nodes(p) | coalesce(n.title, n.name)]
 ----
 
+[.notes]
+--
 It finds all paths that represent 4 hops between two actors where _actor1_ is Tom Cruise and _actor2_ is Kevin Bacon.
 Then it returns a list of names or titles for the nodes in the paths found.
+--
 
 image::UsingOneIndex.png[UsingOneIndex,width=800,align=center]
 
+[.notes]
+--
 The index on _Person.name_ is used for the `MATCH` for the _p1_ side of the query path, but then you see that there are 47,721 rows retrieved and then 34 rows filtered to return the data required. A total of 283,320 db hits.
 
 [NOTE]
 In this example, we are interested in all possible paths of this length. If you only need one, use `shortestPath()` for significantly better performance.
+--
 
+[.half-column]
 === Using query hints
 
 You can force the use of more than one index so that an index is used to find _p1_ nodes and _p2_ nodes:
@@ -435,17 +617,23 @@ RETURN [n IN nodes(p) | coalesce(n.title, n.name)]
 
 image::UsingTwoIndexes.png[UsingTwoIndexes,width=800,align=center]
 
+[.notes]
+--
 Here we see fewer rows and fewer db hits, as well as a reduced elapsed time.
 
 What you will find is that the performance of this type of query when the indexes are unique will out-perform indexes that are non-unique.
 In this database, the _Person.name_ index is not unique.
 But for this particular database, there is only one actor named Tom Cruise and one actor named Kevin Bacon.
 If the database had multiple actors with these names, you would see a greater performance degradation (and cardinality) with using multiple indexes.
+--
 
 === Use query hints with caution
 
+[.notes]
+--
 You should use caution, however when you are explicitly specifying the use of indexes.
 Here are some things to consider:
+--
 
 [square]
 * The planner will take the selectivity of an index into account when evaluating equality.
@@ -470,11 +658,15 @@ This exercise has 3 steps.
 Estimated time to complete: 20 minutes.
 --
 
-== Moving `LIMIT` up
+[.half-column]
+== `LIMIT` is too far down in the query
 
+[.notes]
+--
 If the query is written so that a limited number of results are returned, it is best to move the `LIMIT` up in the query.
 
 Here is an example:
+--
 
 [source,cypher]
 ----
@@ -486,9 +678,18 @@ RETURN m.title as Title, Actors
 
 image::LimitLate.png[LimitLate,width=800,align=center]
 
+[.notes]
+--
 Here you can see that after the initial query, many rows are passed through the steps of the execution plan.
+--
 
+[.half-column]
+=== Solution: Moving `LIMIT` up in the query
+
+[.notes]
+--
 Here is a better way to do it:
+--
 
 [source,cypher]
 ----
@@ -500,15 +701,22 @@ WITH m, collect(a) AS Actors
 RETURN m.title AS Title, Actors
 ----
 
+[.notes]
+--
 We know ahead of time that we want 10 rows, one for each movie so expanding after we have retrieved the 10 rows is better.
+--
 
 image::LimitEarly.png[LimitEarly,width=800,align=center]
 
-== Use distinct nodes
+[.half-column]
+== `DISTINCT` is too far down in the query
 
+[.notes]
+--
 `DISTINCT` is another way that you can reduce rows in the execution plan. Just like you just saw how to move `LIMIT` earlier in the query, you can move `DISTINCT` up to reduce rows required.
 
 Here is another example where we have set _$titleMatch_ to "Matrix"
+--
 
 [source,cypher]
 ----
@@ -520,14 +728,23 @@ MATCH (p)-[:ACTED_IN]->()<-[:ACTED_IN]-(p2:Person)
 RETURN DISTINCT p.name, p2.name
 ----
 
+[.notes]
+--
 This query finds all people who acted in or directed a movie with _$titleMatch_ in the title.
 This query will return duplicate _Person_ nodes because some people both acted in and directed movies.
 Then we have a subsequent query where we use the returned people to find other people who have acted in a movie with the first actor, _p_.
 We then use DISTINCT to ensure that we have distinct rows in our return.
+--
 
 image::DistinctLate.png[DistinctLate,width=800,align=center]
 
+[.half-column]
+=== Solution: Moving `DISTINCT` further up in the query
+
+[.notes]
+--
 We can make a slight improvement by moving `DISTINCT` earlier in the query:
+--
 
 [source,cypher]
 ----
@@ -541,16 +758,23 @@ RETURN p.name, p2.name
 
 image::DistinctEarly.png[DistinctEarly,width=800,align=center]
 
+[.notes]
+--
 It has slightly better execution time and we definitely see fewer rows in the execution plan.
+--
 
+[.half-column]
 == Use `UNWIND` judiciously
 
+[.notes]
+--
 `UNWIND` creates rows so if you use it, be aware that you are introducing more rows.
 Sometimes `UNWIND` is useful, especially if you are creating relationships or refactoring nodes in the graph.
 
 Here is an example where we do a query to find all _Movie_ nodes that are between two _Person_ nodes by at most 4 hops.
 In this example _$actor1_ is Tom Cruise and _$actor2_ is Kevin Bacon.
 We use `UNWIND` to create the rows for all nodes visited:
+--
 
 [source,cypher]
 ----
@@ -569,9 +793,18 @@ RETURN VisitedNode.title
 
 image::UNWIND1.png[UNWIND1,width=800,align=center]
 
+[.notes]
+--
 The `UNWIND` adds 170 rows to the query. This isn't that bad considering the total number of rows passed between the steps of the execution plan.
+--
 
+[.half-column]
+=== Another `UNWIND` example
+
+[.notes]
+--
 Here is another example where we use `UNWIND` to combine lists to return rows to process:
+--
 
 [source,cypher]
 ----
@@ -589,12 +822,19 @@ RETURN VisitedNode.title
 
 image::UNWIND2.png[UNWIND2,width=800,align=center]
 
+[.notes]
+--
 This version of the query produces fewer rows from the `UNWIND` and had better performance.
+--
 
-== Eliminating cartesian products
+[.half-column]
+== Cartesian products are expensive
 
+[.notes]
+--
 Cartesian products are useful when you are creating relationships between nodes.
 But for read-only queries, you should aim to eliminate cartesian products in your queries.
+--
 
 Here is an example where we have set _$year_ to 1990:
 
@@ -607,7 +847,13 @@ RETURN collect(DISTINCT a) AS actors, collect(DISTINCT m) AS movies
 
 image::Cartesian1.png[Cartesian1,width=800,align=center]
 
+[.half-column]
+=== Solution: Eliminate cartesian products
+
+[.notes]
+--
 Here is a better way to do the same query:
+--
 
 [source,cypher]
 ----
@@ -618,7 +864,10 @@ RETURN collect(DISTINCT a) AS actors, collect(DISTINCT m) AS movies
 
 image::Cartesian2.png[Cartesian2,width=800,align=center]
 
+[.notes]
+--
 It is about the same number of db hits, but it performs much faster.
+--
 
 [.student-exercise]
 == Exercise 5: Reducing Cardinality with `LIMIT`, `DISTINCT`

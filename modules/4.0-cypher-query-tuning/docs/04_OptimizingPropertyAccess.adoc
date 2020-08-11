@@ -8,10 +8,13 @@
 
 == About this module
 
+[.notes]
+--
 You have learned some of the ways that you can tune queries by reducing the cardinality of the rows that are passed between the steps of an execution plan.
 In this module, you will learn how to rewrite queries so that property access is optimized.
 
 At the end of this module, you should be able to:
+--
 
 [square]
 * Describe when properties are accessed in a query.
@@ -19,12 +22,15 @@ At the end of this module, you should be able to:
 
 == When are properties accessed?
 
+[.notes]
+--
 During a query, a node or relationship property is accessed when it is used to filter a query and to return results.
 Here are some examples.
 
 In the code below, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results.
 The _title_ property need not be accessed in the `RETURN` clause because it is cached from the query.
 If the _title_ property is indexed, then the node property need not be accessed as the value is in the index:
+--
 
 [source,cypher]
 ----
@@ -32,7 +38,7 @@ MATCH (m:Movie {title: $movieTitle})
 RETURN m.title, m.releaseYear
 ----
 
-This query is the same as the above query:
+This query is the same:
 
 [source,cypher]
 ----
@@ -41,9 +47,14 @@ WHERE m.title = $movieTitle
 RETURN m.title, m.releaseYear
 ----
 
-In the coe below, the _primaryRole_ and _secondaryRole_ properties  are accessed for the query and the _name_, _title_, and _roles_ properties are accessed when returning the query results.
+=== Example: Property access
+
+[.notes]
+--
+In the code below, the _primaryRole_ and _secondaryRole_ properties  are accessed for the query and the _name_, _title_, and _roles_ properties are accessed when returning the query results.
 You cannot define an "regular" index on a relationship property so for this query, every _ACTED_IN_ relationship's _roles_ property values need to be accessed.
 This can be very expensive which is why full-text schema indexes are useful.
+--
 
 [source,cypher]
 ----
@@ -52,7 +63,12 @@ WHERE r.primaryRole CONTAINS $characterString OR r.secondaryRole CONTAINS $chara
 RETURN actor.name, movie.title, r.roles
 ----
 
-Here is how the previous query could use the index. In order to perform the query, only the index is used, and then because so few rows are found, the access to the _name_, _title_, and _roles_ for a small set of rows is not that expensive.
+Here is how the previous query could use a full-text schema index.
+
+[.notes]
+--
+In order to perform the query, only the index is used, and then because so few rows are found, the access to the _name_, _title_, and _roles_ for a small set of rows is not that expensive.
+--
 
 [source,cypher]
 ----
@@ -63,15 +79,22 @@ MATCH (actor)-[rel]->(movie)
 RETURN actor.name, movie.title, rel.roles
 ----
 
+[.notes]
+--
 Your goal for indexing and writing queries should be to minimize the number of properties that need to be accessed during the query.
 In addition, you should aim to only return property values that are truly needed by the application.
+--
 
+[.half-column]
 == Only return what you need
 
+[.notes]
+--
 During query processing you may aggregate data and perform multiple `MATCH` clauses with the ultimate goal of returning something to the client.
 You should always aim to return the minimum amount of data to the client.
+--
 
-For example, this query will return all properties of all nodes and relationships retrieved for the query:
+This query will return all properties of all nodes and relationships retrieved for the query:
 
 [source,cypher]
 ----
@@ -80,21 +103,38 @@ MATCH (actor)-[:ACTED_IN]->(movie:Movie)
 RETURN actor, movie
 ----
 
+ifndef::env-slides[]
 Here is the resulting execution plan:
+endif::[]
 
 image::returnAll.png[returnAll,width=800,align=center]
 
-If the client is accessing the database over a network, the elapsed time for the query will be longer.
+[.one-sixth-five-sixths-row]
+=== How much data is returned to the client?
 
-If we view the table returned in Neo4j Browser, we see more information:
+[.notes]
+--
+If the client is accessing the database over a network, the elapsed time for the query will be longer.
+--
+
+If we view the table returned in Neo4j Browser, we see more data:
 
 image::returnAll2.png[returnAll2,width=800,align=center]
 
+[.notes]
+--
 Notice that the query really only took 1 ms, but the streaming of the results back to the client took the 16 ms.
 From this we can infer that the streaming time was 15 ms.
 If the client were on a different system, this streaming time would be greater.
+--
 
+[.one-third=two-thirds-column]
+=== Returning less data to the client
+
+[.notes]
+--
 Contrast the previous query with this one:
+--
 
 [source,cypher]
 ----
@@ -105,16 +145,23 @@ RETURN actor.name, movie.title
 
 image::returnSome.png[returnSome,width=800,align=center]
 
+[.notes]
+--
 The number of db hits is greater, but the elapsed time is smaller. You can imagine that over a network, you would see greater differences in performance.
 
 And in the table view, we see that the query took the same amount of time and the streaming of the results was faster because there is less data to stream.
+--
 
 image::returnSome2.png[returnSome2,width=800,align=center]
 
-In addition, you should strive to limit the number of rows returned as accessing fewer rows to obtain property values will be faster.
+=== Reducing rows to limit data returned
 
-Here we limit the number of rows returned by only returning movies
-that have greater than _$maxActors_ actors.
+[.notes]
+--
+In addition, you should strive to limit the number of rows returned as accessing fewer rows to obtain property values will be faster.
+--
+
+Here we limit the number of rows returned by only returning movies that have greater than _$maxActors_ actors.
 This will be a subset of all movies.
 
 [source,cypher]
@@ -126,7 +173,9 @@ WHERE size(actors) > $maxActors
 RETURN  m.title, m.releaseYear, actors
 ----
 
-Here is another example where we want to only return _$numResults_
+=== Another reduction of data returned
+
+Here is another example where we want to only return _$numResults_ values.
 
 [source, cypher]
 ----
@@ -136,12 +185,16 @@ WITH  m, collect(a) as actors LIMIT $numResults
 RETURN  m.title, m.releaseYear, actors
 ----
 
+[.half-column]
 == Index-based property access
 
+[.notes]
+--
 If an index was used for the query, then that property value for that node will be cached and you need not go to the database to retrieve it.
 Furthermore, if you use `ORDER BY` for a property that was retrieved with the index, it will be very fast because the index already provides the ordering.
+--
 
-With this query:
+With this query, the results are returned automatically in order:
 
 [source,cypher]
 ----
@@ -153,11 +206,20 @@ RETURN p.name
 
 image::retrieveTomsAsPerson.png[retrieveTomsAsPerson,width=800,align=center]
 
-Because there is an index on Person.name, the results are returned automatically in order. That is, it is optional whether you specify `ORDER BY`.
+[.notes]
+--
+It is optional whether you specify `ORDER BY`.
+--
 
+[.half-column]
+=== Example: No index to use
+
+[.notes]
+--
 Contrast this to a query where an index cannot be used.
 
 With this query:
+--
 
 [source,cypher]
 ----
@@ -167,9 +229,15 @@ WHERE p.name STARTS WITH $firstName
 RETURN p.name
 ----
 
+[.notes]
+--
 No index is used for the query and we see that it takes longer to retrieve the nodes.
+--
 
 image::retrieveTomsAsActor.png[retrieveTomsAsActor,width=800,align=center]
+
+[.half-column]
+=== Sorting takes longer with no index
 
 And if we want the results sorted, there is an additional step:
 
@@ -183,10 +251,14 @@ RETURN p.name ORDER BY p.name
 
 image::retrieveTomsAsActorSorted.png[retrieveTomsAsActorSorted,width=800,align=center]
 
-=== Avoiding aggregation with indexes
+[.half-column]
+=== Aggregation when no index
 
+[.notes]
+--
 You learned earlier that eager operators can be expensive.
-You can perform operations such as `min()` and `max()` without needing to aggregate, provide there is a supporting index.
+You can perform operations such as `min()` and `max()` without needing to aggregate, provided there is a supporting index.
+--
 
 Here is an example where we do not have an index on the _Movie.releaseYear_ property.
 
@@ -200,9 +272,18 @@ RETURN min(m.releaseYear) AS Year
 
 image::min1.png[min1,width=800,align=center]
 
+[.notes]
+--
 In the execution plan, we see that we need to aggregate all _Movie_ nodes to perform the `min()` operation.
+--
 
+[.half-column]
+=== Aggregation is automatic with index
+
+[.notes]
+--
 If we had a query that used an index, the aggregation would be avoided because we can get the data we need to find the smallest length title in the index.
+--
 
 [source,cypher]
 ----
@@ -214,13 +295,20 @@ RETURN min(m.title) AS Title
 
 image::min2.png[min2,width=800,align=center]
 
+[.notes]
+--
 In the execution plan, we see no aggregation to find the minimum value.
+--
 
+[.half-column]
 == Tuning "top ten" types of queries
 
+[.notes]
+--
 In a query where a property value is used to order and provide a top or bottom of the result set, you should strive to move the `ORDER BY` and `LIMIT` earlier in the query.
+--
 
-Here is an example. We want to return the 100 most recent movies and their actors, ordered by the release year:
+We want to return the 100 most recent movies and their actors, ordered by the release year:
 
 [source,cypher]
 ----
@@ -232,8 +320,14 @@ RETURN m.title as Title, m.releaseYear as Released, actors ORDER BY m.releaseYea
 
 image::TopHundred.png[TopHundred,width=800,align=center]
 
+[.half-column]
+=== Improving the "top ten" query
+
+[.notes]
+--
 Here is the revised query. We move `ORDER BY` and `LIMIT` to earlier in the query.
 Even though we are accessing the _releaseYear_ property earlier, it helps us to limit the number of rows processed.
+--
 
 [source,cypher]
 ----
@@ -247,11 +341,15 @@ RETURN m.title as Title, m.releaseYear as Released, actors
 
 image::TopHundredRevised.png[TopHundredRevised,width=800,align=center]
 
-== Project property values before expansion
+[.half-column]
+== Accessing property values after expansion
 
+[.notes]
+--
 If you are doing a query that requires the same value to be repeated for multiple rows in the result, it is sometimes better to project that value out when the node is distinct, then do the expansion.
 
 Here is an example of this:
+--
 
 [source, cypher]
 ----
@@ -262,17 +360,29 @@ MATCH (m)<-[:ACTED_IN]-(actor)
 RETURN m.title AS Title, actor.name AS Actor
 ----
 
+[.notes]
+--
 With this query, we know that we want to return rows containing the movie title and an actor name.
 There will be multiple rows that contain the same movie title.
 
 Here is the execution plan:
+--
 
 image::ProjectAfterExpansion.png[ProjectAfterExpansion,width=800,align=center]
 
+[.notes]
+--
 You will notice, however in this execution plan that the _title_ property is actually cached so that it need not be accessed in the `RETURN` clause.
 This is an improvement in the query planner for 4.x.
+--
 
+[.half-column]
+=== Project property values before expansion
+
+[.notes]
+--
 If you were using an earlier release of Neo4j, a slightly better way to do this would be to project the movie title when you know that node is unique, then do the expansion to retrieve the _Actor_ nodes:
+--
 
 [source, cypher]
 ----
@@ -283,14 +393,20 @@ MATCH (m)<-[:ACTED_IN]-(actor)
 RETURN Title, actor.name AS Actor
 ----
 
+ifndef::env-slides[]
 Here is the execution plan:
+endif::[]
 
 image::ProjectBeforeExpansion.png[ProjectBeforeExpansion,width=800,align=center]
 
+[.notes]
+--
 [NOTE]
 As stated earlier in this course, with every release of Neo4j, you must measure your query performance. This is because the Cypher query planner could change and perhaps make your queries perform faster (or slower).
+--
 
-== Aggregate by nodes not properties
+[.half-column]
+== Aggregate by node property
 
 Here is an example where we aggregate by a node property:
 
@@ -304,11 +420,15 @@ WITH p.name as Actor, collect(m) as Movies
 RETURN Actor, Movies
 ----
 
-Here is the execution plan:
-
 image::AggregateByProperty.png[AggregateByProperty,width=800,align=center]
 
+[.half-column]
+=== Better: Aggregate by node
+
+[.notes]
+--
 Depending on the graph, it is better to aggregate by node, rather than by property.
+--
 
 [source, cypher]
 ----
@@ -321,17 +441,24 @@ WITH p.name as Actor, Movies
 RETURN Actor, Movies
 ----
 
+[.notes]
+--
 Here is the execution plan which is slightly better for this graph:
+--
 
 image::AggregateByNode.png[AggregateByNode,width=800,align=center]
 
-== Delay access until node is distinct
+[.half-column]
+== Accessing node properties multiple times
 
+[.notes]
+--
 Delaying the minimum number of properties accessed by reducing the number of nodes is a good thing.
 Even better is accessing a distinct node.
 
 This is a variation of getting at the property value before expansion.
 Here is an example:
+--
 
 [source, cypher]
 ----
@@ -341,11 +468,20 @@ WHERE a.born > $year
 RETURN  m.title, m.releaseYear
 ----
 
+[.notes]
+--
 This query returns 30,146 rows.
+--
 
 image::NonDistinctPropertyAccess.png[NonDistinctPropertyAccess,width=800,align=center]
 
+[.half-column]
+=== Better: Delay access until node is distinct
+
+[.notes]
+--
 Ideally, you want to access the node property once, so making it distinct helps:
+--
 
 [source, cypher]
 ----
@@ -356,11 +492,20 @@ WITH DISTINCT m
 RETURN  m.title, m.releaseYear
 ----
 
+[.notes]
+--
 Although the elapsed time is greater, the number of rows returned is much smaller which means less work to get the property values.
+--
 
 image::DistinctPropertyAccess.png[DistinctPropertyAccess,width=800,align=center]
 
+[.half-column]
+== Property access before aggregation
+
+[.notes]
+--
 Another example is where aggregation is performed for some of the nodes and the property access is done before the aggregation:
+--
 
 [source, cypher]
 ----
@@ -373,7 +518,13 @@ RETURN  m.title, m.releaseYear, actors
 
 image::PropertyAccessBeforeAggregation.png[PropertyAccessBeforeAggregation,width=800,align=center]
 
+[.half-column]
+=== Better: Aggregate and then access properties
+
+[.notes]
+--
 When we aggregate the actor nodes, the movie nodes are distinct so it is much more efficient to rewrite this query to:
+--
 
 [source, cypher]
 ----
