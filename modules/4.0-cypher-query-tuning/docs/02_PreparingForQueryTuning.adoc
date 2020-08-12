@@ -99,7 +99,7 @@ If possible, set to the size of the graph (:sysinfo).
 
 [.notes]
 --
-Changes to these properties requires a restart of the Neo4j instance.
+Changes to these properties require a restart of the Neo4j instance.
 --
 
 [.half-column]

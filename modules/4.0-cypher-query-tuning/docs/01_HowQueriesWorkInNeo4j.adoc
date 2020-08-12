@@ -1,5 +1,5 @@
 = How Queries Work in Neo4j
-:slug: 03-cqt-40-how-queries-work-in-neo4j
+:slug: 01-cqt-40-how-queries-work-in-neo4j
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -21,7 +21,7 @@ At the end of this module, you should be able to:
 ** DB Stats
 endif::[]
 
-ifndef::env-slides[]
+ifdef::env-slides[]
 [square]
 * Describe the components of query processing.
 * Describe an execution plan.
@@ -162,7 +162,7 @@ Next, you will learn about:
 [.notes]
 --
 When the execution plan is created, it determines the set of nodes that will be the anchor for the query.
-The anchor for a query is based upon a MATCH clause.
+The anchor for a query is based upon a `MATCH` clause.
 The anchor is typically determined by meta-data that is stored in the graph or a filter that is provided inline or in a `WHERE` clause.
 This meta-data is the count store that you will learn about later in this lesson.
 The anchor for a query will be based upon the fewest number of nodes that need to be retrieved into memory.
@@ -357,7 +357,7 @@ A row is retrieved, then the next operator uses that row, and so on until the re
 
 [.notes]
 --
-Eager operations requires that all rows are retrieved and operations are performed on all rows until the result is produced.
+Eager operations require that all rows are retrieved and operations are performed on all rows until the result is produced.
 
 Here is the order that operations execute when the query includes _eager_ operators:
 --
@@ -517,7 +517,7 @@ ifdef::env-slides[]
 * Indexes
 * Relationships
 * Properties
-endif::[]
+
 
 [.notes]
 --
@@ -528,6 +528,7 @@ endif::[]
 * *Relationships* are traversed to discover and collect nodes that satisfy all or part of the query.
 * *Properties* are initially accessed to filter a query or refine the number of rows processed in the execution plan. Some properties are in the same physical location as the node or relationship, but there is no guarantee of this proximity. Properties are also used to collect information during the retrieval, or to collect information to return to the client.
 --
+endif::[]
 
 [.half-column]
 === Hierarchy of accessibility

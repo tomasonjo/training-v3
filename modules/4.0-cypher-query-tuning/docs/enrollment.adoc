@@ -1,0 +1,28 @@
+= Cypher Query Tuning in Neo4j 4.0
+:slug: cypher-query-tuning-40
+:description: Learn how to get the best performance out of your Cypher queries.
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/CypherQueryTuning-40_withTitle.jpg[]
+
+== About the Course
+
+This online course is a collection of lessons and hands-on exercises that teach you best practices for writing Cypher queries.
+You will learn how to improve query performance and monitor currently running as well as historical queries.
+
+== Prerequisites
+
+You must have Cypher programming experience to take this course.
+
+== Duration
+
+If you perform all of the hands-on exercises in this course,
+it will take you four hours to complete the course.
+
+== What you will learn
+
+[square]
+* How queries are processed in Neo4j.
+* Prepare you environment for query tuning.
+* Reduce cardinality in your queries.
+* Optimize queries to reduce property access.
+* Monitor both running queries as well as historical queries.

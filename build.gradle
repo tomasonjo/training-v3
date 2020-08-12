@@ -77,6 +77,9 @@ subprojects {
       case "4.0-cypher-query-tuning":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}cypher-query-tuning-40/"
         break
+      case "4.0-intro-graph-algos":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}intro-graph-algos-40/"
+        break
       default:
         "https://neo4j.com/"
     }

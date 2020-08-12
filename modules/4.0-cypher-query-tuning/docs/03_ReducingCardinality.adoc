@@ -150,7 +150,7 @@ Here are some things to keep in mind that typically increase the cardinality of 
 [square]
 * Multiple `MATCH` and `OPTIONAL MATCH` statements that are back-to back (even with a `WITH`) in between
 * Overuse of `UNWIND` operations because each element of the list becomes a row
-* Procedure results (when they `YIELD something)
+* Procedure results (when they `YIELD` something)
 * Lack of selectivity for the anchor nodes
 
 == How to reduce cardinality?
@@ -173,7 +173,7 @@ ifndef::env-slides[]
 `WITH` on its own does not shrink cardinality.
 endif::[]
 
-ifndef::env-slides[]
+ifdef::env-slides[]
 [IMPORTANT]
 WITH on its own does not shrink cardinality.
 endif::[]
@@ -585,7 +585,7 @@ RETURN [n IN nodes(p) | coalesce(n.title, n.name)]
 
 [.notes]
 --
-It finds all paths that represent 4 hops between two actors where _actor1_ is Tom Cruise and _actor2_ is Kevin Bacon.
+It finds all paths that represent 4 hops between two actors where _$actor1_ is "Tom Cruise" and _$actor2_ is "Kevin Bacon".
 Then it returns a list of names or titles for the nodes in the paths found.
 --
 
@@ -733,7 +733,7 @@ RETURN DISTINCT p.name, p2.name
 This query finds all people who acted in or directed a movie with _$titleMatch_ in the title.
 This query will return duplicate _Person_ nodes because some people both acted in and directed movies.
 Then we have a subsequent query where we use the returned people to find other people who have acted in a movie with the first actor, _p_.
-We then use DISTINCT to ensure that we have distinct rows in our return.
+We then use `DISTINCT` to ensure that we have distinct rows in our return.
 --
 
 image::DistinctLate.png[DistinctLate,width=800,align=center]
@@ -772,7 +772,7 @@ It has slightly better execution time and we definitely see fewer rows in the ex
 Sometimes `UNWIND` is useful, especially if you are creating relationships or refactoring nodes in the graph.
 
 Here is an example where we do a query to find all _Movie_ nodes that are between two _Person_ nodes by at most 4 hops.
-In this example _$actor1_ is Tom Cruise and _$actor2_ is Kevin Bacon.
+In this example _$actor1_ is "Tom Cruise" and _$actor2_ is "Kevin Bacon".
 We use `UNWIND` to create the rows for all nodes visited:
 --
 
