@@ -37,10 +37,27 @@ endif::[]
 When you execute a Cypher statement that is a query against the graph, the following resources are used:
 
 . If the query is not already in the Query Cache, the query is compiled into an execution plan in the Neo4j DBMS.
-. The execution plan executes in the Neo4j DBMS to retrieve data. This is where the Page Cache is used as it holds the data in memory.
+. The execution plan executes in the Neo4j DBMS to retrieve data. The Page Cache is used to hold the data in memory. Heap memory is also used to hold intermediate execution data used for aggregating, sorting, and path building.
 . Neo4j DBMS returns results to the client.
 
 Each of these steps takes time and your goal is to minimize these times.
+
+=== Query processing steps
+
+Here is a little more detail about how a query is processed.
+
+image::QuerySteps.png[QuerySteps,width=800,align=center]
+
+. The query is tokenized and then parsed into an Abstract Syntax Tree (AST).
+. Semantic checking is done on the AST to make sure that variable types and scopes are valid. Otherwise an error is returned to the client.
+. The AST is optimized so that some syntax is normalized. Examples of this are:
+.. Move labels from the `MATCH` clause to the WHERE clause.
+.. Supressing redundant `WITH` clauses.
+.. Expanding aliases such as `RETURN *` becomes `RETURN x AS x, y AS y`.
+.. Folding constants such as 1 + 2 * 4 becomes 9.
+.. plus many more optimizations...
+.  The Normalized AST is used to create a query graph that is used to create the logical execution plan. The planner then uses its knowledge of the graph metadata to produce the physical execution plan which is an optimized version of the logical execution plan.
+. The physical execution plan runs in the appropriate runtime, which is based upon the operations in the execution plan. Some operations cannot run in parallel so this affects which runtime is used to execute the query. And finally the runtime returns the results to the client.
 
 === Query performance factors
 
@@ -72,35 +89,16 @@ We are using Neo4j 4.1 for all query executions.
 The Query Cache is an in-memory data structure that keeps track of queries and their associated execution plans that have been executed against the DBMS.
 
 [square]
-* Each unique query is stored as a hash value.
+* Each unique query is stored as in a hash map.
 ** It is case-sensitive:
 *** `MATCH (a:Actor)` is different from `MATCH(A:Actor)`.
 ** Literal values are part of the hash value:
 *** `MATCH (a:Actor {name: 'Joe'})` is different from `MATCH (a:Actor {name: 'Alice'})`.
 ** *Best Practice*: Always use parameters for literal values in your queries.
 *** `MATCH (a:Actor {name: $actorName})`
-* If the graph has changed significantly, an execution plan could become stale. In this case, the execution plan is removed from the Query Cache.
+* If the graph has changed significantly, an execution plan could become stale because the prerequisites for the planning have changed. In this case, the execution plan is removed from the Query Cache.
 * If the Query Cache is full, Neo4j removes a least recently used query to make room for a different query.
 
-[.one-sixth-five-sixths-row]
-=== Page Cache
-
-[.notes]
---
-The Page Cache is an in-memory copy of part or all of the graph.
-Ideally, you want as much of the graph to be in memory as possible (Hit Ratio), but this will depend upon the size of the graph and the amount of RAM on the system where the Neo4j instance is running.
-Later in this course, you will see how the page cache is used in the steps of a query plan when it executes.
---
-
-You use the `:sysinfo` Neo4j Browser command to examine the usage of the Page Cache:
-
-image::Sysinfo.png[Sysinfo,width=800,align=center]
-
-[.notes]
---
-Ideally, you  want the utilization of the Page Cache to be as close to 100% as possible.
-If you see that in your application, there are a lot of flushes of the Page Cache, then you should consider, if possible, adding more RAM to the system.
---
 
 === Execution plan
 
@@ -120,6 +118,7 @@ ifndef::env-slides[]
 * *rows*: This is probably the most important metric you should aim to reduce in a query. The rows passed from one step of a query to the next require both memory and CPU resources. What  you want to watch for are spikes in the number of rows passed between steps as these may be areas where you can tune.
 * *db hits*: You can think of a db hit as an abstract unit of work. Db hits from one step to another cannot really be compared due to the complexity of how data is stored physically. You may not always be able to reduce the number of db hits. You also want to reduce the amount of data that needs to be retrieved from the graph. If you can confine retrievals to what is in indexes, the less data needs to be retrieved from the graph.
 * *elapsed time*: Elapsed time includes the time to run the query as well as return results. Whether data needs to cross a network may also impact the elapsed time.
+* *memory*: The amount of extra heap required to execute that operator in the execution plan.
 endif::[]
 
 ifdef::env-slides[]
@@ -127,25 +126,90 @@ ifdef::env-slides[]
 * rows
 * db hits
 * elapsed time
+* memory
 
 [.notes]
 --
 * *rows*: This is probably the most important metric you should aim to reduce in a query. The rows passed from one step of a query to the next require both memory and CPU resources. What  you want to watch for are spikes in the number of rows passed between steps as these may be areas where you can tune.
-* *db hits*: You can think of a db hit as an abstract unit of work. Db hits from one step to another cannot really be compared due to the complexity of how data is stored physically. You may not always be able to reduce the number of db hits. You also want to reduce the amount of data that needs to be retrieved from the graph. If you can confine retrievals to what is in indexes, the less data needs to be retrieved from the graph.
+* *db hits*: You can think of a db hit as an abstract unit of work. Db hits from one step to another cannot really be compared due to the complexity of how data is stored physically. You may not always be able to reduce the number of db hits. You also want to reduce the amount of data that needs to be retrieved from the graph. If you can confine retrievals to what is in indexes, the less data needs to be retrieved from the graph. Db hits are typically proportionately related to the input rows.
 * *elapsed time*: Elapsed time includes the time to run the query as well as return results. Whether data needs to cross a network may also impact the elapsed time.
+* *memory*: The amount of extra heap required to execute that operator in the execution plan.
 --
+endif::[]
+
+[.one-sixth-five-sixths-row]
+=== Page Cache
+
+[.notes]
+--
+The Page Cache is an in-memory copy of part or all of the graph.
+The area of memory used for Page Cache is managed heap, meaning that it is not automatically garbage collected in the JVM.
+Ideally, you want as much of the graph to be in memory as possible (Hit Ratio), but this will depend upon the size of the graph and the amount of RAM on the system where the Neo4j instance is running.
+Later in this course, you will see how the page cache is used in the steps of a query plan when it executes.
+--
+
+You use the `:sysinfo` Neo4j Browser command to examine the usage of the Page Cache:
+
+image::Sysinfo.png[Sysinfo,width=800,align=center]
+
+[.notes]
+--
+Ideally, you  want the utilization of the Page Cache to be as close to 100% as possible.
+If you see that in your application, there are a lot of flushes of the Page Cache, then you should consider, if possible, adding more RAM to the system.
+--
+
+=== Heap memory
+
+ifdef::env-slides[]
+[.notes]
+--
+endif::[]
+
+Heap memory is used in all steps of query processing and is unmanaged. That is, it is subject to garbage collection in the JVM.
+The creation of the objects, for example AST, used to parse, optimize, and collection intermediate results is all allocated in the heap.
+You can help to ensure that heap memory does not suffer from unwanted garbage collection by configuring a heap size that is close to the amount of RAM.
+
+ifdef::env-slides[]
+--
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* Heap memory is unmanaged
+* Subject to garbage collection in the JVM
+* Used for intermediate processing:
+  - creation of objects such as the AST
+  - parsing
+  - optimization
+  - collection of intermediate results
 endif::[]
 
 === Result set
 
-The result of a query is returned to the client with the `RETURN` clause. In many cases the data is sent over a network so minimizing the amount of data that needs to be formatted and sent back to the client should be a goal.
+ifdef::env-slides[]
+[.notes]
+--
+endif::[]
+
+The result of a query is returned to the client with the `RETURN` clause.
+In many cases the data is sent over a network so minimizing the amount of data that needs to be formatted and sent back to the client should be a goal.
+ifdef::env-slides[]
+--
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* Data returned to the client as a stream
+* Goal is to minimize newtwork traffic
+* Network considerations for returning large amounts of data to clients
+endif::[]
 
 == Understanding execution plans
 
 [.notes]
 --
 The most important task for you as a developer is to understand what an execution plan is, how to interpret it, and most importantly, how to make it performant.
-To understand the execution plan, you must understand how a query starts and then how it is processed ad the nodes are traversed in the graph.
+To understand the execution plan, you must understand how a query starts and then how it is processed as the nodes are traversed in the graph.
 --
 
 Next, you will learn about:
@@ -162,7 +226,7 @@ Next, you will learn about:
 [.notes]
 --
 When the execution plan is created, it determines the set of nodes that will be the anchor for the query.
-The anchor for a query is based upon a `MATCH` clause.
+The anchor for a query is often based upon a `MATCH` clause.
 The anchor is typically determined by meta-data that is stored in the graph or a filter that is provided inline or in a `WHERE` clause.
 This meta-data is the count store that you will learn about later in this lesson.
 The anchor for a query will be based upon the fewest number of nodes that need to be retrieved into memory.
@@ -181,12 +245,37 @@ In the second statement the _Movie_ nodes will be the anchor for the query becau
 In the third statement, a filter is specified which reduces the number of nodes that will be retrieved for the _Person_ node satisfying the filter is the anchor for the query.
 --
 
+==== Multiple anchors
+
+[.notes]
+--
+By default, an anchor set of nodes is determined by the metadata related to the query path and and `WHERE` clauses to filter the query.
+In some cases you may have more than one set of anchor nodes.
+
+For example, you can specify:
+--
+
+[source,cypher]
+----
+MATCH (p1:Person)-[:ACTED_IN]->(m)
+MATCH (n)<-[:ACTED_IN]-(p2:Person)
+WHERE p1.name = $actor1
+  AND p2.name = $actor2
+  and m=n
+RETURN m.title
+----
+
+[.notes]
+--
+In this example, all _p1_ nodes are retrieved as well as all _p2_ nodes. This query has two sets of anchor nodes.
+--
+
 === Expand to follow paths
 
 [.notes]
 --
 After the anchor nodes have been retrieved, the next step if the query specifies a path is to follow the path.
-The in-memory nodes that are part of the anchor set have pointers to nodes on the other end of the relationships.
+The in-memory nodes that are part of the anchor set have pointers to relationships that point to nodes on the other end of the relationships.
 
 The goal here is to eliminate paths from the nodes in memory to nodes that will need to be retrieved.
 This is where specificity in the relationship types is important in your data model.
@@ -197,7 +286,7 @@ For example:
 [source,cypher]
 ----
 MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
-WHERE p.name = $actorName
+WHERE p.name = $name
 RETURN  m.title
 ----
 
@@ -205,8 +294,8 @@ This query will expand to fewer _Movie_ nodes  than this next statement which re
 
 [source,cypher]
 ----
-MATCH (m:Movie)<-[]-(p:Person)
-WHERE p.name = $actorName
+MATCH (m:Movie)<--(p:Person)
+WHERE p.name = $name
 RETURN  m.title
 ----
 
@@ -230,7 +319,7 @@ Here is a simple example rendered in Neo4j Browser where we use `PROFILE` to dis
 [source,cypher]
 ----
 PROFILE MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
-WHERE p.name = $actorName
+WHERE p.name = $name
 RETURN  m.title
 ----
 
@@ -247,6 +336,7 @@ This is the operator used to anchor the starting point in the query.
 This first step takes no rows as input, but produces one row based upon the  value specified in the `WHERE` clause.
 Because our graph has an index on that property, the index is used.
 You want all of your query anchor steps to use an index if possible.
+Note that the index is only used to find the anchor set of nodes and is not at all used for traversing the graph.
 
 The next operator in the execution plan is _Expand(All)_.
 This operator traverses all _DIRECTED_ relationships from the single _Person_ node retrieved in the first step and returns three rows where the first element in each row is the _Person_ node and the second element in the row is the _Movie_ node that is on the other end of the relationship traversed.
@@ -255,7 +345,7 @@ The next step in the execution plan is _CacheProperties_. In this step, if any n
 In this case the _title_ property of the _Movie_ node is cached, as well as the _name_ property of the _Person_ node.
 
 The next operator, _Filter_ is used to finalize the rows that have been passed in from the previous step to ensure that all predicates for filtering are true.
-In this case, all 3 rows are passed to the next step.
+In this case it checks for the _Movie_ label on the nodes and all 3 rows are passed to the next step.
 
 The next operator, _Projection_ is where the results are prepared to be returned to the client.
 In this example, the rows that contain the _Person_ and _Movie_ nodes are transformed to rows that contain only the _title_ property as that is the property specified in the `RETURN` clause.
@@ -288,16 +378,18 @@ When interpreting the execution plan in cypher-shell, you begin at the bottom an
 --
 Here is another execution plan to illustrate how it is executed.
 Here is the Cypher code where the graph contains _Movie_ nodes with a _genres_ property, but no _Genere_ nodes.
-This code extracts the genre information from the _Movie_ nodes, creates the _Genere_ nodes and the _:IS_GENRE_ relationships between _Movie_ nodes and _Genre_ nodes.
+This code extracts the genre information from the _Movie_ nodes, creates the _Genre_ nodes and the _:IS_GENRE_ relationships between _Movie_ nodes and _Genre_ nodes.
 --
 
 [source,cypher]
 ----
 PROFILE MATCH (m:Movie)
-UNWIND m.genres as name
-WITH DISTINCT name, m
+UNWIND m.genres AS name
+WITH  name, collect(m) AS movies
 MERGE (g:Genre {name:name})
-WITH g, m
+WITH g, movies
+UNWIND movies AS m
+WITH g,m
 MERGE (g)<-[:IS_GENRE]-(m)
 ----
 
