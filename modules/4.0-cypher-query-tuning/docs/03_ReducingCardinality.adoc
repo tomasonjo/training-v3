@@ -11,7 +11,7 @@
 [.notes]
 --
 As you examine execution plans for your queries, you will see that rows are processed and passed through to the next step of the execution plan.
-Even though much of the data resides in the Page Cache, you want to reduce the number of rows that the query needs to execute.
+Even though much of the data resides in the Page Cache, you want to reduce the number of rows that the query needs to process.
 In this module, you will learn how to modify queries to reduce the amount of duplicate information that may be passed from the steps of the execution plan.
 --
 
@@ -147,11 +147,25 @@ image::CombineMatchAttempt.png[CombineMatchAttempt,width=800,align=center]
 Here are some things to keep in mind that typically increase the cardinality of your queries:
 --
 
+ifndef::env-slides[]
 [square]
-* Multiple `MATCH` and `OPTIONAL MATCH` statements that are back-to back (even with a `WITH`) in between
+* Multiple `MATCH` and `OPTIONAL MATCH` statements that are back-to back (even with a `WITH`) in between, especially when:
+** The nodes have a degree > 1 and you need to expand.
+** Index selectivity is > 1
 * Overuse of `UNWIND` operations because each element of the list becomes a row
 * Procedure results (when they `YIELD` something)
 * Lack of selectivity for the anchor nodes
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* Multiple `MATCH` and `OPTIONAL MATCH` statements that are back-to back (even with a `WITH`) in between, especially when:
+  - The nodes have a degree > 1 and you need to expand.
+  - Index selectivity is > 1.
+* Overuse of `UNWIND` operations because each element of the list becomes a row
+* Procedure results (when they `YIELD` something)
+* Lack of selectivity for the anchor nodes
+endif::[]
 
 == How to reduce cardinality?
 
@@ -163,6 +177,7 @@ Here are some tips:
 [square]
 * Aggregate earlier where the grouping key will become distinct.
 * Use pattern comprehension.
+* Use sub-queries (new in Neo4j 4.1)
 * Use labels or indexes to select anchor nodes.
 * Take advantage of indexes.
 * `WITH DISTINCT` applies to the entire row, not just a single variable.
@@ -244,6 +259,7 @@ Here we see that the number of rows has been reduced and subsequently we also se
 [.notes]
 --
 Pattern comprehension is a very powerful way to reduce cardinality. It behaves like an `OPTIONAL MATCH` combined with `collect()`.
+It behaves line an inline sub-query.
 
 Here is a rewrite of the original query using pattern comprehension:
 --
@@ -261,6 +277,10 @@ RETURN m.title,
 --
 In the `RETURN` statement, we are returning two lists, but they are created using pattern comprehension.
 A match pattern is specified that creates the lists by performing an implicit match and in this case, extracts the name property from the nodes retrieved.
+
+Pattern comprehension does introduce new identifiers, but they are very useful especially if you want to do some filtering with `WHERE` and computing an expression as the result.
+
+For example:  [pattern WHERE <predicate> | <expression>]
 
 Here is the execution plan for this query:
 --
@@ -297,7 +317,7 @@ Estimated time to complete: 20 minutes.
 In your `MATCH` statement patterns, you should strive to create execution plans that either use an index or label (which is also an index).
 --
 
-In your execution plans, you should see these operators at the leaf steps:
+In your execution plans, you may see these operators at the leaf steps:
 
 ifndef::env-slides[]
 [square]
@@ -376,7 +396,7 @@ image::DirectorNodes.png[DirectorNodes,width=800,align=center]
 
 [.notes]
 --
-A really big win for reducing cardinality is to ensure that indexes can be used for your queries.
+A really big win for reducing cardinality is to ensure that indexes can be used for your queries, especially if they represent unique constraints for a value.
 If a query is performed frequently by the application, you should add an index for the property that is used for the query.
 The type of index-related step in the execution plan will depend upon the type of filtering your query requires.
 --
@@ -448,8 +468,11 @@ SET r.primaryRole = r.roles[0], r.secondaryRole = r.roles[1]
 [.notes]
 --
 As you learn about graph data modeling and implementing graphs, you will find that sometimes you will need to refactor the graph to improve query performance.
---
 
+
+[NOTE]
+It is also possible to create an index on a comma-separated list with `apoc.text.join(r.roles,",")`.
+--
 [.half-column]
 ==== Example: Rewritten query with the refactored graph?
 
@@ -569,6 +592,9 @@ They are also good for optimizing case-insensitive searches on any node or relat
 [.notes]
 --
 If the database has indexes, you should strive to ensure that execution plans use them.
+Ideally, you want indexes that have values with the lowest selectivity.
+The query planner will always choose to use indexes with low selectivity values.
+
 By default, the execution plan will use a single index.
 --
 

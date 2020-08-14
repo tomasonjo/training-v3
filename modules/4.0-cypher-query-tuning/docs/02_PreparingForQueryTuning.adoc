@@ -55,7 +55,7 @@ ifdef::env-slides[]
 * *RAM* - Ideally you want to fit your entire graph in memory.
 * *CPU cores* - The more cores, the more concurrent operations can occur.
 * *Number of open files* - It is recommended that you set it to 40000 if many indexes and users connect.
-* *Neo4j version* - You should use the latest GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
+* *Neo4j version* - You should use the latest minor version of a GA release of Neo4j to take advantage of the performance improvements that come with Neo4j.
 --
 endif::[]
 
@@ -65,6 +65,8 @@ In addition, you should be prepared to monitor system bottlenecks:
 * top or htop for CPU and memory usage
 * iotop for disk usage
 
+You can read more details about system configuration https://neo4j.com/docs/operations-manual/4.0/performance/disks-ram-and-other-tips/[here]
+
 == Neo4j configuration settings
 
 [.notes]
@@ -73,7 +75,7 @@ To prepare for query tuning, you should examine and modify these settings in *ne
 --
 
 
-[cols="25,50,25",options="header",stripes="none"]
+[cols="m,a,m",options="header",stripes="none"]
 |====
 ifndef::env-slides[]
 |*Property*
@@ -103,6 +105,18 @@ Changes to these properties require a restart of the Neo4j instance.
 --
 
 [.half-column]
+=== Querying memory usage
+
+For a started Neo4j instance, you can also query the DBMS to see how much memory is being used:
+
+[source,cypher]
+----
+CALL dbms.listPools()
+----
+
+image::listPools.png[listPools,width=800,align=center]
+
+[.half-column]
 === Querying configuration settings
 
 [.notes]
@@ -128,7 +142,9 @@ In the next lesson, when you begin query tuning, you will be setting these prope
 
 [.notes]
 --
+[NOTE]
 It is extremely important that the dataset you are performing the queries against has the same characteristics your real data will have.
+
 How the execution plan is created depends upon the DB Stats as well as the indexes defined for the database.
 
 You should always:
@@ -137,9 +153,9 @@ You should always:
 ifndef::env-slides[]
 [square]
 * Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
-* Understand the data model with `CALL db.schema.visualization()`
+* Understand the data model with `CALL apoc.meta.graph()`
 * Understand the DB Stats with `CALL apoc.meta.stats()`
-* Understand the indexes in the graph with `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`
+* Understand the indexes in the graph with `:schema`
 endif::[]
 
 
@@ -148,7 +164,7 @@ ifdef::env-slides[]
 * Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
 * Understand the data model with
 
-  `CALL db.schema.visualization()`
+  `CALL apoc.meta.graph()`
 
 [square]
 * Understand the DB Stats with
@@ -158,7 +174,7 @@ ifdef::env-slides[]
 [square]
 * Understand the indexes in the graph with
 
-  `CALL db.indexes() YIELD name, uniqueness, labelsOrTypes, properties`
+  `:schema
 endif::[]
 
 == Pre-test all queries
@@ -219,7 +235,7 @@ You can execute this statement to get a list of all valid property names in the 
 [source,cypher]
 ----
 CALL db.propertyKeys() YIELD propertyKey
-RETURN collect(propertyKey)
+propertyKey ORDER BY propertyKey
 ----
 
 image::propertyKeys.png[propertyKeys,width=800,align=center]
@@ -271,7 +287,7 @@ When we look at the expected rows now, we now what we expect from the DB Stats:
 
 image::missingRelCorrected.png[missingRelCorrected,width=800,align=center]
 
-== Warm up the Query and Page Caches
+== Warm up the Execution Plan and Page Caches
 
 [.notes]
 --
@@ -279,8 +295,8 @@ After you have confirmed that the queries are properly formed and use the expect
 
 You want the query times to not include time for compilation.
 That is, you want to measure only the query execution time and the time it takes to return the results.
-To warm up the Query Cache, make sure you execute all queries you will be tuning.
-This will ensure that they are compiled and in the Query Cache.
+To warm up the Execution Plan Cache, make sure you execute all queries you will be tuning.
+This will ensure that they are compiled and in the Execution Plan Cache.
 
 There are different ways that you can warm up the Page Cache.
 Depending on the size of your graph and the size of RAM on your system, you may not be able to keep the entire graph in Page Cache.
@@ -298,6 +314,9 @@ CALL apoc.warmup.run(true) // include properties
 CALL apoc.warmup.run(true,true) // include large strings and arrays
 CALL apoc.warmup.run(true,true,true) // include indexes
 ----
+
+[NOTE]
+When the Neo4j instance is restarted, it fills the Page Cache with the data it had before it was previously running.
 
 === Monitor hit percentages in the Page Cache
 

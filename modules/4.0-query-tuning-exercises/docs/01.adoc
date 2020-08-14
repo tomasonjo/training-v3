@@ -123,7 +123,7 @@ How many operators are used?
 
 Answer: 8
 
-== Exercise 1.4: Are there any eager operators in this this second query? (Instructions)
+== Exercise 1.4: Are there any eager steps in this this second query? (Instructions)
 
 Produce the execution plan for this query:
 
@@ -137,7 +137,7 @@ return m.title, genres
 
 Are there any eager operators used?
 
-== Exercise 1.4: Are there any eager operators in this this second query? (Solution)
+== Exercise 1.4: Are there any eager steps in this this second query? (Solution)
 
 Produce the execution plan for this query:
 
@@ -165,13 +165,13 @@ Write and execute the Cypher statement to show the indexes and determine the num
 
 [source, cypher]
 ----
-CALL db.indexes()
+:schema
 ----
 
 The result returned should be:
 
 [.thumb]
-image::db.indexes.png[db.indexes,width=900]
+image::indexes.png[indexes,width=900]
 
 This graph has three unique indexes defined.
 
@@ -186,13 +186,13 @@ Write and execute the Cypher statement to show the data model for the graph.
 
 [source, cypher]
 ----
-CALL db.schema.visualization()
+CALL apoc.meta.graph()
 ----
 
 The result returned should be:
 
 [.thumb]
-image::db.schema.png[db.schema,width=600]
+image::apoc.meta.graph.png[apoc.meta.graph,width=600]
 
 
 == Exercise 1.7: Answer some questions about the DB Stats for this graph (Instructions)
