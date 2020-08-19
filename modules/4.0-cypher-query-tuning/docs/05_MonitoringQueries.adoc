@@ -44,6 +44,8 @@ In this case, you can run this procedure to view all currently running queries:
 
 [source, cypher]
 ----
+:queries
+// OR
 CALL dbms.listQueries()
 ----
 
@@ -80,7 +82,7 @@ Here is an example of a query that takes a long time to execute because it retur
 
 [source,cypher]
 ----
-PROFILE MATCH (a)--(b)--(c)--(d)--(e)--(f) RETURN a,b,c,d,e,f
+EXPLAIN MATCH (a)--(b)--(c)--(d)--(e)--(f) RETURN a,b,c,d,e,f
 ----
 
 [.notes]
@@ -95,7 +97,7 @@ image::ExplainReturnAlotOfData.png[ExplainReturnAlotOfData,width=800,align=cente
 [.one-sixth-five-sixths-row]
 ==== Monitoring the long-running query
 
-When this query runs (on left) , you can see it running when you run listQueries() (:queries) (on right):
+When this query runs (on left) , you can see it running when you run `listQueries()` (`:queries`) (on right):
 
 image::ProfileReturnAlotOfData.png[ProfileReturnAlotOfData,width=800,align=center]
 
@@ -204,6 +206,9 @@ not perform a `LOAD` operation and kill them. You could place this code into a s
 regular intervals.
 --
 
+[NOTE]
+See the documentation about the `db.stats.xx()` procedures you can call to collect query details in the https://neo4j.com/docs/operations-manual/current/reference/procedures/[Operations Manual].
+
 [.student-exercise]
 == Exercise 7: Monitoring Running Queries
 
@@ -251,12 +256,19 @@ dbms.track_query_allocation=true
 
 Upon restart of the Neo4j instance, these logging settings will take effect.
 
+[NOTE]
+If you set `dbms.logs.query.threshold=0ms` all queries are logged. Parameter logging can be expensive and can affect performance, especially when loading data.
+
+=== Example: Query log file
+
+image::ExampleQueryLogFile.png[ExampleQueryLogFile,width=800,align=center]
+
 == Using Neo4j Query Log Analyzer
 
 [.notes]
 --
-Another tool that helps you to understand your application queries is Neo4j Query Log Analyzer.
-This tool is installed in Neo4j Desktop and enables you to examine the query log file to understand historical performance trends.
+A tool that helps you to understand your application queries is Neo4j Query Log Analyzer.
+This tool is installed in Neo4j Desktop and enables you to examine the query log file to understand  current and historical performance trends.
 
 With this tool, you specify a query log file and then you can look at the metrics for all queries in the query log file.
 
@@ -267,7 +279,7 @@ image::QueryLogAnalyzerQueryStats.png[QueryLogAnalyzerQueryStats,width=800,align
 
 [.notes]
 --
-This tool is an evolving _work in progress_ by a Neo4j engineer. You can read more about it https://medium.com/neo4j/meet-the-query-log-analyzer-30b3eb4b1d6[here].
+This tool is an evolving _work in progress_ by a Neo4j engineer. You can read more about it https://medium.com/neo4j/search?q=query%20log%20analzyer[here].
 
 In the next exercise, you will install and start using Neo4j Query Log Analyzer.
 --
@@ -330,7 +342,7 @@ Select the correct answers.
 
 [%interactive.answers]
 - [x] Observe queries that have completed.
-- [ ] Monitor queries that are currently running.
+- [x] Monitor queries that are currently running.
 - [x] Analyze query trends in your application.
 - [ ] Raise alerts for long-running queries.
 

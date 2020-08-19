@@ -46,7 +46,8 @@ https://sandbox.neo4j.com/?ref=graph-academy
 
 Videos on  the Neo4j YouTube channel:
 
-https://www.youtube.com/channel/UCvze3hU6OZBkB1vkhH2lH9Q
+https://www.youtube.com/neo4j
+
 
 Neo4j online and classroom training:
 
@@ -66,7 +67,7 @@ You can take the certification exam multiple times until you pass!
 
 GitHub repository:
 
-https://github.com/neo4j-contrib
+https://github.com/neo4j
 
 Neo4j events all over the world:
 

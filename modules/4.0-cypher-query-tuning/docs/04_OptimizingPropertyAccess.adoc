@@ -24,12 +24,10 @@ At the end of this module, you should be able to:
 
 [.notes]
 --
-During a query, a node or relationship property is accessed when it is used to filter a query and to return results.
+During a query, a node or relationship property is accessed when it is used to filter a query and to return the properties as.
 Here are some examples.
 
-In the code below, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results.
-The _title_ property need not be accessed in the `RETURN` clause because it is cached from the query.
-If the _title_ property is indexed, then the node property need not be accessed as the value is in the index:
+In the code below, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results:
 --
 
 [source,cypher]
@@ -47,12 +45,25 @@ WHERE m.title = $movieTitle
 RETURN m.title, m.releaseYear
 ----
 
+[.notes]
+--
+[NOTE]
+ifndef::env-slides[]
+The _title_ property need not be accessed in the `RETURN` clause because it is cached from the query.
+endif::[]
+ifdef::env-slides[]
+The _title_ property need not be accessed in the RETURN clause because it is cached from the query.
+endif::[]
+If the _title_ property is indexed, then the node property need not be accessed from storage as the value is in the index.
+--
+
+
 === Example: Property access
 
 [.notes]
 --
 In the code below, the _primaryRole_ and _secondaryRole_ properties  are accessed for the query and the _name_, _title_, and _roles_ properties are accessed when returning the query results.
-You cannot define an "regular" index on a relationship property so for this query, every _ACTED_IN_ relationship's _roles_ property values need to be accessed.
+You cannot define a "regular" index on a relationship property so for this query, every _ACTED_IN_ relationship's _roles_ property values need to be accessed.
 This can be very expensive which is why full-text schema indexes are useful.
 --
 
@@ -63,7 +74,7 @@ WHERE r.primaryRole CONTAINS $characterString OR r.secondaryRole CONTAINS $chara
 RETURN actor.name, movie.title, r.roles
 ----
 
-Here is how the previous query could use a full-text schema index.
+Here is how the previous query could use the full-text schema index that you learned how to create in the previous lesson on reducing cardinality.
 
 [.notes]
 --
@@ -73,10 +84,9 @@ In order to perform the query, only the index is used, and then because so few r
 [source,cypher]
 ----
 CALL db.index.fulltext.queryRelationships(
-     "ActedInRoleIndex", $characterString) YIELD relationship
+     'ActedInRoleIndex', $testString) YIELD relationship
 WITH relationship AS rel
-MATCH (actor)-[rel]->(movie)
-RETURN actor.name, movie.title, rel.roles
+RETURN startNode(rel).name, endNode(rel).title, rel.roles
 ----
 
 [.notes]
@@ -175,40 +185,55 @@ RETURN  m.title, m.releaseYear, actors
 
 === Another reduction of data returned
 
-Here is another example where we want to only return _$numResults_ values.
+Here is another example where we want to only return 10 values.
 
 [source, cypher]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
-WITH  m, collect(a) as actors LIMIT $numResults
+WITH  m, collect(a.name) as actors LIMIT 10
 RETURN  m.title, m.releaseYear, actors
 ----
 
-[.half-column]
+
+
 == Index-based property access
 
 [.notes]
 --
 If an index was used for the query, then that property value for that node will be cached and you need not go to the database to retrieve it.
 Furthermore, if you use `ORDER BY` for a property that was retrieved with the index, it will be very fast because the index already provides the ordering.
+
+Since Neo4j is schema-free, you must specify to the planner how retrieve the data.
 --
 
-With this query, the results are returned automatically in order:
+Your queries should specify how to compare the data used by the index, for example:
+
+[square]
+* For strings: n.name STARTS WITH ""
+* For numbers: n.born > 0
+* For dates: n.releaseYear > date()
+
+The type of the data used in the query specification will determine how the data is ordered in the results.
+
+[.half-column]
+=== Example: index-based property access
+
+With this query, the results are returned in ascending order:
 
 [source,cypher]
 ----
 PROFILE
 MATCH (p:Person)
 WHERE p.name STARTS WITH $firstName
-RETURN p.name
+RETURN p.name ORDER BY p.name
 ----
 
 image::retrieveTomsAsPerson.png[retrieveTomsAsPerson,width=800,align=center]
 
 [.notes]
 --
-It is optional whether you specify `ORDER BY`.
+It is optional whether you specify `ORDER BY`, but a best practice is to specify it.
 --
 
 [.half-column]
@@ -282,7 +307,7 @@ In the execution plan, we see that we need to aggregate all _Movie_ nodes to per
 
 [.notes]
 --
-If we had a query that used an index, the aggregation would be avoided because we can get the data we need to find the smallest length title in the index.
+If we had a query that used an index, the aggregation would be avoided because we can get the data we need to find the alphabetically earliest movie title because it is in the index without needing the collect all of the titles in the graph.
 --
 
 [source,cypher]
@@ -341,6 +366,11 @@ RETURN m.title as Title, m.releaseYear as Released, actors
 
 image::TopHundredRevised.png[TopHundredRevised,width=800,align=center]
 
+[.notes]
+--
+Of course, the best optimization would be to add an index on the _releaseYear_ property of the _Movie_ nodes.
+It would not be a unique index, but it would definitely reduce the number of properties that need to be accessed for this type of query.
+--
 [.half-column]
 == Accessing property values after expansion
 
@@ -428,6 +458,7 @@ image::AggregateByProperty.png[AggregateByProperty,width=800,align=center]
 [.notes]
 --
 Depending on the graph, it is better to aggregate by node, rather than by property.
+When you aggregate by node, you do not have to read any properties or node details, it simply get the id for the node.
 --
 
 [source, cypher]
@@ -533,11 +564,13 @@ MATCH (m:Movie)<-[:ACTED_IN]-(a:Actor)
 WHERE a.born > $year
 WITH  m, collect(a) as actors
 WHERE m.releaseYear > $year
-RETURN  m.title, m.releaseYear, actors
+RETURN  m.title, m.releaseYear, [a IN actors | a.name] as actorNames
 ----
 
 image::PropertyAccessAfterAggregation.png[PropertyAccessAfterAggregation,width=800,align=center]
 
+[NOTE]
+This query could benefit from indexes on the _born_ and _releaseYear_ properties.
 
 [.student-exercise]
 == Exercise 6: More Query Tuning

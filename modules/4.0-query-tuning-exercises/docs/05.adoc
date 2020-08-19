@@ -223,13 +223,15 @@ Here is the solution code:
 
 [source, cypher]
 ----
-PROFILE MATCH (p:Person)
-WHERE  p.born < $bornYear
-WITH collect(p.name) AS people
-MATCH (m:Movie)
-WHERE  m.releaseYear < $releaseYear
-WITH collect(m.title) as movies, people
-RETURN people, movies
+PROFILE
+CALL {
+MATCH (m:Movie) WHERE m.releaseYear < $releaseYear
+RETURN collect(m) AS movies
+}
+CALL {
+MATCH (a:Actor) WHERE a.born < $bornYear
+RETURN collect(DISTINCT a) AS actors }
+RETURN movies, actors
 ----
 
 The result of executing this code should be:

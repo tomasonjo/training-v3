@@ -529,8 +529,7 @@ PROFILE
 CALL db.index.fulltext.queryRelationships(
      'ActedInRoleIndex', $testString) YIELD relationship
 WITH relationship AS rel
-MATCH (a:Actor)-[rel]->(m)
-RETURN a.name, m.title, rel.roles
+RETURN startNode(rel).name, endNode(rel).title, rel.roles
 ----
 
 ifndef::env-slides[]
@@ -581,6 +580,8 @@ This is much better. We see far fewer rows, no NodeByLabelScan, much fewer db hi
 
 [NOTE]
 When you call a procedure in Cypher, the execution plan shows zero db hits. When calling procedures, you should mainly rely on rows and elapsed time.
+
+When you use `CALL` for a sub-query, however, db hits are measured.
 
 Full-text schema indexes can be used in these special cases where you want to optimize access to a property of a relationship.
 They are also good for optimizing case-insensitive searches on any node or relationship property string.
@@ -647,7 +648,7 @@ image::UsingTwoIndexes.png[UsingTwoIndexes,width=800,align=center]
 --
 Here we see fewer rows and fewer db hits, as well as a reduced elapsed time.
 
-What you will find is that the performance of this type of query when the indexes are unique will out-perform indexes that are non-unique.
+What you will find is that the performance of this type of query when the indexes are unique will out-perform indexes that are non-unique because the runtime stops fetching from them after the first result.
 In this database, the _Person.name_ index is not unique.
 But for this particular database, there is only one actor named Tom Cruise and one actor named Kevin Bacon.
 If the database had multiple actors with these names, you would see a greater performance degradation (and cardinality) with using multiple indexes.
@@ -668,6 +669,77 @@ Here are some things to consider:
 * Hints can inform the planner about the structure of your data in ways the planner cannot infer itself.
 * If you do use hints, use them to force the plan around aspects of the data model that will remain consistent.
 
+[.half-row]
+=== Index selectivity
+
+You can use the APOC procedure to view the selectivity of your indexes.
+
+[source,cypher]
+----
+CALL apoc.schema.nodes()
+----
+
+image::IndexSelectivity.png[IndexSelectivity,width=800,align=center]
+
+== `USING SCAN`
+
+Just like you can explicitly specify if/when an index will be used or assume the index will be automatically used, you can also specify [underline]#not# to use an index.
+You would specify not to use an index if one of your node labels represented the data you are interested in retrieving.
+For example, you can set a flag or status label to a set of nodes that you know will be queried. That way, you need not access any properties.
+
+In our graph, there is an index on the _Genre_ nodes. By default, any query that is based upon the _name_ property will use the index.
+If you want to scan the nodes by their label and not use the index, then you can specify:
+
+[source, cypher]
+----
+PROFILE
+MATCH (g:Genre)
+USING SCAN g:Genre
+WHERE g.name CONTAINS $text
+RETURN g.name
+----
+
+Whether queries that rely simply on labels, rather than the index, will depend on your data model.
+
+[.half-column]
+== Using `JOIN` to reduce cardinality
+
+[.notes]
+--
+`JOIN` is useful when you are performing queries on patterns that are focused on a particular node. This is particularly useful for dense nodes.
+--
+
+Here is our starting query:
+
+[source,cypher]
+----
+PROFILE
+MATCH (a)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d)
+RETURN collect(a.name), m.title, collect(d.name)
+----
+
+image::WithoutJOIN.png[WithoutJOIN,width=800,align=center]
+
+[.half-column]
+=== Adding JOIN
+
+We can add `JOIN` to this query:
+[source,cypher]
+----
+PROFILE
+MATCH (a)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d)
+USING JOIN ON m
+RETURN collect(a.name), m.title, collect(d.name)
+----
+
+image::WithJOIN.png[WithJOIN,width=800,align=center]
+
+[.notes]
+--
+What happens here is that it does two expands to follow the path to _m_ from _a_ and from _d_.
+Then it compares the  _m's_ from each side with each other in a hash-join.
+There are fewer rows in the execution plan, as well as db hits, and a lower execution time.
+--
 [.student-exercise]
 == Exercise 4: Reducing Cardinality with Anchor Selectivity
 
@@ -698,8 +770,8 @@ Here is an example:
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
-WITH m, collect(a) AS Actors LIMIT 10
-RETURN m.title as Title, Actors
+WITH m, collect(a) AS Actors
+RETURN m.title as Title, Actors LIMIT 10
 ----
 
 image::LimitLate.png[LimitLate,width=800,align=center]
@@ -739,7 +811,7 @@ image::LimitEarly.png[LimitEarly,width=800,align=center]
 
 [.notes]
 --
-`DISTINCT` is another way that you can reduce rows in the execution plan. Just like you just saw how to move `LIMIT` earlier in the query, you can move `DISTINCT` up to reduce rows required.
+`DISTINCT` is another way that you can reduce row cardinality in the execution plan. Just like you just saw how to move `LIMIT` earlier in the query, you can move `DISTINCT` up to reduce rows required.
 
 Here is another example where we have set _$titleMatch_ to "Matrix"
 --
@@ -810,11 +882,10 @@ USING INDEX p1:Person(name)
 USING INDEX p2:Person(name)
 WHERE p1.name = $actor1
   AND p2.name = $actor2
-WITH path
-UNWIND (nodes(path)) as VisitedNode
-WITH DISTINCT VisitedNode
-WHERE VisitedNode:Movie
-RETURN VisitedNode.title
+UNWIND (nodes(path)) as visitedNode
+WITH DISTINCT visitedNode
+WHERE visitedNode:Movie
+RETURN visitedNode.title
 ----
 
 image::UNWIND1.png[UNWIND1,width=800,align=center]
@@ -858,7 +929,7 @@ This version of the query produces fewer rows from the `UNWIND` and had better p
 
 [.notes]
 --
-Cartesian products are useful when you are creating relationships between nodes.
+Cartesian products are useful as hash-joins when you are creating relationships between nodes.
 But for read-only queries, you should aim to eliminate cartesian products in your queries.
 --
 
@@ -874,18 +945,22 @@ RETURN collect(DISTINCT a) AS actors, collect(DISTINCT m) AS movies
 image::Cartesian1.png[Cartesian1,width=800,align=center]
 
 [.half-column]
-=== Solution: Eliminate cartesian products
+=== Solution 1: Eliminate cartesian products
 
 [.notes]
 --
-Here is a better way to do the same query:
+Here is a better way to do the same query using sub-queries:
 --
 
 [source,cypher]
 ----
-PROFILE MATCH (a:Actor), (m:Movie)
-WHERE m.releaseYear = $year AND a.born > $year
-RETURN collect(DISTINCT a) AS actors, collect(DISTINCT m) AS movies
+PROFILE
+CALL {
+MATCH (m:Movie) WHERE m.releaseYear = $year RETURN collect(m) AS movies
+}
+CALL {
+MATCH (a:Actor) WHERE a.born > $year RETURN collect(DISTINCT a) AS actors }
+RETURN movies, actors
 ----
 
 image::Cartesian2.png[Cartesian2,width=800,align=center]
@@ -893,6 +968,30 @@ image::Cartesian2.png[Cartesian2,width=800,align=center]
 [.notes]
 --
 It is about the same number of db hits, but it performs much faster.
+--
+
+[.half-column]
+=== Solution 2: Eliminate cartesian products
+
+[.notes]
+--
+Here is an  even better way to do the same query using `UNION`:
+--
+
+[source,cypher]
+----
+PROFILE MATCH (m:Movie) WHERE m.releaseYear = $year
+RETURN {type:"movies", movies: collect(m)} as data
+union all
+MATCH (a:Actor) WHERE a.born > $year
+RETURN { type:"actors", count:collect(DISTINCT a)} AS data
+----
+
+image::Cartesian3.png[Cartesian3,width=800,align=center]
+
+[.notes]
+--
+It is about the same number of db hits, but it performs slightly better than the use of sub-queries.
 --
 
 [.student-exercise]
@@ -926,7 +1025,7 @@ Select the correct answers.
 - [x] Lack of selectivity for anchoring the query.
 - [ ] The number of nodes and relationships in the database.
 - [x] Overuse of `UNWIND` clauses
-- [x] Multiple back-to-back `MATCH` statements
+- [x] Multiple back-to-back `MATCH` statements that return more than one row
 
 === Question 2
 
@@ -951,7 +1050,7 @@ Which Cypher clause cannot provide db hit metrics in the execution plan?
 Select the correct answer.
 
 [%interactive.answers]
-- [x] `CALL`
+- [x] `CALL` for a procedure
 - [ ] `WITH`
 - [ ] `FOREACH`
 - [ ] `USING INDEX`

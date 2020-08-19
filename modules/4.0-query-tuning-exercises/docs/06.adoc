@@ -115,7 +115,7 @@ Here is the optimized query:
 PROFILE
 MATCH (p:Person)
 WHERE p.name STARTS WITH $firstName
-RETURN p.name
+RETURN p.name ORDER BY p.name
 ----
 
 We know that there is an index on _Person.name_ so we take advantage of it.
