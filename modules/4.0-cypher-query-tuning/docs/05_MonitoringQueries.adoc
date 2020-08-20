@@ -206,8 +206,14 @@ not perform a `LOAD` operation and kill them. You could place this code into a s
 regular intervals.
 --
 
+ifndef::env-slides[]
 [NOTE]
 See the documentation about the `db.stats.xx()` procedures you can call to collect query details in the https://neo4j.com/docs/operations-manual/current/reference/procedures/[Operations Manual].
+endif::[]
+
+ifdef::env-slides[]
+See the documentation about the `db.stats.xx()` procedures you can call to collect query details in the https://neo4j.com/docs/operations-manual/current/reference/procedures/[Operations Manual].
+endif::[]
 
 [.student-exercise]
 == Exercise 7: Monitoring Running Queries
@@ -237,10 +243,10 @@ runs for minutes is not a good thing! At a minimum, you should enable logging fo
 threshold for the length of time queries take. Then, as part of your monitoring, you could regularly
 inspect the *query.log* file to determine if a certain set of queries or users are possibly performing
 queries that tax the resources of the Neo4j instance.
---
 
 Here are the properties you would set in the Neo4j configuration to log a message and
 provide information when a query takes more than 1000ms to complete:
+--
 
 [source]
 ----
@@ -254,7 +260,10 @@ dbms.track_query_cpu_time=true
 dbms.track_query_allocation=true
 ----
 
+[.notes]
+--
 Upon restart of the Neo4j instance, these logging settings will take effect.
+--
 
 [NOTE]
 If you set `dbms.logs.query.threshold=0ms` all queries are logged. Parameter logging can be expensive and can affect performance, especially when loading data.

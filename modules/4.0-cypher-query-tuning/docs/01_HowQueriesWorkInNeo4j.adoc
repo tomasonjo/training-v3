@@ -34,20 +34,31 @@ endif::[]
 
 == Components of a query
 
+[.notes]
+--
 When you execute a Cypher statement that is a query against the graph, the following resources are used:
+--
 
 . If the query is not already in the Execution Plan Cache, the query is compiled into an execution plan in the Neo4j DBMS.
 . The execution plan executes in the Neo4j DBMS to retrieve data. The Page Cache is used to hold the data in memory. Heap memory is also used to hold intermediate execution data used for aggregating, sorting, and path building.
 . Neo4j DBMS returns results to the client.
 
+[.notes]
+--
 Each of these steps takes time and your goal is to minimize these times.
+--
 
 === Query processing steps
 
+[.notes]
+--
 Here is a little more detail about how a query is processed.
+--
 
 image::QuerySteps.png[QuerySteps,width=800,align=center]
 
+[.notes]
+--
 . The query is tokenized and then parsed into an Abstract Syntax Tree (AST).
 . Semantic checking is done on the AST to make sure that variable types and scopes are valid. Otherwise an error is returned to the client.
 . The AST is optimized so that some syntax is normalized. Examples of this are:
@@ -58,6 +69,7 @@ image::QuerySteps.png[QuerySteps,width=800,align=center]
 .. plus many more optimizations...
 .  The Normalized AST is used to create a query graph that is used to create the logical execution plan. The planner then uses its knowledge of the graph metadata to produce the physical execution plan which is an optimized version of the logical execution plan.
 . The physical execution plan runs in the appropriate runtime, which is based upon the operations in the execution plan. Some operations cannot run in parallel so this affects which runtime is used to execute the query. And finally the runtime returns the results to the client.
+--
 
 === Query performance factors
 
@@ -86,9 +98,12 @@ We are using Neo4j 4.1 for all query executions.
 
 === Execution Plan Cache
 
+[.notes]
+--
 The Execution Plan Cache is an in-memory data structure that keeps track of query strings and their associated execution plans that have been executed against the DBMS.
+--
 
-[square]
+[square.small]
 * Each execution plan is cached by the query string as a unique key.
 ** It is case-sensitive:
 *** `MATCH (a:Actor)` is different from `MATCH(A:Actor)`.
@@ -113,7 +128,7 @@ A step in the execution plan takes zero or more "rows" of data to produce "rows"
 
 When you specify `EXPLAIN`, the query does not execute, but it returns the execution plan with the estimated rows.
 
-image::SimpleProfileEXPLAIN.png[SimpleProfileEXPLAIN,width=800,align=center]
+image::SimpleQueryEXPLAIN.png[SimpleQueryEXPLAIN,width=800,align=center]
 
 [.half-column]
 ==== Execution plan - PROFILE
@@ -209,7 +224,7 @@ endif::[]
 ifdef::env-slides[]
 [square]
 * Data returned to the client as a stream
-* Goal is to minimize newtwork traffic
+* Goal is to minimize network traffic
 * Network considerations for returning large amounts of data to clients
 endif::[]
 
@@ -478,7 +493,10 @@ image::EagerGraphic.png[EagerGraphic,width=800,align=center]
 [.half-column]
 ==== Example: Implicit eager operations enforced by the query planner
 
+[.notes]
+--
 Here is an example where the execution plan is created operate "eagerly" to prevent infinite processing.
+--
 
 [source, cypher]
 ----

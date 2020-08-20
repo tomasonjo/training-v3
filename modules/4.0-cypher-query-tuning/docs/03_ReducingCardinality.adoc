@@ -269,7 +269,7 @@ Here is a rewrite of the original query using pattern comprehension:
 PROFILE
 MATCH (m:Movie {title: $movieTitle})
 RETURN m.title,
-[(dir:Person)-[:DIRECTED]->(m)| dir.name] AS Directors,
+[(dir:Person)-[:DIRECTED]->(m) | dir.name] AS Directors,
 [(actor:Person)-[:ACTED_IN]->(m) | actor.name] AS Actors
 ----
 
