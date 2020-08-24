@@ -62,7 +62,7 @@ image::QuerySteps.png[QuerySteps,width=800,align=center]
 . The query is tokenized and then parsed into an Abstract Syntax Tree (AST).
 . Semantic checking is done on the AST to make sure that variable types and scopes are valid. Otherwise an error is returned to the client.
 . The AST is optimized so that some syntax is normalized. Examples of this are:
-.. Move labels from the `MATCH` clause to the WHERE clause.
+.. Move labels from the `MATCH` clause to the `WHERE` clause.
 .. Supressing redundant `WITH` clauses.
 .. Expanding aliases such as `RETURN *` becomes `RETURN x AS x, y AS y`.
 .. Folding constants such as 1 + 2 * 4 becomes 9.
@@ -104,13 +104,15 @@ The Execution Plan Cache is an in-memory data structure that keeps track of quer
 --
 
 [square.small]
-* Each execution plan is cached by the query string as a unique key.
-** It is case-sensitive:
-*** `MATCH (a:Actor)` is different from `MATCH(A:Actor)`.
-** Literal values are part of the hash value:
-*** `MATCH (a:Actor {name: 'Joe'})` is different from `MATCH (a:Actor {name: 'Alice'})`.
-** *Best Practice*: Always use parameters for literal values in your queries.
-*** `MATCH (a:Actor {name: $actorName})`
+* Each execution plan is cached by the query string as well as the types of parameters.
+** The query string is case-sensitive:
+*** Example: `MATCH (a:Actor)` is different from `MATCH(A:Actor)`.
+** Literal values are part of the query that is cached:
+*** Example: `MATCH (a:Actor {name: 'Joe'})` is different from `MATCH (a:Actor {name: 'Alice'})`.
+* *Best Practice*: Always use parameters for literal values in your queries.
+** Example: `MATCH (a:Actor {name: $actorName})`
+** Parameter types are used to create the optimal execution plan.
+*** A parameter mapped as type String can be used for index-backed `ORDER BY`.
 * If the graph has changed significantly, an execution plan could become stale because the prerequisites for the planning have changed. In this case, the execution plan is removed from the Execution Plan Cache.
 * If the Execution Plan Cache is full, Neo4j removes a least recently used query to make room for a different query. This behavior is configurable with `cypher.statistics_divergence_threshold`.
 
