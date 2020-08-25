@@ -177,7 +177,7 @@ Here are some tips:
 [square]
 * Aggregate earlier where the grouping key will become distinct.
 * Use pattern comprehension.
-* Use sub-queries (new in Neo4j 4.1)
+* Use subqueries (new in Neo4j 4.1)
 * Use labels or indexes to select anchor nodes.
 * Take advantage of indexes.
 * `WITH DISTINCT` applies to the entire row, not just a single variable.
@@ -259,7 +259,7 @@ Here we see that the number of rows has been reduced and subsequently we also se
 [.notes]
 --
 Pattern comprehension is a very powerful way to reduce cardinality. It behaves like an `OPTIONAL MATCH` combined with `collect()`.
-It behaves line an inline sub-query.
+It behaves line an inline subquery.
 
 Here is a rewrite of the original query using pattern comprehension:
 --
@@ -581,7 +581,7 @@ This is much better. We see far fewer rows, no NodeByLabelScan, much fewer db hi
 [NOTE]
 When you call a procedure in Cypher, the execution plan shows zero db hits. When calling procedures, you should mainly rely on rows and elapsed time.
 
-When you use `CALL` for a sub-query, however, db hits are measured.
+When you use `CALL` for a subquery, however, db hits are measured.
 
 Full-text schema indexes can be used in these special cases where you want to optimize access to a property of a relationship.
 They are also good for optimizing case-insensitive searches on any node or relationship property string.
@@ -949,7 +949,7 @@ image::Cartesian1.png[Cartesian1,width=800,align=center]
 
 [.notes]
 --
-Here is a better way to do the same query using sub-queries:
+Here is a better way to do the same query using subqueries:
 --
 
 [source,cypher]
@@ -991,7 +991,7 @@ image::Cartesian3.png[Cartesian3,width=800,align=center]
 
 [.notes]
 --
-It is about the same number of db hits, but it performs slightly better than the use of sub-queries.
+It is about the same number of db hits, but it performs slightly better than the use of subqueries.
 --
 
 [.student-exercise]
