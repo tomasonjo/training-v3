@@ -478,7 +478,7 @@ In early 2020, some functions and procedures from the Graph Algorithms Library w
 Before that, support for this library has come from and will continue to come from Neo4j Labs for the algorithms that are not officially supported by Neo4j.
 
 One of the most popular libraries that is used by most developers is Awesome Procedures of Cypher (APOC).
-This library has close to 500 procedures and functions that extend Cypher is ways that make your programming in Cypher much easier for complex tasks.
+This library has close to 500 procedures and functions that extend Cypher in ways that make your programming in Cypher much easier for complex tasks.
 Since APOC is so widely-used by developers, it comes already-installed in a Neo4j Sandbox and Neo4j Aura.
 
 Another library that also comes with Neo4j Desktop is GraphQL.
