@@ -521,12 +521,12 @@ Here is another example.
 A `FOREACH` clause requires that all rows have been retrieved before it processes the rows used in the `FOREACH` clause.
 
 [source, cypher]
----
+----
 PROFILE
 MATCH p = (a:Actor)-[:ACTED_IN]-(m:Movie)
 WHERE 1942 <= m.releaseYear <= 1945
 FOREACH (x IN nodes(p) | SET x.USWarTime = true)
----
+----
 
 image::EagerFOREACH.png[EagerFOREACH,width=800,align=center]
 
