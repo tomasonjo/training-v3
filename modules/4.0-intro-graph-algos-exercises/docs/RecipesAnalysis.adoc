@@ -1,0 +1,152 @@
+= Recipe analysis
+:icons: font
+
+== Recipe analysis (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+== Recipe analysis (Overview)
+
+Combine the knowledge esse
+
+PageRank measures the transitive influence or connectivity of nodes.
+It can be computed by iteratively distributing one node’s rank (originally based on degree) over its neighbors.
+
+In this exercise, you will analyze PageRank for the European Roads dataset:
+
+* *Part 1*: Perform the node similarity algorithm in mutate mode.
+* *Part 2*: Perform Louvain to find communities of dishes.
+* *Part 2*: Use graph export to export to a new database.
+
+Go to the next page to start this exercise.
+
+== Part 1: Perform the PageRank algorithm. (Instructions)
+
+Write Cypher code to perform PageRank analysis on the roads networks using these guidelines:
+
+* Use the stream variation of the algorithm.
+* Use the graph from the graph catalog
+* Specify a maximum of 20 iterations.
+* Specify a dampening factor of .85.
+* Return the results ordering by *score*.
+* Limit the top ten results
+
+*Hint*: Call `gds.pageRank.stream`.
+
+== Part 1: Perform the PageRank algorithm. (Solution)
+
+Write Cypher code to perform PageRank analysis on the *Place* nodes using the *EROADS* relationship using these guidelines:
+
+* Use the stream variation of the algorithm.
+* Use the graph from the graph catalog
+* Specify a maximum of 20 iterations.
+* Specify a dampening factor of .85.
+* Return the results ordering by *score*.
+* Limit the top ten results
+
+*Hint*: Call `gds.pageRank.stream`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.pageRank.stream('roads', 
+    {maxIterations:20, dampingFactor:0.85})
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name AS place, score
+ORDER BY score DESC
+LIMIT 10
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EX7.1.png[EX7.1,width=400]
+
+{nbsp} +
+
+Here we see that Berlin, Budapest, and Praha are the most popular places.
+
+== Perform the weighted variant of the PageRank algorithm. (Instructions)
+
+Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+
+* Use the stream variation of the algorithm.
+* Use the same parameters as before.
+* Add the *relationshipWeightProperty* parameter
+
+
+== Perform the weighted variant of the PageRank algorithm. (Solution)
+
+Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+
+* Use the stream variation of the algorithm.
+* Use the same parameters as before.
+* Add the *relationshipWeightProperty* parameter
+
+[source, cypher]
+----
+CALL gds.pageRank.stream('roads',{
+    maxIterations:20, dampingFactor:0.85, 
+    relationshipWeightProperty:'inverse_distance'})
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name AS place, score
+ORDER BY score DESC
+LIMIT 10
+----
+
+The results are quite different to before when we take the inverse distance into account.
+
+== Perform the Personalized PageRank algorithm. (Instructions)
+
+Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+
+* Use the stream variation of the algorithm.
+* Use the same parameters as before.
+* Input the Madrid node as the input of the *sourceNodes* parameter
+
+== Perform the Personalized PageRank. (Solution)
+
+Write Cypher code to perform the weighted variant of the PageRank analysis on the roads networks using these guidelines:
+
+* Use the stream variation of the algorithm.
+* Use the same parameters as before.
+* Input the Madrid node as the input of the *sourceNodes* parameter
+
+[source, cypher]
+----
+MATCH (p:Place)
+WHERE p.name = 'Madrid'
+CALL gds.pageRank.stream('roads', {
+    maxIterations:20, dampingFactor:0.85, 
+    sourceNodes:[p]})
+YIELD nodeId, score
+WHERE nodeId <> id(p)
+RETURN gds.util.asNode(nodeId).name AS place, score
+ORDER BY score DESC
+LIMIT 10
+----
+
+We expect that the neighbouring places of Madrid will have a higher rank due to personalization.
+
+== PageRank: Taking it further
+
+. Change the iterations and dampening factor to see how it affects the results.
+. Change the sourceNodes parameter to see how it affects the results.
+. Try using the non-stream version of the algorithm.
+
+== PageRank (Summary)
+
+PageRank measures the transitive influence or connectivity of nodes.
+It can be computed by iteratively distributing one node’s rank (originally based on degree) over its neighbors.
+
+In this exercise, you analyzed PageRank for the European Roads dataset.
+

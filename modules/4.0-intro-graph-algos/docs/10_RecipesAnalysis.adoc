@@ -1,0 +1,44 @@
+= Recipes analysis
+:slug: nn-iga-40-recipes-analysis
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Memory requirements estimation
+
+
+== Recipes analysis (Overview)
+
+Product supported:
+Node Similarity (Jaccard Index)
+
+Labs implementations:
+Cosine Similarity
+Euclidean Similarity
+Overlap Similarity
+Pearson Similarity
+Approximate Nearest Neighbors
+
+Evaluates how alike nodes are at an individual level either based on node attributes, neighboring nodes, or relationship properties
+
+== Recipes analysis (Algorithms)
+
+The Jaccard similarity algorithm is often used to find recommendations of similar items as well as part of link prediction.
+Jaccard provides a measure of the similarity between sets, which could be two nodes with their attributes compared.
+Mathematically, it’s defined as the size of the intersection divided by the size of the union of two sets. Basically looking at the overlap of the two sets over the sum of those sets.
+
+Often used to find recommendations of similar items as well as part of link prediction.
+
+Jaccard Similarity measures the similarity between sets.
+
+For example, if set A contains {Orange, Banana, Cherry, Pineapple}  and set B contains {Orange, Banana, Apple} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in A and B (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Pineapple}. The resulting Jaccard similarity coefficient is 2/5 which is 0.4. 
+
+A coefficient of 1 indicates that the groups are identical.
+
+== Recipes analysis: Exercise
+
+In Neo4j Browser:
+:play intro-graph-algos-exercises  (Similarity)
+In NEuler, perform some of the Similarity algorithms on any dataset.
+
+== Summary

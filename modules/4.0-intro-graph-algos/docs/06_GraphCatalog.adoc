@@ -1,0 +1,29 @@
+= Graph Management
+:slug: nn-iga-40-graph-management
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Community detection algorithms
+
+== Graph Management
+
+we store yes, truly truly
+
+=== Graph Catalog
+
+=== Native projection
+
+yes
+
+=== Cypher projection
+
+aha
+
+
+=== Anonymous graph
+yep
+
+
+
+== Utilility procedures

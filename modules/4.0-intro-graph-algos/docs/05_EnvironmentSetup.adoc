@@ -1,0 +1,82 @@
+= Environment setup
+:slug: nn-iga-40-environment-setup
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Graph Management
+
+== Preparing you development environment
+
+Download Neo4j Desktop
+
+lorem ipsum
+
+=== Neo4j Desktop with GDSL and APOC
+// Change the picture
+image::local-global-computation.png[local and global graph analytics,width=500, align=center]
+
+
+You must create a project and graph you will work with for this course.
+
+Note: APOC is also required to perform the exercises of this course, specifically, loading the Game of Thrones (GOT) data.
+
+check with dbms.procedures if it working
+
+link to docs
+
+=== Enter the Neuler
+
+image::enter-neuler.png[local and global graph analytics,width=500, align=center]
+
+
+NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+
+To install NEuler, go to install.graphapp.io
+
+Select the Graph Algorithms Playground.
+
+Loading datasets from Neuler
+
+== Load datasets
+
+an image
+
+== Datasets overview
+
+=== Game of Thrones
+
+The INTERACTS_SEASONx relationship has a property, weight to indicate the number of interactions.
+
+The Character node has two properties, name and id where id is the capitalized value of name.
+
+image::got.png[Game of Thrones,width=500, align=center]
+
+Network of thrones site.
+
+=== European roads
+
+The EROAD relationship has three properties, distance, road_number, and watercrossing.
+
+The Place node has multiple properties, name and countryCode.
+
+
+image::european-roads.png[European Roads,width=500, align=center]
+
+European roads site
+
+=== Recipes 
+
+Recipe and ingredients
+
+== Exercise: Setup
+
+Before coming to this training, you should have:
+Installed Neo4j Desktop.
+se!)
+Installed APOC, Graph Algorithms, and Graph Algorithms Playground  in the project.
+Click the Manage button for the local graph you just created.
+Click Open Folder.
+Started the database.
+
+:play intro-graph-algos-exercises  (Set up your Development Environment)

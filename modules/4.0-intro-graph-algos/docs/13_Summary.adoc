@@ -1,0 +1,56 @@
+= Summary
+:slug: nn-iga-40-summary
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+
+== Summary
+
+
+You should now be able to:
+Describe what a graph algorithm is and why it is used.
+Prepare your development environment for using graph algorithms.
+Write code to implement these types of graph algorithms:
+Community Detection
+Centrality
+Pathfinding
+Similarity
+Link Prediction
+Describe some best practices for using graph algorithms.
+
+
+== Resources
+
+
+== Quiz esse
+
+asd
+
+Which category of graph algorithms is used to evaluate how a group is clustered or partitioned?
+Select the correct answer.
+❏   Pathfinding
+❏   Centrality
+✅  Community Detection
+❏   Similarity
+
+asd
+
+Graph algorithm procedures can be called and used the following ways.
+Select the correct answers.
+✅  As a stream procedure that returns a lot of results.
+❏   As a stream procedure that returns a lot of results and can update the graph.
+✅  As a non-stream procedure that returns statistics.
+✅ As a non-stream procedure that returns statistics and can update the graph.
+
+asd
+
+What Community Detection graph algorithm is useful for creating "sub-graphs" by adding a  "partition" property to nodes based upon the neighbors of the node and the weight of the relationship?
+Select the correct answer.
+❏  Connected Components
+❏  Strongly Connected Components
+❏  Clustering Coefficient
+✅  Label Propagation
+
+asdsad
+

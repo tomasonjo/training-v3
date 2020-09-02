@@ -75,3 +75,9 @@ project(':4.0-cypher-query-tuning').projectDir = file('modules/4.0-cypher-query-
 
 include '4.0-query-tuning-exercises'
 project(':4.0-query-tuning-exercises').projectDir = file('modules/4.0-query-tuning-exercises')
+
+include '4.0-intro-graph-algos'
+project(':4.0-intro-graph-algos').projectDir = file('modules/4.0-intro-graph-algos')
+
+include '4.0-intro-graph-algos-exercises'
+project(':4.0-intro-graph-algos-exercises').projectDir = file('modules/4.0-intro-graph-algos-exercises')
