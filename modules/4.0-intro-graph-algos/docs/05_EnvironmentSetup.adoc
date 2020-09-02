@@ -127,7 +127,7 @@ endif::[]
 .. Install the *APOC* plugin.
 .. Install the *Graph Data Science* plugin.
 . Start the database
-. Install Graph Data Science Playground:
+. Install *Graph Data Science Playground*:
 .. Open the *Graph Apps* pane in the left panel.
 .. Double-click *Graph Apps Gallery*, a new window opens.
 .. Click the link for the Graph Data Science Playground install  as shown here:
@@ -149,6 +149,18 @@ image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500,
 image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500, align=center]
 
 
-:play 4.0-intro-graph-algos-exercises  (Set up your Development Environment)
+[.student-exercise]
+== Exercise: Load the Data for the Exercises
+
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:4.0-intro-graph-algos-exercises]
+
+and follow the instructions for *Load the Data for the Exercises*.
+
+[NOTE]
+This exercise has 2 steps.
+Estimated time to complete: 10 minutes.
+
 
 // this page of the browser guide will have them load the data?
