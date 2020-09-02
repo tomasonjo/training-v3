@@ -1,4 +1,4 @@
-= Graph Catalog
+= Graph Management
 :slug: 00-gdsaa-about-this-course
 :doctype: book
 :toc: left
@@ -6,10 +6,11 @@
 :imagesdir: ../images
 :module-next-title: Setup and Cypher Refresher
 
-== Graph Catalog
+== Graph Management
 
 we store yes, truly truly
 
+=== Graph Catalog
 
 === Native projection
 
@@ -17,6 +18,12 @@ yes
 
 === Cypher projection
 
+aha
+
+
+=== Anonymous graph
 yep
+
+
 
 == Utilility procedures

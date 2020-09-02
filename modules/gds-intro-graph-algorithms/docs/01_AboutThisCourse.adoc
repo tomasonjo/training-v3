@@ -53,7 +53,7 @@ Estimated time: _30 minutes_
 
 Estimated time: _30 minutes_
 
-=== Graph Catalog
+=== Graph management
 
 [square]
 * Learn more about Similarity algorithms in Neo4j.

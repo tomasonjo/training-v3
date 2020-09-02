@@ -247,6 +247,11 @@ When dealing with a weighted network, we assign each relationship a weight, that
 The weight must be a number.
 A common application for using a weighted network is a transportation network, where we are searching for the shortest weighted path between a pair of nodes.
 --
+
+[.note]
+--
+Depending on the domain, sometimes a higher weight value is better, while other times a smaller weight value is preferred.
+--
 === Monopartite versus Multipartite Graphs
 
 A monopartite graph consists of a single set of nodes.

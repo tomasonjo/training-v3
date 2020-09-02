@@ -388,7 +388,8 @@ In Neo4j Browser:
 == Clustering coefficient
 
 Clustering Coefficient is the probability that neighbors of a particular node are connected to each other.
-The goal of the Clustering Coefficient algorithm is to measure how tightly a group is clustered compared to how tightly it could be clustered. The algorithm uses Triangle count in its calculations which provides a ratio of existing triangles to possible relationships. A maximum value of 1 indicates a clique where every node is connected to every other node. 
+The goal of the Clustering Coefficient algorithm is to measure how tightly a group is clustered compared to how tightly it could be clustered. The algorithm 
+uses Triangle count in its calculations which provides a ratio of existing triangles to possible relationships. A maximum value of 1 indicates a clique where every node is connected to every other node. 
 
 === Example: Clustering coefficient
 

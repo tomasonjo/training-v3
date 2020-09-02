@@ -12,8 +12,6 @@ Download Neo4j Desktop
 
 lorem ipsum
 
-- each data model in each database
-
 === Neo4j Desktop with GDSL and APOC
 // Change the picture
 image::local-global-computation.png[local and global graph analytics,width=500, align=center]
