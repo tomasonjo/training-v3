@@ -1,0 +1,202 @@
+= Set up your Development Environment
+:icons: font
+
+== Set up your Development Environment
+
+Before you perform the exercises for this course, complete the following steps:
+
+Since these steps include downloading a *large* dataset, you *must* complete Steps 1-3  before you start this course.
+
+*Step 1*: Prepare project for development.
+{nbsp} +
+{nbsp} +
+*Step 2*: Verify libraries are available.
+{nbsp} +
+{nbsp} +
+*Step 3*: Verify Graph Applications Playground (NEuler) is available.
+{nbsp} +
+{nbsp} +
+The following steps can be completed after you have started the course during this exercise (Exercise 1):
+{nbsp} +
+{nbsp} +
+*Step 4*: Use Graph Applications Playground (NEuler) to load some more data.
+{nbsp} +
+{nbsp} +
+*Step 5*: Load some additional graphs used for the exercises.
+{nbsp} +
+{nbsp} +
+Go to the next page to begin setup.
+
+== Step 1: Prepare project for development.
+
+. In Neo4j Desktop, create a project and a local graph, providing a password you will remember.
+{nbsp} +
+    *Note*: Do *not* start the database!
+    [start=3]
+. Install the necessary plugins in the project.
+.. Click *Add Plugin*.
+.. Install the APOC plugin in the project.
+.. Install the Graph Data Science plugin in the project.
+. Install Graph Algorithms Playground (application) in the project.
+.. Ensure that Graph Algorithms Playground is download in the graph apps settings area. (You may have to click Discover more graph apps to download it)
+.. Click *Add Application*.
+.. Select Graph Algorithms Playground.
+
+This is what you should now see for your project:
+
+image::PluginsAppInstalled.png[PluginsAppInstalled,width=150,role=left]
+
+{nbsp} +
+
+Go to the next page to continue setup.
+
+== Step 2: Verify libraries are available.
+
+Verify that your Neo4j Browser session has access to the apoc and algo libraries by executing the Cypher below:
+
+[source, cypher]
+----
+CALL dbms.procedures()
+YIELD name
+WHERE name STARTS WITH 'apoc.' OR name STARTS WITH 'gds'
+RETURN name ORDER BY name ASC
+----
+
+{nbsp} +
+
+If this code does not return the list of apoc and gds procedures, then you must ensure that the these libraries are available by installing the plugin (Neo4j Desktop) and restarting the database.
+
+Go to the next page to continue setup.
+
+== Step 3: Verify Graph Applications Playground (NEuler) is available.
+
+In Neo4j Desktop, click the image for the Graph Applications Playground.
+
+Does it open a new window? It should look as follows:
+
+image::NEulerInstalled.png[NEulerInstalled,width=400,role=left]
+
+{nbsp} +
+
+If not, you may need to reinstall it.
+
+*Note*: This is where you should have left off in preparing your development environment for this course.
+
+Go to the next page to continue setup.
+
+== Step 4: Use Graph Applications Playground (NEuler) to load some more data.
+
+In Graph Applications Playground (NEuler):
+
+.  Click the database icon in the left pane.
+.  Load the Game of Thrones data.
+.  Close NEuler.
+.  Open NEuler.
+.  Load the European Roads data.
+.  Close NEuler.
+.  Load the Recipes data.
+.  Close NEuler.
+
+*Note*: Do not load the Twitter data as it conflicts with other data in the graph.
+
+[start=7]
+. In Neo4j Browser, confirm that your database looks as follows:
+
+[.thumb]
+image::AfterNEulerLoad.png[AfterNEulerLoad,width=150]
+
+{nbsp} +
+
+Go to the next page to continue setup.
+
+== Preprocess inverted distance
+
+Love, distance explain weights
+
+image::WeightExplain.png[WeightExplain,width=150]
+
++1 to avoid dividing by zero
+
+[source, cypher]
+----
+MATCH (:Place)-[r:EROAD]->(:Place)
+SET r.inverse_distance = 1.0 / log10(r.distance + 2)
+----
+
+== Step 5: Load some additional graphs used for the exercises.
+
+Execute each of these Cypher code blocks to add these graphs to the database:
+
+[source, cypher]
+----
+MERGE (nAlice:Person {name:'Alice'})
+MERGE (nBridget:Person {name:'Bridget'})
+MERGE (nCharles:Person {name:'Charles'})
+MERGE (nDoug:Person {name:'Doug'})
+MERGE (nMark:Person {name:'Mark'})
+MERGE (nMichael:Person {name:'Michael'})
+MERGE (nAlice)-[:HELPS{weight:5.0}]->(nBridget)
+MERGE (nAlice)-[:HELPS{weight:1.5}]->(nCharles)
+MERGE (nMark)-[:HELPS{weight:2.0}]->(nDoug)
+MERGE (nMark)-[:HELPS{weight:1.7}]->(nMichael)
+MERGE (nBridget)-[:HELPS{weight:0.5}]->(nMichael)
+MERGE (nDoug)-[:HELPS{weight:1.1}]->(nMark)
+MERGE (nMichael)-[:HELPS{weight:0.5}]->(nAlice)
+MERGE (nAlice)-[:HELPS{weight:1.1}]->(nMichael)
+MERGE (nBridget)-[:HELPS{weight:2.6}]->(nAlice)
+MERGE (nMichael)-[:HELPS{weight:1.8}]->(nBridget)
+----
+
+{nbsp} +
+
+[source, cypher]
+----
+MERGE (neo4j:Tag {name:'neo4j'})
+MERGE (graphql:Tag {name:'graphql'})
+MERGE (cypher:Tag {name:'cypher'})
+MERGE (graph:Tag {name:'graph'})
+MERGE (python:Tag {name:'python'})
+MERGE (html:Tag {name:'html'})
+MERGE (css:Tag {name:'css'})
+MERGE (js:Tag {name:'javascript'})
+
+MERGE (query:Question {name: "How can I optimize this query in neo4j?"})
+MERGE (path:Question {name: "Neo4j finding a path between two stations"})
+MERGE (grand:Question {name: "How to write relationship mutation in GraphQL using GRANDstack?"})
+MERGE (pythonq:Question {name: "Quicker way to write a dict to a neo4j database using python"})
+MERGE (list:Question {name: "How to make a responsive horizontal list"})
+MERGE (box:Question {name: "3D box tilt with JavaScript and css"})
+
+MERGE (query)-[:HAS_TAG]->(graph)
+MERGE (query)-[:HAS_TAG]->(neo4j)
+MERGE (query)-[:HAS_TAG]->(cypher)
+
+MERGE (path)-[:HAS_TAG]->(neo4j)
+MERGE (path)-[:HAS_TAG]->(cypher)
+MERGE (path)-[:HAS_TAG]->(graph)
+
+MERGE (grand)-[:HAS_TAG]->(neo4j)
+MERGE (grand)-[:HAS_TAG]->(graphql)
+
+MERGE (pythonq)-[:HAS_TAG]->(neo4j)
+MERGE (pythonq)-[:HAS_TAG]->(python)
+MERGE (pythonq)-[:HAS_TAG]->(cypher)
+
+MERGE (list)-[:HAS_TAG]->(html)
+MERGE (list)-[:HAS_TAG]->(css)
+
+MERGE (box)-[:HAS_TAG]->(html)
+MERGE (box)-[:HAS_TAG]->(css)
+MERGE (box)-[:HAS_TAG]->(js)
+----
+
+
+Your database should now look as follows:
+
+[.thumb]
+image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+Your database is now set up and ready for you to gain experience with graph algorithms.
+

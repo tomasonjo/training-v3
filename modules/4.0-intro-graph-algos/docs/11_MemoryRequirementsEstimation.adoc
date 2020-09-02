@@ -1,0 +1,13 @@
+= Memory requirements estimation
+:slug: nn-iga-40-memory-requirements-estimation
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Additional information
+
+== Memory reqirements estimation
+
+on big graphs you need memory
+
+== Summary

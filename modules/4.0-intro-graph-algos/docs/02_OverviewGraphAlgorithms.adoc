@@ -1,0 +1,389 @@
+= Overview of graph algorithms
+:slug: nn-iga-40-overview-of-graph-algorithms
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Introduction to Graph Data Science library
+
+== Graph analytics and algorithms
+
+In nature, we can observe many social and physical networks form and evolve.
+Every person is a member of a friendship network.
+We can represent the human brain as a network of neurons and synapse connections.
+The research papers form a citation network if we follow their citations.
+Every city has a transportation network that includes public transport and infrastructure.
+
+Graph analytics, also known as network analysis, focuses on the study of relationships in real-world networks.
+Due to the sheer volume of data, the insights are sometimes hard to spot with the naked eye.
+Graph algorithms are so exciting because they are the methods we use to understand real-world networks.
+They help us uncover the essence of the complex systems by analyzing their connections.
+
+We can observe and retrieve local graph patterns with graph pattern-based query languages such as Cypher.
+The term graph algorithms usually refer to more global and iterative analysis, where, for example, we want to learn the overall community structure of a graph.
+
+image::local-global-computation.png[local and global graph analytics,width=500, align=center]
+
+[.notes]
+--
+As an example, if we wanted to count the number of neighbours for a given node, we could fetch that information with Cypher.
+However, if we are interested to learn how influential those neighbours are, given their position in the global network, we would use graph algorithms.
+--
+
+=== When not to use graphs
+
+Note when not to use graph and graph algorithms!
+
+[.notes]
+--
+In general, very organized data that follows a regular schema and has relatively few connections between its data elements does not warrant graph specific storage and computation.
+--
+
+* Questions with just a few connections or flat (not nested). 
+* Questions solved with specific, well-crafted queries. 
+* Simple statistical results (sums, averages, ratios).
+* Example: 
+** Regular reporting based on defined criteria and well-organized data
+
+[.is-half.left]
+--
+image::average-rainfall-chart.png[Average rainfall chart,width=500,align=center]
+--
+
+Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate.
+
+
+[.is-half.right]
+--
+Average rainfall calculation is an example of a simple statistical result, where no graph analytics is required.
+--
+
+== Graph Structure
+
+A graph consists of nodes and relationship.
+
+=== Random network
+
+[.is-half.left]
+--
+image::random-network.png[Random network,width=500,align=center]
+--
+
+[.is-half.right]
+--
+In a completely average distribution of relationships per node, a random network is formed with no hierarchies.
+This type of graph is considered flat.
+All nodes have the same probability of being attached to any other node.
+Average distribution is only valid when we are dealing with a set of independent observations.
+--
+
+=== Structured network
+
+[.is-half.left]
+--
+image::structured-network.png[Structured network,width=500,align=center]
+--
+
+[.is-half.right]
+--
+Highly connected and therefore dependent observations do not adhere to average distribution.
+The relationship distribution in most real-world networks follows the Power-Law.
+A well-known example is the Pareto distribution or the "80/20 rule".
+Originally it was used to describe the situation where 20% of a population controls 80% of the wealth.
+--
+=== Structure and density
+
+[.is-half.left]
+--
+image::structure-density.png[Structure and density,width=500,align=center]
+--
+[.is-half.right]
+--
+Graph analytics is a collection of methods that help us determine strategic entities, uncover structural information, and calculate the flow of information in a given network.
+--
+=== Understanding graph complexity
+
+[.is-half.left]
+--
+image::graph-complexity.png[Understanding graph complexity,width=500,align=center]
+--
+
+[.is-half.right]
+--
+Simple networks can be visually inspected to gain insights.
+Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
+As we can't visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
+--
+=== What do people do with graph algorithms
+
+There are a number of real-world use-cases, where graph algorithms are applied.
+
+[.is-half.left]
+--
+*Explore, plan, measure*
+
+Find significant patterns and plan for optimal structures.
+
+image::explore-plan-measure.png[Explore plan measure,width=500,align=center]
+
+Score outcomes and set a threshold value for a prediction.
+--
+
+[.is-half.right]
+--
+*Machine learning*
+
+Use the measures as features to train an ML model.
+
+image::machine-learning.png[Machine learning,width=500,align=center]
+--
+
+== Propagation pathways
+
+This is a very practical example of analyzing Propagation paths; trying to understand the routes taken by network failure,
+
+image::propagation-pathways.png[Propagation pathways,width=500,align=center]
+
+This data is from a serious US 2010 Airline congestion failure.
+With the purple dots showing serious delays and the greens dots doing ok.
+If I had a time sequence you’d see the cascading, rippling failures and the key connections that spread the delay for east to west. 
+Of course this is just one example.
+This would very well be an IT network where you’re trying to contain infection or an electrical grid.
+Or perhaps you want to encourage the spread of something, like information, and you’ll need to understand the best path to promote.. 
+
+Another very practical example:
+
+Flight delays in the U.S. have an economic impact of over $40 billion per year [1], caused by the need for enhanced operations, passenger loss of time, decreased productivity and missed business and leisure opportunities.
+U.S. aviation map showing congested airports as purple nodes, while those with normal traffic as green nodes.
+The lines correspond to the direct flights between them on March 12, 2010.
+The clustering of the congested airports indicate that the delays are not independent of each other, but cascade through the airport network.
+
+Report -Fleurquin, Ramasco, Eguiluz. Systemic delay propagation in the US airport network. Scientific Reports, 3: 1159, 2013 –
+ https://ifisc.uib-csic.es/~jramasco/text/characterization_delays.pdf[Characterization of Delay Propagation in the US Air-Transportation Network]
+
+== Flow and dynamics
+
+This time, looking at Flow and Dynamics to Understand capacity and optimize movement of resources. 
+
+image::flow-and-dynamics.png[Flow and dynamics,width=500,align=center]
+
+This Telecom example shows the complexity in just one challenge, Least Cost Routing: You have to a call from point A to B but there are various different routes, costs by time of day, quality service levels that must be met and even priority calling to be factored in.  
+
+But Evaluating flow options is very common for planning in general and we could just as well be looking at the flow for shipping, maybe getting your goods to customer in the most efficient manner.
+Or perhaps you need to provide services for emergencies – and you need to understand the time impacts of dynamic changes to flow.
+
+== Group resiliency
+
+Group resilience and influence is a fascinating area of study because you’re looking at things like how a group might break apart, or how you might bring them together, what’s the stability overtime and what are the influence points. 
+
+image::group-resiliency.png[Group resiliency,width=500,align=center]
+
+This diagram is from a really interesting study of a Belgian telecom network with the items in red being calls from French speakers and the items in Green being calls from Dutch speakers.
+The first thing you notice is the high call volume within their own groups and they say this affinity among languages EXCEPT for that small little group that’s amplified.
+In that cluster there was no significant preference to call mostly owns language and this this very group that acts as a communication bridge between the other majority French and majority Dutch speakers.
+And if we wanted to bring these two groups closer together, we might focus on communications within that bridge group.
+
+This kind of analyses is done for all sorts of scenarios such as fraud, perhaps you’re looking for a key middle man, or in biology to understand how to better target a disease. 
+
+Paper: https://arxiv.org/pdf/0803.0476.pdf[Fast unfolding of communities in large networks]
+
+== Types of graphs
+
+Graphs come in various shapes and forms.
+For example, on Twitter you can follow someone, but they don't necessarily follow you back.
+On other social media platforms a friendship link exists only if both parties agree to it.
+Sometimes, the strength of a relationship plays an important factor.
+We might also differentiate between different types of nodes in a network.
+
+=== Directed Versus Undirected Graphs
+
+[.is-half.left]
+--
+image::directed-graph.png[Directed graph,width=500,align=center]
+--
+
+[.is-half.right]
+--
+In the case of a directed graph, the direction of a relationship does matter.
+In our example, both Aaliyah and Phillip's feed will contain posts from Sam.
+On the other hand, Sam's feed will contain only posts from Phillip as he does not follow Aaliyah.
+--
+
+[.is-half.left]
+--
+image::undirected-graph.png[Undirected graph,width=500,align=center]
+--
+
+[.is-half.right]
+--
+In an undirected graph, a single relationship represents a link between nodes in both directions.
+For example, Aaliyah and Sam can either be friends or not.
+A scenario, where Aaliyah is friends with Sam, but Sam is not friends with Aaliyah, is not possible.
+
+An undirected relationship can also be represented as two directed relationships, where one relationship points in the opposite direction of another.
+--
+
+=== Unweighted Versus Weighted Graphs
+
+[.is-half.left]
+--
+image::unweighted-graph.png[Unweighted graph,width=500,align=center]
+--
+
+[.is-half.right]
+--
+In an unweighted network, a relationship between a pair of nodes can either exist or not.
+It has no associated cost or weight assigned to it, and therefore, no notion of the strength of relationship exists.
+--
+
+[.is-half.left]
+--
+image::weighted-graph.png[Weighted graph,width=500,align=center]
+--
+
+[.is-half.right]
+--
+When dealing with a weighted network, we assign each relationship a weight, that represents the strength or cost of traversing the relationship.
+The weight must be a number.
+A common application for using a weighted network is a transportation network, where we are searching for the shortest weighted path between a pair of nodes.
+--
+
+[.note]
+--
+Depending on the domain, sometimes a higher weight value is better, while other times a smaller weight value is preferred.
+--
+=== Monopartite versus Multipartite Graphs
+
+A monopartite graph consists of a single set of nodes.
+In Neo4j terms, it means we have nodes with many labels.
+This is an example of a bipartite graph, where we have *Person* and *Organization* labels for nodes. 
+
+image::monopartite-graph.png[Monopartite graph,width=500,align=center]
+
+A multipartite graph consists of many independant sets of nodes.
+In Neo4j terms, it means we have nodes with many labels.
+This is an example of a bipartite graph, where we have *Person* and *Organization* labels for nodes. 
+
+image::multipartite-graph.png[Multipartite graph,width=500,align=center]
+
+All centrality measures and community detection algorihms are designed to run on monopartite graph.
+A common mistake is to run the centrality measure on a bipartite graph.
+We can however infer a monopartite graph from a bipartite graph most of the time.
+
+==== Monopartite projection
+
+image::monopartite-projection.png[Monopartite projection,width=500,align=center]
+
+This is an example of a monopartite projection, where we infer that if two persons are working in the same organization, they are coworkers.
+A monopartite projection can be understood as a process of translating indirect relationship to direct relationships.
+
+=== Multigraph Versus Simple graph
+
+In mathematics, and more specifically in graph theory, a multigraph is a graph which is permitted to have multiple edges (also called parallel edges), that is, edges that have the same end nodes. Thus two vertices may be connected by more than one edge.
+There are two distinct notions of multiple edges:
+- Edges without own identity: The identity of an edge is defined solely by the two nodes it connects. In this case, the term “multiple edges” means that the same edge can occur several times between these two nodes.
+- Edges with own identity: Edges are primitive entities just like nodes. When multiple edges connect two nodes, these are different edges.
+
+A multigraph can have one or many relationships between a given pair of nodes.
+
+image::multigraph.png[Multigraph,width=500,align=center]
+
+Those relationships can be of different types, but we can also have many relationships of a single type between a specific pair of nodes.
+The Graph Data Science library features support for transforming multigraphs to single graphs, where only a single relationship is allowed between a pair of nodes.
+
+
+== Types of graph algorithms
+
+image::types-of-algorithms.png[Types of algorithms,width=500,align=center]
+
+Lorem Ipsum
+
+=== Community detection (Clustering) algorithms
+
+[.is-half.left]
+--
+image::community-detection.png[Community Detection,width=300,align=center]
+--
+
+[.is-half.right]
+--
+Community detection algorithms are used to find clusters of communities that the nodes form in a network.
+They are also used to examine how tightly-knit some of those communities are.
+This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures. This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
+--
+
+=== Centrality algorithms
+
+[.is-half.left]
+--
+image::centrality.png[Community Detection,width=300,align=center]
+--
+
+[.is-half.right]
+--
+Centrality algorithms are used to find the most influental nodes and their role in a network based on the graph topology. 
+These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
+The most famous algorithm in this category is PageRank.
+--
+
+=== Pathfinding algorithms
+
+[.is-half.left]
+--
+image::pathfinding.png[Pathfinding,width=300,align=center]
+--
+
+[.is-half.right]
+--
+Pathfinding algorithms are usually used to find the shortest path between nodes in a network.
+The most common algorithm is the Dijkstra algorithm.
+They are used to evaluate routes for uses such as physical logistics and least-cost call or IP routing.
+--
+
+=== Similarity algorithms
+
+[.is-half.left]
+--
+image::similarity.png[Similarity,width=300,align=center]
+--
+
+[.is-half.right]
+--
+Similarity algorithms are used to find similar nodes in a network based on graph topology or their properties.
+This approach is used in applications such as personalized recommendations and developing categorical hierarchies.
+The most common algorithms in this category are Jaccard similarity and Cosine similarity algorithm.
+They can also be used to infer a monopartite projection of a bipartite graph.
+--
+
+=== Link prediction
+
+[.is-half.left]
+--
+image::link-prediction.png[Link prediction,width=300,align=center]
+--
+
+[.is-half.right]
+--
+Link prediction algorithms help determine the closeness of a pair of nodes.
+They consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships.
+Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
+--
+
+
+=== Node embeddings
+
+[.is-half.left]
+--
+image::node-embedding.png[Node embedding,width=300,align=center]
+--
+
+[.is-half.right]
+--
+Node embedding algorithms compute low-dimensional vector representations of nodes in a graph.
+These vectors, also called embeddings, can be used as a machine learning input.
+--
+
+== Summary
+
+We have learned a lot about graphs, their structure and how to graph algorithms are applied to solve real-world problems.
+

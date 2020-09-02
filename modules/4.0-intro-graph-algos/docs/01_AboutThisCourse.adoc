@@ -1,0 +1,126 @@
+= Introduction to Graph Algorithms with Neo4j 4.0
+:slug: nn-iga-40-about-this-course
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Overview of graph algorithms
+
+Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
+They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).
+In this course you will learn how to use Neo4j's Graph Data Science library to enhance your graph based applications.
+
+asdasd
+
+We will start with an existing web application (a simple business reviews website written in React.js) populated with data from the Yelp public dataset ssin Neo4j. We then work to enhance the existing functionality of the application using graph algorithms.
+
+_Introduction to Graph Data Science in Neo4j and overview of this course_
+
+== Course Outline
+
+=== Overview of graph algorithms
+
+[square]
+* Review of the dataset used in this course.
+* Accessing the Yelp Neo4j Sandbox.
+* Overview of the CodeSandbox React application used in the course.
+* Connecting the React application to your Neo4j Sandbox instance.
+* Verifying configuration and querying the dataset.
+
+Estimated time: _15 minutes_
+
+=== Introduction to Graph Data Science library
+
+[square]
+* Learn about the Overlap Similarity algorithm and how to use it in Neo4j to build a hierarchy of categories.
+* Enhance our business reviews application using Overlap Similarity to improve business search.
+
+Estimated time: _30 minutes_
+
+=== Graph algorithms workflow
+
+[square]
+* Learn about Similarity algorithms in Neo4j.
+* Use Pearson Similarity to improve search result ordering in our business reviews application.
+
+Estimated time: _30 minutes_
+
+=== Environment setup
+
+[square]
+* Learn about PageRank and Personalized PageRank.
+* Use Personalized PageRank to find more relevant business reviews for users.
+
+Estimated time: _30 minutes_
+
+=== Graph management
+
+[square]
+* Learn more about Similarity algorithms in Neo4j.
+* Learn about Community Detection and the Label Propagation algorithm.
+* Use Jaccard Similarity and Label Propagation to build a photo based business recommendation feature.
+
+Estimated time: _30 minutes_
+
+=== Community detection algorithms
+
+[square]
+* Learn more about Similarity algorithms in Neo4j.
+* Learn about Community Detection and the Label Propagation algorithm.
+* Use Jaccard Similarity and Label Propagation to build a photo based business recommendation feature.
+
+Estimated time: _30 minutes_
+
+=== Centrality algorithms
+
+[square]
+* Learn more about Similarity algorithms in Neo4j.
+* Learn about Community Detection and the Label Propagation algorithm.
+* Use Jaccard Similarity and Label Propagation to build a photo based business recommendation feature.
+
+Estimated time: _30 minutes_
+
+=== Similarity algorithms
+
+[square]
+* Learn more about Similarity algorithms in Neo4j.
+* Learn about Community Detection and the Label Propagation algorithm.
+* Use Jaccard Similarity and Label Propagation to build a photo based business recommendation feature.
+
+Estimated time: _30 minutes_
+
+=== Memory requirements estimation
+
+[square]
+* Quiz results.
+* Review of graph algorithms in Neo4j.
+* Overview of resources for learning more and doing more with Graph Data Science in Neo4j.
+
+Estimated time: _10 minutes_
+
+=== Additional information
+
+[square]
+* Quiz results.
+* Review of graph algorithms in Neo4j.
+* Overview of resources for learning more and doing more with Graph Data Science in Neo4j.
+
+Estimated time: _10 minutes_
+
+=== Summary
+
+[square]
+* Quiz results.
+* Review of graph algorithms in Neo4j.
+* Overview of resources for learning more and doing more with Graph Data Science in Neo4j.
+
+Estimated time: _10 minutes_
+
+== Prerequisites
+
+This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
+
+* Have completed Introduction to Neo4j course or have equal Cypher proficiency.
+* Be familiar with Neo4j Browser.
+
+This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].

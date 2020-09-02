@@ -1,0 +1,164 @@
+= Local Clustering Coefficient
+:icons: font
+
+== Local Clustering Coefficient (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
+
+== Local Clustering Coefficient (Graph Catalog)
+
+The projected graphs *roads* and *dach-region* should be created and stored in the GDS graph catalog.
+
+This is what you should see when you execute the following query:
+
+[source, cypher]
+----
+CALL gds.graph.list()
+YIELD graphName, nodeCount, relationshipCount
+----
+
+image::LoadedRoadsGraph.png[LoadedDatabase]
+
+{nbsp} +
+
+If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+
+== Local Clustering Coefficient (Overview)
+
+The Local Clustering Coefficient algorithm computes the local clustering coefficient for each node in the graph.
+The lcc of a node describes the likelihood that the neighbours of the node are also connected.
+It is used to determine how tightly-knit the nodes in a network are.
+
+In this exercise, you will gain some experience with writing Cypher to implement the local clustering coefficient algorithm using the European Roads dataset.
+
+* *Part 1*: Determine the average local clustering coefficient.
+* *Part 2*: Determine the local clustering coefficient for each *Place* node.
+* *Part 3*: Verify the clustering coefficient results
+
+Go to the next page to start this exercise.
+
+== Part 1: Determine the average local clustering coefficient (Instructions)
+
+Write a query to determine the average local clustering coeffient for the European road network using these guidelines:
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following result: averageClusteringCoefficient.
+
+*Hint*: You will call `gds.localClusteringCoefficient.stats`.
+
+== Part 1: Determine the average local clustering coefficient (Solution)
+
+Write a query to determine the average local clustering coeffient for the European road network using these guidelines:
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following result: averageClusteringCoefficient.
+
+*Hint*: You will call `gds.localClusteringCoefficient.stats`.
+
+[source, cypher]
+----
+CALL gds.localClusteringCoefficient.stats('roads')
+YIELD averageClusteringCoefficient
+----
+
+[.thumb]
+image::EXLCC.1.png[EX3.1,width=300]
+
+{nbsp} +
+
+The average clustering coefficient for the European roads network is fairly low, which indicates that the nodes are not tighly-knit.
+In a typical online social network, you can expect higher average clustering coefficient scores.
+
+== Part 2: Determine the triangle count for each *Place* node. (Instructions)
+
+Write a query to determine the local clustering coeffient for each *Place* node in the European road network.
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: nodeId, localClusteringCoefficient
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Order the results by local clustering coefficient score descending.
+* Limit the top ten results.
+
+*Hint*: You will call `gds.localClusteringCoefficient.stream`.
+
+== Part 2: Determine the triangle count for each Place node. (Solution)
+
+Write a query to determine the local clustering coeffient for each *Place* node in the European road network.
+
+* The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* `YIELD` the following results: nodeId, localClusteringCoefficient
+* Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
+* Order the results by local clustering coefficient score descending.
+* Limit the top ten results.
+
+*Hint*: You will call `gds.localClusteringCoefficient.stream`.
+
+[source, cypher]
+----
+CALL gds.localClusteringCoefficient.stream('roads')
+YIELD nodeId, localClusteringCoefficient
+RETURN gds.util.asNode(nodeId).name AS place, localClusteringCoefficient
+ORDER BY localClusteringCoefficient DESC
+LIMIT 10
+----
+
+[.thumb]
+image::EXLCC.2.png[EXLCC.2.2,width=300]
+
+{nbsp} +
+
+A node has a maximum value of local clustering coefficient(1), when each its neighbours has a connection to all the other neighbours. 
+
+== Part 3: Verify the clustering coefficient results. (Instructions)
+
+Let's confirm that the clustering coefficient score of 1 for the *Antwerpen* node is correct.
+
+Write a query to match *Antwerpen* and its neighbours.
+Include connections between neighbours.
+
+*Hint*: Use the variable-length pattern matching.
+
+== Part 3: Verify the clustering coefficient results. (Solution)
+
+Let's confirm that the clustering coefficient score of 1 for the *Antwerpen* node is correct.
+
+Write a query to match *Antwerpen* and its neighbours.
+Include connections between neighbours.
+
+*Hint*: Use the variable-length pattern matching.
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH path=(p:Place{name:'Antwerpen'})-[*..2]-(neighbour)
+WHERE (p)--(neighbour)
+RETURN path
+----
+
+The results should be:
+
+[.thumb]
+image::EXLCC.3.png[EX3.3,width=300]
+
+{nbsp} +
+
+Antwerpen belongs to a single triangle and has no other connections.
+This confirms that the correct clustering coefficient score for the Antwerpen node is indeed 1.
+
+== Local Clustering Coefficient: Taking it further
+
+. Try using the write mode of the algorithm.
+. Try different configuration values.
+
+== Local Clustering Coefficient (Summary)
+
+In this exercise, you gained some experience with writing Cypher to implement the Local Clustering coefficient algorithm to return the clustering coefficient for the *Place* nodes of the European Roads dataset.
