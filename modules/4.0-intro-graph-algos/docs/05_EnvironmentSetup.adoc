@@ -71,12 +71,84 @@ Recipe and ingredients
 
 == Exercise: Setup
 
-Before coming to this training, you should have:
-Installed Neo4j Desktop.
-se!)
-Installed APOC, Graph Algorithms, and Graph Algorithms Playground  in the project.
-Click the Manage button for the local graph you just created.
-Click Open Folder.
-Started the database.
+Before performing the exercises for this course, you must:
 
-:play intro-graph-algos-exercises  (Set up your Development Environment)
+. Install Neo4j Desktop.
+
+ifdef::backend-html5,backend-pdf[]
+These videos show how to install and get started using Neo4j Desktop.
+endif::[]
+
+ifdef::backend-html5[]
+.If using OS X
+[%collapsible%open]
+====
+video::cTZ_Z3KfLyE[youtube,width=560,height=315]
+====
+
+.If using Linux
+[%collapsible]
+====
+video::pvjsxc_MdIw[youtube,width=560,height=315]
+====
+
+.If using Windows
+[%collapsible]
+====
+video::RSbhmVF_ccs[youtube,width=560,height=315]
+====
+endif::[]
+
+ifdef::backend-pdf[]
+If using OS X:
+
+https://youtu.be/cTZ_Z3KfLyE
+
+If using Linux:
+
+https://youtu.be/pvjsxc_MdIw
+
+If using Windows:
+
+https://youtu.be/RSbhmVF_ccs
+endif::[]
+
+ifdef::backend-html5,backend-pdf[]
+[NOTE]
+Before you install on Windows, make sure you have the latest version of PowerShell installed.
+endif::[]
+
+[start=2]
+. In Neo4j Desktop, create a project for this course named *Graph Algos*.
+. In the *Graph Algos* project, create a local 4.1 database.
+. Install the *APOC* and *Graph Data Science plugins*:
+.. Click the *Manage* area for the database.
+.. Select the *Plugins* tab.
+.. Install the *APOC* plugin.
+.. Install the *Graph Data Science* plugin.
+. Start the database
+. Install Graph Data Science Playground:
+.. Open the *Graph Apps* pane in the left panel.
+.. Double-click *Graph Apps Gallery*, a new window opens.
+.. Click the link for the Graph Data Science Playground install  as shown here:
+
+image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500, align=center]
+
+[start=4]
+.. A new browser tab should open for this address.
+.. Copy this address to your clipboard. It should be: https://neo.jfrog.io/neo/api/npm/npm/neuler.
+.. In the left *Graph Apps* panel, paste this address in the *Install* field at the bottom.
+.. Click *Install*.
+.. The *Graph Data Science Graph Playground* Graph App should now appear in the left pane.
+
+[start =6]
+. Start the *Graph Data Science Graph Playground* Graph App:
+.. Double-click *Graph Data Science Graph Playground*  app in the left pane to start it.
+.. Once started, it should open a new window as follows:
+
+image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500, align=center]
+
+
+:play 4.0-intro-graph-algos-exercises  (Set up your Development Environment)
+
+// this page of the browser guide will have them load the data?
