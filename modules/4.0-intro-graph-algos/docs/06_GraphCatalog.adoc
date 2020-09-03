@@ -25,5 +25,8 @@ aha
 yep
 
 
-
 == Utilility procedures
+
+== Guided Exercise: Getting Started with Graph management
+
+== Exercise: Inspect the graph loading code in NEuler

@@ -46,51 +46,6 @@ Keeping track of clusters of database records as part of the deduplication proce
 Working with Citation networks.
 
 [.slide-title.has-green-background.has-team-background]
-== Guided Exercise: Getting Started with Neuler
-
-[.notes]
---
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
-
-. Show different algorithm groups.
-. Select the Weakly connected components algorithm.
-. Run the algorithm on the *Character* node and *INTERACTS* relationship.
-. Stream results.
-. View the generated code.
-. View the visualization.
-. Write back results.
-. Show them how to copy the query from NEuler to Neo4j Browser.
-
-Here is the video:  https://youtu.be/oHo-lQ79zf0
-
-endif::[]
---
-
-ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with common tasks in Neo4j Neuler.
-endif::[]
-
-ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
-endif::[]
-
-ifdef::backend-revealjs[]
-[.center]
-https://youtu.be/oHo-lQ79zf0
-endif::[]
-
-ifdef::backend-html5[]
-[.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
-endif::[]
-
-
-[NOTE]
-Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
-
-
-[.slide-title.has-green-background.has-team-background]
 == Guided Exercise: Getting Started with Weakly Connected Component algorithm
 
 [.notes]
@@ -98,14 +53,18 @@ Before you perform the tasks shown in this video, you must have either created a
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Show different algorithm groups.
-. Select the Weakly connected components algorithm.
-. Run the algorithm on the *Character* node and *INTERACTS1* relationship.
-. Stream results.
+. Select the Community detection group of algorithms.
+. Select the Connected components algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the Store results tick on.
+. Run the algorithm.
+. View the table results.
 . View the visualization.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
 
-Explain results. All the single node components have no relationship of type *INTERACTS1*.
-One could assume that those nodes haven't yet appeared in the first book.
+Explain results.
+For the Person labels, we see that all nodes are reachable, regardless of direction to each other so all nodes receive the community value of 0 because they are all in the same connected group.
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
@@ -113,7 +72,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with common tasks in Neo4j Neuler.
+Follow along with this video to become familiar with Weakly connected components in Neo4j Neuler.
 endif::[]
 
 ifdef::backend-pdf[]
@@ -133,49 +92,6 @@ endif::[]
 
 [NOTE]
 Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
-
-
-
-=== Example: Weakly Connected components 
-
-image::local-global-computation.png[local and global graph analytics,width=500, align=center]
-
-
-For the Person labels, we see that all nodes are reachable, regardless of direction to each other so all nodes receive the community value of 0 because they are all in the same connected group.
-
-
-Here we specify season 1 for the relationship and the unionFind value for the connected components will be unionFind_season1.
-
-Any node that has the same value for this property will be considered connected for that relationship, regardless of the direction of the relationship. Here we see that many of the nodes have a value of 0 for their unionFind_season1 property.
-
-Any node that has a unique value for unionFind will not be connected to any other node in the graph for the season 1 relationship.
-
-In Neo4j Browser:
-
-MATCH (c1:Character)-[:INTERACTS_SEASON7]-(c2:Character)
-WHERE c1.unionFind =  c2.unionFind
-RETURN c1, c2
-
-
-param label => 'Character';
-:param relationshipType => 'INTERACTS_SEASON1';
-:param limit => 50;
-:param config => {
-  concurrency: 8,
-  direction: 'Both',
-  defaultValue: 1,
-  writeProperty: 'unionFind_season1'
-};
-
-
-CALL algo.unionFind($label, $relationshipType, $config)
-
-Season 1
-
-MATCH (node:Character)
-WHERE not(node[$config.writeProperty] is null)
-RETURN node, node[$config.writeProperty] AS community
-LIMIT $limit
 
 === Exercise: Weakly connected component
 
@@ -258,7 +174,53 @@ In contrast to other algorithms, Label Propagation can return different communit
 ^ This is less likely to happen in well delineated groups but we can also narrow the range of solutions by giving some nodes a preliminary labels (i.e., seed labels), while others are unlabeled. Unlabeled nodes are more likely to adopt the preliminary labels.
 A max iteration limit will prevent endless cycles where the algorithm can’t converge on a solution, essentially getting caught in a flip-flop cycle for some labels.
 
-=== Example: Label Propagation
+== Guided Exercise: Getting Started with Label propagation algorithm
+
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
+
+. Select the Community detection group of algorithms.
+. Select the Label Propagation algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. View the visualization.
+. Select the Natural relationship orientation.
+. Run the algorithm while still in the visualization tab.
+. Select the Weight property to be 'weight'.
+. Run the algorithm while still in the visualization tab.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
+
+Explain results.
+Observe how different algorithm settings influence the community detection results.
+
+
+Here is the video:  https://youtu.be/oHo-lQ79zf0
+
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Label propagation in Neo4j Neuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 === Exercise: Label Propagation
 
@@ -320,15 +282,55 @@ RETURN c
 
 Here we see that these 32 nodes can be grouped together, but the Ros and Daisy nodes form a sub-network, as well as the Barra and Mnaegan nodes.
 
-== Example: Louvain Modularity
+== Guided Exercise: Getting Started with Louvain Modularity algorithm
 
-asdasd
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
 
-MATCH (c:Character)
-WITH c, c.louvain as community, size( (c)-[:INTERACTS_SEASON2]-() ) as degree ORDER BY community ASC, degree DESC
-WITH community, (head(collect(c))).name as main, count(*) as size, collect(c.name)[0..7] as characters, collect(c) as all
-ORDER BY size DESC
-RETURN community, main, size, characters
+. Select the Community detection group of algorithms.
+. Select the Louvain algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. View the visualization.
+. Select the Natural relationship orientation.
+. Run the algorithm while still in the visualization tab.
+. Select the Weight property to be 'weight'.
+. Select the table tab
+. Tick the Intermediate communities
+. Run the algorithm.
+. View the table results.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
+
+Explain results.
+Observe how different algorithm settings influence the community detection results.
+
+Here is the video:  https://youtu.be/oHo-lQ79zf0
+
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Louvain modularity in Neo4j Neuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 === Exercise: Louvain Modularity
 
@@ -362,17 +364,48 @@ Finding structural holes.
 Scoring for machine learning.
 
 
-=== Example: Triangle count
+== Guided Exercise: Getting Started with Triangle count algorithm
 
-Michael is part of one triangle. There is a  33% probability  that Mark, Bridget and Alice are connected to each other.
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
 
-Alice is part of one triangle. There is a  33% probability  that Michael, Bridget and Charles are connected to each other.
+. Select the Community detection group of algorithms.
+. Select the Triangle Count algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. View the visualization.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
 
-Bridget is part of one triangle. There is a 100% probability that Michael and Alice are connected to each other.
+Explain results.
+Triangle count only works on an Undirected relationship orientation.
 
-Any node that has no triangles, has a clustering coefficient of 0.
+Here is the video:  https://youtu.be/oHo-lQ79zf0
 
-In this example, no additional properties are added to the Person nodes, but Triangle counts and Coefficients are shown.
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 === Exercise: Triangle count
 
@@ -391,7 +424,48 @@ Clustering Coefficient is the probability that neighbors of a particular node ar
 The goal of the Clustering Coefficient algorithm is to measure how tightly a group is clustered compared to how tightly it could be clustered. The algorithm 
 uses Triangle count in its calculations which provides a ratio of existing triangles to possible relationships. A maximum value of 1 indicates a clique where every node is connected to every other node. 
 
-=== Example: Clustering coefficient
+== Guided Exercise: Getting Started with Local Clustering Coefficient algorithm
+
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
+
+. Select the Community detection group of algorithms.
+. Select the Local Clustering Coefficient algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. View the visualization.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
+
+Explain results.
+Local Clustering Coefficient only works on an Undirected relationship orientation.
+
+Here is the video:  https://youtu.be/oHo-lQ79zf0
+
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 === Exercise: Clustering coefficient
 
