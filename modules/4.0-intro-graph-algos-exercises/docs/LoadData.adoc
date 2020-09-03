@@ -112,6 +112,13 @@ Your database should now look as follows:
 
 [.thumb]
 image::LoadedDatabase.png[LoadedDatabase,width=150]
+
+Refresh the database contents in NEuler to have the new datasets available for algorithm execution.
+
+The database contents in NEuler should look as follows:
+
+[.thumb]
+image::LoadedNEuler.png[LoadedDatabase,width=150]
 ////
 
 == Load Data for the Exercises (Summary)
