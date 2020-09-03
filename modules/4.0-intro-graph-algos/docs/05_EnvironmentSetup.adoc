@@ -159,7 +159,7 @@ kbd:[:4.0-intro-graph-algos-exercises]
 and follow the instructions for *Load the Data for the Exercises*.
 
 [NOTE]
-This exercise has 2 steps.
+This exercise has 3 steps.
 Estimated time to complete: 10 minutes.
 
 

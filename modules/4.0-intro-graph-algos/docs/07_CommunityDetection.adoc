@@ -53,6 +53,7 @@ Working with Citation networks.
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
+. Reconnect with Neuler to ensure all nodes are known.
 . Select the Community detection group of algorithms.
 . Select the Connected components algorithm.
 . Select the *Person* label and *HELPS* relationship type.
@@ -62,36 +63,35 @@ Show the students the basics of using Neuler and have them do the same on their 
 . View the visualization.
 . View the generated code.
 . Show them how to copy the query from NEuler to Neo4j Browser.
+. For the Person labels, we see that all nodes are reachable, regardless of direction to each other so all nodes receive the community value of 0 because they are all in the same connected group.
 
-Explain results.
-For the Person labels, we see that all nodes are reachable, regardless of direction to each other so all nodes receive the community value of 0 because they are all in the same connected group.
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/d8sk_Qt07ek
 
 endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Weakly connected components in Neo4j Neuler.
+Follow along with this video to run the Connected Components algorithm using the Graph Data Science Playground (Neuler).
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/d8sk_Qt07ek
 endif::[]
 
 ifdef::backend-revealjs[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/d8sk_Qt07ek
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::d8sk_Qt07ek[youtube,width=560,height=315]
 endif::[]
 
 
 [NOTE]
-Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
+Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, and followed the instructions for loading the data in the Browser Guide:  `:play 4.0-intro-graph-algos-exercises`.
 
 === Exercise: Weakly connected component
 
@@ -109,7 +109,7 @@ Find all Connected Characters for Season 3 writing the unionFind_season3 propert
 Do the same for any relationship, writing the unionFind_any value.
 
 In Neo4j Browser:
-:play intro-graph-algos-exercises  (Weakly Connected Components)
+:play 4.0-intro-graph-algos-exercises  (Weakly Connected Components)
 
 
 == Label Propagation
@@ -174,7 +174,7 @@ In contrast to other algorithms, Label Propagation can return different communit
 ^ This is less likely to happen in well delineated groups but we can also narrow the range of solutions by giving some nodes a preliminary labels (i.e., seed labels), while others are unlabeled. Unlabeled nodes are more likely to adopt the preliminary labels.
 A max iteration limit will prevent endless cycles where the algorithm can’t converge on a solution, essentially getting caught in a flip-flop cycle for some labels.
 
-== Guided Exercise: Getting Started with Label propagation algorithm
+== Guided Exercise: Getting Started with the  Label propagation algorithm
 
 [.notes]
 --

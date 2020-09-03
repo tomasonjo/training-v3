@@ -16,7 +16,7 @@ Before you perform the exercises for this course, complete the following steps:
 
 Go to the next page to load the data.
 
-== Step 1: Load the data
+== Step 1: Load the data from Graph Data Science Playground
 
 In Graph Data Science Playground:
 
@@ -29,20 +29,9 @@ In Graph Data Science Playground:
 [NOTE]
 Do [underscore]#not# load the Twitter dataset as it conflicts with the other datasets!
 
-== Step 2: Verify data has been loaded.
+== Step 2: Load some other data from Neo4j Browser
 
-After you have loaded the data, open a Neo4j Browser window to the started database and view the database information.
-
-It should appear as follows:
-
-image::ThreeDataSetsLoaded.png[ThreeDataSetsLoaded,width=400,role=left]
-
-////
-??? Not sure what other data needs to be loaded???
-
-== Step 5: Load some additional graphs used for the exercises.
-
-Execute each of these Cypher code blocks to add these graphs to the database:
+In Neo4j Browser, execute this code:
 
 [source, cypher]
 ----
@@ -64,7 +53,16 @@ MERGE (nBridget)-[:HELPS{weight:2.6}]->(nAlice)
 MERGE (nMichael)-[:HELPS{weight:1.8}]->(nBridget)
 ----
 
-{nbsp} +
+== Step 3: Verify data has been loaded.
+
+After you have loaded the data, open a Neo4j Browser window to the started database and view the database information.
+
+It should appear as follows:
+
+image::DataLoaded.png[DataLoaded,width=400,role=left]
+
+////
+??? Not sure what other data needs to be loaded???
 
 [source, cypher]
 ----
