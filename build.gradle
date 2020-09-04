@@ -392,7 +392,7 @@ subprojects {
     asciidoctorj {
       options template_dirs: ["${rootProject.projectDir}/resources/templates/setup"]
       attributes 'parent-path': '/graphacademy/setup',
-        'imagesdir': 'https://s3.amazonaws.com/dev.assets.neo4j.com/course/4.0-intro-neo4j/images',
+        'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
         'document-metadata-attrs-include': 'author,slug,parent-path',
         'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
     }
