@@ -1,12 +1,12 @@
-= Overview of graph algorithms
-:slug: nn-iga-40-overview-of-graph-algorithms
+= Overview of Graph Algorithms
+:slug: 02-iga-40-overview-of-graph-algorithms
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Introduction to Graph Data Science library
 
-== Graph analytics and algorithms
+== Graph Analytics and Algorithms
 
 In nature, we can observe many social and physical networks form and evolve.
 Every person is a member of a friendship network.

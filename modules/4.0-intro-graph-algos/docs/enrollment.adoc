@@ -1,0 +1,32 @@
+= Introduction to Graph Algorithms with Neo4j 4.0
+:slug: intro-graph-algos-40
+:description: Learn how to use Graph Algorithms of the Graph Data Science Library for Neo4j 4.0.
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroGraphAlgos-40_withTitle.jpg[]
+
+== About the Course
+
+This online course is a collection of lessons and hands-on exercises that teach you best practices for using graph algorithms with Neo4j.
+== Prerequisites
+
+You must have Cypher programming experience to take this course.
+
+== Duration
+
+If you perform all of the hands-on exercises in this course,
+it will take you xx hours to complete the course.
+
+== What you will learn
+
+[square]
+* What graph algorithms are.
+* What the Graph Data Science Library is.
+* Workflow best practices when executing graph algorithms.
+* Setting up your training environment for using graph algorithms.
+* Managing graphs during the workflow for graph algorithms.
+* Using Community Detection algorithms.
+* Using Centrality algorithms.
+* Using Similarity algorithms.
+* Analysis of a dataset (recipes).
+* Estimating memory requirements.
+* Additional information for using algorithms effectively.

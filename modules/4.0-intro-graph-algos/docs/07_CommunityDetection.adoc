@@ -1,10 +1,10 @@
-= Community detection algorithms
-:slug: nn-iga-40-community-detection
+= Community Detection Algorithms
+:slug: 07-iga-40-community-detection
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Centrality algorithms
+:module-next-title: Centrality Algorithms
 
 == Community detection algorithms
 

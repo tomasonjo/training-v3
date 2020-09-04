@@ -1,5 +1,5 @@
-= Environment setup
-:slug: nn-iga-40-environment-setup
+= Environment Setup
+:slug: 05-iga-40-environment-setup
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -8,75 +8,18 @@
 
 == Preparing you development environment
 
-Download Neo4j Desktop
+=== Step 1: Set up Neo4j Desktop on your system
 
-lorem ipsum
+To perform the exercises of this course you must have downloaded and installed Neo4j Desktop on your system.
 
-=== Neo4j Desktop with GDSL and APOC
-// Change the picture
-image::local-global-computation.png[local and global graph analytics,width=500, align=center]
-
-
-You must create a project and graph you will work with for this course.
-
-Note: APOC is also required to perform the exercises of this course, specifically, loading the Game of Thrones (GOT) data.
-
-check with dbms.procedures if it working
-
-link to docs
-
-=== Enter the Neuler
-
-image::enter-neuler.png[local and global graph analytics,width=500, align=center]
-
-
-NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
-
-To install NEuler, go to install.graphapp.io
-
-Select the Graph Algorithms Playground.
-
-Loading datasets from Neuler
-
-== Load datasets
-
-an image
-
-== Datasets overview
-
-=== Game of Thrones
-
-The INTERACTS_SEASONx relationship has a property, weight to indicate the number of interactions.
-
-The Character node has two properties, name and id where id is the capitalized value of name.
-
-image::got.png[Game of Thrones,width=500, align=center]
-
-Network of thrones site.
-
-=== European roads
-
-The EROAD relationship has three properties, distance, road_number, and watercrossing.
-
-The Place node has multiple properties, name and countryCode.
-
-
-image::european-roads.png[European Roads,width=500, align=center]
-
-European roads site
-
-=== Recipes 
-
-Recipe and ingredients
-
-== Exercise: Setup
-
-Before performing the exercises for this course, you must:
-
-. Install Neo4j Desktop.
 
 ifdef::backend-html5,backend-pdf[]
 These videos show how to install and get started using Neo4j Desktop.
+For your environment you should:
+
+. Download the latest version of Neo4j Desktop.
+. Create a project in Neo4j Desktop named *Graph Algos*.
+. Create a local 4.1.x database in this Graph Algos project.
 endif::[]
 
 ifdef::backend-html5[]
@@ -114,34 +57,69 @@ https://youtu.be/RSbhmVF_ccs
 endif::[]
 
 ifdef::backend-html5,backend-pdf[]
-[NOTE]
-Before you install on Windows, make sure you have the latest version of PowerShell installed.
-endif::[]
+lorem ipsum
 
-[start=2]
-. In Neo4j Desktop, create a project for this course named *Graph Algos*.
-. In the *Graph Algos* project, create a local 4.1 database.
-. Install the *APOC* and *Graph Data Science plugins*:
-.. Click the *Manage* area for the database.
-.. Select the *Plugins* tab.
-.. Install the *APOC* plugin.
-.. Install the *Graph Data Science* plugin.
-. Start the database
-. Install *Graph Data Science Playground*:
-.. Open the *Graph Apps* pane in the left panel.
-.. Double-click *Graph Apps Gallery*, a new window opens.
-.. Click the link for the Graph Data Science Playground install  as shown here:
+=== Step 2: Install APOC and GDSL for your database
+
+. Click the *Manage* area for the database.
+. Select the *Plugins* tab.
+. Install the *APOC* plugin.
+. Install the *Graph Data Science* plugin.
+
+// Change the picture
+image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
+
+
+=== Step 3: Install Graph Data Science Playground (NEuler)
+
+image::enter-neuler.png[local and global graph analytics,width=500, align=center]
+
+NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+
+
+. Open the *Graph Apps* pane in the left panel.
+. Double-click *Graph Apps Gallery*, a new window opens.
+. Click the link for the Graph Data Science Playground install  as shown here:
 
 image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500, align=center]
 
 [start=4]
-.. A new browser tab should open for this address.
-.. Copy this address to your clipboard. It should be: https://neo.jfrog.io/neo/api/npm/npm/neuler.
-.. In the left *Graph Apps* panel, paste this address in the *Install* field at the bottom.
-.. Click *Install*.
-.. The *Graph Data Science Graph Playground* Graph App should now appear in the left pane.
+. A new browser tab should open for this address.
+. Copy this address to your clipboard. It should be: https://neo.jfrog.io/neo/api/npm/npm/neuler.
+. In the left *Graph Apps* panel, paste this address in the *Install* field at the bottom.
+. Click *Install*.
+. The *Graph Data Science Graph Playground* Graph App should now appear in the left pane.
 
-[start =6]
+=== Datasets you will use in this course
+
+==== Game of Thrones
+
+The INTERACTS_SEASONx relationship has a property, weight to indicate the number of interactions.
+
+The Character node has two properties, name and id where id is the capitalized value of name.
+
+image::got.png[Game of Thrones,width=500, align=center]
+
+Network of thrones site.
+
+==== European Roads
+
+The EROAD relationship has three properties, distance, road_number, and watercrossing.
+
+The Place node has multiple properties, name and countryCode.
+
+
+image::european-roads.png[European Roads,width=500, align=center]
+
+European roads site
+
+==== Recipes
+
+Recipe and ingredients
+
+=== Step 4: Start the database and Graph Data Science Playground
+
+. In Neo4j Desktop, start the database.
 . Start the *Graph Data Science Graph Playground* Graph App:
 .. Double-click *Graph Data Science Graph Playground*  app in the left pane to start it.
 .. Once started, it should open a new window as follows:
@@ -150,8 +128,9 @@ image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500,
 
 
 [.student-exercise]
-== Exercise: Load the Data for the Exercises
+== Step 5: Load the Data for the Exercises
 
+Open Neo4j Browser for the started database.
 In the query edit pane of Neo4j Browser, execute the browser command:
 
 kbd:[:4.0-intro-graph-algos-exercises]
@@ -162,5 +141,3 @@ and follow the instructions for *Load the Data for the Exercises*.
 This exercise has 3 steps.
 Estimated time to complete: 10 minutes.
 
-
-// this page of the browser guide will have them load the data?

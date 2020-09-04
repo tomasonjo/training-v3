@@ -1,10 +1,10 @@
-= Memory requirements estimation
-:slug: nn-iga-40-memory-requirements-estimation
+= Memory Requirements Estimation
+:slug: 11-iga-40-memory-requirements-estimation
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Additional information
+:module-next-title: Additional Information
 
 == Memory reqirements estimation
 

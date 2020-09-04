@@ -1,10 +1,10 @@
 = Introduction to Graph Algorithms with Neo4j 4.0
-:slug: nn-iga-40-about-this-course
+:slug: 01-iga-40-about-this-course
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Overview of graph algorithms
+:module-next-title: Overview of Graph Algorithms
 
 Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
 They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).

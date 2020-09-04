@@ -1,5 +1,5 @@
-= Additional information
-:slug: nn-iga-40-additional-information
+= Additional Information
+:slug: 12-iga-40-additional-information
 :doctype: book
 :toc: left
 :toclevels: 4

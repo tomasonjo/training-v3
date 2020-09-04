@@ -1,10 +1,10 @@
 = Introduction to Graph Data Science library
-:slug: nn-iga-40-intro-to-gds
+:slug: 03-iga-40-intro-to-gds
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Graph algorithms workflow
+:module-next-title: Graph Algorithms Workflow
 
 == Neo4j for Graph Data Science
 

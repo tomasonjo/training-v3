@@ -6,7 +6,7 @@
 Before you perform the exercises for this course, complete the following steps:
 
 . Install Neo4j Desktop.
-. Create a Project named Graph Algos.
+. Create a Project named *Graph Algos*.
 . Create a local 4.1 database.
 . Install the APOC plugin for use with this database.
 . Install the Graph Data Science plugin for use with this database.
@@ -53,16 +53,7 @@ MERGE (nBridget)-[:HELPS{weight:2.6}]->(nAlice)
 MERGE (nMichael)-[:HELPS{weight:1.8}]->(nBridget)
 ----
 
-== Step 3: Verify data has been loaded.
-
-After you have loaded the data, open a Neo4j Browser window to the started database and view the database information.
-
-It should appear as follows:
-
-image::DataLoaded.png[DataLoaded,width=400,role=left]
-
-////
-??? Not sure what other data needs to be loaded???
+Then execute this code:
 
 [source, cypher]
 ----
@@ -104,6 +95,15 @@ MERGE (box)-[:HAS_TAG]->(html)
 MERGE (box)-[:HAS_TAG]->(css)
 MERGE (box)-[:HAS_TAG]->(js)
 ----
+
+
+== Step 3: Verify data has been loaded.
+
+After you have loaded the data, open a Neo4j Browser window to the started database and view the database information.
+
+It should appear as follows:
+
+image::DataLoaded.png[DataLoaded,width=400,role=left]
 
 
 Your database should now look as follows:

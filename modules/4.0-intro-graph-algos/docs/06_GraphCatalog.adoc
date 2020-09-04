@@ -1,10 +1,10 @@
 = Graph Management
-:slug: nn-iga-40-graph-management
+:slug: 06-iga-40-graph-management
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Community detection algorithms
+:module-next-title: Community Detection Algorithms
 
 == Graph Management
 

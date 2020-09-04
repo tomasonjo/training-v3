@@ -1,10 +1,10 @@
-= Similarity algorithms
-:slug: nn-iga-40-similarity-algorithms
+= Similarity Algorithms
+:slug: 09-iga-40-similarity-algorithms
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Recipes analysis
+:module-next-title: Recipes Analysis
 
 == Similarity algorithms
 

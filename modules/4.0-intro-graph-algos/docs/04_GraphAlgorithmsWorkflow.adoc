@@ -1,10 +1,10 @@
-= Graph algorithms workflow
-:slug: nn-iga-40-graph-algorithms-workflow
+= Graph Algorithms Workflow
+:slug: 04-iga-40-graph-algorithms-workflow
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Environment setup
+:module-next-title: Environment Setup
 
 == How do graph algorithms work?
 

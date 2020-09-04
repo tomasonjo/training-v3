@@ -1,10 +1,10 @@
-= Centrality algorithms
-:slug: nn-iga-40-centrality-algorithms
+= Centrality Algorithms
+:slug: 08-iga-40-centrality-algorithms
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Similarity algorithms
+:module-next-title: Similarity Algorithms
 
 == Centrality algorithms
 
