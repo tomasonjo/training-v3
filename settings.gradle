@@ -84,3 +84,18 @@ project(':4.0-intro-graph-algos-exercises').projectDir = file('modules/4.0-intro
 
 include 'training_GraphAlgorithmsForDataScience'
 project(':training_GraphAlgorithmsForDataScience').projectDir = file('modules/training_GraphAlgorithmsForDataScience')
+
+include 'training_ApacheKafkaStreamsInNeo4j'
+project(':training_ApacheKafkaStreamsInNeo4j').projectDir = file('modules/training_ApacheKafkaStreamsInNeo4j')
+
+include 'training_ETLAndDataImport'
+project(':training_ETLAndDataImport').projectDir = file('modules/training_ETLAndDataImport')
+
+include 'training_FullstackGraphQL'
+project(':training_FullstackGraphQL').projectDir = file('modules/training_FullstackGraphQL')
+
+include 'training_GraphBasedFeaturesInMLPipeline'
+project(':training_GraphBasedFeaturesInMLPipeline').projectDir = file('modules/training_GraphBasedFeaturesInMLPipeline')
+
+include 'training_NLPWithHume'
+project(':training_NLPWithHume').projectDir = file('modules/training_NLPWithHume')
