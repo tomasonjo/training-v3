@@ -1,0 +1,129 @@
+
+= Setting up your development environment for the training: Graph Algorithms for Data Science
+:presenter: Neo Technology
+:twitter: neo4j
+:email: info@neotechnology.com
+:neo4j-version: 3.5
+:currentyear: 2019
+:doctype: book
+:toc: left
+:toclevels: 3
+:imagesdir: ../images
+:setup-guides-dir: ../../setup-guides/docs
+//:imagedir: https://s3.amazonaws.com/dev.assets.neo4j.com/course/4.0-intro-neo4j/images
+//:imagedir2: https://graphacademy.neo4j.com/setup/img
+:manual: http://neo4j.com/docs/developer-manual/current
+:manual-cypher: {manual}/cypher
+
+
+== Preparing for the course
+
+You must prepare your development environment before you take this training session, Graph Algorithms for Data Science.
+
+To prepare for this course, you must do the following before this session (scroll down for detailed instructions):
+
+. Ensure that you have the latest Neo4j Desktop (1.2.9 or later) installed on your laptop.
+. Create the project and database for this training.
+. Install plugins for the database.
+. Download the PaySim fraud dataset.
+. Modify the Neo4j configuration.
+. Start the fraud database.
+. Verify your setup.
+
+== Step 1: Install latest version of Neo4j Desktop
+
+If you do not have Neo4j Desktop installed, https://neo4j.com/download-center/#desktop[download] version 1.2.9 or later and install it.
+
+If you already have Neo4j Desktop installed, but is is not up to version 1.2.9 or later, upgrade by selecting *Neo4j Desktop -> Check for updates*.
+
+include::{setup-guides-dir}/DesktopInstall-1.2.6-non-Movie.adoc[]
+
+=== Getting started with Neo4j Browser
+
+If you have never used Neo4j Browser, you can watch this video that illustrates the basics of using Neo4j Browser.
+
+include::{setup-guides-dir}/Neo4jBrowser.adoc[]
+
+== Step 2: Create the project and database for this training
+
+. In Neo4j Desktop, create a new project named *Fraud*
+
+image:CreateFraudProject.png[CreateFraudProject,width=600]
+
+[start=2]
+. In this new project, create a graph of version 3.5.18. Don't forget to type a password for this database.
+
+image:CreateFraudDB.png[CreateFraudDB,width=800]
+
+
+*IMPORTANT:* Do *NOT* start the database! Doing so creates a *graph.db* directory and you do not want this directory yet.
+
+== Step 3: Install plugins for this database
+
+For this training, you will use the GDS and APOC plugins. You should NOT install the Graph Algorithms plugin!
+
+. Go to the Manage area for the Fraud database you just created:
+
+image:GoToManageFraud.png[GoToManageFraud,width=400]
+
+[start=2]
+. Install the GDS and APOC plugins. (Do NOT install the Graph Algorithms plugin)
+
+image:SelectPluginsFraud.png[SelectPluginsFraud,width=800]
+
+Here is what you should see after installation:
+
+image:PluginsInstalledFraud.png[PluginsInstalledFraud,width=800]
+
+== Step 4: Download the PaySim dataset and install it as your database.
+
+. Download the zip file:  https://s3.amazonaws.com/neo4j-ps-ds-bootcamp/data/paysim.zip
+. For database you created earlier, open a terminal window:
+
+image:OpenFraudTerminal.png[OpenFraudTerminal,width=800]
+
+[start=3]
+. In the terminal window:
+.. Change to the *data/databases* directory.
+.. Copy the zip file  you just downloaded to the current directory.
+.. Unzip the zip file.
+.. Remove the zip file.
+
+You should now have a *graph.db* directory in the data/databases directory:
+
+image:CopyFraudDB.png[CopyFraudDB,width=900]
+
+== Step 5: Modify the Neo4j Configuration
+
+. In the Manage area for the database, click the *Settings* tab.
+. Modify the default initial heap size, max heap size, and page cache memory configuration as follows:
+.. dbms.memory.heap.initial_size=2G
+.. dbms.memory.heap.max_size=2G
+.. dbms.memory.pagecache.size=2G
+. Click *Apply* to save your changes.
+
+image:FraudConfig.png[FraudConfig,width=900]
+
+== Step 6: Start the fraud database
+
+Back in the Project view, start the database:
+
+image:StartFraudDB.png[StartFraudDB,width=600]
+
+== Step 7: Verify your setup
+
+. After the database starts, you should see 1,663,200 nodes and 3,271,992 relationships in the database.
+. Open Neo4j Browser for the started fraud database.
+. Enter these statements:
+.. RETURN gds.version();
+.. RETURN apoc.version();
+
+image:VerifyFraudSetup.png[VerifyFraudSetup,width=1000]
+
+*Congratulations!* You are now ready to perform the exercises for this training session.
+
+
+== Getting help
+
+If you have problems installing Neo4j Desktop, you can join http://community.neo4j.com/[Neo4j Community] and ask a question https://community.neo4j.com/c/general/online-training[here].
+
