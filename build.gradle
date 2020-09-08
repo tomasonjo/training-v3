@@ -120,7 +120,7 @@ subprojects {
 
   s3 {
     profile = project.hasProperty('s3-profile') ? project.property('s3-profile') : 'default'
-    region = 'us-east-1'
+    region = project.hasProperty('s3-region') ? project.property('s3-region') : 'us-east-1'
   }
 
   wordpress {
@@ -303,6 +303,13 @@ subprojects {
       }
 
       if (stage == 'production' || stage == 'testing') {
+        task s3UploadSetup(type: S3UploadTask) {
+          dependsOn convertSetupHtml
+          source = "${projectDir}/build/setup"
+          bucket = "graphacademy.neo4j.com"
+          destination = "setup"
+          acl.set(CannedAccessControlList.PublicRead)
+        }
         task wordPressUploadCourse(type: WordPressUploadTask) {
           dependsOn convertOnlineHtml
           source = convertOnlineHtml.outputs.files
@@ -405,6 +412,10 @@ subprojects {
       include 'setup.adoc'
     }
     outputDir file("${projectDir}/build/setup")
+
+    doLast {
+      file("${projectDir}/build/setup/setup.html").renameTo("${projectDir}/build/setup/${project.name}.html")
+    }
   }
 
   task convertSlides(type: AsciidoctorJRevealJSTask) {
