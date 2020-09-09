@@ -13,15 +13,15 @@ Determines the importance of distinct nodes in the network.
 Developed for distinct uses or types of importance. 
 
 Product supported:
-PageRank
-Betweenness Centrality
+* PageRank
+* Betweenness Centrality
 
 Labs implementations:
-ArticleRank
-Closeness Centrality
-Harmonic Centrality
-Degree Centrality
-Eigenvector Centrality
+* ArticleRank
+* Closeness Centrality
+* Harmonic Centrality
+* Degree Centrality
+* Eigenvector Centrality
 
 == PageRank
 
@@ -43,6 +43,10 @@ Twitter uses Personalized PageRank to present users with recommendations of othe
 PageRank has been used to rank public spaces or streets, predicting traffic flow and human movement in these areas. The algorithm is run over a graph of road intersections, where the PageRank score reflects the tendency of people to park, or end their journey, on each street. This is described in more detail in Self- organized Natural Roads for Predicting Traffic Flow: A Sensitivity Study. 17 
 PageRank is also used as part of an anomaly and fraud detection system in the healthcare and insurance industries. It helps reveal doctors or providers that are behaving in an unusual manner and then feeds the score into a machine learning algorithm. 
 
+It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value / # of it’s outgoing links.
+It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
+PageRank then continues to update values until an iterate value is reached.
+
 
 Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing.
 
@@ -59,63 +63,56 @@ personalized PR
 Fraud Detection 
 Feature engineering for machine learning
 
-It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value / # of it’s outgoing links.
-It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
-PageRank then continues to update values until an iterate value is reached.
+== Guided Exercise: Getting Started with PageRank algorithm
 
-=== Example: PageRank
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
 
-MERGE (home:Page {name:"Home"})
-MERGE (about:Page {name:"About"})
-MERGE (product:Page {name:"Product"})
-MERGE (links:Page {name:"Links"})
-MERGE (a:Page {name:"Site A"})
-MERGE (b:Page {name:"Site B"})
-MERGE (c:Page {name:"Site C"})
-MERGE (d:Page {name:"Site D"})
-MERGE (home)-[:LINKS]->(about)
-MERGE (about)-[:LINKS]->(home)
-MERGE (product)-[:LINKS]->(home)
-MERGE (home)-[:LINKS]->(product)
-MERGE (links)-[:LINKS]->(home)
-MERGE (home)-[:LINKS]->(links)
-MERGE (links)-[:LINKS]->(a)
-MERGE (a)-[:LINKS]->(home)
-MERGE (links)-[:LINKS]->(b)
-MERGE (b)-[:LINKS]->(home)
-MERGE (links)-[:LINKS]->(c)
-MERGE (c)-[:LINKS]->(home)
-MERGE (links)-[:LINKS]->(d)
-MERGE (d)-[:LINKS]->(home)
+. Select the Community detection group of algorithms.
+. Select the Local Clustering Coefficient algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. View the visualization.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
 
-CALL algo.pageRank.stream("Page", "LINKS",
-{iterations:20})
-YIELD nodeId, score
-MATCH (node) WHERE id(node) = nodeId
-RETURN node.name AS page,score
-ORDER BY score DESC
+Explain results.
+Local Clustering Coefficient only works on an Undirected relationship orientation.
 
+Here is the video:  https://youtu.be/oHo-lQ79zf0
 
-This code uses the default dampening factor of .85
+endif::[]
+--
 
-=== Example: Personalized PageRank
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+endif::[]
 
-MATCH (p:Page)
-WHERE p.name = 'Site A' OR p.name = 'Site C'
-with collect(p) AS sites
-CALL algo.pageRank.stream("Page", "LINKS",
-{iterations:20, sourceNodes: sites})
-YIELD nodeId, score
-MATCH (node) WHERE id(node) = nodeId
-RETURN node.name AS page,score
-ORDER BY score DESC
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 === Exercise: PageRank
 
 In NEuler:
-Perform the PageRank analysis on different seasons of GOT.
+* Perform the PageRank analysis on different seasons of GOT.
+
 In Neo4j Browser:
-:play intro-graph-algos-exercises  (PageRank)
+* :play intro-graph-algos-exercises  (PageRank)
 
 
 == Betweenness centrality
@@ -150,13 +147,11 @@ Uncover control points.
 
 Find bottlenecks and vulnerabilities.
 
-=== Example: Betweenness Centrality
 
 As we can see in the chart and in the visualization, Ned is of central importance in the graph for season 1. He has a centrality score of 780.
 
 Note that in NEuler, in order for the nodes to provide the information you want to display, you must write the value to the graph. Here we have written betweenness to each node in the graph.
 
-=== Example: Approximate Betweenness centrality
 
 Betweenness centrality doesn’t scale well on large graphs - too many comparisons and you run out of memory
 Sampling lets you calculate an approximate betweenness centrality
@@ -167,6 +162,48 @@ degree sampling only calculates betweenness for graphs with more than the averag
 
 So when you’re using sampling, set the probability initially low and the depth to 1, then if that runs incrementally step up until you reach a threshold. 
 
+== Guided Exercise: Getting Started with Betweenness centrality algorithm
+
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
+
+. Select the Community detection group of algorithms.
+. Select the Local Clustering Coefficient algorithm.
+. Select the *Person* label and *HELPS* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. View the visualization.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
+
+Explain results.
+Local Clustering Coefficient only works on an Undirected relationship orientation.
+
+Here is the video:  https://youtu.be/oHo-lQ79zf0
+
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 === Exercise: Betweenness centrality
 
