@@ -60,20 +60,22 @@ Examples:
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Reconnect with Neuler to ensure all nodes are known.
-. Select the Community detection group of algorithms.
-. Select the Connected components algorithm.
-. Select the *Person* label and *HELPS* relationship type.
-. Leave the Store results tick on.
-. Set Community Node Limit to 10 (or at least 6 or greater as we have 6 Person nodes)
-. Run the algorithm.
-. View the table results.
-. View the visualization.
-. View the generated code.
-. View the generated code for the named graph.
-. Show them how to copy the query from NEuler to Neo4j Browser.
-. For the Person labels, we see that all nodes are reachable, regardless of direction to each other so all nodes receive the community value of 0 because they are all in the same connected group.
-
+. Let's look at how to use the Connected Component algorithm in NEuler to discover how specific types of nodes are connected in the graph, regardless of the direction of their relationhips.
+. Since we previously added more nodes and relationships to the database, we must refresh NEuler to ensure that all nodes are known.
+. We select the Community detection group of algorithms.
+. Then we select the Connected components algorithm.
+. We want to discover how Person nodes are related to each other using the HELPS relationship. We select the *Person* label and *HELPS* relationship type.
+. We leave the Store results box checked.
+. We set Community Node Limit to 10 (or at least 6 or greater as we have 6 Person nodes in our database)
+. Now we run the algorithm.
+. Here are the table results.
+. In the visualization, we see that all nodes have a community value of 0 because they are all in the same undirected group.
+. Here is the generated code. It has the parameter settings, the call to the algorithm, and Cypher code to retrieve the nodes.
+. You can also use the generated code for the named graph, in cases where you want to save intermediate graphs for further downstream processing in your workflow.
+. In NEuler, you can copy the generated code from NEuler to Neo4j Browser as a Browser Guide.
+. When we play this Browser Guide, we can repeat the same code and you can use this code as part of your application logic.
+. In the graph retrieved by the generated code, here, we see that all nodes are reachable, regardless of direction to each other. All nodes receive the community value of 0 because they are all in the same connected group.
+. This concludes our look at running the Connected Component algorithm in NEuler.
 
 Here is the video:  https://youtu.be/d8sk_Qt07ek
 
@@ -81,7 +83,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to run the Connected Components algorithm using the Graph Data Science Playground (Neuler).
+Follow along with this video to run the Connected Components algorithm using the Graph Data Science Playground (NEuler).
 endif::[]
 
 ifdef::backend-pdf[]
@@ -157,30 +159,30 @@ Examples:
 * Inferring dialogue features and user intention for a machine learning model. For more information, see Feature Inference Based on Label Propagation on Wiki‐ data Graph for DST 16. 
 
 
-== Guided Exercise: Getting Started with the Label propagation algorithm
+== Guided Exercise: Getting Started with the Label Propagation algorithm
 
 [.notes]
 --
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Select the Community detection group of algorithms.
-. Select the Label Propagation algorithm.
-. Select the *Person* label and *HELPS* relationship type.
-. Ensure the Community Node Limit is at least 6.
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. View the visualization.
-. Select the Natural relationship orientation.
-. Run the algorithm while still in the visualization tab.
-. Select the Weight property to be 'weight'.
-. Run the algorithm while still in the visualization tab.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
-
-Explain results.
-Observe how different algorithm settings influence the community detection results.
+. Let's look at some of the ways to use the Label Propagation algorithm in NEuler to categorize groups of nodes based upon their relationships in the graph and the weights of their relationships.
+. We have selected the Community Detection group of algorithms.
+. We select the Label Propagation algorithm.
+. We want to create lpa values for the *Person* nodes that are connected by the *HELPS* relationship.
+. At this point, we don't care about relationship direction and we will not use any weights for the relationships.
+. We must ensure the Community Node Limit is at least 6, which is the number of Person nodes in the database.
+. We leave the remaining settings with their default values..
+. Now we run the algorithm.
+. Here are the table results. Notice that this algorithm has identified two communities, one with 2 nodes and one with 4 nodes.
+. And when we view the visualization, we see that each community is represented by a different color.
+. Suppose we select the Natural relationship orientation, meaning that the direction of the relationship is significant.
+. When we run the algorithm, we see that the visualization is different because we are using direction as a qualifier.
+. Next, we select the Weight property to be 'weight'.
+. When we run the algorithm, we see a different result because we are using relationship direction and weight to determine the grouping.
+. Here is the generated code for setting the parameters, running the algorithm, and retrieving the nodes.
+. And finally, we can generate the Browser Guide for this algorithm and copy it to Neo4j Browser.
+. This concludes our look at how to run the Label Propagation algorithm and how changing parameters will influence the lpa property that is written to the nodes.
 
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
@@ -262,23 +264,24 @@ Example use cases include:
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Select the Community detection group of algorithms.
-. Select the Louvain algorithm.
-. Select the *Person* label and *HELPS* relationship type.
-. Ensure Community Node Limit is at least 6
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. View the visualization.
-. Select the Natural relationship orientation.
-. Run the algorithm while still in the visualization tab.
-. Select the Weight property to be 'weight'.
-. Select the table tab
-. Tick the Intermediate communities
-. Run the algorithm.
-. View the table results.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
+. Let's look at some of the ways to use the Louvain algorithm in NEuler to categorize groups of nodes and intermediate communities based upon their relationships in the graph and the weights of their relationships.
+. We are in the Community Detection group of algorithms.
+. We select the Louvain algorithm.
+. We want to create louvain values for the *Person* nodes that are connected by the *HELPS* relationship.
+. At this point, we don't care about relationship direction and we will not use any weights for the relationships.
+. We must ensure the Community Node Limit is at least 6, which is the number of Person nodes in the database.
+. We leave the remaining settings with their default values.
+. Now we run the algorithm.
+. In the table view, we see that the result is pretty similar to the results of Label Propagation where 2 communities have been found.
+. And in the the visualization, we see 2 different node colors, based upon the community or louvain value.
+. Let's refine the algorithm to use the the Natural relationship orientation.
+. We run the algorithm to see that we still have 2 communities, but the louvain values are different because use factered in the direction of the relationship.
+. Next, we select the Weight property to be 'weight'.
+. We also select the Intermediate communities check box so that we will determine communities and intermediate communities of this graph.
+. We run the algorithm and view the table results. Here we see two communities and one community has 2 sub-communities.
+. And here is the generated code with the parameter settings, running the algorithm, and retrieving the nodes.
+. Finally, we can copy the generated Browser Guide to Neo4j Browser.
+. This concludes our look at the different ways you can use the Louvain algorithm to discover communities and intermediate communities in the data.
 
 Explain results.
 Observe how different algorithm settings influence the community detection results.
@@ -317,7 +320,7 @@ In Neo4j Browser:
 
 == Triangle count
 
-A triangle composes of three nodes where each node has a connection to the other two.
+A triangle contains three nodes where each node has a connection to the other two.
 In graph theory terminology, a triangle is equivalent to a 3-clique. 
 The Triangle Count algorithm counts the number of triangles for each node in the graph.
 It has gained popularity in social network analysis, where it is used to measure the cohesiveness and stability of networks.
@@ -358,15 +361,17 @@ Examples:
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Select the Community detection group of algorithms.
-. Select the Triangle Count algorithm.
+. Let's look at how to use the Triangle Count algorithm in NEuler to discover the number of triangles a node participates in.
+. We are in the Community Detection group of algorithms.
+. We select the Triangle Count algorithm.
 . Select the *Person* label and *HELPS* relationship type.
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. View the visualization.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
+. We leave the remaining settings with their default values. Triangle Count does not use relationship direction.
+. We run the algorithm.
+. In the table view, we see the triangle count for each node.
+. And here is the generated code with the parameter settings, running the algorithm, and retrieving the nodes.
+. Finally, we can copy the generated Browser Guide to Neo4j Browser.
+. This concludes our look at using the  Triangle Count algorithm to discover the number of triangles a node participates in.
+
 
 Explain results.
 Triangle count only works on an Undirected relationship orientation.
@@ -426,18 +431,18 @@ Because there are only two relationships between neighbors, the Local Clustering
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Select the Community detection group of algorithms.
-. Select the Local Clustering Coefficient algorithm.
-. Select the *Person* label and *HELPS* relationship type.
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. View the visualization.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
 
-Explain results.
-Local Clustering Coefficient only works on an Undirected relationship orientation.
+. Let's look at how to use the Local Clustering Coefficient  algorithm in NEuler to create a local clustering coefficient value for each node which indicates the probability that neighbors of a particular node are connected to each other.
+. We are in the Community Detection group of algorithms.
+. We select the Local Clustering Coefficient algorithm.
+. We select the *Person* label and *HELPS* relationship type.
+. We leave the remaining settings with their default values. Local Clustering Coefficient does not use relationship direction.
+. We run the algorithm.
+. In the table view, we see the generated coefficient for each node.
+. And here is the generated code with the parameter settings, running the algorithm, and retrieving the nodes.
+. Finally, we can copy the generated Browser Guide to Neo4j Browser.
+. This concludes our look at using the Local Clustering Coefficient algorithm to determine the probability that neighbors of a node are connected.
+
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
