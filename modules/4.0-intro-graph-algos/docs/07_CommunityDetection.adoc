@@ -65,10 +65,12 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Select the Connected components algorithm.
 . Select the *Person* label and *HELPS* relationship type.
 . Leave the Store results tick on.
+. Set Community Node Limit to 10 (or at least 6 or greater as we have 6 Person nodes)
 . Run the algorithm.
 . View the table results.
 . View the visualization.
 . View the generated code.
+. View the generated code for the named graph.
 . Show them how to copy the query from NEuler to Neo4j Browser.
 . For the Person labels, we see that all nodes are reachable, regardless of direction to each other so all nodes receive the community value of 0 because they are all in the same connected group.
 
@@ -165,6 +167,7 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Select the Community detection group of algorithms.
 . Select the Label Propagation algorithm.
 . Select the *Person* label and *HELPS* relationship type.
+. Ensure the Community Node Limit is at least 6.
 . Leave the default settings.
 . Run the algorithm.
 . View the table results.
@@ -262,6 +265,7 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Select the Community detection group of algorithms.
 . Select the Louvain algorithm.
 . Select the *Person* label and *HELPS* relationship type.
+. Ensure Community Node Limit is at least 6
 . Leave the default settings.
 . Run the algorithm.
 . View the table results.
