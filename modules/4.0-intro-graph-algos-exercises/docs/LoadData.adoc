@@ -101,23 +101,15 @@ MERGE (box)-[:HAS_TAG]->(js)
 
 After you have loaded the data, open a Neo4j Browser window to the started database and view the database information.
 
-It should appear as follows:
-
-image::DataLoaded.png[DataLoaded,width=400,role=left]
-
-
-Your database should now look as follows:
-
 [.thumb]
-image::LoadedDatabase.png[LoadedDatabase,width=150]
+image::DataLoaded.png[DataLoaded,width=150]
 
 Refresh the database contents in NEuler to have the new datasets available for algorithm execution.
 
 The database contents in NEuler should look as follows:
 
 [.thumb]
-image::LoadedNEuler.png[LoadedDatabase,width=150]
-////
+image::LoadedNEuler.png[LoadedNEuler,width=800
 
 == Load Data for the Exercises (Summary)
 

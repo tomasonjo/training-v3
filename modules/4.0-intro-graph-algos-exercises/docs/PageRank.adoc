@@ -7,11 +7,10 @@ The database you start with should contain all of the data you loaded in the set
 
 This is what you should see when you click the database icon image:database-icon.png[].
 
-image::LoadedDatabase.png[LoadedDatabase,width=150]
+image::DataLoaded.png[DataLoaded,width=150]
 
-{nbsp} +
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup steps again.
 
 == PageRank (Graph Catalog)
 
