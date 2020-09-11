@@ -6,13 +6,15 @@
 :imagesdir: ../images
 :module-next-title: Centrality Algorithms
 
-== Community detection algorithms
+== Community Detection algorithms
 
 Community detection algorithms are designed to help us discover and understand the structure of complex networks.
 Understanding the community structure has many real-world applications in sociology, biology, and computer science.
-We think of a community as a densely connected group of nodes, similar to how a group of friends is highly interconnected.
+We think of a community as a densely-connected group of nodes, similar to how a group of friends is highly interconnected.
 
-Product supported:
+These algorithms are supported:
+
+[square]
 * Weakly Connected Components (unionFind)
 
 * Label Propagation
@@ -23,7 +25,9 @@ Product supported:
 
 * Local Clustering Coefficient
 
-Labs implementations:
+These algorithms are are in alpha (labs):
+
+[square]
 * Strongly Connected Components
 
 * K-1 Coloring
@@ -32,33 +36,37 @@ Labs implementations:
 
 == Weakly Connected Components
 
-Weakly Connected Components (WCC) algorithm is used to find disconnected subgraphs or islands within our network.
+The Weakly Connected Components (WCC) algorithm is used to find disconnected subgraphs or islands within our network.
 In a single connected component, each node can reach all other nodes when disregarding relationships' direction, effectively treating the connections as undirected.
 Understanding how many connected components exist in our network is crucial to understanding the graph structure.
 For that reason, the WCC algorithm is often used early in graph analysis.
-Make it a habit to run WCC to test whether a graph is connected as a preparatory step for all other graph algorithms.
+A best practice is to run WCC to test whether a graph is connected as a preparatory step for all other graph algorithms.
 Performing this quick test can avoid accidentally running algorithms on only one disconnected component of a graph and getting incorrect results.
-It can also help us better comprehend results from other algorithms.  
+It can also help you to better comprehend results from other algorithms.
 
-Uses:
+Here is why you use WCC:
+
+[square]
 * Early step in graph analysis to see how a graph is structured.
 
 * Great tool to use for graphs that are being updated frequently since it scales well.
 
-* Can help detect new nodes in common that could trigger investigation
+* Can help detect new nodes in common that could trigger investigation.
 
-Examples:
+Here are some examples:
+
+[square]
 * Keeping track of clusters of database records as part of the deduplication process of MDM.
 
 * Working with Citation networks.
 
 [.slide-title.has-green-background.has-team-background]
-== Guided Exercise: Getting Started with Weakly Connected Component algorithm
+=== Guided Exercise: Getting Started with the Weakly Connected Component algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Connected Component algorithm in NEuler to discover how specific types of nodes are connected in the graph, regardless of the direction of their relationhips.
 . Since we previously added more nodes and relationships to the database, we must refresh NEuler to ensure that all nodes are known.
@@ -90,7 +98,7 @@ ifdef::backend-pdf[]
 https://youtu.be/d8sk_Qt07ek
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/d8sk_Qt07ek
 endif::[]
@@ -104,67 +112,79 @@ endif::[]
 [NOTE]
 Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, and followed the instructions for loading the data in the Browser Guide:  `:play 4.0-intro-graph-algos-exercises`.
 
-=== Exercise: Weakly connected component
+[.student-exercise]
+=== Exercise: Weakly Connected Components
 
-In NEuler: 
-* Find all Connected Person nodes writing the unionFind_helps property.
+. In NEuler:
 
-* Find all Connected Characters for Season 3 writing the unionFind_season3 property.
+.. Find all Connected *Person* nodes writing the *unionFind_helps* property.
 
-* Do the same for any relationship, writing the unionFind_any value.
+.. Find all Connected *Characters* for *Season 3* writing the *unionFind_season3* property in the Game of Thrones data.
 
-In Neo4j Browser:
-* :play 4.0-intro-graph-algos-exercises  (Weakly Connected Components)
+.. Do the same for any relationship, writing the *unionFind_any* value.
+
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Weakly Connected Components*.
 
 
 == Label Propagation
 
 The Label Propagation algorithm (LPA) is a fast algorithm for describing communities in a graph.
-It detects these groups using network topology alone and doesn’t require any prior information about the communities or their structure.
-In the LPA, the nodes select their community based on their direct neighbors using the node labels (weights on nodes and relationships can also be considered).
-The idea is that a single label can quickly become dominant in a densely connected group of nodes, but it will have trouble crossing a sparsely connected region.
+It detects these groups using network topology alone and does not require any prior information about the communities or their structure.
+In the LPA, the nodes select their community based on their direct neighbors using the node labels.
+In addition, weights on nodes and relationships can also be considered.
+The idea is that a single label can quickly become dominant in a densely-connected group of nodes, but it will have trouble crossing a sparsely connected region.
 
 image::label-propagation-explanation.png[Label propagation explanation,width=500, align=center]
 
+Here is how the Label Propagation algorithm works.
 First, every node is initialized with a property.
 By default, the initial property is unique for every node.
 However, the LPA also lends itself well to semi-supervised learning because you can seed the initial properties with pre-assigned node labels that you know are predictive.
-In this example, we have started with 2 A nodes but left all other's unique. 
-We are also going with the node default weights of 1.
-Nodes are then processed randomly, with each node acquiring its neighbor's label with the maximum weight. 
-So in the first iteration, the left A acquires the label F, B acquires the label D, and C now becomes A.
-The maximum weight is calculated based on the weights of neighbor nodes and their relationships.
-And ties are broken uniformly and randomly.
-There will be times when a label is not updated because the neighbor with the max weight has the same label.
-Iterations continue until each node has the majority label of its neighbors or reached the max iteration limit. 
-A max iteration limit will prevent endless cycles where the algorithm can't converge on a solution, essentially getting caught in a flip-flop cycle for some labels.
-In contrast to other algorithms, LPA can return different community structures when run multiple times on the same graph. The order in which LPA evaluates nodes can influence the final communities it returns. Another factor is the random tie-breaking process
 
-Uses:
-* In large-scale networks for initial clustering.
+In this example, we have started with 2 *A* nodes, but left all other's unique.
+We are using the node default weights of 1.
+Nodes are then processed randomly, with each node acquiring its neighbor's label with the maximum weight. 
+So, in the first iteration, the left *A* acquires the label *F*, *B* acquires the label *D*, and *C* now becomes *A*.
+The maximum weight is calculated based on the weights of neighbor nodes and their relationships.
+In addition, ties are broken uniformly and randomly.
+There will be times when a label is not updated because the neighbor with the maximum weight has the same label.
+Iterations continue until each node has the majority label of its neighbors or reached the maximum iteration limit.
+A maximum iteration limit will prevent endless cycles where the algorithm cannot converge on a solution, essentially getting caught in a flip-flop cycle for some labels.
+In contrast to other algorithms, LPA can return different community structures when run multiple times on the same graph.
+The order in which LPA evaluates nodes can influence the final communities it returns.
+Another factor is the random tie-breaking process.
+
+Here is why you use LPA:
+
+[square]
+* Large-scale networks for initial clustering.
 
 * Great for preprocessing data (classification).
 
 * Where groupings are less clear but weights can be used.
 
-* Can be parallelized for extremely fast at graph partitioning and scales nearly linearly
+* Can be run with concurrent threads for extremely fast graph partitioning and scales nearly linearly.
 
-Examples:
-* Assigning polarity of tweets as a part of semantic analysis. In this scenario, positive and negative seed labels from a classifier are used in combination with the Twitter follower graph. For more information, see Twitter polarity classification with label propagation over lexical links and the follower graph 14. 
+Here are some examples:
 
-* Finding potentially dangerous combinations of possible co-prescribed drugs, based on the chemical similarity and side effect profiles. The study is found in 14 https://dl.acm.org/citation.cfm?id=2140465 
+[square]
+* Assigning polarity of tweets as a part of semantic analysis. In this scenario, positive and negative seed labels from a classifier are used in combination with the Twitter follower graph.
+//?? For more information, see Twitter polarity classification with label propagation over lexical links and the follower graph 14.
 
-* Label Propagation Prediction of Drug-Drug Interactions Based on Clinical Side Effects 15. 
+* Finding potentially dangerous combinations of possible co-prescribed drugs, based on the chemical similarity and side effect profiles. This study is found in 14 https://dl.acm.org/citation.cfm?id=2140465.
 
-* Inferring dialogue features and user intention for a machine learning model. For more information, see Feature Inference Based on Label Propagation on Wiki‐ data Graph for DST 16. 
+* Label Propagation Prediction of Drug-Drug Interactions Based on Clinical Side Effects.
 
+* Inferring dialogue features and user intention for a machine learning model.
+//?? For more information, see Feature Inference Based on Label Propagation on Wiki‐ data Graph for DST 16.
 
-== Guided Exercise: Getting Started with the Label Propagation algorithm
+[.slide-title.has-green-background.has-team-background]
+=== Guided Exercise: Getting Started with the Label Propagation algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at some of the ways to use the Label Propagation algorithm in NEuler to categorize groups of nodes based upon their relationships in the graph and the weights of their relationships.
 . We have selected the Community Detection group of algorithms.
@@ -184,21 +204,19 @@ Show the students the basics of using Neuler and have them do the same on their 
 . And finally, we can generate the Browser Guide for this algorithm and copy it to Neo4j Browser.
 . This concludes our look at how to run the Label Propagation algorithm and how changing parameters will influence the lpa property that is written to the nodes.
 
-
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  TBD
 
 endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Label propagation in Neo4j Neuler.
-endif::[]
+Follow along with this video to become familiar with running the Label Propagation algorithm using the Graph Data Science Playground (NEuler).
 
 ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -208,21 +226,21 @@ ifdef::backend-html5[]
 video::oHo-lQ79zf0[youtube,width=560,height=315]
 endif::[]
 
+[.student-exercise]
 === Exercise: Label Propagation
 
-In NEuler:
-* Perform the Label Propagation algorithm on the Person data, noting what, if anything is written to the graph.
-* Perform the Label Propagation algorithm on different seasons of GOT.
+.In NEuler:
+.. Perform the Label Propagation algorithm on the Person data, noting what, if anything is written to the graph.
+.. Perform the Label Propagation algorithm on different seasons of Game of Thrones.
 
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (Label Propagation)
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Label Propagation*.
 
 == Louvain Modularity
 
-The Louvain Modularity method is an algorithm to detect communities in large networks.
+The Louvain Modularity algorithm is used to detect communities in large networks.
 You can think of the algorithm doing a "what if" analysis to try out various groupings with the goal of eventually reaching a global modularity optimum. 
 
-The Louvain modularity method consists of repeated application of two steps.
+The Louvain modularity algorithm consists of repeated application of two steps.
 The first step is a “greedy” assignment of nodes to communities, favoring local optimizations of modularity.
 The modularity score quantifies the quality of an assignment of nodes to communities.
 This process evaluates how much more densely connected the nodes within a community are, compared to how connected they would be in a random network.
@@ -234,15 +252,16 @@ These two steps are repeated until no further modularity-increasing reassignment
 
 image::louvain-modularity.png[Louvain Modularity,width=500, align=center]
 
-In this example, we can witness how the algorithm computation works.
+In this example, we can see how the Louvain Modularity algorithm works.
 First, the algorithm assigns nodes to communities by favoring local optimization of modularity.
 In our case, the algorithm found four groups of nodes, which are indicated by node color.
-In the second step, the algorithm merges each group of nodes into a single node. The count of links between nodes within the same community and between various communities is now represented as a weighted relationship between the newly merged nodes.
+In the second step, the algorithm merges each group of nodes into a single node.
+The count of links between nodes within the same community and between various communities is now represented as a weighted relationship between the newly-merged nodes.
 Once the new network is created, the whole process is repeated until a modularity maximum is reached.
-The Louvain algorithm is interesting because we can observe both the final as well as the intermediate communities that are calculated at the end of each level.
+The Louvain Modularity algorithm is interesting, because we can observe both the final as well as the intermediate communities that are calculated at the end of each level.
 It is regarded as a hierarchical clustering algorithm because a hierarchy of communities is produced as a result.
 
-Use when:
+Here is why you use Louvain:
 
 * Community detection in large networks.
 
@@ -250,19 +269,26 @@ Use when:
 
 * Evaluate different grouping thresholds.
 
-Example use cases include: 
-* Extracting topics from online social platforms, like Twitter and YouTube, based on the co-occurence of terms in documents as part of the topic modeling process. This approach is described in Topic Modeling based on Louvain method in Online Social Networks 20.
+Here are some examples:
 
-* Finding hierarchical community structures within the brain’s functional network, as described in Hierarchical Modularity in Human Brain Functional Networks 21.   (Also done for criminal network—evaluating holes in the structure)
+* Extracting topics from online social platforms, like Twitter and YouTube, based on the co-occurence of terms in documents as part of the topic modeling process.
+//?? This approach is described in Topic Modeling based on Louvain method in Online Social Networks 20.
 
-* Detecting cyber attacks. The algorithm was used in a study of fast community detection in large scale cyber networks for cyber security applications 19. Once these communities have been detected they can be used to detect cyber attacks. 
+* Finding hierarchical community structures within the brain’s functional network, as described in Hierarchical Modularity in Human Brain Functional Networks 21.
+//?? need a reference here?
 
-== Guided Exercise: Getting Started with Louvain Modularity algorithm
+* Evaluating criminal networks and holes in the structure.
+
+* Detecting cyber attacks. The algorithm was used in a study of fast community detection in large scale cyber networks for cyber security applications 19. Once these communities have been detected they can be used to detect cyber attacks.
+//?? need a reference here?
+
+[.slide-title.has-green-background.has-team-background]
+=== Guided Exercise: Getting Started with the Louvain Modularity algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at some of the ways to use the Louvain algorithm in NEuler to categorize groups of nodes and intermediate communities based upon their relationships in the graph and the weights of their relationships.
 . We are in the Community Detection group of algorithms.
@@ -274,8 +300,8 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Now we run the algorithm.
 . In the table view, we see that the result is pretty similar to the results of Label Propagation where 2 communities have been found.
 . And in the the visualization, we see 2 different node colors, based upon the community or louvain value.
-. Let's refine the algorithm to use the the Natural relationship orientation.
-. We run the algorithm to see that we still have 2 communities, but the louvain values are different because use factered in the direction of the relationship.
+. Let's refine the algorithm to use the the Natural relationship orientation, meaning that the direction of the relationship is significant.
+. We run the algorithm to see that we still have 2 communities, but the louvain values are different because we specified direction of the relationship.
 . Next, we select the Weight property to be 'weight'.
 . We also select the Intermediate communities check box so that we will determine communities and intermediate communities of this graph.
 . We run the algorithm and view the table results. Here we see two communities and one community has 2 sub-communities.
@@ -283,23 +309,20 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Finally, we can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at the different ways you can use the Louvain algorithm to discover communities and intermediate communities in the data.
 
-Explain results.
-Observe how different algorithm settings influence the community detection results.
-
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
 endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Louvain modularity in Neo4j Neuler.
+Follow along with this video to become familiar with running the Louvain Modularity algorithm in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -309,16 +332,15 @@ ifdef::backend-html5[]
 video::oHo-lQ79zf0[youtube,width=560,height=315]
 endif::[]
 
+[.student-exercise]
 === Exercise: Louvain Modularity
 
-In NEuler
-* Perform the Louvain Modularity algorithm on different seasons of GOT.
+. In NEuler:  Perform the Louvain Modularity algorithm on different seasons of Game of Thrones.
+. In Neo4j Browser:
+.. View the louvain and intermediate louvain values for GOT.
+.. kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Louvain Modularity*.
 
-In Neo4j Browser:
-* View the louvain and intermediate louvain values for GOT.
-* :play intro-graph-algos-exercises  (Louvain Modularity)
-
-== Triangle count
+== Triangle Count
 
 A triangle contains three nodes where each node has a connection to the other two.
 In graph theory terminology, a triangle is equivalent to a 3-clique. 
@@ -329,12 +351,14 @@ The Triangle Count algorithm in the GDS library only finds triangles in undirect
 
 image::triangle-count.png[Triangle Count,width=500, align=center]
 
-In this example, we count the number of triangles passing through node U.
-In the left example, two triangles pass through node U.
-The first triangle consists of node U and left-side nodes and the second triangle consists of node U and bottom-side nodes.
+In this example, we count the number of triangles passing through node *U*.
+In the left example, two triangles pass through node *U*.
+The first triangle consists of node *U* and left-side nodes and the second triangle consists of node *U* and bottom-side nodes.
 In the second example, we connect the top right nodes, which produces another triangle.
 
-Use when:
+Here is why you use Triangle Count:
+
+[square]
 * Basic network analysis.
 
 * Does the network exhibit small-world structures?
@@ -346,20 +370,25 @@ Use when:
 * Scoring for machine learning.
 
 
-Examples:
-* Identifying features for classifying a given website as spam content. This is described in Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive Graphs 4. 
+Here are some examples:
 
-* Investigating the community structure of Facebook’s social graph, where researchers found dense neighborhoods of users in an otherwise sparse global graph. Find this study in The Anatomy of the Facebook Social Graph 5. 
+[square]
+* Identifying features for classifying a given website as spam content.
+//?? This is described in Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive Graphs 4.
 
-* Exploring the thematic structure of the Web and detecting communities of pages with a common topics based on the reciprocal links between them. For more information, see Curvature of co-links uncovers hidden thematic layers in the World Wide Web 6. 
+* Investigating the community structure of Facebook’s social graph, where researchers found dense neighborhoods of users in an otherwise sparse global graph.
+//?? Find this study in The Anatomy of the Facebook Social Graph 5.
 
+* Exploring the thematic structure of the Web and detecting communities of pages with a common topics based on the reciprocal links between them.
+//?? For more information, see Curvature of co-links uncovers hidden thematic layers in the World Wide Web 6.
 
-== Guided Exercise: Getting Started with Triangle count algorithm
+[.slide-title.has-green-background.has-team-background]
+=== Guided Exercise: Getting Started with the Triangle Count algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Triangle Count algorithm in NEuler to discover the number of triangles a node participates in.
 . We are in the Community Detection group of algorithms.
@@ -372,24 +401,20 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Finally, we can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at using the  Triangle Count algorithm to discover the number of triangles a node participates in.
 
-
-Explain results.
-Triangle count only works on an Undirected relationship orientation.
-
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
 endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+Follow along with this video to become familiar with running the Triangle Count algorithm in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -399,38 +424,36 @@ ifdef::backend-html5[]
 video::oHo-lQ79zf0[youtube,width=560,height=315]
 endif::[]
 
-=== Exercise: Triangle count
+[.student-exercise]
+=== Exercise: Triangle Count
 
-In NEuler:
-* Perform some Triangle and Triangle Count algorithms on the Person data, noting what, if anything is written to the graph.
-* Perform some Triangle and Triangle Count algorithms on different seasons of GOT.
+.In NEuler:
+.. Perform some Triangle Count algorithms on the Person data, noting what, if anything is written to the graph.
+.. Perform some Triangle Count algorithms on different seasons of Game of Thrones.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Triangle Count*.
 
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (Triangle Count)
-
-
-== Local Clustering coefficient
+== Local Clustering Coefficient
 
 The Local Clustering Coefficient is the probability that neighbors of a particular node are connected to each other.
 The goal of the Local Clustering Coefficient algorithm is to measure how tightly a group is clustered compared to how tightly it could be clustered.
-The algorithm uses Triangle count in its calculations, which provides a ratio of existing triangles to possible relationships.
+The algorithm uses Triangle Count in its calculations, which provides a ratio of existing triangles to possible relationships.
 A maximum value of 1 indicates a clique where every node is connected to every other node.
 
 image::clustering-coefficient.png[Clustering Coefficient,width=500, align=center]
 
 The Local Clustering Coefficient describes how many of the node's neighbors are also connected.
-In the left example, the probability of node U neighbors being connected is 20 percent.
-Node U has five neighbors.
+In the left example, the probability of node *U* neighbors being connected is 20%.
+Node *U* has five neighbors.
 If all the neighbors were connected to each other, that would be ten relationships between neighbors.
 Because there are only two relationships between neighbors, the Local Clustering Coefficient is 0.2. 
 
-== Guided Exercise: Getting Started with Local Clustering Coefficient algorithm
+[.slide-title.has-green-background.has-team-background]
+=== Guided Exercise: Getting Started with the Local Clustering Coefficient algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
-
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Local Clustering Coefficient  algorithm in NEuler to create a local clustering coefficient value for each node which indicates the probability that neighbors of a particular node are connected to each other.
 . We are in the Community Detection group of algorithms.
@@ -450,14 +473,14 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+Follow along with this video to become familiar with running the Local Clustering Coefficient algorithm in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs, env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -467,14 +490,28 @@ ifdef::backend-html5[]
 video::oHo-lQ79zf0[youtube,width=560,height=315]
 endif::[]
 
+[.student-exercise]
 === Exercise: Local Clustering Coefficient
 
-In NEuler:
-* Perform some Local Clustering Coeffient algorithms on different seasons of GOT.
-
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (Local Clustering Coefficient)
+. In NEuler: Run some Local Clustering Coefficient algorithms on different seasons of Game of Thrones.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Local Clustering Coefficient*.
 
 == Summary
 
-If you want to use labs check out the docs.
+In this module you gained experience running the Neo4j supported algorithms for Community Detection:
+
+These algorithms are supported:
+
+[square]
+* Weakly Connected Components (unionFind)
+
+* Label Propagation
+
+* Louvain Modularity
+
+* Triangle Count
+
+* Local Clustering Coefficient
+
+You can read more about these algorithms and also the alpha (labs) algorithms in the https://neo4j.com/docs/graph-data-science/current/algorithms/community/[Graph Data Science documentation]
+
