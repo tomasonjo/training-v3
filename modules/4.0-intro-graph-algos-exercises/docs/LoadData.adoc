@@ -96,8 +96,17 @@ MERGE (box)-[:HAS_TAG]->(css)
 MERGE (box)-[:HAS_TAG]->(js)
 ----
 
+== Step 3: Calculate inverse value of distance
 
-== Step 3: Verify data has been loaded.
+In Neo4j Browser, execute this code:
+
+[source, cypher]
+----
+MATCH (:Place)-[r:EROAD]->(:Place)
+SET r.inverse_distance = 1.0 / log10(r.distance + 2)
+----
+
+== Step 4: Verify data has been loaded.
 
 After you have loaded the data, open a Neo4j Browser window to the started database and view the database information.
 
