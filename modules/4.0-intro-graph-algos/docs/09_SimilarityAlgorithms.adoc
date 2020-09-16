@@ -8,38 +8,100 @@
 
 == Similarity algorithms
 
+Similarity algorithms evaluate how alike nodes are at an individual level either based on node attributes, neighboring nodes, or relationship properties.
+
 Product supported:
-Node Similarity (Jaccard Index)
+* Node Similarity (Jaccard Index)
 
 Labs implementations:
-Cosine Similarity
-Euclidean Similarity
-Overlap Similarity
-Pearson Similarity
-Approximate Nearest Neighbors
+* Cosine Similarity
 
-Evaluates how alike nodes are at an individual level either based on node attributes, neighboring nodes, or relationship properties
+* Euclidean Similarity
+
+* Overlap Similarity
+
+* Pearson Similarity
+
+* Approximate Nearest Neighbors
 
 == Node Similarity algorithm
 
-The Jaccard similarity algorithm is often used to find recommendations of similar items as well as part of link prediction.
-Jaccard provides a measure of the similarity between sets, which could be two nodes with their attributes compared.
-Mathematically, it’s defined as the size of the intersection divided by the size of the union of two sets. Basically looking at the overlap of the two sets over the sum of those sets.
+Node Similarity algorithm computes similarities between pairs of nodes based on the Jaccard Similarity Score.
+Two nodes are considered similar if they share many of the same neighbors.
+The input of this algorithm is usually a bipartite graph containing two disjoint node sets.
+The Node Similarity algorithm compares all nodes from the first node set based on their relationships to nodes in the second set.
+The output of the algorithm is a unipartite network between nodes in the first node set.
+We can think of this process as translating indirect relationships to direct ones.
 
-Often used to find recommendations of similar items as well as part of link prediction.
+// Todo: prettify this image
+image::jaccard-similarity-unipartite.png[Betweenness centrality,width=500, align=center]
 
-Jaccard Similarity measures the similarity between sets.
+Mathematically, Jaccard Similarity Score is defined as the size of the intersection divided by the size of the union of two sets.
 
-For example, if set A contains {Orange, Banana, Cherry, Pineapple}  and set B contains {Orange, Banana, Apple} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in A and B (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Pineapple}. The resulting Jaccard similarity coefficient is 2/5 which is 0.4. 
+image::jaccard-similarity.png[Betweenness centrality,width=500, align=center]
 
-A coefficient of 1 indicates that the groups are identical.
+For example, if set A contains {Orange, Banana, Cherry, Pineapple}  and set B contains {Orange, Banana, Apple} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in A and B (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Pineapple}.
+The resulting Jaccard similarity coefficient is 2/5 which is 0.4. 
+A coefficient of 1 indicates that the compared sets are identical.
 
-== Example: Node Similarity
+Here is why you use Node Similarity:
+* Find recommendations of similar items.
 
-Here we see that the customers Karin and Arya have the most combined cuisines.
+* First step of analyzing a bipartite network.
+
+* Part of link prediction analysis.
+
+Here are some example:
+
+== Guided Exercise: Getting Started with Node Similarity algorithm
+
+[.notes]
+--
+ifdef::backend-revealjs[]
+Show the students the basics of using Neuler and have them do the same on their systems:
+
+. Select the Similarity group of algorithms.
+. Select the Jaccard algorithm.
+. Select the *Any* label and *HAS_TAG* relationship type.
+. Leave the default settings.
+. Run the algorithm.
+. View the table results.
+. Return to algorithm and select *REVERSE* direction.
+. View the generated code.
+. Show them how to copy the query from NEuler to Neo4j Browser.
+
+Explain results.
+The relationship directions is crucial as it will compare question or tags, depending on the relationship direction.
+
+Here is the video:  https://youtu.be/oHo-lQ79zf0
+
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-revealjs[]
+[.center]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
 
 == Exercise: Node Similarity
 
+In NEuler:
+* Try various algorithm configurations for the Questions dataset
+
+* Try other datasets
+
 In Neo4j Browser:
-:play intro-graph-algos-exercises  (Similarity)
-In NEuler, perform some of the Similarity algorithms on any dataset.
+* :play intro-graph-algos-exercises  (Similarity)

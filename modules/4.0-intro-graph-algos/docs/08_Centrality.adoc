@@ -8,60 +8,62 @@
 
 == Centrality algorithms
 
-Determines the importance of distinct nodes in the network.
-
-Developed for distinct uses or types of importance. 
+In network analysis, centrality measures identify the most important or influential nodes within a graph.
+The centrality concepts were first introduced in social network analysis to identify key players within a social network, but have since found applications in a variety of industries and fields.
 
 Product supported:
 * PageRank
+
 * Betweenness Centrality
 
 Labs implementations:
-* ArticleRank
-* Closeness Centrality
-* Harmonic Centrality
 * Degree Centrality
+
+* ArticleRank
+
+* Closeness Centrality
+
+* Harmonic Centrality
+
 * Eigenvector Centrality
 
 == PageRank
 
-Measures the transitive (directional) influence of nodes and considers the influence of neighbors and their neighbors.
-
-Dampening factor: Probability that the end user will click through a link. Default value used by the Neo4j graph algorithm is .85. You must test the dampening factor as it will change the outcome. Note that Spark uses an inverse dampening factor (.15).
-
-An example of this type of influence might be having the ear of a general that considers you very credible will likely make you more powerful than being really popular with your fellow foot soldiers.
-PageRank measure importance in comparison to other nodes using an iterative process to update ranks.
+PageRank is Google’s popular web page ranking algorithm.
+It works by counting the number and quality of links to a node to estimate its significance.
+The underlying assumption is that a node is only as important as the nodes that link to it.
+An example of this type of influence might be having the ear of a general that considers you very credible will likely make you more powerful than being popular with your fellow foot soldiers.
+PageRank measures importance in comparison to other nodes using an iterative process to update ranks.
+It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value/number of its outgoing links.
 
 image::pagerank-step-1.png[PageRank step 1,width=500, align=center]
 
+It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
+
 image::pagerank-step-2.png[PageRank step 2,width=500, align=center]
+
+PageRank then continues to update values until an iterate value is reached.
 
 image::pagerank-step-3.png[PageRank step 3,width=500, align=center]
 
+There are many domain-specific variations for differing analyses, e.g. Personalized PageRank for personalized recommendations.
+Personalized PageRank is a variation of PageRank, which is biased towards a set of pre-defined source nodes.
 
-Twitter uses Personalized PageRank to present users with recommendations of other accounts that they may wish to follow. The algorithm is run over a graph that contains shared interests and common connections. Their approach is described in more detail in WTF: The Who to Follow Service at Twitter. 
-PageRank has been used to rank public spaces or streets, predicting traffic flow and human movement in these areas. The algorithm is run over a graph of road intersections, where the PageRank score reflects the tendency of people to park, or end their journey, on each street. This is described in more detail in Self- organized Natural Roads for Predicting Traffic Flow: A Sensitivity Study. 17 
-PageRank is also used as part of an anomaly and fraud detection system in the healthcare and insurance industries. It helps reveal doctors or providers that are behaving in an unusual manner and then feeds the score into a machine learning algorithm. 
+Here is why you use PageRank:
 
-It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value / # of it’s outgoing links.
-It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
-PageRank then continues to update values until an iterate value is reached.
+* Recommendations
+* Fraud Detection 
+* Feature engineering for machine learning
 
+Here are some example:
 
-Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing.
+* Twitter uses Personalized PageRank to present users with recommendations of other accounts that they may wish to follow. The algorithm is run over a graph that contains shared interests and common connections.
 
-Use when:
+* PageRank has been used to rank public spaces or streets, predicting traffic flow and human movement in these areas. The algorithm is run over a graph of road intersections, where the PageRank score reflects the tendency of people to park, or end their journey, on each street.
 
-You are looking for broad influence over a network.
+* PageRank is also used as part of an anomaly and fraud detection system in the healthcare and insurance industries. It helps reveal doctors or providers that are behaving in an unusual manner and then feeds the score into a machine learning algorithm. 
 
-There are many domain specific variations for differing analysis, e.g. Personalized PageRank for personalized recommendations.
-
-Recommendations
-Who To follow with
-personalized PR
-
-Fraud Detection 
-Feature engineering for machine learning
+* Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing. 
 
 == Guided Exercise: Getting Started with PageRank algorithm
 
@@ -70,18 +72,23 @@ Feature engineering for machine learning
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Select the Community detection group of algorithms.
-. Select the Local Clustering Coefficient algorithm.
+. Select the Centralities group of algorithms.
+. Select the PageRank algorithm.
 . Select the *Person* label and *HELPS* relationship type.
 . Leave the default settings.
 . Run the algorithm.
 . View the table results.
+. View the chart results.
 . View the visualization.
+. Make a new configuration and select the weight property *weight*.
+. Run the algorithm.
+. View the table results.
 . View the generated code.
 . Show them how to copy the query from NEuler to Neo4j Browser.
 
 Explain results.
-Local Clustering Coefficient only works on an Undirected relationship orientation.
+In PageRank algorithm, every link is considered as a vote of importance from a node to a node.
+Alongside the number of links, the algorithm also considers how important are the nodes that link to a specific node.
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
@@ -89,7 +96,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+Follow along with this video to become familiar with PageRank in Neo4j Neuler.
 endif::[]
 
 ifdef::backend-pdf[]
@@ -115,52 +122,42 @@ In Neo4j Browser:
 * :play intro-graph-algos-exercises  (PageRank)
 
 
-== Betweenness centrality
+== Betweenness Centrality
+
+Sometimes the most critical cog in the system is not the one with the most overt power or the highest status.
+Sometimes it’s the middlemen who connect groups or brokers with the most control over resources or information flow.
+Betweenness Centrality is a way of detecting the amount of influence a node has over the flow of information in a network.
+It is typically used to find nodes that serve as a bridge from one part of a graph to another.
 
 image::betweenness-centrality.png[Betweenness centrality,width=500, align=center]
 
+The Betweenness Centrality algorithm first calculates the shortest path between every pair of nodes in a connected graph.
+Each node receives a score based on the number of these shortest paths that pass through the node.
+The more shortest paths that a node lies on, the higher its score.
 
-The Betweenness Centrality algorithm first calculates the shortest (weighted) path between every pair of nodes in a connected graph. Each node receives a score, based on the number of these shortest paths that pass through the node. The more shortest paths that a node lies on, the higher its score. 
+Betweenness centrality doesn’t scale well on large graphs as the algorithm has to calculate the shortest path between all pairs of nodes in a network.
+Because of this, approximation algorithms of betweenness centrality were developed to allow for a faster calculation.
+The RA-Brandes algorithm is the best-known algorithm for calculating an approximate score for betweenness centrality.
+Rather than calculating the shortest path between every pair of nodes, the RA-Brandes algorithm considers only a subset of nodes.
+Brandes defines several strategies for selecting the subset of nodes.
+Our implementation is based on the random degree selection strategy, which selects nodes with a probability proportional to their degree. 
+The idea behind this strategy is that such nodes are likely to lie on many shortest paths in the graph and thus have a higher contribution to the betweenness centrality score.
 
-Randomized- Approximate Brandes (Random or degree based selection)
+Here is why you use Betweenness Centrality:
 
-On tip - Therefore, it doesn’t give us a perfect view of the most influential nodes in a graph, but rather a good representation. 
+* Identify bridges.
 
-The sum of the % shortest paths that pass through a node, calculated by pairs.
+* Uncover control points.
 
+* Find bottlenecks and vulnerabilities.
 
-Sometimes the most important cog in the system is not the one with the most overt power or the highest status. Sometimes it’s the middlemen that connect groups or the brokers with the most control over resources or the flow of information. Betweenness Centrality is a way of detecting the amount of influence a node has over the flow of information in a graph. It is typically used to find nodes that serve as a bridge from one part of a graph to another. 
+Here are some example:
 
+* Betweenness Centrality is used to identify influencers in various organizations. Powerful individuals are not necessarily in management positions, but can be found in “brokerage positions” using Betweeness Centrality. Removal of such influencers seriously destabilize the organization. This might be a welcome disruption by law enforcement if the organization is criminal, or may be a disaster if a business loses key staff it never knew about.
 
-Betweenness Centrality is used to identify influencers in various organizations. Powerful individuals are not necessarily in management positions, but can be found in “brokerage positions” using Betweeness Centrality. Removal of such influencers seriously destabilize the organization. This might be a welcome dis‐ ruption by law enforcement if the organization is criminal, or may be a disaster if a business loses key staff it never knew about. More details are found in Broker‐ age qualifications in ringing operations 11 by Carlo Morselli and Julie Roy. 
-Betweeness Centrality uncovers key transfer points in networks such electrical grids. Counterintuitively, removal of specific bridges can actually improve overall robustness by “islanding” disturbances. Research details are included in Robust‐ ness of the European power grids under intentional attack 12 by Sol ́e R., Rosas- Casals M., Corominas-Murtral B., and Valverde S. 
-Betweenness Centrality is also used to help microbloggers spread their reach on Twitter, with a recommendation engine for targeting influencers. This approach is described in Making Recommendations in a Microblog to Improve the Impact of a Focal User. 13 
+* Betweeness Centrality uncovers key transfer points in networks such electrical grids. Counterintuitively, removal of specific bridges can actually improve overall robustness by “islanding” disturbances.
 
-
-Improve drug targeting by finding the control genes for specific diseases. – ALSO gluclose processing
-
-Example uses:
-
-Identify bridges.
-
-Uncover control points.
-
-Find bottlenecks and vulnerabilities.
-
-
-As we can see in the chart and in the visualization, Ned is of central importance in the graph for season 1. He has a centrality score of 780.
-
-Note that in NEuler, in order for the nodes to provide the information you want to display, you must write the value to the graph. Here we have written betweenness to each node in the graph.
-
-
-Betweenness centrality doesn’t scale well on large graphs - too many comparisons and you run out of memory
-Sampling lets you calculate an approximate betweenness centrality
-random sampling selects nodes randomly
-
-
-degree sampling only calculates betweenness for graphs with more than the average number of edges
-
-So when you’re using sampling, set the probability initially low and the depth to 1, then if that runs incrementally step up until you reach a threshold. 
+* Betweenness Centrality is also used to help microbloggers spread their reach on Twitter, with a recommendation engine for targeting influencers. 
 
 == Guided Exercise: Getting Started with Betweenness centrality algorithm
 
@@ -169,8 +166,8 @@ So when you’re using sampling, set the probability initially low and the depth
 ifdef::backend-revealjs[]
 Show the students the basics of using Neuler and have them do the same on their systems:
 
-. Select the Community detection group of algorithms.
-. Select the Local Clustering Coefficient algorithm.
+. Select the Centralities group of algorithms.
+. Select the Betweenness centrality algorithm.
 . Select the *Person* label and *HELPS* relationship type.
 . Leave the default settings.
 . Run the algorithm.
@@ -180,7 +177,7 @@ Show the students the basics of using Neuler and have them do the same on their 
 . Show them how to copy the query from NEuler to Neo4j Browser.
 
 Explain results.
-Local Clustering Coefficient only works on an Undirected relationship orientation.
+Betweenness centrality identifies nodes that are often on located on a shortest path between other nodes in network, hence also why bridges.
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
@@ -188,7 +185,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+Follow along with this video to become familiar with Betweenness Centrality in Neo4j Neuler.
 endif::[]
 
 ifdef::backend-pdf[]
@@ -207,9 +204,12 @@ endif::[]
 
 === Exercise: Betweenness centrality
 
-In NEuler
-View the closeness  and betweenness centrality scores for other GOT seasons and examine the paths in Neo4j Browser for these nodes.
-Try some of the other centrality algorithms with the GOT data.
-In Neo4j Browser:
-:play intro-graph-algos-exercises  (Centrality)
+In NEuler:
+* View the betweenness centrality scores for other GOT seasons and examine the paths in Neo4j Browser for these nodes.
+* View the approximate betweenness centrality scores for GOT seasons and see how various sampling sizes affect the results.
 
+In Neo4j Browser:
+* :play intro-graph-algos-exercises  (Betweenness Centrality)
+
+
+== Summary
