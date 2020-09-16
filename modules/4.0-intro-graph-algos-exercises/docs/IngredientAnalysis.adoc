@@ -1,0 +1,371 @@
+= Analysis of commonly used together ingredients
+:icons: font
+
+== Analysis of commonly used together ingredients (Preparations)
+
+The database you start with should contain all of the data you loaded in the setup for this course.
+
+This is what you should see when you click the database icon image:database-icon.png[].
+
+image::DataLoaded.png[DataLoaded,width=150]
+
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+
+== Analysis of commonly used together ingredients (Overview)
+
+Combine the knowledge esse
+
+PageRank measures the transitive influence or connectivity of nodes.
+It can be computed by iteratively distributing one node’s rank (originally based on degree) over its neighbors.
+
+In this exercise, you will analyze PageRank for the European Roads dataset:
+
+* *Part 1*: Project the ingredients graph to Graph Catalog with native projection.
+* *Part 2*: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score.
+* *Part 3*: Run the Node Similarity algorithm to mutate a relationship between a pair of commonly used together ingredients.
+* *Part 4*: Run the Louvain Modularity algorithm to add a community property to each node.
+* *Part 5*: Write the relationships stored in a named in-memory graph back to Neo4j.
+* *Part 6*: Investigate the community detection results.
+* *Part 7*: Inspect the top five largest communities of ingredients.
+* *Part 8*: Find representatives of the top five communities with the PageRank algorithm.
+
+Go to the next page to start this exercise.
+
+== Part 1: Project the ingredients graph to Graph Catalog with native projection. (Instructions)
+
+Write Cypher code to project the Ingredient graph to Graph Catalog using these guidelines:
+
+* The created graph should be named *ingredient*.
+* Project all nodes labeled *Ingredient* and *Recipe*.
+* Project all relationships with a type *CONTAINS_INGREDIENT*.
+* Relationships should use the *REVERSE* orientation.
+
+*Hint*: You will call `gds.graph.create`.
+
+== Part 1: Project the ingredients graph to Graph Catalog with native projection. (Solution)
+
+Write Cypher code to project the Ingredient graph to Graph Catalog using these guidelines:
+
+* The created graph should be named *ingredient*.
+* Project all nodes labeled *Ingredient* and *Recipe*.
+* Project all relationships with a type *CONTAINS_INGREDIENT*.
+* Relationships should use the *REVERSE* orientation.
+
+*Hint*: You will call `gds.graph.create`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.graph.create('ingredient',
+  ['Ingredient','Recipe'],
+  {CONTAINS_INGREDIENT:{
+      type:'CONTAINS_INGREDIENT',
+      orientation:'REVERSE'}})
+----
+
+== Part 2: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
+
+We will evaluate the Jaccard similarity score distribution to helps us fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+
+* The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* `YIELD` the following result: nodesCompared,similarityDistribution.
+
+*Hint*: You will call `gds.nodeSimilarity.stats`.
+
+
+== Part 2: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Solution)
+
+We will evaluate the Jaccard similarity score distribution to helps us fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+
+* The algorithm should use the projected graph *recipes*, which is stored in the graph catalog.
+* `YIELD` the following result: nodesCompared,similarityDistribution.
+
+*Hint*: You will call `gds.nodeSimilarity.stats`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.nodeSimilarity.stats('ingredient')
+YIELD nodesCompared, similarityDistribution
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXIA.2.png[EXIA.2,width=300]
+
+{nbsp} +
+
+The average Jaccard similarity score is relatively low at 0.10 value.
+Due to the low average similarity score, we will have to select a low similarity cutoff value in the next step.
+Otherwise, we might infer too sparse of a similarity network, which will not yield relevant results.
+
+== Part 3: Run the Node Similarity algorithm to mutate a relationship between a pair of commonly used together ingredients. (Instructions)
+
+We will use the *mutate* mode of the Node Similarity algorithm to store the results back to the named in-memory graph.
+Write Cypher code to execute the Node Similarity algorithm on the Ingredients graph using these guidelines:
+
+* The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* The algorithm will mutate a relationship with a type *COMMONLY_USED_TOGETHER* between a pair of ingredients.
+* The algorithm will mutate a property named *score* to each relationship with the computed value.
+* Specify a similarity cutoff threshold of 0.3.
+* Specify the *topK* parameter of 10.
+* `YIELD` the following result: nodesCompared, relationshipsWritten.
+
+*Hint*: You will call `gds.nodeSimilarity.mutate`.
+
+== Part 3: Run the Node Similarity algorithm to mutate a relationship between a pair of commonly used together ingredients. (Solution)
+
+We will use the *mutate* mode of the Node Similarity algorithm to store the results back to the named in-memory graph.
+Write Cypher code to execute the Node Similarity algorithm on the Ingredients graph using these guidelines:
+
+* The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* The algorithm will mutate a relationship with a type *COMMONLY_USED_TOGETHER* between a pair of ingredients.
+* The algorithm will mutate a property named *score* to each relationship with the computed value.
+* Specify a similarity cutoff threshold of 0.3.
+* Specify the *topK* parameter of 10.
+* `YIELD` the following result: nodesCompared, relationshipsWritten.
+
+*Hint*: You will call `gds.nodeSimilarity.mutate`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.nodeSimilarity.mutate('ingredient',{
+   mutateProperty:'score',
+   mutateRelationshipType:'COMMONLY_USED_TOGETHER',
+   similarityCutoff:0.30,
+   topK:10})
+YIELD nodesCompared, relationshipsWritten
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXIA.3.png[EXIA.3,width=300]
+
+{nbsp} +
+
+The algorithm has written 1260 similarity relationships between 1384 nodes.
+Even with the low similarity cutoff value, the inferred network is still relatively sparse.
+
+== Part 4: Run the Louvain Modularity algorithm to add a community property to each node. (Instructions)
+
+Write Cypher code to perform the weighted Louvain Modularity algorithm on the Ingredient graph using these guidelines:
+
+* The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* The algorithm will write a property named *community_ingredient* to each node with the computed value.
+* The algorithm will consider only relationships with a type *COMMONLY_USED_TOGETHER*.
+* The algorithm will consider only nodes with a label *Ingredient*.
+* The relationship weight property name is *score*.
+* `YIELD` the following results: modularity, ranLevels, communityCount.
+
+*Hint*: You will call `gds.louvain.write`.
+
+== Part 4: Run the Louvain Modularity algorithm to add a community property to each node. (Solution)
+
+Write Cypher code to perform the weighted Louvain Modularity algorithm on the Ingredient graph using these guidelines:
+
+* The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* The algorithm will write a property named *community_ingredient* to each node with the computed value.
+* The algorithm will consider only relationships with a type *COMMONLY_USED_TOGETHER*.
+* The algorithm will consider only nodes with a label *Ingredient*.
+* The relationship weight property name is *score*.
+* `YIELD` the following results: modularity, ranLevels, communityCount.
+
+*Hint*: You will call `gds.louvain.write`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.louvain.write('ingredient',
+  {nodeLabels:['Ingredient'],
+   relationshipTypes:['COMMONLY_USED_TOGETHER'], 
+   writeProperty:'community_ingredient',
+   relationshipWeightProperty:'score'})
+YIELD modularity, ranLevels, communityCount
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXIA.4.png[EXIA.4,width=300]
+
+{nbsp} +
+
+The algorithm found three hierarchical levels of communities with a total of 952 communities on the last level.
+We already knew that our inferred similarity network is sparse, so a high number of communities is not surprising.
+Probably a lot of communities consist of only a single node.
+Next, we will investigate single node communities to test our hypothesis.
+
+== Part 5: Write the relationships stored in a named in-memory graph back to Neo4j. (Instructions)
+
+To investigate the inferred similarity network, we have to write the mutated relationships stored in named graph back to Neo4j.
+
+* The procedure should use the projected graph *ingredient*, which is stored in the graph catalog.
+* The procedure will write relationships with a type *COMMONLY_USED_TOGETHER* back to Neo4j.
+
+*Hint*: You will call `gds.graph.writeRelationship`.
+
+== Part 5: Write the relationships stored in a named in-memory graph back to Neo4j. (Solution)
+
+To investigate the inferred similarity network, we have to write the mutated relationships stored in named graph back to Neo4j.
+
+* The procedure should use the projected graph *ingredient*, which is stored in the graph catalog.
+* The procedure will write relationships with a type *COMMONLY_USED_TOGETHER* back to Neo4j.
+
+*Hint*: You will call `gds.graph.writeRelationship`.
+
+Here is the solution code:
+
+[source, cypher]
+----
+CALL gds.graph.writeRelationship('ingredient', 'COMMONLY_USED_TOGETHER')
+----
+
+== Part 6: Investigate the community detection results. (Instructions)
+
+Write Cypher code to find the *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
+
+== Part 6: Investigate the community detection results. (Solution)
+
+Write Cypher code to find the *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (i:Ingredient)
+WHERE NOT (i)-[:COMMONLY_USED_TOGETHER]-()
+RETURN count(*) as count
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXIA.6.png[EXIA.6,width=300]
+
+{nbsp} +
+
+There are 743 nodes without any *COMMONLY_USED_TOGETHER* relationship, and consequently, there are 743 communities that contain only a single node.
+This means that out of a total of 952 communities found by the Louvain Algorithm, only 209 of them consist of more than a single node.
+
+== Part 7: Inspect the top five largest communities of ingredients. (Instructions)
+
+Write a query to return all *ingredient_community* values of the *Ingredient* nodes.
+For each community id, return the size of the community, and the list of *Ingredient* names.
+
+* Return a list of 3 ingredients for each community.
+* Order the results by component size descending.
+* Limit the top five results
+
+== Part 7: Inspect the top five largest communities of ingredients. (Solution)
+
+Write a query to return all *ingredient_community* values of the *Ingredient* nodes.
+For each community id, return the size of the community, and the list of *Ingredient* names.
+
+* Return a list of 3 ingredients for each community.
+* Order the results by component size descending.
+* Limit the top five results
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (i:Ingredient)
+RETURN i.ingredient_community as community,
+       count(*) as communitySize,
+       collect(i.name)[..3] as ingredients
+ORDER BY communitySize DESC LIMIT 5
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXIA.7.png[EXIA.7,width=300]
+
+{nbsp} +
+
+The largest community contains 18 ingredients, while the second community consists of 15 ingredients.
+On average, the communities are relatively small.
+It seems that our recipes dataset contains a variety of dishes that do not have many ingredients in common.
+
+== Part 8: Find representatives of the top five communities with the PageRank algorithm. (Instructions)
+
+The query below provides a template for computing representatives of each community with PageRank.
+Update the query to:
+
+* Compute the representatives for the top five largest communities.
+* Update the *relationshipQuery* to match all the *COMMONLY_USED_TOGETHER* relationships between *Ingredient* nodes in a specific community.
+* Return the community id, community size, and the top three representatives for each community.
+
+[source, cypher]
+----
+MATCH (i:Ingredient)
+WITH i.ingredient_community as community,
+     count(*) as communitySize
+
+// Order by community size and limit the top five largest communities
+
+CALL gds.pageRank.stream({
+  nodeQuery:'MATCH (i:Ingredient) WHERE i.ingredient_community = $community
+             RETURN id(i) as id',
+  
+  relationshipQuery: // Match all COMMONLY_USED_TOGETHER relationships between nodes in a specific community
+
+  relationshipWeightProperty:'weight',
+  parameters:{community:community}})
+YIELD nodeId,score
+WITH community, communitySize, nodeId, score
+ORDER BY score DESC
+// Return the community, communitySize, and the top three representatives for each community
+----
+
+== Part 8: Find representatives of the top five communities with the PageRank algorithm. (Solution)
+
+The query below provides a template for computing representatives of each community with PageRank.
+Update the query to:
+
+* Compute the representatives for the top five largest communities.
+* Update the *relationshipQuery* to match all the *COMMONLY_USED_TOGETHER* relationships between *Ingredient* nodes in a specific community.
+* Return the community id, community size, and the top three representatives for each community.
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH (i:Ingredient)
+WITH i.ingredient_community as community,count(*) as communitySize
+ORDER BY communitySize DESC LIMIT 5
+CALL gds.pageRank.stream({
+  nodeQuery:'MATCH (i:Ingredient) WHERE i.ingredient_community = $community
+             RETURN id(i) as id',
+  relationshipQuery:'MATCH (s:Ingredient)-[r:COMMONLY_USED_TOGETHER]->(t:Ingredient)
+                     WHERE s.ingredient_community = $community AND t.ingredient_community = $community
+                     RETURN id(s) as source, id(t) as target,r.score as weight',
+  relationshipWeightProperty:'weight',
+  parameters:{community:community}})
+YIELD nodeId,score
+WITH community, communitySize, nodeId, score
+ORDER BY score DESC
+RETURN community, communitySize, collect(gds.util.asNode(nodeId).name)[..3] as representatives
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXIA.8.png[EXIA.8,width=300]
+
+== Analysis of commonly used together ingredients: Taking it further
+
+. Change the similarityCutoff and topK parameters to see how it affects the results.
+. Try using Overlap Similarity instead of Node Similarity algorithm.
+. Try doing the same analysis for recipes instead of ingredients.
+
+== Analysis of commonly used together ingredients (Summary)
+
+
