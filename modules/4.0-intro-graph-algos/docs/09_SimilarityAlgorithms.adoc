@@ -55,23 +55,27 @@ Here are some example:
 
 == Guided Exercise: Getting Started with Node Similarity algorithm
 
+
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
-. Select the Similarity group of algorithms.
-. Select the Jaccard algorithm.
-. Select the *Any* label and *HAS_TAG* relationship type.
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. Return to algorithm and select *REVERSE* direction.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
+. Let's look at how to use the Jaccard Similarity algorithm in NEuler to create a jaccard value for each node which indicates how many nodes are connected to the same nodes.
+. We select the Similarity group of algorithms.
+. Then we select the Jaccard algorithm.
+. Let's select the *Any* label and *HAS_TAG* relationship type.
+. We leave the remaining default settings.
+. Then we run the algorithm.
+. Here are the table results.
+. We return to the configuration to edit it.
+. We modify the last configuration to use *REVERSE* direction.
+. We run the algorithm.
+. Here are the table results. Here we note that the relationship direction is crutial as it will compare question or tags, depending on the relationship direction.
+. And here we see the generated code.
+. Finally, we can copy the generated Browser Guide to Neo4j Browser.
+. This concludes our look at using the the Jaccard Similarity algorithm in NEuler to create a jaccard value for each node which indicates how many nodes are connected to the same nodes.
 
-Explain results.
-The relationship directions is crucial as it will compare question or tags, depending on the relationship direction.
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
@@ -86,7 +90,7 @@ ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]

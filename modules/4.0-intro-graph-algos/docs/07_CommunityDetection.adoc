@@ -73,8 +73,7 @@ Show the students the basics of using NEuler and have them do the same on their 
 . We select the Community detection group of algorithms.
 . Then we select the Connected components algorithm.
 . We want to discover how Person nodes are related to each other using the HELPS relationship. We select the *Person* label and *HELPS* relationship type.
-. We leave the Store results box checked.
-. We set Community Node Limit to 10 (or at least 6 or greater as we have 6 Person nodes in our database)
+. We leave the Store results box checked as well as the other default values. Here the default value for the number of nodes per community is 10 which is fine for our small dataset.
 . Now we run the algorithm.
 . Here are the table results.
 . In the visualization, we see that all nodes have a community value of 0 because they are all in the same undirected group.
@@ -191,14 +190,15 @@ Show the students the basics of using NEuler and have them do the same on their 
 . We select the Label Propagation algorithm.
 . We want to create lpa values for the *Person* nodes that are connected by the *HELPS* relationship.
 . At this point, we don't care about relationship direction and we will not use any weights for the relationships.
-. We must ensure the Community Node Limit is at least 6, which is the number of Person nodes in the database.
-. We leave the remaining settings with their default values..
+. We leave the remaining settings with their default values.
 . Now we run the algorithm.
 . Here are the table results. Notice that this algorithm has identified two communities, one with 2 nodes and one with 4 nodes.
 . And when we view the visualization, we see that each community is represented by a different color.
+. In NEuler, during your session, it keeps a history of the algorithms that you have run. You can navigate to them here.
+. Or, if you are in a particular view for the running of an algorithm, if you select the Configuration, you can click Edit Configuration, to modify what you last used for running the algorithm.
 . Suppose we select the Natural relationship orientation, meaning that the direction of the relationship is significant.
 . When we run the algorithm, we see that the visualization is different because we are using direction as a qualifier.
-. Next, we select the Weight property to be 'weight'.
+. Next, we  return to the previous configuration and click Edit Configuration again to select the Weight property to be 'weight'.
 . When we run the algorithm, we see a different result because we are using relationship direction and weight to determine the grouping.
 . Here is the generated code for setting the parameters, running the algorithm, and retrieving the nodes.
 . And finally, we can generate the Browser Guide for this algorithm and copy it to Neo4j Browser.
@@ -295,14 +295,13 @@ Show the students the basics of using NEuler and have them do the same on their 
 . We select the Louvain algorithm.
 . We want to create louvain values for the *Person* nodes that are connected by the *HELPS* relationship.
 . At this point, we don't care about relationship direction and we will not use any weights for the relationships.
-. We must ensure the Community Node Limit is at least 6, which is the number of Person nodes in the database.
 . We leave the remaining settings with their default values.
 . Now we run the algorithm.
 . In the table view, we see that the result is pretty similar to the results of Label Propagation where 2 communities have been found.
 . And in the the visualization, we see 2 different node colors, based upon the community or louvain value.
 . Let's refine the algorithm to use the the Natural relationship orientation, meaning that the direction of the relationship is significant.
 . We run the algorithm to see that we still have 2 communities, but the louvain values are different because we specified direction of the relationship.
-. Next, we select the Weight property to be 'weight'.
+. We return to edit the configuration again and we select the Weight property to be 'weight'.
 . We also select the Intermediate communities check box so that we will determine communities and intermediate communities of this graph.
 . We run the algorithm and view the table results. Here we see two communities and one community has 2 sub-communities.
 . And here is the generated code with the parameter settings, running the algorithm, and retrieving the nodes.

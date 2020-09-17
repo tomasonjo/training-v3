@@ -67,28 +67,28 @@ Here are some example:
 
 == Guided Exercise: Getting Started with PageRank algorithm
 
+
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
-. Select the Centralities group of algorithms.
-. Select the PageRank algorithm.
-. Select the *Person* label and *HELPS* relationship type.
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. View the chart results.
-. View the visualization.
-. Make a new configuration and select the weight property *weight*.
-. Run the algorithm.
-. View the table results.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
+. Let's look at how to use the PageRank algorithm in NEuler to assign pagerank values to a set of nodes in the graph.
+. We select the Centralities group of algorithms.
+. Then we select the PageRank algorithm.
+. We select the *Person* label and *HELPS* relationship type.
+. We leave the default settings everywhere else in the configuration for this algorithm. It will write a value for pagerank to the selected nodes.
+. We run the algorithm.
+. Here are the table results. The score is the pagerank value is written to each node. Every relationship in the graph is considerered as a vote of importance from a node to a node. The algorithm analyzes how important nodes are to each other.
+. And here are the chart results.
+. In the visualization, we see that the node size correlates to the pagerank value written.
+. We return to the configuration and edit the configuration to use the weight property, *weight*.
+. We run the algorithm.
+. Here are the table results.
+. And here is the generated code the generated code.
+. We copy the code into a Browser Guide and view the Browser Guide in Neo4j Browser.
+. This concludes our look at how to use the PageRank algorithm to assign pagerank values to a set of nodes in the graph.
 
-Explain results.
-In PageRank algorithm, every link is considered as a vote of importance from a node to a node.
-Alongside the number of links, the algorithm also considers how important are the nodes that link to a specific node.
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
@@ -103,7 +103,7 @@ ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -159,25 +159,26 @@ Here are some example:
 
 * Betweenness Centrality is also used to help microbloggers spread their reach on Twitter, with a recommendation engine for targeting influencers. 
 
-== Guided Exercise: Getting Started with Betweenness centrality algorithm
+== Guided Exercise: Getting Started with the Betweenness Centrality algorithm
+
 
 [.notes]
 --
-ifdef::backend-revealjs[]
-Show the students the basics of using Neuler and have them do the same on their systems:
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
 
-. Select the Centralities group of algorithms.
-. Select the Betweenness centrality algorithm.
-. Select the *Person* label and *HELPS* relationship type.
-. Leave the default settings.
-. Run the algorithm.
-. View the table results.
-. View the visualization.
-. View the generated code.
-. Show them how to copy the query from NEuler to Neo4j Browser.
+. Let's look at how to use the Betweenness Centrality  algorithm in NEuler to analyze the shortest paths between all nodes in the graph by coming up with a betweenness value for each node.
+. We select the Centralities group of algorithms.
+. Then we select the Betweenness Centrality algorithm.
+. Here we select the *Person* label and *HELPS* relationship type.
+. We leave the default settings.
+. Now we run the algorithm.
+. Here are the table results.
+. And here is the visualization visualization. We can identify nodes that are located on a shortest paths between other nodes, like a bridge can be used.
+. And finally, here is the generated code.
+. We can copy the generated Browser Guide to Neo4j Browser.
+. This concludes our look at using the Betweenness Centrality algorithm to assign a betweenness value to each node based upon shortest paths between pairs of nodes.
 
-Explain results.
-Betweenness centrality identifies nodes that are often on located on a shortest path between other nodes in network, hence also why bridges.
 
 Here is the video:  https://youtu.be/oHo-lQ79zf0
 
@@ -192,7 +193,7 @@ ifdef::backend-pdf[]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
 
-ifdef::backend-revealjs[]
+ifdef::backend-revealjs,env-slides[]
 [.center]
 https://youtu.be/oHo-lQ79zf0
 endif::[]
@@ -202,7 +203,7 @@ ifdef::backend-html5[]
 video::oHo-lQ79zf0[youtube,width=560,height=315]
 endif::[]
 
-=== Exercise: Betweenness centrality
+=== Exercise: Betweenness Centrality
 
 In NEuler:
 * View the betweenness centrality scores for other GOT seasons and examine the paths in Neo4j Browser for these nodes.

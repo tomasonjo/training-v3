@@ -497,7 +497,7 @@ endif::[]
 ----
 // Do this only after ALL data has been imported
 CREATE INDEX MovieTitleIndex ON (m:Movie) FOR (m.title);
-CREATE INDEX PersonNameIndex ON (p:Person) FOR (pname)
+CREATE INDEX PersonNameIndex ON (p:Person) FOR (p.name)
 ----
 
 [.notes]
