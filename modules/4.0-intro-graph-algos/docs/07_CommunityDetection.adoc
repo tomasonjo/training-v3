@@ -82,9 +82,12 @@ Show the students the basics of using NEuler and have them do the same on their 
 . In NEuler, you can copy the generated code from NEuler to Neo4j Browser as a Browser Guide.
 . When we play this Browser Guide, we can repeat the same code and you can use this code as part of your application logic.
 . In the graph retrieved by the generated code, here, we see that all nodes are reachable, regardless of direction to each other. All nodes receive the community value of 0 because they are all in the same connected group.
+. Additionally, in NEuler, if you return to the configuration for an algorithm, it shows the last configuration that was used.
+. You can click Edit configuration if you want to make changes to rerun the algorithm.
+. If you want to clear the configuration and start again with the defaults, simply click another algorithm and then go back to the algorithm where you will see the default values again.
 . This concludes our look at running the Connected Component algorithm in NEuler.
 
-Here is the video:  https://youtu.be/d8sk_Qt07ek
+Here is the video:  https://youtu.be/eu7HBaPev7A
 
 endif::[]
 --
@@ -94,17 +97,17 @@ Follow along with this video to run the Connected Components algorithm using the
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/d8sk_Qt07ek
+https://youtu.be/eu7HBaPev7A
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/d8sk_Qt07ek
+https://youtu.be/eu7HBaPev7A
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::d8sk_Qt07ek[youtube,width=560,height=315]
+video::eu7HBaPev7A[youtube,width=560,height=315]
 endif::[]
 
 
@@ -195,16 +198,16 @@ Show the students the basics of using NEuler and have them do the same on their 
 . Here are the table results. Notice that this algorithm has identified two communities, one with 2 nodes and one with 4 nodes.
 . And when we view the visualization, we see that each community is represented by a different color.
 . In NEuler, during your session, it keeps a history of the algorithms that you have run. You can navigate to them here.
-. Or, if you are in a particular view for the running of an algorithm, if you select the Configuration, you can click Edit Configuration, to modify what you last used for running the algorithm.
+. Or, if you are in a particular view for the running of an algorithm, if you select the Configuration, you can click Edit configuration, to modify what you last used for running the algorithm.
 . Suppose we select the Natural relationship orientation, meaning that the direction of the relationship is significant.
 . When we run the algorithm, we see that the visualization is different because we are using direction as a qualifier.
-. Next, we  return to the previous configuration and click Edit Configuration again to select the Weight property to be 'weight'.
+. Next, we  return to the previous configuration and click Edit configuration again to select the Weight property to be 'weight'.
 . When we run the algorithm, we see a different result because we are using relationship direction and weight to determine the grouping.
 . Here is the generated code for setting the parameters, running the algorithm, and retrieving the nodes.
 . And finally, we can generate the Browser Guide for this algorithm and copy it to Neo4j Browser.
 . This concludes our look at how to run the Label Propagation algorithm and how changing parameters will influence the lpa property that is written to the nodes.
 
-Here is the video:  TBD
+Here is the video:  https://youtu.be/C6I4qCwNutY
 
 endif::[]
 --
@@ -213,17 +216,17 @@ ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with running the Label Propagation algorithm using the Graph Data Science Playground (NEuler).
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/C6I4qCwNutY
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/C6I4qCwNutY
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::C6I4qCwNutY[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]
@@ -308,7 +311,7 @@ Show the students the basics of using NEuler and have them do the same on their 
 . Finally, we can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at the different ways you can use the Louvain algorithm to discover communities and intermediate communities in the data.
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/QYVrcWZfw_0
 
 endif::[]
 --
@@ -318,17 +321,17 @@ Follow along with this video to become familiar with running the Louvain Modular
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/QYVrcWZfw_0
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/QYVrcWZfw_0
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::QYVrcWZfw_0[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]
@@ -400,7 +403,7 @@ Show the students the basics of using NEuler and have them do the same on their 
 . Finally, we can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at using the  Triangle Count algorithm to discover the number of triangles a node participates in.
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/7Rx6x6_l-sI
 
 endif::[]
 --
@@ -410,17 +413,17 @@ Follow along with this video to become familiar with running the Triangle Count 
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/7Rx6x6_l-sI
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/7Rx6x6_l-sI
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::7Rx6x6_l-sI[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]
@@ -466,7 +469,7 @@ Show the students the basics of using NEuler and have them do the same on their 
 . This concludes our look at using the Local Clustering Coefficient algorithm to determine the probability that neighbors of a node are connected.
 
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/8AbJSeKSI5w
 
 endif::[]
 --
@@ -476,17 +479,17 @@ Follow along with this video to become familiar with running the Local Clusterin
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/8AbJSeKSI5w
 endif::[]
 
 ifdef::backend-revealjs, env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/8AbJSeKSI5w
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::8AbJSeKSI5w[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]

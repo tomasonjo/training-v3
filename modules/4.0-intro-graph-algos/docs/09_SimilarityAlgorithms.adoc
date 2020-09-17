@@ -77,7 +77,7 @@ Show the students the basics of using NEuler and have them do the same on their 
 . This concludes our look at using the the Jaccard Similarity algorithm in NEuler to create a jaccard value for each node which indicates how many nodes are connected to the same nodes.
 
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/UkeZ6gASXAA
 
 endif::[]
 --
@@ -87,17 +87,17 @@ Follow along with this video to become familiar with Triangle Count in Neo4j Neu
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/UkeZ6gASXAA
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/UkeZ6gASXAA
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::UkeZ6gASXAA[youtube,width=560,height=315]
 endif::[]
 
 == Exercise: Node Similarity

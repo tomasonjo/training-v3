@@ -90,7 +90,7 @@ Show the students the basics of using NEuler and have them do the same on their 
 . This concludes our look at how to use the PageRank algorithm to assign pagerank values to a set of nodes in the graph.
 
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/K7e9CHY9mwA
 
 endif::[]
 --
@@ -100,17 +100,17 @@ Follow along with this video to become familiar with PageRank in Neo4j Neuler.
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/K7e9CHY9mwA
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/K7e9CHY9mwA
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::K7e9CHY9mwA[youtube,width=560,height=315]
 endif::[]
 
 === Exercise: PageRank
@@ -174,13 +174,13 @@ Show the students the basics of using NEuler and have them do the same on their 
 . We leave the default settings.
 . Now we run the algorithm.
 . Here are the table results.
-. And here is the visualization visualization. We can identify nodes that are located on a shortest paths between other nodes, like a bridge can be used.
+. And here is the visualization. We can identify nodes that are located on a shortest paths between other nodes, like a bridge can be used.
 . And finally, here is the generated code.
 . We can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at using the Betweenness Centrality algorithm to assign a betweenness value to each node based upon shortest paths between pairs of nodes.
 
 
-Here is the video:  https://youtu.be/oHo-lQ79zf0
+Here is the video:  https://youtu.be/jI0NdoPuWbY
 
 endif::[]
 --
@@ -190,17 +190,17 @@ Follow along with this video to become familiar with Betweenness Centrality in N
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/jI0NdoPuWbY
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/oHo-lQ79zf0
+https://youtu.be/jI0NdoPuWbY
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::oHo-lQ79zf0[youtube,width=560,height=315]
+video::jI0NdoPuWbY[youtube,width=560,height=315]
 endif::[]
 
 === Exercise: Betweenness Centrality
