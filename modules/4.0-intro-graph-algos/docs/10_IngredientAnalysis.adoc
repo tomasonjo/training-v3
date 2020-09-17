@@ -7,12 +7,12 @@
 :module-next-title: Memory Requirements Estimation
 
 
-== Analysis of commonly used together ingredients (Overview)
+== Ingredient Analysis Overview
 
 Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes Dataset.
 The goal is to find communities of commonly used together ingredients and the representatives of those communities.
 
-== Analysis of commonly used together ingredients (Algorithms)
+== Ingredient Analysis Workflow
 
 The analysis consists of three steps.
 First, you will infer a similarity network between ingredients with the help of the Node Similarity algorithm.

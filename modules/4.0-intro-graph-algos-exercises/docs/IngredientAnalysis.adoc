@@ -13,12 +13,8 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Analysis of commonly used together ingredients (Overview)
 
-Combine the knowledge esse
-
-PageRank measures the transitive influence or connectivity of nodes.
-It can be computed by iteratively distributing one node’s rank (originally based on degree) over its neighbors.
-
-In this exercise, you will analyze PageRank for the European Roads dataset:
+Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes Dataset.
+In this exercise, you will find communities of commonly used together ingredients and the representatives of those communities:
 
 * *Part 1*: Project the ingredients graph to Graph Catalog with native projection.
 * *Part 2*: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score.
