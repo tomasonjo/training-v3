@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Recipes Analysis
+:module-next-title: Analysis of commonly used together ingredients
 
 == Similarity algorithms
 
