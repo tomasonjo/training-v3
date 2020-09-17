@@ -9,24 +9,22 @@
 
 == Analysis of commonly used together ingredients (Overview)
 
-We have learned the graph workflow in the GDS library and how to use various graph algorithms.
-Now we will put our knowledge together and create a sample analysis.
-We will try to find communities of commonly used together ingredients and find their representatives.
-This is quite a common graph workflow.
+Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes Dataset.
+The goal is to find communities of commonly used together ingredients and the representatives of those communities.
 
 == Analysis of commonly used together ingredients (Algorithms)
 
-We will first infer a similarity network between ingredients with the help of the Node Similarity algorithm.
-The algorithm is frequently used to infer a monopartite graph from an input bipartite graph.
-Instead of writing back the results, we will use the *mutate* mode of the Node Similarity algorithm.
-In the next step we will try to find communities of commonly used together ingredients with the help of the Louvain algorithm.
-For the final step, we will search of representatives of those communities with the help of the PageRank algorithm.
-If every link means that the ingredients are commonly used together, the PageRank will return ingredients that are commonly used together with other ingredients that are also commonly used together.
-This can be understood as the representatives of the communities.
+The analysis consists of three steps.
+First, you will infer a similarity network between ingredients with the help of the Node Similarity algorithm.
+The algorithm will compare how often the ingredients are used together in the same recipe.
+As in the previous chapter, you will start by examining the Jaccard similarity score distribution to help you define a reasonable *topK* and *similarityCutoff* parameters.
+This way, the inferred network between ingredients will not be too sparse or too dense.
 
-This is a common workflow where we use the results of the previous algorithm as an input for the next one.
-So we will use the results of the Node Similarity algorithm to find communities within the inferred network.
-Then we will take the results of the community detection algorithm and search for representatives within those communities with the PageRank algorithm.
+Next, you will use the Louvain Modularity algorithm to analyze the community structure of the ingredient similarity network.
+You will investigate how the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm directly influence the size and the structure of communities.
+
+Finally, you will use the PageRank algorithm to find the representatives of those communities.
+When using the PageRank algorithm, think of every relationship as a vote of confidence or influence. In our analysis, every relationship is a vote of commonly used together ingredients, and so the most frequently used together ingredients will rank the highest. You could think of them as the representatives of those communities.
 
 == Analysis of commonly used together ingredients: Exercise
 
