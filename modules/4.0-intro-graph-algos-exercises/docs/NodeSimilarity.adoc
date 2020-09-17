@@ -118,7 +118,7 @@ CALL gds.graph.create('recipes',
   ['Ingredient','Recipe'],'CONTAINS_INGREDIENT')
 ----
 
-== Part 4:  Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
+== Part 4: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
 
 Before we infer a similarity network between recipes, we will evaluate the similarity score distribution.
 This will help us to fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.

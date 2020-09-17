@@ -1,0 +1,34 @@
+= Analysis of commonly used together ingredients
+:slug: 10-iga-40-ingredient-analysis
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Memory Requirements Estimation
+
+
+== Ingredient Analysis Overview
+
+Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes Dataset.
+The goal is to find communities of commonly used together ingredients and the representatives of those communities.
+
+== Ingredient Analysis Workflow
+
+The analysis consists of three steps.
+First, you will infer a similarity network between ingredients with the help of the Node Similarity algorithm.
+The algorithm will compare how often the ingredients are used together in the same recipe.
+As in the previous chapter, you will start by examining the Jaccard similarity score distribution to help you define a reasonable *topK* and *similarityCutoff* parameters.
+This way, the inferred network between ingredients will not be too sparse or too dense.
+
+Next, you will use the Louvain Modularity algorithm to analyze the community structure of the ingredient similarity network.
+You will investigate how the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm directly influence the size and the structure of communities.
+
+Finally, you will use the PageRank algorithm to find the representatives of those communities.
+When using the PageRank algorithm, think of every relationship as a vote of confidence or influence. In our analysis, every relationship is a vote of commonly used together ingredients, and so the most frequently used together ingredients will rank the highest. You could think of them as the representatives of those communities.
+
+== Analysis of commonly used together ingredients: Exercise
+
+In Neo4j Browser:
+* :play intro-graph-algos-exercises  (Ingredient analysis)
+
+== Summary
