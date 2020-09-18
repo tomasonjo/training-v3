@@ -51,7 +51,7 @@ Here is why you use Node Similarity:
 
 * Part of link prediction analysis.
 
-Here are some example:
+Here are some examples:
 
 == Guided Exercise: Getting Started with Node Similarity algorithm
 
@@ -102,10 +102,8 @@ endif::[]
 
 == Exercise: Node Similarity
 
-In NEuler:
-* Try various algorithm configurations for the Questions dataset
+. In NEuler:
+.. Try various algorithm configurations for the Questions dataset
+.. Try other datasets
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Similarity*.
 
-* Try other datasets
-
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (Similarity)

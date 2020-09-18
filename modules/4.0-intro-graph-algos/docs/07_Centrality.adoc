@@ -55,7 +55,7 @@ Here is why you use PageRank:
 * Fraud Detection 
 * Feature engineering for machine learning
 
-Here are some example:
+Here are some examples:
 
 * Twitter uses Personalized PageRank to present users with recommendations of other accounts that they may wish to follow. The algorithm is run over a graph that contains shared interests and common connections.
 
@@ -66,7 +66,6 @@ Here are some example:
 * Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing. 
 
 == Guided Exercise: Getting Started with PageRank algorithm
-
 
 [.notes]
 --
@@ -115,11 +114,9 @@ endif::[]
 
 === Exercise: PageRank
 
-In NEuler:
-* Perform the PageRank analysis on different seasons of GOT.
-
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (PageRank)
+. In NEuler:
+.. Perform the PageRank analysis on different seasons of GOT.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *PageRank*.
 
 
 == Betweenness Centrality
@@ -151,11 +148,11 @@ Here is why you use Betweenness Centrality:
 
 * Find bottlenecks and vulnerabilities.
 
-Here are some example:
+Here are some examples:
 
 * Betweenness Centrality is used to identify influencers in various organizations. Powerful individuals are not necessarily in management positions, but can be found in “brokerage positions” using Betweeness Centrality. Removal of such influencers seriously destabilize the organization. This might be a welcome disruption by law enforcement if the organization is criminal, or may be a disaster if a business loses key staff it never knew about.
 
-* Betweeness Centrality uncovers key transfer points in networks such electrical grids. Counterintuitively, removal of specific bridges can actually improve overall robustness by “islanding” disturbances.
+* Betweenness Centrality uncovers key transfer points in networks such electrical grids. Counterintuitively, removal of specific bridges can actually improve overall robustness by “islanding” disturbances.
 
 * Betweenness Centrality is also used to help microbloggers spread their reach on Twitter, with a recommendation engine for targeting influencers. 
 
@@ -205,12 +202,18 @@ endif::[]
 
 === Exercise: Betweenness Centrality
 
-In NEuler:
-* View the betweenness centrality scores for other GOT seasons and examine the paths in Neo4j Browser for these nodes.
-* View the approximate betweenness centrality scores for GOT seasons and see how various sampling sizes affect the results.
-
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (Betweenness Centrality)
+. In NEuler:
+.. View the betweenness centrality scores for other GOT seasons and examine the paths in Neo4j Browser for these nodes.
+.. View the approximate betweenness centrality scores for GOT seasons and see how various sampling sizes affect the results.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Betweenness Centrality*.
 
 
 == Summary
+
+In this lesson, you gained experience with the two Neo4j supported Centrality algorithms:
+
+[square]
+* PageRank
+* Betweenness Centrality
+
+You can read more about these algorithms and also the alpha (labs) algorithms in the https://neo4j.com/docs/graph-data-science/current/algorithms/community/[Graph Data Science documentation]
