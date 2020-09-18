@@ -7,50 +7,102 @@
 
 == Summary
 
-
 You should now be able to:
-Describe what a graph algorithm is and why it is used.
-Prepare your development environment for using graph algorithms.
-Write code to implement these types of graph algorithms:
-Community Detection
-Centrality
-Pathfinding
-Similarity
-Link Prediction
-Describe some best practices for using graph algorithms.
 
+[square]
+* Describe how Neo4j supports graph algorithms for analysis and machine learning.
+* Describe the components of the Neo4j Graph Data Science library.
+* Set up your environment for running graph algorithms.
+* Describe the workflow you use to use the Graph Data Science library.
+* Use Community Detections algorithms.
+* Use Centrality algorithms.
+* Use Similarity algorithms.
+* Perform data analysis using a set of graph algorithms.
+* Determine memory requirements for your analysis.
+* Describe some best practices for using algorithms.
 
 == Resources
 
+ifdef::env-slides[]
+== Resources - 1
+endif::[]
 
-== Quiz esse
+ifndef::env-slides[]
+== Resources
+endif::[]
 
-asd
+There are many resources available to you for learning more about Neo4j and Cypher.
 
-Which category of graph algorithms is used to evaluate how a group is clustered or partitioned?
-Select the correct answer.
-❏   Pathfinding
-❏   Centrality
-✅  Community Detection
-❏   Similarity
+https://neo4j.com/developer/resources/
 
-asd
+Neo4j Community Site where you can ask or answer questions about Neo4j and discuss with other users:
 
-Graph algorithm procedures can be called and used the following ways.
-Select the correct answers.
-✅  As a stream procedure that returns a lot of results.
-❏   As a stream procedure that returns a lot of results and can update the graph.
-✅  As a non-stream procedure that returns statistics.
-✅ As a non-stream procedure that returns statistics and can update the graph.
+https://community.neo4j.com
 
-asd
+Neo4j documentation:
 
-What Community Detection graph algorithm is useful for creating "sub-graphs" by adding a  "partition" property to nodes based upon the neighbors of the node and the weight of the relationship?
-Select the correct answer.
-❏  Connected Components
-❏  Strongly Connected Components
-❏  Clustering Coefficient
-✅  Label Propagation
+https://neo4j.com/docs/
 
-asdsad
+ifdef::env-slides[]
+== Resources - 2
+endif::[]
 
+Neo4j Sandboxes for experimenting with graphs:
+
+https://
+sandbox.neo4j.com/?ref=graph-academy
+
+Videos on  the Neo4j YouTube channel:
+
+https://www.youtube.com/channel/UCvze3hU6OZBkB1vkhH2lH9Q
+
+Neo4j online and classroom training:
+
+https://neo4j.com/graphacademy/
+
+ifdef::env-slides[]
+== Resources - 3
+endif::[]
+
+Become a Neo4j certified developer:
+
+https://neo4j.com/graphacademy/neo4j-certification/
+
+[NOTE]
+The certification exam tests you on content from this course.
+You can take the certification exam multiple times until you pass!
+
+GitHub repository:
+
+https://github.com/neo4j-contrib
+
+Neo4j events all over the world:
+
+https://neo4j.com/events/world/all/
+
+ifdef::env-slides[]
+== Resources - 4
+endif::[]
+
+Graph Gists for learning more use cases for Neo4j:
+
+https://neo4j.com/graphgists/
+
+Attend a Neo4j meetup:
+
+https://www.meetup.com/topics/neo4j/
+
+View questions/answers raised about Neo4j:
+
+https://stackoverflow.com/tags/neo4j/hot
+
+ifndef::env-slides[]
+== Course feedback
+
+We want your feedback on this course. Please provide your https://forms.gle/EsBJcFPFi3k48H2i8[feedback] so we can improve this course.
+endif::[]
+
+ifndef::backend-revealjs,backend-pdf[]
+[.certificate]
+== Certificate
+endif::[]

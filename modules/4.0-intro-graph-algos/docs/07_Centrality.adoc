@@ -12,19 +12,18 @@ In network analysis, centrality measures identify the most important or influent
 The centrality concepts were first introduced in social network analysis to identify key players within a social network, but have since found applications in a variety of industries and fields.
 
 Product supported:
-* PageRank
 
+[square]
+* PageRank
 * Betweenness Centrality
 
 Labs implementations:
+
+[square]
 * Degree Centrality
-
 * ArticleRank
-
 * Closeness Centrality
-
 * Harmonic Centrality
-
 * Eigenvector Centrality
 
 == PageRank
@@ -65,7 +64,7 @@ Here are some examples:
 
 * Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing. 
 
-== Guided Exercise: Getting Started with PageRank algorithm
+=== Guided Exercise: Getting Started with PageRank algorithm
 
 [.notes]
 --
@@ -156,7 +155,7 @@ Here are some examples:
 
 * Betweenness Centrality is also used to help microbloggers spread their reach on Twitter, with a recommendation engine for targeting influencers. 
 
-== Guided Exercise: Getting Started with the Betweenness Centrality algorithm
+=== Guided Exercise: Getting Started with the Betweenness Centrality algorithm
 
 
 [.notes]
@@ -207,7 +206,52 @@ endif::[]
 .. View the approximate betweenness centrality scores for GOT seasons and see how various sampling sizes affect the results.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Betweenness Centrality*.
 
+[.quiz]
+== Check your understanding
 
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
 == Summary
 
 In this lesson, you gained experience with the two Neo4j supported Centrality algorithms:

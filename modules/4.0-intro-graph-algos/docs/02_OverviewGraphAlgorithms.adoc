@@ -383,7 +383,53 @@ Node embedding algorithms compute low-dimensional vector representations of node
 These vectors, also called embeddings, can be used as a machine learning input.
 --
 
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
 == Summary
 
-We have learned a lot about graphs, their structure and how to graph algorithms are applied to solve real-world problems.
+You have learned a lot about graphs, their structure and how to graph algorithms are applied to solve real-world problems.
 

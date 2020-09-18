@@ -65,6 +65,52 @@ Alpha:
 
 * Indicates that the algorithm is experimental and might be changed or removed at any time. Algorithms in this tier are prefixed with gds.alpha.<algorithm>.
 
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
 == Summary
 
 In this chapter you have familiarized yourself with the Neo4j for Graph Data Science toolkit.

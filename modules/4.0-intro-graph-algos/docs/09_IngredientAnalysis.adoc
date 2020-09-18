@@ -30,6 +30,52 @@ When using the PageRank algorithm, think of every relationship as a vote of conf
 
 In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Ingredient analysis*.
 
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
 == Summary
 
 In this lesson, you performed an analysis using the Graph Data Science Library algorithms.

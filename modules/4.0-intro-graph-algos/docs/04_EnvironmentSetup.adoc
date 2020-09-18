@@ -6,9 +6,17 @@
 :imagesdir: ../images
 :module-next-title: Graph Algorithms Workflow
 
-== Preparing you development environment
+== Preparing your development environment
 
-=== Step 1: Set up Neo4j Desktop on your system
+To prepare you environment you must:
+
+. Set up Neo4j Desktop on your system.
+. Install the APOC and GDSL plugin libraries for your database.
+. Install the Graph Data Science Playground (NEuler).
+. Start the database and the Graph Data Science Playground.
+. Load some data into your database you will use for the hands-on exercises.
+
+== Step 1: Set up Neo4j Desktop on your system
 
 To perform the exercises of this course you must have downloaded and installed Neo4j Desktop on your system.
 
@@ -57,9 +65,9 @@ https://youtu.be/RSbhmVF_ccs
 endif::[]
 
 ifdef::backend-html5,backend-pdf[]
-lorem ipsum
 
-=== Step 2: Install APOC and GDSL for your database
+
+== Step 2: Install APOC and GDSL for your database
 
 . Click the *Manage* area for the database.
 . Select the *Plugins* tab.
@@ -70,7 +78,7 @@ lorem ipsum
 image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
 
 
-=== Step 3: Install Graph Data Science Playground (NEuler)
+== Step 3: Install Graph Data Science Playground (NEuler)
 
 image::enter-neuler.png[local and global graph analytics,width=500, align=center]
 
@@ -90,34 +98,32 @@ image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500,
 . Click *Install*.
 . The *Graph Data Science Graph Playground* Graph App should now appear in the left pane.
 
-=== Datasets you will use in this course
+== Datasets you will use in this course
 
-==== Game of Thrones
+=== Game of Thrones
+
+image::got.png[Game of Thrones,width=500, align=center]
 
 The INTERACTS_SEASONx relationship has a property, weight to indicate the number of interactions.
 
 The Character node has two properties, name and id where id is the capitalized value of name.
 
-image::got.png[Game of Thrones,width=500, align=center]
-
-Network of thrones site.
-
-==== European Roads
-
-The EROAD relationship has three properties, distance, road_number, and watercrossing.
-
-The Place node has multiple properties, name and countryCode.
-
+=== European Roads
 
 image::european-roads.png[European Roads,width=500, align=center]
 
-European roads site
 
-==== Recipes
+The Place node has multiple properties, name and countryCode.
 
-Recipe and ingredients
+The EROAD relationship has four properties, distance, inverse_distance, road_number, and watercrossing.
 
-=== Step 4: Start the database and Graph Data Science Playground
+=== Recipes
+
+image::recipe.png[recipe,width=500, align=center]
+
+This is a very simple data model where each node has only a name and there are no properties in the relationships.
+
+== Step 4: Start the database and Graph Data Science Playground
 
 . In Neo4j Desktop, start the database.
 . Start the *Graph Data Science Graph Playground* Graph App:
@@ -128,7 +134,7 @@ image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500,
 
 
 [.student-exercise]
-== Step 5: Load the Data for the Exercises
+== Step 5: Load the data for the exercises
 
 Open Neo4j Browser for the started database.
 In the query edit pane of Neo4j Browser, execute the browser command:
@@ -138,6 +144,55 @@ kbd:[:4.0-intro-graph-algos-exercises]
 and follow the instructions for *Load the Data for the Exercises*.
 
 [NOTE]
-This exercise has 3 steps.
+This exercise has 4 steps.
 Estimated time to complete: 10 minutes.
 
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+How many databases do you use for your analysis using the Graph Data Science library?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [x] One
+- [ ] Two, one for the data and another for the metrics created.
+- [ ] Two, one for the data and another for the library graph projections.
+- [ ] Three, one for the data, one for the metrics, and another for the updated data.
+
+=== Question 2
+
+[.statement]
+What libraries do you use to perform analyses for Graph Data Science?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] GDSL
+- [ ] Graph Algorithms
+- [ ] NEuler
+- [x] APOC
+
+=== Question 3
+
+[.statement]
+What Graph app do you use to help you run graph algorithms?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Bloom
+- [ ] Cypher-shell
+- [x] Graph Algorithms Playground
+- [ ] Linkurious
+
+[.summary]
+== Summary
+
+You have now prepared your system for performing the hands-on exercisess for this course.

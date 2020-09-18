@@ -64,4 +64,53 @@ Triangle Count - ignores direction.
 PageRank - an outgoing relationship means you give credibility to the other node.
 What about weights? Which algorithms cans I use?
 
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
 == Summary
+
+In this lesson you learned about some tips and best practices for using the Graph Data Science library for your analyses.

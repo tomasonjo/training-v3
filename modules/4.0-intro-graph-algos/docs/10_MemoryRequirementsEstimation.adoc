@@ -28,4 +28,53 @@ The amount of free heap memory can be increased by either dropping unused named 
 In Neo4j Browser:
 * :play intro-graph-algos-exercises  (Memory Requirements)
 
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
 == Summary
+
+In this lesson you learned how to estimate the memory requirements for you graph algorithm analysys.

@@ -11,9 +11,13 @@
 Similarity algorithms evaluate how alike nodes are at an individual level either based on node attributes, neighboring nodes, or relationship properties.
 
 Product supported:
+
+[square]
 * Node Similarity (Jaccard Index)
 
 Labs implementations:
+
+[square]
 * Cosine Similarity
 
 * Euclidean Similarity
@@ -51,10 +55,8 @@ Here is why you use Node Similarity:
 
 * Part of link prediction analysis.
 
-Here are some examples:
 
 == Guided Exercise: Getting Started with Node Similarity algorithm
-
 
 [.notes]
 --
@@ -75,7 +77,6 @@ Show the students the basics of using NEuler and have them do the same on their 
 . And here we see the generated code.
 . Finally, we can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at using the the Jaccard Similarity algorithm in NEuler to create a jaccard value for each node which indicates how many nodes are connected to the same nodes.
-
 
 Here is the video:  https://youtu.be/UkeZ6gASXAA
 
@@ -107,3 +108,54 @@ endif::[]
 .. Try other datasets
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Similarity*.
 
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [x] xxxx
+- [ ] xxxxxx
+- [ ] xxxxxxxx
+
+=== Question 2
+
+[.statement]
+question
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xx
+- [ ] xxxx
+- [ ] xxxxxx
+- [x] xxxxxxxx
+
+=== Question 3
+
+[.statement]
+question
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] xx
+- [ ] xxxx
+- [x] xxxxxx
+- [ ] xxxxxxxx
+
+[.summary]
+== Summary
+
+In this lesson you gained some experience with the Neo4j support Jaccard Similarity algorithm.
+
+You can read more about these algorithms and also the alpha (labs) algorithms in the https://neo4j.com/docs/graph-data-science/current/algorithms/community/[Graph Data Science documentation]
