@@ -23,10 +23,9 @@ This heap control logic is restrictive in the sense that it only blocks executio
 
 The amount of free heap memory can be increased by either dropping unused named graphs from the catalog or increasing the maximum heap size before starting the Neo4j instance.
 
-== Exercise: Memory Reqirements estimation
+== Exercise: Memory reqirements estimation
 
-In Neo4j Browser:
-* :play intro-graph-algos-exercises  (Memory Requirements)
+In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Memory requirements*.
 
 
 [.quiz]

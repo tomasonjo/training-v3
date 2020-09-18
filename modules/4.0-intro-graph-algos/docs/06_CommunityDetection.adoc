@@ -232,7 +232,7 @@ endif::[]
 [.student-exercise]
 === Exercise: Label Propagation
 
-.In NEuler:
+. In NEuler:
 .. Perform the Label Propagation algorithm on the Person data, noting what, if anything is written to the graph.
 .. Perform the Label Propagation algorithm on different seasons of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Label Propagation*.
@@ -428,7 +428,7 @@ endif::[]
 [.student-exercise]
 === Exercise: Triangle Count
 
-.In NEuler:
+. In NEuler:
 .. Perform some Triangle Count algorithms on the Person data, noting what, if anything is written to the graph.
 .. Perform some Triangle Count algorithms on different seasons of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Triangle Count*.
