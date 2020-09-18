@@ -8,12 +8,12 @@
 
 == Neo4j for Graph Data Science
 
-Neo4j for Graph Data Science is a toolbox that combines a native graph analytics workspace and graph database with scalable graph algorithms and graph visualization for a reliable, easy-to-use experience. This framework enables data scientists to confidently operationalize better analytics and machine learning models that infer behavior based on connected data and network structures. 
+Neo4j for Graph Data Science is a toolbox that combines a native graph analytics workspace and graph database with scalable graph algorithms and graph visualization for a reliable, easy-to-use experience.
+This framework enables data scientists to confidently operationalize better analytics and machine learning models that infer behavior based on connected data and network structures. 
 
 image::neo4j-for-graph-data-science.png[Neo4j for graph data science,width=500,align=center]
 
-lalalalallaa
-
+This toolbox aims to provide support and ease of use of all the steps in Graph Data Science evolution.
 
 image::gds-steps.png[Graph data science steps,width=500,align=center]
 
@@ -26,36 +26,44 @@ Neo4j connects data as it’s stored, enabling queries never before imagined, at
 
 Neo4j Bloom is an easy-to-use graph exploration application for visually interacting with Neo4j graphs.
 
-Bloom gives graph novices and experts the ability to visually investigate and explore their graph data from different business perspectives. Its illustrative, codeless search-to-visualization design makes it the ideal interface for fostering communication between peers, managers and executives, and share the innovative work of their graph development and analytics teams.
+Bloom gives graph novices and experts the ability to visually investigate and explore their graph data from different business perspectives.
+Its illustrative, codeless search-to-visualization design makes it the ideal interface for fostering communication between peers, managers and executives, and share the innovative work of their graph development and analytics teams.
 
 === Graph Data Science library
 
-The Neo4j Graph Data Science (GDS) library contains many graph algorithms. The algorithms are divided into categories which represent different problem classes. The categories are listed in this chapter.
+The Neo4j Graph Data Science (GDS) library contains many graph algorithms.
+The algorithms are divided into categories which represent different problem classes:
 
-Algorithms exist in one of three tiers of maturity:
+* Path Finding - these algorithms help find the shortest path or evaluate the availability and quality of routes
 
-Production-quality
+* Centrality - these algorithms determine the importance of distinct nodes in a network
 
-Indicates that the algorithm has been tested with regards to stability and scalability.
-Algorithms in this tier are prefixed with gds.<algorithm>.
+* Community Detection - these algorithms evaluate how a group is clustered or partitioned, as well as its tendency to strengthen or break apart
 
-Beta
+* Similarity - these algorithms help calculate the similarity of nodes
 
-Indicates that the algorithm is a candidate for the production-quality tier.
-Algorithms in this tier are prefixed with gds.beta.<algorithm>.
+* Link Prediction - these algorithms determine the closeness of pairs of nodes
 
-Alpha
+* Node Embeddings - these algorithms compute vector representations of nodes in a graph.
 
-Indicates that the algorithm is experimental and might be changed or removed at any time.
-Algorithms in this tier are prefixed with gds.alpha.<algorithm>.
-
-At the moment the the GDS library contains
-
+These graph algorithms help to effectively answer questions about your data’s connectivity or topology, or generate new and highly predictive features for your existing ML pipelines.
+At the moment the the GDS library contains more than 40 graph algorithms.
 
 image::gds-algorithms.png[Graph data science algorithms,width=700,align=center]
 
-yes
+Algorithms exist in one of three tiers of maturity:
 
+Production-quality:
+
+* Indicates that the algorithm has been tested with regards to stability and scalability. Algorithms in this tier are prefixed with gds.<algorithm>.
+
+Beta:
+
+* Indicates that the algorithm is a candidate for the production-quality tier. Algorithms in this tier are prefixed with gds.beta.<algorithm>.
+
+Alpha:
+
+* Indicates that the algorithm is experimental and might be changed or removed at any time. Algorithms in this tier are prefixed with gds.alpha.<algorithm>.
 
 == Summary
 
