@@ -1,5 +1,5 @@
 = Analysis of commonly used together ingredients
-:slug: 10-iga-40-ingredient-analysis
+:slug: 09-iga-40-ingredient-analysis
 :doctype: book
 :toc: left
 :toclevels: 4

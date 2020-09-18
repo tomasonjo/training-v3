@@ -1,5 +1,5 @@
 = Environment Setup
-:slug: 05-iga-40-environment-setup
+:slug: 04-iga-40-environment-setup
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,5 +1,5 @@
 = Graph Algorithms Workflow
-:slug: 04-iga-40-graph-algorithms-workflow
+:slug: 05-iga-40-graph-algorithms-workflow
 :doctype: book
 :toc: left
 :toclevels: 4

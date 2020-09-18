@@ -1,5 +1,5 @@
 = Similarity Algorithms
-:slug: 09-iga-40-similarity-algorithms
+:slug: 08-iga-40-similarity-algorithms
 :doctype: book
 :toc: left
 :toclevels: 4
