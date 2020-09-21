@@ -71,44 +71,42 @@ Alpha:
 === Question 1
 
 [.statement]
-question
+What tool is available to you for exploring an unknown graph?
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Neo4j Viewer
+- [x] Neo4j Bloom
+- [ ] Neo4j Explorer
+- [ ] Neo4j Graph Explorer
+
+=== Question 2
+
+[.statement]
+How many graph algorithms are available to you in the Graph Data Science Library?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
+- [ ] ~10
+- [ ] ~20
+- [x] ~50
+- [ ] ~450
 
-=== Question 2
+=== Question 3
 
 [.statement]
-question
+What are the support levels of algorithms in the Graph Data Science Library?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
-
-=== Question 3
-
-[.statement]
-question
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [x] gds.xxx
+- [x] gds.beta.xxx
+- [x] gds.alpha.xxx
+- [ ] gds.algos.xxx
 
 [.summary]
 == Summary

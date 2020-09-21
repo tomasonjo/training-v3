@@ -214,44 +214,44 @@ endif::[]
 === Question 1
 
 [.statement]
-question
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
-
-=== Question 2
-
-[.statement]
-question
+Which of the following Centrality algorithms are fully-supported?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [ ] Degree Centrality
+- [x] PageRank
+- [ ] Closeness Centrality
+- [x] Betweenness Centrality
+
+=== Question 2
+
+[.statement]
+What are some practical use-cases for the PageRank algorithm?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Recommendations
+- [ ] Find bottlenecks in a network
+- [x] Fraud detection
+- [ ] Identify bridges in a network
 
 === Question 3
 
 [.statement]
-question
+Which algorithm is used to determine the "middleman" in a network that might be used to connect parts of a graph?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [ ] PageRank
+- [x] Betweenness Centrality
+- [ ] Weakly Connected Components
+- [ ] Local Clustering Coefficient
 
 [.summary]
 == Summary

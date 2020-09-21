@@ -35,44 +35,44 @@ In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the ins
 === Question 1
 
 [.statement]
-question
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
-
-=== Question 2
-
-[.statement]
-question
+What algorithms can you estimate heap memory for?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [x] Betweenness Centrality
+- [ ] Closeness Centrality
+- [x] PageRank
+- [x] Label Propagation
+
+=== Question 2
+
+[.statement]
+When calling estimate() to provide the heap memory estimation for running the algorithm, what information, must you provide?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] name of the algorithm
+- [x] mode of the algorithm (stream, write)
+- [ ] amount of heap configured for the instance
+- [ ] size of the graph
 
 === Question 3
 
 [.statement]
-question
+What factors impact the amount of memory available for an algorithm?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [x] the size of the graph
+- [x] the amount of heap available to the instance
+- [x] the size of any named graphs
+- [x] the particular algorithm that will run
 
 [.summary]
 == Summary

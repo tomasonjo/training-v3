@@ -8,7 +8,7 @@
 
 == Similarity algorithms
 
-Similarity algorithms evaluate how alike nodes are at an individual level either based on node attributes, neighboring nodes, or relationship properties.
+Similarity algorithms evaluate how alike nodes are at an individual level either based on node properties, neighboring nodes, or relationship properties.
 
 Product supported:
 
@@ -37,7 +37,6 @@ The Node Similarity algorithm compares all nodes from the first node set based o
 The output of the algorithm is a unipartite network between nodes in the first node set.
 We can think of this process as translating indirect relationships to direct ones.
 
-// Todo: prettify this image
 image::jaccard-similarity-unipartite.png[Betweenness centrality,width=500, align=center]
 
 Mathematically, Jaccard Similarity Score is defined as the size of the intersection divided by the size of the union of two sets.
@@ -49,6 +48,8 @@ The resulting Jaccard similarity coefficient is 2/5 which is 0.4.
 A coefficient of 1 indicates that the compared sets are identical.
 
 Here is why you use Node Similarity:
+
+[square]
 * Find recommendations of similar items.
 
 * First step of analyzing a bipartite network.
@@ -115,44 +116,44 @@ endif::[]
 === Question 1
 
 [.statement]
-question
+Which Similarity algorithm is fully supported in the Graph Data Science Library?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
+- [ ] Pearson Similarity
+- [ ] Euclidian Similarity
+- [x] Node Similarity (Jaccard Index)
+- [ ] Overlap Similarity
 
 === Question 2
 
 [.statement]
-question
+What features of the graph can be used to determine if nodes are similar?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [x] node properties
+- [x] relationships to or from a node
+- [x] relationship properties
+- [ ] any relationship in the graph with the same properties
 
 === Question 3
 
 [.statement]
-question
+The Node Similarity algorithm calculates a Jaccard Index for each node. What value indicates that nodes are similar?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [ ] 0
+- [x] 1
+- [ ] 10
+- [ ] 100
 
 [.summary]
 == Summary

@@ -37,44 +37,45 @@ In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the ins
 === Question 1
 
 [.statement]
-question
+Given the recipe dataset, what algorithm do you use to determine how often the ingredients are used together in the same recipe.
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
+- [ ] Weakly Connected Components
+- [ ] Local Clustering Coefficient
+- [ ] Louvain Modularity
+- [x] Node Similarity
 
 === Question 2
 
 [.statement]
-question
+The second part of the analysis is to determine the community structure of the nodes that have been found to be similar.
+What algorithm is used to determine this community structure?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [x] Louvain Modularity
+- [ ] Label Propagation
+- [ ] Weakly Connected Components
+- [ ] Local Clustering Coefficient
 
 === Question 3
 
 [.statement]
-question
+Once the communities have been identified, what algorithm to you use to deterimine the most frequently-used together ingredients.
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [ ] Label Propagation
+- [x] PageRank
+- [ ] Local Clustering Coefficient
+- [ ] Louvain Modularity
 
 [.summary]
 == Summary

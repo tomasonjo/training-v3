@@ -114,31 +114,28 @@ Simple networks can be visually inspected to gain insights.
 Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
 As we can't visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
 --
-=== What do people do with graph algorithms
+=== What do people do with graph algorithms?
 
 There are a number of real-world use-cases, where graph algorithms are applied.
 
-[.is-half.left]
---
-*Explore, plan, measure*
+
+==== Explore, plan, measure
 
 Find significant patterns and plan for optimal structures.
 
 image::explore-plan-measure.png[Explore plan measure,width=500,align=center]
 
 Score outcomes and set a threshold value for a prediction.
---
 
-[.is-half.right]
---
-*Machine learning*
+
+==== Machine learning
 
 Use the measures as features to train an ML model.
 
 image::machine-learning.png[Machine learning,width=500,align=center]
---
 
-== Propagation pathways
+
+==== Propagation pathways
 
 This is a very practical example of analyzing Propagation paths; trying to understand the routes taken by network failure,
 
@@ -151,7 +148,7 @@ Of course this is just one example.
 This would very well be an IT network where you’re trying to contain infection or an electrical grid.
 Or perhaps you want to encourage the spread of something, like information, and you’ll need to understand the best path to promote.. 
 
-Another very practical example:
+==== Example: Flight delay propagation
 
 Flight delays in the U.S. have an economic impact of over $40 billion per year [1], caused by the need for enhanced operations, passenger loss of time, decreased productivity and missed business and leisure opportunities.
 U.S. aviation map showing congested airports as purple nodes, while those with normal traffic as green nodes.
@@ -161,7 +158,7 @@ The clustering of the congested airports indicate that the delays are not indepe
 Report -Fleurquin, Ramasco, Eguiluz. Systemic delay propagation in the US airport network. Scientific Reports, 3: 1159, 2013 –
  https://ifisc.uib-csic.es/~jramasco/text/characterization_delays.pdf[Characterization of Delay Propagation in the US Air-Transportation Network]
 
-== Flow and dynamics
+==== Flow and dynamics
 
 This time, looking at Flow and Dynamics to Understand capacity and optimize movement of resources. 
 
@@ -172,7 +169,7 @@ This Telecom example shows the complexity in just one challenge, Least Cost Rout
 But Evaluating flow options is very common for planning in general and we could just as well be looking at the flow for shipping, maybe getting your goods to customer in the most efficient manner.
 Or perhaps you need to provide services for emergencies – and you need to understand the time impacts of dynamic changes to flow.
 
-== Group resiliency
+==== Group resiliency
 
 Group resilience and influence is a fascinating area of study because you’re looking at things like how a group might break apart, or how you might bring them together, what’s the stability overtime and what are the influence points. 
 
@@ -296,7 +293,6 @@ The Graph Data Science library features support for transforming multigraphs to 
 
 image::types-of-algorithms.png[Types of algorithms,width=500,align=center]
 
-Lorem Ipsum
 
 === Community detection (Clustering) algorithms
 
@@ -389,44 +385,44 @@ These vectors, also called embeddings, can be used as a machine learning input.
 === Question 1
 
 [.statement]
-question
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
-
-=== Question 2
-
-[.statement]
-question
+What are some practical use cases for using graph algorithms?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [x] Machine learning applications.
+- [x] Grouping users in a telecommunications network who speak similar languages.
+- [x] Optimizing the routing of services in a dynamnic network architecture.
+- [x] Analyzing the result of a flight delay on a network of flights.
+
+=== Question 2
+
+[.statement]
+The vertices between nodes can be used in many ways to analyze graphs. What features of these vertices can you use during analysis?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Direction of the relationship.
+- [x] Name of the relationship.
+- [ ] Access rights for the relationship.
+- [x] Weight of the relationship.
 
 === Question 3
 
 [.statement]
-question
+Which categoriess below represent the types of graph algorithms in the Graph Data Science Library?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [x] Community Detection
+- [ ] Moving Averages
+- [x] Similarity
+- [x] Centrality
 
 [.summary]
 == Summary

@@ -504,44 +504,44 @@ endif::[]
 === Question 1
 
 [.statement]
-question
+What algorithm do you use to do an initial identification of the communities within a graph?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
+- [ ] Triangle Count
+- [ ] Louvain Modularity
+- [ ] Weakly Connected Components
+- [x] Label Propagation
 
 === Question 2
 
 [.statement]
-question
+What algorithm do you use early in your analysis to understand the graph structure?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [x] Weakly Connected Components
+- [ ] Louvain Modularity
+- [ ] Triangle Count
+- [ ] Label Propagation
 
 === Question 3
 
 [.statement]
-question
+What algorithm is useful for detecting communities in large networks by applying repeated tests to pairs of nodes in the graph to come up with a score that is refined with each pass of the algorithm.
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [ ] Triangle Count
+- [ ] Label Propagation
+- [ ] Weakly Connected Components
+- [x] Louvain Modularity
 
 [.summary]
 == Summary
