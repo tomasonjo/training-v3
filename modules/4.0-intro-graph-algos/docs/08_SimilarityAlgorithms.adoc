@@ -84,7 +84,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Triangle Count in Neo4j Neuler.
+Follow along with this video to become familiar with Jaccard Similarity in Neo4j Neuler.
 endif::[]
 
 ifdef::backend-pdf[]
@@ -101,12 +101,13 @@ ifdef::backend-html5[]
 video::UkeZ6gASXAA[youtube,width=560,height=315]
 endif::[]
 
+[.student-exercise]
 == Exercise: Node Similarity
 
 . In NEuler:
 .. Try various algorithm configurations for the Questions dataset
 .. Try other datasets
-. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Similarity*.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Node Similarity*.
 
 [.quiz]
 == Check your understanding

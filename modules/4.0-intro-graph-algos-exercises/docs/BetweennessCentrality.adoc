@@ -188,3 +188,7 @@ Try the Randomized-Approximate Brandes analysis with different values for:
 Betweenness centrality is one of the centrality measures to help you identify important nodes in the graph.
 
 In this exercise, you ran a betweenness centrality algorithm on the European Roads dataset.
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/NodeSimilarity.html'>Continue to Exercise: Node Similarity</a>]
+endif::[]

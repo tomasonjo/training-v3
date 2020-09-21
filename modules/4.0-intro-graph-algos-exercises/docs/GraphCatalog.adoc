@@ -98,3 +98,6 @@ CALL gds.graph.create.cypher('dach-region',
 In this exercise, you gained some experience with writing Cypher code to store the projected graph in Graph Catalog using the European Roads dataset.
 This procedure enables you to reuse the same projected graph in the analytical workflow.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/WeaklyConnectedComponents.html'>Continue to Exercise: Weakly Connected Components</a>]
+endif::[]

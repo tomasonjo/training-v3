@@ -283,3 +283,6 @@ Try looking up the communities for another place. e.g. Berlin, Paris, Amsterdam.
 In this exercise, you gained some experience writing Cypher to implement the Louvain Modularity algorithm using the European Roads dataset.
 The Louvain Modularity algorithm finds clusters by comparing community density as it assigns nodes to different groups.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/TriangleCount.html'>Continue to Exercise: Triangle Count</a>]
+endif::[]

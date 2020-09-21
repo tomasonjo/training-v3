@@ -118,9 +118,12 @@ Refresh the database contents in NEuler to have the new datasets available for a
 The database contents in NEuler should look as follows:
 
 [.thumb]
-image::LoadedNEuler.png[LoadedNEuler,width=800
+image::LoadedNEuler.png[LoadedNEuler,width=800]
 
 == Load Data for the Exercises (Summary)
 
 Your database is now set up and ready for you to gain experience with graph algorithms.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/GraphCatalog.html'>Continue to Exercise: Graph Catalog</a>]
+endif::[]

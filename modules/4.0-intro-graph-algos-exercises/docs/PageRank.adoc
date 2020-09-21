@@ -177,3 +177,6 @@ It can be computed by iteratively distributing one node’s rank (originally bas
 
 In this exercise, you analyzed PageRank for the European Roads dataset.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/BetweennessCentrality.html'>Continue to Exercise: Betweenness Centrality</a>]
+endif::[]

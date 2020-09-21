@@ -160,3 +160,8 @@ This confirms that the correct clustering coefficient score for the Antwerpen no
 == Local Clustering Coefficient (Summary)
 
 In this exercise, you gained some experience with writing Cypher to implement the Local Clustering coefficient algorithm to return the clustering coefficient for the *Place* nodes of the European Roads dataset.
+
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/PageRank.html'>Continue to Exercise: PageRank</a>]
+endif::[]

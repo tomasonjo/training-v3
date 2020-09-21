@@ -6,7 +6,7 @@
 :imagesdir: ../images
 :module-next-title: Additional Information
 
-== Memory Reqirements estimation
+== Memory Requirements estimation
 
 The Graph Data Science library operates entirely on heap memory.
 To avoid running out of memory when dealing with large networks, you can estimate the required memory before executing the algorithms.
@@ -23,7 +23,8 @@ This heap control logic is restrictive in the sense that it only blocks executio
 
 The amount of free heap memory can be increased by either dropping unused named graphs from the catalog or increasing the maximum heap size before starting the Neo4j instance.
 
-== Exercise: Memory reqirements estimation
+[.student-exercise]
+== Exercise: Memory requirements estimation
 
 In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Memory requirements*.
 

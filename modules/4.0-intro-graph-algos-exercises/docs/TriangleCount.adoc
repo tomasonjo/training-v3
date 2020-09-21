@@ -185,3 +185,8 @@ There are only six triangles in the DACH region of the European roads network.
 == Triangle Count (Summary)
 
 In this exercise, you gained some experience with writing Cypher to implement the Triangle count algorithm to return the count of triangles for the *Place* nodes of the European Roads dataset.
+
+
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/LocalCusteringCoefficient.html'>Continue to Exercise: Local Clustering Coefficient</a>]
+endif::[]

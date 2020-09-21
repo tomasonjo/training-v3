@@ -26,7 +26,8 @@ You will investigate how the *topK* and *similarityCutoff* parameters of the Nod
 Finally, you will use the PageRank algorithm to find the representatives of those communities.
 When using the PageRank algorithm, think of every relationship as a vote of confidence or influence. In our analysis, every relationship is a vote of commonly used together ingredients, and so the most frequently used together ingredients will rank the highest. You could think of them as the representatives of those communities.
 
-== Analysis of commonly used together ingredients: Exercise
+[.student-exercise]
+== Exercise: Analysis of commonly used together ingredients
 
 In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Ingredient analysis*.
 

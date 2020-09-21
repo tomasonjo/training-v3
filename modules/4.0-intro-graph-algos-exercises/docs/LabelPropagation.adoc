@@ -235,3 +235,6 @@ The largest community has 13 members and contains places mostly from Spain like 
 In this exercise, you gained some experience with writing Cypher to implement the Label Propagation algorithm using the European Roads dataset.
 This algorithm enables you to determine discreet sets of nodes that form clusters based upon how they are connected, as well as the weight of the connections.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/LouvainModularity.html'>Continue to Exercise: Louvain Modularity</a>]
+endif::[]

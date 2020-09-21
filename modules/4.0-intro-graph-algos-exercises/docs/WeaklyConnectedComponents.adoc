@@ -213,3 +213,6 @@ The results show otherwise.
 
 In this exercise, you gained some experience with writing Cypher for the weakly connected graph algorithms using the European Roads dataset.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/LabelPropagation.html'>Continue to Exercise:Label Propagation</a>]
+endif::[]

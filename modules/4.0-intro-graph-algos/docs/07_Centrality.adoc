@@ -111,6 +111,7 @@ ifdef::backend-html5[]
 video::K7e9CHY9mwA[youtube,width=560,height=315]
 endif::[]
 
+[.student-exercise]
 === Exercise: PageRank
 
 . In NEuler:
@@ -199,6 +200,7 @@ ifdef::backend-html5[]
 video::jI0NdoPuWbY[youtube,width=560,height=315]
 endif::[]
 
+[.student-exercise]
 === Exercise: Betweenness Centrality
 
 . In NEuler:
