@@ -9,7 +9,7 @@ This is what you should see when you click the database icon image:database-icon
 
 image::DataLoaded.png[DataLoaded,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and *Load Data* steps.
 
 == Betweenness Centrality (Graph Catalog)
 
@@ -27,7 +27,7 @@ image::LoadedRoadsGraph.png[LoadedDatabase]
 
 {nbsp} +
 
-If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the *Graph Catalog* steps.
 
 == Betweenness Centrality (Overview)
 
@@ -51,7 +51,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by betweenness centrality score descending.
-* Limit the top ten results.
+* Limit it to the top ten results.
 
 *Hint*: Call `gds.betweenness.stream` with no other special configuration values.
 
@@ -62,7 +62,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by betweenness centrality score descending.
-* Limit the top ten results.
+* Limit it to the top ten results.
 
 
 *Hint*: Call `gds.betweenness.stream` with no other special configuration values.
@@ -93,7 +93,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 * The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by betweenness centrality score descending.
-* Limit the top ten results.
+* Limit it to the top ten results.
 
 
 *Hint*: Call `gds.betweenness.stream` with no other special configuration values.
@@ -105,7 +105,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 * The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by betweenness centrality score descending.
-* Limit the top ten results.
+* Limit it to the top ten results.
 
 
 *Hint*: Call `gds.betweenness.stream` with no other special configuration values.
@@ -135,10 +135,10 @@ Write the Cypher code to perform the Randomized-Approximate variation of the Bet
 It will return nodeId and score value.
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
-* Add the *samplingSize* parameter
-* Specify the sampling size of 100
+* Add the *samplingSize* parameter.
+* Specify the sampling size of 100.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
-* Limit the top ten results
+* Limit it to the top ten results.
 
 
 *Hint*: Call `gds.betweenness.stream`
@@ -150,10 +150,10 @@ Write the Cypher code to perform the Randomized-Approximate variation of the Bet
 It will return nodeId and score value.
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
-* Add the *samplingSize* parameter
-* Specify the sampling size of 100
+* Add the *samplingSize* parameter.
+* Specify the sampling size of 100.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
-* Limit the top ten results
+* Limit it to the top ten results.
 
 
 *Hint*: Call `gds.betweenness.stream`

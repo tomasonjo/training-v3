@@ -9,7 +9,7 @@ This is what you should see when you click the database icon image:database-icon
 
 image::DataLoaded.png[DataLoaded,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and *Load Data* steps.
 
 == Label Propagation (Graph Catalog)
 
@@ -27,7 +27,7 @@ image::LoadedRoadsGraph.png[LoadedDatabase]
 
 {nbsp} +
 
-If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the *Graph Catalog* steps.
 
 == Label Propagation (Overview)
 
@@ -98,7 +98,7 @@ RETURN property, apoc.agg.statistics(r[property]) as stats
 The results returned should look like this:
 
 [.thumb]
-image::EXLPA.2.png[EXLPA.2,width=400]
+image::EXLPA.2.png[EXLPA.2,width=500]
 
 {nbsp} +
 
@@ -193,7 +193,7 @@ Write a query to return all *community_lpa* values of the *Place* nodes.
 For each community id, return the size of the community, and the list of *Place* names.
 
 * Order the results by component size descending.
-* Limit the top ten results
+* Limit it to the top ten results.
 
 == Part 5: Verify results of the algorithm. (Solution)
 
@@ -201,7 +201,7 @@ Write a query to return all *community_lpa* values of the *Place* nodes.
 For each community id, return the size of the community, and the list of *Place* names.
 
 * Order the results by component size descending.
-* Limit the top ten results
+* Limit it to the top ten results.
 
 Here is the solution code:
 
@@ -223,6 +223,7 @@ image::EXLPA.5.png[EXLPA.5,width=400]
 {nbsp} +
 
 The largest community has 13 members and contains places mostly from Spain like Madrid and San Sebastian.
+The generated value for communityId may be different for your graph, but the community sizes should match.
 
 == Label Propagation: Taking it further
 

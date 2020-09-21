@@ -9,7 +9,7 @@ This is what you should see when you click the database icon image:database-icon
 
 image::DataLoaded.png[DataLoaded,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and *Load Data* steps.
 
 == Weakly Connected Components (Graph Catalog)
 
@@ -27,7 +27,7 @@ image::LoadedRoadsGraph.png[LoadedRoadsGraph]
 
 {nbsp} +
 
-If you do not see this in your Neo4j Browser, you will need to perform the steps in the *Graph Catalog* Guide.
+If you do not see this in your Neo4j Browser, you will need to perform the steps in the *Graph Catalog* steps.
 
 == Weakly Connected Components (Overview)
 
@@ -61,7 +61,7 @@ RETURN p LIMIT 10
 The results returned should look like this:
 
 [.thumb]
-image::EXWCC.1.png[EXWCC.1,width=300]
+image::EXWCC.1.png[EXWCC.1,width=500]
 
 {nbsp} +
 
@@ -115,7 +115,7 @@ Write a query to return all *wcc_component* values of the *Place* nodes.
 For each component id, return the size of the component, and the list of *Place* names.
 
 * Order the results by component size ascending.
-* Limit the top ten results
+* Limit to the top ten results.
 
 == Part 3: Inspect results of the weakly connected nodes. (Solution)
 
@@ -123,7 +123,7 @@ Write a query to return all *wcc_component* values of the *Place* nodes.
 For each component id, return the size of the component, and the list of *Place* names.
 
 * Order the results by component size ascending.
-* Limit the top ten results
+* Limit to the top ten results,
 
 Here is the solution code:
 
@@ -152,7 +152,7 @@ Notice that most of the nodes are in the same component.
 Write to query to return all components with 10 or less members.
 For each component id, return the size of the component, the list of *Place* names, and also their country code.
 
-Update the query to:
+Update this query to:
 
 * Collect distinct country codes.
 * Filter communities with 10 or less members.

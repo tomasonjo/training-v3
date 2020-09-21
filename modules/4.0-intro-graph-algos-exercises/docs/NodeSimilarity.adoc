@@ -9,7 +9,7 @@ This is what you should see when you click the database icon image:database-icon
 
 image::DataLoaded.png[DataLoaded,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and *Load Data* steps.
 
 
 == Node Similarity (Overview)
@@ -117,6 +117,11 @@ Here is the solution code:
 CALL gds.graph.create('recipes',
   ['Ingredient','Recipe'],'CONTAINS_INGREDIENT')
 ----
+
+You should see this result:
+
+[.thumb]
+image::EXNS.3.png[EXNS.3,width=600]
 
 == Part 4: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
 
@@ -250,7 +255,7 @@ RETURN recommendation.name as recommendation, s.score as score
 ORDER BY score DESC LIMIT 3
 ----
 
-The results returned should look like this:
+The results returned should look something like this:
 
 [.thumb]
 image::EXNS.7.png[EXNS.7,width=300]
@@ -261,7 +266,7 @@ If we want to try baking something similar to Sourdough, we could try Flatbread,
 
 == Node Similarity: Taking it further
 
-. Change the similarity cutoff and topK parameters to see how it affects the results.
+* Change the similarity cutoff and topK parameters to see how it affects the results.
 
 == Node Similarity (Summary)
 

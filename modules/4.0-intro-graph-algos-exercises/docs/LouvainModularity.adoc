@@ -9,7 +9,7 @@ This is what you should see when you click the database icon image:database-icon
 
 image::DataLoaded.png[DataLoaded,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup and *Load Data* steps.
 
 == Louvain Modularity (Graph Catalog)
 
@@ -27,7 +27,7 @@ image::LoadedRoadsGraph.png[LoadedDatabase]
 
 {nbsp} +
 
-If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the *Graph Catalog* steps.
 
 == Louvain Modularity (Overview)
 
@@ -94,6 +94,7 @@ Write a query to return all *community_louvain* values in the graph containing *
 For each distinct communities value, return the list of places and the community size.
 
 * Order the results by community size descending.
+* Limit it to the top ten results.
 
 == Part 2: Inspect the results of the algorithm. (Solution)
 
@@ -101,7 +102,7 @@ Write a query to return all *community_louvain* values in the graph containing *
 For each distinct communities value, return the list of places and the community size.
 
 * Order the results by community size descending.
-* Limit the top ten results
+* Limit it to the top ten results.
 
 Here is the solution code:
 

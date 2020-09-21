@@ -65,6 +65,10 @@ CALL gds.graph.create('roads','Place',
 })
 ----
 
+This is what you should see in the result pane:
+
+image::NativeProjection.png[NativeProjection,width=500]
+
 == Part 2: Project a subgraph to Graph Catalog with cypher projection. (Instructions/Solution)
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
@@ -87,6 +91,10 @@ CALL gds.graph.create.cypher('dach-region',
     RETURN id(s) as source,id(t) as target, coalesce(r.inverse_distance,1.0) as inverse_distance'
     , {validateRelationships:false})
 ----
+
+This is what you should see in the result pane:
+
+image::Subgraph.png[Subgraph,width=500]
 
 == Graph Catalog: Taking it further
 

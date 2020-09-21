@@ -4,16 +4,17 @@
 == Memory Requirements (Preparations)
 
 The database you start with should contain all of the data you loaded in the setup for this course.
+After having completed all exercises prior to this one you should see:
 
-image::DataLoaded.png[DataLoaded,width=150]
+image::BeforeMemoryRequirements.png[BeforeMemoryRequirements,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+At a minimum, if you do not see the European Roads and Game of Thrones data in your Neo4j Browser, you will need to perform the setup  and *Load Data* steps.
 
 == Memory Requirements (Graph Catalog)
 
 The projected graphs *roads* and *dach-region* should be created and stored in the GDS graph catalog.
 
-This is what you should see when you execute the following query:
+This is what you should see when you execute the following query if you have completed all previous exercises:
 
 [source, cypher]
 ----
@@ -21,11 +22,11 @@ CALL gds.graph.list()
 YIELD graphName, nodeCount, relationshipCount
 ----
 
-image::LoadedRoadsGraph.png[LoadedDatabase]
+image::LoadedGraphs.png[LoadedGraphs]
 
 {nbsp} +
 
-If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+For this exercise, you must have the *roads* and *dach-region* graphs created. If not, you will need to perform the *Graph Catalog* steps.
 
 == Memory Requirements (Overview)
 

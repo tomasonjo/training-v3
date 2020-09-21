@@ -9,7 +9,7 @@ This is what you should see when you click the database icon image:database-icon
 
 image::DataLoaded.png[DataLoaded,width=150]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup  and *Load Data* steps.
 
 
 == Triangle Count (Graph Catalog)
@@ -28,7 +28,7 @@ YIELD graphName, nodeCount, relationshipCount
 
 image::LoadedRoadsGraph.png[LoadedDatabase]
 
-If you do not see this in your Neo4j Browser, you will need to perform the graph catalog steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the *Graph Catalog* steps.
 
 == Triangle Count (Overview)
 
@@ -88,13 +88,14 @@ This indicates that the European roads network is very sparse.
 Write a query to return all *Place* nodes and their triangle count property.
 
 * Order the results by triangles descending.
+* Limit it to the top ten results.
 
 == Part 2: Inspect the results of the algorithm (Solution)
 
 Write a query to return all *Place* nodes and their triangle count property.
 
 * Order the results by triangles descending.
-* Limit the top ten results
+* Limit it to the top ten results.
 
 [source, cypher]
 ----
@@ -145,7 +146,7 @@ Write a query to perform the Triangle Count algorithm on the DACH region of the 
 * The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by triangles count descending.
-* Limit the top ten results.
+* Limit it to the top ten results.
 
 *Hint*: Call `gds.triangleCount.stream`
 
@@ -156,7 +157,7 @@ Write a query to perform the Triangle Count algorithm on the DACH region of the 
 * The algorithm should use the projected graph *dach-region*, which is stored in the graph catalog.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by triangles count descending.
-* Limit the top ten results.
+* Limit it to the top ten results.
 
 *Hint*: Call `gds.triangleCount.stream`
 
@@ -180,7 +181,7 @@ There are only six triangles in the DACH region of the European roads network.
 
 == Triangle Count: Taking it further
 
-. Try different configuration values.
+* Try different configuration values.
 
 == Triangle Count (Summary)
 
@@ -188,5 +189,5 @@ In this exercise, you gained some experience with writing Cypher to implement th
 
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/LocalCusteringCoefficient.html'>Continue to Exercise: Local Clustering Coefficient</a>]
+pass:a[<a play-topic='{guides}/LocalClusteringCoefficient.html'>Continue to Exercise: Local Clustering Coefficient</a>]
 endif::[]

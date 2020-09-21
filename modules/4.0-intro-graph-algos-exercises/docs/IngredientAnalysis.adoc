@@ -7,9 +7,9 @@ The database you start with should contain all of the data you loaded in the set
 
 This is what you should see when you click the database icon image:database-icon.png[].
 
-image::DataLoaded.png[DataLoaded,width=150]
+image::DatabaseBeforeIngredientAnalysis.png[DatabaseBeforeIngredientAnalysis,width=200]
 
-If you do not see this in your Neo4j Browser, you will need to perform the setup  and load data steps again.
+If you do not see this in your Neo4j Browser, you will need to perform the setup,  *Load Data*, and *Node Similarity* steps again.
 
 == Analysis of commonly used together ingredients (Overview)
 
@@ -59,6 +59,11 @@ CALL gds.graph.create('ingredient',
       type:'CONTAINS_INGREDIENT',
       orientation:'REVERSE'}})
 ----
+
+You should see these results:
+
+image::EXIA.1.png[EXIA.2,width=600]
+
 
 == Part 2: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
 
@@ -153,7 +158,7 @@ Even with the low similarity cutoff value, the inferred network is still relativ
 Write Cypher code to perform the weighted Louvain Modularity algorithm on the Ingredient graph using these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
-* The algorithm will write a property named *community_ingredient* to each node with the computed value.
+* The algorithm will write a property named *ingredient_community* to each node with the computed value.
 * The algorithm will consider only relationships with a type *COMMONLY_USED_TOGETHER*.
 * The algorithm will consider only nodes with a label *Ingredient*.
 * The relationship weight property name is *score*.
@@ -166,7 +171,7 @@ Write Cypher code to perform the weighted Louvain Modularity algorithm on the In
 Write Cypher code to perform the weighted Louvain Modularity algorithm on the Ingredient graph using these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
-* The algorithm will write a property named *community_ingredient* to each node with the computed value.
+* The algorithm will write a property named *ingredient_community* to each node with the computed value.
 * The algorithm will consider only relationships with a type *COMMONLY_USED_TOGETHER*.
 * The algorithm will consider only nodes with a label *Ingredient*.
 * The relationship weight property name is *score*.
@@ -181,7 +186,7 @@ Here is the solution code:
 CALL gds.louvain.write('ingredient',
   {nodeLabels:['Ingredient'],
    relationshipTypes:['COMMONLY_USED_TOGETHER'], 
-   writeProperty:'community_ingredient',
+   writeProperty:'ingredient_community',
    relationshipWeightProperty:'score'})
 YIELD modularity, ranLevels, communityCount
 ----
@@ -223,6 +228,11 @@ Here is the solution code:
 CALL gds.graph.writeRelationship('ingredient', 'COMMONLY_USED_TOGETHER')
 ----
 
+You should see these results:
+
+[.thumb]
+image::EXIA.5.png[EXIA.5,width=600]
+
 == Part 6: Investigate the community detection results. (Instructions)
 
 Write Cypher code to find the *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
@@ -243,7 +253,7 @@ RETURN count(*) as count
 The results returned should look like this:
 
 [.thumb]
-image::EXIA.6.png[EXIA.6,width=300]
+image::EXIA.6.png[EXIA.6,width=500]
 
 {nbsp} +
 
@@ -257,7 +267,7 @@ For each community id, return the size of the community, and the list of *Ingred
 
 * Return a list of 3 ingredients for each community.
 * Order the results by component size descending.
-* Limit the top five results
+* Limit it to the top five results.
 
 == Part 7: Inspect the top five largest communities of ingredients. (Solution)
 
@@ -266,7 +276,7 @@ For each community id, return the size of the community, and the list of *Ingred
 
 * Return a list of 3 ingredients for each community.
 * Order the results by component size descending.
-* Limit the top five results
+* Limit it to the top five results.
 
 Here is the solution code:
 
