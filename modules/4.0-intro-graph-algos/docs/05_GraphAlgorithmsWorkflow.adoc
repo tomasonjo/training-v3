@@ -8,90 +8,266 @@
 
 == How do graph algorithms work?
 
-Graph algorithms run on a graph data model which is a projection of the Neo4j property graph data model. A graph projection can be seen as a view over the stored graph, containing only analytically relevant, potentially aggregated, topological and property information. Graph projections are stored entirely in-memory using compressed data structures optimized for topology and property lookup operations.
+Graph algorithms run on a graph data model, which is a projection of the stored Neo4j property graph data model.
+A graph projection can be seen as a view over the stored graph containing only relevant, potentially aggregated, topological, and property information.
+Graph projections are stored entirely in-memory using compressed data structures optimized for topology and property lookup operations.
 
 image::projected-graph-model.png[Projected graph model,width=500, align=center]
 
+The graph analytics pipeline consists of three main parts. 
+In the first part, the graph loader reads the stored graph from Neo4j and loads it as an in-memory projected graph.
+We can use either native projection or cypher projection to load the projected graph.
+In the second step, we execute the graph algorithms on the in-memory projected graph.
+We can use the results of one graph algorithm as an input to another one.
+Last but not least, we can stream or store the results back to Neo4j.
 
-Stored to project graph
+== Graph Management
 
-For large graphs,  you should:
-Use the explicit graph loader
-Load label/relationship - not based on a cypher projection
+In this chapter, we will learn the various methods to load an in-memory projected graph.
 
-== Native projection
+=== Named Graph
 
-A native projection allows us to project a graph from Neo4j into an in-memory graph. The projected graph can be specified in terms of node labels, relationship types and properties. Node labels and node properties are projected using Node projections. Relationship types and relationship properties are projected using Relationship projections.
+The graph catalog is a concept within the GDS library that allows managing multiple graph projections by name.
+We call a graph stored in the graph catalog a *named graph* because we can retrieve it using its name when executing graph algorithms.
+The advantage of using named graphs is that they can be used many times in the analytical workflow.
+This way, we don't have to load the projected graph for each algorithm separately, saving us time.
+We can also use the results of one graph algorithm as an input to another graph algorithm.
+Named graphs can be created using either Native projections or Cypher projections.
+After usage, named graphs can be removed from the catalog to free up the main memory.
 
-The main benefit of native projections is their performance. In contrast, a Cypher projection is more flexible from the declaration point of view, but less performant. In most cases it is possible to structure your Neo4j graph model in a way that enables native projections to be used.
+==== Native projection
 
-CALL gds.graph.create('graph','NodeLabel','RelationshipType', 
-    {relationshipProperties: ['weight']})
+A native projection allows us to project a graph from Neo4j into an in-memory graph.
+The projected graph can be specified in terms of node labels, relationship types and properties.
+The main benefit of native projections is their performance.
+The general syntax for using native projection to load a named graph is:
 
-asdasd
+[source,cypher]
+----
+CALL gds.graph.create(
+  <graph name>,<node projection>,<relationship projection>, 
+    {nodeProperties: String or List,
+     relationshipProperties: String or List
+     })
+----
 
-CALL gds.graph.create('type_default',['NodeLabel1, NodeLabel2'],
+With the graph name parameter, we specify the name of the projected graph. 
+The node projection parameter is used to define the nodes we want to project.
+There are three supported options for the node projection parameter.
+
+* String: Used to project a single node label
+
+[source,cypher]
+----
+'Person'
+----
+
+* Array: Used to project multiple node labels
+
+[source,cypher]
+----
+['Person', 'Organization']
+----
+
+* Map: Used for granular node label(s) and property definition
+
+[source,cypher]
+----
+{
+    <node-label>: {
+        label: <neo4j-label>,
+        properties: {
+            <property-key-1>: {
+                property: <neo-property-key>,
+                defaultValue: <numeric-value>
+            },
+            <property-key-2>: {
+                property: <neo-property-key>,
+                defaultValue: <numeric-value>
+            }
+        }
+    }
+}
+----
+
+We will very rarely need to use the Map option for the Node projection parameter.
+If we need to project many labels and their properties, we can use the array input for Node projection combined with nodeProperties parameter.
+Similarly to Node projection, the Relationship projection also supports three options as an input:
+
+* String: Used to project a single relationship type
+
+[source,cypher]
+----
+'FRIEND'
+----
+
+* Array: Used to project multiple relationship types
+
+[source,cypher]
+----
+['FRIEND', 'COWORKER']
+----
+
+* Map: Used for granular relationship type(s) and property definition
+
+[source,cypher]
+----
+{
+    <relationship-type>: {
+        type: <neo4j-type>,
+        orientation: <orientation>,
+        aggregation: <aggregation-type>,
+        properties: <relationship-property-mappings>
+    }
+}
+----
+
+Opposed to Node projection, we will use the Map option for projecting relationships more frequently.
+It allows us to define granular relationship type and properties projection, but has the added *orientation* and *aggregation* parameters.
+The *orientation* parameter denotes how Neo4j relationships are represented in the projected graph.
+The following values are allowed:
+
+* NATURAL: each relationship is projected the same way as it is stored in Neo4j (default)
+
+* REVERSE: each relationship is reversed during graph projection
+
+* UNDIRECTED: each relationship is projected in both natural and reverse orientation
+
+The *aggregation* parameter can be used to reduce a multigraph to a single graph.
+Read more about it in the https://neo4j.com/docs/graph-data-science/current/management-ops/native-projection/#native-projection-syntax-relationship-projections[documentation].
+
+One simple example of using native projections to project a named graph is as follows:
+
+[source,cypher]
+----
+CALL gds.graph.create('graph','Person','HELPS', 
+    { nodeProperties:['seed']
+      relationshipProperties: ['weight','cost']})
+----
+
+Here we project a graph consisting of nodes labeled *Person* and their *seed* property.
+We also project only a single relationship type *HELPS* with their *weight* and *cost* properties. 
+A bit more complex example is:
+
+[source,cypher]
+----
+CALL gds.graph.create('graph',
+  ['Person', 'Organization'],
   {  
   LIKES: {
-    "orientation": "NATURAL",
+    "orientation": "UNDIRECTED",
     "aggregation": "DEFAULT",
     "type": "LIKES",
     "properties": 'property'
   })
+----
 
-  assd
-  Simple graph deduplication with aggreagation. Also the orientation prrovides wtf.
+Here we projected a graph that contains nodes labels *Person* and *Organization*.
+For the relationship projection, we use the Map option, where we project the *LIKES* relationship type with an *UNDIRECTED* orientation.
+We didn't mention before, but we you load many node labels or relationship types, we can filter them at algorithm execution time.
+This way, we can, for example, load more relationship types between a single node label and observe how the community structure and node ranking differ between the two networks using a single named graph.
 
-== Cypher projection
+==== Cypher projection
 
-If the Native projection is not expressive enough to describe the in-memory graph, we can instead use Cypher queries to select nodes and relationships. One benefit of using Cypher queries is the possibility to form the graph from data that exists only at query time. A common use case is the reduction of paths into single relationships between the start and end node of the path.
+If the Native projection is not expressive enough to describe the in-memory graph, we can instead use Cypher projection to describe the nodes and relationships.
+Their flexibility is convenient when exploring data and algorithms, and designing a workflow.
+One benefit of using Cypher projection is the possibility to form the graph from data that exists only at query time.
+A common use case is the reduction of a 2-hop path to a single relationship.
+In contrast to Native projection, a Cypher projection is more flexible from the declaration point of view, but less performant.
+For production, it is recommended to adapt the domain model in a way that it can take advantage of the loading speed of native projections.
 
-The following query reduces a 2-hop path to a single relationship effectively representing co-authors: 
+The general syntax for using Cypher projection to load a named graph is:
 
-MATCH (p1:Author)-[:WROTE]->(a:Article)<-[:WROTE]-(p2:Author)
-RETURN id(p1) AS source, id(p2) AS target, count(a) AS weight
-
-Cypher projections are especially useful during the development phase. Their flexibility is convenient when exploring data and algorithms, and designing a workflow. However, creating a graph from a Cypher projection can be significantly slower than creating it directly from the Neo4j store files. For production, it is recommended to adapt the domain model in a way that it can take advantage of the loading speed of native projections.
-
-inferred relationships
-asdasd
-
-image::inferred-relationships.png[local and global graph analytics,width=500, align=center]
-
-aasdasd
-
-CALL algo.pageRank(
-"MATCH (r1:Troll)-[:POSTED]->(:Tweet)<-[:RETWEETED]-(:Tweet)<-[:POSTED]-(r2:Troll)
-RETURN id(r2) as source, id(r1) as target",   
-{graph:'cypher'})
-
-
-
+[source,cypher]
+----
 CALL gds.graph.create.cypher(
-    'my-cypher-graph',
-    'MATCH (n:City) RETURN id(n) AS id, n.stateId AS community, n.population AS population',
-    'MATCH (n:City)-[r:ROAD]->(m:City) RETURN id(n) AS source, id(m) AS target, r.distance AS distance, coalesce(r.condition, 1.0) AS quality'
+    '<graph name>',
+    '<node query>',
+    '<relatonship query>'
 )
+----
 
-Russian trolls?
-https://www.nbcnews.com/tech/social-media/russian-trolls-went-attack-during-key-election-moments-n827176
+As before, with the graph name parameter, we specify the name of the projected graph. 
+The node query is used to describe the nodes we want to project.
+The input is a single Cypher query that must return an *id* of the node.
+For the *id*, the internal node id is used.
+Another reserved return column is the *labels* column, which can be used to describe the node's label.
+Using the *labels* column in return, we can filter node labels at execution time like with the Native projection.
+An example node query describing all *Person* and *Organization* nodes, and returning the internal node id, its label, and the seed property is as follows:
 
-Important to note is that with cypher query you can't specify undirected orientation, you have to project it with the actual query.
-The same applies to reducing multigraphs to single graphs.
+[source,cypher]
+----
+MATCH (n) WHERE n:Person or n:Organization
+RETURN id(n) as id, labels(n) as labels, n.seed as seedProperty
+----
 
-== Graph management
+The relationship query is used to specify the relationships we want to project.
+We describe the relationships using the *source* and *target* node ids.
+A reserved column for the relationship type is the *type* column.
+It is important to note that the Cypher projection does not support an *orientation* parameter.
+Instead, we have to represent an undirected relationship as two directed relationships, where one relationship points in the opposite direction of another.
+The following relationship query reduces a 2-hop path to a single relationship, effectively representing undirected coauthorship network:
 
-=== Graph Catalog
+[source,cypher]
+----
+MATCH (p1:Author)-[:WROTE]->(a:Article)<-[:WROTE]-(p2:Author)
+RETURN id(p1) AS source, id(p2) AS target, 'COWORKER' as type, count(*) AS weight
+----
 
-The graph catalog is a concept within the GDS library that allows managing multiple graph projections by name. Using its name, a created graph can be used many times in the analytical workflow. Named graphs can be created using either a Native projection or a Cypher projection. After usage, named graphs can be removed from the catalog to free up main memory.
+Because we used the *count()* aggregation in the relationship query, we effectively reduced a multigraph to a single graph. 
+Putting all these information together, we would use the following syntax to project the undirected coauthorship network. 
 
+[source,cypher]
+----
+CALL gds.graph.create.cypher(
+    'coauthor-graph',
+    'MATCH (n:Author) RETURN id(n) AS id, labels(n) as labels,',
+    'MATCH (p1:Author)-[:WROTE]->(a:Article)<-[:WROTE]-(p2:Author)
+     RETURN id(p1) AS source, id(p2) AS target, count(a) AS weight'
+)
+----
+
+Another example of projecting inferred relationships with Cypher projections is from the https://www.nbcnews.com/tech/social-media/russian-trolls-went-attack-during-key-election-moments-n827176[Russian Twitter troll analysis].
+
+image::inferred-relationships.png[Inferred relationships,width=500, align=center]
+
+We assume that each retweet amplifies the message of the original post by the retweeted author.
+This way, we can find the most influential Twitter users and their community structure in the retweet amplification network.
+
+[source,cypher]
+----
+CALL gds.graph.create.cypher(
+    'troll-graph',
+    'MATCH (n:Troll) RETURN id(n) AS id',
+    'MATCH (r1:Troll)-[:POSTED]->(:Tweet)<-[:RETWEETED]-(:Tweet)<-[:POSTED]-(r2:Troll)
+     RETURN id(r2) as source, id(r1) as target, count(*) as weight, "AMPLIFIED" as type'
+)
+----
+
+==== Remove named graph
+
+After we have finished our graph analysis, we can release the named graph from the main memory.
+The syntax to release the named graph from Graph Catalog is:
+
+[source,cypher]
+----
+CALL gds.graph.drop(<graph name>)
+----
 
 === Anonymous Graph
 
-The typical workflow when using the GDS library is to create a graph and store it in the catalog. This is useful to minimize reads from Neo4j and to run an algorithm with various settings or several algorithms on the same graph projection.
+When using the GDS library, the typical workflow is to create a graph and store it in the catalog.
+However, if you want to run a single algorithm quickly, it can be convenient to use an anonymous projection.
+The syntax for describing node labels and relationship types is similar to the ordinary syntax for named graphs.
+We can use both the Native projection or Cypher projection for describing anonymous graphs.
+It differs, however, in that relationship projections cannot have more than one property.
 
-However, if you want to quickly run a single algorithm, it can be convenient to use an anonymous projection. The syntax is similar to the ordinary syntax for gds.graph.create, described here. It differs however in that relationship projections cannot have more than one property. Moreover, the nodeProjection and relationshipProjection arguments are named and placed in the configuration map of the algorithm:
+==== Native Projection
 
+Instead of separately projecting the in-memory graph and then later executing a graph algorithm, we describe the Node projection and Relationship projection directly as configuration parameters of an algorithm.
+
+[source,cypher]
+----
 CALL gds.<algo>.<mode>(
   {
     nodeProjection: String, List or Map,
@@ -101,12 +277,55 @@ CALL gds.<algo>.<mode>(
     // algorithm and other create configuration
   }
 )
+----
+
+An example of executing the PageRank graph algorithm using the anonymous graph with Native projections is:
+
+[source,cypher]
+----
+CALL gds.pageRank.stream(
+  {
+    nodeProjection: 'Person',
+    relationshipProjection: ['FRIEND', 'COWORKER'],
+    relationshipProperties: 'weight',
+    relationshipWeightProperty:'weight'
+  }
+)
+----
+
+==== Cypher Projection
+
+Similarly to using Native projection on an anonymous graph, we describe the Node query and Relationship query directly as configuration parameters of an algorithm.
+
+[source,cypher]
+----
+CALL gds.<algo>.<mode>(
+  {
+    nodeQuery: Cypher Query,
+    relationshipQuery: Cypher Query,
+    // algorithm and other create configuration
+  }
+)
+----
+
+An example of executing the PageRank graph algorithm using the anonymous graph with Cypher projection is:
+
+[source,cypher]
+----
+CALL gds.pageRank.stream(
+  {
+    nodeQuery: 'MATCH (n:Author) RETURN id(n) AS id',
+    relationshipQuery: 'MATCH (p1:Author)-[:WROTE]->(a:Article)<-[:WROTE]-(p2:Author)
+                        RETURN id(p1) AS source, id(p2) AS target, count(a) AS weight',
+    relationshipWeightProperty:'weight'
+  }
+)
+----
 
 == How to use graph algorithms
 
-Important: With the stream version of the procedure, no updates occur in the graph. This method is preferable for large graphs because nothing is written to the graph,  but very useful for using results externally.
-
-Mention that you can use some of the algorithms as functions (see the doc).
+All product supported graph algorithms feature four modes of execution.
+These are the supported execution modes:
 
 === Stream mode
 
@@ -118,6 +337,13 @@ The returned data can be a node ID and a computed value for the node (such as a 
 If the graph is very large, the result of a stream mode computation will also be very large.
 Using the ORDER BY and LIMIT subclauses in the Cypher query could be useful to support 'top N'-style use cases.
 
+The general syntax to use the *stream* mode is:
+
+[source,cypher]
+----
+CALL gds.<algo>.stream()
+----
+
 === Stats mode
 
 The stats mode returns statistical results for the algorithm computation like counts or percentile distributions.
@@ -125,17 +351,37 @@ A statistical summary of the computation is returned as a single Cypher result r
 The direct results of the algorithm are not available when using the stats mode.
 This mode forms the basis of the mutate and write execution modes but does not attempt to make any modifications or updates anywhere.
 
+The general syntax to use the *stats* mode is:
+
+[source,cypher]
+----
+CALL gds.<algo>.stats()
+----
+
 === Write mode
 
-The write mode will write the results of the algorithm computation back to the Neo4j database. This is similar to how standard Cypher writing queries operate. A statistical summary of the computation is returned similar to the stats mode. This is the only execution mode that will attempt to make modifications to the Neo4j database.
+The write mode will write the results of the algorithm computation back to the Neo4j database.
+This is similar to how standard Cypher writing queries operate.
+A statistical summary of the computation is returned similar to the stats mode.
+This is the only execution mode that will attempt to make modifications to the Neo4j database.
 
-The written data can be node properties (such as Page Rank scores), new relationships (such as Node Similarity similarities), or relationship properties. The write mode can be very useful for use cases where the algorithm results would be inspected multiple times by separate queries since the computational results are handled entirely by the library.
+The written data can be node properties (such as Page Rank scores), new relationships (such as Node Similarity similarities), or relationship properties.
+The write mode can be very useful for use cases where the algorithm results would be inspected multiple times by separate queries since the computational results are handled entirely by the library.
 
 In order for the results from a write mode computation to be used by another algorithm, a new graph must be created from the Neo4j database with the updated graph.
 
+The general syntax to use the *write* mode is:
+
+[source,cypher]
+----
+CALL gds.<algo>.write()
+----
+
 === Mutate mode
 
-The mutate mode will write the results of the algorithm computation back to the in-memory graph. Note that the specified mutateProperty value must not exist in the in-memory graph beforehand. This enables running multiple algorithms on the same in-memory graph without writing results to Neo4j in-between algorithm executions.
+The mutate mode will write the results of the algorithm computation back to the in-memory graph.
+Note that the specified mutateProperty value must not exist in the in-memory graph beforehand.
+This enables running multiple algorithms on the same in-memory graph without writing results to Neo4j in-between algorithm executions.
 
 This execution mode is especially useful in three scenarios:
 
@@ -143,7 +389,70 @@ This execution mode is especially useful in three scenarios:
 * Algorithm results can be written altogether (see write node properties and write relationships).
 * Algorithm results can be queried via Cypher without the need to write to Neo4j at all (see gds.util.nodeProperty).
 
-A statistical summary of the computation is returned similar to the stats mode. Mutated data can be node properties (such as Page Rank scores), new relationships (such as Node Similarity similarities), or relationship properties.
+A statistical summary of the computation is returned similar to the stats mode.
+Mutated data can be node properties (such as Page Rank scores), new relationships (such as Node Similarity similarities), or relationship properties.
+
+The general syntax to use the *mutate* mode is:
+
+[source,cypher]
+----
+CALL gds.<algo>.mutate()
+----
+
+[.slide-title.has-green-background.has-team-background]
+=== Guided Exercise: Getting Started with the Graph Algoritms workflow
+
+[.notes]
+--
+ifdef::backend-revealjs,env-slides[]
+Show the students the basics of using NEuler and have them do the same on their systems:
+
+. Degree centrality detects the number of direct connections a node has
+. We are in the Centrality group of algorithms.
+. We select the Degree algorithm.
+. We select the *Person* label and *HELPS* relationship type.
+. We leave the remaining settings with their default values.
+. We run the algorithm.
+. In the table view, we see the generated coefficient for each node.
+. And here is the generated code of Anonymous graph with the parameter settings, running the algorithm, and retrieving the nodes.
+. And here is the generated code of Named graph with the parameter settings, running the algorithm, and retrieving the nodes.
+. We can copy the generated Browser Guide to Neo4j Browser.
+. Edit the configuration by selecting *UNDIRECTED* relationship orientation and weight property *weight*
+. In the table view, we see the generated coefficient for each node.
+. And here is the generated code of Anonymous graph with the parameter settings, running the algorithm, and retrieving the nodes.
+. And here is the generated code of Named graph with the parameter settings, running the algorithm, and retrieving the nodes.
+. We can copy the generated Browser Guide to Neo4j Browser.
+. This concludes our look at using the Graph management.
+
+
+Here is the video:  https://youtu.be/8AbJSeKSI5w
+
+endif::[]
+--
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with the GDSL Graph Management in Neo4j NEuler.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/8AbJSeKSI5w
+endif::[]
+
+ifdef::backend-revealjs,env-slides[]
+[.center]
+https://youtu.be/8AbJSeKSI5w
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::8AbJSeKSI5w[youtube,width=560,height=315]
+endif::[]
+
+[.student-exercise]
+=== Exercise: Graph algorithms workflow
+
+. In NEuler: Run various graph algorithms with different configuration options and observe the generated code to run the algorithms using anonymous or named graphs.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Graph catalog*.
 
 == Summary
 
