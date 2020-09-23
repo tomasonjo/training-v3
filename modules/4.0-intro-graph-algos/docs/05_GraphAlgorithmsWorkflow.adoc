@@ -21,11 +21,11 @@ In the second step, we execute the graph algorithms on the in-memory projected g
 We can use the results of one graph algorithm as an input to another one.
 Last but not least, we can stream or store the results back to Neo4j.
 
-== Graph Management
+== Graph management
 
-In this chapter, we will learn the various methods to load an in-memory projected graph.
+In this lesson, we will learn the various methods to load an in-memory projected graph.
 
-=== Named Graph
+=== Named graph
 
 The graph catalog is a concept within the GDS library that allows managing multiple graph projections by name.
 We call a graph stored in the graph catalog a *named graph* because we can retrieve it using its name when executing graph algorithms.
@@ -55,21 +55,21 @@ With the graph name parameter, we specify the name of the projected graph.
 The node projection parameter is used to define the nodes we want to project.
 There are three supported options for the node projection parameter.
 
-* String: Used to project a single node label
+*String*: Used to project a single node label:
 
 [source,cypher]
 ----
 'Person'
 ----
 
-* Array: Used to project multiple node labels
+*Array*: Used to project multiple node labels:
 
 [source,cypher]
 ----
 ['Person', 'Organization']
 ----
 
-* Map: Used for granular node label(s) and property definition
+*Map*: Used for granular node label(s) and property definition:
 
 [source,cypher]
 ----
@@ -94,21 +94,21 @@ We will very rarely need to use the Map option for the Node projection parameter
 If we need to project many labels and their properties, we can use the array input for Node projection combined with nodeProperties parameter.
 Similarly to Node projection, the Relationship projection also supports three options as an input:
 
-* String: Used to project a single relationship type
+*String*: Used to project a single relationship type:
 
 [source,cypher]
 ----
 'FRIEND'
 ----
 
-* Array: Used to project multiple relationship types
+*Array*: Used to project multiple relationship types:
 
 [source,cypher]
 ----
 ['FRIEND', 'COWORKER']
 ----
 
-* Map: Used for granular relationship type(s) and property definition
+*Map*: Used for granular relationship type(s) and property definition:
 
 [source,cypher]
 ----
@@ -127,6 +127,7 @@ It allows us to define granular relationship type and properties projection, but
 The *orientation* parameter denotes how Neo4j relationships are represented in the projected graph.
 The following values are allowed:
 
+[square]
 * NATURAL: each relationship is projected the same way as it is stored in Neo4j (default)
 
 * REVERSE: each relationship is reversed during graph projection
@@ -244,7 +245,16 @@ CALL gds.graph.create.cypher(
 )
 ----
 
-==== Remove named graph
+==== Listing all named graphs
+
+If in your analysis you have created named graphs, you can view existing graphs as follows:
+
+[source,cypher]
+----
+CALL gds.graph.list()
+----
+
+==== Removing named graphs
 
 After we have finished our graph analysis, we can release the named graph from the main memory.
 The syntax to release the named graph from Graph Catalog is:
@@ -254,7 +264,7 @@ The syntax to release the named graph from Graph Catalog is:
 CALL gds.graph.drop(<graph name>)
 ----
 
-=== Anonymous Graph
+=== Anonymous graph
 
 When using the GDS library, the typical workflow is to create a graph and store it in the catalog.
 However, if you want to run a single algorithm quickly, it can be convenient to use an anonymous projection.
@@ -262,7 +272,7 @@ The syntax for describing node labels and relationship types is similar to the o
 We can use both the Native projection or Cypher projection for describing anonymous graphs.
 It differs, however, in that relationship projections cannot have more than one property.
 
-==== Native Projection
+==== Native projection
 
 Instead of separately projecting the in-memory graph and then later executing a graph algorithm, we describe the Node projection and Relationship projection directly as configuration parameters of an algorithm.
 
@@ -293,7 +303,7 @@ CALL gds.pageRank.stream(
 )
 ----
 
-==== Cypher Projection
+==== Cypher projection
 
 Similarly to using Native projection on an anonymous graph, we describe the Node query and Relationship query directly as configuration parameters of an algorithm.
 
@@ -400,32 +410,44 @@ CALL gds.<algo>.mutate()
 ----
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting Started with the Graph Algoritms workflow
+=== Guided Exercise: Getting started with the graph algorithms workflow
 
 [.notes]
 --
 ifdef::backend-revealjs,env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
-. Degree centrality detects the number of direct connections a node has
-. We are in the Centrality group of algorithms.
-. We select the Degree algorithm.
-. We select the *Person* label and *HELPS* relationship type.
+. Let's look at how to start using NEuler for managing your graph algorithms workflow.
+. Since we previously added more nodes and relationships to the database, we must refresh NEuler to ensure that all nodes are known.
+. For this demonstration, we will use the Degree Centrality algorithm to detect the number of direct connections a node has.
+. The Degree Centrality algorithm is in the Centralities group of algorithms.
+. We select the Centralities group of algorithms.
+. Then we select the Degree algorithm.
+. We select the *Person* label and *HELPS* relationship type for our graph.
 . We leave the remaining settings with their default values.
 . We run the algorithm.
 . In the table view, we see the generated coefficient for each node.
 . And here is the generated code of Anonymous graph with the parameter settings, running the algorithm, and retrieving the nodes.
-. And here is the generated code of Named graph with the parameter settings, running the algorithm, and retrieving the nodes.
+. Here is the generated code of the Named graph with the parameter settings, running the algorithm, and retrieving the nodes.
 . We can copy the generated Browser Guide to Neo4j Browser.
-. Edit the configuration by selecting *UNDIRECTED* relationship orientation and weight property *weight*
-. In the table view, we see the generated coefficient for each node.
-. And here is the generated code of Anonymous graph with the parameter settings, running the algorithm, and retrieving the nodes.
-. And here is the generated code of Named graph with the parameter settings, running the algorithm, and retrieving the nodes.
-. We can copy the generated Browser Guide to Neo4j Browser.
-. This concludes our look at using the Graph management.
+. Suppose we want to re-use a Named graph in our analysis workflow.
+. In the Named graph section of the generated Browser guide, we see the generated Named graph.
+. We can replace that name with a more useful name we use for our analysys.
+. If you want to modify the configuration for a previously run algorithm, you return to the configuration tab.
+. Then you click Edit configuration
+. Here we modify the  configuration by selecting the  *UNDIRECTED* relationship orientation and the weight property *weight*
+. Next we run the algorithm.
+. In the table view, we see the generated coefficient for each node which is different from the last run because we are  using different configuration values.
+. And here is the generated code of Named graph with the updated parameter settings, running the algorithm, and retrieving the nodes.
+. We copy this to Neo4j Browser.
+. We set the parameters and then when we go to the Named graph page, we can reuse the Named graph from before.
+. Then we run the algorithm.
+. During your graph algorithms workflow, if you are using Named graphs, you may want to get a list of them.
+. You do so by calling gds.graphs.list.
+. This concludes our look at how to start using NEuler for managing your graph algorithms workflow.
 
 
-Here is the video:  https://youtu.be/8AbJSeKSI5w
+Here is the video:  xxxx
 
 endif::[]
 --
@@ -435,24 +457,24 @@ Follow along with this video to become familiar with the GDSL Graph Management i
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/8AbJSeKSI5w
+xxxx
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/8AbJSeKSI5w
+xxxx
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::8AbJSeKSI5w[youtube,width=560,height=315]
+video::xxxx[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]
 === Exercise: Graph algorithms workflow
 
 . In NEuler: Run various graph algorithms with different configuration options and observe the generated code to run the algorithms using anonymous or named graphs.
-. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Graph catalog*.
+. In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Graph Catalog*.
 
 == Summary
 
