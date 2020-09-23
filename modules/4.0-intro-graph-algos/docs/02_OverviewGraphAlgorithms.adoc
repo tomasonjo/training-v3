@@ -42,9 +42,19 @@ In general, very organized data that follows a regular schema and has relatively
 * Questions with just a few connections or flat (not nested). 
 * Questions solved with specific, well-crafted queries. 
 * Simple statistical results (sums, averages, ratios).
-* Example: 
-** Regular reporting based on defined criteria and well-organized data
+* Example: Regular reporting based on defined criteria and well-organized data:
 
+ifndef::env-slides[]
+[grid=cols,cols="70,30"]
+|===
+|image:average-rainfall-chart.png[Average rainfall chart]
+
+Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate.
+|Average rainfall calculation is an example of a simple statistical result, where no graph analytics is required.
+|===
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::average-rainfall-chart.png[Average rainfall chart,width=500,align=center]
@@ -57,6 +67,7 @@ Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate.
 --
 Average rainfall calculation is an example of a simple statistical result, where no graph analytics is required.
 --
+endif::[]
 
 == Graph Structure
 
@@ -64,6 +75,19 @@ A graph consists of nodes (also called vertices), which are connected by relatio
 
 === Random network
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:random-network.png[Random network]
+|In a completely average distribution of relationships per node, a random network is formed with no hierarchies.
+ All nodes have the same probability of being attached to any other node.
+ However, average distribution is only valid when we are dealing with a set of independent observations.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::random-network.png[Random network,width=500,align=center]
@@ -75,9 +99,24 @@ In a completely average distribution of relationships per node, a random network
 All nodes have the same probability of being attached to any other node.
 However, average distribution is only valid when we are dealing with a set of independent observations.
 --
+endif::[]
 
 === Structured network
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:structured-network.png[Structured network]
+|Highly connected and, therefore, dependent observations do not adhere to average distribution.
+ The relationship distribution in most real-world networks follows the Power-Law.
+ A well-known example is the Pareto distribution or the "80/20 rule".
+ Originally it was used to describe a situation where 20% of a population controls 80% of the wealth.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::structured-network.png[Structured network,width=500,align=center]
@@ -90,8 +129,22 @@ The relationship distribution in most real-world networks follows the Power-Law.
 A well-known example is the Pareto distribution or the "80/20 rule".
 Originally it was used to describe a situation where 20% of a population controls 80% of the wealth.
 --
+endif::[]
+
 === Structure and density
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:structure-density.png[Structure and density]
+|Graph analytics is a collection of methods that help us determine strategic entities, uncover structural information, and calculate the flow of information in a given network.
+
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::structure-density.png[Structure and density,width=500,align=center]
@@ -100,9 +153,24 @@ image::structure-density.png[Structure and density,width=500,align=center]
 --
 Graph analytics is a collection of methods that help us determine strategic entities, uncover structural information, and calculate the flow of information in a given network.
 --
+endif::[]
+
 === Understanding graph complexity
 
-[.is-half.left]
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:graph-complexity.png[Understanding graph complexity]
+|Simple networks can be visually inspected to gain insights.
+ Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
+ As we can't visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
+[.is-half.right]
 --
 image::graph-complexity.png[Understanding graph complexity,width=500,align=center]
 --
@@ -113,6 +181,8 @@ Simple networks can be visually inspected to gain insights.
 Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
 As we can't visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
 --
+endif::[]
+
 === What do people do with graph algorithms?
 
 There are a number of real-world use-cases, where graph algorithms are applied.
@@ -125,7 +195,6 @@ Find significant patterns and plan for optimal structures.
 image::explore-plan-measure.png[Explore plan measure,width=500,align=center]
 
 Score outcomes and set a threshold value for a prediction.
-
 
 ==== Machine learning
 
@@ -152,7 +221,7 @@ Paper: https://ifisc.uib-csic.es/~jramasco/text/characterization_delays.pdf[Char
 
 We could be looking at flow and dynamics of a network to understand its capacity and optimize movement of resources. 
 
-image::flow-and-dynamics.png[Flow and dynamics,width=500,align=center]
+image::flow-and-dynamics.png[Flow and dynamics,width=800,align=center]
 
 This Telecom example shows the complexity in just one challenge, Least Cost Routing: We have to call from point A to B, but there are various routes we might choose.
 We need to consider costs by the time of day, quality service levels, and even priority calling to be factored in when choosing the optimal route.  
@@ -183,8 +252,21 @@ On other social media platforms, a friendship link exists only if both parties a
 Sometimes, the strength of a relationship plays an important factor.
 We might also differentiate between different types of nodes and various kinds of relationships in a network.
 
-=== Directed Versus Undirected Graphs
+=== Directed versus undirected graphs
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:directed-graph.png[Directed graph]
+|In the case of a directed graph, the direction of a relationship does matter.
+ In our example, both Aaliyah and Phillip's feed will contain posts from Sam.
+ On the other hand, Sam's feed will contain only Phillip's posts as he does not follow Aaliyah.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::directed-graph.png[Directed graph,width=500,align=center]
@@ -196,7 +278,24 @@ In the case of a directed graph, the direction of a relationship does matter.
 In our example, both Aaliyah and Phillip's feed will contain posts from Sam.
 On the other hand, Sam's feed will contain only Phillip's posts as he does not follow Aaliyah.
 --
+endif::[]
 
+
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:undirected-graph.png[Undirected graph]
+|In an undirected graph, a single relationship represents a link between nodes in both directions.
+ For example, Aaliyah and Sam can either be friends or not.
+ A scenario where Aaliyah is friends with Sam, but Sam is not friends with Aaliyah, is not possible.
+
+ An undirected relationship can also be represented as two directed relationships, where one relationship points in the opposite direction of another.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::undirected-graph.png[Undirected graph,width=500,align=center]
@@ -210,9 +309,22 @@ A scenario where Aaliyah is friends with Sam, but Sam is not friends with Aaliya
 
 An undirected relationship can also be represented as two directed relationships, where one relationship points in the opposite direction of another.
 --
+endif::[]
 
-=== Unweighted Versus Weighted Graphs
+=== Unweighted versus weighted graphs
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:unweighted-graph.png[Unweighted graph]
+|In an unweighted network, a relationship between a pair of nodes has no associated cost or weight assigned to it.
+ Therefore, no notion of the strength of a relationship exists.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::unweighted-graph.png[Unweighted graph,width=500,align=center]
@@ -223,7 +335,21 @@ image::unweighted-graph.png[Unweighted graph,width=500,align=center]
 In an unweighted network, a relationship between a pair of nodes has no associated cost or weight assigned to it.
 Therefore, no notion of the strength of a relationship exists.
 --
+endif::[]
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:weighted-graph.png[Weighted graph]
+|When dealing with weighted networks, we assign each relationship a weight representing the strength or cost of traversing the relationship.
+ The weight must be a number.
+ A typical application for using a weighted network is a transportation network, where we are searching for the shortest weighted path between a pair of nodes.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::weighted-graph.png[Weighted graph,width=500,align=center]
@@ -235,13 +361,14 @@ When dealing with weighted networks, we assign each relationship a weight repres
 The weight must be a number.
 A typical application for using a weighted network is a transportation network, where we are searching for the shortest weighted path between a pair of nodes.
 --
+endif::[]
 
 [.note]
 --
 Depending on the domain, sometimes a higher weight value is better, while other times, a smaller weight value is preferred.
 --
 
-=== Monopartite versus Multipartite Graphs
+=== Monopartite versus multipartite graphs
 
 A monopartite graph consists of a single set of nodes.
 In Neo4j terms, it means we have nodes with a single label.
@@ -251,7 +378,7 @@ image::monopartite-graph.png[Monopartite graph,width=500,align=center]
 
 A multipartite graph consists of many independant sets of nodes.
 In Neo4j terms, it means we have nodes with many labels.
-This is an example of a bipartite graph, where we have *Person* and *Organization* labels for nodes. 
+This is an example of a bipartite graph, where we have *Person* and *Company* labels for nodes.
 
 image::multipartite-graph.png[Multipartite graph,width=500,align=center]
 
@@ -267,7 +394,7 @@ This is an example of a monopartite projection, where we infer that two persons 
 Now we could try to understand the community structure of the coworkers network.
 A monopartite projection can be understood as a process of translating indirect relationships to direct relationships.
 
-=== Multigraph Versus Simple graph
+=== Multigraph versus simple graph
 
 A simple graph permits only a single relationship between a pair of nodes, whereas a multigraph is a graph that allows multiple connections between a single pair of nodes.
 
@@ -278,11 +405,25 @@ The Graph Data Science library features support for multigraphs and as well as t
 
 == Types of graph algorithms
 
-image::types-of-algorithms.png[Types of algorithms,width=500,align=center]
+image::types-of-algorithms.png[Types of algorithms,width=800,align=center]
 
 
 === Community detection (Clustering) algorithms
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="30,70",stripes=none]
+|===
+|image:community-detection.png[Community Detection]
+|Community detection algorithms are used to find clusters of communities that the nodes form in a network.
+ They are also used to examine how tightly-knit some of those communities are.
+ This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures.
+ This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::community-detection.png[Community Detection,width=300,align=center]
@@ -295,9 +436,23 @@ They are also used to examine how tightly-knit some of those communities are.
 This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures.
 This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
 --
+endif::[]
 
 === Centrality algorithms
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="30,70",stripes=none]
+|===
+|image:centrality.png[Community Detection]
+|Centrality algorithms are used to find the most influental nodes and their role in a network based on the graph topology.
+ These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
+ The most famous algorithm in this category is PageRank.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::centrality.png[Community Detection,width=300,align=center]
@@ -309,9 +464,23 @@ Centrality algorithms are used to find the most influental nodes and their role 
 These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
 The most famous algorithm in this category is PageRank.
 --
+endif::[]
 
 === Pathfinding algorithms
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="30,70",stripes=none]
+|===
+|image:pathfinding.png[Pathfinding]
+|Pathfinding algorithms are usually used to find the shortest path between nodes in a network.
+ The most common algorithm is the Dijkstra algorithm.
+ They are used to evaluate routes for uses such as physical logistics and least-cost call or IP routing.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::pathfinding.png[Pathfinding,width=300,align=center]
@@ -323,9 +492,24 @@ Pathfinding algorithms are usually used to find the shortest path between nodes 
 The most common algorithm is the Dijkstra algorithm.
 They are used to evaluate routes for uses such as physical logistics and least-cost call or IP routing.
 --
+endif::[]
 
 === Similarity algorithms
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="30,70",stripes=none]
+|===
+|image:similarity.png[Similarity]
+|Similarity algorithms are used to find similar nodes in a network based on graph topology or their properties.
+ This approach is used in applications such as personalized recommendations and developing categorical hierarchies.
+ The most common algorithms in this category are Jaccard similarity and Cosine similarity algorithm.
+ They can also be used to infer a monopartite projection of a bipartite graph.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::similarity.png[Similarity,width=300,align=center]
@@ -338,9 +522,23 @@ This approach is used in applications such as personalized recommendations and d
 The most common algorithms in this category are Jaccard similarity and Cosine similarity algorithm.
 They can also be used to infer a monopartite projection of a bipartite graph.
 --
+endif::[]
 
 === Link prediction
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="30,70",stripes=none]
+|===
+|image:link-prediction.png[Link prediction]
+|Link prediction algorithms help determine the closeness of a pair of nodes.
+ They consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships.
+ Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::link-prediction.png[Link prediction,width=300,align=center]
@@ -352,10 +550,22 @@ Link prediction algorithms help determine the closeness of a pair of nodes.
 They consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships.
 Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
 --
-
+endif::[]
 
 === Node embeddings
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="50,50",stripes=none]
+|===
+|image:node-embedding.png[Node embedding]
+|Node embedding algorithms compute low-dimensional vector representations of nodes in a graph.
+ These vectors, also called embeddings, can be used as a machine learning input.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
 [.is-half.left]
 --
 image::node-embedding.png[Node embedding,width=300,align=center]
@@ -366,6 +576,7 @@ image::node-embedding.png[Node embedding,width=300,align=center]
 Node embedding algorithms compute low-dimensional vector representations of nodes in a graph.
 These vectors, also called embeddings, can be used as a machine learning input.
 --
+endif::[]
 
 [.quiz]
 == Check your understanding
