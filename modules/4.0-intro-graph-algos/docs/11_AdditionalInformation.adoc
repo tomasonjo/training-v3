@@ -6,64 +6,63 @@
 :imagesdir: ../images
 :module-next-title: Summary
 
-== Monopartite graph
+== Additional information
 
-Here be dragons…                            (warning!)
+At the end of this course, we would like to give you some additional information to keep in mind when developing and creating your graph analytics workflow.
 
-The algorithms are built for monopartite graphs
-Monopartite = only one type of node 
-Solution: project a monopartite graph (but this only sometimes makes sense)
-The algorithms will run … even when they shouldn’t
-Most similarity algorithms rely on feature vectors that are the same length
-May not always return meaningful results
+=== Labs algorithms
 
-== Multigraph
+This course only covered the production-quality graph algorithms in the GDS library, but there are more than 30 algorithms available in alpha and beta tier at this moment.
+Take a look at the https://neo4j.com/docs/graph-data-science/current/algorithms/[algorithms documentation] to explore all the supported graph algorithms.
+You will find link prediction, pathfinding, and node embedding algorithms that we haven't explored in this course.
 
-asad
+=== Types of graph
 
-== Neo4j Cluster
+It is vital to understand the type of graph we want to analyze.
+Remember, most of the Community detection and Centrality algorithms are designed to run on a monopartite graph.
+If we start with a bipartite graph, we might want to use the Similarity algorithms or Cypher projection to infer a monopartite network before moving on to other graph algorithms.
+We should always include the Weakly Connected Components algorithm in our graph analytics workflow to learn how the graph is connected.
+Disconnected components might skew the results of other graph algorithms, so it is critical to understand how well our graph is connected.
+Another thing to keep in mind is the direction of relationships.
+Differentiating between directed and undirected networks is of great importance as it has a significant influence on the algorithm's results.
+Finally, keep in mind if we want to include the relationship weights as an input of the algorithm.
+Sometimes, we might get better results if we include weights, but sometimes they don't produce the desired results.
+Test many configuration options and see what works best.
 
-GraphDatabase.driver( "bolt+routing://server?policy=OLAP" )
+=== Seed parameters
 
-// neo4j.conf
-causal_clustering.server_groups=olap1
-causal_clustering.load_balancing.config.server_policies.OLAP=groups(olap1)
+The first step in most community detection algorithms is to initialize each node in its own community. 
+In practice, each node gets assigned a unique community id.
+In the next step, algorithms use various technics to search for communities within the network.
+Community Detection algorithms can return different community ids when executed multiple times on the same graph.
+This can be a bit of a nuisance if we want to track how communities evolve over time.
+The seed property parameter allows us to define the initial community id for each node.
+Using seed property can be thought of as semi-supervised community detection, where we provide the initial community id for some nodes based on prior domain knowledge.
+Imagine we are running a daily batch process where you search for communities in your Neo4j graph.
+What you want to do each day is to provide the communities from the previous day as the seed values.
+There are two reasons.
+The first one is that it is easier to track a specific community through time as by providing the communities from the day before as seed property, we make sure that the community ids do not change.
+That is unless a community disintegrates. 
+The algorithm should also be faster as most of the communities are already calculated from the day before, so the algorithms needs less iteration. 
 
-
-== Types of graphs
-
-Tie the flavors of graph back to what it means for running algorithms:
-
-Directed and weighted graphs have more data that can be used as inputs for your algorithms to tune their performance.
-
-Graph density is going to impact your performance (but is also not really a type of graph) but isn't an input.
-
-Cyclic/Acyclic graphs have implementations for some algorithms, but we don't implement any algorithms that require acyclic graphs.
-
-== Other tips
+=== Streaming graph algorithms results
 
 Streaming lots of results with the Neo4j Drivers can be very slow. 
-Lots of results = easier to store those and query them afterwards. 
-Or, wrap a streamed result in apoc.export.csv.
+We could either store the results with the *write* mode of the algorithm and query the results later or we could wrap a streamed result in apoc.export.csv procedure to produce a CSV file of results.
+
+=== Neo4j Causal Cluster
+
 Avoid writing to core cluster members.
-Stream data in a cluster, use snapshot to write results.
-Avoid running graph algorithms on a transactional graph
-May get unexpected behavior when you write back to the graph.
-Similarity algorithms return nonsensical results when vectors are of different lengths.
+We will want to run the graph algorithms on a read replica and write the results to CSV (or export somehow).
+If we want to store the results back to the cluster, we can add them back to the leader by way of import-csv, or use Kafka to stream the results back.
+Another alternative is to create and detach a read replica from the cluster.
+We can then run the graph algorithms on that instance.
 
+=== Common concerns
 
-== Common concerns
-
-Why stream vs store results?
-Algorithm takes really long to run.
-Betweenness Centrality is slow (all pairs shortest path).
-Community Detection gives different results each time.
-Resolved by using a "seeding" parameter in Label Propagation and unionFind
-Do relationship directions matter?
-Triangle Count - ignores direction.
-PageRank - an outgoing relationship means you give credibility to the other node.
-What about weights? Which algorithms cans I use?
-
+Try to avoid running graph algorithms on a transactional graph.
+If algorithms take really long to run, try to use the approximation variants of the algorithm or run the algorithm only on the subset of a graph.
+In production, try to use only the Native projection and avoid Cypher projection.
 
 [.quiz]
 == Check your understanding
