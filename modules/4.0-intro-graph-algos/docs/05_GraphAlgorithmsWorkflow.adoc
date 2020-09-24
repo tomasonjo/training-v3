@@ -417,8 +417,9 @@ CALL gds.<algo>.mutate()
 ifdef::backend-revealjs,env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
-. Let's look at how to start using NEuler for managing your graph algorithms workflow.
+. Let's look at how to start using NEuler and Neo4j Browser for managing your graph algorithms workflow.
 . Since we previously added more nodes and relationships to the database, we must refresh NEuler to ensure that all nodes are known.
+. NEuler is a great way to start your graph algorithm analysis.
 . For this demonstration, we will use the Degree Centrality algorithm to detect the number of direct connections a node has.
 . The Degree Centrality algorithm is in the Centralities group of algorithms.
 . We select the Centralities group of algorithms.
@@ -426,28 +427,32 @@ Show the students the basics of using NEuler and have them do the same on their 
 . We select the *Person* label and *HELPS* relationship type for our graph.
 . We leave the remaining settings with their default values.
 . We run the algorithm.
-. In the table view, we see the generated coefficient for each node.
-. And here is the generated code of Anonymous graph with the parameter settings, running the algorithm, and retrieving the nodes.
-. Here is the generated code of the Named graph with the parameter settings, running the algorithm, and retrieving the nodes.
-. We can copy the generated Browser Guide to Neo4j Browser.
-. Suppose we want to re-use a Named graph in our analysis workflow.
-. In the Named graph section of the generated Browser guide, we see the generated Named graph.
-. We can replace that name with a more useful name we use for our analysys.
-. If you want to modify the configuration for a previously run algorithm, you return to the configuration tab.
-. Then you click Edit configuration
-. Here we modify the  configuration by selecting the  *UNDIRECTED* relationship orientation and the weight property *weight*
-. Next we run the algorithm.
-. In the table view, we see the generated coefficient for each node which is different from the last run because we are  using different configuration values.
-. And here is the generated code of Named graph with the updated parameter settings, running the algorithm, and retrieving the nodes.
-. We copy this to Neo4j Browser.
-. We set the parameters and then when we go to the Named graph page, we can reuse the Named graph from before.
-. Then we run the algorithm.
+. In the table view, we see the calculated degree for each node which is the number of direct connections to these nodes since we used the default orientation of Reverse.
+. We can look at the data in Neo4j Browser where  Michael has 3 incoming relationships and Alice has 2.
+. After you have run an algorithm, you can modify it by returning to the Configuration tab.
+. Here we click Edit configuration so we can modify the parameters for running this algorithm.
+. We select a different orientation for the relationship, Natural, meaning that we follow the direction in the graph.
+. With this change, we run the algorithm and we see different table results.
+. We click Code to see the generated code for running this algorithm for the anonymous graph.
+. This code includes the parameter settings, running the algorithm, and retrieving the nodes.
+. We can also examine the generated code using a Named graph.
+. Notice that it generates a name for the graph.
+. The generated code includes setting the same parameters, creating the named graph, running the algorithm using the named graph, retrieving the nodes, and finally dropping the named graph.
+. We can copy the generated generated code as a Browser Guide.
+. And here is our Browser Guide where we set the configuration parameters.
+. We execute the code to set these parameters.
+. Here is the code for running the algorithm using an Anonymous graph.
+. And here is the code for running the algorithm using a Named graph. In your graph algorithms analysis, you would most likely use a meaningful name.
+. Let's create the named graph called PersonDegrees.
+. Next we modify the code to run the algorithm using the PersonDegrees in-memory graph.
+. Having this named graph enables you to keep the graph you are working on in memory and reuse it for other algorithms.
 . During your graph algorithms workflow, if you are using Named graphs, you may want to get a list of them.
-. You do so by calling gds.graphs.list.
+. You do so by calling gds.graphs.list('PersonDegrees').
+. And finally you can remove the Named graph from memory by calling gds.graph.drop('PersonDegrees').
 . This concludes our look at how to start using NEuler for managing your graph algorithms workflow.
 
 
-Here is the video:  xxxx
+Here is the video:  https://youtu.be/7NHj09myb5Q
 
 endif::[]
 --
@@ -457,17 +462,17 @@ Follow along with this video to become familiar with the GDSL Graph Management i
 endif::[]
 
 ifdef::backend-pdf[]
-xxxx
+https://youtu.be/7NHj09myb5Q
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-xxxx
+https://youtu.be/7NHj09myb5Q
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::xxxx[youtube,width=560,height=315]
+video::7NHj09myb5Q[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]
@@ -476,5 +481,52 @@ endif::[]
 . In NEuler: Run various graph algorithms with different configuration options and observe the generated code to run the algorithms using anonymous or named graphs.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Graph Catalog*.
 
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+xxx?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xxx
+- [ ] xxx
+- [x] xxx
+- [x] xxx
+
+=== Question 2
+
+[.statement]
+xxx?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xxx
+- [x] xxx
+- [ ] xxx
+- [ ] xxx
+
+=== Question 3
+
+[.statement]
+xxx?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] xxx
+- [x] xxx
+- [x] xxx
+- [x] xxx
+
+[.summary]
 == Summary
 
+In this lesson, you learned some best practices for working with graph algorithms as part of your analytics workflow.
