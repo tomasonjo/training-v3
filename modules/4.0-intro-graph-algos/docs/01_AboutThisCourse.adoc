@@ -100,11 +100,10 @@ Estimated time: _30 minutes_
 === Additional information
 
 [square]
-* Monopartite graph
-* Multigraph
-* Neo4j Cluster
+* Labs algorithms
 * Types of graphs
-* Tips
+* Seed parameters
+* Using Neo4j Causal Clusters
 * Common concerns
 
 Estimated time: _10 minutes_
