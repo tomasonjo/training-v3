@@ -45,11 +45,6 @@ The first one is that it is easier to track a specific community through time as
 That is unless a community disintegrates. 
 The algorithm should also be faster as most of the communities are already calculated from the day before, so the algorithms needs less iteration. 
 
-=== Streaming graph algorithms results
-
-Streaming lots of results with the Neo4j Drivers can be very slow. 
-We could either store the results with the *write* mode of the algorithm and query the results later or we could wrap a streamed result in apoc.export.csv procedure to produce a CSV file of results.
-
 === Neo4j Causal Cluster
 
 Avoid writing to core cluster members.
