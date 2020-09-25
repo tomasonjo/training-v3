@@ -52,6 +52,14 @@ Estimated time: _30 minutes_
 
 Estimated time: _30 minutes_
 
+=== Memory requirements estimation
+
+[square]
+* Estimating memory required.
+* Hands-on memory estimation.
+
+Estimated time: _10 minutes_
+
 === Community detection algorithms
 
 [square]
@@ -76,26 +84,18 @@ Estimated time: _45 minutes_
 === Similarity algorithms
 
 [square]
-* Jaccard Similarity
+* Node Similarity
 * Hands-on exercise
 
 Estimated time: _30 minutes_
 
-=== Analysis of commonly used together ingredients
+=== Practical application of algorithms
 
 [square]
 * Workflow overview
 * Hands-on analysis
 
 Estimated time: _30 minutes_
-
-=== Memory requirements estimation
-
-[square]
-* Estimating memory required.
-* Hands-on memory estimation.
-
-Estimated time: _10 minutes_
 
 === Additional information
 

@@ -1,5 +1,5 @@
 = Community Detection Algorithms
-:slug: 06-iga-40-community-detection
+:slug: 07-iga-40-community-detection
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -49,16 +49,12 @@ Here is why you use WCC:
 [square]
 * Early step in graph analysis to see how a graph is structured.
 
-* Great tool to use for graphs that are being updated frequently since it scales well.
-
-* Can help detect new nodes in common that could trigger investigation.
-
 Here are some examples:
 
 [square]
-* Keeping track of clusters of database records as part of the deduplication process of MDM.
+* Finding common identifiers in disambiguation process.
 
-* Working with Citation networks.
+* Identifying disconnected subgraphs to run resource intensive algorithms (like Node Similarity) in parallel.
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Weakly Connected Component algorithm

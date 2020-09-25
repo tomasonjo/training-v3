@@ -1,10 +1,10 @@
 = Memory Requirements Estimation
-:slug: 10-iga-40-memory-requirements-estimation
+:slug: 06-iga-40-memory-requirements-estimation
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Additional Information
+:module-next-title: Community Detection Algorithms
 
 == Memory Requirements estimation
 
