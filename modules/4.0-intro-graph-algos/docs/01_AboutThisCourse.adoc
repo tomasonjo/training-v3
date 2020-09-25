@@ -15,11 +15,11 @@ In this course you will learn how to use Neo4j's Graph Data Science library to e
 === Overview of graph algorithms
 
 [square]
-* Graph analytics and alrithms.
-* Graph structure.
-** Propagation pathways.
-** Flow and dynamics.
-** Group resiliency.
+* Graph analytics and algorithms
+* Graph structure
+** Propagation pathways
+** Flow and dynamics
+** Group resiliency
 * Types of graphs
 * Types of graph algorithms
 
@@ -28,35 +28,36 @@ Estimated time: _30 minutes_
 === Introduction to the Graph Data Science Library
 
 [square]
-* Neo4j support for graph analytics and visualization.
-* The Neo4j Graph Data Science Library.
+* Neo4j support for graph analytics and visualization
+* The Neo4j Graph Data Science Library
 
 Estimated time: _15 minutes_
 
 === Environment setup
 
 [square]
-* Prepare your environment for the hands-on exercises.
-* Datasets used for this course.
+* Prepare your environment for the hands-on exercises
+* Datasets used for this course
 
 Estimated time: _30 minutes_
 
 === Graph algorithms workflow
 
 [square]
-* How graph algorithms work.
-* Native projection.
-* Cypher projection.
-* Graph management.
-* Using graph algorithms.
+* How graph algorithms work
+* Native projection
+* Cypher projection
+* Graph management
+* Using graph algorithms
+* Hands-on exercise
 
 Estimated time: _30 minutes_
 
 === Memory requirements estimation
 
 [square]
-* Estimating memory required.
-* Hands-on memory estimation.
+* Estimating memory required
+* Hands-on memory estimation
 
 Estimated time: _10 minutes_
 
@@ -113,7 +114,7 @@ Estimated time: _10 minutes_
 [square]
 * Review of lessons.
 * Overview of resources for learning more and doing more with Graph Data Science in Neo4j.
-* Certificate of completion if you answer all questions correctly.
+* Download certificate of completion if you have answered all questions correctly.
 
 Estimated time: _5 minutes_
 
@@ -121,7 +122,7 @@ Estimated time: _5 minutes_
 
 This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
 
-* Have completed Introduction to Neo4j course or have equal Cypher proficiency.
-* Be familiar with Neo4j Browser.
+* Have completed the Introduction to Neo4j 4.0 course or have equal Cypher proficiency.
+* Be familiar with using Neo4j Desktop and Neo4j Browser.
 
-This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+This course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].

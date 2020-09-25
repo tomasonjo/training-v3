@@ -8,9 +8,9 @@
 
 == Community Detection algorithms
 
-Community detection algorithms are designed to help us discover and understand the structure of complex networks.
+Community detection algorithms are designed to help you discover and understand the structure of complex networks.
 Understanding the community structure has many real-world applications in sociology, biology, and computer science.
-We think of a community as a densely-connected group of nodes, similar to how a group of friends is highly interconnected.
+You can think of a community as a densely-connected group of nodes, similar to how a group of friends is highly interconnected.
 
 These algorithms are supported:
 
@@ -127,7 +127,7 @@ Before you perform the tasks shown in this video, you must have either created a
 == Label Propagation
 
 The Label Propagation algorithm (LPA) is a fast algorithm for describing communities in a graph.
-It detects these groups using network topology alone and does not require any prior information about the communities or their structure.
+It detects these groups using network topology alone, and does not require any prior information about the communities, or their structure.
 In the LPA, the nodes select their community based on their direct neighbors using the node labels.
 In addition, weights on nodes and relationships can also be considered.
 The idea is that a single label can quickly become dominant in a densely-connected group of nodes, but it will have trouble crossing a sparsely connected region.
@@ -139,10 +139,10 @@ First, every node is initialized with a property.
 By default, the initial property is unique for every node.
 However, the LPA also lends itself well to semi-supervised learning because you can seed the initial properties with pre-assigned node labels that you know are predictive.
 
-In this example, we have started with 2 *A* nodes, but left all other's unique.
-We are using the node default weights of 1.
+In this example, we have started with 2 _A_ nodes, but left all other nodes as unique.
+We are using the node default weights of _1_.
 Nodes are then processed randomly, with each node acquiring its neighbor's label with the maximum weight. 
-So, in the first iteration, the left *A* acquires the label *F*, *B* acquires the label *D*, and *C* now becomes *A*.
+So, in the first iteration, the left _A_ acquires the label _F_, _B_ acquires the label _D_, and _C_ now becomes _A_.
 The maximum weight is calculated based on the weights of neighbor nodes and their relationships.
 In addition, ties are broken uniformly and randomly.
 There will be times when a label is not updated because the neighbor with the maximum weight has the same label.
@@ -169,9 +169,9 @@ Here are some examples:
 * Assigning polarity of tweets as a part of semantic analysis. In this scenario, positive and negative seed labels from a classifier are used in combination with the Twitter follower graph.
 //?? For more information, see Twitter polarity classification with label propagation over lexical links and the follower graph 14.
 
-* Finding potentially dangerous combinations of possible co-prescribed drugs, based on the chemical similarity and side effect profiles. This study is found in 14 https://dl.acm.org/citation.cfm?id=2140465.
+* Finding potentially dangerous combinations of possible co-prescribed drugs, based on the chemical similarity and side effect profiles. This  study is found https://dl.acm.org/citation.cfm?id=2140465[here].
 
-* Label Propagation Prediction of Drug-Drug Interactions Based on Clinical Side Effects.
+* Label Propagation prediction of drug-drug interactions based on clinical side effects.
 
 * Inferring dialogue features and user intention for a machine learning model.
 //?? For more information, see Feature Inference Based on Label Propagation on Wiki‐ data Graph for DST 16.
@@ -229,8 +229,8 @@ endif::[]
 === Exercise: Label Propagation
 
 . In NEuler:
-.. Perform the Label Propagation algorithm on the Person data, noting what, if anything is written to the graph.
-.. Perform the Label Propagation algorithm on different seasons of Game of Thrones.
+.. Perform the Label Propagation algorithm on the *Person* data, noting what, if anything is written to the graph.
+.. Perform the Label Propagation algorithm on different *seasons* of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Label Propagation*.
 
 == Louvain Modularity
@@ -238,7 +238,7 @@ endif::[]
 The Louvain Modularity algorithm is used to detect communities in large networks.
 You can think of the algorithm doing a "what if" analysis to try out various groupings with the goal of eventually reaching a global modularity optimum. 
 
-The Louvain modularity algorithm consists of repeated application of two steps.
+The Louvain Modularity algorithm consists of repeated application of two steps.
 The first step is a “greedy” assignment of nodes to communities, favoring local optimizations of modularity.
 The modularity score quantifies the quality of an assignment of nodes to communities.
 This process evaluates how much more densely connected the nodes within a community are, compared to how connected they would be in a random network.
@@ -256,11 +256,12 @@ In our case, the algorithm found four groups of nodes, which are indicated by no
 In the second step, the algorithm merges each group of nodes into a single node.
 The count of links between nodes within the same community and between various communities is now represented as a weighted relationship between the newly-merged nodes.
 Once the new network is created, the whole process is repeated until a modularity maximum is reached.
-The Louvain Modularity algorithm is interesting, because we can observe both the final as well as the intermediate communities that are calculated at the end of each level.
+The Louvain Modularity algorithm is interesting, because you can observe both the final as well as the intermediate communities that are calculated at the end of each level.
 It is regarded as a hierarchical clustering algorithm because a hierarchy of communities is produced as a result.
 
 Here is why you use Louvain:
 
+[square]
 * Community detection in large networks.
 
 * Uncover hierarchical structures in data.
@@ -269,15 +270,17 @@ Here is why you use Louvain:
 
 Here are some examples:
 
+[square]
 * Extracting topics from online social platforms, like Twitter and YouTube, based on the co-occurence of terms in documents as part of the topic modeling process.
 //?? This approach is described in Topic Modeling based on Louvain method in Online Social Networks 20.
 
-* Finding hierarchical community structures within the brain’s functional network, as described in Hierarchical Modularity in Human Brain Functional Networks 21.
+* Finding hierarchical community structures within the brain’s functional network.
+//as described in Hierarchical Modularity in Human Brain Functional Networks 21.
 //?? need a reference here?
 
 * Evaluating criminal networks and holes in the structure.
 
-* Detecting cyber attacks. The algorithm was used in a study of fast community detection in large scale cyber networks for cyber security applications 19. Once these communities have been detected they can be used to detect cyber attacks.
+* Detecting cyber attacks. The algorithm was used in a study of fast community detection in large scale cyber networks for cyber security applications. Once these communities have been detected they can be used to detect cyber attacks.
 //?? need a reference here?
 
 [.slide-title.has-green-background.has-team-background]
@@ -332,9 +335,9 @@ endif::[]
 [.student-exercise]
 === Exercise: Louvain Modularity
 
-. In NEuler:  Perform the Louvain Modularity algorithm on different seasons of Game of Thrones.
+. In NEuler:  Perform the Louvain Modularity algorithm on different *seasons* of Game of Thrones (GOT).
 . In Neo4j Browser:
-.. View the louvain and intermediate louvain values for GOT.
+.. View the *louvain* and *intermediate louvain* values for GOT.
 .. kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Louvain Modularity*.
 
 == Triangle Count
@@ -344,13 +347,15 @@ In graph theory terminology, a triangle is equivalent to a 3-clique.
 The Triangle Count algorithm counts the number of triangles for each node in the graph.
 It has gained popularity in social network analysis, where it is used to measure the cohesiveness and stability of networks.
 It is also one of the indices used in the computation of the local clustering coefficients.
-The Triangle Count algorithm in the GDS library only finds triangles in undirected graphs.
+
+[NOTE]
+The Triangle Count algorithm in the GDSL only finds triangles in undirected graphs.
 
 image::triangle-count.png[Triangle Count,width=500, align=center]
 
-In this example, we count the number of triangles passing through node *U*.
-In the left example, two triangles pass through node *U*.
-The first triangle consists of node *U* and left-side nodes and the second triangle consists of node *U* and bottom-side nodes.
+In this example, we count the number of triangles passing through node _U_.
+In the left example, two triangles pass through node _U_.
+The first triangle consists of node _U_ and left-side nodes and the second triangle consists of node _U_ and bottom-side nodes.
 In the second example, we connect the top right nodes, which produces another triangle.
 
 Here is why you use Triangle Count:
@@ -425,8 +430,8 @@ endif::[]
 === Exercise: Triangle Count
 
 . In NEuler:
-.. Perform some Triangle Count algorithms on the Person data, noting what, if anything is written to the graph.
-.. Perform some Triangle Count algorithms on different seasons of Game of Thrones.
+.. Perform some Triangle Count algorithms on the *Person* data, noting what, if anything is written to the graph.
+.. Perform some Triangle Count algorithms on different *seasons* of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Triangle Count*.
 
 == Local Clustering Coefficient
@@ -434,13 +439,13 @@ endif::[]
 The Local Clustering Coefficient is the probability that neighbors of a particular node are connected to each other.
 The goal of the Local Clustering Coefficient algorithm is to measure how tightly a group is clustered compared to how tightly it could be clustered.
 The algorithm uses Triangle Count in its calculations, which provides a ratio of existing triangles to possible relationships.
-A maximum value of 1 indicates a clique where every node is connected to every other node.
+A maximum value of _1_ indicates a clique, where every node is connected to every other node.
 
 image::clustering-coefficient.png[Clustering Coefficient,width=500, align=center]
 
 The Local Clustering Coefficient describes how many of the node's neighbors are also connected.
-In the left example, the probability of node *U* neighbors being connected is 20%.
-Node *U* has five neighbors.
+In the left example, the probability of node _U_ neighbors being connected is 20%.
+Node _U_ has five neighbors.
 If all the neighbors were connected to each other, that would be ten relationships between neighbors.
 Because there are only two relationships between neighbors, the Local Clustering Coefficient is 0.2. 
 
@@ -490,7 +495,7 @@ endif::[]
 [.student-exercise]
 === Exercise: Local Clustering Coefficient
 
-. In NEuler: Run some Local Clustering Coefficient algorithms on different seasons of Game of Thrones.
+. In NEuler: Run some Local Clustering Coefficient algorithms on different *seasons* of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Local Clustering Coefficient*.
 
 

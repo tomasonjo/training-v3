@@ -14,11 +14,11 @@ You should now be able to:
 * Describe the components of the Neo4j Graph Data Science library.
 * Set up your environment for running graph algorithms.
 * Describe the workflow you use to use the Graph Data Science library.
+* Determine memory requirements for your analysis.
 * Use Community Detections algorithms.
 * Use Centrality algorithms.
 * Use Similarity algorithms.
 * Perform data analysis using a set of graph algorithms.
-* Determine memory requirements for your analysis.
 * Describe some best practices for using algorithms.
 
 == Resources

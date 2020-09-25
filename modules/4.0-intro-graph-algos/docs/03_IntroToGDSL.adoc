@@ -13,55 +13,58 @@ This framework enables data scientists to confidently operationalize better anal
 
 image::neo4j-for-graph-data-science.png[Neo4j for graph data science,width=500,align=center]
 
-This toolbox aims to provide support and ease of use of all the steps in Graph Data Science evolution.
+This toolbox aims to provide support and ease of use for all the steps in Graph Data Science analysis.
 
 image::gds-steps.png[Graph data science steps,width=500,align=center]
 
 === Neo4j Database
 
 Neo4j is a native graph database, built from the ground up to leverage not only data but also data relationships.
-Neo4j connects data as it’s stored, enabling queries never before imagined, at speeds never thought possible.
+Neo4j connects data as it is stored, enabling queries never before imagined, at speeds never thought possible.
 
 === Neo4j Bloom
 
 Neo4j Bloom is an easy-to-use graph exploration application for visually interacting with Neo4j graphs.
 
 Bloom gives graph novices and experts the ability to visually investigate and explore their graph data from different business perspectives.
-Its illustrative, codeless search-to-visualization design makes it the ideal interface for fostering communication between peers, managers and executives, and share the innovative work of their graph development and analytics teams.
+Its illustrative, codeless search-to-visualization design makes it the ideal interface for fostering communication between peers, managers and executives, where they can share the innovative work of their graph development and analytics teams.
 
-=== Graph Data Science library
+=== Graph Data Science Library
 
-The Neo4j Graph Data Science (GDS) library contains many graph algorithms.
+The Neo4j Graph Data Science Library (GDSL) contains many graph algorithms.
 The algorithms are divided into categories which represent different problem classes:
 
-* Path Finding - these algorithms help find the shortest path or evaluate the availability and quality of routes
+[square]
+* Path Finding - these algorithms help find the shortest path or evaluate the availability and quality of routes.
 
-* Centrality - these algorithms determine the importance of distinct nodes in a network
+* Centrality - these algorithms determine the importance of distinct nodes in a network.
 
-* Community Detection - these algorithms evaluate how a group is clustered or partitioned, as well as its tendency to strengthen or break apart
+* Community Detection - these algorithms evaluate how a group is clustered or partitioned, as well as its tendency to strengthen or break apart.
 
-* Similarity - these algorithms help calculate the similarity of nodes
+* Similarity - these algorithms help calculate the similarity of nodes.
 
-* Link Prediction - these algorithms determine the closeness of pairs of nodes
+* Link Prediction - these algorithms determine the closeness of pairs of nodes.
 
 * Node Embeddings - these algorithms compute vector representations of nodes in a graph.
 
 These graph algorithms help to effectively answer questions about your data’s connectivity or topology, or generate new and highly predictive features for your existing ML pipelines.
-At the moment the the GDS library contains more than 40 graph algorithms.
+At this writing, the the GDSL contains more than 50 graph algorithms.
 
 image::gds-algorithms.png[Graph data science algorithms,width=700,align=center]
 
 Algorithms exist in one of three tiers of maturity:
 
-Production-quality:
+*Production-quality*:
 
-* Indicates that the algorithm has been tested with regards to stability and scalability. Algorithms in this tier are prefixed with gds.<algorithm>.
+[square]
+* Indicates that the algorithm has been tested with regards to stability and scalability. Algorithms in this tier are prefixed with gds.<algorithm> and are supported by Neo4j.
 
-Beta:
+*Beta*:
 
+[square]
 * Indicates that the algorithm is a candidate for the production-quality tier. Algorithms in this tier are prefixed with gds.beta.<algorithm>.
 
-Alpha:
+*Alpha*:
 
 * Indicates that the algorithm is experimental and might be changed or removed at any time. Algorithms in this tier are prefixed with gds.alpha.<algorithm>.
 

@@ -1,4 +1,4 @@
-= Practical application of algorithms
+= Practical Application of Algorithms
 :slug: 10-iga-40-ingredient-analysis
 :doctype: book
 :toc: left
@@ -7,17 +7,17 @@
 :module-next-title: Additional Information
 
 
-== Practical application of algorithms Overview
+== Practical application of algorithms overview
 
-Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes Dataset.
+Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes dataset.
 The goal is to find communities of commonly used together ingredients and the representatives of those communities.
 
-== Practical application of algorithms Workflow
+== Practical application of algorithms workflow
 
 The analysis consists of three steps.
 First, you will infer a similarity network between ingredients with the help of the Node Similarity algorithm.
 The algorithm will compare how often the ingredients are used together in the same recipe.
-As in the previous chapter, you will start by examining the Jaccard similarity score distribution to help you define a reasonable *topK* and *similarityCutoff* parameters.
+As in the previous lesson, you will start by examining the Jaccard Similarity score distribution to help you define reasonable *topK* and *similarityCutoff* parameters.
 This way, the inferred network between ingredients will not be too sparse or too dense.
 
 Next, you will use the Louvain Modularity algorithm to analyze the community structure of the ingredient similarity network.

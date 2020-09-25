@@ -8,7 +8,7 @@
 
 == Similarity algorithms
 
-Similarity algorithms evaluate how alike nodes are at an individual level either based on node properties, neighboring nodes, or relationship properties.
+Similarity algorithms evaluate how alike nodes are at an individual level based on node properties, neighboring nodes, or relationship properties.
 
 Product supported:
 
@@ -30,7 +30,7 @@ Labs implementations:
 
 == Node Similarity algorithm
 
-Node Similarity algorithm computes similarities between pairs of nodes based on the Jaccard Similarity Score.
+The Node Similarity algorithm computes similarities between pairs of nodes based on the Jaccard Similarity Score.
 Two nodes are considered similar if they share many of the same neighbors.
 The input of this algorithm is usually a bipartite graph containing two disjoint node sets.
 The Node Similarity algorithm compares all nodes from the first node set based on their relationships to nodes in the second set.
@@ -43,8 +43,8 @@ Mathematically, Jaccard Similarity Score is defined as the size of the intersect
 
 image::jaccard-similarity.png[Betweenness centrality,width=500, align=center]
 
-For example, if set A contains {Orange, Banana, Cherry, Pineapple}  and set B contains {Orange, Banana, Apple} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in A and B (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Pineapple}.
-The resulting Jaccard similarity coefficient is 2/5 which is 0.4. 
+For example, if Basket _A_ contains {Orange, Banana, Cherry}  and Basket _B_ contains {Orange, Banana, Apple,Kiwi} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in _A_ and _B_ (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Kiwi}.
+The resulting Jaccard Similarity Coefficient is 2/5 which is 0.4.
 A coefficient of 1 indicates that the compared sets are identical.
 
 image::fruit.png[NodeSimilarity,width=500, align=center]
@@ -87,7 +87,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with Jaccard Similarity in Neo4j Neuler.
+Follow along with this video to become familiar with Jaccard Similarity in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
@@ -108,8 +108,8 @@ endif::[]
 == Exercise: Node Similarity
 
 . In NEuler:
-.. Try various algorithm configurations for the Questions dataset
-.. Try other datasets
+.. Try various algorithm configurations for the *Questions* dataset.
+.. Try other datasets.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Node Similarity*.
 
 [.quiz]

@@ -8,7 +8,7 @@
 
 == Preparing your development environment
 
-To prepare you environment you must:
+To prepare your development environment you must:
 
 . Set up Neo4j Desktop on your system.
 . Install the APOC and GDSL plugin libraries for your database.
@@ -19,7 +19,6 @@ To prepare you environment you must:
 == Step 1: Set up Neo4j Desktop on your system
 
 To perform the exercises of this course you must have downloaded and installed Neo4j Desktop on your system.
-
 
 ifdef::backend-html5,backend-pdf[]
 These videos show how to install and get started using Neo4j Desktop.
@@ -74,7 +73,6 @@ ifdef::backend-html5,backend-pdf[]
 . Install the *APOC* plugin.
 . Install the *Graph Data Science* plugin.
 
-// Change the picture
 image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
 
 
@@ -87,7 +85,7 @@ NEuler is a project of Neo4j Labs and is an excellent way to explore smaller gra
 
 . Open the *Graph Apps* pane in the left panel.
 . Double-click *Graph Apps Gallery*, a new window opens.
-. Click the link for the Graph Data Science Playground install  as shown here:
+. Click the link for the Graph Data Science Playground install as shown here:
 
 image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500, align=center]
 
@@ -195,4 +193,4 @@ Select the correct answer.
 [.summary]
 == Summary
 
-You have now prepared your system for performing the hands-on exercisess for this course.
+You have now prepared your system for performing the hands-on exercises for this course.

@@ -8,10 +8,10 @@
 
 == Graph Analytics and Algorithms
 
-In nature, we can observe many social and physical networks form and evolve.
+In nature, we can observe  the formation and evolution of many social and physical networks.
 Every person is a member of a friendship network.
 We can represent the human brain as a network of neurons and synapse connections.
-The research papers form a citation network if we follow their citations.
+Research papers form a citation network if we follow their citations.
 Every city has a transportation network that includes public transport and infrastructure.
 
 Graph analytics, also known as network analysis, focuses on the study of relationships in real-world networks.
@@ -26,8 +26,8 @@ image::local-global-computation.png[local and global graph analytics,width=500, 
 
 [.notes]
 --
-As an example, if we wanted to count the number of neighbours for a given node, we could fetch that information with Cypher.
-However, if we are interested to learn how influential those neighbours are, given their position in the global network, we would use graph algorithms.
+As an example, if we wanted to count the number of neighbors for a given node, we could fetch that information with Cypher.
+However, if we are interested to learn how influential those neighbors are, given their position in the global network, we would use graph algorithms.
 --
 
 === When not to use graphs
@@ -36,13 +36,16 @@ Note when not to use graph and graph algorithms!
 
 [.notes]
 --
-In general, very organized data that follows a regular schema and has relatively few connections between its data elements does not warrant graph specific storage and computation.
+In general, very organized data that follows a regular schema, and has relatively few connections between its data elements does not warrant graph specific storage and computation.
+
+Here are some examples:
 --
 
+[square]
 * Questions with just a few connections or flat (not nested). 
 * Questions solved with specific, well-crafted queries. 
 * Simple statistical results (sums, averages, ratios).
-* Example: Regular reporting based on defined criteria and well-organized data:
+** Example: Regular reporting based on defined criteria and well-organized data:
 
 ifndef::env-slides[]
 [grid=cols,cols="70,30"]
@@ -164,7 +167,7 @@ ifndef::env-slides[]
 |image:graph-complexity.png[Understanding graph complexity]
 |Simple networks can be visually inspected to gain insights.
  Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
- As we can't visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
+ As we cannot visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
 |===
 {set:cellbgcolor!}
 endif::[]
@@ -179,7 +182,7 @@ image::graph-complexity.png[Understanding graph complexity,width=500,align=cente
 --
 Simple networks can be visually inspected to gain insights.
 Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
-As we can't visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
+As we cannot visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
 --
 endif::[]
 
@@ -205,15 +208,15 @@ image::machine-learning.png[Machine learning,width=500,align=center]
 
 ==== Propagation pathways
 
-This is a very practical example of analyzing Propagation paths; trying to understand the routes taken by network failure,
+This is a very practical example of analyzing Propagation paths; trying to understand the routes taken by network failure:
 
 image::propagation-pathways.png[Propagation pathways,width=500,align=center]
 
 This data is from a severe US 2010 Airline congestion failure, with the purple dots showing serious delays and the greens dots doing ok.
 If we had a time sequence, we would see the cascading, rippling failures, and the key connections that spread the delay from east to west. 
 Of course, this is just one example.
-This could very well be an IT network where you’re trying to contain an infection or an electrical grid.
-Or perhaps you want to encourage the spread of something, like information, and you’ll need to understand the best path to promote.
+This could very well be an IT network where you are trying to contain an infection or an electrical grid.
+Or perhaps you want to encourage the spread of something, like information, and you will need to understand the best path to promote.
 
 Paper: https://ifisc.uib-csic.es/~jramasco/text/characterization_delays.pdf[Characterization of Delay Propagation in the US Air-Transportation Network]
 
@@ -236,18 +239,18 @@ Group resilience and influence are a fascinating area of study because we are lo
 image::group-resiliency.png[Group resiliency,width=500,align=center]
 
 This diagram is from a fascinating study of a Belgian telecom network with the nodes in red being calls from French speakers and the nodes in Green being calls from Dutch speakers.
-The first thing you notice is the high call volume within their own language groups, except for that small little group that’s amplified.
+The first thing you notice is the high call volume within their own language groups, except for that small little group that is amplified.
 In that cluster, there was no significant preference to call mostly speakers of the same language. This very group acts as a communication bridge between the other majority French and Dutch speakers.
 And if we wanted to bring these two groups closer together, we might focus on communications within that bridge group.
 
-This kind of analysis is done for all sorts of scenarios such as fraud, perhaps we’re looking for a key middle man, or in biology to understand how to target a disease better.  
+This kind of analysis is done for all sorts of scenarios such as fraud, perhaps we are looking for a key middle man, or in biology to understand how to target a disease better.
 
 Paper: https://arxiv.org/pdf/0803.0476.pdf[Fast unfolding of communities in large networks]
 
 == Types of graphs
 
 Graphs come in various shapes and forms.
-For example, on Twitter, you can follow someone, but they don't necessarily follow you back.
+For example, on Twitter, you can follow someone, but they do not necessarily follow you back.
 On other social media platforms, a friendship link exists only if both parties agree to it.
 Sometimes, the strength of a relationship plays an important factor.
 We might also differentiate between different types of nodes and various kinds of relationships in a network.
@@ -401,7 +404,7 @@ A simple graph permits only a single relationship between a pair of nodes, where
 image::multigraph.png[Multigraph,width=500,align=center]
 
 Those relationships can be of different types, but we can also have many relationships of a single type between a specific pair of nodes.
-The Graph Data Science library features support for multigraphs and as well as transforming multigraphs to single graphs.
+The Graph Data Science Library features support for multigraphs, as well as procedures for transforming multigraphs to single graphs.
 
 == Types of graph algorithms
 
@@ -417,8 +420,8 @@ ifndef::env-slides[]
 |image:community-detection.png[Community Detection]
 |Community detection algorithms are used to find clusters of communities that the nodes form in a network.
  They are also used to examine how tightly-knit some of those communities are.
- This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures.
- This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
+ This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups, and various structures.
+ This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities, or simply prepare data for other analyses.
 |===
 {set:cellbgcolor!}
 endif::[]
@@ -433,8 +436,8 @@ image::community-detection.png[Community Detection,width=300,align=center]
 --
 Community detection algorithms are used to find clusters of communities that the nodes form in a network.
 They are also used to examine how tightly-knit some of those communities are.
-This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups and various structures.
-This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities or simply prepare data for other analyses.
+This category includes popular algorithms – such as Connected Components, Label Propagation and Louvain Modularity – where the connections reveal tight clusters, isolated groups, and various structures.
+This information helps predict similar behavior or preferences, estimate resilience, find duplicate entities, or simply prepare data for other analyses.
 --
 endif::[]
 
@@ -445,8 +448,8 @@ ifndef::env-slides[]
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
 |image:centrality.png[Community Detection]
-|Centrality algorithms are used to find the most influental nodes and their role in a network based on the graph topology.
- These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
+|Centrality algorithms are used to find the most influential nodes and their role in a network based on the graph topology.
+ These algorithms are used to infer group dynamics such as credibility, rippling vulnerability, and bridges between groups.
  The most famous algorithm in this category is PageRank.
 |===
 {set:cellbgcolor!}
@@ -460,8 +463,8 @@ image::centrality.png[Community Detection,width=300,align=center]
 
 [.is-half.right]
 --
-Centrality algorithms are used to find the most influental nodes and their role in a network based on the graph topology. 
-These algorithms are used to infer group dynamics such as credibility, rippling vulnerability and bridges between groups.
+Centrality algorithms are used to find the most influential nodes and their role in a network based on the graph topology.
+These algorithms are used to infer group dynamics such as credibility, rippling vulnerability, and bridges between groups.
 The most famous algorithm in this category is PageRank.
 --
 endif::[]
@@ -503,7 +506,7 @@ ifndef::env-slides[]
 |image:similarity.png[Similarity]
 |Similarity algorithms are used to find similar nodes in a network based on graph topology or their properties.
  This approach is used in applications such as personalized recommendations and developing categorical hierarchies.
- The most common algorithms in this category are Jaccard similarity and Cosine similarity algorithm.
+ The most common algorithms in this category are Jaccard Similarity and Cosine Similarity algorithms.
  They can also be used to infer a monopartite projection of a bipartite graph.
 |===
 {set:cellbgcolor!}
@@ -519,7 +522,7 @@ image::similarity.png[Similarity,width=300,align=center]
 --
 Similarity algorithms are used to find similar nodes in a network based on graph topology or their properties.
 This approach is used in applications such as personalized recommendations and developing categorical hierarchies.
-The most common algorithms in this category are Jaccard similarity and Cosine similarity algorithm.
+The most common algorithms in this category are Jaccard Similarity and Cosine Similarity algorithms.
 They can also be used to infer a monopartite projection of a bipartite graph.
 --
 endif::[]
@@ -533,7 +536,7 @@ ifndef::env-slides[]
 |image:link-prediction.png[Link prediction]
 |Link prediction algorithms help determine the closeness of a pair of nodes.
  They consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships.
- Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
+ Preferential Attachment is included in this class of algorithms that has many applications, from drug re-purposing and estimating collaboration to criminal investigations.
 |===
 {set:cellbgcolor!}
 endif::[]
@@ -548,7 +551,7 @@ image::link-prediction.png[Link prediction,width=300,align=center]
 --
 Link prediction algorithms help determine the closeness of a pair of nodes.
 They consider the proximity of nodes, as well as structural elements, to predict unobserved or future relationships.
-Preferential Attachment is included in this class of algorithms that has many applications, from drug repurposing and estimating collaboration to criminal investigations.
+Preferential Attachment is included in this class of algorithms that has many applications, from drug re-purposing and estimating collaboration to criminal investigations.
 --
 endif::[]
 
@@ -626,5 +629,5 @@ Select the correct answers.
 [.summary]
 == Summary
 
-You have learned a lot about graphs, their structure and how graph algorithms are applied to solve real-world problems.
+You have learned a lot about graphs, their structure, and how graph algorithms are applied to solve real-world problems.
 

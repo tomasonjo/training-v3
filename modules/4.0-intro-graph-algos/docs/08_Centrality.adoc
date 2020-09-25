@@ -28,7 +28,7 @@ Labs implementations:
 
 == PageRank
 
-PageRank is Google’s popular web page ranking algorithm.
+PageRank is Google’s popular Web page ranking algorithm.
 It works by counting the number and quality of links to a node to estimate its significance.
 The underlying assumption is that a node is only as important as the nodes that link to it.
 An example of this type of influence might be having the ear of a general that considers you very credible will likely make you more powerful than being popular with your fellow foot soldiers.
@@ -50,17 +50,19 @@ Personalized PageRank is a variation of PageRank, which is biased towards a set 
 
 Here is why you use PageRank:
 
+[square]
 * Recommendations
 * Fraud Detection 
 * Feature engineering for machine learning
 
 Here are some examples:
 
+[square]
 * Twitter uses Personalized PageRank to present users with recommendations of other accounts that they may wish to follow. The algorithm is run over a graph that contains shared interests and common connections.
 
 * PageRank has been used to rank public spaces or streets, predicting traffic flow and human movement in these areas. The algorithm is run over a graph of road intersections, where the PageRank score reflects the tendency of people to park, or end their journey, on each street.
 
-* PageRank is also used as part of an anomaly and fraud detection system in the healthcare and insurance industries. It helps reveal doctors or providers that are behaving in an unusual manner and then feeds the score into a machine learning algorithm. 
+* PageRank is also used as part of an anomaly and fraud detection system in the healthcare and insurance industries. It helps reveal doctors or providers that are behaving in an unusual manner and then feeds the score into a machine learning algorithm.
 
 * Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing. 
 
@@ -94,7 +96,7 @@ endif::[]
 --
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to become familiar with PageRank in Neo4j Neuler.
+Follow along with this video to become familiar with PageRank in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
@@ -115,14 +117,14 @@ endif::[]
 === Exercise: PageRank
 
 . In NEuler:
-.. Perform the PageRank analysis on different seasons of GOT.
+.. Perform the PageRank analysis on different *seasons* of GOT.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *PageRank*.
 
 
 == Betweenness Centrality
 
 Sometimes the most critical cog in the system is not the one with the most overt power or the highest status.
-Sometimes it’s the middlemen who connect groups or brokers with the most control over resources or information flow.
+Sometimes it is the middlemen who connect groups or brokers with the most control over resources or information flow.
 Betweenness Centrality is a way of detecting the amount of influence a node has over the flow of information in a network.
 It is typically used to find nodes that serve as a bridge from one part of a graph to another.
 
@@ -132,16 +134,17 @@ The Betweenness Centrality algorithm first calculates the shortest path between 
 Each node receives a score based on the number of these shortest paths that pass through the node.
 The more shortest paths that a node lies on, the higher its score.
 
-Betweenness centrality doesn’t scale well on large graphs as the algorithm has to calculate the shortest path between all pairs of nodes in a network.
-Because of this, approximation algorithms of betweenness centrality were developed to allow for a faster calculation.
-The RA-Brandes algorithm is the best-known algorithm for calculating an approximate score for betweenness centrality.
+Betweenness Centrality does not scale well on large graphs as the algorithm has to calculate the shortest path between all pairs of nodes in a network.
+Because of this, approximation algorithms of Betweenness Centrality were developed to allow for a faster calculation.
+The RA-Brandes algorithm is the best-known algorithm for calculating an approximate score for Betweenness Centrality.
 Rather than calculating the shortest path between every pair of nodes, the RA-Brandes algorithm considers only a subset of nodes.
 Brandes defines several strategies for selecting the subset of nodes.
-Our implementation is based on the random degree selection strategy, which selects nodes with a probability proportional to their degree. 
-The idea behind this strategy is that such nodes are likely to lie on many shortest paths in the graph and thus have a higher contribution to the betweenness centrality score.
+The GDSL implementation is based on the random degree selection strategy, which selects nodes with a probability proportional to their degree.
+The idea behind this strategy is that such nodes are likely to lie on many shortest paths in the graph and thus have a higher contribution to the Betweenness Centrality score.
 
 Here is why you use Betweenness Centrality:
 
+[square]
 * Identify bridges.
 
 * Uncover control points.
@@ -150,11 +153,12 @@ Here is why you use Betweenness Centrality:
 
 Here are some examples:
 
+[square]
 * Betweenness Centrality is used to identify influencers in various organizations. Powerful individuals are not necessarily in management positions, but can be found in “brokerage positions” using Betweeness Centrality. Removal of such influencers seriously destabilize the organization. This might be a welcome disruption by law enforcement if the organization is criminal, or may be a disaster if a business loses key staff it never knew about.
 
-* Betweenness Centrality uncovers key transfer points in networks such electrical grids. Counterintuitively, removal of specific bridges can actually improve overall robustness by “islanding” disturbances.
+* Betweenness Centrality uncovers key transfer points in networks such electrical grids. Counter-intuitively, removal of specific bridges can actually improve overall robustness by “islanding” disturbances.
 
-* Betweenness Centrality is also used to help microbloggers spread their reach on Twitter, with a recommendation engine for targeting influencers. 
+* Betweenness Centrality is also used to help micro-bloggers spread their reach on Twitter, with a recommendation engine for targeting influencers.
 
 === Guided Exercise: Getting Started with the Betweenness Centrality algorithm
 
@@ -204,8 +208,8 @@ endif::[]
 === Exercise: Betweenness Centrality
 
 . In NEuler:
-.. View the betweenness centrality scores for other GOT seasons and examine the paths in Neo4j Browser for these nodes.
-.. View the approximate betweenness centrality scores for GOT seasons and see how various sampling sizes affect the results.
+.. View the Betweenness Centrality scores for other GOT *seasons* and examine the paths in Neo4j Browser for these nodes.
+.. View the approximate Betweenness Centrality scores for GOT *seasons* and see how various sampling sizes affect the results.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Betweenness Centrality*.
 
 [.quiz]
