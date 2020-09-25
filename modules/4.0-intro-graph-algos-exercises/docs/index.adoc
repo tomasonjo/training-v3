@@ -64,9 +64,9 @@ These are extra exercises that you can complete if you have more time, in order 
 [cols=2, frame=none]
 |===
 | pass:a[<a play-topic='{guides}/LoadData.html'>Load the Data for the Exercises</a>] | pass:a[<a play-topic='{guides}/GraphCatalog.html'>Graph Catalog</a>]
-| pass:a[<a play-topic='{guides}/WeaklyConnectedComponents.html'>Weakly Connected Components</a>] |  pass:a[<a play-topic='{guides}/LabelPropagation.html'>Label Propagation</a>] 
-| pass:a[<a play-topic='{guides}/LouvainModularity.html'>Louvain Modularity</a>] | pass:a[<a play-topic='{guides}/TriangleCount.html'>Triangle Count</a>]
-| pass:a[<a play-topic='{guides}/LocalClusteringCoefficient.html'>Local Clustering Coefficient</a>]  | pass:a[<a play-topic='{guides}/PageRank.html'>PageRank</a>]
-| pass:a[<a play-topic='{guides}/BetweennessCentrality.html'>Betweenness Centrality</a>] | pass:a[<a play-topic='{guides}/NodeSimilarity.html'>Node Similarity</a>]
-| pass:a[<a play-topic='{guides}/IngredientAnalysis.html'>Ingredient Analysis</a>] | pass:a[<a play-topic='{guides}/MemoryRequirements.html'>Memory Requirements</a>]
+| pass:a[<a play-topic='{guides}/MemoryRequirements.html'>Memory Requirements</a>] | pass:a[<a play-topic='{guides}/WeaklyConnectedComponents.html'>Weakly Connected Components</a>] 
+| pass:a[<a play-topic='{guides}/LabelPropagation.html'>Label Propagation</a>] | pass:a[<a play-topic='{guides}/LouvainModularity.html'>Louvain Modularity</a>]
+| pass:a[<a play-topic='{guides}/TriangleCount.html'>Triangle Count</a>] | pass:a[<a play-topic='{guides}/LocalClusteringCoefficient.html'>Local Clustering Coefficient</a>]
+| pass:a[<a play-topic='{guides}/PageRank.html'>PageRank</a>] | pass:a[<a play-topic='{guides}/BetweennessCentrality.html'>Betweenness Centrality</a>]
+| pass:a[<a play-topic='{guides}/NodeSimilarity.html'>Node Similarity</a>] | pass:a[<a play-topic='{guides}/PracticalApplication.html'>Practical application</a>] 
 |===

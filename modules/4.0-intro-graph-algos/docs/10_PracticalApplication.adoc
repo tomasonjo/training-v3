@@ -1,18 +1,18 @@
-= Analysis of commonly used together ingredients
-:slug: 09-iga-40-ingredient-analysis
+= Practical application of algorithms
+:slug: 10-iga-40-ingredient-analysis
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Memory Requirements Estimation
+:module-next-title: Additional Information
 
 
-== Ingredient Analysis Overview
+== Practical application of algorithms Overview
 
 Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes Dataset.
 The goal is to find communities of commonly used together ingredients and the representatives of those communities.
 
-== Ingredient Analysis Workflow
+== Practical application of algorithms Workflow
 
 The analysis consists of three steps.
 First, you will infer a similarity network between ingredients with the help of the Node Similarity algorithm.
@@ -27,9 +27,9 @@ Finally, you will use the PageRank algorithm to find the representatives of thos
 When using the PageRank algorithm, think of every relationship as a vote of confidence or influence. In our analysis, every relationship is a vote of commonly used together ingredients, and so the most frequently used together ingredients will rank the highest. You could think of them as the representatives of those communities.
 
 [.student-exercise]
-== Exercise: Analysis of commonly used together ingredients
+== Exercise: Practical application of algorithms
 
-In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Ingredient analysis*.
+In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Practical application*.
 
 [.quiz]
 == Check your understanding

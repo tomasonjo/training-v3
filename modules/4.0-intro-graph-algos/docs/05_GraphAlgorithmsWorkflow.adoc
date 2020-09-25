@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Community Detection Algorithms
+:module-next-title: Memory Requirements Estimation
 
 == How do graph algorithms work?
 

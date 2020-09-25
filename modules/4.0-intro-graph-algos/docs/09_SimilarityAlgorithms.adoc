@@ -1,10 +1,10 @@
 = Similarity Algorithms
-:slug: 08-iga-40-similarity-algorithms
+:slug: 09-iga-40-similarity-algorithms
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Analysis of commonly used together ingredients
+:module-next-title: Practical application of algorithms
 
 == Similarity algorithms
 
