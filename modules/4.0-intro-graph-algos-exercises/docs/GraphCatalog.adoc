@@ -195,5 +195,5 @@ You have also seen an example of how to filter relationship types at algorithm e
 The Graph Catalog enables you to reuse the same projected graph in the analytical workflow.
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/WeaklyConnectedComponents.html'>Continue to Exercise: Weakly Connected Components</a>]
+pass:a[<a play-topic='{guides}/MemoryRequirements.html'>Continue to Exercise: Memory Requirements</a>]
 endif::[]

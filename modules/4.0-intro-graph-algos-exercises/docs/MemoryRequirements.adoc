@@ -163,3 +163,6 @@ Calculate memory requirements for different combinations of graphs and algorithm
 
 In this exercise, you gained some experience estimating the memory requirements for loading graphs into memory and executing some production-tier algorithms.
 
+ifdef::env-guide[]
+pass:a[<a play-topic='{guides}/WeaklyConnectedComponents.html'>Continue to Exercise: Weakly Connected Components</a>]
+endif::[]

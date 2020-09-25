@@ -376,6 +376,3 @@ image::EXIA.8.png[EXIA.8,width=300]
 
 In the exercise you used a number of graph algorithms to analyze data.
 
-ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/MemoryRequirements.html'>Continue to Exercise: Memory Requirements</a>]
-endif::[]

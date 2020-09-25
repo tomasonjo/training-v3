@@ -37,7 +37,7 @@ The Node Similarity algorithm compares all nodes from the first node set based o
 The output of the algorithm is a unipartite network between nodes in the first node set.
 We can think of this process as translating indirect relationships to direct ones.
 
-image::jaccard-similarity-unipartite.png[Betweenness centrality,width=500, align=center]
+//image::jaccard-similarity-unipartite.png[Betweenness centrality,width=500, align=center]
 
 Mathematically, Jaccard Similarity Score is defined as the size of the intersection divided by the size of the union of two sets.
 
@@ -46,6 +46,8 @@ image::jaccard-similarity.png[Betweenness centrality,width=500, align=center]
 For example, if set A contains {Orange, Banana, Cherry, Pineapple}  and set B contains {Orange, Banana, Apple} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in A and B (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Pineapple}.
 The resulting Jaccard similarity coefficient is 2/5 which is 0.4. 
 A coefficient of 1 indicates that the compared sets are identical.
+
+image::fruit.png[NodeSimilarity,width=500, align=center]
 
 Here is why you use Node Similarity:
 

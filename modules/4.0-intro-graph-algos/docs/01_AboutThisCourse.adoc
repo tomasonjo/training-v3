@@ -25,11 +25,11 @@ In this course you will learn how to use Neo4j's Graph Data Science library to e
 
 Estimated time: _30 minutes_
 
-=== Introduction to the Graph Data Science library
+=== Introduction to the Graph Data Science Library
 
 [square]
 * Neo4j support for graph analytics and visualization.
-* The Neo4j Graph Data Science library.
+* The Neo4j Graph Data Science Library.
 
 Estimated time: _15 minutes_
 

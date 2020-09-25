@@ -556,7 +556,7 @@ endif::[]
 
 ifndef::env-slides[]
 {set:cellbgcolor:white}
-[frame="none",grid=none,cols="50,50",stripes=none]
+[frame="none",grid=none,cols="30,70",stripes=none]
 |===
 |image:node-embedding.png[Node embedding]
 |Node embedding algorithms compute low-dimensional vector representations of nodes in a graph.

@@ -275,5 +275,5 @@ Similarity algorithms are useful for analyzing datasets to determine how alike n
 In this exercise, you gained experience with Node Similarity algorithm on the Recipes dataset.
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/IngredientAnalysis.html'>Continue to Exercise: Ingredient Analysis</a>]
+pass:a[<a play-topic='{guides}/PracticalApplication.html'>Continue to Exercise: Practical application</a>]
 endif::[]
