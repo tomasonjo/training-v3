@@ -22,7 +22,7 @@ CALL gds.graph.list()
 YIELD graphName, nodeCount, relationshipCount
 ----
 
-image::LoadedGraphs.png[LoadedGraphs]
+image::LoadedGraphsMemoryRequirements.png[LoadedGraphsMemoryRequirements]
 
 {nbsp} +
 

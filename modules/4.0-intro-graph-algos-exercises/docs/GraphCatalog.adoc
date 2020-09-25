@@ -13,7 +13,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the setup
 
 == Graph Catalog (Overview)
 
-The graph catalog is a concept within the GDS library that allows managing multiple graph projections by name.
+The graph catalog is a concept within the GDSL that allows managing multiple graph projections by name.
 Using its name, a created graph can be used many times in the analytical workflow.
 
 In this exercise, you will gain some experience with writing Cypher to create a graph in the Graph Catalog.
@@ -29,7 +29,7 @@ Go to the next page to start this exercise.
 
 == Part 1: Project multiple relationship orientations in a single named graph. (Instructions/Solution)
 
-In the guided exercise, you have executed the Degree centrality separately for the *NATURAL* and *REVERSE* orientation of *HELPS* relationship type.
+In the Guided Exercise, you have executed the Degree centrality separately for the *NATURAL* and *REVERSE* orientation of *HELPS* relationship type.
 Here, you will project both the *NATURAL* and *REVERSE* orientation of the *HELPS* relationship type in a single named graph.
 
 * The created graph should be named *Person*.
@@ -56,7 +56,7 @@ CALL gds.graph.create('PersonGraph', 'Person',
 == Part 2: Execute the Degree Centrality algorithm on a named graph (Instructions/Solution)
 
 You will execute the Degree Centrality algorithm on the *Person* named graph without any additional configuration options.
-As you don't specify which relationship types should the algorithm consider, it will use all available relationship types as an input. 
+As you do not specify which relationship types should the algorithm consider, it will use all available relationship types as an input.
 
 *Hint*: You will call `gds.alpha.degree.stream`.
 
@@ -75,7 +75,7 @@ image::UndirectedDegree.png[NativeProjection,width=500]
 
 == Part 3: Execute the Degree Centrality algorithm on a named graph and filter relationship types (Instructions/Solution)
 
-The advantage of using a named graph with multiple relationship types is that we can filter which relationships should the algorithm consider at the execution time with the *relationshipTypes* parameter.
+The advantage of using a named graph with multiple relationship types is that you can filter which relationships should the algorithm consider at the execution time with the *relationshipTypes* parameter.
 You will execute the Degree Centrality algorithm on the *Person* named graph and consider only *HELPS_NATURAL* relationships.
 
 *Hint*: You will call `gds.alpha.degree.stream` and include the `relationshipTypes` parameter.
@@ -95,13 +95,13 @@ image::DirectedDegree.png[NativeProjection,width=500]
 
 == Part 4: Drop a projected graph from Graph Catalog (Instructions)
 
-After we have completed our analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
+After you have completed your analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
 
 *Hint*: You will call `gds.graph.drop`.
 
 == Part 4: Drop a projected graph from Graph Catalog (Solution)
 
-After we have completed our analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
+After you have completed your analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
 
 *Hint*: You will call `gds.graph.drop`.
 
