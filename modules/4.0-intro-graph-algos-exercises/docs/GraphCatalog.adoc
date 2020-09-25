@@ -18,12 +18,99 @@ Using its name, a created graph can be used many times in the analytical workflo
 
 In this exercise, you will gain some experience with writing Cypher to create a graph in the Graph Catalog.
 
-* *Part 1*: Project a graph to Graph Catalog with native projection.
-* *Part 2*: Project a subgraph to Graph Catalog with cypher projection.
+* *Part 1*: Project multiple relationship orientations in a single named graph
+* *Part 2*: Execute the Degree Centrality algorithm on a named graph
+* *Part 3*: Execute the Degree Centrality algorithm on a named graph and filter relationship types
+* *Part 4*: Drop a projected graph from Graph Catalog
+* *Part 5*: Project European Roads graph to Graph Catalog with native projection.
+* *Part 6*: Project a subgraph of European Roads dataset to Graph Catalog with cypher projection.
 
 Go to the next page to start this exercise.
 
-== Part 1: Project a graph to Graph Catalog with native projection. (Instructions)
+== Part 1: Project multiple relationship orientations in a single named graph. (Instructions/Solution)
+
+In the guided exercise, you have executed the Degree centrality separately for the *NATURAL* and *REVERSE* orientation of *HELPS* relationship type.
+Here, you will project both the *NATURAL* and *REVERSE* orientation of the *HELPS* relationship type in a single named graph.
+
+* The created graph should be named *Person*.
+* Project all nodes labeled *Person*.
+* Project all relationships with a type *HELPS* and include both the *NATURAL* and *REVERSE* orientations.
+
+*Hint*: You will call `gds.graph.create`.
+
+[source, cypher]
+----
+CALL gds.graph.create('PersonGraph', 'Person',
+  {
+    HELPS_REVERSE: {
+      type: 'HELPS',
+      orientation: 'REVERSE'
+   },
+   HELPS_NATURAL: {
+     type:'HELPS',
+     orientation:'NATURAL'
+   }
+  })
+----
+
+== Part 2: Execute the Degree Centrality algorithm on a named graph (Instructions/Solution)
+
+You will execute the Degree Centrality algorithm on the *Person* named graph without any additional configuration options.
+As you don't specify which relationship types should the algorithm consider, it will use all available relationship types as an input. 
+
+*Hint*: You will call `gds.alpha.degree.stream`.
+
+[source, cypher]
+----
+CALL gds.alpha.degree.stream('PersonGraph')
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name as name, score
+----
+
+Note that if we include both the *NATURAL* and *REVERSE* orientation of a relationship type, we will get identical results if we projected it *UNDIRECTED*.
+
+This is what you should see in the result pane:
+
+image::UndirectedDegree.png[NativeProjection,width=500]
+
+== Part 3: Execute the Degree Centrality algorithm on a named graph and filter relationship types (Instructions/Solution)
+
+The advantage of using a named graph with multiple relationship types is that we can filter which relationships should the algorithm consider at the execution time with the *relationshipTypes* parameter.
+You will execute the Degree Centrality algorithm on the *Person* named graph and consider only *HELPS_NATURAL* relationships.
+
+*Hint*: You will call `gds.alpha.degree.stream` and include the `relationshipTypes` parameter.
+
+[source, cypher]
+----
+CALL gds.alpha.degree.stream('PersonGraph', 
+  {relationshipTypes:['HELPS_NATURAL']})
+YIELD nodeId, score
+RETURN gds.util.asNode(nodeId).name as name, score
+----
+
+This is what you should see in the result pane:
+
+image::DirectedDegree.png[NativeProjection,width=500]
+
+
+== Part 4: Drop a projected graph from Graph Catalog (Instructions)
+
+After we have completed our analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
+
+*Hint*: You will call `gds.graph.drop`.
+
+== Part 4: Drop a projected graph from Graph Catalog (Solution)
+
+After we have completed our analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
+
+*Hint*: You will call `gds.graph.drop`.
+
+[source, cypher]
+----
+CALL gds.graph.drop('PersonGraph')
+----
+
+== Part 5: Project European Roads graph to Graph Catalog with native projection. (Instructions)
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
@@ -36,7 +123,7 @@ Write Cypher code to project the European Roads graph to Graph Catalog using the
 
 *Hint*: You will call `gds.graph.create`.
 
-== Part 1: Project a graph to Graph Catalog with native projection. (Solution)
+== Part 6: Project European Roads graph to Graph Catalog with native projection. (Solution)
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
@@ -69,7 +156,7 @@ This is what you should see in the result pane:
 
 image::NativeProjection.png[NativeProjection,width=500]
 
-== Part 2: Project a subgraph to Graph Catalog with cypher projection. (Instructions/Solution)
+== Part 5: Project a subgraph of European Roads dataset to Graph Catalog with cypher projection. (Instructions/Solution)
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
@@ -103,8 +190,9 @@ image::Subgraph.png[Subgraph,width=500]
 
 == Graph Catalog (Summary)
 
-In this exercise, you gained some experience with writing Cypher code to store the projected graph in Graph Catalog using the European Roads dataset.
-This procedure enables you to reuse the same projected graph in the analytical workflow.
+In this exercise, you gained some experience with writing Cypher code to store the projected graph in Graph Catalog.
+You have also seen an example of how to filter relationship types at algorithm execution time.
+The Graph Catalog enables you to reuse the same projected graph in the analytical workflow.
 
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/WeaklyConnectedComponents.html'>Continue to Exercise: Weakly Connected Components</a>]
