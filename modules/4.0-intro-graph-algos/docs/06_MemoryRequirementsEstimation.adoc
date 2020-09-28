@@ -30,7 +30,6 @@ The amount of free heap memory can be increased by either dropping unused named 
 
 In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Memory requirements*.
 
-
 [.quiz]
 == Check your understanding
 
@@ -51,7 +50,7 @@ Select the correct answers.
 === Question 2
 
 [.statement]
-When calling estimate() to provide the heap memory estimation for running the algorithm, what information, must you provide?
+When calling estimate() to provide the heap memory estimation for running the algorithm, what information must you provide?
 
 [.statement]
 Select the correct answers.
@@ -71,9 +70,9 @@ What factors impact the amount of memory available for an algorithm?
 Select the correct answers.
 
 [%interactive.answers]
-- [x] the size of the graph
+- [x] the size of the projected graph
 - [x] the amount of heap available to the instance
-- [x] the size of any named graphs
+- [ ] the number of previously executed algorithms
 - [x] the particular algorithm that will run
 
 [.summary]

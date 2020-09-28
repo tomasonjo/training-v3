@@ -20,7 +20,7 @@ Go to the next page to load the data.
 
 In Graph Data Science Playground:
 
-. Click the database icon in the left panel.
+. Click the yellow database icon in the lower part of the left panel.
 . Click *Select* , followed by *Yes, load it!* to load these datasets:
 .. Game of Thrones
 .. European Roads
@@ -31,6 +31,7 @@ Do [underscore]#not# load the Twitter dataset as it conflicts with the other dat
 
 == Step 2: Load some other data from Neo4j Browser
 
+We will load some additional small graphs to demonstrate graph algorithms.
 In Neo4j Browser, execute this code:
 
 [source, cypher]
@@ -97,6 +98,12 @@ MERGE (box)-[:HAS_TAG]->(js)
 ----
 
 == Step 3: Calculate inverse value of distance
+
+The European Roads network is a weighted graph, where the distance between places in kilometers is stored as a relationship weight.
+In this course, we will examine the community structure and centrality of the European Roads network.
+Community Detection and Centrality algorithms deduce that a higher relationship weight represents a stronger relationship.
+In our case, the greater the relationship weight is, the weaker the relationship strength is as the cities are farther away.
+For this reason, we will calculate the inverse value of the distance, which will be used as an input relationship weight in Community Detection and Centrality algorithms.
 
 In Neo4j Browser, execute this code:
 

@@ -25,7 +25,7 @@ These algorithms are supported:
 
 * Local Clustering Coefficient
 
-These algorithms are are in alpha (labs):
+Labs implementations:
 
 [square]
 * Strongly Connected Components

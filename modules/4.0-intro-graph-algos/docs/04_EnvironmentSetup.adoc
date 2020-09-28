@@ -102,23 +102,26 @@ image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500,
 
 image::got.png[Game of Thrones,width=500, align=center]
 
-The INTERACTS_SEASONx relationship has a property, weight to indicate the number of interactions.
-
-The Character node has two properties, name and id where id is the capitalized value of name.
+The Game of Thrones network is a monopartite graph containing *Character* nodes and their interactions in the TV shows.
+Interactions between characters are grouped by TV shows seasons.
+For example, a relationship *INTERACTS_SEASON1* represents an interaction between characters in the first season, *INTERACTS_SEASON2* means interaction in the second season, and so on.
+The relationship weight represents the strength of the interaction, and because two characters can interact in more than a single season, we are dealing with a weighted multigraph.
 
 === European Roads
 
 image::european-roads.png[European Roads,width=500, align=center]
 
-
-The Place node has multiple properties, name and countryCode.
-
-The EROAD relationship has four properties, distance, inverse_distance, road_number, and watercrossing.
+The European Roads network is also a monopartite graph containing *Place* nodes and their road connections indicated by the *EROAD* relationship.
+The *Place* node has multiple properties, name and countryCode.
+The *EROAD* relationship has four properties, distance, inverse_distance, road_number, and watercrossing.
+We will assume that we can traverse each *EROAD* relationship in both directions, effectively treating the European Roads network as an undirected graph.
 
 === Recipes
 
 image::recipe.png[recipe,width=500, align=center]
 
+The Recipes network is a bipartite graph containing *Recipe* and *Ingredient* nodes.
+A *CONTAINS_INGREDIENT* relationships indicates that an ingredient was used in the particular recipe.
 This is a very simple data model where each node has only a name and there are no properties in the relationships.
 
 == Step 4: Start the database and Graph Data Science Playground
@@ -137,7 +140,7 @@ image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500,
 Open Neo4j Browser for the started database.
 In the query edit pane of Neo4j Browser, execute the browser command:
 
-kbd:[:4.0-intro-graph-algos-exercises]
+kbd:[:play 4.0-intro-graph-algos-exercises]
 
 and follow the instructions for *Load the Data for the Exercises*.
 
@@ -151,16 +154,16 @@ Estimated time to complete: 10 minutes.
 === Question 1
 
 [.statement]
-How many databases do you use for your analysis using the Graph Data Science library?
+What labels could we use to describe the Recipes network?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [x] One
-- [ ] Two, one for the data and another for the metrics created.
-- [ ] Two, one for the data and another for the library graph projections.
-- [ ] Three, one for the data, one for the metrics, and another for the updated data.
+- [x] Bipartite
+- [x] Unweighted
+- [ ] Monopartite
+- [ ] Weighted
 
 === Question 2
 
@@ -172,7 +175,7 @@ Select the correct answers.
 
 [%interactive.answers]
 - [x] GDSL
-- [ ] Graph Algorithms
+- [ ] Graph Explorer
 - [ ] NEuler
 - [x] APOC
 

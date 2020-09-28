@@ -17,7 +17,7 @@ Every city has a transportation network that includes public transport and infra
 Graph analytics, also known as network analysis, focuses on the study of relationships in real-world networks.
 Due to the sheer volume of data, the insights are sometimes hard to spot with the naked eye.
 Graph algorithms are so exciting because they are the methods we use to understand real-world networks.
-They help us uncover the essence of the complex systems by analyzing their connections.
+They help us uncover the essence of complex systems by analyzing their connections.
 
 We can observe and retrieve local graph patterns with query languages such as Cypher.
 The term graph algorithms usually refer to more global and iterative analysis, where, for example, we want to learn the overall community structure of a graph.
@@ -166,7 +166,7 @@ ifndef::env-slides[]
 |===
 |image:graph-complexity.png[Understanding graph complexity]
 |Simple networks can be visually inspected to gain insights.
- Due to the enormous amount of data generated today, real-world networks can contain millions or even billions of nodes and relationships.
+ Due to the enormous amount of data generated today, real-world networks can contain billions of nodes and relationships.
  As we cannot visually inspect networks of those sizes, we turn to graph algorithms to help us make sense of the data.
 |===
 {set:cellbgcolor!}
@@ -386,7 +386,7 @@ This is an example of a bipartite graph, where we have *Person* and *Company* la
 image::multipartite-graph.png[Multipartite graph,width=500,align=center]
 
 Centrality measures and community detection algorithms are primarily designed to run on monopartite graphs.
-Usually, it is a mistake to run the centrality algorithms on a bipartite graph.
+Usually, it is a mistake to run centrality algorithms on a bipartite graph.
 To solve this obstacle, we can easily infer a monopartite graph from a bipartite graph.
 
 ==== Monopartite projection
@@ -394,8 +394,8 @@ To solve this obstacle, we can easily infer a monopartite graph from a bipartite
 image::monopartite-projection.png[Monopartite projection,width=500,align=center]
 
 This is an example of a monopartite projection, where we infer that two persons are coworkers if they are working in the same organization.
-Now we could try to understand the community structure of the coworkers network.
 A monopartite projection can be understood as a process of translating indirect relationships to direct relationships.
+In real-world graph analysis, we are often dealing with multipartite networks, and so, the monopartite projection is a common step of the graph analytics workflow.
 
 === Multigraph versus simple graph
 
@@ -408,8 +408,13 @@ The Graph Data Science Library features support for multigraphs, as well as proc
 
 == Types of graph algorithms
 
+Various graph problems require different graph algorithms to solve them.
+Here are some of the graph algorithm categories studied today:
+
 image::types-of-algorithms.png[Types of algorithms,width=800,align=center]
 
+
+We will take a closer look at the categories of graph algorithms available in the GDSL.
 
 === Community detection (Clustering) algorithms
 
@@ -601,16 +606,16 @@ Select the correct answers.
 === Question 2
 
 [.statement]
-The relationships between nodes can be used in many ways to analyze graphs. What features of these relationships can you use during analysis?
+The graph consists of nodes with multiple labels and stores the strength of relationships as their property. How do we label this graph?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] Direction of the relationship.
-- [x] Type of the relationship.
-- [ ] Access rights for the relationship.
-- [x] Weight of the relationship.
+- [x] Multipartite, weighted graph.
+- [ ] Monopartite,  unweighted graph.
+- [ ] Simple graph.
+- [ ] Multipartite, unweighted graph.
 
 === Question 3
 
