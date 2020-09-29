@@ -44,10 +44,14 @@ In this exercise, you will perform the following with the European Roads dataset
 * *Part 4*: Inspect the hierarchical results of the algorithm.
 * *Part 5*: View the communities on different hierarchical levels.
 * *Part 6*: Examine the communities at each level for a single place.
+* *Part 7*: Inspect hierarchical structure of a single community on the final level.
 
 Go to the next page to start this exercise.
 
 == Part 1: Run the Louvain Modularity algorithm to add a community property to each node. (Instructions)
+
+You will start by executing the weighted Louvain Modularity algorithm and storing the results back to Neo4j.
+Similarly to LPA, Louvain Modularity algorithm also deems that a higher relationship weight value represents a stronger connection, so you will use the *inverse_distance* relationship property.
 
 Write Cypher code to perform the weighted Louvain Modularity algorithm on the European road network using these guidelines:
 
@@ -65,7 +69,7 @@ Write Cypher code to perform the weighted Louvain Modularity algorithm on the Eu
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * The algorithm will write a property named *community_louvain* to each node with the computed value.
 * The relationship weight property name is *inverse_distance*.
-* `YIELD` the following results: modularity, ranLevels, communityCount.
+* `YIELD` the following results: modularity, ranLevels, communityCount, communityDistribution.
 
 *Hint*: You will call `gds.louvain.write`.
 
@@ -76,7 +80,7 @@ Here is the solution code:
 CALL gds.louvain.write('roads',{
     writeProperty:'community_louvain', 
     relationshipWeightProperty: 'inverse_distance'})
-YIELD modularity, ranLevels, communityCount
+YIELD modularity, ranLevels, communityCount, communityDistribution
 ----
 
 The results returned should look like this:
@@ -86,9 +90,17 @@ image::EXLM.1.png[EX5.1,width=400]
 
 {nbsp} +
 
-Algorithm found three hierarchical levels of communities with a total of 24 communities on the last level.
+The algorithm found three hierarchical levels of communities with a total of 24 groups on the last level.
+The weighted variant of the Louvain Modularity algorithm found fewer communities than both the weighted and unweighted variants of LPA.
+The size of communities seems evenly distributed between 2 and 75, with an average value of 37.25.
+Remember, those communities with a size of 2 are probably the disconnected components we discovered with the Weakly Connected Components algorithm.
+Note how the Louvain Modularity community size distribution is more evenly distributed than the unweighted LPA results. 
+In the unweighted LPA results, the largest community contains 219 members, and the second-largest group has only 63 members.
+However, this is not a golden rule that will always hold, so it is recommended to try out both the LPA and Louvain Modularity algorithm to see what works best for your use case.
 
 == Part 2: Inspect the results of the algorithm. (Instructions)
+
+Next, you will retrieve the members of the largest 10 communities uncovered by the Louvain Modularity algorithm.
 
 Write a query to return all *community_louvain* values in the graph containing *Place* nodes.
 For each distinct communities value, return the list of places and the community size.
@@ -128,13 +140,18 @@ It contains places from Belgium, Netherlands, France, and Germany.
 
 == Part 3: Run the Louvain Modularity algorithm to discover a hierarchy of communities within the graph. (Instructions)
 
+When you ran the Louvain Modularity algorithm, it reported that it found three hierarchical levels of communities.
+By default, the intermediate communities are not stored or returned in the results.
+With the `includeIntermediateCommunities` parameter, you can specify that the results should include the intermediate communities.
+To investigate the communities at each hierarchical level, you will first write back the intermediate communities results to Neo4j.
+
 Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify that intermediate communities are to be analyzed.
 * The algorithm will write a property named *communities_louvain* to each node with the computed value for intermediate communities.
 * The relationship weight property name is *inverse_distance*.
-* `YIELD` the following results: modularity, ranLevels, communityCount.
+* `YIELD` the following results: modularity, ranLevels, communityCount, communityDistribution.
 
 *Hint*: You will call `gds.louvain.write`.
 
@@ -146,7 +163,7 @@ Write Cypher code to perform the Louvain Modularity algorithm on the European ro
 * Specify that intermediate communities are to be analyzed.
 * The algorithm will write a property named *communities_louvain* to each node with the computed value for intermediate communities.
 * The relationship weight property name is *inverse_distance*.
-* `YIELD` the following results: modularity, ranLevels, communityCount.
+* `YIELD` the following results: modularity, ranLevels, communityCount, communityDistribution.
 
 *Hint*: You will call `gds.louvain.write`.
 
@@ -166,7 +183,12 @@ The results returned should look like this:
 [.thumb]
 image::EXLM.1.png[EXLM.1,width=400]
 
+The community distribution statistics in the results are identical to the one we got in Part 1, as the community distribution is only calculated for the last hierarchical level.
+
 == Part 4: Inspect the hierarchical results of the algorithm. (Instructions)
+
+You will now inspect the intermediate communities and their structure.
+You will begin by inspecting the *Place* nodes with a shared community throughout all the levels.
 
 Write a query to return all *communities_louvain* values in the graph containing *Place* nodes.
 For each distinct communities value, return the list of places and the community size.
@@ -196,11 +218,14 @@ image::EXLM.4.png[EX5.4,width=400]
 {nbsp} +
 
 Antwerpen, Gent, Bruxelles, and six other places share the same community through all the hierarchical levels.
+On the first level, they have been assigned to the community with an id 145, but later switched to community 192 on level two and final third level.
+As we group the results by all the hierarchical levels, the communities will only include members that share the same community on all three levels.
+For example, Paris and Dijon share the community 198 on the third level, but they are not grouped together in the results because they do not share the same communities on the first and second levels.
 
 == Part 5: View the communities on different hierarchical levels. (Instructions/Solution)
 
 You can then query the graph to find which communities form at each hierarchical level.
-Let’s start with the final level (and most coarse-grained communities).
+You will inspect the communities of the final level to verify they are identical to the Part 2 results.
 
 Execute this code:
 
@@ -222,11 +247,10 @@ image::EXLM.2.png[EXLM.2,width=400]
 {nbsp} +
 
 The results are identical to before when we ran the Louvain Modularity algorithm in Part 2.
-The algorithm returns the last hierarchical level by default if we use the following parameter: `includeIntermediateCommunities:false`.
 
 {nbsp} +
 
-If you want to find one of the intermediate communities, you can execute this code:
+If you want to inspect the community structure of the first hierarchical level, you can execute this code:
 
 [source, cypher]
 ----
@@ -243,7 +267,9 @@ image::EXLM.5.png[EXLM.5,width=400]
 
 {nbsp} +
 
-Communities on the first hierarchical level are the most fine-grained (smallest).
+Communities on the first hierarchical level are the most fine-grained (smallest) by definition.
+The largest community on the first level contains only 9 members.
+Try to inspect the community structure of the second level, you only need to change the array index.
 
 == Part 6: Examine the communities at each level for a single place. (Instructions/Solution)
 
@@ -269,10 +295,35 @@ image::EXLM.6.png[EXLM.6,width=400]
 
 {nbsp} +
 
-The first level community is relatively small and contains only London, Colchester, and Harwich.
-On the next level, it already constains 22 members, and grows to 50 members on the third and final level.
+The first level, the community is relatively small and contains only London, Colchester, and Harwich.
+On the next level, it already contains 22 members and grows to 50 members on the third and final level.
 
-Try looking up the communities for another place. e.g. Berlin, Paris, Amsterdam.
+Try looking up the hierarchical community's progression for another place, e.g. Berlin, Paris, Amsterdam.
+
+== Part 7: Inspect hierarchical structure of a single community on the final level (Instructions/Solution)
+
+To better understand why the Louvain Modularity algorithm is called a hierarchical community detection algorithm, you will examine a single community's hierarchical structure.
+You will inspect which communities of the first and second levels are merged into a single community on the final level.
+
+You can examine the hiearchical structure of a single community by running the following query:
+
+[source, cypher]
+----
+MATCH (p:Place)
+WHERE p.communities_louvain[-1] = 154
+RETURN collect(distinct p.communities_louvain[0]) as first_level_communities,
+       collect(distinct p.communities_louvain[1]) as second_level_communities,
+       collect(distinct p.communities_louvain[-1]) as third_level_communities
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXLM.7.png[EXLM.6,width=400]
+
+You can observe that a single community of the final level consists of three communities found on the second level.
+Those three communities are broken down into 15 different communities on the first level.
+This is how the concept of community hierarchy in Louvain Modularity algorithm is derived.
 
 == Louvain Modularity: Taking it further
 

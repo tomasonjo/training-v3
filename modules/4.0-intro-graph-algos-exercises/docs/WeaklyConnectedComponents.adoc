@@ -38,7 +38,8 @@ In this exercise, you will gain some experience with writing Cypher code to exec
 * *Part 1*: View the European Roads dataset schema.
 * *Part 2*: Find all connected places, writing weakly connected components information to the graph.
 * *Part 3*: Inspect results of the weakly connected nodes.
-* *Part 4*: Inspect smaller disconnected components.
+* *Part 4*: Verify connected components results.
+* *Part 5*: Inspect smaller disconnected components.
 
 Go to the next page to start this exercise.
 
@@ -108,8 +109,11 @@ image::EXWCC.2.png[EXWCC.2,width=400]
 
 The algorithm found six components in the graph.
 The largest one has 882 members, while the smallest has only two members.
+The results are a bit surprising as you would expect that all the places in European Roads network would be connected.
 
 == Part 3: Inspect results of the weakly connected nodes. (Instructions)
+
+You will inspect the connected components within the European Roads graph to gain more insight into which places are disconnected from the network.
 
 Write a query to return all *wcc_component* values of the *Place* nodes.
 For each component id, return the size of the component, and the list of *Place* names.
@@ -146,10 +150,45 @@ image::EXWCC.3.png[EXWCC.3,width=400]
 
 The component ids can have different values due to random assignment of ids.
 Notice that most of the nodes are in the same component.
+For example, it seems that Memmingen and Füssen are disconnected from the rest of the European Roads network.
 
-== Part 4: Inspect smaller disconnected components. (Instructions)
+== Part 4: Verify connected components results. (Instructions)
 
-Write to query to return all components with 10 or less members.
+Now you will verify the results of the connected components algorithm by retrieving all the neighbours of *Memmingen* and *Füssen* places.
+Write a Cypher query to retrieve all the neighbours of *Memmingen* and *Füssen* places.
+
+
+== Part 4: Verify connected components results. (Solution)
+
+Now you will verify the results of the connected components algorithm by retrieving all the neighbours of *Memmingen* and *Füssen* places.
+Write a Cypher query to retrieve all the neighbors of *Memmingen* and *Füssen* places.
+
+Here is the solution code:
+
+[source, cypher]
+----
+MATCH path=(p:Place)-[:EROAD]-()
+WHERE p.name in ["Memmingen", "Füssen"]
+RETURN path
+----
+
+The results returned should look like this:
+
+[.thumb]
+image::EXWCC.4.png[EXWCC.4,width=400]
+
+{nbsp} +
+
+The results show the Memmingen and Füssen places are indeed disconnected from the European Road network.
+Connected components algorithm can help us identify anomalies within our network.
+Having disconnected components in a road network is not expected, so you might take action and inspect the data collection process to confirm if some places are actually disconnected, or you might lack some data about road connections.
+
+== Part 5: Inspect smaller disconnected components. (Instructions)
+
+Suppose that the data collection is separate for each country.
+You want to retrieve the place and the country code for each *Place* in the smaller connected components so that you can talk to an appropriate person who handles the data collection for the country where you found some anomalies.
+
+Write to query to return all connected components with 10 or less members.
 For each component id, return the size of the component, the list of *Place* names, and also their country code.
 
 Update this query to:
@@ -171,9 +210,9 @@ RETURN component_id, componentSize, places, countryCodes
 
 ----
 
-== Part 4: Inspect smaller disconnected components. (Solution)
+== Part 5: Inspect smaller disconnected components. (Solution)
 
-Write to query to return all components with 10 or less members.
+Write to query to return all connected components with 10 or less members.
 For each component id, return the size of the component, the list of *Place* names, and also their country code.
 
 Update the query to:
@@ -197,12 +236,12 @@ RETURN component_id, componentSize, places, countryCodes
 The results returned should look like this:
 
 [.thumb]
-image::EXWCC.4.png[EXWCC.4,width=400]
+image::EXWCC.5.png[EXWCC.5,width=400]
 
 {nbsp} +
 
-One would assume that all the roads in Europe are connected, or at least those in the mainland like Germany and France.
-The results show otherwise.
+There are five small connected components, and each is in a different country.
+To verify the Memmingen and Füssen anomaly, you will have to talk to the person who handles the data collection for Germany.
 
 == Weakly Connected Components: Taking it further
 
@@ -211,7 +250,7 @@ The results show otherwise.
 
 == Weakly Connected Components (Summary)
 
-In this exercise, you gained some experience with writing Cypher for the weakly connected graph algorithms using the European Roads dataset.
+In this exercise, you gained some experience with writing Cypher for the Weakly Connected Components graph algorithms using the European Roads dataset.
 
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/LabelPropagation.html'>Continue to Exercise:Label Propagation</a>]

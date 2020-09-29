@@ -47,9 +47,12 @@ Go to the next page to start this exercise.
 
 == Part 1: Run the Label Propagation to determine the number of communities and their sizes (Instructions)
 
+You can get a quick overview and distribution of the community structure by using the `stats` mode of the LPA algorithm.
+
 Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stats` mode of the LPA algorithm.
 * `YIELD` the following results: communityCount, communityDistribution.
 
 *Hint*: You will use `gds.labelPropagation.stats`.
@@ -59,6 +62,7 @@ Write Cypher code to perform the Label Propagation algorithm on the European roa
 Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stats` mode of the LPA algorithm.
 * `YIELD` the following results: communityCount, communityDistribution.
 
 *Hint*: You will use `gds.labelPropagation.stats`.
@@ -77,10 +81,15 @@ image::EXLPA.1.png[EXLPA.1,width=400]
 
 {nbsp} +
 
-The algorithm found a total of 32 communities in the graph.
+The LPA algorithm found a total of 32 communities in the graph.
 The largest community has 219 members, while most of the other communities have less than 50 members.
+You can observe that even though the nodes are in the same connected component, they are not necessarily in the same community.
+Most likely, each of the five smaller connected components forms its community, but the largest component is broken down into 27 communities.
 
 == Part 2: Perform a basic statistical analysis of the relationship weight properties (Instructions/Solution)
+
+Next, you will inspect how adding the relationship weight as an input influence the LPA algorithm results.
+But first, you will examine the relationship weight statistics and value distribution.
 
 Write Cypher code to perform a basic statistical analysis of the relationship weight properties using these guidelines:
 
@@ -105,24 +114,29 @@ image::EXLPA.2.png[EXLPA.2,width=500]
 Values of *distance* property are in kilometers.
 More than half of the connections are shorter than 100km.
 The longest road connecting Moskva to Rostov-na-Donu is 1066km long.
-On the other hand, *inverse_distance* values are mostly between 0.3 to 1.1.
+On the other hand, *inverse_distance* values are mostly between 0.3 and 0.74.
 
 == Part 3: Run the weighted Label Propagation to determine the number of communities and their sizes (Instructions)
+
+This time, you will run the `stats` mode of the LPA algorithm and add the relationship weight property as an input.
+The LPA algorithm deems that a higher relationship weight value represents a stronger connection.
+For this reason, you will use the *inverse_distance* property as the relationship weight input.
 
 Write Cypher code to perform the weighted Label Propagation algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stats` mode of the LPA algorithm.
 * `YIELD` the following results: communityCount, communityDistribution.
 * The relationship weight property name is *inverse_distance*.
 
 *Hint*: You will use `gds.labelPropagation.stats`.
-
 
 == Part 3: Run the weighted Label Propagation to determine the number of communities and their sizes (Solution)
 
 Write Cypher code to perform the weighted Label Propagation algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stats` mode of the LPA algorithm.
 * `YIELD` the following results: communityCount, communityDistribution.
 * The relationship weight property name is *inverse_distance*.
 
@@ -144,12 +158,18 @@ image::EXLPA.3.png[EXLPA.3,width=400]
 {nbsp} +
 
 The weighted variant of the algorithm found a total of 261 communities, which is almost 10 times more than the unweighted variant.
+You can observe that the weighted LPA algorithm found more granular communities as the largest community contains only 13 members.
+Depending on your use case, you might use the configuration option that works best for you.
 
 == Part 4: Add a community property to each node using Label Propagation. (Instructions)
+
+You will now inspect the members of communities of the weighted LPA results.
+First, you need to write back the results to Neo4j.
 
 Write Cypher code to perform the Label Propagation algorithm on the European road network and store the results back to nodes using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `write` mode of the LPA algorithm.
 * The algorithm will perform a maximum of 10 iterations.
 * The algorithm will write a property named *community_lpa* to each node with the computed value.
 * The weight property name is *inverse_distance*.
@@ -159,14 +179,14 @@ Write Cypher code to perform the Label Propagation algorithm on the European roa
 
 == Part 4: Add a community property to each node using Label Propagation. (Solution)
 
-Write Cypher code to perform the Label Propagation algorithm on the European road network using these guidelines:
+Write Cypher code to perform the Label Propagation algorithm on the European road network and store the results back to nodes using these guidelines:
 
-* The algorithm will perform a maximum of 10 iterations.
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `write` mode of the LPA algorithm.
+* The algorithm will perform a maximum of 10 iterations.
 * The algorithm will write a property named *community_lpa* to each node with the computed value.
 * The weight property name is *inverse_distance*.
 * `YIELD` the following results: nodePropertiesWritten, communityCount, ranIterations, didConverge.
-
 
 *Hint*: You will call `gds.labelPropagation.write`.
 
@@ -188,6 +208,8 @@ The results returned should look like this:
 image::EXLPA.4.png[EXLPA.4,width=400]
 
 == Part 5: Verify results of the algorithm. (Instructions)
+
+As a part of the analysis, you will inspect the largest ten communities and retrieve its members.
 
 Write a query to return all *community_lpa* values of the *Place* nodes.
 For each community id, return the size of the community, and the list of *Place* names.
@@ -222,8 +244,10 @@ image::EXLPA.5.png[EXLPA.5,width=400]
 
 {nbsp} +
 
-The largest community has 13 members and contains places mostly from Spain like Madrid and San Sebastian.
-The generated value for communityId may be different for your graph, but the community sizes should match.
+The largest community has 13 members and contains places mostly located in Spain like Madrid, Bilbao, and San Sebastian.
+It also includes Bordeaux and Toulouse, which are two cities located in France.
+If you inspect the world map, you can observe that Bordeaux and Toulouse are near the border with Spain, which makes sense, given that the LPA algorithm assigned them the same community as some Spanish cities.
+The generated value for communityId may be different for your graph, but the community sizes and members should match.
 
 == Label Propagation: Taking it further
 

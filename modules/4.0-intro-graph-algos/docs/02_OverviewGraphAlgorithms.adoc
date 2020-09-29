@@ -311,6 +311,8 @@ For example, Aaliyah and Sam can either be friends or not.
 A scenario where Aaliyah is friends with Sam, but Sam is not friends with Aaliyah, is not possible.
 
 An undirected relationship can also be represented as two directed relationships, where one relationship points in the opposite direction of another.
+This is an important idea as the GDSL has no concept of undirected relationships.
+It represents an undirected relationship as two directed relationships.
 --
 endif::[]
 
