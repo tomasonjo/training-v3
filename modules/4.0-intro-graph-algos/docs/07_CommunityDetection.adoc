@@ -349,13 +349,9 @@ In the second example, we connect the top right nodes, which produces another tr
 Here is why you use Triangle Count:
 
 [square]
-* Basic network analysis.
-
-* Does the network exhibit small-world structures?
-
 * Estimating stability.
 
-* Finding structural holes.
+* Part of the Local Clustering Coefficient calculation.
 
 * Scoring for machine learning.
 
@@ -363,14 +359,7 @@ Here is why you use Triangle Count:
 Here are some examples:
 
 [square]
-* Identifying features for classifying a given website as spam content.
-//?? This is described in Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive Graphs 4.
-
-* Investigating the community structure of Facebook’s social graph, where researchers found dense neighborhoods of users in an otherwise sparse global graph.
-//?? Find this study in The Anatomy of the Facebook Social Graph 5.
-
-* Exploring the thematic structure of the Web and detecting communities of pages with a common topics based on the reciprocal links between them.
-//?? For more information, see Curvature of co-links uncovers hidden thematic layers in the World Wide Web 6.
+* Identifying features for classifying a given website as spam content. This is described in https://chato.cl/papers/becchetti_2007_approximate_count_triangles.pdf[Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive].
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Triangle Count algorithm
@@ -418,8 +407,7 @@ endif::[]
 === Exercise: Triangle Count
 
 . In NEuler:
-.. Perform some Triangle Count algorithms on the *Person* data, noting what, if anything is written to the graph.
-.. Perform some Triangle Count algorithms on different *seasons* of Game of Thrones.
+.. Perform some Triangle Count algorithms on *seasons* 3 and 4 of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Triangle Count*.
 
 == Local Clustering Coefficient
@@ -436,6 +424,22 @@ In the left example, the probability of node _U_ neighbors being connected is 20
 Node _U_ has five neighbors.
 If all the neighbors were connected to each other, that would be ten relationships between neighbors.
 Because there are only two relationships between neighbors, the Local Clustering Coefficient is 0.2. 
+
+Here is why you use Local Clustering Coeffient:
+
+[square]
+* Estimating network stability.
+
+* Finding structural holes.
+
+* Scoring for machine learning.
+
+
+Here are some examples:
+
+* Investigating the community structure of Facebook’s social graph, where researchers found dense neighborhoods of users in an otherwise sparse global graph. Find this study in https://arxiv.org/pdf/1111.4503.pdf[The Anatomy of the Facebook Social Graph].
+
+* Exploring the thematic structure of the Web and detecting communities of pages with a common topics based on the reciprocal links between them. For more information, see https://arxiv.org/pdf/cond-mat/0110338.pdf[Curvature of co-links uncovers hidden thematic layers in the World Wide Web].
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Local Clustering Coefficient algorithm
@@ -483,7 +487,7 @@ endif::[]
 [.student-exercise]
 === Exercise: Local Clustering Coefficient
 
-. In NEuler: Run some Local Clustering Coefficient algorithms on different *seasons* of Game of Thrones.
+. In NEuler: Run some Local Clustering Coefficient algorithms on *seasons* 1 and 2 of Game of Thrones dataset.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Local Clustering Coefficient*.
 
 
