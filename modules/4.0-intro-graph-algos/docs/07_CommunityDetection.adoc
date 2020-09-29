@@ -497,21 +497,21 @@ endif::[]
 === Question 1
 
 [.statement]
-What algorithm do you use to do an initial identification of the communities within a graph?
+What algorithm do you use to calculate the number of triangles a nodes belongs to?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] Triangle Count
+- [x] Triangle Count
 - [ ] Louvain Modularity
 - [ ] Weakly Connected Components
-- [x] Label Propagation
+- [ ] Label Propagation
 
 === Question 2
 
 [.statement]
-What algorithm do you use early in your analysis to understand the graph structure?
+What algorithm do you use to find disconnected parts of the network?
 
 [.statement]
 Select the correct answers.
@@ -525,7 +525,7 @@ Select the correct answers.
 === Question 3
 
 [.statement]
-What algorithm is useful for detecting communities in large networks by applying repeated tests to pairs of nodes in the graph to come up with a score that is refined with each pass of the algorithm.
+What algorithm can be used to examine the hierarchical community structure a graph? 
 
 [.statement]
 Select the correct answer.
