@@ -108,7 +108,7 @@ image::EXIA.2.png[EXIA.2,width=300]
 
 {nbsp} +
 
-The average Jaccard similarity score is relatively low at 0.10 value.
+The average Jaccard similarity score is relatively low at 0.15 value.
 Due to the low average similarity score, we will have to select a low similarity cutoff value in the next step.
 Otherwise, we might infer too sparse of a similarity network, which will not yield relevant results.
 
@@ -321,7 +321,7 @@ image::EXIA.7.png[EXIA.7,width=300]
 
 {nbsp} +
 
-The largest community contains 18 ingredients, while the second community consists of 15 ingredients.
+The largest community contains 18 ingredients, while the second largest community consists of 15 ingredients.
 On average, the communities are relatively small.
 It seems that our recipes dataset contains a variety of dishes that do not have many ingredients in common.
 You have returned random three members for each community, which might not be the most representative members.

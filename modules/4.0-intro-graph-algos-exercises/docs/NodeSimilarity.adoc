@@ -32,6 +32,7 @@ Go to the next page to start this exercise.
 == Part 1: View the Recipes dataset schema. (Instructions)
 
 The Recipes dataset contains *Recipe* nodes that are connected by the *CONTAINS_INGREDIENT* relationship to *Ingredient* nodes.
+
 Write a query to view some of the *RECIPE* nodes and *CONTAINS_INGREDIENT* relationships in this dataset.
 
 == Part 1: View the Recipes dataset schema. (Solution)

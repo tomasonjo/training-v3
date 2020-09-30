@@ -55,7 +55,7 @@ CALL gds.graph.create('PersonGraph', 'Person',
 
 == Part 2: Execute the Degree Centrality algorithm on a named graph (Instructions/Solution)
 
-You will execute the Degree Centrality algorithm on the *Person* named graph without any additional configuration options.
+You will execute the Degree Centrality algorithm on the *PersonGraph* named graph without any additional configuration options.
 As you do not specify which relationship types should the algorithm consider, it will use all available relationship types as an input.
 
 *Hint*: You will call `gds.alpha.degree.stream`.
@@ -97,13 +97,13 @@ image::DirectedDegree.png[NativeProjection,width=500]
 
 == Part 4: Drop a projected graph from Graph Catalog (Instructions)
 
-After you have completed your analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
+After you have completed the analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
 
 *Hint*: You will call `gds.graph.drop`.
 
 == Part 4: Drop a projected graph from Graph Catalog (Solution)
 
-After you have completed your analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
+After you have completed the analysis on the Person graph, it is advisable to release the projected graph from Graph Catalog to free up memory.
 
 *Hint*: You will call `gds.graph.drop`.
 
@@ -164,8 +164,8 @@ image::NativeProjection.png[NativeProjection,width=500]
 == Part 5: Project a subgraph of European Roads dataset to Graph Catalog with cypher projection. (Instructions/Solution)
 
 In some parts of this course, you will analyze the DACH region subgraph of the European Roads network.
-The native projection is not expressive enough to allow you to project *Place* nodes with only *D*,*A*, or *CH* country codes. 
-Due to this limitation of native projection, you will use cypher projection to describe the DACH subregiond of the European Roads network.
+The native projection is not expressive enough to allow you to project only *Place* nodes with *D*,*A*, or *CH* country codes. 
+Due to this limitation of native projection, you will use cypher projection to describe the DACH subregion of the European Roads network.
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 

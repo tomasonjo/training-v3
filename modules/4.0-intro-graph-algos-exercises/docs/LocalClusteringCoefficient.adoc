@@ -33,7 +33,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the *Grap
 
 The Local Clustering Coefficient algorithm computes the local clustering coefficient for each node in the graph.
 The LCC of a node describes the likelihood that the neighbours of the node are also connected.
-It is used to determine how tightly-knit the nodes in a network are.
+It is used to determine how tightly-knit the network is.
 
 In this exercise, you will gain some experience with writing Cypher to implement the local clustering coefficient algorithm using the European Roads dataset.
 
@@ -74,7 +74,7 @@ image::EXLCC.1.png[EX3.1,width=300]
 
 {nbsp} +
 
-The average clustering coefficient for the European roads network is fairly low, which indicates that the nodes are not tighly-knit.
+The average clustering coefficient for the European roads network is fairly low, which indicates that the network is not tighly-knit.
 In fact, the network is quite sparse as the LCC value has a range between 0 to 1 and the result of 0.014 is very close to zero.
 In a typical online social network, you can expect much higher average clustering coefficient scores of 0.5 or even higher.
 
@@ -118,7 +118,7 @@ image::EXLCC.2.png[EXLCC.2.2,width=300]
 
 {nbsp} +
 
-A node has a maximum value of local clustering coefficient(1), when each its neighbours has a connection to all the other neighbours.
+A node has a maximum value of local clustering coefficient(1), when each of its neighbours has a connection to all the other neighbours.
 There are actually four places that have all their neighbors connected.
 Given the results from previous algorithms on the European Roads network, you might hypothesize that they are probably nodes with only 2 neighbours that are connected.
 

@@ -46,7 +46,7 @@ Go to the next page to start this exercise.
 
 == Part 1: Perform Betweenness Centrality analysis. (Instructions)
 
-You will use the Betweenness Centrality algorithm to find the bridges in the European Roads network.
+You will use the Betweenness Centrality algorithm to find the bridge nodes in the European Roads network.
 Places that most frequently lie on the shortest paths between other network places will rank the highest.
 
 Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return nodeId and score value.

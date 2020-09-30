@@ -148,7 +148,7 @@ To investigate the communities at each hierarchical level, you will first write 
 Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
-* Specify that intermediate communities are to be analyzed.
+* Specify that intermediate communities are to be returned in the results.
 * The algorithm will write a property named *communities_louvain* to each node with the computed value for intermediate communities.
 * The relationship weight property name is *inverse_distance*.
 * `YIELD` the following results: modularity, ranLevels, communityCount, communityDistribution.
@@ -160,7 +160,7 @@ Write Cypher code to perform the Louvain Modularity algorithm on the European ro
 Write Cypher code to perform the Louvain Modularity algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
-* Specify that intermediate communities are to be analyzed.
+* Specify that intermediate communities are to be returned in the results.
 * The algorithm will write a property named *communities_louvain* to each node with the computed value for intermediate communities.
 * The relationship weight property name is *inverse_distance*.
 * `YIELD` the following results: modularity, ranLevels, communityCount, communityDistribution.
