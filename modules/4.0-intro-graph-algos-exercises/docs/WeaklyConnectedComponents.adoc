@@ -186,7 +186,7 @@ Having disconnected components in a road network is not expected, so you might t
 == Part 5: Inspect smaller disconnected components. (Instructions)
 
 Suppose that the data collection is separate for each country.
-You want to retrieve the place and the country code for each *Place* in the smaller connected components so that you can talk to an appropriate person who handles the data collection for the country where you found some anomalies.
+You want to retrieve the name and the country code for each *Place* in the smaller connected components so that you can talk to an appropriate person who handles the data collection for the country where you found some anomalies.
 
 Write to query to return all connected components with 10 or less members.
 For each component id, return the size of the component, the list of *Place* names, and also their country code.

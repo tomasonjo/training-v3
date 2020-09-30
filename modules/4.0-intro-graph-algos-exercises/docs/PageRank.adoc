@@ -149,7 +149,7 @@ image::EXPR.2.png[EXPR.2,width=400]
 
 Using the weighted variant of the PageRank algorithm, you can observe that now the most well-connected place is Basel, which was in 6th place of the unweighted variant.
 Berlin lost the 1st place but is still going strong in second place.
-Praha keeps the third place and is identical to the unweighted variant.
+Praha keeps the third place.
 On the other hand, Budapest has dropped down to 9th place.
 You can observe how using various configuration settings can influence the PageRank ranking score.
 
