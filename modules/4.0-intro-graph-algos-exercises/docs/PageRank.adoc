@@ -45,10 +45,17 @@ Go to the next page to start this exercise.
 
 == Part 1: Perform the PageRank algorithm. (Instructions)
 
+You will start by running the PageRank algorithm on the European Roads network.
+The PageRank algorithm will determine the most influential *Place* nodes in the network.
+Remember that PageRank interprets each connection in the network as a vote of importance or influence.
+The places with the most connections to other well-connected cities will rank the highest.
+In the context of the European Roads network, you can use the PageRank algorithm to find the most well-connected places in the system.
+
 Write Cypher code to perform PageRank analysis using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify a maximum of 20 iterations.
+* Use the `stream` mode of the PageRank algorithm.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by PageRank score descending.
 * Limit it to the top ten results.
@@ -62,6 +69,7 @@ Write Cypher code to perform PageRank analysis using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
 * Specify a maximum of 20 iterations.
+* Use the `stream` mode of the PageRank algorithm.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by PageRank score descending.
 * Limit it to the top ten results.
@@ -87,13 +95,18 @@ image::EXPR.1.png[EXPR.1,width=400]
 
 {nbsp} +
 
-Here we see that Berlin, Budapest, and Praha are the important places in the networks judging by the PageRank centrality score.
+Here you see that Berlin, Budapest, and Praha are the most well-connected places in the networks judging by the PageRank centrality score.
 
 == Perform the weighted variant of the PageRank algorithm. (Instructions)
+
+Next, you will run the weighted variant of the PageRank algorithm.
+Just like with the Community Detection algorithms, the PageRank algorithm also deems that a higher relationship weight value represents a stronger connection. 
+Again, you will use the *inverse_distance* relationship property as the input relationship weight.
 
 Write Cypher code to perform the weighted variant of the PageRank analysis using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stream` mode of the PageRank algorithm.
 * Specify a maximum of 20 iterations.
 * The relationship weight property name is *inverse_distance*.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
@@ -107,6 +120,7 @@ Write Cypher code to perform the weighted variant of the PageRank analysis using
 Write Cypher code to perform the weighted variant of the PageRank analysis using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stream` mode of the PageRank algorithm.
 * Specify a maximum of 20 iterations.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * The relationship weight property name is *inverse_distance*.
@@ -133,15 +147,24 @@ image::EXPR.2.png[EXPR.2,width=400]
 
 {nbsp} +
 
-Here we see that with the weighted variant of PageRank, the most important places are Basel, Berlin, and Praha.
+Using the weighted variant of the PageRank algorithm, you can observe that now the most well-connected place is Basel, which was in 6th place of the unweighted variant.
+Berlin lost the 1st place but is still going strong in second place.
+Praha keeps the third place and is identical to the unweighted variant.
+On the other hand, Budapest has dropped down to 9th place.
+You can observe how using various configuration settings can influence the PageRank ranking score.
 
 == Perform the Personalized PageRank algorithm. (Instructions/Solution)
+
+In the last example, you will use the Personalized PageRank algorithm.
+Personalized PageRank is a variation of PageRank, which is biased towards a set of source nodes.
+You need to match the predefined source nodes and add them as an input to the `sourceNodes` parameter.
 
 Write Cypher code to perform the Personalized PageRank analysis using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stream` mode of the PageRank algorithm.
 * Add the *sourceNodes* parameter.
-* Specify *Madrid* as the source node and exclude it from results.
+* Specify all the *Place* nodes with the country code *E* as the source nodes.
 * Limit it to the top ten results.
 
 *Hint*: Call `gds.pageRank.stream`.
@@ -149,11 +172,11 @@ Write Cypher code to perform the Personalized PageRank analysis using these guid
 [source, cypher]
 ----
 MATCH (p:Place)
-WHERE p.name = 'Madrid'
+WHERE p.countryCode = 'E'
+WITH collect(p) as source_nodes
 CALL gds.pageRank.stream('roads', {
-    sourceNodes:[p]})
+    sourceNodes:source_nodes})
 YIELD nodeId, score
-WHERE nodeId <> id(p)
 RETURN gds.util.asNode(nodeId).name AS place, score
 ORDER BY score DESC
 LIMIT 10
@@ -163,7 +186,8 @@ image::EXPR.3.png[EXPR.3,width=400]
 
 {nbsp} +
 
-We expect that the neighbouring places of Madrid will have a higher rank.
+All the top ten ranked places are located in Spain, which makes sense as the Personalized PageRank algorithm is biased towards the cities located in Spain.
+You can try to use source nodes located in other countries and observe the results.
 
 == PageRank: Taking it further
 

@@ -46,9 +46,13 @@ Go to the next page to start this exercise.
 
 == Part 1: Perform Betweenness Centrality analysis. (Instructions)
 
+You will use the Betweenness Centrality algorithm to find the bridges in the European Roads network.
+Places that most frequently lie on the shortest paths between other network places will rank the highest.
+
 Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return nodeId and score value.
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stream` mode of the Betweenness Centrality algorithm.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by betweenness centrality score descending.
 * Limit it to the top ten results.
@@ -60,6 +64,7 @@ Write the Cypher code to perform the stream variation of the Betweenness Central
 Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return nodeId and score value.
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
+* Use the `stream` mode of the Betweenness Centrality algorithm.
 * Use the `gds.util.asNode()` function to fetch the node from the nodeId value and return its name.
 * Order the results by betweenness centrality score descending.
 * Limit it to the top ten results.
@@ -83,10 +88,16 @@ The results returned should look like this:
 [.thumb]
 image::EXBC.1.png[EXBC.1,width=400]
 
-Berlin is quite important by both the PageRank and Betweenness centrality score.
-The most influental bridge in the network is Wien, followed by Paris.
+Berlin is quite influential by both the PageRank and Betweenness centrality scores.
+The most influential bridge in the network is Wien, followed by Paris.
+The city of Wien lies at the intersection of Western and Eastern Europe, so that might be why it has a high betweenness score.
+If you plan any long road trips across Europe, you will most likely pass through Wien and should grab yourself a Wiener Schnitzel.
 
 == Part 2: Perform Betweenness Centrality analysis on the DACH region of the network (Instructions)
+
+Next, you will use the Betweenness Centrality algorithm to find the bridge places in the DACH subregion.
+Wien is in Austria, which is part of the DACH region. 
+It might be interesting to see if it will still hold a high betweenness rank when considering road trips only between Germany, Austria, and Switzerland.
 
 Write the Cypher code to perform the stream variation of the Betweenness Centrality algorithm. It will return nodeId and score value.
 
@@ -126,11 +137,14 @@ The results returned should look like this:
 [.thumb]
 image::EXBC.2.png[EXBC.1,width=400]
 
-The most influental bridges in the DACH area are München and Nürnberg.
+Wien does not show up in the places with the highest betweenness rank of the DACH subregion.
+While it connects Western and Eastern Europe, it lies on the DACH region's outskirts, which explains the low betweenness rank of the DACH region.
+The most influential bridges in the DACH area are München and Nürnberg.
 
 == Part 3: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Instructions)
 
-On very large graphs it is not really feasible to run all these shortest path computations, so we might choose to use an approximate version of the algorithm.
+On very large graphs it is not really feasible to run all these shortest path computations, so you might choose to use an approximate version of the algorithm.
+
 Write the Cypher code to perform the Randomized-Approximate variation of the Betweenness Centrality algorithm.
 It will return nodeId and score value.
 
@@ -145,7 +159,6 @@ It will return nodeId and score value.
 
 == Part 3: Perform a variation of Betweenness Centrality analysis: Randomized-Approximate Brandes. (Solution)
 
-On very large graphs it is not really feasible to run all these shortest path computations, so we might choose to use an approximate version of the algorithm.
 Write the Cypher code to perform the Randomized-Approximate variation of the Betweenness Centrality algorithm.
 It will return nodeId and score value.
 
@@ -173,8 +186,7 @@ LIMIT 10
 image::EXBC.3.png[EXBC.1,width=400]
 
 You should see similar results as with the original algorithm. Due to randomness, each result will be slightly different.
-
-Try running this algorithm a few times to see how the results change.
+Try running this algorithm with different sampling size values to examine how it influences the results.
 
 == Betweenness Centrality: Taking it further
 

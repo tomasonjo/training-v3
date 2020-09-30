@@ -24,7 +24,9 @@ Next, you will use the Louvain Modularity algorithm to analyze the community str
 You will investigate how the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm directly influence the size and the structure of communities.
 
 Finally, you will use the PageRank algorithm to find the representatives of those communities.
-When using the PageRank algorithm, think of every relationship as a vote of confidence or influence. In our analysis, every relationship is a vote of commonly used together ingredients, and so the most frequently used together ingredients will rank the highest. You could think of them as the representatives of those communities.
+When using the PageRank algorithm, think of every relationship as a vote of confidence or influence.
+In our analysis, every relationship is a vote of commonly used together ingredients, and so, the most frequently used together ingredients will rank the highest.
+You could think of them as the representatives of those communities.
 
 [.student-exercise]
 == Exercise: Practical application of algorithms

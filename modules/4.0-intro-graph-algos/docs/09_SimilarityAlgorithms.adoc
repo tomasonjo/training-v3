@@ -36,9 +36,6 @@ The input of this algorithm is usually a bipartite graph containing two disjoint
 The Node Similarity algorithm compares all nodes from the first node set based on their relationships to nodes in the second set.
 The output of the algorithm is a unipartite network between nodes in the first node set.
 We can think of this process as translating indirect relationships to direct ones.
-
-//image::jaccard-similarity-unipartite.png[Betweenness centrality,width=500, align=center]
-
 Mathematically, Jaccard Similarity Score is defined as the size of the intersection divided by the size of the union of two sets.
 
 image::jaccard-similarity.png[Betweenness centrality,width=500, align=center]
@@ -132,21 +129,21 @@ Select the correct answer.
 === Question 2
 
 [.statement]
-What features of the graph can be used to determine if nodes are similar?
+How is the Jaccard similarity score calculated?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] node properties
-- [x] relationships to or from a node
-- [x] relationship properties
-- [ ] any relationship in the graph with the same properties
+- [x] intersection of two sets divided by the union of sets
+- [ ] intersection of sets
+- [ ] union of sets
+- [ ] union of two sets divided by the intersections of sets
 
 === Question 3
 
 [.statement]
-The Node Similarity algorithm calculates a Jaccard Index for each node. What value indicates that nodes are similar?
+The Node Similarity algorithm calculates a Jaccard Index for each node. What value indicates that compared sets are identical?
 
 [.statement]
 Select the correct answer.

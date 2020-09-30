@@ -32,12 +32,11 @@ Go to the next page to start this exercise.
 == Part 1: View the Recipes dataset schema. (Instructions)
 
 The Recipes dataset contains *Recipe* nodes that are connected by the *CONTAINS_INGREDIENT* relationship to *Ingredient* nodes.
-Write a query to view some of the nodes and relationships in this dataset.
+Write a query to view some of the *RECIPE* nodes and *CONTAINS_INGREDIENT* relationships in this dataset.
 
 == Part 1: View the Recipes dataset schema. (Solution)
 
-The Recipes dataset contains *Recipe* nodes that are connected by the *CONTAINS_INGREDIENT* relationship to *Ingredient* nodes.
-Write a query to view some of the nodes and relationships in this dataset.
+Write a query to view some of the *RECIPE* nodes and *CONTAINS_INGREDIENT* relationships in this dataset.
 
 Here is the solution code:
 
@@ -59,14 +58,14 @@ Some ingredients are used in many recipes.
 
 == Part 2: Find the most common ingredients. (Instructions)
 
-Next, we will identify the most common ingredients.
+Next, you will identify the most common ingredients.
+
 Write a query to find the top five common ingredients used in the recipes.
 
 *Hint*: Match all *Ingredient* nodes and count their *CONTAINS_INGREDIENT* relationships.
 
 == Part 2: Find the most common ingredients. (Solution)
 
-Next, we will identify the most common ingredients.
 Write a query to find the top five common ingredients used in the recipes.
 
 *Hint*: Match all *Ingredient* nodes and count their *CONTAINS_INGREDIENT* relationships.
@@ -91,6 +90,9 @@ image::EXNS.2.png[EXNS.2,width=300]
 The most common ingredient used is sugar, followed by egg and flour.
 
 == Part 3: Project the Recipes graph to graph catalog with native projection. (Instructions)
+
+The Recipes dataset is not yet projected as a named graph in the Graph Catalog.
+Here you will project a named graph that consists of nodes with labels *Recipe* and *Ingredient*, connected by the *CONTAINS_INGREDIENT* relationships.
 
 Write Cypher code to project the Recipes graph to Graph Catalog using these guidelines:
 
@@ -126,19 +128,23 @@ image::EXNS.3.png[EXNS.3,width=600]
 == Part 4: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
 
 Before we infer a similarity network between recipes, we will evaluate the similarity score distribution.
-This will help us to fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+Examining the similarity score distribution will help us fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+This is probably the most crucial step of the Node Similarity algorithm as the *topK* and *similarityCutoff* parameters directly influence how sparse or dense the inferred similarity network will be.
+
+Write Cypher code to examine the similarity score distribution of the Recipes dataset following these guidelines:
 
 * The algorithm should use the projected graph *recipes*, which is stored in the graph catalog.
+* Use the `stats` mode of the Node Similarity algorithm.
 * `YIELD` the following result: nodesCompared,similarityDistribution.
 
 *Hint*: You will call `gds.nodeSimilarity.stats`.
 
 == Part 4:  Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Solution)
 
-Before we infer a similarity network between recipes, we will evaluate the similarity score distribution.
-This will help us to fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+Write Cypher code to examine the similarity score distribution of the Recipes dataset following these guidelines:
 
 * The algorithm should use the projected graph *recipes*, which is stored in the graph catalog.
+* Use the `stats` mode of the Node Similarity algorithm.
 * `YIELD` the following result: nodesCompared,similarityDistribution.
 
 *Hint*: You will call `gds.nodeSimilarity.stats`.
@@ -161,15 +167,19 @@ image::EXNS.4.png[EXNS.4,width=300]
 The Jaccard similarity score ranges from 0 to 1, where 1 means that the two recipes use the exact same ingredients.
 On average, a pair of recipes share around 35% of ingredients.
 Judging by the *p90* score, only 10% of recipe pairs share more than 55% of ingredients.
+The recipes are not very similar, so you will have to use a lower *similarityCutoff* parameter to not infer too sparse similarity network.
 
 == Part 5: Run the Node Similarity algorithm to add a relationship between a pair of similar recipes. (Instructions)
+
+After the similarity score distribution examination, you can go ahead and write the similarity network between recipes back to Neo4j.
 
 Write Cypher code to execute the Node Similarity algorithm on the Recipes dataset using these guidelines:
 
 * The algorithm should use the projected graph *recipes*, which is stored in the graph catalog.
+* Use the `write` mode of the Node Similarity algorithm.
 * The algorithm will write a relationship with a type *SIMILAR* between a pair of similar recipes.
 * The algorithm will write a property named *score* to each relationship with the computed value.
-* Specify a similarity cutoff threshold of 0.5.
+* Specify a similarity cutoff threshold of 0.45.
 * Specify the *topK* parameter of 5.
 * `YIELD` the following result: nodesCompared, relationshipsWritten.
 
@@ -180,6 +190,7 @@ Write Cypher code to execute the Node Similarity algorithm on the Recipes datase
 Write Cypher code to execute the Node Similarity algorithm on the Recipes dataset using these guidelines:
 
 * The algorithm should use the projected graph *recipes*, which is stored in the graph catalog.
+* Use the `write` mode of the Node Similarity algorithm.
 * The algorithm will write a relationship with a type *SIMILAR* between a pair of similar recipes.
 * The algorithm will write a property named *score* to each relationship with the computed value.
 * Specify a similarity cutoff threshold of 0.45.
@@ -209,6 +220,8 @@ image::EXNS.5.png[EXNS.4,width=300]
 {nbsp} +
 
 The algorithm has written 3000 similarity relationships between 2178 nodes.
+On average, a single recipe is deemed similar to 1.4 other recipes.
+Even with the low *similarityCutoff* parameter, the inferred similarity network is still relatively sparse.
 
 == Part 6: Inspect the results of the algorithm. (Instructions)
 
@@ -238,6 +251,8 @@ image::EXNS.6.png[EXNS.6,width=300]
 For example, Banana cue recipe is similar to Camote cue recipe.
 
 == Part 7: Recommend similar recipes. (Instructions)
+
+The inferred similarity network between recipes can be used to recommend similar recipes in your application.
 
 Write Cypher code to recommend the three most similar recipes to *Sourdough* recipe.
 

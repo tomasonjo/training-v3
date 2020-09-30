@@ -29,6 +29,11 @@ Go to the next page to start this exercise.
 
 == Part 1: Project the ingredients graph to Graph Catalog with native projection. (Instructions)
 
+This time, you will compare how often the ingredients are used in the same recipes instead of how similar the recipes are.
+The direction of relationships in the projected graph determines which set of nodes will be compared.
+In the previous section, you used the default *NATURAL* orientation of the *CONTAINS_INGREDIENT* relationships to compare how similar are the recipes.
+In this section, you will use the *REVERSE* orientation of the *CONTAINS_INGREDIENT* relationships to compare how often are the ingredients used in a common recipe.
+
 Write Cypher code to project the Ingredient graph to Graph Catalog using these guidelines:
 
 * The created graph should be named *ingredient*.
@@ -67,9 +72,12 @@ image::EXIA.1.png[EXIA.2,width=600]
 
 == Part 2: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Instructions)
 
-We will evaluate the Jaccard similarity score distribution to helps us fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+You will evaluate the Jaccard similarity score distribution to help you fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+
+Write Cypher code to examine the similarity score distribution between ingredients following these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* Use the `stats` mode of the Node Similarity algorithm.
 * `YIELD` the following result: nodesCompared,similarityDistribution.
 
 *Hint*: You will call `gds.nodeSimilarity.stats`.
@@ -77,9 +85,10 @@ We will evaluate the Jaccard similarity score distribution to helps us fine-tune
 
 == Part 2: Run the Node Similarity algorithm to evaluate the distribution of the Jaccard index similarity score. (Solution)
 
-We will evaluate the Jaccard similarity score distribution to helps us fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
+You will evaluate the Jaccard similarity score distribution to better fine-tune the *topK* and *similarityCutoff* parameters of the Node Similarity algorithm in the next step.
 
 * The algorithm should use the projected graph *recipes*, which is stored in the graph catalog.
+* Use the `stats` mode of the Node Similarity algorithm.
 * `YIELD` the following result: nodesCompared,similarityDistribution.
 
 *Hint*: You will call `gds.nodeSimilarity.stats`.
@@ -105,10 +114,14 @@ Otherwise, we might infer too sparse of a similarity network, which will not yie
 
 == Part 3: Run the Node Similarity algorithm to mutate a relationship between a pair of commonly used together ingredients. (Instructions)
 
-We will use the *mutate* mode of the Node Similarity algorithm to store the results back to the named in-memory graph.
+You will use the *mutate* mode of the Node Similarity algorithm to store the results back to the named in-memory graph.
+The *COMMONLY_USED_TOGETHER* relationships will be stored back to the projected in-memory named graph instead of the Neo4j stored graph.
+This way, you can use the results of the Node Similarity algorithm as an input to the Community detection algorithm in the next step without having to recreate another in-memory named graph.
+
 Write Cypher code to execute the Node Similarity algorithm on the Ingredients graph using these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* Use the `mutate` mode of the Node Similarity algorithm.
 * The algorithm will mutate a relationship with a type *COMMONLY_USED_TOGETHER* between a pair of ingredients.
 * The algorithm will mutate a property named *score* to each relationship with the computed value.
 * Specify a similarity cutoff threshold of 0.3.
@@ -119,10 +132,10 @@ Write Cypher code to execute the Node Similarity algorithm on the Ingredients gr
 
 == Part 3: Run the Node Similarity algorithm to mutate a relationship between a pair of commonly used together ingredients. (Solution)
 
-We will use the *mutate* mode of the Node Similarity algorithm to store the results back to the named in-memory graph.
 Write Cypher code to execute the Node Similarity algorithm on the Ingredients graph using these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
+* Use the `mutate` mode of the Node Similarity algorithm.
 * The algorithm will mutate a relationship with a type *COMMONLY_USED_TOGETHER* between a pair of ingredients.
 * The algorithm will mutate a property named *score* to each relationship with the computed value.
 * Specify a similarity cutoff threshold of 0.3.
@@ -152,15 +165,20 @@ image::EXIA.3.png[EXIA.3,width=300]
 
 The algorithm has written 1260 similarity relationships between 1384 nodes.
 Even with the low similarity cutoff value, the inferred network is still relatively sparse.
+You could lower the similarity cutoff value even more, but then some relationships between not so commonly used together ingredients will be inferred.
 
 == Part 4: Run the Louvain Modularity algorithm to add a community property to each node. (Instructions)
+
+You will use the Louvain Modularity algorithm to inspect the community structure of the inferred similarity network between *Ingredient* nodes.
+Because you used the *mutate* mode of the Node Similarity algorithm, the *COMMONLY_USED_TOGETHER* relationship is already available in the *ingredients* named graph.
 
 Write Cypher code to perform the weighted Louvain Modularity algorithm on the Ingredient graph using these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
-* The algorithm will write a property named *ingredient_community* to each node with the computed value.
+* Use the `write` mode of the Louvain Modularity algorithm.
 * The algorithm will consider only relationships with a type *COMMONLY_USED_TOGETHER*.
 * The algorithm will consider only nodes with a label *Ingredient*.
+* The algorithm will write a property named *ingredient_community* to each node with the computed value.
 * The relationship weight property name is *score*.
 * `YIELD` the following results: modularity, ranLevels, communityCount.
 
@@ -171,9 +189,10 @@ Write Cypher code to perform the weighted Louvain Modularity algorithm on the In
 Write Cypher code to perform the weighted Louvain Modularity algorithm on the Ingredient graph using these guidelines:
 
 * The algorithm should use the projected graph *ingredient*, which is stored in the graph catalog.
-* The algorithm will write a property named *ingredient_community* to each node with the computed value.
+* Use the `write` mode of the Louvain Modularity algorithm.
 * The algorithm will consider only relationships with a type *COMMONLY_USED_TOGETHER*.
 * The algorithm will consider only nodes with a label *Ingredient*.
+* The algorithm will write a property named *ingredient_community* to each node with the computed value.
 * The relationship weight property name is *score*.
 * `YIELD` the following results: modularity, ranLevels, communityCount.
 
@@ -199,13 +218,15 @@ image::EXIA.4.png[EXIA.4,width=300]
 {nbsp} +
 
 The algorithm found three hierarchical levels of communities with a total of 952 communities on the last level.
-We already knew that our inferred similarity network is sparse, so a high number of communities is not surprising.
+You already knew that the inferred similarity network is sparse, so a high number of communities is not surprising.
 Probably a lot of communities consist of only a single node.
-Next, we will investigate single node communities to test our hypothesis.
+Next, you will investigate single node communities to test our hypothesis.
 
 == Part 5: Write the relationships stored in a named in-memory graph back to Neo4j. (Instructions)
 
-To investigate the inferred similarity network, we have to write the mutated relationships stored in named graph back to Neo4j.
+To investigate the inferred similarity network, you have to write the mutated relationships stored in named graph back to Neo4j.
+
+Write Cypher code to write the mutated *COMMONLY_USED_TOGETHER* relationship back to Neo4j using these guidelines:
 
 * The procedure should use the projected graph *ingredient*, which is stored in the graph catalog.
 * The procedure will write relationships with a type *COMMONLY_USED_TOGETHER* back to Neo4j.
@@ -214,7 +235,7 @@ To investigate the inferred similarity network, we have to write the mutated rel
 
 == Part 5: Write the relationships stored in a named in-memory graph back to Neo4j. (Solution)
 
-To investigate the inferred similarity network, we have to write the mutated relationships stored in named graph back to Neo4j.
+Write Cypher code to write the mutated *COMMONLY_USED_TOGETHER* relationship back to Neo4j using these guidelines:
 
 * The procedure should use the projected graph *ingredient*, which is stored in the graph catalog.
 * The procedure will write relationships with a type *COMMONLY_USED_TOGETHER* back to Neo4j.
@@ -235,11 +256,13 @@ image::EXIA.5.png[EXIA.5,width=600]
 
 == Part 6: Investigate the community detection results. (Instructions)
 
-Write Cypher code to find the *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
+Now, you can investigate the single node communities hypothesis by looking at *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
+
+Write Cypher code to find the count of *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
 
 == Part 6: Investigate the community detection results. (Solution)
 
-Write Cypher code to find the *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
+Write Cypher code to find the count of *Ingredient* nodes that have no *COMMONLY_USED_TOGETHER* relationship.
 
 Here is the solution code:
 
@@ -261,6 +284,8 @@ There are 743 nodes without any *COMMONLY_USED_TOGETHER* relationship, and conse
 This means that out of a total of 952 communities found by the Louvain Algorithm, only 209 of them consist of more than a single node.
 
 == Part 7: Inspect the top five largest communities of ingredients. (Instructions)
+
+In this section, you will inspect the five largest communities of commonly used together ingredients.
 
 Write a query to return all *ingredient_community* values of the *Ingredient* nodes.
 For each community id, return the size of the community, and the list of *Ingredient* names.
@@ -299,8 +324,17 @@ image::EXIA.7.png[EXIA.7,width=300]
 The largest community contains 18 ingredients, while the second community consists of 15 ingredients.
 On average, the communities are relatively small.
 It seems that our recipes dataset contains a variety of dishes that do not have many ingredients in common.
+You have returned random three members for each community, which might not be the most representative members.
 
 == Part 8: Find representatives of the top five communities with the PageRank algorithm. (Instructions)
+
+The PageRank algorithm regards each relationship as a vote of importance or influence.
+In the context of our ingredients analysis, each relationship represents a commonly used together connections.
+Ingredients, who are the most commonly used together with other common ingredients will rank the highest.
+You can regard them as the representatives of those communities.
+When calculating each community's representatives, you want to consider only nodes and links of a specific community.
+You will use an anonymous graph with cypher projection to filter only nodes and links between each specific community.
+This way, you will run the PageRank algorithm for each community separately.
 
 The query below provides a template for computing representatives of each community with PageRank.
 Update the query to:

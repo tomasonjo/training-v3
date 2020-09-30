@@ -12,7 +12,7 @@ At the end of this course, we would like to give you some additional information
 
 === Labs algorithms
 
-This course only covered the production-quality graph algorithms in the GDSL, but there are more than 40 algorithms available in alpha and beta tier at this writing.
+This course only covered the production-quality graph algorithms in the GDSL, but there are more than 40 algorithms available in alpha and beta tier at the time of this writing.
 Take a look at the https://neo4j.com/docs/graph-data-science/current/algorithms/[GDSL documentation] to explore all the supported graph algorithms.
 You will find Link Prediction, Pathfinding, and Node Embedding algorithms that we have not explored in this course.
 
@@ -43,9 +43,8 @@ What you want to do each day is to provide the communities from the previous day
 There are two reasons for this.
 The first one is that it is easier to track a specific community through time by providing the communities from the day before as a seed property, we make sure that the community ids do not change.
 That is, unless a community disintegrates.
-The algorithm should also be faster as most of the communities are already calculated from the day before, so the algorithms needs less iteration. 
+The second reason is that the algorithm execution should be faster as most of the communities are already calculated from the day before, so the algorithms needs less iteration. 
 
-//??? what is the second reason here???
 === Neo4j Causal Cluster
 
 Avoid writing to core cluster members.
@@ -66,44 +65,44 @@ In production, try to use only the Native projection and avoid Cypher projection
 === Question 1
 
 [.statement]
-question
+What are the benefits of using seed parameters in Community Detection algorithms?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [x] xxxx
-- [ ] xxxxxx
-- [ ] xxxxxxxx
+- [x] Faster algorithm execution times
+- [x] Community ids don't change with each algorithm execution
+- [ ] Slower algorithm execution times
+- [x] Easier to keep track of community evolution through time
 
 === Question 2
 
 [.statement]
-question
+Community detection and Centrality algorithms are designed primarly for what types of graphs?
 
 [.statement]
 Select the correct answers.
 
 [%interactive.answers]
-- [x] xx
-- [ ] xxxx
-- [ ] xxxxxx
-- [x] xxxxxxxx
+- [ ] Flat graphs
+- [ ] Link prediction graphs
+- [ ] Multipartite graphs
+- [x] Monopartite graphs
 
 === Question 3
 
 [.statement]
-question
+When running GDSL on a causal cluster, what should you avoid?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] xx
-- [ ] xxxx
-- [x] xxxxxx
-- [ ] xxxxxxxx
+- [x] Using Cypher projection
+- [ ] Streaming algorithm results
+- [x] Using the `write` mode of algorithms
+- [ ] Running many algorithms on a read replica
 
 [.summary]
 == Summary
