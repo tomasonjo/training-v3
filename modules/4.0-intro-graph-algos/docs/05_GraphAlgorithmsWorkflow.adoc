@@ -62,10 +62,9 @@ There are three supported options for the node projection parameter.
 'Person'
 ----
 
-[.note]
---
-Using the wildcard operator `\*`, we project all the node labels in the database.
---
+[NOTE]
+Using the wildcard operator `*`, you can project all the node labels in the database.
+
 
 *Array*: Used to project multiple node labels:
 
@@ -106,10 +105,8 @@ Similarly to Node projection, the Relationship projection also supports three op
 'FRIEND'
 ----
 
-[.note]
---
-Using the wildcard operator `\*`, we project all the relationship types in the database.
---
+[NOTE]
+Using the wildcard operator `*`, you can project all the relationship types in the database.
 
 *Array*: Used to project multiple relationship types:
 

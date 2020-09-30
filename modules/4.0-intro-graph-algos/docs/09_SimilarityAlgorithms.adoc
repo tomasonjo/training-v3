@@ -67,18 +67,18 @@ Show the students the basics of using NEuler and have them do the same on their 
 . We select the Similarity group of algorithms.
 . Then we select the Jaccard algorithm.
 . Let's select the *Any* label and *HAS_TAG* relationship type.
-. We leave the remaining default settings.
+. We do not want to store anything back to the graph so we de-select store results here.
 . Then we run the algorithm.
 . Here are the table results.
 . We return to the configuration to edit it.
 . We modify the last configuration to use *REVERSE* direction.
 . We run the algorithm.
-. Here are the table results. Here we note that the relationship direction is crutial as it will compare question or tags, depending on the relationship direction.
+. Here are the table results. Here we note that the relationship direction is crucial as it will compare question or tags, depending on the relationship direction.
 . And here we see the generated code.
 . Finally, we can copy the generated Browser Guide to Neo4j Browser.
 . This concludes our look at using the the Jaccard Similarity algorithm in NEuler to create a jaccard value for each node which indicates how many nodes are connected to the same nodes.
 
-Here is the video:  https://youtu.be/UkeZ6gASXAA
+Here is the video:  https://youtu.be/iRE56fc9TLs
 
 endif::[]
 --
@@ -88,17 +88,17 @@ Follow along with this video to become familiar with Jaccard Similarity in Neo4j
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/UkeZ6gASXAA
+https://youtu.be/iRE56fc9TLs
 endif::[]
 
 ifdef::backend-revealjs,env-slides[]
 [.center]
-https://youtu.be/UkeZ6gASXAA
+https://youtu.be/iRE56fc9TLs
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::UkeZ6gASXAA[youtube,width=560,height=315]
+video::iRE56fc9TLs[youtube,width=560,height=315]
 endif::[]
 
 [.student-exercise]

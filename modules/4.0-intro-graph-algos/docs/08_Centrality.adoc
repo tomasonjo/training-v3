@@ -33,18 +33,73 @@ It works by counting the number and quality of links to a node to estimate its s
 The underlying assumption is that a node is only as important as the nodes that link to it.
 An example of this type of influence might be having the ear of a general that considers you very credible will likely make you more powerful than being popular with your fellow foot soldiers.
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:pagerank-step-1.png[PageRank step 1]
+|PageRank measures importance in comparison to other nodes using an iterative process to update ranks.
+ It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value/number of its outgoing links.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
+[.is-half.right]
+--
 PageRank measures importance in comparison to other nodes using an iterative process to update ranks.
 It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value/number of its outgoing links.
+--
 
+[.is-half.left]
+--
 image::pagerank-step-1.png[PageRank step 1,width=500, align=center]
+--
+endif::[]
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:pagerank-step-2.png[PageRank step 2]
+|It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
+[.is-half.right]
+--
 It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
+--
 
+[.is-half.left]
+--
 image::pagerank-step-2.png[PageRank step 2,width=500, align=center]
+--
+endif::[]
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:pagerank-step-3.png[PageRank step 3]
+|PageRank then continues to update values until an iterate value is reached.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
+[.is-half.right]
+--
 PageRank then continues to update values until an iterate value is reached.
+--
 
+[.is-half.left]
+--
 image::pagerank-step-3.png[PageRank step 3,width=500, align=center]
+
+endif::[]
 
 There are many domain-specific variations for differing analyses, e.g. Personalized PageRank for personalized recommendations.
 Personalized PageRank is a variation of PageRank, which is biased towards a set of predefined source nodes.

@@ -191,19 +191,23 @@ endif::[]
 There are a number of real-world use-cases, where graph algorithms are applied.
 
 
-==== Explore, plan, measure
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="50,50",stripes=none]
+|===
+| *Explore, plan, measure*
+| *Machine learning*
+| Find significant patterns and plan for optimal structures.
+| Use the measures as features to train an ML model.
+| image:explore-plan-measure.png[Explore plan measure]
+| image:machine-learning.png[Machine learning]
+| Score outcomes and set a threshold value for a prediction.
+|
+|===
+{set:cellbgcolor!}
+endif::[]
 
-Find significant patterns and plan for optimal structures.
-
-image::explore-plan-measure.png[Explore plan measure,width=500,align=center]
-
-Score outcomes and set a threshold value for a prediction.
-
-==== Machine learning
-
-Use the measures as features to train an ML model.
-
-image::machine-learning.png[Machine learning,width=500,align=center]
+// TBD for slides
 
 
 ==== Propagation pathways
@@ -375,17 +379,57 @@ Depending on the domain, sometimes a higher weight value is better, while other 
 
 === Monopartite versus multipartite graphs
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:monopartite-graph.png[Monopartite graph]
+|A monopartite graph consists of a single set of nodes.
+ In Neo4j terms, it means we have nodes with a single label.
+ This is an example of a monopartite graph, where we have only *Person* labels for nodes.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
+[.is-half.right]
+--
 A monopartite graph consists of a single set of nodes.
 In Neo4j terms, it means we have nodes with a single label.
 This is an example of a monopartite graph, where we have only *Person* labels for nodes. 
+--
 
+[.is-half.left]
+--
 image::monopartite-graph.png[Monopartite graph,width=500,align=center]
+--
+endif::[]
 
+ifndef::env-slides[]
+{set:cellbgcolor:white}
+[frame="none",grid=none,cols="75,25",stripes=none]
+|===
+|image:multipartite-graph.png[Multipartite graph]
+|A multipartite graph consists of many independant sets of nodes.
+ In Neo4j terms, it means we have nodes with many labels.
+ This is an example of a bipartite graph, where we have *Person* and *Company* labels for nodes.
+|===
+{set:cellbgcolor!}
+endif::[]
+
+ifdef::env-slides[]
+[.is-half.right]
+--
 A multipartite graph consists of many independant sets of nodes.
 In Neo4j terms, it means we have nodes with many labels.
 This is an example of a bipartite graph, where we have *Person* and *Company* labels for nodes.
+--
 
+[.is-half.left]
+--
 image::multipartite-graph.png[Multipartite graph,width=500,align=center]
+--
+endif::[]
 
 Centrality measures and community detection algorithms are primarily designed to run on monopartite graphs.
 Usually, it is a mistake to run centrality algorithms on a bipartite graph.
