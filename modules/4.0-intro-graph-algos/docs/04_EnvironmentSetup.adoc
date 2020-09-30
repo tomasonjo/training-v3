@@ -157,13 +157,13 @@ Estimated time to complete: 10 minutes.
 What labels could we use to describe the Recipes network?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
-- [x] Bipartite
-- [x] Unweighted
-- [ ] Monopartite
-- [ ] Weighted
+- [ ] Food
+- [x] Ingredient
+- [x] Recipe
+- [ ] Category
 
 === Question 2
 
@@ -190,7 +190,7 @@ Select the correct answer.
 [%interactive.answers]
 - [ ] Bloom
 - [ ] Cypher-shell
-- [x] Graph Algorithms Playground
+- [x] Graph Data Science Playground
 - [ ] Linkurious
 
 [.summary]

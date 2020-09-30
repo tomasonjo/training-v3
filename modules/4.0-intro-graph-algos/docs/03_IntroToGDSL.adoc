@@ -35,17 +35,17 @@ The Neo4j Graph Data Science Library (GDSL) contains many graph algorithms.
 The algorithms are divided into categories which represent different problem classes:
 
 [square]
-* Path Finding - these algorithms help find the shortest path or evaluate the availability and quality of routes.
+* *Path Finding* - these algorithms help find the shortest path or evaluate the availability and quality of routes.
 
-* Centrality - these algorithms determine the importance of distinct nodes in a network.
+* *Centrality* - these algorithms determine the importance of distinct nodes in a network.
 
-* Community Detection - these algorithms evaluate how a group is clustered or partitioned, as well as its tendency to strengthen or break apart.
+* *Community Detection* - these algorithms evaluate how a group is clustered or partitioned, as well as its tendency to strengthen or break apart.
 
-* Similarity - these algorithms help calculate the similarity of nodes.
+* *Similarity* - these algorithms help calculate the similarity of nodes.
 
-* Link Prediction - these algorithms determine the closeness of pairs of nodes.
+* *Link Prediction* - these algorithms determine the closeness of pairs of nodes.
 
-* Node Embeddings - these algorithms compute vector representations of nodes in a graph.
+* *Node Embeddings* - these algorithms compute vector representations of nodes in a graph.
 
 These graph algorithms help to effectively answer questions about your data’s connectivity or topology, or generate new and highly predictive features for your existing ML pipelines.
 At this writing, the the GDSL contains more than 50 graph algorithms.
@@ -56,17 +56,17 @@ Algorithms exist in one of three tiers of maturity:
 
 *Production-quality*:
 
-[square]
-* Indicates that the algorithm has been tested with regards to stability and scalability. Algorithms in this tier are prefixed with `gds.<algorithm>` and are supported by Neo4j.
+
+Indicates that the algorithm has been tested with regards to stability and scalability. Algorithms in this tier are prefixed with `gds.<algorithm>` and are supported by Neo4j.
 
 *Beta*:
 
-[square]
-* Indicates that the algorithm is a candidate for the production-quality tier. Algorithms in this tier are prefixed with `gds.beta.<algorithm>`.
+
+Indicates that the algorithm is a candidate for the production-quality tier. Algorithms in this tier are prefixed with `gds.beta.<algorithm>`.
 
 *Alpha*:
 
-* Indicates that the algorithm is experimental and might be changed or removed at any time. Algorithms in this tier are prefixed with `gds.alpha.<algorithm>`.
+Indicates that the algorithm is experimental and might be changed or removed at any time. Algorithms in this tier are prefixed with `gds.alpha.<algorithm>`.
 
 [.quiz]
 == Check your understanding
@@ -75,6 +75,8 @@ Algorithms exist in one of three tiers of maturity:
 
 [.statement]
 What tool is available to you for visually exploring a graph?
+
+[.statement]
 Select the correct answer.
 
 [%interactive.answers]

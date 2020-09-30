@@ -72,7 +72,7 @@ Note that if we consider both the *NATURAL* and *REVERSE* orientation of a relat
 
 This is what you should see in the result pane:
 
-image::UndirectedDegree.png[NativeProjection,width=500]
+image::UndirectedDegree.png[NativeProjection,width=300]
 
 == Part 3: Execute the Degree Centrality algorithm on a named graph and filter relationship types (Instructions/Solution)
 

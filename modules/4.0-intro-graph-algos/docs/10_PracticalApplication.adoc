@@ -57,7 +57,7 @@ The second part of the analysis is to determine the community structure of the n
 What algorithm is used to determine this community structure?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [x] Louvain Modularity

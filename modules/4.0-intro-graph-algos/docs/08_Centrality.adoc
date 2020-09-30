@@ -201,11 +201,11 @@ The idea behind this strategy is that such nodes are likely to lie on many short
 Here is why you use Betweenness Centrality:
 
 [square]
-* Identify bridges.
+* Identify bridges
 
-* Uncover control points.
+* Uncover control points
 
-* Find bottlenecks and vulnerabilities.
+* Find bottlenecks and vulnerabilities
 
 Here are some examples:
 

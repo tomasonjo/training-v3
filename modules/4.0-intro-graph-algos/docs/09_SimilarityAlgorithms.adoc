@@ -49,11 +49,11 @@ image::fruit.png[NodeSimilarity,width=500, align=center]
 Here is why you use Node Similarity:
 
 [square]
-* Find recommendations of similar items.
+* Find recommendations of similar items
 
-* First step of analyzing a bipartite network.
+* First step of analyzing a bipartite network
 
-* Part of link prediction analysis.
+* Part of link prediction analysis
 
 
 == Guided Exercise: Getting Started with Node Similarity algorithm

@@ -47,7 +47,7 @@ It can also help you to better comprehend results from other algorithms.
 Here is why you use WCC:
 
 [square]
-* Early step in graph analysis to see how a network is connected.
+* Early step in graph analysis to see how a network is connected
 
 * Fraud detection
 
@@ -155,11 +155,11 @@ Another factor is the random tie-breaking process.
 Here is why you use LPA:
 
 [square]
-* Community detection.
+* Community detection
 
-* Semi-supervised community detection.
+* Semi-supervised community detection
 
-* Preprocessing data (classification).
+* Preprocessing data (classification)
 
 Here are some examples:
 
@@ -256,11 +256,11 @@ As a rule of thumb, the communities on lower levels are smaller and more fine-gr
 Here is why you use Louvain:
 
 [square]
-* Community detection in large networks.
+* Community detection in large networks
 
-* Uncover hierarchical structures in data.
+* Uncover hierarchical structures in data
 
-* Evaluate different grouping thresholds.
+* Evaluate different grouping thresholds
 
 Here are some examples:
 
@@ -349,17 +349,16 @@ In the second example, we connect the top right nodes, which produces another tr
 Here is why you use Triangle Count:
 
 [square]
-* Estimating stability.
+* Estimating stability
 
-* Part of the Local Clustering Coefficient calculation.
+* Part of the Local Clustering Coefficient calculation
 
-* Scoring for machine learning.
+* Scoring for machine learning
 
 
-Here are some examples:
+Here is an example:
 
-[square]
-* Identifying features for classifying a given website as spam content. This is described in https://chato.cl/papers/becchetti_2007_approximate_count_triangles.pdf[Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive].
+Identifying features for classifying a given website as spam content. This is described in https://chato.cl/papers/becchetti_2007_approximate_count_triangles.pdf[Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive].
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Triangle Count algorithm
@@ -428,11 +427,11 @@ Because there are only two relationships between neighbors, the Local Clustering
 Here is why you use Local Clustering Coeffient:
 
 [square]
-* Estimating network stability.
+* Estimating network stability
 
-* Finding structural holes.
+* Finding structural holes
 
-* Scoring for machine learning.
+* Scoring for machine learning
 
 
 Here are some examples:
@@ -514,7 +513,7 @@ Select the correct answer.
 What algorithm do you use to find disconnected parts of the network?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [x] Weakly Connected Components

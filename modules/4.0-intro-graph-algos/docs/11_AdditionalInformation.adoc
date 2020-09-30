@@ -26,7 +26,7 @@ Disconnected components might skew the results of other graph algorithms, so it 
 Another thing to keep in mind is the direction of relationships.
 Differentiating between directed and undirected networks is of great importance, as it has a significant influence on the algorithm's results.
 Finally, keep in mind if you might want to include the relationship weights as an input to the algorithm.
-Sometimes, you might see better results if you include weights, but sometimes they don't produce the desired results.
+Sometimes, you might see better results if you include weights, but sometimes they do not produce the desired results.
 Test many configuration options and see what works best.
 
 === Seed parameters
@@ -68,7 +68,7 @@ In production, try to use only the Native projection and avoid Cypher projection
 What are the benefits of using seed parameters in Community Detection algorithms?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
 - [x] Faster algorithm execution times
@@ -82,7 +82,7 @@ Select the correct answer.
 Community detection and Centrality algorithms are designed primarly for what types of graphs?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [ ] Flat graphs
@@ -96,7 +96,7 @@ Select the correct answers.
 When running GDSL on a causal cluster, what should you avoid?
 
 [.statement]
-Select the correct answer.
+Select the correct answers.
 
 [%interactive.answers]
 - [x] Using Cypher projection

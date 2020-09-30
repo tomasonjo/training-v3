@@ -21,15 +21,14 @@ You should now be able to:
 * Perform data analysis using a set of graph algorithms.
 * Describe some best practices for using algorithms.
 
+ifndef::env-slides[]
 == Resources
+endif::[]
 
 ifdef::env-slides[]
 == Resources - 1
 endif::[]
 
-ifndef::env-slides[]
-== Resources
-endif::[]
 
 There are many resources available to you for learning more about Neo4j and Cypher.
 
@@ -67,10 +66,6 @@ endif::[]
 Become a Neo4j certified developer:
 
 https://neo4j.com/graphacademy/neo4j-certification/
-
-[NOTE]
-The certification exam tests you on content from this course.
-You can take the certification exam multiple times until you pass!
 
 GitHub repository:
 

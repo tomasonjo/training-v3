@@ -655,7 +655,7 @@ Select the correct answers.
 The graph consists of nodes with multiple labels and stores the strength of relationships as their property. How do we label this graph?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [x] Multipartite, weighted graph.
