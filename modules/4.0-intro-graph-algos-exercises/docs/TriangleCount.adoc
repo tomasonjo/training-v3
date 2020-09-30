@@ -47,6 +47,8 @@ Go to the next page to start this exercise.
 
 == Part 1: Run the Triangle Count algorithm to add a triangles property to each node. (Instructions)
 
+First, you will calculate the number of triangles for each node and store the results back to Neo4j.
+
 Write a query to perform the Triangle Count algorithm on the European road network using these guidelines:
 
 * The algorithm should use the projected graph *roads*, which is stored in the graph catalog.
@@ -80,10 +82,12 @@ image::EXTC.1.png[EXTC.1,width=400]
 
 {nbsp} +
 
-There are 894 nodes and only 22 triangles in the whole graph.
-This indicates that the European roads network is very sparse.
+There are 894 nodes and only 21 triangles in the whole graph.
+This indicates that the European roads network is very sparse and not very interconnected.
 
 == Part 2: Inspect the results of the algorithm (Instructions)
+
+Next, you will inspect the *Place* nodes with the highest count of triangles.
 
 Write a query to return all *Place* nodes and their triangle count property.
 
@@ -113,9 +117,12 @@ image::EXTC.2.png[EXTC.2,width=400]
 
 {nbsp} +
 
-Antwerpen has the most triangles.
+Antwerpen has the most triangles, followed by Bruxelles and Liège.
+
 
 == Part 3: Examine the triangles of a single place (Instructions/Solution)
+
+Here, you will verify the triangle count for a given *Place* node.
 
 Write a query to match Antwerpen and its neighbours.
 Include connections between neighbours.
@@ -138,8 +145,13 @@ image::EXTC.3.png[EXTC.3,width=400]
 
 Breda, Eindhoven, and Antwerpen form a triangle.
 Zeebrugge does not form any triangles with Antwerpen as it has no connections to any of its neighbours.
+It is interesting to notice that the Antwerpen, Bruxelles and Liège, which are the places with the highest count of triangles, form a triangle themselves.
+It seems that the connections between cities in Belgium are the most resistant to any catastrophic failure.
+For example, if they closed the road between Liège and Antwerpen, you could always travel from Liège to Antwerpen via Bruxelles.
 
 == Run the Triangle Count algorithm on the DACH subgraph (Instructions)
+
+Now, you will find the *Place* nodes with the highest triangle count of the DACH region.
 
 Write a query to perform the Triangle Count algorithm on the DACH region of the European road network using these guidelines:
 
@@ -177,7 +189,7 @@ image::EXTC.4.png[EXTC.3,width=400]
 
 {nbsp} +
 
-There are only six triangles in the DACH region of the European roads network.
+There are only six triangles in the DACH region of the European roads network and no place belongs to more than a single triangle.
 
 == Triangle Count: Taking it further
 

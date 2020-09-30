@@ -32,7 +32,7 @@ If you do not see this in your Neo4j Browser, you will need to perform the *Grap
 == Local Clustering Coefficient (Overview)
 
 The Local Clustering Coefficient algorithm computes the local clustering coefficient for each node in the graph.
-The lcc of a node describes the likelihood that the neighbours of the node are also connected.
+The LCC of a node describes the likelihood that the neighbours of the node are also connected.
 It is used to determine how tightly-knit the nodes in a network are.
 
 In this exercise, you will gain some experience with writing Cypher to implement the local clustering coefficient algorithm using the European Roads dataset.
@@ -44,6 +44,8 @@ In this exercise, you will gain some experience with writing Cypher to implement
 Go to the next page to start this exercise.
 
 == Part 1: Determine the average local clustering coefficient (Instructions)
+
+To get an overall feeling of how tightly-connected the European Roads network is, you will execute the `stats` mode of the Local Clustering Coefficient algorithm to calculate the average clustering coefficient of the whole network.
 
 Write a query to determine the average local clustering coeffient for the European road network using these guidelines:
 
@@ -73,9 +75,12 @@ image::EXLCC.1.png[EX3.1,width=300]
 {nbsp} +
 
 The average clustering coefficient for the European roads network is fairly low, which indicates that the nodes are not tighly-knit.
-In a typical online social network, you can expect higher average clustering coefficient scores.
+In fact, the network is quite sparse as the LCC value has a range between 0 to 1 and the result of 0.014 is very close to zero.
+In a typical online social network, you can expect much higher average clustering coefficient scores of 0.5 or even higher.
 
 == Part 2: Determine the triangle count for each *Place* node. (Instructions)
+
+To inspect the nodes with the highest LCC value, you will use the `stream` mode of the LCC algorithm.
 
 Write a query to determine the local clustering coeffient for each *Place* node in the European road network.
 
@@ -113,11 +118,13 @@ image::EXLCC.2.png[EXLCC.2.2,width=300]
 
 {nbsp} +
 
-A node has a maximum value of local clustering coefficient(1), when each its neighbours has a connection to all the other neighbours. 
+A node has a maximum value of local clustering coefficient(1), when each its neighbours has a connection to all the other neighbours.
+There are actually four places that have all their neighbors connected.
+Given the results from previous algorithms on the European Roads network, you might hypothesize that they are probably nodes with only 2 neighbours that are connected.
 
 == Part 3: Verify the clustering coefficient results. (Instructions)
 
-Let's confirm that the clustering coefficient score of 1 for the *Bradford* node is correct.
+Validate the hypothesis and inspect the neighbouring nodes and their connections for the *Bradford* node.
 
 Write a query to match *Bradford* and its neighbours.
 Include connections between neighbours.
@@ -150,7 +157,7 @@ image::EXLCC.3.png[EX3.3,width=300]
 {nbsp} +
 
 Bradford belongs to a single triangle and has no other connections.
-This confirms that the correct clustering coefficient score for the Bradford node is indeed 1.
+This confirms that the correct clustering coefficient score for the Bradford node is indeed 1 and also our hypothesis.
 
 == Local Clustering Coefficient: Taking it further
 

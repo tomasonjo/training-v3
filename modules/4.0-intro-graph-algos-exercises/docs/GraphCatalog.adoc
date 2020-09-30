@@ -32,7 +32,7 @@ Go to the next page to start this exercise.
 In the Guided Exercise, you have executed the Degree centrality separately for the *NATURAL* and *REVERSE* orientation of *HELPS* relationship type.
 Here, you will project both the *NATURAL* and *REVERSE* orientation of the *HELPS* relationship type in a single named graph.
 
-* The created graph should be named *Person*.
+* The created graph should be named *PersonGraph*.
 * Project all nodes labeled *Person*.
 * Project all relationships with a type *HELPS* and include both the *NATURAL* and *REVERSE* orientations.
 
@@ -65,9 +65,10 @@ As you do not specify which relationship types should the algorithm consider, it
 CALL gds.alpha.degree.stream('PersonGraph')
 YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name as name, score
+ORDER BY score DESC
 ----
 
-Note that if we include both the *NATURAL* and *REVERSE* orientation of a relationship type, we will get identical results if we projected it *UNDIRECTED*.
+Note that if we consider both the *NATURAL* and *REVERSE* orientation of a relationship type as in input to a graph algorithm, we will get identical results as if we projected it *UNDIRECTED*. You can confirm this by running the *UNDIRECTED* orientation of the *HELPS* relationship in NEuler.
 
 This is what you should see in the result pane:
 
@@ -86,6 +87,7 @@ CALL gds.alpha.degree.stream('PersonGraph',
   {relationshipTypes:['HELPS_NATURAL']})
 YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name as name, score
+ORDER BY score DESC
 ----
 
 This is what you should see in the result pane:
@@ -111,6 +113,9 @@ CALL gds.graph.drop('PersonGraph')
 ----
 
 == Part 5: Project European Roads graph to Graph Catalog with native projection. (Instructions)
+
+You will reuse the European Road network throughout the course to familiarize yourself with various graph algorithms.
+For this reason, you will now project the European Roads graph as a named graph in Graph Catalog.
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 
@@ -157,6 +162,10 @@ This is what you should see in the result pane:
 image::NativeProjection.png[NativeProjection,width=500]
 
 == Part 5: Project a subgraph of European Roads dataset to Graph Catalog with cypher projection. (Instructions/Solution)
+
+In some parts of this course, you will analyze the DACH region subgraph of the European Roads network.
+The native projection is not expressive enough to allow you to project *Place* nodes with only *D*,*A*, or *CH* country codes. 
+Due to this limitation of native projection, you will use cypher projection to describe the DACH subregiond of the European Roads network.
 
 Write Cypher code to project the European Roads graph to Graph Catalog using these guidelines:
 

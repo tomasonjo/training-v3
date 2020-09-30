@@ -25,7 +25,7 @@ These algorithms are supported:
 
 * Local Clustering Coefficient
 
-These algorithms are are in alpha (labs):
+Labs implementations:
 
 [square]
 * Strongly Connected Components
@@ -47,7 +47,9 @@ It can also help you to better comprehend results from other algorithms.
 Here is why you use WCC:
 
 [square]
-* Early step in graph analysis to see how a graph is structured.
+* Early step in graph analysis to see how a network is connected.
+
+* Fraud detection
 
 Here are some examples:
 
@@ -115,11 +117,9 @@ Before you perform the tasks shown in this video, you must have either created a
 
 . In NEuler:
 
-.. Find all Connected *Person* nodes writing the *unionFind_helps* property.
-
 .. Find all Connected *Characters* for *Season 3* writing the *unionFind_season3* property in the Game of Thrones data.
 
-.. Do the same for any relationship, writing the *unionFind_any* value.
+.. Edit the configuration and find all Connected *Character* nodes, but leave the *Any* relationship type, writing the *unionFind_any* value.
 
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Weakly Connected Components*.
 
@@ -155,26 +155,20 @@ Another factor is the random tie-breaking process.
 Here is why you use LPA:
 
 [square]
-* Large-scale networks for initial clustering.
+* Community detection.
 
-* Great for preprocessing data (classification).
+* Semi-supervised community detection.
 
-* Where groupings are less clear but weights can be used.
-
-* Can be run with concurrent threads for extremely fast graph partitioning and scales nearly linearly.
+* Preprocessing data (classification).
 
 Here are some examples:
 
 [square]
-* Assigning polarity of tweets as a part of semantic analysis. In this scenario, positive and negative seed labels from a classifier are used in combination with the Twitter follower graph.
-//?? For more information, see Twitter polarity classification with label propagation over lexical links and the follower graph 14.
+* Assigning polarity of tweets as a part of semantic analysis. In this scenario, positive and negative seed labels from a classifier are used in combination with the Twitter follower graph. For more information, see https://dl.acm.org/citation.cfm?id=2140465[Twitter polarity classification with label propagation over lexical links and the follower graph].
 
 * Finding potentially dangerous combinations of possible co-prescribed drugs, based on the chemical similarity and side effect profiles. This  study is found https://dl.acm.org/citation.cfm?id=2140465[here].
 
 * Label Propagation prediction of drug-drug interactions based on clinical side effects.
-
-* Inferring dialogue features and user intention for a machine learning model.
-//?? For more information, see Feature Inference Based on Label Propagation on Wiki‐ data Graph for DST 16.
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Label Propagation algorithm
@@ -229,8 +223,7 @@ endif::[]
 === Exercise: Label Propagation
 
 . In NEuler:
-.. Perform the Label Propagation algorithm on the *Person* data, noting what, if anything is written to the graph.
-.. Perform the Label Propagation algorithm on different *seasons* of Game of Thrones.
+.. Perform the Label Propagation algorithm on *seasons* 1 and 2 of Game of Thrones dataset.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Label Propagation*.
 
 == Louvain Modularity
@@ -242,9 +235,9 @@ The Louvain Modularity algorithm consists of repeated application of two steps.
 The first step is a “greedy” assignment of nodes to communities, favoring local optimizations of modularity.
 The modularity score quantifies the quality of an assignment of nodes to communities.
 This process evaluates how much more densely connected the nodes within a community are, compared to how connected they would be in a random network.
-It starts by calculating each change in modularity if that node joins and forms a community - for each of its immediate neighbors.
-Then the node joins the node with the highest modularity change.
-The process is repeated for each node with the above communities formed.
+It starts by calculating the change in modularity if that node joins a community with each of its immediate neighbors.
+The node then joins the node with the highest modularity change.
+The process is repeated for each node until the optimal communities are formed.
 The second step is defining a new coarse-grained network, based on the communities found in the first step. 
 These two steps are repeated until no further modularity-increasing reassignments of communities are possible.
 
@@ -258,6 +251,7 @@ The count of links between nodes within the same community and between various c
 Once the new network is created, the whole process is repeated until a modularity maximum is reached.
 The Louvain Modularity algorithm is interesting, because you can observe both the final as well as the intermediate communities that are calculated at the end of each level.
 It is regarded as a hierarchical clustering algorithm because a hierarchy of communities is produced as a result.
+As a rule of thumb, the communities on lower levels are smaller and more fine-grained than the communities found on higher and final levels.
 
 Here is why you use Louvain:
 
@@ -272,16 +266,10 @@ Here are some examples:
 
 [square]
 * Extracting topics from online social platforms, like Twitter and YouTube, based on the co-occurence of terms in documents as part of the topic modeling process.
-//?? This approach is described in Topic Modeling based on Louvain method in Online Social Networks 20.
 
 * Finding hierarchical community structures within the brain’s functional network.
-//as described in Hierarchical Modularity in Human Brain Functional Networks 21.
-//?? need a reference here?
 
 * Evaluating criminal networks and holes in the structure.
-
-* Detecting cyber attacks. The algorithm was used in a study of fast community detection in large scale cyber networks for cyber security applications. Once these communities have been detected they can be used to detect cyber attacks.
-//?? need a reference here?
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Louvain Modularity algorithm
@@ -335,7 +323,7 @@ endif::[]
 [.student-exercise]
 === Exercise: Louvain Modularity
 
-. In NEuler:  Perform the Louvain Modularity algorithm on different *seasons* of Game of Thrones (GOT).
+. In NEuler:  Perform the Louvain Modularity algorithm on *seasons* 2 and 3 of the Game of Thrones dataset.
 . In Neo4j Browser:
 .. View the *louvain* and *intermediate louvain* values for GOT.
 .. kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Louvain Modularity*.
@@ -361,13 +349,9 @@ In the second example, we connect the top right nodes, which produces another tr
 Here is why you use Triangle Count:
 
 [square]
-* Basic network analysis.
-
-* Does the network exhibit small-world structures?
-
 * Estimating stability.
 
-* Finding structural holes.
+* Part of the Local Clustering Coefficient calculation.
 
 * Scoring for machine learning.
 
@@ -375,14 +359,7 @@ Here is why you use Triangle Count:
 Here are some examples:
 
 [square]
-* Identifying features for classifying a given website as spam content.
-//?? This is described in Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive Graphs 4.
-
-* Investigating the community structure of Facebook’s social graph, where researchers found dense neighborhoods of users in an otherwise sparse global graph.
-//?? Find this study in The Anatomy of the Facebook Social Graph 5.
-
-* Exploring the thematic structure of the Web and detecting communities of pages with a common topics based on the reciprocal links between them.
-//?? For more information, see Curvature of co-links uncovers hidden thematic layers in the World Wide Web 6.
+* Identifying features for classifying a given website as spam content. This is described in https://chato.cl/papers/becchetti_2007_approximate_count_triangles.pdf[Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive].
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Triangle Count algorithm
@@ -430,8 +407,7 @@ endif::[]
 === Exercise: Triangle Count
 
 . In NEuler:
-.. Perform some Triangle Count algorithms on the *Person* data, noting what, if anything is written to the graph.
-.. Perform some Triangle Count algorithms on different *seasons* of Game of Thrones.
+.. Perform some Triangle Count algorithms on *seasons* 3 and 4 of Game of Thrones.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Triangle Count*.
 
 == Local Clustering Coefficient
@@ -448,6 +424,22 @@ In the left example, the probability of node _U_ neighbors being connected is 20
 Node _U_ has five neighbors.
 If all the neighbors were connected to each other, that would be ten relationships between neighbors.
 Because there are only two relationships between neighbors, the Local Clustering Coefficient is 0.2. 
+
+Here is why you use Local Clustering Coeffient:
+
+[square]
+* Estimating network stability.
+
+* Finding structural holes.
+
+* Scoring for machine learning.
+
+
+Here are some examples:
+
+* Investigating the community structure of Facebook’s social graph, where researchers found dense neighborhoods of users in an otherwise sparse global graph. Find this study in https://arxiv.org/pdf/1111.4503.pdf[The Anatomy of the Facebook Social Graph].
+
+* Exploring the thematic structure of the Web and detecting communities of pages with a common topics based on the reciprocal links between them. For more information, see https://arxiv.org/pdf/cond-mat/0110338.pdf[Curvature of co-links uncovers hidden thematic layers in the World Wide Web].
 
 [.slide-title.has-green-background.has-team-background]
 === Guided Exercise: Getting Started with the Local Clustering Coefficient algorithm
@@ -495,7 +487,7 @@ endif::[]
 [.student-exercise]
 === Exercise: Local Clustering Coefficient
 
-. In NEuler: Run some Local Clustering Coefficient algorithms on different *seasons* of Game of Thrones.
+. In NEuler: Run some Local Clustering Coefficient algorithms on *seasons* 1 and 2 of Game of Thrones dataset.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Local Clustering Coefficient*.
 
 
@@ -505,21 +497,21 @@ endif::[]
 === Question 1
 
 [.statement]
-What algorithm do you use to do an initial identification of the communities within a graph?
+What algorithm do you use to calculate the number of triangles a nodes belongs to?
 
 [.statement]
 Select the correct answer.
 
 [%interactive.answers]
-- [ ] Triangle Count
+- [x] Triangle Count
 - [ ] Louvain Modularity
 - [ ] Weakly Connected Components
-- [x] Label Propagation
+- [ ] Label Propagation
 
 === Question 2
 
 [.statement]
-What algorithm do you use early in your analysis to understand the graph structure?
+What algorithm do you use to find disconnected parts of the network?
 
 [.statement]
 Select the correct answers.
@@ -533,7 +525,7 @@ Select the correct answers.
 === Question 3
 
 [.statement]
-What algorithm is useful for detecting communities in large networks by applying repeated tests to pairs of nodes in the graph to come up with a score that is refined with each pass of the algorithm.
+What algorithm can be used to examine the hierarchical community structure a graph? 
 
 [.statement]
 Select the correct answer.

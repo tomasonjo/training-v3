@@ -34,12 +34,12 @@ Before you run a graph algorithm, it is helpful to understand what the memory re
 
 In this exercise, you will determine the memory requirements for each algorithm on the datasets you have been working with:
 
-* *Part 1*: Determine the memory requirements for loading each of the datasets.
+* *Part 1*: Determine the memory requirements for loading named graphs.
 * *Part 2*: Determine the memory requirements for running algorithms on these graphs.
 
 Go to the next page to start this exercise.
 
-== Part 1: Determine the memory requirements for loading each of the datasets. (Instructions)
+== Part 1: Determine the memory requirements for loading named graphs. (Instructions)
 
 Write the Cypher code to determine the memory requirements for loading these graphs:
 
@@ -48,7 +48,7 @@ Write the Cypher code to determine the memory requirements for loading these gra
 * European roads dataset using the *Place* nodes and the *EROADS* relationships with included relationship weight property.
 
 
-== Part 1: Determine the memory requirements for loading each of the datasets. (Solution)
+== Part 1: Determine the memory requirements for loading named graphs. (Solution)
 
 Write the Cypher code to determine the memory requirements for loading these graphs:
 
@@ -64,7 +64,7 @@ YIELD requiredMemory
 
 This load requires 299 KiB of memory.
 
-* Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships with included relationship weight property.
+* Game of Thrones dataset using the *Character* nodes and the *INTERACTS_SEASON1* relationships with included *weight* relationship property.
 
 Here is the solution code:
 
@@ -77,7 +77,7 @@ YIELD requiredMemory
 
 This load requires 563 KiB of memory.
 
-* European roads dataset using the *Place* nodes and the *EROADS* relationships with included relationship weight property.
+* European roads dataset using the *Place* nodes and the *EROADS* relationships with included *inverse_distance* relationship property.
 
 Here is the solution code:
 
@@ -154,6 +154,9 @@ YIELD requiredMemory
 ----
 
 This algorithm requires 329 KiB to 951 KiB of memory.
+
+Note that when you estimate the memory requirements of an anonymous graph projection, the memory requirements for both the graph projection and algorithm execution will be estimated.
+However, when you estimate the memory requirements for a graph algorithm on a named graph projections, only the memory requirements for algorithm execution will be estimated.
 
 == Memory Requirements: Taking it further
 

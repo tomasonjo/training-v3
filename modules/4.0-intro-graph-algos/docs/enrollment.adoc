@@ -29,5 +29,5 @@ it will take you 5 hours to complete the course.
 * Using Community Detection algorithms.
 * Using Centrality algorithms.
 * Using Similarity algorithms.
-* Analysis of a dataset (recipes).
+* Practical application of graph algorithms.
 * Additional information for using algorithms effectively.
