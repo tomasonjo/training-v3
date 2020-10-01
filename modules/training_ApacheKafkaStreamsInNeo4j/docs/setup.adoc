@@ -12,24 +12,80 @@
 == Preparing for the training session
 
 You must prepare your development environment before you perform the exercises for this training session.
-We assume that you have the latest version of Neo4j Desktop installed.
 
-To prepare for this course, you must do the following before this session (scroll down for detailed instructions):
+=== Prerequisites
 
-To prepare your system for this course, you must perform these Steps:
+[square]
+* At least 16Gb RAM on your system.
+* Docker installed (from https://hub.docker.com)
 
-*Step 1:* Download files used for this training session.
+[NOTE]
+It will take approximately 1.5 hours to download the files for this training.
 
-*Step 2:* Install components you will use for the training session.
+=== Steps to prepare your system for the hands-on exercises
 
-*Step 3:* Confirm that your development environment is is ready for the hands-on exercises for this training session.
+. Clone the Github repo:
+----
+	git clone https://github.com/conker84/neo4j-streams-october-2k20.git
+----
 
-== Step 1: Download files used for this training session.
+[start=2]
+. Move into the directory:
+----
+	cd neo4j-streams-october-2k20
+----
 
-== Step 2: Install components you will use for the training session.
+[start=3]
+. Execute the compose file in order to download all the required images:
+----
+	docker-compose up -d
+----
 
-== Step 3: Confirm that your development environment is is ready for the hands-on exercises for this training session.
+[start=4]
+. Wait until all the images are downloaded, once finished you will see something like this:
 
+
+----
+	Creating elasticsearch ... done
+	Creating kibana        ... done
+	Creating broker        ... done
+	Creating neo4j         ... done
+	Creating connect       ... done
+	Creating zeppelin      ... done
+----
+
+[start=5]
+. Once finished, you can shutdown the stack with:
+----
+	docker-compose down
+----
+
+[start=6]
+. Wait until everything is down, once finished you will something like this:
+
+----
+	Stopping zeppelin      ... done
+	Stopping neo4j         ... done
+	Stopping connect       ... done
+	Stopping broker        ... done
+	Stopping kibana        ... done
+	Stopping elasticsearch ... done
+	Stopping zookeeper     ... done
+	Removing zeppelin      ... done
+	Removing neo4j         ... done
+	Removing connect       ... done
+	Removing broker        ... done
+	Removing kibana        ... done
+	Removing elasticsearch ... done
+	Removing zookeeper     ... done
+----
+
+[start=7]
+. Pull this Docker image separately:
+
+----
+	docker pull confluentinc/cp-kafkacat
+----
 
 == Getting help
 
