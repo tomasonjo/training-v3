@@ -20,6 +20,12 @@ To prepare your development environment you must:
 
 To perform the exercises of this course you must have downloaded and installed Neo4j Desktop on your system.
 
+ifdef::env-slides[]
+. Download the latest version of Neo4j Desktop.
+. Create a project in Neo4j Desktop named *Graph Algos*.
+. Create a local 4.1.x database in this Graph Algos project.
+endif::[]
+
 ifdef::backend-html5,backend-pdf[]
 These videos show how to install and get started using Neo4j Desktop.
 For your environment you should:
@@ -68,26 +74,41 @@ ifdef::backend-html5,backend-pdf[]
 
 == Step 2: Install APOC and GDSL for your database
 
+[.is-half.left]
+--
 . Click the *Manage* area for the database.
 . Select the *Plugins* tab.
 . Install the *APOC* plugin.
 . Install the *Graph Data Science* plugin.
+--
 
+[.is-half.right]
+--
 image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
-
+--
 
 == Step 3: Install Graph Data Science Playground (NEuler)
 
 image::enter-neuler.png[local and global graph analytics,width=500, align=center]
 
+[.notes]
+--
 NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+--
 
+ifdef::env-slides[]
+=== Install Graph Data Science Playground
+endif::[]
 
 . Open the *Graph Apps* pane in the left panel.
 . Double-click *Graph Apps Gallery*, a new window opens.
 . Click the link for the Graph Data Science Playground install as shown here:
 
 image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500, align=center]
+
+ifdef::env-slides[]
+=== Install Graph Data Science Playground (2)
+endif::[]
 
 [start=4]
 . A new browser tab should open for this address.
@@ -98,31 +119,45 @@ image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500,
 
 == Datasets you will use in this course
 
+[square]
+* Game of Thrones (GOT)
+* European Roads
+* Recipes
+
 === Game of Thrones
 
 image::got.png[Game of Thrones,width=500, align=center]
 
+[.notes]
+--
 The Game of Thrones network is a monopartite graph containing *Character* nodes and their interactions in the TV shows.
 Interactions between characters are grouped by TV shows seasons.
 For example, a relationship *INTERACTS_SEASON1* represents an interaction between characters in the first season, *INTERACTS_SEASON2* means interaction in the second season, and so on.
 The relationship weight represents the strength of the interaction, and because two characters can interact in more than a single season, we are dealing with a weighted multigraph.
+--
 
 === European Roads
 
 image::european-roads.png[European Roads,width=500, align=center]
 
+[.notes]
+--
 The European Roads network is also a monopartite graph containing *Place* nodes and their road connections indicated by the *EROAD* relationship.
 The *Place* node has multiple properties, name and countryCode.
 The *EROAD* relationship has four properties, distance, inverse_distance, road_number, and watercrossing.
 We will assume that we can traverse each *EROAD* relationship in both directions, effectively treating the European Roads network as an undirected graph.
+--
 
 === Recipes
 
 image::recipe.png[recipe,width=500, align=center]
 
+[.notes]
+--
 The Recipes network is a bipartite graph containing *Recipe* and *Ingredient* nodes.
 A *CONTAINS_INGREDIENT* relationships indicates that an ingredient was used in the particular recipe.
 This is a very simple data model where each node has only a name and there are no properties in the relationships.
+--
 
 == Step 4: Start the database and Graph Data Science Playground
 
@@ -145,7 +180,6 @@ kbd:[:play 4.0-intro-graph-algos-exercises]
 and follow the instructions for *Load the Data for the Exercises*.
 
 [NOTE]
-This exercise has 4 steps.
 Estimated time to complete: 10 minutes.
 
 [.quiz]

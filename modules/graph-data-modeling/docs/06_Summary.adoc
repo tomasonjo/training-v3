@@ -95,7 +95,7 @@ ifndef::env-slides[]
 We want your feedback on this course. Please provide your https://forms.gle/SzK3ssDRyDG31SL17[feedback] so we can improve this course.
 endif::[]
 
-ifndef::backend-revealjs,backend-pdf[]
+ifndef::backend-revealjs,backend-pdf,env-slides[]
 [.certificate]
 == Certificate
 endif::[]

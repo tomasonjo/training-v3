@@ -6,12 +6,111 @@
 :imagesdir: ../images
 :module-next-title: Overview of Graph Algorithms
 
+[.notes]
+--
 Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
 They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).
+--
+
+[.statement]
 In this course you will learn how to use Neo4j's Graph Data Science library to enhance your graph-based applications that require analysis.
 
 == Course outline:
 
+ifdef::env-slides[]
+. Overview of graph algorithms
+. Introduction to the Graph Data Science Library
+. Environment setup
+. Graph algorithms workflow
+. Memory requirements
+. Commmunity Detection algorithms
+. Centrality algorithms
+. Similarity algorithms
+. Practical application of graph algorithms
+. Additional information
+
+[.notes]
+--
+*Overview of graph algorithms*:
+
+[square]
+* Graph analytics and algorithms
+* Graph structure
+** Propagation pathways
+** Flow and dynamics
+** Group resiliency
+* Types of graphs
+* Types of graph algorithms
+
+*Introduction to the Graph Data Science Library*:
+
+[square]
+* Neo4j support for graph analytics and visualization
+* The Neo4j Graph Data Science Library
+
+*Environment setup*:
+
+[square]
+* Prepare your environment for the hands-on exercises
+* Datasets used for this course
+
+*Graph algorithms workflow*:
+
+[square]
+* How graph algorithms work
+* Native projection
+* Cypher projection
+* Graph management
+* Using graph algorithms
+* Hands-on exercise
+
+*Memory requirements estimation*:
+
+[square]
+* Estimating memory required
+* Hands-on memory estimation
+
+*Community detection algorithms*:
+
+[square]
+* Weakly Connected Components
+* Label Propagation
+* Louvain Modularity
+* Triangle Count
+* Local Clustering Coefficient
+* Hands-on exercises
+
+*Centrality algorithms*:
+
+[square]
+* PageRank
+* Betweenness Centrality
+* Hands-on exercises
+
+*Similarity algorithms*:
+
+[square]
+* Node Similarity
+* Hands-on exercise
+
+*Practical application of graph algorithms*:
+
+[square]
+* Workflow overview
+* Hands-on analysis
+
+*Additional information*:
+
+[square]
+* Labs algorithms
+* Types of graphs
+* Seed parameters
+* Using Neo4j Causal Clusters
+* Common concerns
+--
+endif::[]
+
+ifndef::env-slides[]
 === Overview of graph algorithms
 
 [square]
@@ -118,11 +217,37 @@ Estimated time: _10 minutes_
 
 Estimated time: _5 minutes_
 
+endif::[]
+
 == Prerequisites
 
+[.notes]
+--
 This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
+--
 
+[square]
 * Have completed the Introduction to Neo4j 4.0 course or have equal Cypher proficiency.
 * Be familiar with using Neo4j Desktop and Neo4j Browser.
 
 This course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+
+== Resources
+
+ifndef::env-slides[]
+We have created a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
+You should register on the Community site where you can view other questions and answers for students taking our online training courses.
+The Neo4j Community Site is an excellent resource for answering many types of questions posed by other users of Neo4j.
+endif::[]
+
+Here are some resources you may use as you go through this course:
+
+[square]
+* https://neo4j.com/docs/cypher-manual/currrent/[Neo4j Cypher Manual]
+* https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard]
+* https://neo4j.com/docs/graph-data-science/current/[Graph Data Science Library Documentation]
+* https://neo4j.com/developer/resources/[Neo4j Developer Resources]
+ifndef::env-slides[]
+* https://community.neo4j.com/c/general/online-training[Neo4j Community Site]
+endif::[]
+

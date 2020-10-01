@@ -9,12 +9,25 @@
 
 == Practical application of algorithms overview
 
+[.notes]
+--
 Now that you have familiarized yourself with graph algorithms and how to execute them in the Graph Data Science library, you will do a quick graph analysis of the Recipes dataset.
+--
+
 The goal is to find communities of commonly used together ingredients and the representatives of those communities.
 
 == Practical application of algorithms workflow
 
-The analysis consists of three steps.
+The analysis you will do for this lesson consists of three steps.
+
+ifdef::env-slides[]
+. Infer a similarity network between ingredients.
+. Analyze the community structure.
+. Find the most frequently used together ingredients.
+endif::[]
+
+[.notes]
+--
 First, you will infer a similarity network between ingredients with the help of the Node Similarity algorithm.
 The algorithm will compare how often the ingredients are used together in the same recipe.
 As in the previous lesson, you will start by examining the Jaccard Similarity score distribution to help you define reasonable *topK* and *similarityCutoff* parameters.
@@ -27,11 +40,15 @@ Finally, you will use the PageRank algorithm to find the representatives of thos
 When using the PageRank algorithm, think of every relationship as a vote of confidence or influence.
 In our analysis, every relationship is a vote of commonly used together ingredients, and so, the most frequently used together ingredients will rank the highest.
 You could think of them as the representatives of those communities.
+--
 
 [.student-exercise]
 == Exercise: Practical application of algorithms
 
 In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Practical application*.
+
+[NOTE]
+Estimated time to complete: 30 minutes
 
 [.quiz]
 == Check your understanding
@@ -82,4 +99,4 @@ Select the correct answer.
 [.summary]
 == Summary
 
-In this lesson, you performed an analysis using the Graph Data Science Library algorithms.
+In this lesson, you performed an analysis of the recipe dataset using the Graph Data Science Library algorithms.

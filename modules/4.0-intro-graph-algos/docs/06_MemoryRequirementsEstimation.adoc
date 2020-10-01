@@ -8,20 +8,26 @@
 
 == Memory Requirements estimation
 
+[.notes]
+--
 The Graph Data Science library operates entirely on heap memory.
 To avoid running out of memory when dealing with large networks, you can estimate the required memory before executing the algorithms.
 GDSL supports estimating the required memory to load a named graph as well as to execute a graph algorithm by using the _estimate_ mode.
 
 The general syntax is as follows:
+--
 
 [source,cypher]
 ----
 CALL gds.<ALGO>.<MODE>.estimate()
 ----
 
+[.notes]
+--
 All algorithm procedures in the GDSL, including graph creation, will do an estimation check at the beginning of their execution.
 If the estimation check determines that the current amount of free memory is insufficient to complete the operation, the operation will be aborted, and an error will be reported. 
 This heap control logic is restrictive in the sense that it only blocks executions that are certain to not fit into memory. It does not guarantee that an execution that passed the heap control will succeed without depleting memory. Thus, it is still useful to first run the estimation mode before running an algorithm or graph creation on a large data set to ensure you will not run out of memory.
+--
 
 The amount of free heap memory can be increased by either dropping unused named graphs from the Graph Catalog, or increasing the maximum heap size before starting the Neo4j instance.
 
@@ -29,6 +35,9 @@ The amount of free heap memory can be increased by either dropping unused named 
 == Exercise: Memory requirements estimation
 
 In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Memory requirements*.
+
+[NOTE]
+Estimated time to complete: 5 minutes
 
 [.quiz]
 == Check your understanding

@@ -8,7 +8,10 @@
 
 == Similarity algorithms
 
+[.notes]
+--
 Similarity algorithms evaluate how alike nodes are at an individual level based on node properties, neighboring nodes, or relationship properties.
+--
 
 Product supported:
 
@@ -19,40 +22,48 @@ Labs implementations:
 
 [square]
 * Cosine Similarity
-
 * Euclidean Similarity
-
 * Overlap Similarity
-
 * Pearson Similarity
-
 * Approximate Nearest Neighbors
 
 == Node Similarity algorithm
 
 The Node Similarity algorithm computes similarities between pairs of nodes based on the Jaccard Similarity Score.
 Two nodes are considered similar if they share many of the same neighbors.
+
+[.notes]
+--
 The input of this algorithm is usually a bipartite graph containing two disjoint node sets.
 The Node Similarity algorithm compares all nodes from the first node set based on their relationships to nodes in the second set.
 The output of the algorithm is a unipartite network between nodes in the first node set.
 We can think of this process as translating indirect relationships to direct ones.
 Mathematically, Jaccard Similarity Score is defined as the size of the intersection divided by the size of the union of two sets.
+--
 
 image::jaccard-similarity.png[Betweenness centrality,width=500, align=center]
 
+=== Example: Node Similarity
+
+[.notes]
+--
 For example, if Basket _A_ contains {Orange, Banana, Cherry}  and Basket _B_ contains {Orange, Banana, Apple,Kiwi} then the Jaccard algorithm counts 2 co-occurrences {Orange, Banana} and divides that count by the number of items in _A_ and _B_ (while not double-counting items), in this case 5 {Orange, Banana, Apple, Cherry, Kiwi}.
 The resulting Jaccard Similarity Coefficient is 2/5 which is 0.4.
 A coefficient of 1 indicates that the compared sets are identical.
+--
 
 image::fruit.png[NodeSimilarity,width=500, align=center]
 
+=== Why use Node Similarity?
+
+[.notes]
+--
 Here is why you use Node Similarity:
+--
 
 [square]
 * Find recommendations of similar items
-
 * First step of analyzing a bipartite network
-
 * Part of link prediction analysis
 
 
@@ -109,6 +120,9 @@ endif::[]
 .. Try other datasets.
 . In Neo4j Browser: kbd:[:play 4.0-intro-graph-algos-exercises] and follow the instructions for *Node Similarity*.
 
+[NOTE]
+Estimated time to complete: 20 minutes
+
 [.quiz]
 == Check your understanding
 
@@ -157,6 +171,6 @@ Select the correct answer.
 [.summary]
 == Summary
 
-In this lesson you gained some experience with the Neo4j support Jaccard Similarity algorithm.
+In this lesson you gained some experience with the Neo4j supported Node Similarity (Jaccard Index) algorithm.
 
-You can read more about these algorithms and also the alpha (labs) algorithms in the https://neo4j.com/docs/graph-data-science/current/algorithms/community/[Graph Data Science documentation]
+You can read more about this algorithm and also the alpha (labs) algorithms in the https://neo4j.com/docs/graph-data-science/current/algorithms/community/[Graph Data Science documentation]

@@ -8,6 +8,8 @@
 
 == Graph Analytics and Algorithms
 
+[.notes]
+--
 In nature, we can observe  the formation and evolution of many social and physical networks.
 Every person is a member of a friendship network.
 We can represent the human brain as a network of neurons and synapse connections.
@@ -21,7 +23,7 @@ They help us uncover the essence of complex systems by analyzing their connectio
 
 We can observe and retrieve local graph patterns with query languages such as Cypher.
 The term graph algorithms usually refer to more global and iterative analysis, where, for example, we want to learn the overall community structure of a graph.
-
+--
 image::local-global-computation.png[local and global graph analytics,width=500, align=center]
 
 [.notes]
@@ -61,10 +63,9 @@ ifdef::env-slides[]
 [.is-half.left]
 --
 image::average-rainfall-chart.png[Average rainfall chart,width=500,align=center]
---
 
 Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate.
-
+--
 
 [.is-half.right]
 --
@@ -152,6 +153,7 @@ ifdef::env-slides[]
 --
 image::structure-density.png[Structure and density,width=500,align=center]
 --
+
 [.is-half.right]
 --
 Graph analytics is a collection of methods that help us determine strategic entities, uncover structural information, and calculate the flow of information in a given network.
@@ -201,53 +203,83 @@ ifndef::env-slides[]
 | Use the measures as features to train an ML model.
 | image:explore-plan-measure.png[Explore plan measure]
 | image:machine-learning.png[Machine learning]
-| Score outcomes and set a threshold value for a prediction.
+| Score outcomes and set a threshold values for a prediction
 |
 |===
 {set:cellbgcolor!}
 endif::[]
 
-// TBD for slides
+ifdef::env-slides[]
+[.is-half.left]
+--
+*Explore, plan, measure*
+image::explore-plan-measure.png[Explore plan measure]
+Score outcomes and set a threshold values for a prediction
+--
 
+[.is-half.right]
+--
+*Machine learning*
+image::machine-learning.png[Machine learning]
+--
+endif::[]
 
 ==== Propagation pathways
 
+[.notes]
+--
 This is a very practical example of analyzing Propagation paths; trying to understand the routes taken by network failure:
+--
 
 image::propagation-pathways.png[Propagation pathways,width=500,align=center]
 
+[.notes]
+--
 This data is from a severe US 2010 Airline congestion failure, with the purple dots showing serious delays and the greens dots doing ok.
 If we had a time sequence, we would see the cascading, rippling failures, and the key connections that spread the delay from east to west. 
 Of course, this is just one example.
 This could very well be an IT network where you are trying to contain an infection or an electrical grid.
 Or perhaps you want to encourage the spread of something, like information, and you will need to understand the best path to promote.
+--
 
 Paper: https://ifisc.uib-csic.es/~jramasco/text/characterization_delays.pdf[Characterization of Delay Propagation in the US Air-Transportation Network]
 
 ==== Flow and dynamics
 
+[.notes]
+--
 We could be looking at flow and dynamics of a network to understand its capacity and optimize movement of resources. 
+--
 
 image::flow-and-dynamics.png[Flow and dynamics,width=800,align=center]
 
+[.notes]
+--
 This Telecom example shows the complexity in just one challenge, Least Cost Routing: We have to call from point A to B, but there are various routes we might choose.
 We need to consider costs by the time of day, quality service levels, and even priority calling to be factored in when choosing the optimal route.  
 
 Evaluating flow options is very common for planning in general, and we could just as well be looking at the flow for shipping, maybe getting your goods to a customer in the most efficient manner.
 Or perhaps you need to provide services for emergencies – and you need to understand the time impacts of dynamic changes to flow.
+--
 
 ==== Group resiliency
 
+[.notes]
+--
 Group resilience and influence are a fascinating area of study because we are looking at things like how a group might break apart or how you might bring them together, the stability over time, and the influence points.
+--
 
 image::group-resiliency.png[Group resiliency,width=500,align=center]
 
+[.notes]
+--
 This diagram is from a fascinating study of a Belgian telecom network with the nodes in red being calls from French speakers and the nodes in Green being calls from Dutch speakers.
 The first thing you notice is the high call volume within their own language groups, except for that small little group that is amplified.
 In that cluster, there was no significant preference to call mostly speakers of the same language. This very group acts as a communication bridge between the other majority French and Dutch speakers.
 And if we wanted to bring these two groups closer together, we might focus on communications within that bridge group.
 
 This kind of analysis is done for all sorts of scenarios such as fraud, perhaps we are looking for a key middle man, or in biology to understand how to target a disease better.
+--
 
 Paper: https://arxiv.org/pdf/0803.0476.pdf[Fast unfolding of communities in large networks]
 
@@ -258,6 +290,18 @@ For example, on Twitter, you can follow someone, but they do not necessarily fol
 On other social media platforms, a friendship link exists only if both parties agree to it.
 Sometimes, the strength of a relationship plays an important factor.
 We might also differentiate between different types of nodes and various kinds of relationships in a network.
+
+ifdef::env-slides[]
+[square]
+* directed
+* undirected
+* weighted
+* unweighted
+* monopartite
+* multipartite
+* simple graph
+* multigraph
+endif::[]
 
 === Directed versus undirected graphs
 
@@ -303,6 +347,8 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
+=== Directed versus undirected graphs (2)
+
 [.is-half.left]
 --
 image::undirected-graph.png[Undirected graph,width=500,align=center]
@@ -359,6 +405,8 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
+=== Unweighted versus weighted graphs (2)
+
 [.is-half.left]
 --
 image::weighted-graph.png[Weighted graph,width=500,align=center]
@@ -418,6 +466,8 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
+=== Monopartite versus multipartite graphs (2)
+
 [.is-half.right]
 --
 A multipartite graph consists of many independant sets of nodes.
@@ -431,36 +481,53 @@ image::multipartite-graph.png[Multipartite graph,width=500,align=center]
 --
 endif::[]
 
+[.notes]
+--
 Centrality measures and community detection algorithms are primarily designed to run on monopartite graphs.
 Usually, it is a mistake to run centrality algorithms on a bipartite graph.
 To solve this obstacle, we can easily infer a monopartite graph from a bipartite graph.
+--
 
 ==== Monopartite projection
 
 image::monopartite-projection.png[Monopartite projection,width=500,align=center]
 
+[.notes]
+--
 This is an example of a monopartite projection, where we infer that two persons are coworkers if they are working in the same organization.
 A monopartite projection can be understood as a process of translating indirect relationships to direct relationships.
 In real-world graph analysis, we are often dealing with multipartite networks, and so, the monopartite projection is a common step of the graph analytics workflow.
+--
 
 === Multigraph versus simple graph
 
+[.notes]
+--
 A simple graph permits only a single relationship between a pair of nodes, whereas a multigraph is a graph that allows multiple connections between a single pair of nodes.
+--
 
 image::multigraph.png[Multigraph,width=500,align=center]
 
+[.notes]
+--
 Those relationships can be of different types, but we can also have many relationships of a single type between a specific pair of nodes.
 The Graph Data Science Library features support for multigraphs, as well as procedures for transforming multigraphs to single graphs.
+--
 
 == Types of graph algorithms
 
+[.notes]
+--
 Various graph problems require different graph algorithms to solve them.
 Here are some of the graph algorithm categories studied today:
+--
 
 image::types-of-algorithms.png[Types of algorithms,width=800,align=center]
 
-
+[.notes]
+--
 We will take a closer look at the categories of graph algorithms available in the GDSL.
+--
 
 === Community detection (Clustering) algorithms
 
