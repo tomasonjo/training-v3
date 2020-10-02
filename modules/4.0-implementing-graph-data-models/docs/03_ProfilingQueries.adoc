@@ -142,7 +142,7 @@ image::OriginalAirportModel.png[OriginalAirportModel,width=1000,align=center]
 ifdef::env-slides[]
 [.two-thirds-one-third-column]
 == Do we need to change the model, continued?
-ifdef::env-slides[]
+endif::[]
 
 Here is the query:
 

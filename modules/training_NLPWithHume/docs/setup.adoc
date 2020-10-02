@@ -13,23 +13,21 @@
 == Preparing for the training session
 
 You must prepare your development environment before you perform the exercises for this training session.
-We assume that you have the latest version of Neo4j Desktop installed.
 
-To prepare for this course, you must do the following before this session (scroll down for detailed instructions):
+*Step 1:* Download this license file as you will need it for running Hume
 
-To prepare your system for this course, you must perform these Steps:
+https://graphacademy.neo4j.com/setup/hume/hume-api_nodes2020_2020-10-31.lic
 
-*Step 1:* Download files used for this training session.
+*Step 2:* Follow the setup instructions here:
 
-*Step 2:* Install components you will use for the training session.
+https://github.com/graphaware/hume-nodes2020
 
-*Step 3:* Confirm that your development environment is is ready for the hands-on exercises for this training session.
 
-== Step 1: Download files used for this training session.
+Here are the credentials you should use for logging in to Hume:
 
-== Step 2: Install components you will use for the training session.
+login : nodes2020
 
-== Step 3: Confirm that your development environment is is ready for the hands-on exercises for this training session.
+password : XYps4hhLVA9WxHKF
 
 
 == Getting help
