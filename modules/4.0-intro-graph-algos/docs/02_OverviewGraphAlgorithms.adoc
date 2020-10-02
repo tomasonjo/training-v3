@@ -23,7 +23,9 @@ They help us uncover the essence of complex systems by analyzing their connectio
 
 We can observe and retrieve local graph patterns with query languages such as Cypher.
 The term graph algorithms usually refer to more global and iterative analysis, where, for example, we want to learn the overall community structure of a graph.
+
 --
+
 image::local-global-computation.png[local and global graph analytics,width=500, align=center]
 
 [.notes]
@@ -59,7 +61,11 @@ Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate.
 |===
 endif::[]
 
+
 ifdef::env-slides[]
+[.half-column]
+=== When not to use graph algorithms (2)
+
 [.is-half.left]
 --
 image::average-rainfall-chart.png[Average rainfall chart,width=500,align=center]
@@ -77,6 +83,7 @@ endif::[]
 
 A graph consists of nodes (also called vertices), which are connected by relationships (also called edges or links).
 
+[.half-column]
 === Random network
 
 ifndef::env-slides[]
@@ -105,6 +112,7 @@ However, average distribution is only valid when we are dealing with a set of in
 --
 endif::[]
 
+[.half-column]
 === Structured network
 
 ifndef::env-slides[]
@@ -135,6 +143,7 @@ Originally it was used to describe a situation where 20% of a population control
 --
 endif::[]
 
+[.half-column]
 === Structure and density
 
 ifndef::env-slides[]
@@ -160,6 +169,7 @@ Graph analytics is a collection of methods that help us determine strategic enti
 --
 endif::[]
 
+[.half-column]
 === Understanding graph complexity
 
 ifndef::env-slides[]
@@ -213,13 +223,19 @@ ifdef::env-slides[]
 [.is-half.left]
 --
 *Explore, plan, measure*
+
 image::explore-plan-measure.png[Explore plan measure]
+
 Score outcomes and set a threshold values for a prediction
 --
+
+
+=== What do people do with graph algorithms? (2)
 
 [.is-half.right]
 --
 *Machine learning*
+
 image::machine-learning.png[Machine learning]
 --
 endif::[]
@@ -303,6 +319,7 @@ ifdef::env-slides[]
 * multigraph
 endif::[]
 
+[.half-column]
 === Directed versus undirected graphs
 
 ifndef::env-slides[]
@@ -347,6 +364,7 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
+[.half-column]
 === Directed versus undirected graphs (2)
 
 [.is-half.left]
@@ -366,6 +384,7 @@ It represents an undirected relationship as two directed relationships.
 --
 endif::[]
 
+[.half-column]
 === Unweighted versus weighted graphs
 
 ifndef::env-slides[]
@@ -405,6 +424,7 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
+[.half-column]
 === Unweighted versus weighted graphs (2)
 
 [.is-half.left]
@@ -425,6 +445,7 @@ endif::[]
 Depending on the domain, sometimes a higher weight value is better, while other times, a smaller weight value is preferred.
 --
 
+[.half-column]
 === Monopartite versus multipartite graphs
 
 ifndef::env-slides[]
@@ -466,6 +487,7 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
+[.half-column]
 === Monopartite versus multipartite graphs (2)
 
 [.is-half.right]
@@ -529,6 +551,7 @@ image::types-of-algorithms.png[Types of algorithms,width=800,align=center]
 We will take a closer look at the categories of graph algorithms available in the GDSL.
 --
 
+[.half-column]
 === Community detection (Clustering) algorithms
 
 ifndef::env-slides[]
@@ -559,6 +582,7 @@ This information helps predict similar behavior or preferences, estimate resilie
 --
 endif::[]
 
+[.half-column]
 === Centrality algorithms
 
 ifndef::env-slides[]
@@ -587,6 +611,7 @@ The most famous algorithm in this category is PageRank.
 --
 endif::[]
 
+[.half-column]
 === Pathfinding algorithms
 
 ifndef::env-slides[]
@@ -615,6 +640,7 @@ They are used to evaluate routes for uses such as physical logistics and least-c
 --
 endif::[]
 
+[.half-columm]
 === Similarity algorithms
 
 ifndef::env-slides[]
@@ -645,6 +671,7 @@ They can also be used to infer a monopartite projection of a bipartite graph.
 --
 endif::[]
 
+[.half-columm]
 === Link prediction
 
 ifndef::env-slides[]
@@ -673,6 +700,7 @@ Preferential Attachment is included in this class of algorithms that has many ap
 --
 endif::[]
 
+[.half-columm]
 === Node embeddings
 
 ifndef::env-slides[]

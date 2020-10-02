@@ -71,7 +71,7 @@ endif::[]
 
 ifdef::backend-html5,backend-pdf[]
 
-
+[.half-column]
 == Step 2: Install APOC and GDSL for your database
 
 [.is-half.left]
@@ -97,6 +97,7 @@ NEuler is a project of Neo4j Labs and is an excellent way to explore smaller gra
 --
 
 ifdef::env-slides[]
+[.half-column]
 === Install Graph Data Science Playground
 endif::[]
 
@@ -159,6 +160,7 @@ A *CONTAINS_INGREDIENT* relationships indicates that an ingredient was used in t
 This is a very simple data model where each node has only a name and there are no properties in the relationships.
 --
 
+[.half-row]
 == Step 4: Start the database and Graph Data Science Playground
 
 . In Neo4j Desktop, start the database.
@@ -167,7 +169,6 @@ This is a very simple data model where each node has only a name and there are n
 .. Once started, it should open a new window as follows:
 
 image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500, align=center]
-
 
 [.student-exercise]
 == Step 5: Load the data for the exercises

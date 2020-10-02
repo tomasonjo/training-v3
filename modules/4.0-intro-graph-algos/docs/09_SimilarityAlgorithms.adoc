@@ -27,6 +27,7 @@ Labs implementations:
 * Pearson Similarity
 * Approximate Nearest Neighbors
 
+[.half-column]
 == Node Similarity algorithm
 
 The Node Similarity algorithm computes similarities between pairs of nodes based on the Jaccard Similarity Score.

@@ -128,6 +128,7 @@ Before you perform the tasks in this Guided Exercise, you must have either creat
 [NOTE]
 Estimated time to complete: 15 minutes
 
+[.half-row]
 == Label Propagation
 
 The Label Propagation algorithm (LPA) is a fast algorithm for describing communities in a graph.
@@ -244,6 +245,7 @@ endif::[]
 [NOTE]
 Estimated time to complete: 15 minutes
 
+[.half-row]
 == Louvain Modularity
 
 The Louvain Modularity algorithm is used to detect communities in large networks.
@@ -454,6 +456,7 @@ endif::[]
 [NOTE]
 Estimated time to complete: 10 minutes
 
+[.half-row]
 == Local Clustering Coefficient
 
 The Local Clustering Coefficient is the probability that neighbors of a particular node are connected to each other.

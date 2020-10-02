@@ -25,6 +25,7 @@ This toolbox aims to provide support and ease of use for all the steps in Graph 
 
 image::gds-steps.png[Graph data science steps,width=500,align=center]
 
+[.half-row]
 === Neo4j Database
 
 image::Neo4jDatabase.png[Neo4j Database,width=200,align=center]
@@ -33,6 +34,7 @@ image::Neo4jDatabase.png[Neo4j Database,width=200,align=center]
 * Neo4j is a native graph database, built from the ground up to leverage not only data but also data relationships.
 * Neo4j connects data as it is stored, enabling queries never before imagined, at speeds never thought possible.
 
+[.half-row]
 === Neo4j Bloom
 
 image::Bloom.png[Bloom,width=500,align=center]
@@ -87,11 +89,9 @@ Algorithms exist in one of three tiers of maturity:
 
 *Production-quality*
 
-
 Indicates that the algorithm has been tested with regards to stability and scalability. Algorithms in this tier are prefixed with `gds.<algorithm>` and are supported by Neo4j.
 
 *Beta*
-
 
 Indicates that the algorithm is a candidate for the production-quality tier. Algorithms in this tier are prefixed with `gds.beta.<algorithm>`.
 

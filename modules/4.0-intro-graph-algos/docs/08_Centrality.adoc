@@ -29,6 +29,7 @@ Labs implementations:
 * Harmonic Centrality
 * Eigenvector Centrality
 
+[.half-column]
 == PageRank
 
 [.notes]
@@ -64,7 +65,10 @@ image::pagerank-step-1.png[PageRank step 1,width=500, align=center]
 --
 endif::[]
 
+[.half-column]
+ifdef::env-slides[]
 === PageRank (2)
+endif::[]
 
 ifndef::env-slides[]
 {set:cellbgcolor:white}
@@ -88,7 +92,10 @@ image::pagerank-step-2.png[PageRank step 2,width=500, align=center]
 --
 endif::[]
 
+[.half-column]
+ifdef::env-slides[]
 === PageRank (3)
+endif::[]
 
 ifndef::env-slides[]
 {set:cellbgcolor:white}
@@ -198,6 +205,7 @@ endif::[]
 [NOTE]
 Estimated time to complete: 15 minutes
 
+[.half-row]
 == Betweenness Centrality
 
 Sometimes the most critical cog in the system is not the one with the most overt power or the highest status.

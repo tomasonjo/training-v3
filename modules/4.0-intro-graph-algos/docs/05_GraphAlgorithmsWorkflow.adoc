@@ -103,6 +103,7 @@ endif::[]
 Using the wildcard operator `*`, you can project all the node labels in the database.
 
 ifdef::env-slides[]
+
 ==== Node projection: Array
 endif::[]
 
@@ -217,11 +218,15 @@ The following values are allowed:
 === Multigraph to single graph
 
 The _aggregation_ parameter can be used to reduce a multigraph to a single graph.
+
 Read more about it in the https://neo4j.com/docs/graph-data-science/current/management-ops/native-projection/#native-projection-syntax-relationship-projections[documentation].
 
 === Example: Using Native projection
 
+[.notes]
+--
 Here is a simple example of using Native projection to project a named graph:
+--
 
 [source,cypher]
 ----
@@ -239,7 +244,10 @@ In relationship projection, we define a single relationship type _HELPS_ with it
 
 === Example: More complex projection
 
+[.notes]
+--
 Here is a more complex example:
+--
 
 [source,cypher]
 ----
@@ -297,10 +305,7 @@ Using the _labels_ column in return allows you to filter node labels at algorith
 
 ==== Example: Preparing for a Relationship projection
 
-[.notes]
---
 Here is an example node query describing all _Person_ and _Organization_ nodes, and returning the internal node id, its label, and the seed property:
---
 
 [source,cypher]
 ----
@@ -319,10 +324,7 @@ Instead, we have to represent an undirected relationship as two directed relatio
 
 ==== Example: Preparing for a different Relationship projection
 
-[.notes]
---
 The following relationship query reduces a 2-hop path to a single relationship, effectively representing undirected co-authorship network:
---
 
 [source,cypher]
 ----
@@ -337,10 +339,7 @@ Because we use the _count()_ aggregation in the relationship query, we effective
 
 ==== Example: Using the Relationship projections to create the named graph
 
-[.notes]
---
 Putting all this information together, we would use the following syntax to project the undirected coauthorship network:
---
 
 [source,cypher]
 ----
@@ -352,6 +351,7 @@ CALL gds.graph.create.cypher(
 )
 ----
 
+[.half-column]
 === Using Cypher projection
 
 [.notes]
@@ -405,6 +405,7 @@ The syntax to release the named graph from the Graph Catalog is:
 CALL gds.graph.drop(<graph-name>)
 ----
 
+[.half-row]
 == Anonymous graph
 
 image::AnonymousGraph.png[Anonymous graph,width=500, align=center]
