@@ -23,7 +23,7 @@ ifdef::env-slides[]
 . Environment setup
 . Graph algorithms workflow
 . Memory requirements
-. Commmunity Detection algorithms
+. Community Detection algorithms
 . Centrality algorithms
 . Similarity algorithms
 . Practical application of graph algorithms

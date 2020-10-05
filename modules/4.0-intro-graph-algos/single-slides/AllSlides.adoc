@@ -2,7 +2,6 @@
 
 include::{includedir}/01_AboutThisCourse.adoc[]
 
-////
 [.title.slide-start-title]
 include::{includedir}/02_OverviewGraphAlgorithms.adoc[leveloffset=+1]
 
@@ -36,4 +35,4 @@ include::{includedir}/11_AdditionalInformtion.adoc[leveloffset=+1]
 [.title.slide-start-title]
 include::{includedir}/12_Summary.adoc[leveloffset=+1]
 
-////
+
