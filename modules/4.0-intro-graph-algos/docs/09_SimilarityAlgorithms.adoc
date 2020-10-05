@@ -67,12 +67,12 @@ Here is why you use Node Similarity:
 * First step of analyzing a bipartite network
 * Part of link prediction analysis
 
-
+[.slide-title.has-green-background.has-team-background]
 == Guided Exercise: Getting Started with Node Similarity algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
+ifdef::env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Jaccard Similarity algorithm in NEuler to create a jaccard value for each node which indicates how many nodes are connected to the same nodes.
@@ -100,11 +100,6 @@ Follow along with this video to become familiar with Jaccard Similarity in Neo4j
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/iRE56fc9TLs
-endif::[]
-
-ifdef::backend-revealjs,env-slides[]
-[.center]
 https://youtu.be/iRE56fc9TLs
 endif::[]
 

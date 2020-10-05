@@ -53,16 +53,14 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
-[.is-half.right]
---
+
 PageRank measures importance in comparison to other nodes using an iterative process to update ranks.
 It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value/number of its outgoing links.
---
 
-[.is-half.left]
---
+
+
 image::pagerank-step-1.png[PageRank step 1,width=500, align=center]
---
+
 endif::[]
 
 [.half-column]
@@ -81,15 +79,11 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
-[.is-half.right]
---
-It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
---
 
-[.is-half.left]
---
+It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
+
 image::pagerank-step-2.png[PageRank step 2,width=500, align=center]
---
+
 endif::[]
 
 [.half-column]
@@ -108,13 +102,9 @@ ifndef::env-slides[]
 endif::[]
 
 ifdef::env-slides[]
-[.is-half.right]
---
-PageRank then continues to update values until an iterate value is reached.
---
 
-[.is-half.left]
---
+PageRank then continues to update values until an iterate value is reached.
+
 image::pagerank-step-3.png[PageRank step 3,width=500, align=center]
 
 endif::[]
@@ -148,11 +138,12 @@ Here are some examples:
 * Find the most influential features for extraction in machine learning and rank text for entity relevance in natural language processing. 
 --
 
-=== Guided Exercise: Getting Started with the PageRank algorithm
+[.slide-title.has-green-background.has-team-background]
+== Guided Exercise: Getting Started with the PageRank algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
+ifdef::env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the PageRank algorithm in NEuler to assign pagerank values to a set of nodes in the graph.
@@ -182,11 +173,6 @@ Follow along with this video to become familiar with PageRank in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/K7e9CHY9mwA
-endif::[]
-
-ifdef::backend-revealjs,env-slides[]
-[.center]
 https://youtu.be/K7e9CHY9mwA
 endif::[]
 
@@ -256,11 +242,12 @@ Here are some examples:
 * Betweenness Centrality is also used to help micro-bloggers spread their reach on Twitter, with a recommendation engine for targeting influencers.
 --
 
-=== Guided Exercise: Getting Started with the Betweenness Centrality algorithm
+[.slide-title.has-green-background.has-team-background]
+== Guided Exercise: Getting Started with the Betweenness Centrality algorithm
 
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
+ifdef::env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Betweenness Centrality  algorithm in NEuler to analyze the shortest paths between all nodes in the graph by coming up with a betweenness value for each node.
@@ -286,11 +273,6 @@ Follow along with this video to become familiar with Betweenness Centrality in N
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/jI0NdoPuWbY
-endif::[]
-
-ifdef::backend-revealjs,env-slides[]
-[.center]
 https://youtu.be/jI0NdoPuWbY
 endif::[]
 

@@ -15,7 +15,7 @@ You should now be able to:
 * Set up your environment for running graph algorithms.
 * Describe the workflow you use to use the Graph Data Science library.
 * Determine memory requirements for your analysis.
-* Use Community Detections algorithms.
+* Use Community Detection algorithms.
 * Use Centrality algorithms.
 * Use Similarity algorithms.
 * Perform data analysis using a set of graph algorithms.
@@ -48,8 +48,7 @@ endif::[]
 
 Neo4j Sandboxes for experimenting with graphs:
 
-https://
-sandbox.neo4j.com/?ref=graph-academy
+https://sandbox.neo4j.com/?ref=graph-academy
 
 Videos on  the Neo4j YouTube channel:
 
@@ -97,7 +96,7 @@ ifndef::env-slides[]
 We want your feedback on this course. Please provide your https://forms.gle/EsBJcFPFi3k48H2i8[feedback] so we can improve this course.
 endif::[]
 
-ifndef::backend-revealjs,backend-pdf,env-slides[]
+ifdef::backend-html5[]
 [.certificate]
 == Certificate
 endif::[]

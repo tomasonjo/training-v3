@@ -603,7 +603,7 @@ CALL gds.<algo>.mutate()
 ----
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting started with the graph algorithms workflow
+== Guided Exercise: Getting started with the graph algorithms workflow
 
 [.notes]
 --
@@ -658,10 +658,6 @@ ifdef::backend-pdf[]
 https://youtu.be/7NHj09myb5Q
 endif::[]
 
-ifdef::backend-revealjs,env-slides[]
-[.center]
-https://youtu.be/7NHj09myb5Q
-endif::[]
 
 ifdef::backend-html5[]
 [.center]

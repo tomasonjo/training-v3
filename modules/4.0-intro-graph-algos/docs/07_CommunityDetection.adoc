@@ -64,11 +64,14 @@ Here are some examples:
 * Identifying disconnected subgraphs to run resource intensive algorithms (like Node Similarity) in parallel.
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting Started with the Weakly Connected Component algorithm
+== Guided Exercise: Getting Started with the Weakly Connected Component algorithm
 
+ifdef::env-slides[]
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
+[NOTE]
+Before you perform the tasks in this Guided Exercise, you must have either created and started the database in the Neo4j Desktop, and followed the instructions for loading the data in the Browser Guide:  `:play 4.0-intro-graph-algos-exercises`.
+
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Connected Component algorithm in NEuler to discover how specific types of nodes are connected in the graph, regardless of the direction of their relationhips.
@@ -91,9 +94,9 @@ Show the students the basics of using NEuler and have them do the same on their 
 . This concludes our look at running the Connected Component algorithm in NEuler.
 
 Here is the video:  https://youtu.be/eu7HBaPev7A
-
-endif::[]
 --
+endif::[]
+
 
 ifdef::backend-html5,backend-pdf[]
 Follow along with this video to run the Connected Components algorithm using the Graph Data Science Playground (NEuler).
@@ -103,19 +106,15 @@ ifdef::backend-pdf[]
 https://youtu.be/eu7HBaPev7A
 endif::[]
 
-ifdef::backend-revealjs,env-slides[]
-[.center]
-https://youtu.be/eu7HBaPev7A
-endif::[]
-
 ifdef::backend-html5[]
 [.center]
 video::eu7HBaPev7A[youtube,width=560,height=315]
 endif::[]
 
-
+ifndef::env-slides[]
 [NOTE]
 Before you perform the tasks in this Guided Exercise, you must have either created and started the database in the Neo4j Desktop, and followed the instructions for loading the data in the Browser Guide:  `:play 4.0-intro-graph-algos-exercises`.
+endif::[]
 
 [.student-exercise]
 === Exercise: Weakly Connected Components
@@ -187,11 +186,11 @@ Here are some examples:
 --
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting Started with the Label Propagation algorithm
+== Guided Exercise: Getting Started with the Label Propagation algorithm
 
+ifdef::env-slides[]
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at some of the ways to use the Label Propagation algorithm in NEuler to categorize groups of nodes based upon their relationships in the graph and the weights of their relationships.
@@ -214,19 +213,15 @@ Show the students the basics of using NEuler and have them do the same on their 
 . This concludes our look at how to run the Label Propagation algorithm and how changing parameters will influence the lpa property that is written to the nodes.
 
 Here is the video:  https://youtu.be/C6I4qCwNutY
-
-endif::[]
 --
+endif::[]
+
 
 ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with running the Label Propagation algorithm using the Graph Data Science Playground (NEuler).
-
-ifdef::backend-pdf[]
-https://youtu.be/C6I4qCwNutY
 endif::[]
 
-ifdef::backend-revealjs,env-slides[]
-[.center]
+ifdef::backend-pdf[]
 https://youtu.be/C6I4qCwNutY
 endif::[]
 
@@ -301,11 +296,12 @@ Here are some examples:
 * Evaluating criminal networks and holes in the structure.
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting Started with the Louvain Modularity algorithm
+== Guided Exercise: Getting Started with the Louvain Modularity algorithm
 
+ifdef::env-slides[]
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
+
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at some of the ways to use the Louvain algorithm in NEuler to categorize groups of nodes and intermediate communities based upon their relationships in the graph and the weights of their relationships.
@@ -327,20 +323,15 @@ Show the students the basics of using NEuler and have them do the same on their 
 . This concludes our look at the different ways you can use the Louvain algorithm to discover communities and intermediate communities in the data.
 
 Here is the video:  https://youtu.be/QYVrcWZfw_0
-
-endif::[]
 --
+endif::[]
+
 
 ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with running the Louvain Modularity algorithm in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/QYVrcWZfw_0
-endif::[]
-
-ifdef::backend-revealjs,env-slides[]
-[.center]
 https://youtu.be/QYVrcWZfw_0
 endif::[]
 
@@ -405,11 +396,12 @@ Here is an example:
 Identifying features for classifying a given website as spam content. This is described in https://chato.cl/papers/becchetti_2007_approximate_count_triangles.pdf[Efficient Semi-streaming Algorithms for Local Triangle Counting in Massive].
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting Started with the Triangle Count algorithm
+== Guided Exercise: Getting Started with the Triangle Count algorithm
 
+ifdef::env-slides[]
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
+
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Triangle Count algorithm in NEuler to discover the number of triangles a node participates in.
@@ -425,19 +417,15 @@ Show the students the basics of using NEuler and have them do the same on their 
 
 Here is the video:  https://youtu.be/7Rx6x6_l-sI
 
-endif::[]
 --
+endif::[]
+
 
 ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with running the Triangle Count algorithm in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/7Rx6x6_l-sI
-endif::[]
-
-ifdef::backend-revealjs,env-slides[]
-[.center]
 https://youtu.be/7Rx6x6_l-sI
 endif::[]
 
@@ -501,11 +489,11 @@ Here are some examples:
 --
 
 [.slide-title.has-green-background.has-team-background]
-=== Guided Exercise: Getting Started with the Local Clustering Coefficient algorithm
+== Guided Exercise: Getting Started with the Local Clustering Coefficient algorithm
 
+ifdef::env-slides[]
 [.notes]
 --
-ifdef::backend-revealjs,env-slides[]
 Show the students the basics of using NEuler and have them do the same on their systems:
 
 . Let's look at how to use the Local Clustering Coefficient  algorithm in NEuler to create a local clustering coefficient value for each node which indicates the probability that neighbors of a particular node are connected to each other.
@@ -521,20 +509,15 @@ Show the students the basics of using NEuler and have them do the same on their 
 
 
 Here is the video:  https://youtu.be/8AbJSeKSI5w
-
-endif::[]
 --
+endif::[]
+
 
 ifdef::backend-html5,backend-pdf[]
 Follow along with this video to become familiar with running the Local Clustering Coefficient algorithm in Neo4j NEuler.
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/8AbJSeKSI5w
-endif::[]
-
-ifdef::backend-revealjs,env-slides[]
-[.center]
 https://youtu.be/8AbJSeKSI5w
 endif::[]
 

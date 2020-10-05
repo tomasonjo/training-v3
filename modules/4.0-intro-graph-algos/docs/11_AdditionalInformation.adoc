@@ -12,25 +12,22 @@ At the end of this course, we would like to give you some additional information
 
 === Labs algorithms
 
+ifdef::env-slides[]
+[square]
+* Explore the alpha and beta tier of the Community Detection, Centrality, and Similarity algorithms
+* Explore the Link Prediction algorithms
+* Explore the Pathfinding algorithms
+* Also explore Node Embedding.
+
+https://neo4j.com/docs/graph-data-science/current/algorithms/
+endif::[]
+
 [.notes]
 --
 This course only covered the production-quality graph algorithms in the GDSL, but there are more than 40 algorithms available in alpha and beta tier at the time of this writing.
 Take a look at the https://neo4j.com/docs/graph-data-science/current/algorithms/[GDSL documentation] to explore all the supported graph algorithms.
 You will find Link Prediction, Pathfinding, and Node Embedding algorithms that we have not explored in this course.
 --
-
-ifdef::env-slides[]
-
-[square]
-* Explore the alpha and beta tier of the Community Detection, Centrality, and Similarity algorithms
-* Explore the Link Prediction algorithms
-* Explore the Pathfinding algorithms
-
-[NOTE]
-Also explore Node Embedding.
-
-https://neo4j.com/docs/graph-data-science/current/algorithms/
-endif::[]
 
 === Types of graph
 

@@ -11,6 +11,7 @@ include::{includedir}/03_IntroToGDSL.adoc[leveloffset=+1]
 [.title.slide-start-title]
 include::{includedir}/04_EnvironmentSetup.adoc[leveloffset=+1]
 
+
 [.title.slide-start-title]
 include::{includedir}/05_GraphAlgorithmsWorkflow.adoc[leveloffset=+1]
 
@@ -20,17 +21,22 @@ include::{includedir}/06_MemoryRequirementsEstimation.adoc[leveloffset=+1]
 [.title.slide-start-title]
 include::{includedir}/07_CommunityDetection.adoc[leveloffset=+1]
 
+
 [.title.slide-start-title]
 include::{includedir}/08_Centrality.adoc[leveloffset=+1]
+
 
 [.title.slide-start-title]
 include::{includedir}/09_SimilarityAlgorithms.adoc[leveloffset=+1]
 
+
 [.title.slide-start-title]
 include::{includedir}/10_PracticalApplication.adoc[leveloffset=+1]
 
+
 [.title.slide-start-title]
-include::{includedir}/11_AdditionalInformtion.adoc[leveloffset=+1]
+include::{includedir}/11_AdditionalInformation.adoc[leveloffset=+1]
+
 
 [.title.slide-start-title]
 include::{includedir}/12_Summary.adoc[leveloffset=+1]
