@@ -351,13 +351,12 @@ CALL gds.graph.create.cypher(
 )
 ----
 
-[.half-column]
+[.half-row]
 === Using Cypher projection
 
-[.notes]
---
+
 Another example of projecting inferred relationships with Cypher projections is from the https://www.nbcnews.com/tech/social-media/russian-trolls-went-attack-during-key-election-moments-n827176[Russian Twitter troll analysis].
---
+
 
 image::inferred-relationships.png[Inferred relationships,width=500, align=center]
 

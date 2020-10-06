@@ -51,7 +51,7 @@ Here are some examples:
 * Simple statistical results (sums, averages, ratios).
 ** Example: Regular reporting based on defined criteria and well-organized data:
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 [grid=cols,cols="70,30"]
 |===
 |image:average-rainfall-chart.png[Average rainfall chart]
@@ -62,7 +62,7 @@ Image from https://www.weather-atlas.com/en/slovenia/ljubljana-climate.
 endif::[]
 
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 [.half-column]
 === When not to use graph algorithms (2)
 
@@ -82,7 +82,7 @@ A graph consists of nodes (also called vertices), which are connected by relatio
 [.half-column]
 === Random network
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -94,7 +94,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::random-network.png[Random network,width=500,align=center]
 
@@ -107,7 +107,7 @@ endif::[]
 [.half-column]
 === Structured network
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -120,7 +120,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::structured-network.png[Structured network,width=500,align=center]
 
@@ -134,7 +134,7 @@ endif::[]
 [.half-column]
 === Structure and density
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -145,7 +145,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::structure-density.png[Structure and density,width=500,align=center]
 
@@ -156,7 +156,7 @@ endif::[]
 [.half-column]
 === Understanding graph complexity
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -168,7 +168,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::graph-complexity.png[Understanding graph complexity,width=500,align=center]
 
@@ -182,8 +182,7 @@ endif::[]
 
 There are a number of real-world use-cases, where graph algorithms are applied.
 
-
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="50,50",stripes=none]
 |===
@@ -199,7 +198,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 *Explore, plan, measure*
 
@@ -208,7 +207,6 @@ image::explore-plan-measure.png[Explore plan measure]
 Score outcomes and set a threshold values for a prediction
 
 === What do people do with graph algorithms? (2)
-
 
 *Machine learning*
 
@@ -283,7 +281,7 @@ On other social media platforms, a friendship link exists only if both parties a
 Sometimes, the strength of a relationship plays an important factor.
 We might also differentiate between different types of nodes and various kinds of relationships in a network.
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 [square]
 * directed
 * undirected
@@ -298,7 +296,7 @@ endif::[]
 [.half-column]
 === Directed versus undirected graphs
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -310,7 +308,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::directed-graph.png[Directed graph,width=500,align=center]
 
@@ -321,7 +319,7 @@ On the other hand, Sam's feed will contain only Phillip's posts as he does not f
 endif::[]
 
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -335,7 +333,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 [.half-column]
 === Directed versus undirected graphs (2)
 
@@ -354,7 +352,7 @@ endif::[]
 [.half-column]
 === Unweighted versus weighted graphs
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -365,7 +363,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::unweighted-graph.png[Unweighted graph,width=500,align=center]
 
@@ -374,7 +372,7 @@ Therefore, no notion of the strength of a relationship exists.
 
 endif::[]
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -386,7 +384,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 [.half-column]
 === Unweighted versus weighted graphs (2)
 
@@ -406,7 +404,7 @@ Depending on the domain, sometimes a higher weight value is better, while other 
 [.half-column]
 === Monopartite versus multipartite graphs
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -418,7 +416,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 A monopartite graph consists of a single set of nodes.
 In Neo4j terms, it means we have nodes with a single label.
@@ -428,7 +426,7 @@ image::monopartite-graph.png[Monopartite graph,width=500,align=center]
 
 endif::[]
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -440,7 +438,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 [.half-column]
 === Monopartite versus multipartite graphs (2)
 
@@ -503,7 +501,7 @@ We will take a closer look at the categories of graph algorithms available in th
 [.half-column]
 === Community detection (Clustering) algorithms
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
@@ -516,7 +514,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::community-detection.png[Community Detection,width=300,align=center]
 
@@ -530,7 +528,7 @@ endif::[]
 [.half-column]
 === Centrality algorithms
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
@@ -542,7 +540,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::centrality.png[Community Detection,width=300,align=center]
 
@@ -555,7 +553,7 @@ endif::[]
 [.half-column]
 === Pathfinding algorithms
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
@@ -567,7 +565,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::pathfinding.png[Pathfinding,width=300,align=center]
 
@@ -580,7 +578,7 @@ endif::[]
 [.half-columm]
 === Similarity algorithms
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
@@ -593,7 +591,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::similarity.png[Similarity,width=300,align=center]
 
@@ -607,7 +605,7 @@ endif::[]
 [.half-columm]
 === Link prediction
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
@@ -619,7 +617,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::link-prediction.png[Link prediction,width=300,align=center]
 
@@ -632,7 +630,7 @@ endif::[]
 [.half-column]
 === Node embeddings
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="30,70",stripes=none]
 |===
@@ -643,7 +641,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 image::node-embedding.png[Node embedding,width=300,align=center]
 

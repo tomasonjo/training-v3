@@ -98,7 +98,7 @@ endif::[]
 . Double-click *Graph Apps Gallery*, a new window opens.
 . Click the link for the Graph Data Science Playground install as shown here:
 
-image::GDSPlaygroundInstall.jpg[Graph Data Science Playground Install,width=500, align=center]
+image::GDSPlaygroundInstall.png[Graph Data Science Playground Install,width=500, align=center]
 
 ifdef::env-slides[]
 === Install Graph Data Science Playground (2)

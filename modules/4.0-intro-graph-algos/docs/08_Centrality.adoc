@@ -41,7 +41,7 @@ The underlying assumption is that a node is only as important as the nodes that 
 An example of this type of influence might be having the ear of a general that considers you very credible will likely make you more powerful than being popular with your fellow foot soldiers.
 --
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -52,12 +52,10 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 PageRank measures importance in comparison to other nodes using an iterative process to update ranks.
 It starts by assigning values to nodes as 1/n (n is the total number of nodes linked to) and value to relationships as that nodes value/number of its outgoing links.
-
-
 
 image::pagerank-step-1.png[PageRank step 1,width=500, align=center]
 
@@ -68,7 +66,7 @@ ifdef::env-slides[]
 === PageRank (2)
 endif::[]
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -78,7 +76,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 It then starts to update values for nodes as the sum of the prior in-link values. The relationship values are updated the same way they were initially assigned.
 
@@ -91,7 +89,7 @@ ifdef::env-slides[]
 === PageRank (3)
 endif::[]
 
-ifndef::env-slides[]
+ifndef::env-slides,backend-pdf[]
 {set:cellbgcolor:white}
 [frame="none",grid=none,cols="75,25",stripes=none]
 |===
@@ -101,7 +99,7 @@ ifndef::env-slides[]
 {set:cellbgcolor!}
 endif::[]
 
-ifdef::env-slides[]
+ifdef::env-slides,backend-pdf[]
 
 PageRank then continues to update values until an iterate value is reached.
 
