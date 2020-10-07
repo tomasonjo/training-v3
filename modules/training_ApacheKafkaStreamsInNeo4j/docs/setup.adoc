@@ -87,6 +87,14 @@ It will take approximately 1.5 hours to download the files for this training.
 	docker pull confluentinc/cp-kafkacat
 ----
 
+[start=8]
+. Before your start the Docker instance, you will need to configure it to use at least 8G of RAM. Please follow these instructions per your system:
+.. https://docs.docker.com/docker-for-mac/#resources
+.. https://docs.docker.com/docker-for-windows/#resources
+
+[NOTE]
+Because of the size of the configuration, it will take time for processes to start when you begin your hands-on exercises.
+
 == Getting help
 
 If you have problems with setting up your Neo4j development environment, you can join http://community.neo4j.com/[Neo4j Community] and ask a question https://community.neo4j.com/c/general/online-training[here].
