@@ -18,10 +18,20 @@ You must prepare your development environment before you perform the exercises f
 
 https://graphacademy.neo4j.com/setup/hume/hume-api_nodes2020_2020-10-31.lic
 
+[NOTE]
+This license file expires October 31, 2020. You can request a new license file by emailing info@graphaware.com.
+
 *Step 2:* Follow the setup instructions here:
 
 https://github.com/graphaware/hume-nodes2020
 
+*Step 3:* Before your start the Docker instance, you will need to configure it to use at least 12-16G of RAM. Please follow these instructions per your system:
+
+* https://docs.docker.com/docker-for-mac/#resources
+* https://docs.docker.com/docker-for-windows/#resources
+
+[NOTE]
+Because of the size of the configuration, it will take time for processes to start when you begin your hands-on exercises.
 
 Here are the credentials you should use for logging in to Hume:
 
