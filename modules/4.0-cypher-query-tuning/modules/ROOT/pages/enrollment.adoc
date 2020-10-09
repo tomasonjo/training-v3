@@ -1,6 +1,11 @@
 = Cypher Query Tuning in Neo4j 4.0
 :slug: cypher-query-tuning-40
 :description: Learn how to get the best performance out of your Cypher queries.
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 4 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/CypherQueryTuning-40.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/CypherQueryTuning-40_withTitle.jpg[]
 

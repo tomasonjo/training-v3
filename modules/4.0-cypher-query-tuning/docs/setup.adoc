@@ -2,9 +2,10 @@
 :doctype: book
 :toc: left
 :toclevels: 3
-:imagesdir: ../images
 :manual-cypher: {manual}/cypher
 :setup-guides-dir: ../../setup-guides/docs
+// for IntelliJ preview
+:imagesdir: ../images
 
 == Overview
 

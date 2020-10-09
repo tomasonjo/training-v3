@@ -3,7 +3,9 @@
 :doctype: book
 :toc: left
 :toclevels: 3
-:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-certificate:
 
 == Course Summary
 

@@ -1,23 +1,23 @@
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
-include::{includedir}/00_AboutThisCourse.adoc[]
-
-[.title.slide-start-title]
-include::{includedir}/01_HowQueriesWorkInNeo4j.adoc[leveloffset=+1]
+include::{includedir}/00-cqt-40-about.adoc[]
 
 [.title.slide-start-title]
-include::{includedir}/02_PreparingForQueryTuning.adoc[leveloffset=+1]
+include::{includedir}/01-cqt-40-how-queries-work-in-neo4j.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/03_ReducingCardinality.adoc[leveloffset=+1]
+include::{includedir}/02-cqt-40-preparing-for-query-tuning.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/04_OptimizingPropertyAccess.adoc[leveloffset=+1]
+include::{includedir}/03-cqt-40-reducing-cardinality.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/05_MonitoringQueries.adoc[leveloffset=+1]
+include::{includedir}/04-cqt-40-optimizing-property-access.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/06_Summary.adoc[leveloffset=+1]
+include::{includedir}/05-cqt-40-monitoring-queries.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/06-cqt-40-summary.adoc[leveloffset=+1]
 
 
