@@ -45,7 +45,7 @@ subprojects {
 
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
-    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.2.0'
+    asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.3.1'
     asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.30")
   }
 
@@ -113,7 +113,7 @@ subprojects {
         break
       case "4.0-intro-graph-algos":
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}01-iga-40-about-this-course/"
-        break      default:
+        break default:
         "https://neo4j.com/"
     }
   }
@@ -145,7 +145,8 @@ subprojects {
       'manual': 'http://neo4j.com/docs/developer-manual/current',
       'manual-cypher': '{manual}/cypher',
       'module-enrollment-url': enrollmentUrl,
-      'document-metadata-attrs-include': 'author,slug,parent-path,categories*,tags*,taxonomies*<>'
+      'document-metadata-attrs-include': 'author,slug,parent-path,categories*,tags*,taxonomies*<>',
+      'module-descriptor-path': "${projectDir}/build/online/asciidoctor-module-descriptor.yml"
   }
 
   asciidoctorGemsPrepare.with {
@@ -174,44 +175,47 @@ subprojects {
     }
   }
 
-  task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
-    source = fileTree(dir: "${projectDir}/docs", include: '**/*.adoc', excludes: ['enrollment.adoc', 'setup.adoc'])
-    outputDir "${projectDir}/build/online"
-    moduleName stage != 'production' ? "_testing_${project.name}" : project.name
-  }
-
-  // for debugging purpose
-  task convertStandaloneHtml(type: AsciidoctorTask) {
-    dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
-
-    inputs.dir "${rootProject.projectDir}/resources/templates"
-
-    asciidoctorj {
-      options template_dirs: ["${rootProject.projectDir}/resources/templates"]
-      attributes 'imagesdir': 'images',
-        'sectanchors': ''
-    }
-
-    baseDir file("${projectDir}/docs")
-    sourceDir file("${projectDir}/docs")
-    sources {
-      excludes.addAll(['enrollment.adoc', 'setup.adoc'])
-    }
-    outputDir file("${projectDir}/build/standalone")
-
-    resources {
-      from("${rootProject.projectDir}/resources/images") {
-        include '**'
-        into 'images'
-      }
-      from("${projectDir}/images") {
-        include '**'
-        into 'images'
-      }
-    }
-  }
-
   afterEvaluate { Project project ->
+    def sourceImagesDirPath = project.hasProperty("antoraStructure") ? "${projectDir}/modules/ROOT/images" : "${projectDir}/images"
+    def sourceDocsRootPath = project.hasProperty("antoraStructure") ? "${projectDir}/modules/ROOT/pages" : "${projectDir}/docs"
+
+    task generateModuleDescriptor(type: AsciidoctorModuleDescriptorGenerateTask) {
+      source = fileTree(dir: sourceDocsRootPath, include: '**/*.adoc', excludes: ['enrollment.adoc', 'setup.adoc'])
+      outputDir "${projectDir}/build/online"
+      moduleName stage != 'production' ? "_testing_${project.name}" : project.name
+    }
+
+    // for debugging purpose
+    task convertStandaloneHtml(type: AsciidoctorTask) {
+      dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
+
+      inputs.dir "${rootProject.projectDir}/resources/templates"
+
+      asciidoctorj {
+        options template_dirs: ["${rootProject.projectDir}/resources/templates"]
+        attributes 'imagesdir': 'images',
+          'sectanchors': ''
+      }
+
+      baseDir file(sourceDocsRootPath)
+      sourceDir file(sourceDocsRootPath)
+      sources {
+        excludes.addAll(['enrollment.adoc', 'setup.adoc'])
+      }
+      outputDir file("${projectDir}/build/standalone")
+
+      resources {
+        from("${rootProject.projectDir}/resources/images") {
+          include '**'
+          into 'images'
+        }
+        from(sourceImagesDirPath) {
+          include '**'
+          into 'images'
+        }
+      }
+    }
+
     if (project.hasProperty("browserGuides")) {
       task convertBrowserGuideHtml(type: AsciidoctorTask) {
         dependsOn asciidoctorGemsPrepare
@@ -256,18 +260,18 @@ subprojects {
         }
 
         resources {
-          from("${projectDir}/images") {
+          from(sourceImagesDirPath) {
             include '**'
             into 'images'
           }
         }
 
-        baseDir file("${projectDir}/docs")
-        sourceDir file("${projectDir}/docs")
+        baseDir file(sourceDocsRootPath)
+        sourceDir file(sourceDocsRootPath)
         outputDir file("${projectDir}/build/browser-guide")
       }
 
-      if (new File("${projectDir}/images").exists()) {
+      if (new File(sourceImagesDirPath).exists()) {
         if (stage == 'production') {
           task s3UploadContent(type: S3UploadTask) {
             dependsOn convertBrowserGuideHtml
@@ -282,11 +286,11 @@ subprojects {
         }
       }
     } else {
-      if (new File("${projectDir}/images").exists()) {
+      if (new File(sourceImagesDirPath).exists()) {
         if (stage == 'production') {
           task s3UploadImages(type: S3UploadTask) {
             //overwrite = true
-            source = "${projectDir}/images"
+            source = sourceImagesDirPath
             bucket = "dev.assets.neo4j.com"
             destination = "course/${project.name}/images"
             acl.set(CannedAccessControlList.PublicRead)
@@ -294,7 +298,7 @@ subprojects {
         } else if (stage == 'testing') {
           task s3UploadImages(type: S3UploadTask) {
             //overwrite = true
-            source = "${projectDir}/images"
+            source = sourceImagesDirPath
             bucket = "dev.assets.neo4j.com"
             destination = "test-course/${project.name}/images"
             acl.set(CannedAccessControlList.PublicRead)
@@ -329,349 +333,350 @@ subprojects {
         }
       }
     }
-  }
 
-  task convertOnlineHtml(type: AsciidoctorTask) {
-    dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
 
-    inputs.dir "${rootProject.projectDir}/resources/templates/course"
+    task convertOnlineHtml(type: AsciidoctorTask) {
+      dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
 
-    asciidoctorj {
-      def imagesdir = {
-        switch (stage) {
-          case 'production':
-            return "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/"
-          case 'testing':
-            return "https://s3.amazonaws.com/dev.assets.neo4j.com/test-course/${project.name}/images/"
-          default:
-            return './images'
+      inputs.dir "${rootProject.projectDir}/resources/templates/course"
+
+      asciidoctorj {
+        def imagesdir = {
+          switch (stage) {
+            case 'production':
+              return "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/"
+            case 'testing':
+              return "https://s3.amazonaws.com/dev.assets.neo4j.com/test-course/${project.name}/images/"
+            default:
+              return './images'
+          }
+        }
+        requires "${rootProject.projectDir}/resources/extensions.rb"
+        options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
+        attributes 'imagesdir': imagesdir,
+          'sectanchors': '',
+          'intercom-app-id': 'dt0ig5ab'
+      }
+
+      if (stage != 'production' && stage != 'testing') {
+        resources {
+          from(sourceImagesDirPath) {
+            include '**'
+            into 'images'
+          }
         }
       }
-      requires "${rootProject.projectDir}/resources/extensions.rb"
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
-      attributes 'imagesdir': imagesdir,
-        'sectanchors': '',
-        'intercom-app-id': 'dt0ig5ab'
+
+      baseDir file(sourceDocsRootPath)
+      sourceDir file(sourceDocsRootPath)
+      sources {
+        excludes.addAll(['enrollment.adoc', 'setup.adoc'])
+      }
+      outputDir file("${projectDir}/build/online")
     }
 
-    if (stage != 'production' && stage != 'testing') {
+    task convertEnrollmentHtml(type: AsciidoctorTask) {
+      dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
+
+      inputs.dir "${rootProject.projectDir}/resources/templates/enrollment"
+
+      asciidoctorj {
+        requires "${rootProject.projectDir}/resources/extensions.rb"
+        options template_dirs: ["${rootProject.projectDir}/resources/templates/enrollment"]
+        attributes 'parent-path': '/graphacademy/online-training',
+          'document-metadata-attrs-include': 'author,slug,parent-path',
+          'module-course-url': courseUrl,
+          'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
+      }
+
+      baseDir file(sourceDocsRootPath)
+      sourceDir file(sourceDocsRootPath)
+      sources {
+        include 'enrollment.adoc'
+      }
+      outputDir file("${projectDir}/build/enrollment")
+    }
+
+    task convertSetupHtml(type: AsciidoctorTask) {
+      dependsOn asciidoctorGemsPrepare
+
+      inputs.dir "${rootProject.projectDir}/resources/templates/setup"
+
+      asciidoctorj {
+        options template_dirs: ["${rootProject.projectDir}/resources/templates/setup"]
+        attributes 'parent-path': '/graphacademy/setup',
+          'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
+          'document-metadata-attrs-include': 'author,slug,parent-path',
+          'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
+      }
+
+      baseDir file("${projectDir}/docs")
+      sourceDir file("${projectDir}/docs")
+      sources {
+        include 'setup.adoc'
+      }
+      outputDir file("${projectDir}/build/setup")
+
+      doLast {
+        file("${projectDir}/build/setup/setup.html").renameTo("${projectDir}/build/setup/${project.name}.html")
+      }
+    }
+
+    task convertSlides(type: AsciidoctorJRevealJSTask) {
+      dependsOn asciidoctorGemsPrepare
+
+      revealjsOptions {
+        controls = false
+        progressBar = true
+        pushToHistory = true
+        overviewMode = true
+        touchMode = true
+        theme = 'white'
+      }
+
+      asciidoctorj {
+        requires "${rootProject.projectDir}/resources/extensions.rb"
+        options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
+        // for no transition between slides add this line after imagesdir:
+        // 'revealjs_transition': 'none',
+        attributes 'revealjs_customtheme': 'themes/reveal.css',
+          'imagesdir': 'images',
+          'env-slides': '',
+          'revealjs_transition': 'none',
+          'revealjs_center': 'false',
+          'revealjs_width': '1280',
+          'revealjs_height': '720',
+          'revealjs_margin': '0.05',
+          'revealjs_fragmentinurl': 'true',
+          'revealjs_slidenumber': 'c',
+          'revealjs_minscale': '0.2',
+          'revealjs_maxscale': '2'
+      }
+
+      plugins 'denehyg/menu.js', 'rajgoel/chalkboard/chalkboard.js'
+      pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
+
+      baseDirFollowsSourceDir()
+      sourceDir file(sourceDocsRootPath)
+      sources {
+        excludes.addAll(['enrollment.adoc', 'setup.adoc'])
+      }
+      outputDir file("${projectDir}/build/slides")
+
       resources {
-        from("${projectDir}/images") {
+        from("${rootProject.projectDir}/resources/themes") {
+          include 'reveal.css'
+          into 'themes'
+        }
+        from("${rootProject.projectDir}/resources/extensions") {
+          include 'cypher-highlightjs.js'
+          into 'extensions'
+        }
+        from("${rootProject.projectDir}/resources/images") {
+          include '**'
+          into 'images'
+        }
+        from(sourceImagesDirPath) {
           include '**'
           into 'images'
         }
       }
     }
 
-    baseDir file("${projectDir}/docs")
-    sourceDir file("${projectDir}/docs")
-    sources {
-      excludes.addAll(['enrollment.adoc', 'setup.adoc'])
-    }
-    outputDir file("${projectDir}/build/online")
-  }
+    task convertOnlinePdf(type: AsciidoctorPdfTask) {
+      dependsOn asciidoctorGemsPrepare
 
-  task convertEnrollmentHtml(type: AsciidoctorTask) {
-    dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
+      inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
 
-    inputs.dir "${rootProject.projectDir}/resources/templates/enrollment"
-
-    asciidoctorj {
-      requires "${rootProject.projectDir}/resources/extensions.rb"
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/enrollment"]
-      attributes 'parent-path': '/graphacademy/online-training',
-        'document-metadata-attrs-include': 'author,slug,parent-path',
-        'module-course-url': courseUrl,
-        'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
-    }
-
-    baseDir file("${projectDir}/docs")
-    sourceDir file("${projectDir}/docs")
-    sources {
-      include 'enrollment.adoc'
-    }
-    outputDir file("${projectDir}/build/enrollment")
-  }
-
-  task convertSetupHtml(type: AsciidoctorTask) {
-    dependsOn asciidoctorGemsPrepare
-
-    inputs.dir "${rootProject.projectDir}/resources/templates/setup"
-
-    asciidoctorj {
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/setup"]
-      attributes 'parent-path': '/graphacademy/setup',
-        'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
-        'document-metadata-attrs-include': 'author,slug,parent-path',
-        'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
-    }
-
-    baseDir file("${projectDir}/docs")
-    sourceDir file("${projectDir}/docs")
-    sources {
-      include 'setup.adoc'
-    }
-    outputDir file("${projectDir}/build/setup")
-
-    doLast {
-      file("${projectDir}/build/setup/setup.html").renameTo("${projectDir}/build/setup/${project.name}.html")
-    }
-  }
-
-  task convertSlides(type: AsciidoctorJRevealJSTask) {
-    dependsOn asciidoctorGemsPrepare
-
-    revealjsOptions {
-      controls = false
-      progressBar = true
-      pushToHistory = true
-      overviewMode = true
-      touchMode = true
-      theme = 'white'
-    }
-
-    asciidoctorj {
-      requires "${rootProject.projectDir}/resources/extensions.rb"
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
-      // for no transition between slides add this line after imagesdir:
-      // 'revealjs_transition': 'none',
-      attributes 'revealjs_customtheme': 'themes/reveal.css',
-        'imagesdir': 'images',
-        'env-slides': '',
-        'revealjs_transition': 'none',
-        'revealjs_center': 'false',
-        'revealjs_width': '1280',
-        'revealjs_height': '720',
-        'revealjs_margin': '0.05',
-        'revealjs_fragmentinurl': 'true',
-        'revealjs_slidenumber': 'c',
-        'revealjs_minscale': '0.2',
-        'revealjs_maxscale': '2'
-    }
-
-    plugins 'denehyg/menu.js', 'rajgoel/chalkboard/chalkboard.js'
-    pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
-
-    baseDirFollowsSourceDir()
-    sourceDir file("${projectDir}/docs")
-    sources {
-      excludes.addAll(['enrollment.adoc', 'setup.adoc'])
-    }
-    outputDir file("${projectDir}/build/slides")
-
-    resources {
-      from("${rootProject.projectDir}/resources/themes") {
-        include 'reveal.css'
-        into 'themes'
+      asciidoctorj {
+        requires "${rootProject.projectDir}/resources/extensions.rb"
+        modules.pdf.version '1.5.2'
+        attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
+          'imagesdir': '../images'
       }
-      from("${rootProject.projectDir}/resources/extensions") {
-        include 'cypher-highlightjs.js'
-        into 'extensions'
+
+      baseDir file(sourceDocsRootPath)
+      sourceDir file(sourceDocsRootPath)
+      sources {
+        excludes.addAll(['enrollment.adoc', 'setup.adoc'])
       }
-      from("${rootProject.projectDir}/resources/images") {
-        include '**'
-        into 'images'
+      outputDir file("${projectDir}/build/online")
+    }
+
+    /**
+     * Copy svg images to "build/images-pdf" before generating a PDF.
+     */
+    task copySvgImagesPdf(type: Copy) {
+      doFirst {
+        mkdir "$buildDir/images-pdf"
       }
-      from("${projectDir}/images") {
-        include '**'
-        into 'images'
+
+      from sourceImagesDirPath
+      include '*.svg'
+      into "$buildDir/images-pdf"
+    }
+
+    /**
+     * Prepare the images before generating a PDF.
+     *
+     * Since high-resolution images consume a *lot* of memory while generating a PDF with Asciidoctor,
+     * we downscale png and jpg/jpeg images using a max width and height in pixels.
+     *
+     * We rely on ImageMagick (more specifically `mogrify` command line) to downscale the images.
+     * https://imagemagick.org/
+     *
+     * We also copy svg images to "build/images-pdf".
+     */
+    task prepareImagesPdf(type: Exec) {
+      dependsOn copySvgImagesPdf
+
+      inputs.dir sourceImagesDirPath
+      inputs.files "${projectDir}/images/**"
+      outputs.dir "$buildDir/images-pdf"
+      outputs.files "$buildDir/images-pdf/**"
+
+      workingDir sourceImagesDirPath
+
+      def commandsArgs = []
+      if (!fileTree(sourceImagesDirPath).filter { it.isFile() && it.getName().endsWith('.png') }.isEmpty()) {
+        commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.png'])
+      }
+      if (!fileTree(sourceImagesDirPath).filter { it.isFile() && it.getName().endsWith('.jpeg') }.isEmpty()) {
+        commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpeg'])
+      }
+      if (!fileTree(sourceImagesDirPath).filter { it.isFile() && it.getName().endsWith('.jpg') }.isEmpty()) {
+        commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpg'])
+      }
+      commandsArgs.push(['echo'])
+
+      for (commandArgs in commandsArgs) {
+        commandLine commandArgs
       }
     }
-  }
 
-  task convertOnlinePdf(type: AsciidoctorPdfTask) {
-    dependsOn asciidoctorGemsPrepare
+    /* single document */
+    task convertSinglePdf(type: AsciidoctorPdfTask) {
+      dependsOn asciidoctorGemsPrepare
+      dependsOn prepareImagesPdf
 
-    inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
+      inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
 
-    asciidoctorj {
-      requires "${rootProject.projectDir}/resources/extensions.rb"
-      modules.pdf.version '1.5.2'
-      attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
-        'imagesdir': '../images'
-    }
-
-    baseDir file("${projectDir}/docs")
-    sourceDir file("${projectDir}/docs")
-    sources {
-      excludes.addAll(['enrollment.adoc', 'setup.adoc'])
-    }
-    outputDir file("${projectDir}/build/online")
-  }
-
-  /**
-   * Copy svg images to "build/images-pdf" before generating a PDF.
-   */
-  task copySvgImagesPdf(type: Copy) {
-    doFirst {
-      mkdir "$buildDir/images-pdf"
-    }
-
-    from "${projectDir}/images"
-    include '*.svg'
-    into "$buildDir/images-pdf"
-  }
-
-  /**
-   * Prepare the images before generating a PDF.
-   *
-   * Since high-resolution images consume a *lot* of memory while generating a PDF with Asciidoctor,
-   * we downscale png and jpg/jpeg images using a max width and height in pixels.
-   *
-   * We rely on ImageMagick (more specifically `mogrify` command line) to downscale the images.
-   * https://imagemagick.org/
-   *
-   * We also copy svg images to "build/images-pdf".
-   */
-  task prepareImagesPdf(type: Exec) {
-    dependsOn copySvgImagesPdf
-
-    inputs.dir "${projectDir}/images"
-    inputs.files "${projectDir}/images/**"
-    outputs.dir "$buildDir/images-pdf"
-    outputs.files "$buildDir/images-pdf/**"
-
-    workingDir "${projectDir}/images"
-
-    def commandsArgs = []
-    if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.png') }.isEmpty()) {
-      commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.png'])
-    }
-    if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpeg') }.isEmpty()) {
-      commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpeg'])
-    }
-    if (!fileTree("${projectDir}/images").filter { it.isFile() && it.getName().endsWith('.jpg') }.isEmpty()) {
-      commandsArgs.push(['mogrify', '-path', "$buildDir/images-pdf", '-thumbnail', '1024x768>', '*.jpg'])
-    }
-    commandsArgs.push(['echo'])
-
-    for (commandArgs in commandsArgs) {
-      commandLine commandArgs
-    }
-  }
-
-  /* single document */
-  task convertSinglePdf(type: AsciidoctorPdfTask) {
-    dependsOn asciidoctorGemsPrepare
-    dependsOn prepareImagesPdf
-
-    inputs.file "${rootProject.projectDir}/resources/themes/pdf-theme.yml"
-
-    asciidoctorj {
-      requires "${rootProject.projectDir}/resources/extensions.rb"
-      inProcess 'IN_PROCESS'
-      modules.pdf.version '1.5.2'
-      attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
-        'imagesdir': "${buildDir}/images-pdf"
-    }
-
-    baseDir file("${projectDir}/single-pdf")
-    sourceDir file("${projectDir}/single-pdf")
-    outputDir file("${projectDir}/build/single-pdf")
-  }
-
-  task convertSingleSlides(type: AsciidoctorJRevealJSTask) {
-    dependsOn asciidoctorGemsPrepare
-
-    revealjsOptions {
-      controls = false
-      progressBar = true
-      pushToHistory = true
-      overviewMode = true
-      touchMode = true
-      theme = 'white'
-    }
-
-    asciidoctorj {
-      requires "${rootProject.projectDir}/resources/extensions.rb"
-      options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
-      attributes 'revealjs_customtheme': 'themes/reveal.css',
-        'imagesdir': 'images',
-        'env-slides': '',
-        'revealjs_center': 'false',
-        'revealjs_width': '1280',
-        'revealjs_height': '720',
-        'revealjs_margin': '0.05',
-        'revealjs_fragmentinurl': 'true',
-        'revealjs_slidenumber': 'c',
-        'revealjs_minscale': '0.2',
-        'revealjs_maxscale': '2'
-    }
-
-    plugins 'denehyg/menu.js', 'rajgoel/chalkboard/chalkboard.js'
-    pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
-
-    baseDirFollowsSourceDir()
-    sourceDir file("${projectDir}/single-slides")
-    outputDir file("${projectDir}/build/single-slides")
-
-    resources {
-      from("${rootProject.projectDir}/resources/themes") {
-        include 'reveal.css'
-        into 'themes'
+      asciidoctorj {
+        requires "${rootProject.projectDir}/resources/extensions.rb"
+        inProcess 'IN_PROCESS'
+        modules.pdf.version '1.5.2'
+        attributes 'pdf-style': "${rootProject.projectDir}/resources/themes/pdf-theme.yml",
+          'imagesdir': "${buildDir}/images-pdf"
       }
-      from("${rootProject.projectDir}/resources/extensions") {
-        include 'cypher-highlightjs.js'
-        into 'extensions'
+
+      baseDir file("${projectDir}/single-pdf")
+      sourceDir file("${projectDir}/single-pdf")
+      outputDir file("${projectDir}/build/single-pdf")
+    }
+
+    task convertSingleSlides(type: AsciidoctorJRevealJSTask) {
+      dependsOn asciidoctorGemsPrepare
+
+      revealjsOptions {
+        controls = false
+        progressBar = true
+        pushToHistory = true
+        overviewMode = true
+        touchMode = true
+        theme = 'white'
       }
-      from("${rootProject.projectDir}/resources/images") {
-        include '**'
-        into 'images'
+
+      asciidoctorj {
+        requires "${rootProject.projectDir}/resources/extensions.rb"
+        options template_dirs: ["${rootProject.projectDir}/resources/templates/slide"]
+        attributes 'revealjs_customtheme': 'themes/reveal.css',
+          'imagesdir': 'images',
+          'env-slides': '',
+          'revealjs_center': 'false',
+          'revealjs_width': '1280',
+          'revealjs_height': '720',
+          'revealjs_margin': '0.05',
+          'revealjs_fragmentinurl': 'true',
+          'revealjs_slidenumber': 'c',
+          'revealjs_minscale': '0.2',
+          'revealjs_maxscale': '2'
       }
-      from("${projectDir}/images") {
-        include '**'
-        into 'images'
+
+      plugins 'denehyg/menu.js', 'rajgoel/chalkboard/chalkboard.js'
+      pluginConfigurationFile "${rootProject.projectDir}/resources/extensions/revealjs-extension-config.js"
+
+      baseDirFollowsSourceDir()
+      sourceDir file("${projectDir}/single-slides")
+      outputDir file("${projectDir}/build/single-slides")
+
+      resources {
+        from("${rootProject.projectDir}/resources/themes") {
+          include 'reveal.css'
+          into 'themes'
+        }
+        from("${rootProject.projectDir}/resources/extensions") {
+          include 'cypher-highlightjs.js'
+          into 'extensions'
+        }
+        from("${rootProject.projectDir}/resources/images") {
+          include '**'
+          into 'images'
+        }
+        from(sourceImagesDirPath) {
+          include '**'
+          into 'images'
+        }
       }
     }
-  }
 
-  // beta!
-  task convertGoogleSlides(type: AsciidoctorTask) {
-    dependsOn asciidoctorGemsPrepare
+    // beta!
+    task convertGoogleSlides(type: AsciidoctorTask) {
+      dependsOn asciidoctorGemsPrepare
 
-    // disable up-to-date
-    outputs.upToDateWhen { false }
+      // disable up-to-date
+      outputs.upToDateWhen { false }
 
-    asciidoctorj {
-      // must be a web accessible location
-      attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
-        'env-slides': '',
-        'experimental': '',
-        'google-slides-copy-id': '1aR6dlFmu6ssBuf1yQJm8I_cfTOOpSBHIfjqCQzuDsdQ',
-        'google-slides-credentials-path': "${rootProject.rootDir}/tokens/credentials.json",
-        'google-slides-layout-student-exercise': "CUSTOM_2", // Title gold with body
-        'google-slides-layout-quiz': "CUSTOM_1", // Title purple
-        'google-slides-layout-one-sixth-five-sixths-row': "CUSTOM_3", // one sixth + fix sixths row
-        'google-slides-layout-half-row': "CUSTOM_4", // half row
-        'google-slides-layout-half-column': "CUSTOM_5", // half column
-        'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6", // one third + two thirds column
-        'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7", // five sixths one sixth row
-        'google-slides-layout-two-thirds-one-third-column': "CUSTOM_8" // two thirds + one third column
+      asciidoctorj {
+        // must be a web accessible location
+        attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
+          'env-slides': '',
+          'experimental': '',
+          'google-slides-copy-id': '1aR6dlFmu6ssBuf1yQJm8I_cfTOOpSBHIfjqCQzuDsdQ',
+          'google-slides-credentials-path': "${rootProject.rootDir}/tokens/credentials.json",
+          'google-slides-layout-student-exercise': "CUSTOM_2", // Title gold with body
+          'google-slides-layout-quiz': "CUSTOM_1", // Title purple
+          'google-slides-layout-one-sixth-five-sixths-row': "CUSTOM_3", // one sixth + fix sixths row
+          'google-slides-layout-half-row': "CUSTOM_4", // half row
+          'google-slides-layout-half-column': "CUSTOM_5", // half column
+          'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6", // one third + two thirds column
+          'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7", // five sixths one sixth row
+          'google-slides-layout-two-thirds-one-third-column': "CUSTOM_8" // two thirds + one third column
+      }
+
+      inProcess "IN_PROCESS"
+      baseDirFollowsSourceDir()
+      sourceDir file("${projectDir}/single-slides")
+      outputDir file("${projectDir}/build/google-slides")
+      outputOptions {
+        backends = ["googleslides"]
+      }
     }
 
-    inProcess "IN_PROCESS"
-    baseDirFollowsSourceDir()
-    sourceDir file("${projectDir}/single-slides")
-    outputDir file("${projectDir}/build/google-slides")
-    outputOptions {
-      backends = ["googleslides"]
+    convertGoogleSlides.configurations 'asciidoctorgoogleslides'
+
+    task convert {
+      dependsOn convertOnlineHtml
+      dependsOn convertEnrollmentHtml
+      dependsOn convertSetupHtml
+      dependsOn convertOnlinePdf
+      dependsOn convertSlides
     }
+
+    task liveReload(type: LiveReloadTask) {
+      docRoot "${projectDir}/build"
+    }
+
+    task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
   }
-
-  convertGoogleSlides.configurations 'asciidoctorgoogleslides'
-
-  task convert {
-    dependsOn convertOnlineHtml
-    dependsOn convertEnrollmentHtml
-    dependsOn convertSetupHtml
-    dependsOn convertOnlinePdf
-    dependsOn convertSlides
-  }
-
-  task liveReload(type: LiveReloadTask) {
-    docRoot "${projectDir}/build"
-  }
-
-  task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
 }
 
