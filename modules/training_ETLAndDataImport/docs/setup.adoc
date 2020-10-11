@@ -21,16 +21,35 @@ To prepare your system for this course, you must perform these Steps:
 
 *Step 1:* Download files used for this training session.
 
-*Step 2:* Install components you will use for the training session.
+*Step 2:* Install and configure components you will use for the training session.
 
 *Step 3:* Confirm that your development environment is is ready for the hands-on exercises for this training session.
 
 == Step 1: Download files used for this training session.
 
-== Step 2: Install components you will use for the training session.
+Download this file on to your local machine:
+
+https://s3.amazonaws.com/datasets.neo4j.org/stackoverflow-2020-09.tar
+
+[NOTE]
+This is a 2.5Gb file!
+
+== Step 2: Install  and configure components you will use for the training session.
+
+In Neo4j Desktop:
+
+. Create a 4.1.x database in a project of your choice.
+. Add the APOC plugin to the project.
+. Configure at least 2G heap and 512M Page Cache for your Neo4j instance
+. Start the Neo4j instance to make sure it starts with the configuration changes.
 
 == Step 3: Confirm that your development environment is is ready for the hands-on exercises for this training session.
 
+. Make sure that you have 4-8 Gb RAM free.
+. Make sure you have at least 30 Gb free space on your hard drive.
+.. The downloaded extracted files will be 5Gb.
+.. The database sill be 17Gb
+. Have an IDE/development setup for a language of your choice: Python, Java, C#, JavaScript
 
 == Getting help
 
