@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Environment Setup
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == Neo4j for Graph Data Science
 

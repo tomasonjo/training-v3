@@ -1,0 +1,13 @@
+name: training-iga-40
+title: Introduction to Graph Algorithms in Neo4j 4.0
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: '4.0-intro-graph-algos'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

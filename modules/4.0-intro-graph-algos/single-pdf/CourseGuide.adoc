@@ -3,20 +3,19 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
 
-include::{includedir}/01_AboutThisCourse.adoc[leveloffset=+1]
-include::{includedir}/02_OverviewGraphAlgorithms.adoc[leveloffset=+1]
-include::{includedir}/03_IntroToGDSL.adoc[leveloffset=+1]
-include::{includedir}/04_EnvironmentSetup.adoc[leveloffset=+1]
-include::{includedir}/05_GraphAlgorithmsWorkflow.adoc[leveloffset=+1]
-include::{includedir}/06_MemoryRequirementsEstimation.adoc[leveloffset=+1]
-include::{includedir}/07_CommunityDetection.adoc[leveloffset=+1]
-include::{includedir}/08_Centrality.adoc[leveloffset=+1]
-include::{includedir}/09_SimilarityAlgorithms.adoc[leveloffset=+1]
-include::{includedir}/10_PracticalApplication.adoc[leveloffset=+1]
-include::{includedir}/11_AdditionalInformation.adoc[leveloffset=+1]
-include::{includedir}/12_Summary.adoc[leveloffset=+1]
+include::{includedir}/01-iga-40-about-this-course.adoc[leveloffset=+1]
+include::{includedir}/02-iga-40-overview-of-graph-algorithms.adoc[leveloffset=+1]
+include::{includedir}/03-iga-40-intro-to-gds.adoc[leveloffset=+1]
+include::{includedir}/04-iga-40-environment-setup.adoc[leveloffset=+1]
+include::{includedir}/05-iga-40-graph-algorithms-workflow.adoc[leveloffset=+1]
+include::{includedir}/06-iga-40-memory-requirements-estimation.adoc[leveloffset=+1]
+include::{includedir}/07-iga-40-community-detection.adoc[leveloffset=+1]
+include::{includedir}/08-iga-40-centrality-algorithms.adoc[leveloffset=+1]
+include::{includedir}/09-iga-40-similarity-algorithms.adoc[leveloffset=+1]
+include::{includedir}/10-iga-40-ingredient-analysis.adoc[leveloffset=+1]
+include::{includedir}/11-iga-40-additional-information.adoc[leveloffset=+1]
 
 
