@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Summary
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -42,7 +45,7 @@ There may be situations where a user/client performs a query that does not retur
 In this case, you can run this procedure to view all currently running queries:
 --
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 :queries
 // OR
@@ -65,7 +68,7 @@ image::listQueries.png[listQueries,width=800,align=center]
 You can also specify what values you want returned from this procedure:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CALL dbms.listQueries() YIELD  queryId, username, metaData, query, planner , runtime , indexes , startTime , protocol , clientAddress , requestUri , status , resourceInformation , activeLockCount , elapsedTimeMillis , cpuTimeMillis , waitTimeMillis , idleTimeMillis , allocatedBytes , pageHits , pageFaults
 ----
@@ -80,7 +83,7 @@ image::listQueries2.png[listQueries2,width=800,align=center]
 Here is an example of a query that takes a long time to execute because it returns a lot of data:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 EXPLAIN MATCH (a)--(b)--(c)--(d)--(e)--(f) RETURN a,b,c,d,e,f
 ----
@@ -116,7 +119,7 @@ Later in this lesson, you will learn how to kill it from another session.
 Here is an example of a query that takes a long time to execute:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 EXPLAIN MATCH (a), (b), (c), (d), (e) RETURN count(id(a))
 ----
@@ -159,7 +162,7 @@ As a user with the admin role, you can view queries of all users and you can als
 
 If you know that a query is running too long and you want to kill it, you do the following:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CALL dbms.listQueries() YIELD query, queryId;
 // followed by
@@ -189,7 +192,7 @@ time to complete. One option for you to help automate the killing of long-runnin
 create a script that executes a Cypher statement such as the following:
 --
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 CALL dbms.listQueries() YIELD query, elapsedTimeMillis, queryId, username
 WHERE NOT query CONTAINS toLower('LOAD')
@@ -248,7 +251,7 @@ Here are the properties you would set in the Neo4j configuration to log a messag
 provide information when a query takes more than 1000ms to complete:
 --
 
-[source]
+[source,properties,role=noheader]
 ----
 dbms.logs.query.enabled=INFO
 dbms.logs.query.threshold=1000ms

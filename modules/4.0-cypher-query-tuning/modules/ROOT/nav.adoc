@@ -1,0 +1,7 @@
+* xref:00-cqt-40-about.adoc[]
+* xref:01-cqt-40-how-queries-work-in-neo4j.adoc[]
+* xref:02-cqt-40-preparing-for-query-tuning.adoc[]
+* xref:03-cqt-40-reducing-cardinality.adoc[]
+* xref:04-cqt-40-optimizing-property-access.adoc[]
+* xref:05-cqt-40-monitoring-queries.adoc[]
+* xref:06-cqt-40-summary.adoc[]

@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Optimizing Property Access
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -58,7 +61,7 @@ endif::[]
 Here is a query that we will be looking to improve. The value of _$movieTitle_ is "The Matrix":
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (m:Movie {title: $movieTitle})
@@ -125,7 +128,7 @@ ifndef::env-slides[]
 Here is a revised query:
 endif::[]
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (dir:Person)-[:DIRECTED]->(m:Movie {title: $movieTitle})<-[:ACTED_IN]-(actor:Person)
@@ -202,7 +205,7 @@ endif::[]
 Here is our original query:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (m:Movie {title: $movieTitle})
@@ -227,7 +230,7 @@ We are passing 26 rows through the query.
 --
 We can improve this query buy moving the aggregation up:
 --
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (m:Movie {title: $movieTitle})
@@ -264,7 +267,7 @@ It behaves line an inline subquery.
 Here is a rewrite of the original query using pattern comprehension:
 --
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (m:Movie {title: $movieTitle})
@@ -361,7 +364,7 @@ Ideally you want the greatest selectivity for the anchor nodes.
 For example, here is a query that will use NodeByLabelScan:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (p:Person)
@@ -383,7 +386,7 @@ image::PersonNodes.png[PersonNodes,width=800,align=center]
 But if you are only really interested in directors, you should anchor your query with this node label:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (p:Director)
@@ -419,7 +422,7 @@ Here is an example where a full-text schema index helps. We want to query the ro
 For this example, the value of _$testString_ is "CABBIE".
 --
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
@@ -459,7 +462,7 @@ To solve this problem, we will refactor the graph to have 2 properties for the _
 
 We refactor the graph as follows, keeping the roles property as is:
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
 SET r.primaryRole = r.roles[0], r.secondaryRole = r.roles[1]
@@ -480,7 +483,7 @@ ifndef::env-slides[]
 So the previous query with this change is:
 endif::[]
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (a:Actor)-[r:ACTED_IN]->(m:Movie)
@@ -523,7 +526,7 @@ After adding this type of index, we can query the graph, but the query will chan
 Because it is a full-text schema index, it must be called differently and the query changes to something like this:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 CALL db.index.fulltext.queryRelationships(
@@ -556,7 +559,7 @@ The solution to this is the remove the labels from the `MATCH` statement so that
 Here is the improved query:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 CALL db.index.fulltext.queryRelationships(
@@ -601,7 +604,7 @@ By default, the execution plan will use a single index.
 
 Here is a query that uses an index _$actor1_ is "Tom Cruise" and _$actor2_ is "Kevin Bacon".
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH p = (p1:Person)-[:ACTED_IN*4]-(p2:Person)
@@ -631,7 +634,7 @@ In this example, we are interested in all possible paths of this length. If you 
 
 You can force the use of more than one index so that an index is used to find _p1_ nodes and _p2_ nodes:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH p = (p1:Person)-[:ACTED_IN*4]-(p2:Person)
@@ -674,7 +677,7 @@ Here are some things to consider:
 
 You can use the APOC procedure to view the selectivity of your indexes.
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CALL apoc.schema.nodes()
 ----
@@ -690,7 +693,7 @@ For example, you can set a flag or status label to a set of nodes that you know 
 In our graph, there is an index on the _Genre_ nodes. By default, any query that is based upon the _name_ property will use the index.
 If you want to scan the nodes by their label and not use the index, then you can specify:
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (g:Genre)
@@ -711,7 +714,7 @@ Whether queries that rely simply on labels, rather than the index, will depend o
 
 Here is our starting query:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (a)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d)
@@ -724,7 +727,7 @@ image::WithoutJOIN.png[WithoutJOIN,width=800,align=center]
 === Adding JOIN
 
 We can add `JOIN` to this query:
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (a)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d)
@@ -766,7 +769,7 @@ If the query is written so that a limited number of results are returned, it is 
 Here is an example:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
@@ -789,7 +792,7 @@ Here you can see that after the initial query, many rows are passed through the 
 Here is a better way to do it:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -816,7 +819,7 @@ image::LimitEarly.png[LimitEarly,width=800,align=center]
 Here is another example where we have set _$titleMatch_ to "Matrix"
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (p:Person)-[:ACTED_IN| DIRECTED]->(m)
@@ -844,7 +847,7 @@ image::DistinctLate.png[DistinctLate,width=800,align=center]
 We can make a slight improvement by moving `DISTINCT` earlier in the query:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (p:Person)-[:ACTED_IN| DIRECTED]->(m)
@@ -874,7 +877,7 @@ In this example _$actor1_ is "Tom Cruise" and _$actor2_ is "Kevin Bacon".
 We use `UNWIND` to create the rows for all nodes visited:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH path = (p1:Person)-[:ACTED_IN*4]-(p2:Person)
@@ -903,7 +906,7 @@ The `UNWIND` adds 170 rows to the query. This isn't that bad considering the tot
 Here is another example where we use `UNWIND` to combine lists to return rows to process:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (p1:Person)-[:ACTED_IN]-(m1)-[:ACTED_IN]-(p)-[:ACTED_IN]-(m2)-[:ACTED_IN]-(p2:Person)
@@ -935,7 +938,7 @@ But for read-only queries, you should aim to eliminate cartesian products in you
 
 Here is an example where we have set _$year_ to 1990:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE MATCH (a:Actor), (m:Movie)
 WHERE m.releaseYear = $year AND a.born > $year
@@ -952,7 +955,7 @@ image::Cartesian1.png[Cartesian1,width=800,align=center]
 Here is a better way to do the same query using subqueries:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 CALL {
@@ -978,7 +981,7 @@ It is about the same number of db hits, but it performs much faster.
 Here is an  even better way to do the same query using `UNION`:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE MATCH (m:Movie) WHERE m.releaseYear = $year
 RETURN {type:"movies", movies: collect(m)} as data
