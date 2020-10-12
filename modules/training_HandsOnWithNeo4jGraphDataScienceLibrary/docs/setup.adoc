@@ -1,0 +1,85 @@
+
+= Setting up your development environment for the training session:  Hands on with Neo4j's Graph Data Science Library
+:presenter: Neo Technology
+:twitter: neo4j
+:doctype: book
+:toc: left
+:toclevels: 4
+:experimental:
+:imagesdir: ../images
+:manual: http://neo4j.com/docs/developer-manual/current
+:manual-cypher: {manual}/cypher
+
+== Preparing for the course
+
+You must prepare your development environment before you take this training session, Hands on with Neo4j's Graph Data Science Library
+To prepare for this course, you must do the following before this session (scroll down for detailed instructions):
+
+. Ensure that you have the latest Neo4j Desktop (1.3.5 or later) installed on your laptop.
+. Create the project and database for this training.
+. Install plugins for the database.
+. Download the PaySim fraud database dump file and load it.
+. Modify the Neo4j configuration.
+. Verify your setup.
+
+== Step 1: Install latest version of Neo4j Desktop
+
+If you do not have Neo4j Desktop installed, https://neo4j.com/download-center/#desktop[download] version 1.3.5 or later and install it.
+
+If you already have Neo4j Desktop installed, but is is not up to version 1.3.5 or later, upgrade by selecting *Neo4j Desktop -> Check for updates*.
+
+
+== Step 2: Create the project and Neo4j instance for this training
+
+. In Neo4j Desktop, create a new project named *Fraud*
+
+. In this new project, create a graph of version 4.1.1. Don't forget to type a password for this database.
+
+== Step 3: Install plugins for this database
+
+For this training, you will use the GDS and APOC plugins. You should NOT install the Graph Algorithms plugin!
+
+. Go to the Manage area for the Fraud database you just created.
+
+. Install the GDS and APOC plugins. (Do NOT install the Graph Algorithms plugin)
+
+. Start the database.
+
+== Step 4: Download the PaySim database dump file and load it
+
+. Download the dump file:  https://graphacademy.neo4j.com/setup/GDS-Paysim/paysim_v2_4.1.1.dump
+. For database you created earlier, open a terminal window.
+. In the terminal window type: bin/neo4j-admin load --from=<absolute path to the paysim_v2_4.1.1.dump file> --database=paysim
+. In Neo4j Browser:
+.. Connect to the Neo4j instance you started.
+.. Type CREATE database paysim
+.. Type :use paysim
+. Confirm that the paysim database is accessible.
+
+== Step 5: Modify the Neo4j Configuration
+
+. In the Manage area for the database, click the *Settings* tab.
+. Modify the default initial heap size, max heap size, and page cache memory configuration as follows:
+.. dbms.memory.heap.initial_size=2G
+.. dbms.memory.heap.max_size=2G
+.. dbms.memory.pagecache.size=2G
+. Click *Apply* to save your changes.
+. Restart the database instance.
+
+== Step 6: Verify your setup
+
+. After the database starts, you should see 332,948 nodes and 979,772 relationships in the database.
+. Open Neo4j Browser for the started fraud database.
+. Enter these statements:
+.. RETURN gds.version() // It should return 1.3.3
+.. RETURN apoc.version() // It should return 4.1.0.2
+
+
+*Congratulations!* You are now ready to perform the exercises for this training session.
+
+
+== Getting help
+
+If you have problems installing Neo4j Desktop, you can join http://community.neo4j.com/[Neo4j Community] and ask a question https://community.neo4j.com/c/general/online-training[here].
+
+
