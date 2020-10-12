@@ -1,0 +1,6 @@
+* xref:00-igdm-40-implementing-graph-data-models-about.adoc[]
+* xref:01-igdm-40-implementing-first-model.adoc[]
+* xref:02-igdm-40-importing-data-graph.adoc[]
+* xref:03-igdm-40-profiling-queries.adoc[]
+* xref:04-igdm-40-refactoring-graphs.adoc[]
+* xref:05-igdm-40-implementing-graph-data-models-summary.adoc[]

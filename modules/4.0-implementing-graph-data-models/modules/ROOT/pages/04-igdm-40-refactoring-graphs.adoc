@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Summary
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -97,7 +100,7 @@ The _Flight.flightId_ property will contain the following data which will be uni
 
 Before we perform the refactoring of the existing graph, we add the uniqueness constraint:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CREATE CONSTRAINT Flight_flightId_constraint ON (f:Flight)
        ASSERT f.flightId IS UNIQUE
@@ -107,7 +110,7 @@ CREATE CONSTRAINT Flight_flightId_constraint ON (f:Flight)
 
 Here is the code to refactor the graph:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)
 MERGE (newFlight:Flight {flightId: connection.airline + connection.flightNumber +
@@ -156,7 +159,7 @@ This is because index maintenance is expensive and you do not want a large refac
 Here is the code to create the index on the flight number property:
 --
 
-[source.center, cypher]
+[source.center,cypher]
 ----
 CREATE INDEX Flight_number_index FOR (f:Flight) ON (f.number)
 ----
@@ -167,13 +170,13 @@ CREATE INDEX Flight_number_index FOR (f:Flight) ON (f.number)
 --
 After you have refactored the graph, you then profile the query that you are hoping to improve.
 --
-[small]
+[.small]
 --
 Recall that the query is: What are the airports and flight information for flight number 1016 for airline WN?
 
 Here is the original query:
 --
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)
@@ -181,11 +184,12 @@ WHERE connection.airline = 'WN' AND connection.flightNumber = '1016'
 RETURN origin.code, destination.code, connection.date, connection.departure, connection.arrival
 ----
 
-[small]
+[.small]
 --
 We must change the query to work with the new model as follows:
 --
-[source, cypher]
+
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -222,7 +226,7 @@ Relationships, especially those with properties take up unnecessary space in the
 
 image::DeleteConnected_to.png[DeleteConnected_to,width=1000,align=center]
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 MATCH ()-[connection:CONNECTED_TO]->()
 DELETE connection
@@ -247,7 +251,7 @@ Estimated time to complete: 30 minutes.
 
 == Adding another domain question
 
-[small]
+[.small]
 --
 We need to add another question for our application:
 
@@ -271,7 +275,7 @@ endif::[]
 Here is the query:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (origin:Airport {code: 'LAS'})
     <-[:ORIGINATES_FROM]-(flight:Flight)-[:LANDS_IN]->
@@ -279,7 +283,7 @@ MATCH (origin:Airport {code: 'LAS'})
 WHERE flight.date = '2019-1-3'
 RETURN origin, destination, flight
 ----
-[small]
+[.small]
 --
 [NOTE]
 You will work with this query in the next exercise where you have loaded 10k nodes into the graph.
@@ -335,7 +339,7 @@ This is an instance where we do not want to remove the relationships between air
 
 image::Refactor4.png[Refactor4,width=1000,align=center]
 
-[small]
+[.small]
 --
 [NOTE]
 You only pull out a node if you are going to query through it, otherwise a property will suffice.
@@ -359,7 +363,7 @@ That way we do not have to go through the _Flight_ nodes to find a date.
 Just like the _Flight_ nodes, it will have a unique ID, _AirportDay.airportDayId_ so that it can used it in the query.
 --
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 CREATE CONSTRAINT AirportDay_airportDayId_constraint ON (a:AirportDay)
        ASSERT a.airportDayId IS UNIQUE
@@ -384,7 +388,7 @@ Then, you will want to:
 
 == Refactor implementation
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (origin:Airport)<-[:ORIGINATES_FROM]-(flight:Flight)-
       [:LANDS_IN]->(destination:Airport)
@@ -414,7 +418,7 @@ After a refactor, you should check that all queries perform OK. Here is our firs
 
 [.is-two-thirds.left-column]
 --
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -452,7 +456,7 @@ Then we want to profile our second query after the refactor: Find all the flight
 
 [.is-two-thirds.left-column]
 --
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})
     <-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -491,7 +495,7 @@ Due to the change in the model, we must rewrite the  query as:
 
 [.is-two-thirds.left-column]
 --
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})-
     [:HAS_DAY]->(:AirportDay {date: '2019-1-3'})<-
@@ -541,7 +545,7 @@ Estimated time to complete: 30 minutes.
 [.half-column]
 == More questions for the model?
 
-[small]
+[.small]
 --
 We now have a model that is performs well for these questions:
 
@@ -577,7 +581,7 @@ To answer this question with the current model our query would be:
 
 [.is-two-thirds.left-column]
 --
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->
@@ -626,14 +630,14 @@ image::SpecificRelationshipsModel.png[SpecificRelationshipsModel,width=600,align
 
 === APOC to the rescue!
 
-[small]
+[.small]
 --
 With APOC, you can create relationships based upon data in the graph.
 
 Here is the syntax:
 --
 
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 apoc.create.relationship(startNode(<relationship-variable>),
                          '<new-relationship-value>',
@@ -653,7 +657,7 @@ Calling this procedure where _rel_ is returned enables you to either return the 
 
 Here is the code to transform the _HAS_DAY_ relationships to specific relationships:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (origin:Airport)-[hasDay:HAS_DAY]->(ad:AirportDay)
 CALL apoc.create.relationship(startNode(hasDay),
@@ -678,7 +682,7 @@ Since the model has changed, we need to rewrite the query:
 
 [.is-three-quarters.left-column]
 --
-[source, cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (origin:Airport {code: 'LAS'})-[:`ON_2019-1-3`]->
@@ -753,11 +757,11 @@ For example increase these values for the server in the *neo4j.conf* file:
 Here is one way that you can control how much work is done for a refactoring:
 --
 
-[small]
+[.small]
 --
 . Tag all the nodes we need to process with a temporary label (for example _Process_).
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (f:Flight)
 SET f:Process
@@ -779,7 +783,7 @@ SET f:Process
 Here is code that will process all nodes with the label _Process_:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MATCH (flight:Process)
 WITH flight LIMIT 500
@@ -822,7 +826,7 @@ We will focus on using _apoc.periodic.commit()_.
 == Batching with APOC
 
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CALL apoc.periodic.commit('
 MATCH (flight:Process)

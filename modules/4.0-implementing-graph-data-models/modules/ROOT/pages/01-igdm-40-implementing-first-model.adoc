@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Importing Data into the Graph
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -154,7 +157,7 @@ Select the correct answer.
 
 [.statement]
 Given this code:
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CREATE (:Person {name:"Joe"}
 CREATE (:Person {name:"Jane"}
@@ -179,7 +182,7 @@ Select the correct answer.
 [.statement]
 Given this code:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MERGE (a:Airport {code:'LAS'})
 MERGE (b:Airport {code:'LAX'})

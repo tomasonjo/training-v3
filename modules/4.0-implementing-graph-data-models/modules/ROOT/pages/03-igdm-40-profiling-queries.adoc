@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Refactoring Graphs
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -21,7 +24,7 @@ Understanding the performance of the queries for your use cases is an important 
 Here is the workflow you should use:
 --
 
-[small]
+[.small]
 --
 . Load data into the graph.
 . Create queries that answer the application questions.
@@ -39,12 +42,12 @@ The new query will be different due to the change in the graph data model.
 [.two-thirds-one-third-column]
 == Example: Profiling a query
 
-[smaller]
+[.smaller]
 --
 Here is the code to profile a query that retrieves all connections that have a destination of _LAS_:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (origin:Airport)-[c:CONNECTED_TO]->(destination:Airport)
@@ -146,7 +149,7 @@ endif::[]
 
 Here is the query:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)
