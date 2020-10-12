@@ -5,7 +5,7 @@
 :page-description: {description}
 :page-layout: training-enrollment
 :page-course-duration: 16 hrs
-:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-40.jpg
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0_withTitle.jpg[]
 

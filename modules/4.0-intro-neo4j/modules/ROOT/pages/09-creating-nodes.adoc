@@ -104,7 +104,7 @@ image::CreateBatmanBegins.png[CreateBatmanBegins,width=600,align=center]
 Here is the node when we retrieve it. It is the only node in the graph with a label of _Action_ so to retrieve it from the graph is straightforward where we only specify the node labels.
 --
 
-[is-half.right-column]
+[.is-half.right-column]
 --
 
 image::RetrieveBatmanBegins.png[RetrieveBatmanBegins,width=400,align=center]
