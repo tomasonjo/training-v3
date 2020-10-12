@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Introduction to Graph Databases
+:page-slug: {slug}
+:page-type: training-course-index
+:page-pagination: next
+:page-layout: training
 
 == About this course
 
