@@ -156,7 +156,7 @@ If we were to repeat this `MERGE` clause, no additional _Actor_ nodes would be c
 At this point, however, we have two _Michael Caine_ nodes in the graph, one of type _Person_, and one of type _Actor_:
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::TwoMichaelCaines.png[TwoMichaelCaines,width=800,align=center]
 --
@@ -168,7 +168,7 @@ Be mindful that node labels and the properties for a node are significant when m
 If we were to run `MERGE` code again:
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [source,cypher]
 ----

@@ -237,7 +237,7 @@ End-users typically use applications written by developers to access the graph d
 To better understand the Neo4j Graph Platform, you will learn about these components and the benefits they provide.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [square]
 * Neo4j DBMS
@@ -249,7 +249,7 @@ To better understand the Neo4j Graph Platform, you will learn about these compon
 ** Neo4j Bloom
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [square]
 * cypher-shell
@@ -328,12 +328,12 @@ By contrast, a traditional Relational Database Management System (RDBMS) cannot 
 It must use a central index.
 --
 
-[is-half.left]
+[.is-half.left-column]
 --
 image::IFA-2.png[IFA-2,width=300,align=center]
 --
 
-[is-half.right]
+[is-half.right-column]
 --
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
 --
@@ -380,12 +380,12 @@ All of these updates to the database must [.underline]#all# succeed or fail.
 
 === Neo4j DBMS: Clusters
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::Clustering.png[Clustering,width=600,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 
 [.statement]
@@ -545,12 +545,12 @@ You can use Bloom from Neo4j Desktop to access a local database. Another way tha
 
 == cypher-shell
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::cypher-shell.png[cypher-shell,width=800,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 `cypher-shell` is part of the Neo4j installation and is located in the *bin* directory.
 It is a command-line tool that you can use to connect to a Neo4j DBMS instance and run Cypher statements against the database.

@@ -68,7 +68,7 @@ RETURN a, m
 Before you run this Cypher code, you may see a warning in Neo4j Browser that you are creating a query that is a cartesian product that could potentially be a performance issue.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::CartesianBeforeCreateRelationship.png[CartesianBeforeCreateRelationship,width=700,align=center]
 --
@@ -83,7 +83,7 @@ ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::CreateActedInRelationship.png[CreateActedInRelationship,width=600,align=center]
 --

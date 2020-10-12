@@ -33,7 +33,7 @@ End-users typically use applications written by developers to access the graph d
 
 To better understand the Neo4j Graph Platform, you will learn about these components and the benefits they provide.
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [square]
 * Neo4j DBMS
@@ -45,7 +45,7 @@ To better understand the Neo4j Graph Platform, you will learn about these compon
 ** Neo4j Bloom
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [square]
 * cypher-shell
@@ -151,12 +151,12 @@ All of these updates to the database must [.underline]#all# succeed or fail.
 
 === Neo4j DBMS: Clusters
 
-[.is-two-thirds.left]
+[.is-two-thirds.left-column]
 --
 image::Clustering.png[Clustering,width=600,align=center]
 --
 
-[.is-one-third.right]
+[.is-one-third.right-column]
 --
 [.statement]
 Neo4j supports clusters that provide high availability, scalability for read access to the data, and failover which is important to many enterprises.
@@ -428,7 +428,7 @@ Before you perform the tasks shown in this video, you must have either created a
 Neo4j Bloom is a Neo4j-supported graph application where you can experience:
 --
 
-[.is-half.left.statement]
+[.is-half.left-column.statement]
 --
 [square.small]
 * Visual presentation of your graph data tangibly reveals non-obvious connections.
@@ -437,7 +437,7 @@ Neo4j Bloom is a Neo4j-supported graph application where you can experience:
 * Browsing tools make it easy for you to discover new insights from your data.
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::Bloom.png[Bloom,width=600,align=center]
 

@@ -250,7 +250,7 @@ When we execute the Cypher statement, `MATCH (p:Person) RETURN p`, the graph eng
 The default view of the returned nodes are the nodes that were referenced by the variable _p_.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [.statement]
 The result returned is:
@@ -258,7 +258,7 @@ The result returned is:
 image::PersonNodes-graph.png[PersonNodes-graph,width=700, align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [NOTE]
 When you specify a pattern for a `MATCH` clause, you should always specify a node label if possible. In doing so, the graph engine uses an index to retrieve the nodes which will perform better than not using a label for the `MATCH`.
@@ -875,7 +875,7 @@ MATCH  (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
 RETURN p
 ----
 
-[.is-half.left]
+[.is-half.left-column]
 --
 ifndef::env-slides[]
 The result returned is:
@@ -892,7 +892,7 @@ Then the query engine looks for all relationships _into_ this node and retrieves
 In this case there is only one relationship that is defined that points to the Angela Scope node, Paul Blythe.
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::AngelaFollowersQueryTraversal.png[AngelaFollowers,width=400,align=center]
 --
@@ -931,7 +931,7 @@ MATCH  (p1:Person)-[:FOLLOWS]-(p2:Person {name:'Angela Scope'})
 RETURN p1, p2
 ----
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [.statement]
 We also return the Angela Scope node so that we can see the relationships in the result. The result returned is:
@@ -944,7 +944,7 @@ image::AngelaFromTo.png[AngelaFromTo,width=700,align=center]
 In this case the Angela Scope node is the anchor and the query engine traverses all _FOLLOWS_ relationships both in and out of the Angela Scope Node.
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::AngelaConnectionsQueryTraversal.png[AngelaConnectionsQueryTraversal,width=400,align=center]
 --
@@ -963,7 +963,7 @@ MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thom
 RETURN p
 ----
 
-[.is-half.right]
+[.is-half.right-column]
 --
 ifndef::env-slides[]
 The result returned is:
@@ -980,7 +980,7 @@ It finds two, but then it must traverse more to find the next FOLLOWS relationsh
 It finds only one node, _Paul Blythe_ that matches the query.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,width=300,align=center]
 --

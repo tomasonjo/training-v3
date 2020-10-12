@@ -10,24 +10,24 @@ To complete this course we will make use of the following tools:
 
 == Neo4j Sandbox
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::sandbox.png[Neo4j Sandbox,width=500, align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 Neo4j Sandbox is a hosted Neo4j tool that allows you to run private instances of Neo4j without having to install Neo4j locally. You can choose Neo4j Sandbox usecases that come pre-loaded with datasets and your Neo4j Sandbox instances can be accessed over the internet, making them useful for building sample applications. While Neo4j Browser is the primary way to interact with Neo4j instances hosted by Neo4j Sandbox, for this course you will also connect your sandbox instance to a simple web application.
 --
 
 == Neo4j Browser Guides
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 Neo4j Browser Guides are documents that embed text, images, and Cypher queries inside Neo4j Browser in a carousel-like series of slides. We use Neo4j Browser Guides to show how to use graph algorithms in Cypher and Neo4j. Each module will have a browser guide to help "guide" you through the content.
 --
@@ -41,12 +41,12 @@ You can access the guides for this course by running this command in Neo4j Brows
 
 == The Neo4j Graph Data Science Plugin
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::gdsplugin.png[Neo4j Graph Data Science plugin,width=500,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Plugin. The plugin implements four types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity. The first three are classic graph algorithms and the fourth can be used on its own or in combination with the other three.
 --
@@ -55,12 +55,12 @@ This plugin is available in the Yelp Sandbox you use for this course, so you nee
 
 == CodeSandbox React Application
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::codesandbox2.png[CodeSandbox,width=500,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 Since this an applied course, we want to see how to enhance features of an actual application. You will use an existing React application for this part of the course. CodeSandbox is a hosted environment that allows you to edit, run, and preview JavaScript applications, all in the browser.
 --

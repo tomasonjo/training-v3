@@ -133,7 +133,7 @@ WHERE p.name ='Tom Cruise'
 RETURN collect(m) AS `movies for Tom Cruise`
 ----
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [.statement]
 Here is the result returned viewed as a graph. It is the same as simply returning _m_:
@@ -141,7 +141,7 @@ Here is the result returned viewed as a graph. It is the same as simply returnin
 image::TomCruiseMovieCollection2.png[TomCruiseMovieCollection,width=500,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 
 

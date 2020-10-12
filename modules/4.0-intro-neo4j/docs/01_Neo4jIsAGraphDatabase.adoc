@@ -66,14 +66,14 @@ We care because any dataset can be represented as a graph.
 Any structure or concept, no matter how simple or complex, can be broken down into a set constituent parts that have some relationship to one another.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 For example, the Internet can be modeled as a network of computers.
 
 image::TheInternetAsAGraph.png[TheInternetAsAGraph,width=400,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 At the other extreme of complexity, a single molecule can be represented as a graph of its constituent atoms--or an atom represented as a graph of subatomic particles.
 
@@ -171,12 +171,12 @@ In Neo4j traversal is optimized since that is how one performs queries in the gr
 During traversal of a Neo4j graph, nodes may be visited more than once, but a relationship is only traversed once.
 This is called a *path* in Neo4j.
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::GraphConcepts-Traversal.png[GraphConcepts-Traversal,width=400,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [.statement]
 Relationships have direction, as well as types so you can identify which relationship you want to traverse.
@@ -319,7 +319,7 @@ For example, a _Person_ node might have a property, _name_ and a _Location_ node
 --
 For this training, we will use a Movies graph to get you started with accessing the data in a Neo4j database.
 --
-[.is-half.left]
+[.is-half.left-column]
 --
 The data model is very simple, it includes entities such as:
 
@@ -329,7 +329,7 @@ The data model is very simple, it includes entities such as:
 
 that are implemented as nodes in the graph.
 --
-[.is-half.right]
+[.is-half.right-column]
 --
 People are related to Movies using these relationships:
 
@@ -376,13 +376,13 @@ As you learn Cypher in this course, you will explore all of these node and relat
 
 == Exploring graphgists
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [.statement]
 As a developer just learning Neo4j and Cypher, you will use the very simple Movies graph data model.
 If, however, you are curious about how other developers have created graph data models for Neo4j, you can explore the https://neo4j.com/graphgists/[graphgists page].
 --
-[.is-half.right]
+[.is-half.right-column]
 --
 image::graphgists1.png[Graphgists1,width=500,align=center]
 --
@@ -395,12 +395,12 @@ You can explore this site to see how other applications have modeled their data 
 
 === Example graphgist
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [.statement]
 For example, here is the _Exploring a Conference_ graphgist that has a description of the model, how to load the sample data, and how to query the data.
 --
-[.is-half.right]
+[.is-half.right-column]
 --
 
 image::graphgists2.png[Graphgists2,width=500,align=center]

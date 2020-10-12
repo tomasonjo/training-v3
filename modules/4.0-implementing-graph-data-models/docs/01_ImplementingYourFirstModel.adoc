@@ -33,12 +33,12 @@ The airline data itself is quite rich.
 We will not make use of every part of it in the exercises, but you can check it out if you have spare time during the exercises.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::AirlineIndustryData1.png[AirlineIndustryData1,width=600,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::AirlineIndustryData2.png[AirlineIndustryData2,width=600,align=center]
 --
@@ -68,13 +68,13 @@ Here is how we might model for this question with some sample data:
 --
 
 ifdef::env-slides[]
-[.is-half.left]
+[.is-half.left-column]
 --
 image::InitialQuestionAirports.png[InitialQuestionAirports,width=500,align=center]
 --
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::InitialSampleDataAndModel.png[InitialSampleDataAndModel,width=500,align=center]
 --

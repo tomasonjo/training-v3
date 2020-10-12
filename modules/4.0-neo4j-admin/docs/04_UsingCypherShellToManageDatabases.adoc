@@ -224,14 +224,14 @@ Once a database is created, you cannot rename it.
 
 === Creating a database
 
-[.is-half.left]
+[.is-half.left-column]
 --
 Here we create a database named _myfirstdatabase_:
 
 image::CreateDatabase.png[CreateDatabase,width=1000,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 You can view the directory created for the database:
 

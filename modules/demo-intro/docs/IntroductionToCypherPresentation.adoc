@@ -94,7 +94,7 @@ image::cypher-nodes.svg[Nodes,width=700,align=center]
 
 === Labels
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 --
 [source,cypher]
 ----
@@ -109,7 +109,7 @@ image::cypher-nodes.svg[Nodes,width=700,align=center]
 image::NodeLabels.png[Labels,350px,align=center]
 --
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 image::Labels.svg[Nodes,75%,align=center]
 
 === Comments in Cypher
@@ -345,10 +345,10 @@ image::DaVinciCode.png[height=220,align=center,role=border]
 
 === Using patterns for queries - 1
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 image::FollowsRelationships.png[width=350px,align=center]
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 Find all people who follow _Angela Scope_, returning the nodes:
 
@@ -363,10 +363,10 @@ image::AngelaFollowers.png[width=600,align=center,role=border]
 
 === Using patterns for queries - 2
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 image::FollowsRelationships.png[width=350px,align=center]
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 Find all people who _Angela Scope_ follows, returning the nodes:
 
@@ -381,10 +381,10 @@ image::FollowedByAngela.png[width=600,align=center,role=border]
 
 === Querying by any direction of the relationship
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 image::FollowsRelationships.png[width=350px,align=center]
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 Find all people who _Angela Scope_ follows, returning the nodes:
 
@@ -399,10 +399,10 @@ image::AngelaFollowsAndFollowers.png[width=550,align=center,role=border]
 
 === Traversing relationships - 1
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 image::FollowsRelationships.png[width=350px,align=center]
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 Find all people who follow anybody who follows _Jessica Thompson_ returning the people as nodes:
 
@@ -418,10 +418,10 @@ image::Traversing.png[width=550,align=center,role=border]
 
 === Traversing relationships - 2
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 image::FollowsRelationships.png[width=350px,align=center]
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 Find  the path that includes all people who follow anybody who follows _Jessica Thompson_ returning the path:
 

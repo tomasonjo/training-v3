@@ -414,11 +414,11 @@ body {
   width: 50%;
 }
 
-.is-half.left > .content {
+.is-half.left-column > .content {
   padding-right: 0.5em;
 }
 
-.is-half.right > .content {
+.is-half.right-column > .content {
   padding-left: 0.5em;
 }
 
@@ -443,11 +443,11 @@ body {
   clear: both;
 }
 
-.left {
+.left-column {
   float: left;
 }
 
-.right {
+.right-column {
   float: right;
 }
 

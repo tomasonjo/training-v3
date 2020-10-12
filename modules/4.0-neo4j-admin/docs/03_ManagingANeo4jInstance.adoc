@@ -100,7 +100,7 @@ When the instance is started (on Debian) it creates a database directory named *
 You can start and stop the instance regardless of whether the _neo4j_ service is enabled.
 --
 
-[.is-half.left.small]
+[.is-half.left-column.small]
 --
 Here is how  you manage the Neo4j instance on Debian:
 
@@ -111,7 +111,7 @@ Here is how  you manage the Neo4j instance on Debian:
 * `systemctl status neo4j`
 --
 
-[.is-half.right.small]
+[.is-half.right-column.small]
 --
 Here is how  you manage the Neo4j instance on non-Debian systems:
 

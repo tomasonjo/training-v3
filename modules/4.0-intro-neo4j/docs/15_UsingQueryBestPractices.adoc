@@ -92,7 +92,7 @@ It takes a name and expression and stores the value of that expression for the n
 After the _actorName_ parameter is set, you can run the query that uses the parameter:
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::UseParameter.png[UseParameter,width=800,align=center]
 --
@@ -102,7 +102,7 @@ image::UseParameter.png[UseParameter,width=800,align=center]
 Subsequently, you need only change the value of the parameter and not the Cypher statement to test with different values.
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [.statement]
 After we have changed the _actorName_ parameter to _Tom Cruise_, we get a different result with the same Cypher query:
