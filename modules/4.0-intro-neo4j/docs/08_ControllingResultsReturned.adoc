@@ -281,7 +281,7 @@ In this example, we count the number of movies during the query and we return th
 That is, the question we are asking is, "What actors acted in exactly five movies?".
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [source,cypher]
 ----
@@ -308,7 +308,7 @@ ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 
 image::Count5Movies.png[Count5Movies,width=900,align=center]

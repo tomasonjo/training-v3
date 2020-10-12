@@ -171,7 +171,7 @@ ifndef::env-slides[]
 Here is the result of running this Cypher statement:
 endif::[]
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::DeleteLiamNeeson.png[DeleteLiamNeeson,width=600,align=center]
 --
@@ -181,7 +181,7 @@ image::DeleteLiamNeeson.png[DeleteLiamNeeson,width=600,align=center]
 And here is what the _Batman Begins_ node and its relationships now look like. There is only one actor, _Michael Caine_ connected to the movie.
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::BatmanBeginsRelationships.png[BatmanBeginsRelationships,width=700,align=center]
 --

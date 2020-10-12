@@ -41,7 +41,7 @@ ifndef::env-slides[]
 Here is the result:
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::TheReplacements.png[TheReplacements,width=1000,align=center]
 --
@@ -55,7 +55,7 @@ Then it found all _Person_ nodes who follow the people who reviewed the movie, _
 In all, six relationships were traversed.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::TheReplacementsTraversal.png[TheReplacementsTraversal,width=500,align=center]
 --
@@ -78,7 +78,7 @@ image::Movies2000.png[Movies2000,width=700,align=center]
 This `MATCH` clause includes a pattern  specified by two paths separated by a comma:
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 [source,cypher]
 ----
@@ -98,7 +98,7 @@ ifndef::env-slides[]
 Here is the result of executing this query:
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::Movies2000ActorsDirectors.png[Movies2000ActorsDirectors,width=300,align=center]
 --
@@ -159,7 +159,7 @@ You should only perform these types of queries if you know the data well and the
 If you click the warning symbol in the top left corner, it produces an explanation result pane.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::CartesianProductWarning.png[CartesianProductWarning,width=500,align=center]
 --
@@ -168,7 +168,7 @@ ifndef::env-slides[]
 Here is the result of executing this query:
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
 --
@@ -228,7 +228,7 @@ The anchor of the `MATCH` clause is the _Top Gun_ _Movie_node.
 When the query engine traverses the graph for these `MATCH` clauses, we see that the _ACTED_IN_ relationship is traversed twice.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::ValKilmerCoActorsMultipleMatchTraversal.png[ValKilmerCoActorsMultipleMatchTraversal,width=400,align=center]
 --
@@ -237,7 +237,7 @@ ifndef::env-slides[]
 Here is the result returned:
 endif::[]
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMatch,width=600,align=center]
 --
@@ -265,7 +265,7 @@ With this scenario, the _ACTED_IN_ relationship is only traversed once.
 We already know the _Person_ node for _Val Kilmer_ so we need not return it.
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSingleMatchTraversal,width=400,align=center]
 --
@@ -275,7 +275,7 @@ image::ValKilmerCoActorsSingleMatchTraversal.png[ValKilmerCoActorsSingleMatchTra
 The result returned is smaller because it does not include the _Val Kilmer_ node.
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::ValKilmerCoActorsSingleMatch.png[ValKilmerCoActorsSingleMatch,width=800,align=center]
 --
@@ -293,7 +293,7 @@ Think of the _connected_ relationship in _LinkedIn_ and how connections are made
 The _Movie_ database for this training does not have much depth of relationships, but it does have the _:FOLLOWS_ relationship that you learned about earlier:
 --
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 --
 image::FollowsRelationships.png[FollowsRelationships,width=400,align=center]
 --
@@ -304,7 +304,7 @@ You write a `MATCH` clause where  you want to find all of the followers of the f
 Here is an example where we want to retrieve all _Person_ nodes that are exactly two hops away:
 --
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 [source,cypher]
 ----
@@ -390,7 +390,7 @@ RETURN  p
 When you specify this `MATCH` clause to use the `shortestPath()` function as shown here with an unbounded varying length, you will see this warning:
 --
 
-[.is-half.left]
+[.is-half.left-column]
 --
 image::ShortestPathWarning.png[ShortestPathWarning,width=600,align=center]
 --
@@ -403,7 +403,7 @@ You can also read the _Graph Data Science_ documentation about the shortest path
 Here is the result returned:
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::ShortestPath1.png[ShortestPath1,width=500,align=center]
 --
@@ -438,7 +438,7 @@ If in Neo4j Browser where have unset *Connect result nodes*, the result is visua
 Here is the result of this query:
 --
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 --
 image::Subgraph1.png[Subgraph1,width=800,align=center]
 --
@@ -448,7 +448,7 @@ image::Subgraph1.png[Subgraph1,width=800,align=center]
 If you view the result as text, you will see that it is simply a set of rows where a movie is connected to a person:
 --
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 image::Subgraph2.png[Subgraph2,width=800,align=center]
 --
@@ -470,7 +470,7 @@ The difference is that if no matches are found, `OPTIONAL MATCH` will use nulls 
 `OPTIONAL MATCH` could be considered the Cypher equivalent of the outer join in SQL.
 --
 
-[.is-one-third.left]
+[.is-one-third.left-column]
 --
 [.statement]
 Here is a subgraph of our movies graph with all people named _James_ and their relationships:
@@ -484,7 +484,7 @@ Here is an example where we query the graph for all people whose name starts wit
 The `OPTIONAL MATCH` is specified to include people who have reviewed movies: 
 --
 
-[.is-two-thirds.right]
+[.is-two-thirds.right-column]
 --
 [source,cypher]
 ----

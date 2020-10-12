@@ -296,7 +296,7 @@ This attempt to create the constraint failed because there are _Person_ nodes in
 --
 If we set these properties for all nodes in the graph that do not have _born_ properties with:
 --
-[.is-half.left]
+[.is-half.left-column]
 --
 [source,cypher]
 ----
@@ -312,7 +312,7 @@ endif::[]
 image::SetBorn0.png[SetBorn0,width=800,align=center]
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 [.statement]
 Then the creation of the node key succeeds:

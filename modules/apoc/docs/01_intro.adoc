@@ -78,7 +78,7 @@ Have you:
 
 == Extending Neo4j
 
-[.is-half.left]
+[.is-half.left-column]
 --
 User-defined procedures let you write custom code that:
 
@@ -88,7 +88,7 @@ User-defined procedures let you write custom code that:
 * Can be accessed by applications via Cypher
 --
 
-[.is-half.right]
+[.is-half.right-column]
 image::{imagedir}/extending-neo4j.png[Extending Neo4j]
 
 == Neo4j developer surface
@@ -173,7 +173,7 @@ RETURN name, signature
 
 == Built-in procedures
 
-[.is-half.left]
+[.is-half.left-column]
 --
 * database
 * clustering
@@ -184,7 +184,7 @@ RETURN name, signature
 * configuration
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
 --
@@ -202,7 +202,7 @@ Reference: https://neo4j.com/docs/operations-manual/current/reference/procedures
 
 == About APOC
 
-[.is-half.left]
+[.is-half.left-column]
 --
 * Large standard library of utility  functions and procedures
 * Actively developed - many contributors
@@ -212,7 +212,7 @@ Reference: https://neo4j.com/docs/operations-manual/current/reference/procedures
 * Plan is to migrate some of the functionality into the Neo4j product
 --
 
-[.is-half.right]
+[.is-half.right-column]
 --
 image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
 --
@@ -249,7 +249,7 @@ image::{imagedir}/in-built-procedures.png[inBuiltProcedures]
 
 == APOC availability
 
-[.is-half.left]
+[.is-half.left-column]
 --
 * Neo4j Sandbox
 * Neo4j Desktop
