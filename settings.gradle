@@ -84,6 +84,9 @@ project(':4.0-intro-graph-algos-exercises').projectDir = file('modules/4.0-intro
 include 'datascience'
 project(':datascience').projectDir = file('modules/datascience')
 
+include 'applied-algos'
+project(':applied-algos').projectDir = file('modules/applied-algos')
+
 include 'training_GraphAlgorithmsForDataScience'
 project(':training_GraphAlgorithmsForDataScience').projectDir = file('modules/training_GraphAlgorithmsForDataScience')
 
