@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Community Detection Algorithms
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == Memory Requirements estimation
 

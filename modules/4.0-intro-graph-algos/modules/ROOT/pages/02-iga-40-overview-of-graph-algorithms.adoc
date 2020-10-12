@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Introduction to Graph Data Science library
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == Graph Analytics and Algorithms
 

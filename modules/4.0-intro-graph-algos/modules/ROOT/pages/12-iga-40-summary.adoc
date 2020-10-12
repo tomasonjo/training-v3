@@ -4,6 +4,9 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
++:page-slug: {slug}
++:page-layout: training
++:page-certificate:
 
 == Summary
 

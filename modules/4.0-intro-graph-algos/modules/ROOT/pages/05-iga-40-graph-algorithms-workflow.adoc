@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Memory Requirements Estimation
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == How do graph algorithms work?
 
