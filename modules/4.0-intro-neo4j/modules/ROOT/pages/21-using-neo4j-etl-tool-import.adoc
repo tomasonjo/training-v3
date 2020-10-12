@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Summary
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -50,14 +53,14 @@ Then you simply click the *Add Application* icon to add the Neo4j ETL Tool.
 
 image::AddETLTool.png[AddETLTool,width=300,align=center]
 
-[small]
+[.small]
 --
 Here is what your project should look like with the Neo4j ETL Tool added:
 --
 
 image::ETLToolAdded.png[ETLToolAdded,width=200,align=center]
 
-[small]
+[.small]
 --
 [NOTE]
 Make sure that you have updated Neo4j Desktop so that it has the latest version of the ETL Tool.
@@ -92,7 +95,7 @@ show databases
 
 image::DatabaseForImport.png[DatabaseForImport,width=700,align=center]
 
-[small]
+[.small]
 --
 Next, you are ready to use the Neo4j ETL Tool for import.
 --
@@ -106,7 +109,7 @@ Here is the initial page you see when you start the Neo4j ETL tool:
 
 image::OpenETLTool.png[OpenETLTool,width=800,align=center]
 
-[small]
+[.small]
 --
 The first thing you should do is connect to the RDBMS.
 --
@@ -137,7 +140,7 @@ After you have connected to the RDBMS, you must select the Neo4j Desktop project
 
 image::PrepareForMapping.png[PrepareForMapping,width=800,align=center]
 
-[small]
+[.small]
 --
 You then click *START MAPPING* to begin the  mapping.
 --

@@ -5,6 +5,9 @@
 :toclevels: 4
 :module-next-title: Working with Patterns in Queries
 :imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
