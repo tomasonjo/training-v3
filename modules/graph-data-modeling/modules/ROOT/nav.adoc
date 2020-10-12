@@ -1,0 +1,7 @@
+* xref:00-graph-data-modeling-about.adoc[]
+* xref:01-introduction-graph-data-modeling.adoc[]
+* xref:02-designing-initial-graph-data-model.adoc[]
+* xref:03-graph-data-modeling-core-principles.adoc[]
+* xref:04-common-graph-structures.adoc[]
+* xref:05-refactoring-model.adoc[]
+* xref:06-graph-data-modeling-summary.adoc[]

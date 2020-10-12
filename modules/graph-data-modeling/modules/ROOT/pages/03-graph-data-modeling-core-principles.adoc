@@ -5,9 +5,11 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Common Graph Structures
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
-
 
 At the end of this module, you should be able to:
 [square]

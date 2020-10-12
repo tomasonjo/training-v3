@@ -1,0 +1,13 @@
+name: training-gdm-40
+title: Graph Data Modeling for Neo4j
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: 'graph-data-modeling'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

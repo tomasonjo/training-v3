@@ -1,23 +1,23 @@
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
-include::{includedir}/00_AboutThisCourse.adoc[]
-
-[.title.slide-start-title]
-include::{includedir}/01_IntroductionToGraphDataModeling.adoc[leveloffset=+1]
+include::{includedir}/00-graph-data-modeling-about.adoc[]
 
 [.title.slide-start-title]
-include::{includedir}/02_DesigningTheInitialGraphDataModel.adoc[leveloffset=+1]
+include::{includedir}/01-introduction-graph-data-modeling.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/03_GraphDataModelingCorePrinciples.adoc[leveloffset=+1]
+include::{includedir}/02-designing-initial-graph-data-model.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/04_CommonGraphStructures.adoc[leveloffset=+1]
+include::{includedir}/03-graph-data-modeling-core-principles.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/05_RefactoringAndEvolvingAModel.adoc[leveloffset=+1]
+include::{includedir}/04-common-graph-structures.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/06_Summary.adoc[leveloffset=+1]
+include::{includedir}/05-refactoring-model.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/06-graph-data-modeling-summary.adoc[leveloffset=+1]
 
 
