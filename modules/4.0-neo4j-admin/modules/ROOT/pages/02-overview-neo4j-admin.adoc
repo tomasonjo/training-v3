@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Managing a Neo4j Instance
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -378,7 +382,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise01.adoc[]
+include::{partialsdir}/exercises/Exercise01.adoc[]
 endif::[]
 
 == References

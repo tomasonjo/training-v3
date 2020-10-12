@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Checking Database Consistency
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 [.notes]
@@ -95,7 +99,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise06.adoc[]
+include::{partialsdir}/exercises/Exercise06.adoc[]
 endif::[]
 
 [.quiz]

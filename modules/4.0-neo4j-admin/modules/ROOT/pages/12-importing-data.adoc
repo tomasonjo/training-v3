@@ -4,6 +4,10 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -251,7 +255,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise12.adoc[]
+include::{partialsdir}/exercises/Exercise12.adoc[]
 endif::[]
 
 [.quiz]
