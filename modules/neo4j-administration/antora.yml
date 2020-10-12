@@ -1,0 +1,13 @@
+name: training-admin-35
+title: Neo4j 3.5 Administration
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: 'neo4j-administration'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

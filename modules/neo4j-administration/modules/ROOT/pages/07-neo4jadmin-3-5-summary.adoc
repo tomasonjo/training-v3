@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Summary
+:page-slug: {slug}
+:page-layout: training
+:page-certificate:
 
 == Course Summary
 

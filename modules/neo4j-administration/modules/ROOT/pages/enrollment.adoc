@@ -1,6 +1,11 @@
 = Neo4j 3.5 Administration Online Course
 :slug: neo4j-administration
 :description: Learn about common Administration Tasks for a Neo4j application in Production
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 12 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/Neo4jAdministration-3.5.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/Neo4jAdministration-3.5_withTitle.jpg[]
 
