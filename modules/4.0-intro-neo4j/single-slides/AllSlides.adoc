@@ -1,69 +1,69 @@
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
-include::{includedir}/00_AboutThisCourse.adoc[]
-
-[.title.slide-start-title]
-include::{includedir}/01_Neo4jIsAGraphDatabase.adoc[leveloffset=+1]
+include::{includedir}/00-intro-neo4j-about.adoc[]
 
 [.title.slide-start-title]
-include::{includedir}/02_TheNeo4jGraphPlatform.adoc[leveloffset=+1]
+include::{includedir}/01-neo4j-graph-database.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/03_IntroductionToCypherQueries.adoc[leveloffset=+1]
+include::{includedir}/02-neo4j-graph-platform.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/04_UsingWHEREToFilterQueries.adoc[leveloffset=+1]
+include::{includedir}/03-introduction-to-cypher.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/05_WorkingWithPatternsInQueries.adoc[leveloffset=+1]
+include::{includedir}/04-using-where-to-filter-queries.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/06_WorkingWithCypherData.adoc[leveloffset=+1]
+include::{includedir}/05-working-with-patterns-in-queries.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/07_ControllingTheQueryChain.adoc[leveloffset=+1]
+include::{includedir}/06-working-with-cypher-data.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/08_ControllingResultsReturned.adoc[leveloffset=+1]
+include::{includedir}/07-controlling-query-chain.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/09_CreatingNodes.adoc[leveloffset=+1]
+include::{includedir}/08-controlling-results-returned.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/10_CreatingRelationships.adoc[leveloffset=+1]
+include::{includedir}/09-creating-nodes.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/11_DeletingNodesAndRelationships.adoc[leveloffset=+1]
+include::{includedir}/10-creating-relationships.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/12_MergingData.adoc[leveloffset=+1]
+include::{includedir}/11-deleting-nodes-and-relationships.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/13_DefiningConstraintsForYourData.adoc[leveloffset=+1]
+include::{includedir}/12-merging-data.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/14_UsingIndexes.adoc[leveloffset=+1]
+include::{includedir}/13-defining-constraints-data.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/15_UsingQueryBestPractices.adoc[leveloffset=+1]
+include::{includedir}/14-using-indexes.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/16_OverviewOfImportingDataIntoNeo4j.adoc[leveloffset=+1]
+include::{includedir}/15-using-query-best-practices.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/17_UsingLOADCSVForImport.adoc[leveloffset=+1]
+include::{includedir}/16-overview-importing-data.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/18_UsingAPOCForImport.adoc[leveloffset=+1]
+include::{includedir}/17-using-load-csv-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/19_UsingTheNeo4jAdminToolForImport.adoc[leveloffset=+1]
+include::{includedir}/18-using-apoc-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/20_UsingAnApplicationForImport.adoc[leveloffset=+1]
+include::{includedir}/19-using-neo4j-admin-tool-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/21_UsingTheETLToolForImport.adoc[leveloffset=+1]
+include::{includedir}/20-using-application-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/22_Summary.adoc[leveloffset=+1]
+include::{includedir}/21-using-neo4j-etl-tool-import.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/22-intro-neo4j-summary.adoc[leveloffset=+1]

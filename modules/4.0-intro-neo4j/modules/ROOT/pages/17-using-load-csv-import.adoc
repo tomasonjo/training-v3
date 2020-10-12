@@ -6,6 +6,9 @@
 :module-next-title: Using Cypher and APOC for Import
 :imagesdir: ../images
 :module-next-title: Using APOC for Import
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
