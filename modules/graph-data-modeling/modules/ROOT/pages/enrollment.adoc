@@ -1,6 +1,11 @@
 = Graph Data Modeling Online Course
 :slug: graph-data-modeling
 :description: Learn how to model your application data as a Neo4j graph data model.
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 4 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/GraphDataModeling.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/GraphDataModeling_withTitle.jpg[]
 

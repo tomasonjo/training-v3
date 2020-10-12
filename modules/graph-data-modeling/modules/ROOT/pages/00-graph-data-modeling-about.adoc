@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Introduction to Graph Data Modeling
+:page-slug: {slug}
+:page-type: training-course-index
+:page-pagination: next
+:page-layout: training
 
 == About this course
 
@@ -26,7 +30,6 @@ If you complete all lessons, you will receive a _Certificate of Completion_.
 
 If you perform the hands-on exercises, this course will take you approximately 4 hours to complete.
 endif::[]
-
 
 This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
 
