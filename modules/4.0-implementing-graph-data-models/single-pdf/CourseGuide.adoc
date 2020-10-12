@@ -3,12 +3,12 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
-include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
-include::{includedir}/01_ImplementingYourFirstModel.adoc[leveloffset=+1]
-include::{includedir}/02_ImportingData.adoc[leveloffset=+1]
-include::{includedir}/03_ProfilingQueries.adoc[leveloffset=+1]
-include::{includedir}/04_RefactoringGraphs.adoc[leveloffset=+1]
-include::{includedir}/05_Summary.adoc[leveloffset=+1]
+include::{includedir}/00-igdm-40-implementing-graph-data-models-about.adoc[leveloffset=+1]
+include::{includedir}/01-igdm-40-implementing-first-model.adoc[leveloffset=+1]
+include::{includedir}/02-igdm-40-importing-data-graph.adoc[leveloffset=+1]
+include::{includedir}/03-igdm-40-profiling-queries.adoc[leveloffset=+1]
+include::{includedir}/04-igdm-40-refactoring-graphs.adoc[leveloffset=+1]
+include::{includedir}/05-igdm-40-implementing-graph-data-models-summary.adoc[leveloffset=+1]
 

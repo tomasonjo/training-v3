@@ -1,6 +1,11 @@
 = Implementing Graph Data Models in Neo4j 4.0
 :slug: implementing-graph-data-models-40
 :description: Learn how to create a database for a graph data model and evolve the graph.
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 4 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/ImplementingGDM-40.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/ImplementingGDM-40withTitle.jpg[]
 
