@@ -1,0 +1,8 @@
+* xref:00-neo4jadmin-3-5-about.adoc[]
+* xref:01-neo4jadmin-3-5-intro-neo4j.adoc[]
+* xref:02-neo4jadmin-3-5-overview-neo4j-admin.adoc[]
+* xref:03-neo4jadmin-3-5-managing-neo4j-database.adoc[]
+* xref:04-neo4jadmin-3-5-causal-clustering-neo4j.adoc[]
+* xref:05-neo4jadmin-3-5-security-in-neo4j.adoc[]
+* xref:06-neo4jadmin-3-5-monitoring-neo4j.adoc[]
+* xref:07-neo4jadmin-3-5-summary.adoc[]
