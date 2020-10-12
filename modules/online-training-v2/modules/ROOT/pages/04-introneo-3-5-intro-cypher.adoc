@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Getting More out of Queries
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 

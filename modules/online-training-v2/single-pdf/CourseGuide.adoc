@@ -3,16 +3,16 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
-include::{includedir}/00_AboutThisCourse.adoc[leveloffset=+1]
-include::{includedir}/01_IntroductionToGraphDatabases.adoc[leveloffset=+1]
-include::{includedir}/02_IntroductionToNeo4j.adoc[leveloffset=+1]
-include::{includedir}/03_SettingUpYourDevelopmentEnvironment.adoc[leveloffset=+1]
-include::{includedir}/04_IntroductionToCypher.adoc[leveloffset=+1]
-include::{includedir}/05_GettingMoreOutOfnQueries.adoc[leveloffset=+1]
-include::{includedir}/06_CreatingNodesAndRelationships.adoc[leveloffset=+1]
-include::{includedir}/07_GettingMoreOutOfNeo4jadoc[leveloffset=+1]
-include::{includedir}/08_Summary.adoc[leveloffset=+1]
+include::{includedir}/00-introneo-3-5-about.adoc[leveloffset=+1]
+include::{includedir}/01-introneo-3-5-intro-graph-databases.adoc[leveloffset=+1]
+include::{includedir}/02-introneo-3-5-intro-neo4j.adoc[leveloffset=+1]
+include::{includedir}/03-introneo-3-5-setup.adoc[leveloffset=+1]
+include::{includedir}/04-introneo-3-5-intro-cypher.adoc[leveloffset=+1]
+include::{includedir}/05-introneo-3-5-getting-more-out-of-queries.adoc[leveloffset=+1]
+include::{includedir}/06-introneo-3-5-creating-nodes-and-relationships.adoc[leveloffset=+1]
+include::{includedir}/07-introneo-3-5-getting-more-out-of-neo4j.adoc[leveloffset=+1]
+include::{includedir}/08-introneo-3-5-summary.adoc[leveloffset=+1]
 
 
