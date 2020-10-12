@@ -1,6 +1,11 @@
 = Applied Graph Data Science for Web Applications Online Course
 :slug: gds-applied-algos
 :description: Learn how to apply graph algorithms to enhance a Web application.
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 4 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/AppliedGDSForWebApps.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/AppliedGDSForWebApps_withTitle.jpg[]
 
