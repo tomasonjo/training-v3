@@ -82,7 +82,7 @@ These steps are covered in the course _Introduction to Neo4j 4.0: Using LOAD CSV
 
 Here is the simplified syntax for using `LOAD CSV`:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 LOAD CSV     // load csv data
 WITH HEADERS // optionally use first header row as keys in "row" map
@@ -114,7 +114,7 @@ image::InspectDataFile.png[InspectDataFile,width=700,align=center]
 
 You use `LOAD CSV` to read the data from the CSV file as a row to create nodes and relationships, for example:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_1k' AS row
 MERGE (origin:Airport {code: row.Origin})

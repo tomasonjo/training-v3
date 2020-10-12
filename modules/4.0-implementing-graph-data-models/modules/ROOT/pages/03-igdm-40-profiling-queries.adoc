@@ -47,7 +47,7 @@ The new query will be different due to the change in the graph data model.
 Here is the code to profile a query that retrieves all connections that have a destination of _LAS_:
 --
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH (origin:Airport)-[c:CONNECTED_TO]->(destination:Airport)
@@ -149,7 +149,7 @@ endif::[]
 
 Here is the query:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 PROFILE
 MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)

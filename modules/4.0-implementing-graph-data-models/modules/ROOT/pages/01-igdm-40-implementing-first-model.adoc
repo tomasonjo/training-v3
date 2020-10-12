@@ -157,7 +157,7 @@ Select the correct answer.
 
 [.statement]
 Given this code:
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 CREATE (:Person {name:"Joe"}
 CREATE (:Person {name:"Jane"}
@@ -182,7 +182,7 @@ Select the correct answer.
 [.statement]
 Given this code:
 
-[source,cypher]
+[source,cypher,role=noheader]
 ----
 MERGE (a:Airport {code:'LAS'})
 MERGE (b:Airport {code:'LAX'})
