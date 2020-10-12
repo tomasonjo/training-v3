@@ -170,7 +170,7 @@ CREATE INDEX Flight_number_index FOR (f:Flight) ON (f.number)
 --
 After you have refactored the graph, you then profile the query that you are hoping to improve.
 --
-[small]
+[.small]
 --
 Recall that the query is: What are the airports and flight information for flight number 1016 for airline WN?
 
@@ -184,7 +184,7 @@ WHERE connection.airline = 'WN' AND connection.flightNumber = '1016'
 RETURN origin.code, destination.code, connection.date, connection.departure, connection.arrival
 ----
 
-[small]
+[.small]
 --
 We must change the query to work with the new model as follows:
 --
@@ -250,7 +250,7 @@ Estimated time to complete: 30 minutes.
 
 == Adding another domain question
 
-[small]
+[.small]
 --
 We need to add another question for our application:
 
@@ -282,7 +282,7 @@ MATCH (origin:Airport {code: 'LAS'})
 WHERE flight.date = '2019-1-3'
 RETURN origin, destination, flight
 ----
-[small]
+[.small]
 --
 [NOTE]
 You will work with this query in the next exercise where you have loaded 10k nodes into the graph.
@@ -338,7 +338,7 @@ This is an instance where we do not want to remove the relationships between air
 
 image::Refactor4.png[Refactor4,width=1000,align=center]
 
-[small]
+[.small]
 --
 [NOTE]
 You only pull out a node if you are going to query through it, otherwise a property will suffice.
@@ -544,7 +544,7 @@ Estimated time to complete: 30 minutes.
 [.half-column]
 == More questions for the model?
 
-[small]
+[.small]
 --
 We now have a model that is performs well for these questions:
 
@@ -629,7 +629,7 @@ image::SpecificRelationshipsModel.png[SpecificRelationshipsModel,width=600,align
 
 === APOC to the rescue!
 
-[small]
+[.small]
 --
 With APOC, you can create relationships based upon data in the graph.
 
@@ -756,7 +756,7 @@ For example increase these values for the server in the *neo4j.conf* file:
 Here is one way that you can control how much work is done for a refactoring:
 --
 
-[small]
+[.small]
 --
 . Tag all the nodes we need to process with a temporary label (for example _Process_).
 
