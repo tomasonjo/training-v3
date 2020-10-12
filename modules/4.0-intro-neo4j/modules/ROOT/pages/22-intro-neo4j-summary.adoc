@@ -8,7 +8,6 @@
 :page-layout: training
 :page-certificate:
 
-
 == Course Summary
 
 In this course, you have learned how to:
@@ -99,9 +98,4 @@ ifndef::env-slides[]
 == Course feedback
 
 We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.
-endif::[]
-
-ifndef::backend-revealjs,backend-pdf[]
-[.certificate]
-== Certificate
 endif::[]
