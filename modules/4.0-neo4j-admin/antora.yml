@@ -1,0 +1,13 @@
+name: training-basic-admin-40
+title: Basic Neo4j 4.0 Administration
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: '4.0-neo4j-admin'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

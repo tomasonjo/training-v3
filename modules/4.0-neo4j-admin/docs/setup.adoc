@@ -4,7 +4,6 @@
 :toclevels: 4
 :imagesdir: ../images
 
-
 == Overview
 
 You should bring a laptop to the class that is properly set up for the class.

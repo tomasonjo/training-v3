@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Managing HTTP Ports
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -224,7 +228,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise09.adoc[]
+include::{partialsdir}/exercises/Exercise09.adoc[]
 endif::[]
 
 [.quiz]

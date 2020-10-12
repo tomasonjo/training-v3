@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Configuring Plugins
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 [.notes]
@@ -99,7 +103,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise08.adoc[]
+include::{partialsdir}/exercises/Exercise08.adoc[]
 endif::[]
 
 [.quiz]

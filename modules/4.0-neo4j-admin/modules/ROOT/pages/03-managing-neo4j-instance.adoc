@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Using cypher-shell to Manage Databases
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -221,7 +225,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise02.adoc[]
+include::{partialsdir}/exercises/Exercise02.adoc[]
 endif::[]
 
 

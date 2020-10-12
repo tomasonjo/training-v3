@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Overview of Neo4j Administration
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -333,7 +336,7 @@ It must use a central index.
 image::IFA-2.png[IFA-2,width=300,align=center]
 --
 
-[is-half.right-column]
+[.is-half.right-column]
 --
 Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
 --
@@ -478,7 +481,7 @@ image::GraphApps.png[GraphApps,width=700,align=center]
 Here are [.underline]#some# of the graph applications that users can use:
 --
 
-[small]
+[.small]
 --
 [square]
 * *Neo4j Browser*: UI for testing Cypher queries and visualizing the graph.

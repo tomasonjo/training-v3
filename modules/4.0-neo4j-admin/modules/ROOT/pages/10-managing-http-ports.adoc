@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Managing Backups
+:partialsdir: ../partials
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 == About this module
 
@@ -39,7 +43,7 @@ HTTP
 
 === Default configuration: Connector ports
 
-[small]
+[.small]
 --
 Here are the default settings for connector ports:
 --
@@ -124,7 +128,7 @@ endif::[]
 
 ifndef::backend-pdf,env-slides[]
 
-include::exercises/Exercise10.adoc[]
+include::{partialsdir}/exercises/Exercise10.adoc[]
 endif::[]
 
 [.quiz]
