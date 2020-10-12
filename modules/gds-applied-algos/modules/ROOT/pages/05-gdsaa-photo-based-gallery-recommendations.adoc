@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Summary: Applied Graph Data Science for Web Applications
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 video::DQ7fH0QUg6A[youtube,width=560,height=315]
 

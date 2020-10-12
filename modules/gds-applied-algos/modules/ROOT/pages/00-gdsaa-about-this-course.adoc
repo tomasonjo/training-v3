@@ -5,6 +5,10 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Setup and Cypher Refresher
+:page-slug: {slug}
+:page-type: training-course-index
+:page-pagination: next
+:page-layout: training
 
 Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
 They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).

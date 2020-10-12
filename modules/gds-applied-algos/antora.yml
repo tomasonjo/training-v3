@@ -1,0 +1,13 @@
+name: training-gdsaa-40
+title: Applied Graph Data Science for Web Applications
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: 'gds-applied-algos'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

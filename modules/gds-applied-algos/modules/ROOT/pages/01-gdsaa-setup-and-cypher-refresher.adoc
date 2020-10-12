@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Category Hierarchy
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 To complete this course we will make use of the following tools:
 

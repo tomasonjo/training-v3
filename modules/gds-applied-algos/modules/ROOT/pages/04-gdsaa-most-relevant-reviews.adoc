@@ -5,6 +5,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Photo Based Gallery Recomendations
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
 
 video::jpFJqwVg4qE[youtube,width=560,height=315]
 
