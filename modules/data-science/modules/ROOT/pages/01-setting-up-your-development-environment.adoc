@@ -8,7 +8,7 @@
 == About this module
 
 As a data scientist, you will create Neo4j Databases, add and update data in them, and query the data.
-When you learn to use Neo4j as a data scientist, you have two options ⎼ the Neo4j Desktop or the Neo4j Sandbox.
+When you learn to use Neo4j as a data scientist, you have two options: the Neo4j Desktop or the Neo4j Sandbox.
 In this module you will learn how to setup the Neo4j Sandbox for use in the rest of the course, and connect to it from Jupyter notebooks hosted in Google Colabatory.
 
 In this module, you will:
