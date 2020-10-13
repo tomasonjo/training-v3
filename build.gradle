@@ -285,55 +285,7 @@ subprojects {
           }
         }
       }
-    } else {
-      if (new File(sourceImagesDirPath).exists()) {
-        if (stage == 'production') {
-          task s3UploadImages(type: S3UploadTask) {
-            //overwrite = true
-            source = sourceImagesDirPath
-            bucket = "dev.assets.neo4j.com"
-            destination = "course/${project.name}/images"
-            acl.set(CannedAccessControlList.PublicRead)
-          }
-        } else if (stage == 'testing') {
-          task s3UploadImages(type: S3UploadTask) {
-            //overwrite = true
-            source = sourceImagesDirPath
-            bucket = "dev.assets.neo4j.com"
-            destination = "test-course/${project.name}/images"
-            acl.set(CannedAccessControlList.PublicRead)
-          }
-        }
-      }
-
-      if (stage == 'production' || stage == 'testing') {
-        task s3UploadSetup(type: S3UploadTask) {
-          dependsOn convertSetupHtml
-          source = "${projectDir}/build/setup"
-          bucket = "graphacademy.neo4j.com"
-          destination = "setup"
-          acl.set(CannedAccessControlList.PublicRead)
-        }
-        task wordPressUploadCourse(type: WordPressUploadTask) {
-          dependsOn convertOnlineHtml
-          source = convertOnlineHtml.outputs.files
-          type = "course"
-          status = stage == 'production' ? "publish" : "private"
-        }
-        task wordPressUploadEnrollment(type: WordPressUploadTask) {
-          dependsOn convertEnrollmentHtml
-          source = convertEnrollmentHtml.outputs.files
-          type = "page"
-          status = stage == 'production' ? "publish" : "private"
-          template = "page-inner-100-mkto.php"
-        }
-        task wordPressUpload {
-          dependsOn wordPressUploadCourse
-          dependsOn wordPressUploadEnrollment
-        }
-      }
     }
-
 
     task convertOnlineHtml(type: AsciidoctorTask) {
       dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
@@ -674,6 +626,55 @@ subprojects {
 
     task liveReload(type: LiveReloadTask) {
       docRoot "${projectDir}/build"
+    }
+
+    if (!project.hasProperty("browserGuides")) {
+      if (new File(sourceImagesDirPath).exists()) {
+        if (stage == 'production') {
+          task s3UploadImages(type: S3UploadTask) {
+            //overwrite = true
+            source = sourceImagesDirPath
+            bucket = "dev.assets.neo4j.com"
+            destination = "course/${project.name}/images"
+            acl.set(CannedAccessControlList.PublicRead)
+          }
+        } else if (stage == 'testing') {
+          task s3UploadImages(type: S3UploadTask) {
+            //overwrite = true
+            source = sourceImagesDirPath
+            bucket = "dev.assets.neo4j.com"
+            destination = "test-course/${project.name}/images"
+            acl.set(CannedAccessControlList.PublicRead)
+          }
+        }
+      }
+
+      if (stage == 'production' || stage == 'testing') {
+        task s3UploadSetup(type: S3UploadTask) {
+          dependsOn convertSetupHtml
+          source = "${projectDir}/build/setup"
+          bucket = "graphacademy.neo4j.com"
+          destination = "setup"
+          acl.set(CannedAccessControlList.PublicRead)
+        }
+        task wordPressUploadCourse(type: WordPressUploadTask) {
+          dependsOn convertOnlineHtml
+          source = convertOnlineHtml.outputs.files
+          type = "course"
+          status = stage == 'production' ? "publish" : "private"
+        }
+        task wordPressUploadEnrollment(type: WordPressUploadTask) {
+          dependsOn convertEnrollmentHtml
+          source = convertEnrollmentHtml.outputs.files
+          type = "page"
+          status = stage == 'production' ? "publish" : "private"
+          template = "page-inner-100-mkto.php"
+        }
+        task wordPressUpload {
+          dependsOn wordPressUploadCourse
+          dependsOn wordPressUploadEnrollment
+        }
+      }
     }
 
     task s3Upload dependsOn(tasks.names.findAll { it.startsWith("s3Upload") && it != "s3Upload" })
