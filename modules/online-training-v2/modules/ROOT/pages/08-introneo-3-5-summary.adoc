@@ -91,12 +91,6 @@ View questions/answers raised about Neo4j:
 
 https://stackoverflow.com/tags/neo4j/hot
 
-
 == Course feedback
 
 We want your feedback on this course. Please provide your https://goo.gl/forms/BEpb5Dsj6CFTvWiI2[feedback] so we can improve this course.
-
-ifndef::backend-revealjs,backend-pdf[]
-[.certificate]
-== Certificate
-endif::[]

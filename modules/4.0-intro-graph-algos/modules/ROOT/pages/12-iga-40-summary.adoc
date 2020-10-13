@@ -4,9 +4,9 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-+:page-slug: {slug}
-+:page-layout: training
-+:page-certificate:
+:page-slug: {slug}
+:page-layout: training
+:page-certificate:
 
 == Summary
 
@@ -97,9 +97,4 @@ ifndef::env-slides[]
 == Course feedback
 
 We want your feedback on this course. Please provide your https://forms.gle/EsBJcFPFi3k48H2i8[feedback] so we can improve this course.
-endif::[]
-
-ifdef::backend-html5[]
-[.certificate]
-== Certificate
 endif::[]
