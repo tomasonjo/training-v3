@@ -1,0 +1,122 @@
+= Exploratory Data Analysis
+:slug: 02-gdsds-exploratory-data-analysis
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Recommendations
+
+== About this module
+
+In the previous section, we setup our Neo4j Sandbox environment containing the citation dataset.
+In this module we're going to explore that data.
+We'll be querying Neo4j and processing the results using tools in the Python ecosystem.
+
+At the end of this module, you should be able to:
+[square]
+* Query a database for its schema.
+* Return and chart the number of node labels and relationship types using matplotlib.
+* Build and plot a histogram of papers and their citations using pandas and matplotlib.
+
+== Tools
+
+We'll be using the following Python libraries in this course:
+
+=== py2neo
+
+The https://py2neo.org/v4/[py2neo^] driver enables data scientists to easily integrate Neo4j with tools in the Python Data Science ecosystem.
+It does this by providing functions that translate the results of queries into data structures used by these tools.
+We'll be using this library to execute Cypher queries against Neo4j.
+
+=== pandas
+
+https://pandas.pydata.org/[pandas^] is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the Python programming language.
+We'll be using this library to do post processing of the data that we query from Neo4j.
+
+=== Matplotlib
+
+https://matplotlib.org/[Matplotlib^] is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms.
+We'll be using this library to create charts based on our data.
+
+
+== Citation Dataset
+
+Now you are ready to start exploring the data.
+The graph model for the dataset is shown below:
+
+image::graph.png[Graph Model,width=600]
+
+You want to better understand the data you will be working with, including the distribution of authors, papers, and citations.
+You will then be able to use this knowledge to help build a recommendation engine and make predictions on the data.
+
+== Exercise 1: Exploring the data
+
+In this course you use the Jupyter notebook you set up previously.
+
+Click the button below to launch the notebook and perform the steps for exploring the data. When you launch this notebook, you will enter the same credentials you entered when you tested your connection to the Neo4j Sandbox.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA.ipynb">Exercise 1</a>
+<br />
+++++
+
+Once you have attempted the exercises, you can see the answers by launching the following notebook:
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA_Exercises.ipynb">See answers</a>
+++++
+
+[#module-2.quiz]
+== Check your understanding
+=== Question 1
+
+[.statement]
+What is the name of the procedure that returns the node labels in the database?
+[.statement]
+Select the correct answer.
+[%interactive.answers]
+- [x] db.labels
+- [ ] db.nodeLabels
+- [ ] db.nodes
+- [ ] dbms.labels
+
+=== Question 2
+
+[.statement]
+Which node label is the most popular one in this dataset?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Article
+- [x] Author
+- [ ] Venue
+
+=== Question 3
+
+[.statement]
+What is the mean number of articles published by an author?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] 2.064
+- [ ] 89.000
+- [x] 1.751
+- [ ] 3.000
+
+
+== Summary
+
+You should now be able to:
+[square]
+* Query a database for its schema.
+* Return and chart the number of node labels and relationship types using matplotlib.
+* Build and plot a histogram of papers and their citations using pandas and matplotlib.
+
+== Grade Quiz and Continue
+
+++++
+<a class="next-section medium button" href="../part-3/">Continue to Module 3</a>
+++++
