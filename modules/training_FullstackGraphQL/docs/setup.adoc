@@ -13,24 +13,27 @@
 == Preparing for the training session
 
 You must prepare your development environment before you perform the exercises for this training session.
-We assume that you have the latest version of Neo4j Desktop installed.
 
-To prepare for this course, you must do the following before this session (scroll down for detailed instructions):
+. Install or upgrade to the latest version of https://neo4j.com/downloads[Neo4j Desktop].
+. Install a recent (v12.x or later) version of https://nodejs.org/[Node.js]
+. Install the https://www.npmjs.com/get-npm[npm package manager] (v5.x or later, installed with Node.js by default), or yarn if you prefer.
 
-To prepare your system for this course, you must perform these Steps:
+Verify that you have the correct version of node and npm:
 
-*Step 1:* Download files used for this training session.
+----
+node -v
+npm -v
+----
 
-*Step 2:* Install components you will use for the training session.
+We will make use of the following resources and tools, so if you would like to get a head start you can familiarize yourself with the following:
 
-*Step 3:* Confirm that your development environment is is ready for the hands-on exercises for this training session.
+[square]
+* Neo4j Sandbox: https://neo4j.com/sandbox/
+* GraphQL Architect: https://install.graphapp.io/
+* The create-grandstack-app CLI: https://grandstack.io/docs/getting-started-grand-stack-starter
+* Netlify: https://www.netlify.com/
 
-== Step 1: Download files used for this training session.
-
-== Step 2: Install components you will use for the training session.
-
-== Step 3: Confirm that your development environment is is ready for the hands-on exercises for this training session.
-
+And for reference, the GRANDstack documentation: https://grandstack.io/
 
 == Getting help
 
