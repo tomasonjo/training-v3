@@ -1,4 +1,4 @@
-= Applied Graph Data Science for Web Applications Online Course
+= Applied Graph Data Science for Web Applications
 :slug: gds-applied-algos
 :description: Learn how to apply graph algorithms to enhance a Web application.
 :page-slug: {slug}

@@ -1,4 +1,4 @@
-= Neo4j 3.5 Administration Online Course
+= Neo4j 3.5 Administration
 :slug: neo4j-administration
 :description: Learn about common Administration Tasks for a Neo4j application in Production
 :page-slug: {slug}
