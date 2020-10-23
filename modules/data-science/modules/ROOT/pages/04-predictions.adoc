@@ -89,7 +89,7 @@ Select the correct answer.
 [%interactive.answers]
 - [ ] Adamic Adar
 - [x] Common Neighbors
-- [ ] PageRank#
+- [ ] PageRank
 - [ ] Preferential Attachment
 
 === Question 2
