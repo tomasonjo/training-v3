@@ -1,0 +1,6 @@
+* xref:00-data-science-about.adoc[]
+* xref:01-setting-up-your-development-environment.adoc[]
+* xref:02-exploratory-data-analysis.adoc[]
+* xref:03-recommendations.adoc[]
+* xref:04-predictions.adoc[]
+* xref:05-summary.adoc[]
