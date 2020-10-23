@@ -113,7 +113,11 @@ subprojects {
         break
       case "4.0-intro-graph-algos":
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}01-iga-40-about-this-course/"
-        break default:
+        break
+      case "data-science":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-data-science-about/"
+        break
+      default:
         "https://neo4j.com/"
     }
   }
