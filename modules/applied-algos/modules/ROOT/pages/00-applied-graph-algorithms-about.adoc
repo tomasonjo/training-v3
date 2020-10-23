@@ -1,0 +1,29 @@
+= Applied Graph Algorithms
+:slug: 00-applied-graph-algos-about
+:neo4j-version: 3.5
+:imagesdir: ../images
+:page-slug: {slug}
+:page-type: training-course-index
+:page-pagination: next
+:page-layout: training
+
+Graph algorithms are used to compute metrics for graphs, nodes, or relationships.
+They can provide insights on relevant entities (centralities, ranking) in the graph or inherent structures such as communities (community-detection, graph-partitioning, clustering).
+In this course you will learn how to use Neo4j's Graph Algorithms library to enhance your graph based applications.
+
+We will start with an existing web application (a simple business reviews website written in React.js) populated with data from the Yelp public dataset in Neo4j. We then work to enhance the existing functionality of the application using graph algorithms.
+
+[NOTE]
+====
+Don't worry if you're not familiar with React or web development in general, to enhance our application we'll just be changing the Cypher queries used by the already existing application. But feel free to modify the application if you'd like to add more advanced features!
+====
+
+video::FfW5YCXBnhQ[youtube]
+
+== Prerequisites
+
+This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
+
+* Have completed Introduction to Neo4j course or have equal Cypher proficiency.
+* Be familiar with Neo4j Browser.
+* Be familiar with the concepts of a web application.

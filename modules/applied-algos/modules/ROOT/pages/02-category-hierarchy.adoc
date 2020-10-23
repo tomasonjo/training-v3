@@ -1,0 +1,96 @@
+= Category Hierarchy
+:slug: 02-category-hierarchy
+:neo4j-version: 3.5
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+
+video::-pdxTOaX1OI[youtube]
+
+_Category Hierarchy Algorithm Overview_
+
+In this module, you will improve navigation for business categories.
+Let's first have a look at the part of the application that you will enhance.
+
+image::codesandbox3.png[,width=700,align=center]
+
+We can search for businesses by name and category, but at the moment we have a list of over 100 categories to choose from!
+One way that we could make things easier for our user is if we let them navigate a taxonomy of categories, starting at the top-level. To do this we'll use the Overlap Similarity algorithm to identify a category hierarchy in the data. We'll need to run the algorithm and make some updates to our data in Neo4j, then update the query used in the application to populate the category drop-down.
+
+== Exercise
+
+. In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. You should see a very long list of categories. You will use the Overlap Similarity algorithm to create relationships in the graph that will be used to identify the top-level categories.
+. In Neo4j Browser, complete the steps for *Category Hierarchy* (:play applied_graph_algorithms/02_category_hierarchy.html) to add category hierarchy to the graph using the Overlap Similarity algorithm.
+. In CodeSandbox, edit the Cypher query in `src/exercises/exercise1.js` to return only top-level categories to populate the Category drop down in Business Search.
+. Save your changes to *exercise1.js*.
+. In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. Is the list of categories smaller?
+
+[NOTE]
+====
+.Useful Resources
+
+* https://neo4j.com/docs/graph-algorithms/current/algorithms/similarity-overlap/[Overlap Similarity^]
+
+.Tips
+
+* Remember, you only need to edit the Cypher query in `src/exercises/exercise1.js`, not any other code in the application.
+* In your new query, be sure to keep the same return structure, or otherwise the client application might not be able to interpret that data.
+====
+
+== Solution
+
+If you get stuck, watch this video for a walk-through of the solution:
+
+video::621it6d-AxE[youtube]
+
+_Category Hierarchy exercise solution_
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+*Algorithm Understanding: Overlap Similarity*
+
+Which of the following best describes what the Overlap Similarity algorithm computes?
+
+Select the correct answer.
+
+[%interactive.answers]
+- [x] The size of the intersection divided by the size of the smaller of the two sets
+- [ ] The number of pairwise disagreements between two ranking lists
+- [ ] The size of the intersection divided by the size of the union of two sets
+- [ ] The minimum number of operations required to transform one string into the other
+
+=== Question 2
+
+*Running the algorithm in Neo4j*
+
+Which of the following parameters can be used to control the threshold for overlap similarity?
+
+Select the correct answer.
+[%interactive.answers]
+- [ ] degreeCutoff
+- [x] similarityCutoff
+- [ ] minimumSimilarity
+- [ ] topK
+
+=== Question 3
+
+*Matching Results*
+
+Which of these categories are top-level categories i.e. they don't have any outgoing `NARROWER_THAN` relationships?
+
+Select the correct answers.
+[%interactive.answers]
+- [x] Shopping
+- [ ] Wine Bars
+- [ ] Doctors
+- [x] Local Flavor
+
+== Summary
+
+You should now be able to:
+[square]
+* Use the Overlap Similarity graph algorithm.

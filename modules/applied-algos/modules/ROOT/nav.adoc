@@ -1,0 +1,7 @@
+* xref:00-applied-graph-algorithms-about.adoc[]
+* xref:01-setup-and-cypher-refresher.adoc[]
+* xref:02-category-hierarchy.adoc[]
+* xref:03-ordering-search-results.adoc[]
+* xref:04-most-relevant-reviews.adoc[]
+* xref:05-photo-based-gallery-recommendations.adoc[]
+* xref:06-applied-graph-algos-summary.adoc[]

@@ -1,0 +1,13 @@
+name: training-applied-algos
+title: Applied Graph Algorithms
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: 'applied-algos'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

@@ -1,0 +1,94 @@
+= Ordering Search Results
+:slug: 03-ordering-search-results
+:neo4j-version: 3.5
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+
+video::50PJuJUpFz0[youtube]
+
+_Pearson similarity overview and problem statement_
+
+In this section you will improve the display of search results. When a user searches for businesses we want to order the results so that we show the most relevant results first. To do that, you will use the Pearson similarity metric.
+
+Let's look at the part of the application that you will enhance.
+
+In the CodeSandbox Browser, you can select *Business Search*, and search for *Pizza* in the category *Restaurants*.
+
+image::codesandbox4.png[,width=700,align=center]
+
+Instead of showing results in alphabetical order you will modify the application to show the most relevant businesses first.
+
+[NOTE]
+====
+.Useful Resources
+
+* https://neo4j.com/docs/graph-algorithms/current/introduction/#_graph_loading[Graph Loading^]
+* https://neo4j.com/docs/graph-algorithms/current/algorithms/page-rank/[PageRank^]
+====
+
+== Exercise
+
+You will update the application to use this new information.
+
+Instead of selecting the reviews for our businesses based on the opinions of users unrelated to `user-name`, we'll show reviews written by similar users.
+
+. In Neo4j Browser, perform the steps in Neo4j Browser guide section *Search Results*. (:play applied_graph_algorithms/03_search_results.html)
+. In CodeSandbox, edit the Cypher query in `src/exercises/exercise2.js` to return businesses.
+. Save this file.
+. In the CodeSandbox Browser, select a user from the *User Profile* drop down. This will set this user for the search.
+. Select *Business Search*,  entering *pizza* for the search text and select *Restaurant* for the category. You should see a list of restaurants that are relevant to that user.
+. Select a different user and then search for pizza restaurants. You should see a different set of restaurants.
+
+[NOTE]
+====
+This query should be in the context of the currently "logged in" user in the application. Since our simple application doesn't have any authentication mechanism we fake this by choosing a user in the dropdown in the "User Profile" section of the application. The id of the currently logged in user will be available as a Cypher parameter `userId` in the query.
+
+So for example, to find the currently logged in user:
+
+`MATCH (me:User {id: $userId})`
+====
+
+== Solution
+
+If you get stuck, watch this video for a walk-through of the solution:
+
+video::tsNfjs892f8[youtube]
+
+_Ordering search results solution_
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+*Algorithm Understanding: Pearson Similarity*
+
+Which of the following are valid values that can be returned by the Pearson Similarity algorithm?
+
+Select the correct answers.
+[%interactive.answers]
+- [x] 0.72
+- [ ] -3.41
+- [ ] 2.34
+- [x] -0.52
+
+=== Question 2
+
+*Running the algorithm in Neo4j*
+
+Which of the following are fields returned by the `algo.similarity.pearson` procedure?
+
+Select the correct answers.
+[%interactive.answers]
+- [x] similarityPairs
+- [ ] relationships
+- [x] p75
+- [x] writeRelationshipType
+
+== Summary
+
+You should now be able to:
+[square]
+* Use the Pearson Similarity graph algorithm.
