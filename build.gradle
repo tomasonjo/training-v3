@@ -80,6 +80,9 @@ subprojects {
       case "datascience":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}data-science/"
         break
+      case "applied-algos":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}applied-graph-algorithms/"
+        break
       default:
         "https://neo4j.com/"
     }
