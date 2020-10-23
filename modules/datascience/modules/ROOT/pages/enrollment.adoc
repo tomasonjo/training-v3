@@ -1,5 +1,5 @@
 = Data Science
-:slug: datascience
+:slug: data-science
 :description: Learn about doing Data Science and Machine Learning with Neo4j
 :page-slug: {slug}
 :page-description: {description}
