@@ -1,4 +1,4 @@
-= Basic Neo4j 4.0 Administration Online Course
+= Basic Neo4j 4.0 Administration
 :slug: basic-neo4j-admin-40
 :description: Learn how create a database for a graph data model and evolve the graph.
 :page-slug: {slug}

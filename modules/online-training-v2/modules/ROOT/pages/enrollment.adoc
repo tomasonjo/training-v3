@@ -1,4 +1,4 @@
-= Introduction to Neo4j Online Course
+= Introduction to Neo4j 3.5
 :slug: introduction-to-neo4j
 :description: Learn about Graph Databases, Neo4j and Cypher – the Graph Query Language.
 :page-slug: {slug}

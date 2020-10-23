@@ -1,4 +1,4 @@
-= Graph Data Modeling Online Course
+= Graph Data Modeling for Neo4j
 :slug: graph-data-modeling
 :description: Learn how to model your application data as a Neo4j graph data model.
 :page-slug: {slug}
