@@ -52,7 +52,7 @@ require 'json'
     <div class="guide-section-content large-8 columns">
       <h1 class="entry-title"><%= attr('doctitle') %></h1>
       <%= content %>
-      <% if attr('page-certificate') == 'true' %>
+      <% if attr?('page-certificate') %>
         <div id="_certificate" class="sect1 certificate columns medium-12" style="padding-left: 0;">
           <h3 style="display: inline;">
             <a class="anchor" href="#_certificate"></a>Certificate
