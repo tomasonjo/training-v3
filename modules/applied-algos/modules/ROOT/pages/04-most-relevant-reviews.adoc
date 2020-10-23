@@ -45,7 +45,7 @@ _Most relevant reviews exercise solution_
 
 === Question 1
 
-=== Algorithm Understanding: Personalized PR
+*Algorithm Understanding: Personalized PR*
 
 Which of the following best describe the Personalized PageRank algorithm?
 
@@ -59,7 +59,7 @@ Select the correct answer.
 
 === Question 2
 
-=== Running the algorithm in Neo4j
+*Running the algorithm in Neo4j*
 
 What is the default value of the `dampingFactor` used by the PageRank procedure?
 

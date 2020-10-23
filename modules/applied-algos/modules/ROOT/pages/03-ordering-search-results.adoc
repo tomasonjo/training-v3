@@ -63,7 +63,7 @@ _Ordering search results solution_
 
 === Question 1
 
-=== Algorithm Understanding: Pearson Similarity
+*Algorithm Understanding: Pearson Similarity*
 
 Which of the following are valid values that can be returned by the Pearson Similarity algorithm?
 
@@ -76,12 +76,12 @@ Select the correct answers.
 
 === Question 2
 
-=== Running the algorithm in Neo4j
+*Running the algorithm in Neo4j*
 
 Which of the following are fields returned by the `algo.similarity.pearson` procedure?
 
 Select the correct answers.
-[%interactive]
+[%interactive.answers]
 - [x] similarityPairs
 - [ ] relationships
 - [x] p75

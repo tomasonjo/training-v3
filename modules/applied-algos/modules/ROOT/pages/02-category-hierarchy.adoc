@@ -51,7 +51,7 @@ _Category Hierarchy exercise solution_
 
 === Question 1
 
-=== Algorithm Understanding: Overlap Similarity
+*Algorithm Understanding: Overlap Similarity*
 
 Which of the following best describes what the Overlap Similarity algorithm computes?
 
@@ -65,7 +65,7 @@ Select the correct answer.
 
 === Question 2
 
-=== Running the algorithm in Neo4j
+*Running the algorithm in Neo4j*
 
 Which of the following parameters can be used to control the threshold for overlap similarity?
 
@@ -78,7 +78,7 @@ Select the correct answer.
 
 === Question 3
 
-=== Matching Results
+*Matching Results*
 
 Which of these categories are top-level categories i.e. they don't have any outgoing `NARROWER_THAN` relationships?
 

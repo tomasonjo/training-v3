@@ -39,7 +39,7 @@ _Photo based recommendations solution_
 
 === Question 1
 
-=== Algorithm Understanding: LPA
+*Algorithm Understanding: LPA*
 
 Which category of algorithms best describes LPA?
 
@@ -53,13 +53,13 @@ Select the correct answer.
 
 === Question 2
 
-=== Running the algorithm in Neo4j
+*Running the algorithm in Neo4j*
 
 Which voting mechanism does Neo4j's Label Propagation algorithm use?
 
 Select the correct answer.
 
-[%interactive]
+[%interactive.answers]
 - [ ] Random Walk Method
 - [x] Pull Method
 - [ ] Push Method

@@ -127,7 +127,7 @@ _Overview of the application and connecting it to your Neo4j Sandbox instance_
 
 === Question 1
 
-=== Verify your CodeSandbox React application is connected to Neo4j Sandbox
+*Verify your CodeSandbox React application is connected to Neo4j Sandbox*
 
 Which of the following users appear in the User Profile dropdown?
 
@@ -140,12 +140,12 @@ Select the correct answers.
 
 === Question 2
 
-=== Cypher refresher
+*Cypher refresher*
 
 Using the Neo4j Browser for your Yelp Neo4j Sandbox instance write a Cypher query to find all the businesses connected to the Category "Breweries". How many breweries are there in the dataset?
 
 Select the correct answer.
-[%interactive]
+[%interactive.answers]
 - [ ] 10
 - [x] 38
 - [ ] 1142
