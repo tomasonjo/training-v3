@@ -17,7 +17,7 @@
 You have learned how to query the graph and create nodes and relationships in the graph.
 In most graphs, you will want to provide uniqueness for some properties of the nodes in the graph.
 In addition, you may want to enforce the creation of mandatory properties for selected nodes.
-These are called contraints in a Neo4j graph data model and are typically defined during the graph data modeling phase of your application developement.
+These are called constraints in a Neo4j graph data model and are typically defined during the graph data modeling phase of your application developement.
 --
 
 At the end of this module, you should be able to:

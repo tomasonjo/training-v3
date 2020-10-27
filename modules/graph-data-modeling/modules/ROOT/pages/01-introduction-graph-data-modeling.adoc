@@ -1,5 +1,5 @@
 = Introduction to Graph Data Modeling
-:slug: 01-introduction-graph-data-modeling
+= :slug: 01-introduction-graph-data-modeling
 :doctype: book
 :toc: left
 :toclevels: 4
