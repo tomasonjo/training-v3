@@ -87,7 +87,7 @@ You can skip this step if you plan to use an existing project that already has a
 You will most likely be importing the data into a newly-created database.
 --
 
-[source,cypher]
+[source,browser,role=nocopy noplay]
 ----
 create database customers;
 show databases

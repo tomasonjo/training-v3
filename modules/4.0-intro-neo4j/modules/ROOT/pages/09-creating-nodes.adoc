@@ -25,6 +25,9 @@ At the end of this module, you should be able to write Cypher statements to:
 * Add and remove node properties.
 * Update node properties.
 
+[NOTE]
+Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+
 == Syntax: Creating nodes
 
 [.notes]
@@ -37,7 +40,7 @@ In virtually all cases, the nodes that you create in a graph will be connected t
 
 Here is the simplified syntax for creating a node:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CREATE (optionalVariable optionalLabels {optionalProperties})
 ----
@@ -53,7 +56,7 @@ Next, you will see some examples of creating a single node in Cypher.
 
 Add a node to the graph of type _Movie_ with the _title_, _Batman Begins_. This node can be retrieved using the _title_. A set of nodes with the label _Movie_ can also be retrieved which will contain this node:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE (:Movie {title: 'Batman Begins'})
 ----
@@ -62,7 +65,7 @@ CREATE (:Movie {title: 'Batman Begins'})
 
 Add a node with two labels to the graph of types _Movie_ and _Action_ with the _title_, _Batman Begins_. This node can be retrieved using the _title_. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE (:Movie:Action {title: 'Batman Begins'})
 ----
@@ -71,7 +74,7 @@ CREATE (:Movie:Action {title: 'Batman Begins'})
 
 Add a node to the graph of types _Movie_ and _Action_ with the _title_, _Batman Begins_. This node can be retrieved using the title. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. The variable _m_ can be used for later processing after the `CREATE` clause:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE (m:Movie:Action {title: 'Batman Begins'})
 ----
@@ -80,7 +83,7 @@ CREATE (m:Movie:Action {title: 'Batman Begins'})
 
 Add a node to the graph of types _Movie_ and _Action_ with the _title_ _Batman Begins_. This node can be retrieved using the _title_. A set of nodes with the labels _Movie_ or _Action_ can also be retrieved which will contain this node. Here we return the _title_ of the node:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE (m:Movie:Action {title: ' Batman Begins'})
 RETURN m.title
@@ -129,7 +132,7 @@ Here is an example, where we create some _Person_ nodes that will represent some
 
 [.is-two-thirds.left-column]
 --
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE 
 (:Person {name: 'Michael Caine', born: 1933}),
@@ -171,12 +174,12 @@ You may not know ahead of time what label or labels you want for a node when it 
 Here is the simplified syntax for adding labels to a node:
 --
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x:Label         // adding one label to node referenced by the variable x
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x:Label1:Label2	// adding two labels to node referenced by the variable x
 ----
@@ -191,7 +194,7 @@ If you attempt to add a label to a node for which the label already exists, the 
 Here is an example where we add the _Fantasy_ label to the node that has a labels, _Movie_ and _Action_:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -220,7 +223,7 @@ Perhaps your data model has changed or the underlying data for a node has change
 Here is the simplified syntax for removing a label from a node:
 --
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 // remove the label from the node referenced by the variable x
 REMOVE x:Label
@@ -231,7 +234,7 @@ REMOVE x:Label
 Here is the simplified syntax for removing multiple labels from a node:
 --
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 // remove the two labels from the node referenced by the variable x
 REMOVE x:Label1, x:Label2
@@ -249,7 +252,7 @@ If you attempt to remove a label from a node for which the label does not exist,
 Here is an example where we remove the _Action_  and _Fantasy_ labels from the node that has the label, _Action_:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Action)
 REMOVE m:Action, m:Fantasy
@@ -270,22 +273,22 @@ After you have created a node and have a reference to the node, you can add prop
 Here are simplified syntax examples for adding properties to a node referenced by the variable _x_:
 --
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x.propertyName = value
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x.propertyName1 = value1	, x.propertyName2 = value2 
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x = {propertyName1: value1, propertyName2: value2}
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x += {propertyName1: value1, propertyName2: value2}
 ----
@@ -307,7 +310,7 @@ When specify the JSON-style object for assignment (using `=`) of the property va
 Here is an example where we add the properties _released_  and _lengthInMinutes_ to the movie _Batman Begins_:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -327,7 +330,7 @@ image::AddReleasedMinutesProperties.png[AddReleasedMinutesProperties,width=800,a
 Here is another example where we set the property values to the movie node using the JSON-style object containing the property keys and values. Note that [.underline]#all# properties must be included in the object.
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -376,7 +379,7 @@ In addition to querying the names of all properties, you can also return the pro
 You can retrieve the properties of a node as a Cypher map:
 --
 
-[source, cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -396,7 +399,7 @@ image::PropertyKeysBatmanBegins.png[PropertyKeysBatmanBegins,width=800,align=cen
 Here is an example where we use the JSON-style object to add the _awards_ property to the node and update the _grossMillions_ property:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -420,12 +423,12 @@ There are two ways that you can remove a property from a node. One way is to use
 Here are simplified syntax examples for removing properties from a node referenced by the variable _x_:
 --
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 REMOVE x.propertyName
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 SET x.propertyName = null
 ----
@@ -440,7 +443,7 @@ However, we have decided that we want to remove these properties from this node.
 Here is example Cypher to remove this property from this _Batman Begins_ node:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -493,7 +496,7 @@ Select the correct answers.
 Suppose that you have retrieved a node, _s_ with a property, _color_.
 What Cypher clause do you add here to delete the _color_ property from this node?
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (s:Shape {location: [20,30]})
 ???
@@ -515,7 +518,7 @@ Select the correct answers.
 Suppose you have this _Person_ node in the graph: "name": "Joe Cool", "birthYear": 1985.
 What properties have values after executing this code?
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 -----
 MATCH (p:Person) WHERE p.name = 'Joe Cool'
 SET  p += { salary: 130000,

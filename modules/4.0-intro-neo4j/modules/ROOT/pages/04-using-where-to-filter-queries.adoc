@@ -49,7 +49,7 @@ In the `WHERE` clause, you can place conditions that are evaluated at runtime to
 
 Previously, you learned to write simple query as follows:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie {released: 2008}) 
 RETURN p, m
@@ -57,7 +57,7 @@ RETURN p, m
 
 Here is a way you specify the same query using the `WHERE` clause:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie) 
 WHERE m.released = 2008
@@ -72,7 +72,7 @@ The benefit of using a `WHERE` clause is that you can specify potentially comple
 
 For example:
 
-[source.fit,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE m.released = 2008 OR m.released = 2009
@@ -88,7 +88,7 @@ Not only can the equality `=` be tested, but you can test ranges, existence, str
 Here is an example of specifying a range for filtering the query:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie) 
 WHERE m.released >= 2003 AND m.released <= 2004
@@ -103,7 +103,7 @@ image::MoviesBetween2003And2004.png[MoviesBetween2003And2004,width=600,align=cen
 
 You can also specify the same query as:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie) 
 WHERE 2003 <= m.released <= 2004
@@ -133,13 +133,13 @@ endif::[]
 [.statement]
 For example, these two Cypher queries:
 
-[source,cypher]
+[[source,cypher,role=noplay]
 ----
 MATCH (p:Person) 
 RETURN p.name
 ----
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(:Movie {title: 'The Matrix'}) 
 RETURN p.name
@@ -151,14 +151,14 @@ RETURN p.name
 [.statement]
 can be rewritten using `WHERE` clauses as follows:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p)
 WHERE p:Person
 RETURN p.name
 ----
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p)-[:ACTED_IN]->(m)
 WHERE p:Person AND m:Movie AND m.title='The Matrix'
@@ -189,7 +189,7 @@ Suppose we only want to return the movies that the actor, _Jack Nicholson_ acted
 Here is the query to retrieve the specified movies where we test the existence of the _tagline_ property:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name='Jack Nicholson' AND exists(m.tagline)
@@ -213,7 +213,7 @@ You can specify `STARTS WITH`, `ENDS WITH`, and `CONTAINS`.
 [.statement]
 For example, to find all actors in the _Movie_ database whose first name is _Michael_, you would write:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->()
 WHERE p.name STARTS WITH 'Michael'
@@ -236,7 +236,7 @@ For example, if you want to test a value, regardless of its case, you could call
 
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->()
 WHERE toLower(p.name) STARTS WITH 'michael'
@@ -262,7 +262,7 @@ You use the syntax `=~` to specify the regular expression you are testing with.
 Here is an example where we test the name of the _Person_ using a regular expression to retrieve all _Person_ nodes with a _name_ property that begins with 'Tom':
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)
 WHERE p.name =~'Tom.*'
@@ -292,7 +292,7 @@ You can specify a `NOT` specifier on a pattern in a `WHERE` clause.
 [.statement]
 Here is an example where we want to return all _Person_ nodes of people who wrote movies:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:WROTE]->(m:Movie)
 RETURN p.name, m.title
@@ -312,7 +312,7 @@ image::WroteMovies.png[WroteMovies,width=400,align=center]
 [.statement]
 Next, we modify this query to exclude people who directed that particular movie:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:WROTE]->(m:Movie)
 WHERE NOT exists( (p)-[:DIRECTED]->(m) )
@@ -332,7 +332,7 @@ image::WroteMoviesNotDirected.png[WroteMoviesNotDirected,width=400, align=center
 [.statement]
 Here is another example where we want to find _Gene Hackman_ and the movies that he acted in with another person who also directed the movie.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (gene:Person)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(other:Person)
 WHERE gene.name= 'Gene Hackman'
@@ -363,7 +363,7 @@ If you are testing with a property of a string type, then all the elements of th
 [.statement]
 In this example, we only want to retrieve _Person_ nodes of people born in 1965 or 1970:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)
 WHERE p.born IN [1965, 1970]
@@ -389,7 +389,7 @@ Here is the query we write to return the name of the actor who played _Neo_ in t
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
 WHERE  'Neo' IN r.roles AND m.title='The Matrix'

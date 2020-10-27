@@ -112,7 +112,7 @@ Changes to these properties require a restart of the Neo4j instance.
 
 For a started Neo4j instance, you can also query the DBMS to see how much memory is being used:
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 CALL dbms.listPools()
 ----
@@ -127,7 +127,7 @@ image::listPools.png[listPools,width=800,align=center]
 You can also query the graph for what these settings are with this Cypher:
 --
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 CALL dbms.listConfig() YIELD name, value
 WHERE name STARTS WITH 'dbms.memory'
@@ -207,7 +207,7 @@ You can use `EXPLAIN` to help you when examining queries you will be tuning.
 Suppose we had this query:
 --
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 EXPLAIN
 MATCH (p:Person)
@@ -235,7 +235,7 @@ Furthermore, we can see that _fullName_ is not a valid property key.
 You can execute this statement to get a list of all valid property names in the graph or you can simply view the keys in the left panel of Neo4j Browser.
 --
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 CALL db.propertyKeys() YIELD propertyKey
 propertyKey ORDER BY propertyKey
@@ -253,7 +253,7 @@ From our knowledge of DB Stats, we know that there are 56,914 (:Person)-(:_ACTED
 Suppose we will be tuning this query:
 --
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 EXPLAIN
 MATCH (p:Person)-[ACTED_IN]->(m)
@@ -276,7 +276,7 @@ This is not correct because the query had an error in it.
 It should have been written as follows:
 --
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 EXPLAIN
 MATCH (p:Person)-[:ACTED_IN]->(m)
@@ -307,7 +307,7 @@ Depending on the size of your graph and the size of RAM on your system, you may 
 Here are some ways that you can warm up the Page Cache:
 --
 
-[source.center, cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (n) RETURN max(id(n))
 MATCH ()-[rel]->() RETURN max(id(rel))

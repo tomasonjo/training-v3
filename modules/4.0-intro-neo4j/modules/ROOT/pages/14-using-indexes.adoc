@@ -33,6 +33,9 @@ At the end of this module, you should be able to:
 ** Drop a full-text schema index.
 --
 
+[NOTE]
+Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+
 == Indexes in Neo4j
 
 [.notes]
@@ -73,7 +76,7 @@ When you add an index for a property of a node, it can greatly reduce the number
 In this query we are testing the value of the _released_ property of a _Movie_ node using ranges:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE 1990 < m.released < 2000
@@ -98,7 +101,7 @@ An index on its own does [.underline]#not# guarantee uniqueness.
 Here is an example of how we create a single-property index on the _released_ property of all nodes of type _Movie_:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE INDEX MovieReleased FOR (m:Movie) ON (m.released)
 ----
@@ -127,7 +130,7 @@ A composite index is based upon multiple properties for a node.
 Suppose we added the property, _videoFormat_ to every _Movie_ node and set its value, based upon the released date of the movie as follows:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.released >= 2000
@@ -158,7 +161,7 @@ In general, you need not end a Cypher statement with a semi-colon. If you want t
 Now that the graph has _Movie_ nodes with both the properties, _released_ and _videoFormat_, we can create a composite index on these properties as follows:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE INDEX MovieReleasedVideoFormat FOR (m:Movie) ON (m.released, m.videoFormat)
 ----
@@ -199,7 +202,7 @@ You can change the underlying index provider of any index.
 Here is an example where we create a full-text schema index on data in _title_ property of _Movie_ nodes and data in the _name_ property of _Person_ nodes:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.index.fulltext.createNodeIndex(
       'MovieTitlePersonName',['Movie', 'Person'], ['title', 'name'])
@@ -220,7 +223,7 @@ After creating a full-text schema index, you can always get of listing of all ex
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.indexes()
 ----
@@ -246,7 +249,7 @@ To use a full-text schema index, you must call the query procedure that uses the
 Here is an example where we want to find all movies and person names that contain the string _Jerry_:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.index.fulltext.queryNodes(
      'MovieTitlePersonName', 'Jerry') YIELD node
@@ -276,7 +279,7 @@ Here is an example:
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.index.fulltext.queryNodes(
      'MovieTitlePersonName', 'Matrix') YIELD node, score
@@ -296,7 +299,7 @@ image::UseFullTextIndex2.png[UseFullTextIndex2,width=900,align=center]
 With full-text indexes created, you can also specify which property you want to search for. Here is an example where we are looking for _Jerry_, but only as a _name_ property of a _Person_ node:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.index.fulltext.queryNodes(
      'MovieTitlePersonName', 'name: Jerry') YIELD node
@@ -319,7 +322,7 @@ Please see the _Cypher Reference Manual_ for more on using full-text schema inde
 [.statement]
 You have already seen the three types of indexes in our database thus far using this Cypher statement:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.indexes()
 ----
@@ -337,7 +340,7 @@ image::ManagingIndexes1.png[ManagingIndexes1,width=1300,align=center]
 To drop an index on a property, you simply use the `DROP INDEX` clause, specifying the name of the index:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 DROP INDEX MovieReleasedVideoFormat
 ----
@@ -357,7 +360,7 @@ To drop a full-text schema index, you must call the procedure. Here we drop the 
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.index.fulltext.drop('MovieTitlePersonName')
 ----
@@ -374,7 +377,7 @@ image::ManagingIndexes3.png[ManagingIndexes3,width=900,align=center]
 [.statement]
 You must list the indexes to confirm that it was dropped:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL db.indexes()
 ----

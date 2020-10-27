@@ -24,6 +24,8 @@ At the end of this module, you should be able to write Cypher statements to:
 * Delete a relationship.
 * Delete a node and its relationships.
 
+[NOTE]
+Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
 
 == Deleting nodes
 
@@ -32,7 +34,7 @@ At the end of this module, you should be able to write Cypher statements to:
 Suppose you have created a _Person_ node for Jane Doe:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE (p:Person {name: 'Jane Doe'})
 ----
@@ -40,7 +42,7 @@ CREATE (p:Person {name: 'Jane Doe'})
 [.statement]
 You delete this node as follows:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)
 WHERE p.name = 'Jane Doe'
@@ -72,7 +74,7 @@ Perhaps we were over zealous with the creation of relationships between nodes.
 For example, what if we had this code where relationships were created:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Katie Holmes' AND m.title = 'Batman Begins'
@@ -100,7 +102,7 @@ Provided you have a reference to a relationship, you can delete it.
 So for example, we can find the relationships that we want to delete and then delete them as follows:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (a:Person)-[rel:WROTE | DIRECTED]->(m:Movie)
 WHERE a.name = 'Katie Holmes' AND m.title = 'Batman Begins'
@@ -121,7 +123,7 @@ image::DeleteRels.png[DeleteRels,width=500,align=center]
 You can confirm that there is only one relationship associated with the _Katie Holmes_ node as follows:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (a:Person)-[rel]-()
 WHERE a.name = 'Katie Holmes'
@@ -144,7 +146,7 @@ When you specify `DETACH DELETE` for a node, the relationships to and from the n
 If we were to attempt to delete the _Liam Neeson_ node without first deleting its relationships:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)
 WHERE p.name = 'Liam Neeson'
@@ -163,7 +165,7 @@ image::LiamNeesonDeleteError.png[LiamNeesonDeleteError,width=800,align=center]
 Here we delete the _Liam Neeson_ node [underline]#and# its relationships to any other nodes:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)
 WHERE p.name = 'Liam Neeson'

@@ -64,7 +64,7 @@ Some drivers support concurrency while others do not.
 [.statement]
 Here is an example where we wait for the call to return before continuing:
 
-[source]
+[source,java,role=nocopy noplay]
 ----
 String uri = "bolt://localhost:7687";
 Driver driver = GraphDatabase.driver(uri, AuthTokens.basic("neo4j", "p4ssw0rd"));
@@ -85,7 +85,7 @@ try (Session session = driver.session()) {
 [.statement]
 Here is an example where we continue processing while the call executes:
 
-[source]
+[source,java,role=nocopy noplay]
 ----
 String uri = "bolt://localhost:7687";
 Driver driver = GraphDatabase.driver(uri, AuthTokens.basic("neo4j", "p4ssw0rd"));
@@ -100,7 +100,7 @@ session.readTransactionAsync(tx ->
 
 == Example: Synchronous Python example
 
-[source]
+[source,python,role=nocopy noplay]
 ----
 uri = "bolt://localhost:7687"
 driver = GraphDatabase.driver(uri, auth=("neo4j", "p4ssw0rd"))
@@ -116,7 +116,7 @@ with driver.session() as session:
 
 == Example: Synchronous JavaScript example
 
-[source]
+[source,javascript,role=nocopy noplay]
 ----
 const neo4j = require('neo4j-driver').v1;
 const uri = 'bolt://localhost:7687';
@@ -134,7 +134,7 @@ resultPromise.then(result => {
 
 == Example: Synchronous C# example
 
-[source]
+[source,Csharp,role=nocopy noplay]
 ----
 var uri = "bolt://localhost:7687";
 var driver = GraphDatabase.Driver(uri, AuthTokens.Basic("neo4j", "p4ssw0rd"));
@@ -151,7 +151,7 @@ Console.WriteLine(record["a.name"]);
 
 == Example: Asynchronous C# example
 
-[source]
+[source,Csharp,role=nocopy noplay]
 ----
 var uri = "bolt://localhost:7687";
 var driver = GraphDatabase.Driver(uri, AuthTokens.Basic("neo4j", "p4ssw0rd"));
@@ -177,7 +177,8 @@ Here is a very simple example that shows the Java code for retrieving data from 
 
 [.statement]
 *rdbms2graph.groovy*
-[source]
+
+[source,java,role=nocopy noplay]
 ----
 @GrabConfig( systemClassLoader=true )
 @Grapes([

@@ -36,7 +36,7 @@ When you return results as values, Cypher automatically returns the values group
 For example, with this query:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:REVIEWED]->(m:Movie)
 RETURN  p.name, m.title
@@ -67,7 +67,7 @@ When you aggregate in a Cypher query, this means that the query must process all
 Here is an example:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, d.name, count(m)
@@ -101,7 +101,7 @@ The value can be a property value, a node, a relationship, or a path.
 Here is an example where we collect the list of movie titles that _Tom Cruise_ acted in:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name ='Tom Cruise'
@@ -129,7 +129,7 @@ For example, rather than collecting the values of the _title_ properties for all
 For this simple query, it is the same as returning _m_, but for more complex queries, you will find that collecting nodes and using them for a later step of the query is useful.
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name ='Tom Cruise'
@@ -166,7 +166,7 @@ When you use `count()`, the graph engine does an implicit "group by" based upon 
 Here is an example where we count the paths retrieved where an actor and director collaborated in a movie and the `count()` function is used to count the number of paths found for each actor/director collaboration.
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
 RETURN actor.name, director.name,
@@ -197,7 +197,7 @@ The `size()` function returns the number of elements in a list.
 
 Here is an alternative to using `count()` that returns the same results, but with using `size()`:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
 RETURN actor.name, director.name, size(collect(m)) AS collaborations,
@@ -235,7 +235,7 @@ There are many built-in Cypher functions that you can use to build or access ele
 [.statement]
 Here we return the cast list for every movie, as well as the size of the cast:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a) as cast, size(collect(a)) as castSize
@@ -260,7 +260,7 @@ Notice that when viewing nodes in table view, each node is shown with {} notatio
 [.statement]
 We can adjust this query slightly so that the list contains the names, rather than the entire set of  _Person_ node properties.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a.name) as cast, size(collect(a.name)) as castSize
@@ -284,7 +284,7 @@ In this example we return the first cast member for each movie.
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN m.title, collect(a.name)[0] as `A cast member`,
@@ -316,7 +316,7 @@ A Cypher `map` is list of key/value pairs where each element of the list is of t
 Using this map, we can return the value for one of its elements:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 RETURN {Jan: 31, Feb: 28, Mar: 31, Apr: 30 , May: 31, Jun: 30 ,
        Jul: 31, Aug: 31, Sep: 30, Oct: 31, Nov: 30, Dec: 31}['Feb'] AS DaysInFeb
@@ -356,7 +356,7 @@ You can do so as follows using map projections:
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title CONTAINS 'Matrix'
@@ -384,7 +384,7 @@ Neo4j has these several basic formats for storing date/time data.
 There are a number of other types of data such as _Time_, _LocalTime_, _LocalDataTime_, and _Duration_ which are described in the documentation.
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 RETURN date(), datetime(), time(), timestamp()
 ----
@@ -400,7 +400,7 @@ Since both `date()` and `datetime()` store their values as strings, you can use 
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 RETURN date().day, date().year, datetime().year, datetime().hour,
        datetime().minute
@@ -419,7 +419,7 @@ To extract a month, year, or time from a timestamp, you would do the following:
 
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 RETURN datetime({epochmillis:timestamp()}).day,
        datetime({epochmillis:timestamp()}).year,

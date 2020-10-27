@@ -31,6 +31,9 @@ At the end of this module, you should be able to:
 * Import the data with `LOAD CSV`.
 * Create indexes for newly-loaded data.
 
+[NOTE]
+Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+
 == Loading data with Cypher
 
 In Cypher, you can:
@@ -169,7 +172,7 @@ With `LOAD CSV`, you can access CSV data at a URL or stored locally.
 Here is an example where we can view the first 10 lines of the file at the URL where the headers are included in the CSV file and the default delimiter is the comma character:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/v4.0-intro-neo4j/people.csv'
@@ -198,7 +201,7 @@ To determine where the *import* folder is for a local database in Neo4j Desktop,
 Here is an example where we can view the first 10 lines of the local file that has been placed in the *import* folder for the database:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'file:///people.csv'
@@ -235,7 +238,7 @@ You can preview the transformations you will make by returning their values:
 --
 [%unbreakable]
 --
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'file:///movies1.csv'
@@ -257,7 +260,7 @@ In fact, the _genres_ field is a string and we want to turn it into a Cypher lis
 To do this, we use the `split()`  and `coalesce()` functions as shown here:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'file:///movies1.csv'
@@ -343,7 +346,7 @@ Here is the code for creating the constraints in the graph where we will import 
 Note that the _id_ property is different from the internal _id_ of a node that is created automatically by the graph engine.
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT UniqueMovieIdConstraint ON (m:Movie) ASSERT m.id IS UNIQUE;
 
@@ -374,7 +377,7 @@ By default `LOAD CSV` can handle the loading of up to 100K lines/rows.
 You can query the size of your CSV files as follows:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'file:///people.csv'
@@ -423,7 +426,7 @@ If you cannot use `:auto USING PERIODIC COMMIT` because your Cypher include some
 In this example, we import the movie data:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 :auto USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM
@@ -467,7 +470,7 @@ Both the *directors.csv* and *roles.csv* files contain information about how Mov
 In this example, we import the data to create the relationships between existing _Movie_ and _Person_ nodes:
 --
 
-[source.fit,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS FROM
 'https://data.neo4j.com/v4.0-intro-neo4j/directors.csv' AS row
@@ -496,7 +499,7 @@ ifndef::env-slides[]
 So for example:
 endif::[]
 
-[source.fit,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 // Do this only after ALL data has been imported
 CREATE INDEX MovieTitleIndex ON (m:Movie) FOR (m.title);
