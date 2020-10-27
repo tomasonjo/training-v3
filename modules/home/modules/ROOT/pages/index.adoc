@@ -1,0 +1,3 @@
+= GraphAcademy Online Training
+:page-layout: training-index
+:page-introduction: Free self-paced, hands-on Neo4j training courses

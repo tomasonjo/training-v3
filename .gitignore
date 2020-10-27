@@ -13,3 +13,4 @@ node_modules/
 
 tokens/*
 !tokens/credentials.json
+/public/

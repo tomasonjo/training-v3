@@ -1,0 +1,48 @@
+{
+  "name": "@neo4j/graphacademy-site-generator",
+  "version": "0.1.0",
+  "description": "The Neo4j local site generator for producing and publishing GraphAcademy site with Antora.",
+  "license": "MIT",
+  "author": "Guillaume Grossetie (https://yuzutech.fr)",
+  "contributors": [
+    "Guillaume Grossetie <ggrossetie@yuzutech.fr>"
+  ],
+  "homepage": "https://github.com/neo4j-contrib/training-v3#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neo4j-contrib/training-v3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neo4j-contrib/training-v3/issues"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@antora/asciidoc-loader": "3.0.0-alpha.1",
+    "@antora/content-aggregator": "3.0.0-alpha.1",
+    "@antora/content-classifier": "3.0.0-alpha.1",
+    "@antora/document-converter": "3.0.0-alpha.1",
+    "@antora/navigation-builder": "3.0.0-alpha.1",
+    "@antora/page-composer": "3.0.0-alpha.1",
+    "@antora/playbook-builder": "3.0.0-alpha.1",
+    "@antora/redirect-producer": "3.0.0-alpha.1",
+    "@antora/site-mapper": "3.0.0-alpha.1",
+    "@antora/site-publisher": "3.0.0-alpha.1",
+    "@antora/ui-loader": "3.0.0-alpha.1"
+  },
+  "engines": {
+    "node": ">=10.17.0"
+  },
+  "files": [
+    "lib/"
+  ],
+  "keywords": [
+    "antora",
+    "antora-component",
+    "generator",
+    "pipeline",
+    "documentation",
+    "static site",
+    "web publishing"
+  ],
+  "private": true
+}

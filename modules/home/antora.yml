@@ -1,0 +1,6 @@
+name: training-welcome
+title: GraphAcademy Online Training
+version: 'master'
+asciidoc:
+  attributes:
+    page-theme: 'training'

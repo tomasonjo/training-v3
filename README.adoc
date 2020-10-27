@@ -3,10 +3,17 @@
 :uri-livereload: http://livereload.com/
 :uri-gradle-wrapper: https://docs.gradle.org/current/userguide/gradle_wrapper.html
 :uri-java-download: https://www.java.com/fr/download/
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
 image:https://github.com/neo4j-contrib/training-v3/workflows/CI/badge.svg[GitHub Actions Status, link=https://github.com/neo4j-contrib/training-v3/actions]
 
-This repo will use the gradle tool chain for building the following for Courses:
+This repo will use the Gradle tool chain for building the following for Courses:
 
 - HTML for online courses
 - HTML for enrollment pages
@@ -22,11 +29,12 @@ This repo will use the Gradle tool chain for building the following for Browser 
 
 [square]
 * *modules* each directory is a course or a browser guide which contains:
-** *docs*             the asciidoc source files
+** *modules*          the modules list of the Antora documentation component (contains AsciiDoc source files)
+** *docs*             the AsciiDoc source files
 ** *images*           the images
 ** *single-pdf*       container for generating the course guide or exercise guide
 ** *single-slides*    container for generating a single HTML for the entire course
-** *build*            generated when you convert asciidoc which contains these important artifacts
+** *build*            generated when you convert AsciiDoc which contains these important artifacts
 *** *enrollment*      the HTML for the enrollment page
 *** *online*          the online HTML and the PDF for each lesson of the course
 *** *slides*          the HTML slides for each lesson of the course
@@ -83,8 +91,8 @@ For example:
  $ ./gradlew 4.0-intro-neo4j:convertSlides
  $ ./gradlew 4.0-intro-neo4j:convert
 
-If you want to create a single slide deck for a group of slide asciidoc files, make a folder named "single-slides".
-In that folder include the asciidoc for the group of files you want to combine. (see example in 4.0-intro-neo4j module)
+If you want to create a single slide deck for a group of slide AsciiDoc files, make a folder named "single-slides".
+In that folder include the AsciiDoc for the group of files you want to combine. (see example in 4.0-intro-neo4j module)
 Then use this command to build it:
 
  $ #./gradlew <nameOfModule>:convertSingleSlides
@@ -150,9 +158,9 @@ project(':browser').projectDir = file('modules/browser-guides')
 
 Now we can execute tasks on this new module, for instance:
 
-[source,gradle]
+[source,console]
 ----
-./gradlew browser:convert
+$ ./gradlew browser:convert
 ----
 
 == Viewing slides locally
@@ -168,3 +176,36 @@ Now we can execute tasks on this new module, for instance:
 * Page down/Page up to move from slide to slide
 * Option + Click to zoom in/zoom out
 * S to open speaker notes in a different window
+
+== Antora Local preview
+
+As a prerequisite, you will need to install the latest LTS of https://nodejs.org/[Node.js].
+Once `node` and `npm` are installed, open a terminal and type:
+
+ $ npm i
+ $ npm i --prefix resources/site-generator
+
+The above commands will install the dependencies.
+
+=== Tasks
+
+Build and publish the site in _public_ directory:
+
+ $ npm run build
+
+Start a local server to serve the _public_ directory:
+
+ $ npm run start
+
+Continuously watch, build and serve the site:
+
+ $ npm run watch
+
+[TIP]
+====
+It can take quite some time to build all the courses everytime.
+To get a snappier experience, we recommend using the envrionment variable `TRAINING_MODULE` to build only one course.
+For instance, if we are working on the `datascience` course:
+
+ $ TRAINING_MODULE=datascience npm run watch
+====
