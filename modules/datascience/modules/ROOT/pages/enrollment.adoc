@@ -1,4 +1,4 @@
-= Data Science
+= Data Science with Neo4j
 :slug: data-science
 :description: Learn about doing Data Science and Machine Learning with Neo4j
 :page-slug: {slug}
