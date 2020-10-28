@@ -13,25 +13,30 @@ In this exercise you will create a database from a set of CSV files using the im
 == Exercise steps:
 
 . Download the ZIP file containing the CSV files to the *files* directory:
-
++
 On OS X and Linux:
-
++
+[source,shell,role=noplay]
 ----
 cd /home/ubuntu/files
+----
++
+[source,shell,role=noplay]
+----
 curl -O http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 ----
-
++
 On Windows, open the file in a Web browser to download it.
-
++
 [start=2]
 . Unzip the contents of the *crimes-dataset.zip*.
 +
-
 . The crimes-dataset directory should contain six CSV files. Move these six files to *import* folder for the Docker Neo4j instance.
 . Examine the CSV files. Make sure you understand the headers and how they will be used for the import.
 . Change directory to the *import* directory.
 . Use the `neo4j-admin` tool to import the CSV files using these guidelines:
-
++
+[source,snippet,role=noheader]
 ----
              --database crimes
              --nodes /import/crimes_header.csv,/import/crimes.csv
@@ -41,29 +46,35 @@ On Windows, open the file in a Web browser to download it.
              --relationships=PRIMARY_TYPE=/import/crimesPrimaryTypes.csv
              --trim-strings=true
 ----
-
++
 This is what you should enter (ensure there are no newline characters):
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin import --database crimes --nodes /import/crimes_header.csv,/import/crimes.csv --nodes /import/beats.csv --nodes=PrimaryType=/import/primaryTypes.csv --relationships /import/crimesBeats.csv --relationships=PRIMARY_TYPE=/import/crimesPrimaryTypes.csv --trim-strings=true
 ----
-
++
 This import will take a couple of minutes. This is what you should see in the terminal window if all goes well:
-
++
 image::ImportCrimesDocker1.png[ImportCrimesDocker1,width=500]
-
++
 [start=7]
 . In `cypher-shell` create the _crimes_ database.
 . Enter the following Cypher statements to view the schema of the database and return the number of nodes.
-
++
+[source,cypher,role=noplay]
 ----
 :use crimes
+----
++
+[source,cypher,role=noplay]
+----
 CALL db.schema.visualization();
 MATCH (n) RETURN count(n);
 ----
-
++
 The database information should now look as follows:
-
++
 image::Afteradmin-toolImportDocker.png[Afteradmin-toolImportDocker,width=600]
 
 == Exercise summary

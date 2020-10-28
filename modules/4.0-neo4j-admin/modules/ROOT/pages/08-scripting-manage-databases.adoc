@@ -47,7 +47,7 @@ Suppose that we create 3 files to make changes:
 *1. AddConstraintsMovies.cypher* that contains the Cypher statements to execute in `cypher-shell`:
 
 
-[source]
+[source,cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
@@ -63,7 +63,7 @@ Note that each Cypher statement must end with a `;`.
 
 *2. AddConstraints.sh* that invokes `cypher-shell` using a set of Cypher statements and specifies verbose output:
 
-[source]
+[source,shell,role=nocopy noplay]
 ----
 cat /usr/local/work/AddConstraintsMovies.cypher |
        /usr/bin/cypher-shell -u neo4j -p <InstancePassword>
@@ -79,7 +79,7 @@ Note that this statement must [.underline]#not# have linefeeds in it.
 
 *3. PrepareDB.sh* that initializes the log file, *PrepareDB.log*, and calls the script to add the constraints:
 
-[source]
+[source,shell,role=nocopy noplay]
 ----
 rm -rf /usr/local/work/PrepareDB.log
 /usr/local/work/AddConstraints.sh 2>&1 >> /usr/local/work/PrepareDB.log

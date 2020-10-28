@@ -78,7 +78,7 @@ endif::[]
 
 image::Traversal.png[Traversal,width=700,align=center]
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (r:Residence)<-[:OWNS]-(p:Person)
 WHERE r.address = '475 Broad Street'

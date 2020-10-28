@@ -65,7 +65,7 @@ The main benefit of native projections is their performance.
 The general syntax for using native projection to load a named graph is:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.graph.create(
   <graph-name>, <node-projection>, <relationship-projection>, 
@@ -97,7 +97,7 @@ endif::[]
 
 *String*: Used to project a single node label:
 
-[source,cypher]
+
 ----
 'Person'
 ----
@@ -112,7 +112,7 @@ endif::[]
 
 *Array*: Used to project multiple node labels:
 
-[source,cypher]
+
 ----
 ['Person', 'Organization']
 ----
@@ -123,7 +123,7 @@ endif::[]
 
 *Map*: Used for granular node label(s) and property definition:
 
-[source,cypher]
+
 ----
 {
     <node-label>: {
@@ -164,7 +164,7 @@ endif::[]
 
 *String*: Used to project a single relationship type:
 
-[source,cypher]
+
 ----
 'FRIEND'
 ----
@@ -178,7 +178,7 @@ endif::[]
 
 *Array*: Used to project multiple relationship types:
 
-[source,cypher]
+
 ----
 ['FRIEND', 'COWORKER']
 ----
@@ -189,7 +189,7 @@ endif::[]
 
 *Map*: Used for granular relationship type(s) and property definition:
 
-[source,cypher]
+
 ----
 {
     <relationship-type>: {
@@ -231,7 +231,7 @@ Read more about it in the https://neo4j.com/docs/graph-data-science/current/mana
 Here is a simple example of using Native projection to project a named graph:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 CALL gds.graph.create('graph','Person','HELPS', 
     {nodeProperties:['seed']
@@ -252,7 +252,7 @@ In relationship projection, we define a single relationship type _HELPS_ with it
 Here is a more complex example:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL gds.graph.create('graph',
   ['Person', 'Organization'],
@@ -287,7 +287,7 @@ For production, it is recommended to adapt the domain model in a way that it can
 
 The general syntax for using Cypher projection to load a named graph is:
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.graph.create.cypher(
     '<graph-name>',
@@ -310,7 +310,7 @@ Using the _labels_ column in return allows you to filter node labels at algorith
 
 Here is an example node query describing all _Person_ and _Organization_ nodes, and returning the internal node id, its label, and the seed property:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (n) WHERE n:Person OR n:Organization
 RETURN id(n) as id, labels(n) as labels, n.seed as seedProperty
@@ -329,7 +329,7 @@ Instead, we have to represent an undirected relationship as two directed relatio
 
 The following relationship query reduces a 2-hop path to a single relationship, effectively representing undirected co-authorship network:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (p1:Author)-[:WROTE]->(a:Article)<-[:WROTE]-(p2:Author)
 RETURN id(p1) AS source, id(p2) AS target, 'COWORKER' as type, count(*) AS weight
@@ -344,7 +344,7 @@ Because we use the _count()_ aggregation in the relationship query, we effective
 
 Putting all this information together, we would use the following syntax to project the undirected coauthorship network:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL gds.graph.create.cypher(
     'coauthorship-graph',
@@ -371,7 +371,7 @@ This way, we can find the most influential Twitter users and their community str
 
 ==== Example: Using Cypher projection
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL gds.graph.create.cypher(
     'troll-graph',
@@ -388,7 +388,7 @@ CALL gds.graph.create.cypher(
 If in your analysis you have created named graphs, you can view existing named graphs with the following procedure:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 CALL gds.graph.list()
 ----
@@ -402,7 +402,7 @@ After you have finished your graph analysis, you can release the named graph fro
 The syntax to release the named graph from the Graph Catalog is:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.graph.drop(<graph-name>)
 ----
@@ -431,7 +431,7 @@ Native and Cypher projections differ, however, in that relationship projections 
 Instead of separately projecting the in-memory graph, and then later executing a graph algorithm, you describe the Node projection and Relationship projection directly as configuration parameters of an algorithm.
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<algo>.<mode>(
   {
@@ -451,7 +451,7 @@ CALL gds.<algo>.<mode>(
 Here is an example of executing the PageRank graph algorithm using the anonymous graph with Native projection:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL gds.pageRank.stream(
   {
@@ -470,7 +470,7 @@ CALL gds.pageRank.stream(
 Similarly to using Native projection on an anonymous graph, you can describe the Node query and Relationship query directly as configuration parameters of an algorithm:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<algo>.<mode>(
   {
@@ -488,7 +488,7 @@ CALL gds.<algo>.<mode>(
 Here is an example of executing the PageRank graph algorithm using the anonymous graph with Cypher projection:
 --
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 CALL gds.pageRank.stream(
   {
@@ -525,7 +525,7 @@ Using the `ORDER BY` and `LIMIT` clauses in the Cypher query could be useful to 
 The general syntax to use the *stream* mode is:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<algo>.stream()
 ----
@@ -543,7 +543,7 @@ This mode forms the basis of the mutate and write execution modes, but does not 
 The general syntax to use the *stats* mode is:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<algo>.stats()
 ----
@@ -569,7 +569,7 @@ For the results from a write mode computation to be used by another algorithm, a
 The general syntax to use the *write* mode is:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<algo>.write()
 ----
@@ -599,7 +599,7 @@ Mutated data can be node properties (such as Page Rank scores), new relationship
 The general syntax to use the *mutate* mode is:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<algo>.mutate()
 ----

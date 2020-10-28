@@ -15,7 +15,7 @@ In this exercise you will gain some experience with creating and deleting a data
 . Enter the command to show all databases.
 +
     *Hint*: You must use the system database.
-
++
 image::ShowDatabasesExDocker.png[ShowDatabasesExDocker,width=1000,align=center]
 
 [start=3]
@@ -43,20 +43,25 @@ With the Docker Neo4j instance, it uses its own internal configuration, but you 
 [start=7]
 . Create the *neo4j.conf* file in the *$HOME/docker-neo4j/neo4j/conf* directory created when you created the Docker Neo4j instance.
 . Add the `dbms.default_database` property for *databaseone* to this file.
-
++
 Your neo4j.conf file should be as follows:
-
++
 image::AddConfigDatabaseoneDocker.png[AddConfigDatabaseoneDocker,width=1000,align=center]
 
 [start=9]
 . Restart the Docker Neo4j instance. Any change to the Neo4j configuration file requires a restart of the Neo4j instance.
 +
 
+[source,shell,role=noplay]
 ----
 [sudo] docker stop neo4j
+----
++
+[source,shell,role=noplay]
+----
 [sudo] docker start neo4j
 ----
-
+[start=10]
 . Connect to the Neo4j instance with `cypher-shell`.
 . Enter the command to show all databases to confirm that _databaseone_ is now the default database.
 +

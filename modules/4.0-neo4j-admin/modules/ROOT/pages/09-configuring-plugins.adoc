@@ -46,7 +46,7 @@ In many cases, if you upgrade to a later version of Neo4j, you may also need to 
 Here is an example of a script you can run to produce a file, *Procedures.txt* that contains the names of the procedures currently available for the Neo4j instance:
 --
 
-[source]
+[source,shell,role=noplay]
 ----
 echo "CALL dbms.procedures() YIELD name;" |
     /usr/bin/cypher-shell -u neo4j -p <InstancePassword> --format plain >
@@ -170,8 +170,10 @@ How much of the APOC library is used by your application is determined by the de
 Suppose we want to allow [.underline]#all# APOC procedures to be available to this Neo4j instance.
 We would sandbox the plugin in the *neo4j.conf* file as follows where we specify:
 
-`dbms.security.procedures.unrestricted=apoc.*`
-
+[source,config,role=noplay]
+----
+dbms.security.procedures.unrestricted=apoc.*
+----
 --
 
 image::APOCConfig.png[APOCConfig,width=950,align=center]
@@ -203,7 +205,7 @@ You may see some warning messages, but you can ignore them as they represent som
 You can produce a report of all the procedures available in the Neo4j instance:
 --
 
-[source]
+[source,shell,role=noplay]
 ----
 echo "CALL dbms.procedures() YIELD name;" |
        /usr/bin/cypher-shell -u neo4j -p <InstancePassword> --format plain >

@@ -34,7 +34,7 @@ The Neo4j database must be stopped to perform the consistency check.
 Here is how you use the `neo4j-admin` tool to check the consistency of the database:
 --
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 neo4j-admin check-consistency --database=<database-name>
                               --report-dir=report-location [--verbose]

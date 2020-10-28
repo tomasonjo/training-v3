@@ -16,6 +16,9 @@ At the end of this module, you should be able to:
 * Write Cypher code to import CSV data into the graph.
 * Confirm that the data has been loaded.
 
+[NOTE]
+Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+
 [.half-row]
 == Options for importing data into the graph
 
@@ -82,7 +85,7 @@ These steps are covered in the course _Introduction to Neo4j 4.0: Using LOAD CSV
 
 Here is the simplified syntax for using `LOAD CSV`:
 
-[source,cypher,role=noheader]
+[source,syntax,role=nocopy noplay]
 ----
 LOAD CSV     // load csv data
 WITH HEADERS // optionally use first header row as keys in "row" map
@@ -114,7 +117,7 @@ image::InspectDataFile.png[InspectDataFile,width=700,align=center]
 
 You use `LOAD CSV` to read the data from the CSV file as a row to create nodes and relationships, for example:
 
-[source,cypher,role=noheader]
+[source,cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_1k' AS row
 MERGE (origin:Airport {code: row.Origin})

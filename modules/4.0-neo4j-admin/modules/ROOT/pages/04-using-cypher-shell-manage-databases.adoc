@@ -32,7 +32,10 @@ At the end of this module, you should be able to:
 `cypher-shell` enables you to access the Neo4j database from a terminal window.  You simply log into the database using `cypher-shell` with your credentials:
 --
 
-`/usr/bin/cypher-shell -u <username> -p <password>`
+[source,syntax,role= nocopy noplay]
+----
+/usr/bin/cypher-shell -u <username> -p <password>
+----
 
 [.small]
 --
@@ -186,6 +189,7 @@ In Neo4j 4.0 Enterprise Edition, a Neo4j instance can host multiple user databas
 Here are the commands to create a database:
 --
 
+[source,syntax,role= nocopy noplay]
 ----
 :USE system
 CREATE DATABASE <database-name>
@@ -213,6 +217,7 @@ All of the above commands are executed as Cypher commands, and the database name
 In particular, the - (dash) character is not legal in Cypher variables, and therefore names with dashes need to be escaped by enclosing with back-ticks.
 For example,
 
+[source,cypher,role= nocopy noplay]
 ----
 CREATE DATABASE `main-db`.
 ----
@@ -297,6 +302,7 @@ One way that you can achieve this is to drop the database and then create it aga
 Another way that you can do is is to use the following command:
 --
 
+[source,syntax,role= nocopy noplay]
 ----
 CREATE OR REPLACE <database>;
 ----
@@ -308,6 +314,7 @@ CREATE OR REPLACE <database>;
 If you are scripting the creation of databases, you can also create a database if it does not exist as follows:
 --
 
+[source,syntax,role= nocopy noplay]
 ----
 CREATE <database> IF NOT EXISTS;
 ----

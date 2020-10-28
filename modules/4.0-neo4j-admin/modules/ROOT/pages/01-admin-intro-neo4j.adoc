@@ -193,7 +193,7 @@ If you have ever tried to write a SQL statement with a large number of JOINs, yo
 
 For example, in an organizational domain, here is what a SQL statement that lists the employees in the IT Department would look like:
 
-[source]
+[source,SQL,role=nocopy noplay]
 ----
 SELECT name FROM Person
 LEFT JOIN Person_Department
@@ -207,7 +207,7 @@ WHERE Department.name = "IT Department"
 [.statement]
 Cypher is the language for accessing data in the Neo4j database. In contrast to SQL, Cypher syntax stays clean and focused on domain concepts since queries are expressed visually:
 
-[source,cypher]
+[source,cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)<-[:EMPLOYEE]-(d:Department)
 WHERE d.name = "IT Department"

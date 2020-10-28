@@ -14,6 +14,7 @@ In this Exercise, you will log in to the Neo4j instance with `cypher-shell`, cha
 . Log into the database with `cypher-shell` using the default credentials of _neo4j/neo4j_.
 +
 
+[source,shell,role=noplay]
 ----
 [sudo] docker exec -it neo4j bin/cypher-shell
 ----
@@ -41,28 +42,34 @@ image::ShowInitialDatabasesDocker.png[ShowInitialDatabasesDocker,width=1000,alig
 
 ----
 :use neo4j
+----
++
+[source,cypher,role=noplay]
+----
 CREATE (:Person {name: '<your name'});
 ----
-
++
 
 image::CreatePersonDocker.png[CreatePersonDocker,width=1000,align=center]
 
 [start=7]
 . Enter this Cypher statement to retrieve the node you just created:
-
++
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person) RETURN p;
 ----
-
++
 image::FindPersonDocker.png[FindPersonDocker,width=1000,align=center]
 
 [start=8]
 . Enter this Cypher statement to delete the node you just created:
-
++
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person) DELETE p;
 ----
-
++
 image::DeletePersonDocker.png[DeletePersonDocker,width=1000,align=center]
 
 [start=9]
@@ -70,34 +77,45 @@ image::DeletePersonDocker.png[DeletePersonDocker,width=1000,align=center]
 . Create the directory, _files_ in your *$HOME/docker-neo4j* directory.
 +
 
+[source,shell,role=noplay]
 ----
 cd ~/docker-neo4j
+----
++
+[source,shell,role=noplay]
+----
 mkdir files
 ----
 
 . Download this file: https://data.neo4j.com/admin-neo4j/movies.cypher to the _files_ directory. This file contains the Cypher statements to load the database with movie data.
-
-
++
 On OS X or Linux:
-
++
+[source,shell,role=noplay]
 ----
 cd files
+----
++
+[source,shell,role=noplay]
+----
 curl -O https://data.neo4j.com/admin-neo4j/movies.cypher
 ----
-
++
 On Windows, enter the above URL in a Web browser to download it. Then move it to the *files* folder.
 
 [start=12]
 . Invoke `cypher-shell` using *movies.cypher* as input.
-
++
 On OS X or Linux:
-
++
+[source,shell,role=noplay]
 ----
 cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
 ----
-
++
 On Windows:
-
++
+[source,shell,role=noplay]
 ----
 type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
 ----
@@ -105,17 +123,19 @@ type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u n
 [start=13]
 . Start `cypher-shell`.
 +
+[source,shell,role=noplay]
 ----
 [sudo] docker exec -it neo4j bin/cypher-shell -u neo4j -p <passwordYouSpecified>
 ----
 
 . Execute these statements to confirm that the data was loaded into the user database:
-
++
+[source,cypher,role=noplay]
 ----
 CALL db.schema.visualization();
 MATCH (p:Person) WHERE p.name = 'Tom Hanks' RETURN p;
 ----
-
++
 You should see something like this:
 
 image::ConfirmMovieDataDocker.png[ConfirmMovieDataDocker,width=1000,align=center]

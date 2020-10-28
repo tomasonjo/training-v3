@@ -21,7 +21,9 @@ On a non-Docker installation, you would specify this location in the Neo4j confi
 . Create a directory named *$HOME/docker-neo4j/neo4j/data/new-location*. This is the directory where the databases will reside which is different from the default location used by Neo4j.
 . Make sure that this *new-location* directory is writable.
 . Modify the *neo4j.conf* file to use this new location as the data directory. Also ensure that there the default database is _maindb_. Your *neo4j.conf* file should look something like this:
++
 
+[source,config,role=noplay]
 ----
 dbms.default_database=maindb
 dbms.directories.data=data/new-location
@@ -45,6 +47,7 @@ image::Neo4jStarted-newLocation2Docker.png[Neo4jStarted-newLocation2Docker,width
 . Use the `load` command of the `neo4j-admin` tool to create the database, _movies_ from the dump file as follows:
 +
 
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin load --database=movies --from=data/movies.dump
 ----

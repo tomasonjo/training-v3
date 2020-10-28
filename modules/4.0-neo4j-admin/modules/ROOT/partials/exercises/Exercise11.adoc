@@ -19,7 +19,7 @@ In your real application, if you were to back up a production stand-alone Neo4j 
 . Modify the Neo4j configuration so that online backup is enabled and will be done on this same host.
 For example, your *neo4j.conf* properties should look something like this:
 +
-
+[source,config,role=noplay]
 ----
 dbms.backup.enabled=true
 dbms.backup.listen_address=localhost:6362
@@ -36,9 +36,13 @@ dbms.backup.listen_address=localhost:6362
 [start=6]
 . Confirm that the movies database has 171 nodes:
 +
-
+[source,cypher,role=noplay]
 ----
 :USE movies
+----
++
+[source,cypher,role=noplay]
+----
 MATCH (n) RETURN count(n);
 ----
 
@@ -46,15 +50,16 @@ MATCH (n) RETURN count(n);
 .. Perform a consistency check.
 .. Use the *backups* directory for the location of the backup.
 .. Use the *reports* directory for the report location.
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin backup --backup-dir=logs/backups --from=localhost:6362 --check-consistency --database=system --report-dir=logs/reports
 ----
-
++
 The result of the backup should look something like this:
-
++
 image::BackupSystemDocker.png[BackupSystemDocker,width=1000,align=center]
-
++
 [start=8]
 . Repeat the backup procedure for the user databases
 ** maindb
@@ -64,42 +69,44 @@ image::BackupSystemDocker.png[BackupSystemDocker,width=1000,align=center]
 . In `cypher-shell` drop the _movies_ database.
 . Use the restore tool to restore the _movies_ database.
 +
-
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin restore --from=logs/backups/movies --database=movies
 ----
-
++
 . In `cypher-shell` create the _movies_ database that was just restored.
 . Confirm that the _movies_ database has 171 nodes.
 +
-
+[source,cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
-
++
 . Exit `cypher-shell`.
 . Invoke `cypher-shell` to add nodes to the _movies_ database using the *movies.cypher* file.
-
++
 On OS X or Linux:
-
++
+[source,shell,role=noplay]
 ----
 cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
-
++
 On Windows:
-
++
+[source,shell,role=noplay]
 ----
 type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
-
++
 [start=15]
 . In `cypher-shell` confirm that the database contains 342 nodes:
 +
-
+[source,cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
-
++
 . Perform an online backup using these guidelines:
 .. Back up the _movies_ database.
 .. Perform a consistency check.
@@ -111,36 +118,39 @@ image::BackupMoviesDocker.png[BackupMoviesDocker,width=1000,align=center]
 
 [start=17]
 . Invoke `cypher-shell` to add more nodes to the _movies_ database using the *movies.cypher* file.
-
++
 On OS X or Linux:
-
++
+[source,shell,role=noplay]
 ----
 cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
-
++
 On Windows:
-
++
+[source,shell,role=noplay]
 ----
 type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
-
++
 [start=18]
 . In `cypher-shell` confirm that the database contains 513 nodes:
 +
-
+[source,cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
-
++
 . Next, you will restore the _movies_ database to the one that has 342 nodes. Stop the _movies_ database.
 . Restore the _movies_ using these guidelines:
 .. Use the same _backups_ location.
 .. Specify _force_ so that the database will be replaced.
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin restore --from=logs/backups/movies --database=movies --force
 ----
-
++
 [start=21]
 . Connect to the Neo4j instance with `cypher-shell`.
 . Start the _movies_ database.

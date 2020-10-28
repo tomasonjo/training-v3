@@ -66,7 +66,7 @@ For most Neo4j instances, you can view the *neo4j.conf* file.
 Another way that you can view the current configuration values for a Neo4j instance is with a Cypher call:
 --
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 // return all configuration values
 CALL dbms.listConfig() YIELD name, value RETURN name, value;
@@ -85,7 +85,7 @@ image::listConfigDocker.png[listConfigDocker,width=800,align=center]
 If you want to query the current Neo4j instance for particular configuration values, you can use Cypher's WHERE clause to specify the filter.
 In this example, we want all configuration properties in the instance that contains the string "http":
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 // return specific configuration values
 CALL dbms.listConfig() YIELD name, value WHERE name CONTAINS "http" RETURN name,value;
@@ -105,7 +105,7 @@ This is fine in a development environment only where access from different syste
 By default, a Neo4j instance cannot be accessed by a client running on a different system.
 If you want to allow external connections to the Neo4j instance, you must set this property:
 
-[source]
+[source,config,role=nocopy noplay]
 ----
 dbms.connectors.default_listen_address=0.0.0.0
 ----

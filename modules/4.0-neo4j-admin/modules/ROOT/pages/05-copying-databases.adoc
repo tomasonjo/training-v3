@@ -66,7 +66,7 @@ You use the `neo4j-admin` tool to copy a database within your Neo4j instance. He
 . In `cypher-shell` stop the source database you want to copy:
 +
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 :USE system
 STOP DATABASE <sourceDB>;
@@ -74,14 +74,15 @@ STOP DATABASE <sourceDB>;
 . In a different terminal window, enter this as the user, neo4j:
 +
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 /usr/bin/neo4j-admin copy --from-database=<sourceDB> --to-database=<targetDB>
 ----
 
 . In `cypher-shell`  again:
++
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 CREATE DATABASE <targetDB>;
 ----
@@ -106,7 +107,7 @@ To create a dump file of a database, you must:
 . In `cypher-shell`, stop the database you want to dump:
 +
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 :USE system
 STOP DATABASE <sourceDB>;
@@ -114,8 +115,9 @@ STOP DATABASE <sourceDB>;
 
 . Ensure that the directory where you will dump the database exists.
 . As the neo4j users, you can use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
++
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 /usr/bin/neo4j-admin dump --database=<sourceDB> --to=<absolute path to dump file>
 ----
@@ -138,7 +140,7 @@ Then, if you want to create a database from any dump file (offline backup) to us
 . Use the `load` command of the `neo4j-admin` tool as the neo4j user, to create the database from the dump file as follows:
 +
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 /usr/bin/neo4j-admin load --database=<targetDB> --from=<absolute path to dump file>
 ----
@@ -146,7 +148,7 @@ Then, if you want to create a database from any dump file (offline backup) to us
 . In `cypher-shell` create the database:
 +
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 :USE system
 CREATE DATABASE <targetDB>;

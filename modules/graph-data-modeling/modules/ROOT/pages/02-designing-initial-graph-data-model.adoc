@@ -371,7 +371,7 @@ For Properties, encourage folks to use “expected data type” as property valu
 
 If you do not want to do all the clicking and typing, copy this markup:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
@@ -391,7 +391,7 @@ endif::[]
 ifndef::env-slides[]
 Here is the Arrow tool markup for the solution:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
@@ -562,7 +562,7 @@ image::Exercise3Solution.png[Exercise3Solution,width=1200,align=center]
 
 Here is the markup:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="283.8195928886757" data-y="-6.306578837493484">
@@ -601,7 +601,7 @@ This particular sample data is useful, especially when discussing how well the d
 ifndef::env-slides[]
 Here is the Arrow tool markup for the sample data for the BOM application:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">
@@ -695,7 +695,7 @@ ifdef::env-slides[]
 --
 Here is the markup for the sample data:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">

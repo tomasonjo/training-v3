@@ -29,10 +29,7 @@ Neo4j Browser Guides are documents that embed text, images, and Cypher queries i
 
 You can access the guides for this course by running this command in Neo4j Browser. This command is already set up for you in the Yelp Sandbox you will be using for this course.
 
-[source,cypher]
-----
-:play applied_graph_algorithms
-----
+kbd:[:play applied_graph_algorithms]
 
 == The Neo4j Graph Algorithms Plugin
 

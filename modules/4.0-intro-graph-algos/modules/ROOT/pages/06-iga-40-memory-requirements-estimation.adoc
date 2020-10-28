@@ -20,7 +20,7 @@ GDSL supports estimating the required memory to load a named graph as well as to
 The general syntax is as follows:
 --
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 CALL gds.<ALGO>.<MODE>.estimate()
 ----

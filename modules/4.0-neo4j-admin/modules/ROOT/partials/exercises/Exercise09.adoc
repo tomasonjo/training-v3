@@ -14,19 +14,25 @@ In this Exercise, you will install the APOC library for use by your Neo4j instan
 . In a Web browser, go to the GitHub repository for the https://github.com/neo4j-contrib/neo4j-apoc-procedures[APOC library].
 . Find the latest release of the library that is compatible with Neo4j Enterprise Edition 4.0.
 . Download the already-built *.jar* file into the *$HOME/docker-neo4j/neo4j/plugins* directory.
-
++
 In OS X and Linux:
-
++
+[source,shell,role=noplay]
 ----
 cd $HOME/docker-neo4j/neo4j/plugins
+----
++
+[source,shell,role=noplay]
+----
 curl -L <URL for the jar file> > <name of the jar file>
 ----
-
++
 [start=4]
 . Make sure this *.jar* file has execute permissions.
 . Modify */etc/neo4j/neo4j.conf* to allow (sandbox) all procedures of the APOC library.
 +
 
+[source,config,role=noplay]
 ----
 dbms.security.procedures.unrestricted=apoc.*
 ----
@@ -34,15 +40,17 @@ dbms.security.procedures.unrestricted=apoc.*
 . Start the Neo4j instance.
 . View the log to ensure the instance started with no problems.
 . Using `cypher-shell` write a command to create the procedures.txt file that contains all of the procedures that are loaded for the Neo4j instance.
-
++
 On OS X and Linux:
-
++
+[source,shell,role=noplay]
 ----
 echo "CALL dbms.procedures YIELD name;" | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <your password> --format plain --database maindb > $HOME/docker-neo4j/neo4j/logs/reports/procedures.txt
 ----
-
++
 On Windows:
-
++
+[source,shell,role=noplay]
 ----
 echo CALL dbms.procedures YIELD name; | docker exec --interactive neo4j bin/cypher-shell -u neo4j -p <your password> --format plain --database maindb > %HOMEPATH%\docker-neo4j\neo4j\logs\reports\procedures.txt
 ----

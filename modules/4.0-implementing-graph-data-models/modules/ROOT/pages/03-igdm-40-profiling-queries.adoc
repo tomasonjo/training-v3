@@ -16,6 +16,9 @@ At the end of this module, you should be able to:
 * Profile queries against the graph.
 * Determine if a query can be improved.
 
+[NOTE]
+Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+
 == Workflow for profiling queries
 
 [.notes]
@@ -47,7 +50,7 @@ The new query will be different due to the change in the graph data model.
 Here is the code to profile a query that retrieves all connections that have a destination of _LAS_:
 --
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 PROFILE
 MATCH (origin:Airport)-[c:CONNECTED_TO]->(destination:Airport)
@@ -149,7 +152,7 @@ endif::[]
 
 Here is the query:
 
-[source,cypher,role=noheader]
+[source,cypher,role=noplay]
 ----
 PROFILE
 MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)

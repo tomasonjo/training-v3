@@ -85,7 +85,7 @@ When using neo4j-admin for import:
 [.statememt]
 Here is portion of the *beats.csv* file with embedded header information for loading nodes of type _Beat_:
 
-[source]
+[source,CSV,role=nocopy noplay]
 ----
 id:ID(beat-ref),:LABEL
 1132,Beat
@@ -105,7 +105,7 @@ The ID(beat-ref) is used to store a reference to the node that is created so tha
 [.statement]
 Here is an example of the *crimes_header.csv* header file for loading nodes of type _Crime_:
 
-[source]
+[source,CSV,role=nocopy noplay]
 ----
 id:ID(crime-ref),:LABEL,date,description
 ----
@@ -113,7 +113,7 @@ id:ID(crime-ref),:LABEL,date,description
 [.statement]
 And here is a portion of the associated *crimes.csv* file for loading nodes of type _Crime_:
 
-[source]
+[source,CSV,role=nocopy noplay]
 ----
 8920441,Crime,12/07/2012 07:50:00 AM,AUTOMOBILE
 4730813,Crime,05/09/2006 08:20:00 AM,POCKET-PICKING
@@ -137,7 +137,7 @@ The ID(crime-ref) is used to store a reference to the node that is created so th
 [.statement]
 Here is a portion of the *primaryTypes.csv* file for loading these nodes:
 
-[source]
+[source,CSV,role=nocopy noplay]
 ----
 id:ID(primarytype-ref)
 ARSON
@@ -165,7 +165,7 @@ CSV files for loading relationships contain a row for every relationship where t
 [.statement]
 Here is a portion of the *crimesBeats.csv* file that will be used to create the _:ON_BEAT_ relationships between _Crime_ and _Beat_ nodes:
 
-[source]
+[source,CSV,role=nocopy noplay]
 ----
 :START_ID(crime-ref),:END_ID(beat-ref),:TYPE
 6978096,0911,ON_BEAT
@@ -183,7 +183,7 @@ We specify the relationship to be created between the _Crime_ and _Beat_ nodes u
 [.statement]
 Here is a portion of a portion of the *crimesPrimaryTypes.csv* file that will be used to create the  relationships between the _Crime_ nodes and the nodes that contain the _CrimeType_ data:
 
-[source]
+[source,CSV,role=nocopy noplay]
 ----
 :START_ID(crime-ref),:END_ID(primarytype-ref)
 5221115,NARCOTICS
@@ -211,7 +211,7 @@ The data import creates a database so the database you specify must either be em
 [.statement]
 Here is the simplified syntax for creating a database from CSV files:
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 neo4j-admin import
   --database <database-name>

@@ -28,6 +28,7 @@ You must install Docker on your system from https://hub.docker.com.
 
 . Verify that you have access to docker on your system:
 +
+[source,shell,role=noplay]
 ----
 docker --help
 ----
@@ -37,27 +38,28 @@ image::DockerInstalled.png[DockerInstalled,width=600,align=center]
 [start=2]
 . Install the Neo4j docker image.
 +
-
+[source,shell,role=noplay]
 ----
 docker pull neo4j:4.0.2-enterprise
 ----
-
++
 . Confirm that the docker instance with the TAG, 4.0.2-enterprise is available:
 +
-
+[source,shell,role=noplay]
 ----
 docker images
 ----
-
++
 . Create a directory on your system that you will use for your coursework:
 +
+[source,shell,role=noplay]
 ----
 mkdir $HOME/docker-neo4j
 ----
-
++
 . Create a script in this new directory named *create_neo4j_instance.sh* that will have the following content if you are using OS X or Linux:
 +
-
+[source,shell,role=noplay]
 ----
 docker run \
     --name=neo4j \
@@ -72,12 +74,12 @@ docker run \
     --detach \
     neo4j:4.0.2-enterprise
 ----
-
++
   *Note*: Make sure this script has execute permissions.
-
++
 . If you are using Windows (assuming you are using the C drive), create a script in this new directory named *create_neo4j_instance.bat*:
 +
-
+[source,script,role=noplay]
 ----
 docker run^
     --name=neo4j^
@@ -92,18 +94,19 @@ docker run^
     --detach^
     neo4j:4.0.2-enterprise
 ----
-
++
   *Note*: You may see a popup asking if you want Docker to access your local file system which you should respond yes to.
-
++
 . Run the script to create the Neo4j instance and confirm that it creates the neo4j directory.
 . Run the Docker command to see the running instances.
-
++
+[source,shell,role=noplay]
 ----
 docker ps -a
 ----
-
++
 image::DockerInstanceStarted.png[DockerInstanceStarted,width=600,align=center]
-
++
 ifdef::backend-pdf[]
 == Using the EC2 instance
 
@@ -118,20 +121,20 @@ Follow the steps below, depending on your OS.
 . Download the private key, https://neo4j-training.s3.us-east-2.amazonaws.com/Lab+VM+Files/neo4j-training.pem[neo4j-training.pem] to your system and place it in your home directory.
 . Change permissions on the private key file as follows:
 +
-
+[source,shell,role=noplay]
 ----
 chmod 400 neo4j-training.pem
 ----
-
++
 . Open a terminal window on your system.
 . Enter the following in the terminal window:
 +
-
+[source,shell,role=noplay]
 ----
 ssh -i neo4j-training.pem ubuntu@<IP address>
 yes
 ----
-
++
 . You should now be logged in to the EC2 instance.
 
 === Setup steps (Windows):
@@ -163,12 +166,10 @@ image::PuTTYSavedSession.png[PuTTYSavedSession,width=500,align=center]
 [start=6]
 . Connect to the EC2 instance by clicking *Open*.
 +
-
 image::OpenEC2FromPuTTY.png[OpenEC2FromPuTTY,width=400,align=center]
-
++
 . You should now have a terminal window for the EC2 instance. Enter *ubuntu* to log in.
 +
-
 image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 
 === Confirm that you can start the Docker instance in the EC2 instance (OS X, Linux, and Windows)
@@ -176,13 +177,14 @@ image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 . Navigate to the *docker-neo4j* folder.
 . Create the Docker Neo4j instance:
 +
-
+[source,shell,role=noplay]
 ----
  sudo ./create_neo4j_instance.sh
 ----
-
++
 . Run the Docker command to see the running instance.
-
++
+[source,shell,role=noplay]
 ----
 sudo docker ps -a
 ----

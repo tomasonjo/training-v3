@@ -16,25 +16,29 @@ In this exercise, you will use `neo4j-admin` to copy a database and create a dat
 . In `cypher-shell` create a database named _movies_.
 . Exit out of `cypher-shell`.
 . Invoke `cypher-shell` using *movies.cypher* as input and specify _movies_ as the database.
-
++
 On OS X or Linux:
-
++
+[source,shell,role=noplay]
 ----
 cat ~/docker-neo4j/files/movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
-
++
 On Windows:
-
++
+[source,shell,role=noplay]
 ----
 type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --database movies -u neo4j -p <passwordYouSpecified>
 ----
-
++
 [start=4]
 . In `cypher-shell` confirm that the database was loaded. It should contain 171 nodes:
++
+[source,cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
-
++
 image::ConfirmMovieLoadDocker.png[ConfirmMovieLoadDocker,width=1000,align=center]
 
 
@@ -47,16 +51,20 @@ image::ConfirmMovieStoppedDocker.png[ConfirmMovieStoppedDocker,width=1000,align=
 
 . Exit `cypher-shell`.
 . Copy the _movies_ database to the _movies2_ database using the neo4j-admin tool:
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin copy --from-database=movies --to-database=movies2
 ----
-
++
 image::neo4j-adminCopyDocker.png[neo4j-adminCopyDocker,width=1000,align=center]
-
++
 [start=4]
 . In `cypher-shell` create _movies2_.
 . Confirm that this _movies2_ database has 171 nodes.
++
+
+[source,cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
@@ -66,11 +74,12 @@ image::Verify-neo4j-adminCopyDocker.png[Verify-neo4j-adminCopyDocker,width=1000,
 *Part 3*: You will dump the _movies_ database.
 
 . Use the `dump` command of the `neo4j-admin` tool to create the dump file as follows:
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin dump --database=movies --to=data/movies.dump
 ----
-
++
 This writes the *movies.dump* file to the *$HOME/docker-neo4j/data* directory which is available to the Docker Neo4j instance.
 
 [start=2]
@@ -81,6 +90,7 @@ This writes the *movies.dump* file to the *$HOME/docker-neo4j/data* directory wh
 . Use the `load` command of the `neo4j-admin` tool to create the database, _movies3_ from the dump file as follows:
 +
 
+[source,shell,role=noplay]
 ----
 [sudo] docker exec --interactive neo4j bin/neo4j-admin load --database=movies3 --from=data/movies.dump
 ----

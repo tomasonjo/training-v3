@@ -79,7 +79,7 @@ There are other options that you can additionally specify about the backup that 
 To enable a Neo4j instance to be backed up online, you must add these two properties to the *neo4j.conf* file for the Neo4j instance that will be backed up:
 --
 
-[source]
+[source,config,role=nocopy noplay]
 ----
 dbms.backup.enabled=true
 dbms.backup.listen_address=<host-address>:<6362-6372>
@@ -98,7 +98,7 @@ You must specify a port number that will not conflict with existing ports used o
 After you restart the Neo4j instance with the configuration changes, you can then initiate the backup on the server you specified in _host_address_ as follows with consistency checking:
 --
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 neo4j-admin backup --backup-dir=<backup-directory>
                    [--verbose]
@@ -157,7 +157,7 @@ If you need to restore a specific database from a backup, you must first stop th
 Here is how you restore the database from a backup:
 --
 
-[source]
+[source,syntax,role=nocopy noplay]
 ----
 neo4j-admin restore
           --from=<backup-directory>

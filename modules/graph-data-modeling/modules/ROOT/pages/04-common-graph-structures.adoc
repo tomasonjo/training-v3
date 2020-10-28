@@ -313,7 +313,7 @@ If their model is imperfect, rather than telling them the better model, ask them
 
 Here is the markup for the model:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="0.67" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-550.4655813128935" data-y="-1216.8149073094257">
@@ -391,7 +391,7 @@ This intermediate node allows us to keep track of students’ progress through d
 ifndef::env-slides[]
 Here is the markup for the model:
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="0.67" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-550.4655813128935" data-y="-1216.8149073094257">
@@ -455,7 +455,7 @@ Here is the sample data fully fleshed out.  Use the below markup to get it into 
 
 As a group, prompt students to trace the traversal for each of the application questions, in order to verify that the model serves the questions.
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="0.21" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-396.2973779224105" data-y="-1598.542651644388">
@@ -573,7 +573,7 @@ endif::[]
 ifndef::env-slides[]
 Here is the sample data fully fleshed out.  Use the below markup to get it into Arrows.
 
-[source]
+[source,markup,role=noplay]
 ----
 <ul class="graph-diagram-markup" data-internal-scale="0.21" data-external-scale="1">
   <li class="node" data-node-id="0" data-x="-396.2973779224105" data-y="-1598.542651644388">

@@ -11,23 +11,29 @@ Open a terminal on your system to access the Docker Neo4j instance.
 == Exercise steps:
 
 . View the status of neo4j:
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker logs neo4j
 ----
-
++
 You should see something like this:
-
++
 image::Status-docker.png[Status-docker,width=600,align=center]
-
++
 [start=2]
 . Stop the Neo4j instance and then view its status.
-
++
+[source,shell,role=noplay]
 ----
 [sudo] docker stop neo4j
+----
++
+[source,shell,role=noplay]
+----
 [sudo] docker logs neo4j
 ----
-
++
 image::Stop_neo4j-docker.png[Stop_neo4j-docker,width=600,align=center]
 
 [start=3]

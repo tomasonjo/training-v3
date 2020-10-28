@@ -35,15 +35,15 @@ image::changehttp.png[changehttp,width=800,align=center]
 image::confirmchangehttp.png[confirmchangehttp,width=800,align=center]
 
 . Enter this in a terminal window to confirm that you can access using the HTTP API the Neo4j instance using the 9999 port number:
-
-
++
+[source,shell,role=noplay]
 ----
 curl -v -H "Content-Type: application/json" -d '{ "statements" : [ { "statement"  : "CALL db.schema.visualization()" }]}' http://localhost:9999/db/data/transaction/commit -u neo4j
 ----
-
++
 You must specify the password for the Neo4j instance.
 You should see something like the following:
-
++
 image::UsePort9999.png[UsePort9999,width=1200,align=center]
 
 [start=8]
