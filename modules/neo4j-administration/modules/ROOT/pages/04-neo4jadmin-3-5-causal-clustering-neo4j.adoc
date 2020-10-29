@@ -128,6 +128,8 @@ image::ClusterMembers.png[ClusterMembers,width=600,align=center]
 ==== Example: Configuration properties
 
 Here are some of the settings that you may use for your core servers, depending on whether the addresses are known in the network. You may have to specify advertised addresses in addition to the actual addresses.
+
+[source,config,role=nocopy noplay]
 ----
 # set this if you want to ensure the host can be accessed from external browsers
 dbms.connectors.default_listen_address=0.0.0.0
@@ -193,6 +195,7 @@ The published Neo4j Enterprise Edition 3.5.0 Docker image (from DockerHub.com) i
 
 For example, here are the settings in the *neo4j.conf* file for the Neo4j instance container named _core3_ when it starts as a Docker container:
 
+[source,config,role=nocopy noplay]
 ----
 #********************************************************************
 # Other Neo4j system properties
@@ -225,6 +228,7 @@ Some of these settings are for applications that use the _high availability (ha)
 
 When you create Docker Neo4j containers using `docker run`, you specify additional clustering configuration as parameters, rather than specifying them in the *neo4j.conf* file. Here is an example of the parameters that are specified when creating the Docker container named _core3_:
 
+[source,shell,role=nocopy noplay]
 ----
 docker run --name=core3 \
         --volume=`pwd`/core3/conf:/conf --volume=`pwd`/core3/data:/data --volume=`pwd`/core3/logs:/logs  \
@@ -463,6 +467,7 @@ image::ConfiguringReadReplicas.png[ConfiguringReadReplicas,width=800,align=cente
 
 Here are the configuration settings you use for a read replica server:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.connectors.default_listen_address=0.0.0.0
 
@@ -678,7 +683,10 @@ The database for a cluster is backed up online. You must specify `dbms.backup.en
 
 The core server can use its transaction port or the backup port for backup operations. You typically use the backup port. Here is the setting that you must add to the configuration:
 
-`dbms.backup.address=<server-address>:6362`
+[source,config,role=nocopy noplay]
+----
+dbms.backup.address=<server-address>:6362`
+----
 
 === Using a read replica for the backup
 
@@ -690,7 +698,10 @@ For backing up a cluster, you must first decide which server and port will be us
 
 You log in to the server from where you will be performing the backup (typically a read replica server) and then you perform the backup with these suggested settings:
 
-`neo4j-admin backup --backup-dir=<backup-path> --name=<backup-name> --from=<core-server:backup-port> --protocol=catchup --check-consistency=true`
+[source,syntax,role=nocopy noplay]
+----
+neo4j-admin backup --backup-dir=<backup-path> --name=<backup-name> --from=<core-server:backup-port> --protocol=catchup --check-consistency=true
+----
 
 You can add more to the backup command as you can read about in the https://neo4j.com/docs/operations-manual/3.5/backup/causal-clusters/[Neo4j Operations Manual].
 
@@ -732,12 +743,13 @@ image::L04-Ex6_SeedCluster.png[L04-Ex6_SeedCluster,width=800,align=center]
 [start=6]
 . Shut down all servers as you will be modifying their configurations to enable backups.
 . For each core servers, add these properties to the end of each *neo4j.conf* file where _X_ is the _bcore_ number:
-
++
+[source,config,role=noplay]
 ----
 dbms.backup.enabled=true
 dbms.backup.address=bcoreX:6362
 ----
-
++
 [start=8]
 . Start the core servers and the read replica server.
 . Check the last transaction ID on the core server that is the _LEADER_.

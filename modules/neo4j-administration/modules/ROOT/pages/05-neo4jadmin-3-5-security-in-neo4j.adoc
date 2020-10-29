@@ -115,7 +115,10 @@ If you will be using a different LDAP or authentication provider in your real ap
 
 A secure Neo4j instance should always have authentication enabled. By default, authentication is enabled for a Neo4j instance. You can explicitly set it in *neo4j.conf* as follows:
 
-`dbms.security.auth_enabled=true`
+[source,config,role=nocopy noplay]
+----
+dbms.security.auth_enabled=true
+----
 
 === How roles are used for users
 
@@ -140,6 +143,8 @@ The tasks for using LDAP for authentication with Neo4j include:
 In your enterprise, you will need to work with the system administrator responsible for maintaining the user directory (LDAP). Part of the configuration that [underline]#must# be modified for LDAP is the addition of groups for users. The groups added to LDAP and associated with specific users correspond to roles in Neo4j. An easy way to identify a group in LDAP is with a group ID.
 
 For example, the LDAP would have these entries that correspond to the Neo4j native _reader_ and _publisher_ roles for the training *neo4jtraining.com* domain. The attribute that is used to identify the groups is _gidnumber_.
+
+[source,LDAP,role=nocopy noplay]
 ----
 # reader group
 dn: cn=reader,ou=groups,dc=neo4jtraining,dc=com
@@ -160,6 +165,7 @@ gidnumber: 502
 
 In addition, each user that will be authenticated for connecting to the Neo4j instance, will need to be modified in the LDAP to be associated with a specific group. Here is are examples of the _reader_ and _publisher_ users that you will be working with in this training:
 
+[source,LDAP,role=nocopy noplay]
 ----
 # user reader
 objectClass: organizationalPerson
@@ -211,6 +217,7 @@ The Neo4j instance never writes to the LDAP Server. Before you begin configuring
 
 To understand the groups that users are associated with in the LDAP, you should perform this type of query:
 
+[source,syntax,role=nocopy noplay]
 ----
 ldapsearch -x -v  -W -D '<designated-name-for-user>'
                      -H <ldap-server>:<port>
@@ -221,6 +228,8 @@ ldapsearch -x -v  -W -D '<designated-name-for-user>'
 ==== Example: Retrieving the user, architect
 
 Here is an example for retrieving the user _architect_ in the training LDAP Server:
+
+[source,shell,role=nocopy noplay]
 ----
 ldapsearch -x -v  -W -D 'uid=architect,ou=users,dc=neo4jtraining,dc=com'
            -H ldap://openldap-training.neo4jlabs.com:389
@@ -238,6 +247,7 @@ In this example, you see that this particular user is part of many object classe
 
 For example, a user directory will contain entries for non-users such as printers. If you want to focus the search only on people, you would specify something like the following to filter by _person_:
 
+[source,shell,role=nocopy noplay]
 ----
 ldapsearch -x -v  -W -D 'uid=architect,ou=users,dc=neo4jtraining,dc=com'
            -H ldap://openldap-training.neo4jlabs.com:389
@@ -251,6 +261,7 @@ For integration with Neo4j, you must examine the LDAP entries to understand what
 
 For example, once you determine the attribute that is used to define group membership in the LDAP, you can perform a query to retrieve all entries that use that same _gidNumber_ of _503_:
 
+[source,shell,role=nocopy noplay]
 ----
 ldapsearch -x -H ldap://openldap-training.neo4jlabs.com:389  -b 'dc=neo4jtraining,dc=com' '(gidNumber=503)'
 ----
@@ -265,6 +276,7 @@ Notice that the group entry has an _objectClass_ of _posixGroup_. This tells you
 
 So, for example, you can then do a query to find all entries that have this attribute to learn about which groups are defined in the LDAP:
 
+[source,shell,role=nocopy noplay]
 ----
 ldapsearch -x -H ldap://openldap-training.neo4jlabs.com:389  -b 'dc=neo4jtraining,dc=com' '(objectClass=posixGroup)'
 ----
@@ -288,7 +300,8 @@ In this Exercise, you will simply execute a couple of commands to retrieve data 
 In this example, and for the LDAP provider (an EC2 instance) you will be using for the Exercises in this module, the users are all part of the *neo4jtraining.com* domain.
 
 . Execute this `ldapsearch` command to retrieve all entries from the LDAP Server:
-
++
+[source,shell,role=noplay]
 ----
 ldapsearch -x -H ldap://openldap-training.neo4jlabs.com:389  -b 'dc=neo4jtraining,dc=com' '(objectclass=*)'
 ----
@@ -300,7 +313,8 @@ In an enterprise LDAP, you will probably not want to perform this type of query 
 
 [start=2]
 . Execute this `ldapsearch` command to retrieve the _reader_ entry from the LDAP Server. When prompted for the password, enter _reader_.
-
++
+[source,shell,role=noplay]
 ----
 ldapsearch -x -v  -W -D 'uid=reader,ou=users,dc=neo4jtraining,dc=com' -H ldap://openldap-training.neo4jlabs.com:389  -b 'dc=neo4jtraining,dc=com' "(&(objectClass=*)(cn=reader))" memberOf
 ----
@@ -360,6 +374,7 @@ _use_samaccountname=true_
 
 For _openLDAP_, you set up a stand-alone or core and read replica servers in a cluster for authentication using an LDAP Server and configure the following:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.security.auth_enabled=true
 dbms.security.auth_provider=ldap
@@ -385,6 +400,7 @@ dbms.security.ldap.authorization.group_to_role_mapping=\
 
 For example, with the LDAP Server that you will be using in this training, you  specify:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.security.auth_enabled=true
 dbms.security.auth_provider=ldap
@@ -423,6 +439,7 @@ The *security.log* file contains log records of all users that connected to or a
 
 It is possible to use native and another authentication provider together in situations where a small number of users would be maintaining the database, but most of the users would use the enterprise authentication provider such as LDAP. To to this, your configuration setting would be:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.security.auth_providers=native,ldap
 ----
@@ -431,6 +448,7 @@ dbms.security.auth_providers=native,ldap
 
 In a troubleshooting situation, you may need to give all users access to the database. You can start the Neo4j instance where all role mapping is bypassed. In this example, all groups with the ID of user would have the reader role:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.security.ldap.authorization.group_membership_attributes=objectClass
 dbms.security.ldap.authorization.group_to_role_mapping="user" = reader
@@ -496,6 +514,7 @@ By default, the Neo4j instance caches security-related interactions between a cl
 
 If the LDAP provider uses encryption (LDAPS or StartTLS=true), then you must set some additional properties in *neo4j.conf* to specify that encryption will be used and what port to use. In addition, the LDAP Server Certificate needs to be added to the JVM keystore for each Neo4j instance:
 
+[source,shell,role=nocopy noplay]
 ----
 keytool -import -alias <alias-name> -keystore ..\lib\security\cacerts -file <path-to-cert-file>
 ----
@@ -560,6 +579,7 @@ Here are the steps you should take for your production system.
 
 Your Neo4j instance can only provide SSL if you have installed JCE. On Linux/Debian, you can confirm that your specific ports of the running Neo4j instance are SSL-capable by executing one of the following commands:
 
+[source,shell,role=nocopy noplay]
 ----
 # a causal cluster raft listen address
 nmap --script ssl-enum-ciphers -p 7000 localhost
@@ -596,6 +616,7 @@ If you are using _LetsEncrypt_, follow the instructions in the article regarding
 
 Here is an example of recommended settings to configure SSL for a Neo4j instance that will support SSL for all clients:
 
+[source,config,role=nocopy noplay]
 ----
 # client policy
 dbms.ssl.policy.client_policy.base_directory=/var/lib/neo4j/certificates/client_policy
@@ -623,6 +644,7 @@ For each Neo4j instance that will serve as a core server or read replica, you sh
 
 Here is an example of the SSL configuration for a member of a cluster that you add to the Neo4j configuration in addition to the SSL configuration settings you saw earlier for the client policy:
 
+[source,config,role=nocopy noplay]
 ----
 # cluster policy
 dbms.ssl.policy.cluster_policy.base_directory=/var/lib/neo4j/certificates/cluster_policy
@@ -650,6 +672,7 @@ Whether you are using Neo4j stand-alone or in a cluster, a best practice is to a
 
 Here are some additional settings that you should consider to help reduce unintended access to your Neo4j instances:
 
+[source,config,role=nocopy noplay]
 ----
 #prevent browser from caching logging information
 browser.retain_connection_credentials=false
@@ -729,6 +752,7 @@ Implementing an audit trail does not secure your application against malicious a
 
 Here are some recommended settings for security auditing in Neo4j:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.directories.logs=logs
 # Log level for the security log. One of DEBUG, INFO, WARN and ERROR.

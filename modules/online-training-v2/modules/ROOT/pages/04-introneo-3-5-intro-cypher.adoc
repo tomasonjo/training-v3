@@ -77,7 +77,7 @@ A node can have zero or more labels.
 
 Here are simplified syntax examples for specifying a node:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 ()
 (variable)
@@ -91,13 +91,13 @@ Notice that a node must have the parentheses. The labels and the variable for a 
 
 Here are examples of specifying nodes in Cypher:
 
-[source,cypher]
+[source,syntax,role=nocopy noplay]
 ----
-()					// anonymous node not be referenced later in the query
-(p)					// variable p, a reference to a node used later
-(:Person)			// anonymous node of type Person
-(p:Person)			// p, a reference to a node of type Person
-(p:Actor:Director)	// p, a reference to a node of types Actor and Director
+()                 // anonymous node not be referenced later in the query
+(p)	           // variable p, a reference to a node used later
+(:Person)          // anonymous node of type Person
+(p:Person)         // p, a reference to a node of type Person
+(p:Actor:Director) // p, a reference to a node of types Actor and Director
 ----
 
 A node can have multiple labels. For example a node can be created with a label of _Person_ and that same node can be modified to also have the label of _Actor_ and/or _Director_.
@@ -148,13 +148,13 @@ First, you will learn how to simply return nodes.
 
 Here are simplified syntax examples for a query:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable)
 RETURN variable
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label)
 RETURN variable
@@ -167,13 +167,13 @@ The _variable_ must be specified here, otherwise the query will have nothing to 
 
 Here are example queries to the _Movie_ database:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (n) 			// returns all nodes in the graph
 RETURN n
 ----
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person) 	// returns all Person nodes in the graph
 RETURN p
@@ -243,25 +243,25 @@ Any node that matches the value will be retrieved.
 
 Here are  simplified syntax examples for a query where we specify one or more values for  properties that will be used to filter the query results and return a subset of the graph:
 
-[source.big,cyphe]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {propertyKey: propertyValue})
 RETURN variable
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {propertyKey: propertyValue})
 RETURN variable
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {propertyKey1: propertyValue1, propertyKey2: propertyValue2})
 RETURN variable
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {propertyKey: propertyValue, propertyKey2: propertyValue2})
 RETURN variable
@@ -270,7 +270,7 @@ RETURN variable
 Here is an example where we filter the query results using a property value.
 We only retrieve _Person_ nodes that have a _born_ property value of _1970_.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person {born: 1970})
 RETURN p
@@ -284,7 +284,7 @@ image::MatchPersonBorn1970.png[MatchPersonBorn1970,width=600]
 
 Here is an example where we specify two property values for the query.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (m:Movie {released: 2003, tagline: 'Free your mind'})
 RETURN m
@@ -320,25 +320,25 @@ You can use the `RETURN` clause to return property values of nodes retrieved.
 
 Here are simplified syntax examples for returning property values, rather than nodes:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {prop1: value})
 RETURN variable.prop2
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {prop1: value})
 RETURN variable.prop2
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {prop1: value, prop2: value})
 RETURN variable.prop3
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {prop1:value})
 RETURN variable.prop2, variable.prop3
@@ -346,7 +346,7 @@ RETURN variable.prop2, variable.prop3
 
 In this example, we use the _born_ property to refine the query, but rather than returning the nodes, we return the _name_  and _born_ values for every node that satisfies the query.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person {born: 1965})
 RETURN p.name, p.born
@@ -363,7 +363,7 @@ If you want to customize the headings for a table containing property values, yo
 
 Here is the simplified syntax for specifying an alias for a property value:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {propertyKey1: propertyValue1})
 RETURN variable.propertyKey2 AS alias2
@@ -374,7 +374,7 @@ If you want a heading to contain a space between strings, you must specify the a
 
 Here we specify aliases for the returned property values:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person {born: 1965})
 RETURN p.name AS name, p.born AS `birth year`
@@ -408,10 +408,11 @@ You can specify nodes and their relationships to traverse the graph and quickly 
 
 Here is how Cypher uses ASCII art to specify path used for a query:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
-()			// a node
+()	    // a node
 ()--()	    // 2 nodes have some type of relationship
+()-[]-()    // 2 nodes have some type of relationship
 ()-->()	    // the first node has a relationship to the second node
 ()<--()	    // the second node has a relationship to the first node
 ----
@@ -422,13 +423,13 @@ In your `MATCH` clause, you specify how you want a relationship to be used to pe
 
 Here are simplified syntax examples for retrieving a set of nodes that satisfy one or more directed and typed relationships:
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (node1)-[:REL_TYPE]->(node2)
 RETURN node1, node2
 ----
 
-[source.big,cypher]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (node1)-[:REL_TYPEA | :REL_TYPEB]->(node2)
 RETURN node1, node2
@@ -465,7 +466,7 @@ image::call_db.schema-relationships.png[call_db.schema-relationships,width=600]
 Here is an example where we retrieve the _Person_ nodes that have the _ACTED_IN_ relationship to the _Movie_, _The Matrix_.
 In other words, show me the actors that acted in _The Matrix_.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'The Matrix'})
 RETURN p, rel, m
@@ -482,7 +483,7 @@ We return a graph with the _Person_ nodes, the _Movie_ node and their _ACTED_IN_
 *Important:* You specify node labels whenever possible in your queries as it optimizes the retrieval in the graph engine.
 That is, you should *not* specify this same query as:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p)-[rel:ACTED_IN]->(m {title:'The Matrix'})
 RETURN p,m
@@ -492,7 +493,7 @@ RETURN p,m
 
 Here is another example where we want to know the movies that _Tom Hanks_ acted in and directed:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN|:DIRECTED]->(m:Movie)
 RETURN p.name, m.title
@@ -511,7 +512,7 @@ Suppose you wanted to retrieve the actors that acted in _The Matrix_, but you do
 You need not specify a variable for a node in a query if that node is not returned or used for later processing in the query.
 You can simply use the anonymous node in the query as follows:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(:Movie {title: 'The Matrix'})
 RETURN p.name
@@ -532,7 +533,7 @@ You can specify an empty relationship type in the query so that all relationship
 In this example, we want to retrieve all _Person_ nodes that have any type of connection to the _Movie_ node, with the _title_, _The Matrix_.
 This query returns more nodes with the relationships types, _DIRECTED_, _ACTED_IN_, and _PRODUCED_.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-->(m:Movie {title: 'The Matrix'})
 RETURN p, m
@@ -544,13 +545,14 @@ The result returned is:
 image::AllRelationshipsMatrix.png[AllRelationshipsMatrix,width=600]
 
 Here are other examples of using the anonymous relationship:
-[source,cypher]
+
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)--(m:Movie {title: 'The Matrix'})
 RETURN p, m
 ----
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (m:Movie)<--(p:Person {name: 'Keanu Reeves'})
 RETURN p, m
@@ -564,7 +566,7 @@ There is a built-in function, `type()` that returns the relationship type of a r
 
 Here is an example where we use the _rel_ variable to hold the relationships retrieved. We then use this variable to return the relationship types.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[rel]->(:Movie {title:'The Matrix'})
 RETURN p.name, type(rel)
@@ -589,7 +591,7 @@ image::REVIEWEDProperties.png[ReviewedProperties,width=700,align=center]
 
 Just as you can specify property values for filtering nodes for a query, you can specify property values for a relationship. This query returns the name of of the person who gave the movie a rating of _65._
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person)-[:REVIEWED {rating: 65}]->(:Movie {title: 'The Da Vinci Code'})
 RETURN p.name
@@ -613,7 +615,7 @@ image::FollowsRelationships.png[FollowsRelationships,width=500]
 
 We can perform a query that returns all _Person_ nodes who follow _Angela Scope_:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH  (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
 RETURN p
@@ -626,7 +628,7 @@ image::AngelaFollowers.png[AngelaFollowers,width=700]
 
 If we reverse the direction in the pattern, the query returns different results:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH  (p:Person)<-[:FOLLOWS]-(:Person {name:'Angela Scope'})
 RETURN p
@@ -641,7 +643,7 @@ image::FollowedByAngela.png[FollowedByAngela,width=700]
 
 We can also find out what _Person_ nodes are connected by the _FOLLOWED_ relationship in either direction by removing the directional arrow from the pattern.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH  (p1:Person)-[:FOLLOWS]-(p2:Person {name:'Angela Scope'})
 RETURN p1, p2
@@ -658,7 +660,7 @@ Since we have a graph, we can traverse through nodes to obtain relationships fur
 
 For example, we can write a Cypher query to return all followers of the followers of _Jessica Thompson_.
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
 RETURN p
@@ -671,7 +673,7 @@ image::FollowersOfJessicaFollowers.png[FollowersOfJessicaFollowers,width=800]
 
 This query could also be modified to return each person along the path by specifying variables for the nodes and returning them. In addition, you can assign a variable to the path and return the path as follows:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH  path = (:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
 RETURN  path
@@ -689,7 +691,7 @@ For example, suppose we wanted to get a result stream containing rows of actors 
 
 Here is the Cypher query to do this. Notice that the direction of the traversal is used to focus on a particular movie during the query:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, m.title, d.name
@@ -720,7 +722,7 @@ Here are the *Neo4j-recommended* Cypher coding standards that we use in this tra
 
 Here is an example showing some best coding practices:
 
-[source,cypher]
+[source,cypher,role=noplay]
 ----
 MATCH (:Person {name: 'Diane Keaton'})-[movRel:ACTED_IN]->
 (:Movie {title:"Something's Gotta Give"})

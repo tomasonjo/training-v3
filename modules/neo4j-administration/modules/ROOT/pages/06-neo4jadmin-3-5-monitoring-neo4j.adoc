@@ -62,6 +62,7 @@ You can configure Neo4j to log an event if a query runs more than xx millisecond
 
 For example, here are the properties you would set in the Neo4j configuration to log a message and provide information when a query takes more than 1000ms to complete:
 
+[source,config,role=nocopy noplay]
 ----
 dbms.logs.query.enabled=true
 dbms.logs.query.threshold=1000ms
@@ -145,8 +146,13 @@ image::L06-Ex1-LogQueriesTooLong.png[L06-Ex1-LogQueriesTooLong,width=600,align=c
 [start=2]
 . Start/restart the Neo4j stand-alone instance.
 . Open a new terminal window and log in to `cypher-shell` with the _reader/reader_ credentials. (*Suggestion*: specify --format plain)
-. In this `cypher-shell` session, enter the following statement which will execute a query that runs for longer than 1000 ms: `MATCH (a), (b), (c), (d) RETURN count(id(a));`
-
+. In this `cypher-shell` session, enter the following statement which will execute a query that runs for longer than 1000 ms:
++
+[source,cypher,role=noplay]
+----
+MATCH (a), (b), (c), (d) RETURN count(id(a));
+----
++
 [NOTE]
 You should [underline]#never# run this type of query against a large database. It is only presented here for illustrative purposes to show  a long-running query.
 
@@ -161,7 +167,13 @@ image::L06-Ex1-LongQuery.png[L06-Ex1-LongQuery,width=800,align=center]
 image::L06-Ex1-QueryLog.png[L06-Ex1-QueryLog,width=1000,align=center]
 
 [start=7]
-. In `cypher-shell` session for _reader_, enter a query that will execute for an even longer period of time:  `MATCH (a), (b), (c), (d), (e) RETURN count(id(a));`.
+. In `cypher-shell` session for _reader_, enter a query that will execute for an even longer period of time:
++
+[source,cypher,role=noplay]
+----
+MATCH (a), (b), (c), (d), (e) RETURN count(id(a));
+----
+
 . Open a new terminal window and log in to cypher-shell with the _admin/admin_ credentials. (*Suggestion*: specify --format plain)
 . In this second _admin_ `cypher-shell` session, execute the Cypher statement to list transactions. Do you see the query from _reader_?
 . Then execute the same statement returning the username, currentQueryId, currentQuery, and elapsedTimeMillis.
@@ -180,6 +192,7 @@ image::L06-Ex1-KillQuery.png[L06-Ex1-KillQuery,width=1000,align=center]
 
 Some queries against the Neo4j instance are not simply queries, but are Cypher statements that load data from CSV files. These types of Cypher statements could take a considerable amount of time to complete. One option for you to help automate the killing of long-running queries is to create a script that executes a Cypher statement such as the following:
 
+[source,cypher,role=nocopy noplay]
 ----
 CALL dbms.listQueries() YIELD query, elapsedTimeMillis, queryId, username
 WHERE  NOT query CONTAINS toLower('LOAD')
@@ -205,6 +218,7 @@ In addition, you should configure an upper limit for how long a transaction can 
 
 Here is an example of the configuration settings for lock acquisition timeout and _transaction guard_ where the transaction will fail if it exceeds one second or the request waits more than 10 milliseconds to acquire a write lock:
 
+[source,config,role=nocopy noplay]
 ----
 # transaction guard: max duration of any transaction
 dbms.transaction.timeout=1s
@@ -231,8 +245,15 @@ For this exercise, you will be using the stand-alone Neo4j instance that you use
 . Modify the *neo4j.conf* file to terminate transactions where the client cannot obtain a write lock after 10 milliseconds or the transaction time exceeds 1 second.
 . Start or restart the Neo4j instance.
 . In a terminal window, log in to `cypher-shell` with the credentials _publisher/publisher_.
-. Enter this Cypher statement which will attempt to execute a write transaction to create a million _Person_ nodes: `FOREACH (i IN RANGE(1,1000000) | CREATE (:Person {name:'Person' + i}));`. Do you receive an error?
-
+. Enter this Cypher statement which will attempt to execute a write transaction to create a million _Person_ nodes:
++
+[source,cypher,role=noplay]
+----
+FOREACH (i IN RANGE(1,1000000) | CREATE (:Person {name:'Person' + i}));
+----
++
+Do you receive an error?
++
 image::L06-Ex2-LongTransactionTimeOut.png[L06-Ex2-LongTransactionTimeOut,width=800,align=center]
 
 [start=5]
@@ -278,7 +299,14 @@ In this Exercise, you access the Neo4j instance from multiple clients and monito
 *Before you begin:*
 
 . Make sure that you have exited out of any `cypher-shell` sessions.
-. Download the writeApp java application zip file located https://s3-us-west-1.amazonaws.com/data.neo4j.com/admin-neo4j/writeApp.zip[here]. *Hint*: Enter `wget https://s3-us-west-1.amazonaws.com/data.neo4j.com/admin-neo4j/writeApp.zip`.
+. Download the writeApp java application zip file located https://s3-us-west-1.amazonaws.com/data.neo4j.com/admin-neo4j/writeApp.zip[here].
++
+*Hint*: Enter:
++
+[source,shell,role=noplay]
+----
+wget https://s3-us-west-1.amazonaws.com/data.neo4j.com/admin-neo4j/writeApp.zip
+----
 . Unzip *writeApp.zip* which will create the folder *writeApp*.
 . Make sure that *write.sh* has execute permissions (`chmod +x write.sh`)
 
@@ -323,6 +351,7 @@ You may want to monitor requests that come into the Neo4j instance from browser 
 
 You can set this property in *neo4j.conf* to log these requests:
 
+[source,config,role=nocopy noplay]
 ----
 # To enable HTTP logging, uncomment this line
 dbms.logs.http.enabled=true
@@ -429,9 +458,15 @@ image::jcmd.png[jcmd,width=1000,align=center]
 
 If you suspect that certain parts of the application or a transaction is consuming too much memory, you can run `jcmd` to get a baseline, and then run it again to compare the differences in memory consumption as follows:
 
+[source,shell,role=nocopy noplay]
 ----
 jcmd <PID for Neo4j instance> VM.native_memory baseline
-// wait for some time during transaction
+----
+
+Wait for some time during transaction, then:
+
+[source,shell,role=nocopy noplay]
+----
 jcmd <PID for Neo4j instance> VM.native_memory summary.diff
 ----
 
@@ -455,7 +490,13 @@ In this Exercise, you will execute a query that exhausts memory, then you will c
 
 . Start the Neo4j instance.
 . In `cypher-shell`, connect to the Neo4j instance as _publisher/publisher_.
-. Enter the following Cypher statement that will attempt to create 1.3 million _Person_ nodes: `FOREACH (i IN RANGE(1,1300000) | CREATE (:Person {name:'Person' + i}));`.
+. Enter the following Cypher statement that will attempt to create 1.3 million _Person_ nodes:
++
+[source,cypher,role=noplay]
+----
+FOREACH (i IN RANGE(1,1300000) | CREATE (:Person {name:'Person' + i}));
+----
+
 . Wait a few minutes. Eventually, you should receive an error.
 
 image::L06-Ex5-OutOfMemory.png[L06-Ex5-OutOfMemory,width=1000,align=center]
@@ -489,6 +530,7 @@ In your production application, you must work with developers and users of the a
 
 As an administrator, you will configure the Neo4j instance to log at the appropriate levels. In most production environments, you will archive log files so that they may be viewed at a later time as part of an auditing process or to troubleshoot a problem. Each type of log file (if configured to use) should have its maximum size defined, as well as the number of log files to keep.
 
+[source,config,role=nocopy noplay]
 ----
 # Number of HTTP logs to keep.
 #dbms.logs.http.rotation.keep_number=5
@@ -554,6 +596,7 @@ Neo4j supports the use of JMX in Cypher queries. This is something that is safe 
 
 For example, here is a rather long Cypher statement that retrieves the same information that you would expect to see when you run the `:sysinfo` command in Neo4j Browser:
 
+[source,cypher,role=noplay]
 ----
 CALL dbms.queryJmx("org.neo4j:instance=kernel#0,name=Store file sizes") YIELD attributes
        WITH  keys(attributes) AS k , attributes
@@ -618,7 +661,12 @@ In this Exercise, you will execute a JMX query to view metrics about the Neo4j i
 image::L06-Ex6-CypherJMX1.png[L06-Ex6-CypherJMX1,width=800,align=center]
 
 [start=3]
-. Execute the Cypher statement for creating 1.3 million nodes: `FOREACH (i IN RANGE(1,1300000) | CREATE (:Person {name:'Person' + i}));`.
+. Execute the Cypher statement for creating 1.3 million nodes:
++
+[source,shell,role=noplay]
+----
+FOREACH (i IN RANGE(1,1300000) | CREATE (:Person {name:'Person' + i}));
+----
 
 [start=4]
 . Execute the Cypher statement shown above for querying for metrics.
