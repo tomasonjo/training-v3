@@ -15,11 +15,12 @@ In this course you will learn how to setup the Neo4j Desktop for use in the rest
 
 In this module, you will:
 [square]
-* Set up Neo4j Desktop on your system.
+* Set up Neo4j Desktop on your system and create a database.
 * Install APOC and GDSL for your database.
 * Set up Jupyter Notebook on your system.
 * Download the course notebooks.
-* Launch a Jupyter Notebook and connect to the Citations database.
+* Launch a Jupyter Notebook and connect to the database.
+* Launch a Jupyter Notebook to load the database.
 
 == Step 1: Set up Neo4j Desktop on your system
 
@@ -149,10 +150,10 @@ Open the 01_DataLoading.ipynb notebook and follow the steps to load the data.
 
 You should now have set up your development environment:
 [square]
-* Set up Neo4j Desktop on your system.
-* Install APOC and GDSL for your database.
-* Start the database.
+* Set up Neo4j Desktop on your system and created a database.
+* Installed APOC and GDSL for your database.
+* Started the database.
 * Set up Jupyter Notebook on your system.
-* Download the course notebooks.
-* Launching a Jupyter Notebook and connecting to the Neo4j database.
-* Launching a Jupyter Notebook and load the data.
+* Downloaded the course notebooks.
+* Launched a Jupyter Notebook and connected to the Neo4j database.
+* Launched a Jupyter Notebook and loaded the data.
