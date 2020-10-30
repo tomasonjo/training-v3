@@ -1,5 +1,5 @@
 = Summary: Data Science with Neo4j
-:slug: 05-gdsds-predictions
+:slug: 05-gdsds-summary
 :toc: left
 :toclevels: 4
 :imagesdir: ../images

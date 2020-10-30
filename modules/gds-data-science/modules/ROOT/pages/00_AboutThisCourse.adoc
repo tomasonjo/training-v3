@@ -1,4 +1,4 @@
-= Data Science with Neo4j
+= Using a Machine Learning Workflow for Link Prediction
 :slug: 00-gdsds-about-this-course
 :doctype: book
 :toc: left

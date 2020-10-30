@@ -1,0 +1,38 @@
+= Using a Machine Learning Workflow for Link Prediction
+:slug: using-ml-for-link-prediction-40
+:description: Learn how to use the Neo4j Graph Data Science Library in a Machine Learning workflow to link prediction
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 5 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/MLWorkflowLinkPrediction-40.jpg
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/MLWorkflowLinkPrediction-40_withTitle.jpg[]
+
+== About the Course
+
+This online course is a collection of lessons and hands-on exercises that teach you how to incorporate some of the graph algorithms of the Neo4j Data Science Library into a Machine Learning workflow.
+
+== Prerequisites
+
+You must the following programming experience to take this course:
+
+[square]
+* Cypher
+* Using the Graph Data Science Library
+* Python using Jupyter Notebooks
+
+== Duration
+
+If you perform all of the hands-on exercises in this course,
+it will take you 4 hours to complete the course.
+
+== What you will learn
+
+[square]
+* How to set up your development environment to run Jupyter Notebooks.
+* How to perform steps to explore a dataset.
+* Incorporate graph algorithms into your code to provide recommendations from the data.
+* Incorporate link prediction algorithms into your code.
+* The challenges of building a Machine Learning model.
+* Build a link prediction classifier using scikit-learn.

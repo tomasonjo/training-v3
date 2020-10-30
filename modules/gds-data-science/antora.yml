@@ -1,0 +1,13 @@
+name: training-gdsds-40
+title: Using a Machine Learning Workflow for Link Prediction
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: 'datascience'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~
