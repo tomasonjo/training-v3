@@ -137,14 +137,14 @@ Download the zip from xxx and unpack it.
 In this course you will use Jupyter Notebooks.
 All the notebooks in this course require a connection to your started Neo4j instance.
 
-Open the 00_Environment.ipynb notebook and follow the steps to test your connection to the Neo4j database.
+Open the *00_Environment.ipynb* notebook and follow the steps to test your connection to the Neo4j database.
 
 === Step 6: Open a Jupyter Notebook to load the data.
 
 In this course you will use Jupyter Notebooks.
 All the notebooks in this course require a connection to your started Neo4j instance.
 
-Open the 01_DataLoading.ipynb notebook and follow the steps to load the data.
+Open the *01_DataLoading.ipynb* notebook and follow the steps to load the data.
 
 == Summary
 

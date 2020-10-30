@@ -53,7 +53,7 @@ You will then be able to use this knowledge to help build a recommendation engin
 
 In this exercise you use the Jupyter notebook you set up previously.
 
-Open the 02_EDA.ipynb notebook to complete the first exercise.
+Open the *02_EDA.ipynb* notebook to complete the first exercise.
 
 //Click the button below to launch the notebook and perform the steps for exploring the data. When you launch this notebook, you will enter the same credentials you entered when you tested your connection to the Neo4j Sandbox.
 //++++
@@ -61,7 +61,7 @@ Open the 02_EDA.ipynb notebook to complete the first exercise.
 //<br />
 //++++
 
-Once you have attempted the exercises, you can see the answers by launching the 02_EDA_Solutions.ipynb notebook.
+Once you have attempted the exercises, you can see the answers by launching the *02_EDA_Solutions.ipynb* notebook.
 
 //++++
 //<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA_Exercises.ipynb">See answers</a>
