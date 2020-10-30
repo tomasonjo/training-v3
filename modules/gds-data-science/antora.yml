@@ -6,7 +6,7 @@ nav:
   - modules/ROOT/nav.adoc
 asciidoc:
   attributes:
-    page-course-name: 'datascience'
+    page-course-name: 'gds-data-science'
     page-theme: 'training'
     page-toclevels: 1
     page-pagination: '@'

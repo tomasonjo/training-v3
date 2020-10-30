@@ -86,6 +86,9 @@ subprojects {
       case "applied-algos":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}applied-graph-algorithms/"
         break
+      case "gds-data-science":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}gds-data-science/"
+        break
       default:
         "https://neo4j.com/"
     }
@@ -125,6 +128,9 @@ subprojects {
         break
       case "applied-algos":
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-applied-graph-algos-about/"
+        break
+      case "gds-data-science":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-gdsds-about-this-course/"
         break
       default:
         "https://neo4j.com/"

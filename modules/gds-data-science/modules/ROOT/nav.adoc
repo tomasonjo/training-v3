@@ -1,0 +1,6 @@
+* xref:00_AboutThisCourse.adoc[]
+* xref:01_SettingUpYourDevelopmentEnvironment.adoc[]
+* xref:02-ExploratoryDataAnalysis.adoc[]
+* xref:03-Recommendations.adoc[]
+* xref:04-Predictions.adoc[]
+* xref:05-Summary.adoc[]

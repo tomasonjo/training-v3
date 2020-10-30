@@ -1,37 +1,30 @@
-= Summary: Data Science with Neo4j
+= Summary: Using a Machine Learning Workflow for Link Prediction
 :slug: 05-gdsds-summary
+:doctype: book
 :toc: left
-:toclevels: 4
+:toclevels: 3
 :imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-certificate:
 
-
-[#module-5.quiz]
-== Quiz Results
-++++
-<span id="quizes-result"></span>
-++++
-
-== Course Completion Certificate
-++++
-<span id="cert-result"></span>
-++++
 
 == Course Summary
 
 In this course, you have learned how to:
 
 [square]
-* Set up your Neo4j Sandbox development environment for performing the hands-on exercises of this course
-* Query a database for its schema
-* Return and chart the number of node labels and relationship types using matplotlib
-* Build and plot a histogram of papers and their citations using pandas and matplotlib
+* Set up your Neo4j development environment for performing the hands-on exercises of this course.
+* Query a database for its schema.
+* Return and chart the number of node labels and relationship types using matplotlib.
+* Build and plot a histogram of papers and their citations using pandas and matplotlib.
 * Build a mini recommendation engine with Cypher queries to:
-    ** find potential collaborators for an author
-    ** find relevant papers about a topic for an author
-* Describe what link prediction is
-* Use the link prediction functions in Neo4j
-* Understand the challenges when building machine learning models on graph data
-* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Graph Data Science library
+    ** Find potential collaborators for an author.
+    ** Find relevant papers about a topic for an author.
+* Describe what Link Prediction is.
+* Use the Link Prediction functions in Neo4j.
+* Understand the challenges when building Machine Learning models on graph data.
+* Build a Link Prediction classifier using scikit-learn with features derived from the Neo4j Graph Data Science library.
 
 == Next steps
 

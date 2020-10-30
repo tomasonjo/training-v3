@@ -10,8 +10,8 @@
 == About this module
 
 As a data scientist, you will create Neo4j Databases, add and update data in them, and query the data.
-When you learn to use Neo4j as a data scientist, you have two options ⎼ the Neo4j Desktop or the Neo4j Sandbox.
-In this module you will learn how to setup the Neo4j Desktop for use in the rest of the course, and connect to it from local Jupyter notebooks.
+When you learn to use Neo4j as a data scientist, you have two options ⎼  Neo4j Desktop or  Neo4j Sandbox.
+In this course you will learn how to setup the Neo4j Desktop for use in the rest of the course, and connect to it from local Jupyter notebooks.
 
 In this module, you will:
 [square]
@@ -82,6 +82,7 @@ endif::[]
 . Select the *Plugins* tab.
 . Install the *APOC* plugin.
 . Install the *Graph Data Science* plugin.
+. Start the database
 
 image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
 
@@ -103,20 +104,23 @@ You can install Jupyter Notebook on your system via pip or conda package manager
 
 If you use conda package manager, you can install Jupyter Notebook with:
 
+[source,shell,role=noplay]
 ----
 conda install -c conda-forge notebook
 ----
 
 ==== pip
 
-If you use conda package manager, you can install Jupyter Notebook with:
+You can install Jupyter Notebook with:
 
+[source,shell,role=noplay]
 ----
 pip install notebook
 ----
 
 If you successfuly installed Jupyter Notebook, you can run the following command at the Terminal (Mac/Linux) or Command Prompt (Windows) to open Jupyter Notebook:
 
+[source,shell,role=noplay]
 ----
 jupyter notebook
 ----
@@ -127,19 +131,28 @@ Consult the https://jupyter.org/install[official Jupyter documentation] for more
 
 Download the zip from xxx and unpack it.
 
-=== Step 5: Open a Jupyter Notebook and connect to the Neo4j database
+=== Step 5: Open a Jupyter Notebook to connect to the Neo4j database.
 
-In this course you will use Jupyter Notebook.
-All the notebooks in this course require a connection to your Neo4j Desktop instance, so you will test that now.
+In this course you will use Jupyter Notebooks.
+All the notebooks in this course require a connection to your started Neo4j instance.
 
-Open the 00_Environment.ipynb notebook to test you connection to Neo4j instance.
+Open the 00_Environment.ipynb notebook and follow the steps to test your connection to the Neo4j database.
+
+=== Step 6: Open a Jupyter Notebook to load the data.
+
+In this course you will use Jupyter Notebooks.
+All the notebooks in this course require a connection to your started Neo4j instance.
+
+Open the 01_DataLoading.ipynb notebook and follow the steps to load the data.
 
 == Summary
 
-You should now have set up your development environment by:
+You should now have set up your development environment:
 [square]
 * Set up Neo4j Desktop on your system.
 * Install APOC and GDSL for your database.
+* Start the database.
 * Set up Jupyter Notebook on your system.
 * Download the course notebooks.
 * Launching a Jupyter Notebook and connecting to the Neo4j database.
+* Launching a Jupyter Notebook and load the data.

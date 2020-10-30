@@ -7,14 +7,14 @@
 
 == About this module
 
-In this module you will learn how to build a machine learning classifier to predict co-authorships in the citation graph.
+In this module you will learn how to build a Machine Learning classifier to predict co-authorships in the citation graph.
 
 At the end of this module, you should be able to:
 [square]
-* Describe what link prediction is
-* Use the link prediction functions in Neo4j
-* Understand the challenges when building machine learning models on graph data
-* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Graph Data Science library
+* Describe what link prediction is.
+* Use the link prediction graph algorithms in Neo4j.
+* Understand the challenges when building Machine Learning models on graph data.
+* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Graph Data Science library.
 
 == The Link Prediction problem
 
@@ -22,7 +22,7 @@ Link Prediction has been around for a long time, but was popularised by a paper 
 
 image::LinkPrediction.png[Link Prediction,width=600]
 
-Kleinberg and Liben-Nowell approach this problem from the perspective of social networks, asking this question:
+Kleinberg and Liben-Nowell approached this problem from the perspective of social networks, asking this question:
 
 Given a snapshot of a social network, can we infer which new interactions among its members are likely to occur in the near future?
 
@@ -30,10 +30,10 @@ We formalize this question as the Link Prediction problem, and develop approache
 
 For example, we could predict future associations between:
 
-* People in a terrorist network
-* Associations between molecules in a biology network
-* Potential co-authorships in a citation network
-* Interest in an artist or artwork
+* People in a terrorist network.
+* Molecules in a biology network.
+* Potential co-authorships in a citation network.
+* Interest in an artist or artwork.
 
 In each these examples, predicting a link means that we are *predicting some future behaviour*.
 For example in a citation network, we’re actually predicting the action of two people collaborating on a paper.
@@ -54,10 +54,14 @@ In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play
 Now that you have learned how to execute the link prediction algorithms, you will learn what to do with the results.
 There are two approaches:
 
+[square]
+* Using measures directly
+* Supervised learning
+
 === Using the measures directly
 
 You can use the scores from the link prediction algorithms directly.
-With this approach you set a threshold value above which the algorithm would predict that a pair of nodes will have a link.
+With this approach, you set a threshold value above which the algorithm would predict that a pair of nodes will have a link.
 
 For example, you might say that every pair of nodes that has a preferential attachment score above 3 would have a link, and any with 3 or less would not.
 
@@ -72,17 +76,19 @@ In the next part of this module you will use the supervised learning approach.
 == Exercise 2: Building a binary classifier
 
 In this exercise, you will build a binary classifier to predict co-authorships using a notebook.
-Launch the 04_Predictions.ipynb notebook.
+
+Launch the 04_Predictions.ipynb notebook and follow the steps in this exercise.
 
 //++++
 //<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/04_Predictions.ipynb">Exercise 2</a>
 //++++
 
-[#module-4.quiz]
+[.quiz]
 == Check your understanding
+
 === Question 1
 [.statement]
-Which link prediction algorithm "captures the notion that two strangers who have a common friend may be introduced by that friend."?
+Which Link Prediction algorithm "captures the notion that two strangers who have a common friend may be introduced by that friend."?
 
 [.statement]
 Select the correct answer.
@@ -95,7 +101,7 @@ Select the correct answer.
 
 === Question 2
 [.statement]
-Which of these challenges do we need to address when building a binary classifier for link prediction?
+Which of these challenges do we need to address when building a binary classifier for Link Prediction?
 
 [.statement]
 Select the correct answers.
@@ -124,7 +130,7 @@ Select the correct answer.
 
 You should now be able to:
 [square]
-* Describe what link prediction is
-* Use the link prediction functions in Neo4j
-* Understand the challenges when building machine learning models on graph data
-* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Data Science library
+* Describe what Link Prediction is.
+* Use the Link Prediction algorithms in Neo4j.
+* Understand the challenges when building Machine Learning models on graph data.
+* Build a Link Prediction classifier using scikit-learn with features derived from the Neo4j Data Science library.

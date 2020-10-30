@@ -7,9 +7,9 @@
 
 == About this module
 
-In the previous section, we setup our Neo4j Sandbox environment containing the citation dataset.
-In this module we're going to explore that data.
-We'll be querying Neo4j and processing the results using tools in the Python ecosystem.
+In the previous section, you setup your Neo4j Desktop environment and loaded the citation dataset.
+In this module you will explore that data.
+You will be querying Neo4j and processing the results using tools in the Python ecosystem.
 
 At the end of this module, you should be able to:
 [square]
@@ -19,29 +19,30 @@ At the end of this module, you should be able to:
 
 == Tools
 
-We'll be using the following Python libraries in this course:
+You will be using the following Python libraries in this course:
 
 === py2neo
 
 The https://py2neo.org/v4/[py2neo^] driver enables data scientists to easily integrate Neo4j with tools in the Python Data Science ecosystem.
 It does this by providing functions that translate the results of queries into data structures used by these tools.
-We'll be using this library to execute Cypher queries against Neo4j.
+You will be using this library to execute Cypher queries against Neo4j.
 
 === pandas
 
 https://pandas.pydata.org/[pandas^] is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the Python programming language.
-We'll be using this library to do post processing of the data that we query from Neo4j.
+You will be using this library to do post-processing of the data that you query from Neo4j.
 
 === Matplotlib
 
-https://matplotlib.org/[Matplotlib^] is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms.
-We'll be using this library to create charts based on our data.
+https://matplotlib.org/[Matplotlib^] is a Python 2D plotting library which produces publication-quality figures in a variety of hard-copy formats and interactive environments across platforms.
+You will be using this library to create charts based on our data.
 
 
 == Citation Dataset
 
 Now you are ready to start exploring the data.
-The graph model for the dataset is shown below:
+
+Here is the graph model for the dataset:
 
 image::graph.png[Graph Model,width=600]
 
@@ -50,7 +51,7 @@ You will then be able to use this knowledge to help build a recommendation engin
 
 == Exercise 1: Exploring the data
 
-In this course you use the Jupyter notebook you set up previously.
+In this exercise you use the Jupyter notebook you set up previously.
 
 Open the 02_EDA.ipynb notebook to complete the first exercise.
 
@@ -60,14 +61,15 @@ Open the 02_EDA.ipynb notebook to complete the first exercise.
 //<br />
 //++++
 
-Once you have attempted the exercises, you can see the answers by launching the 02_EDA_Exercises.ipynb notebook.
+Once you have attempted the exercises, you can see the answers by launching the 02_EDA_Solutions.ipynb notebook.
 
 //++++
 //<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA_Exercises.ipynb">See answers</a>
 //++++
 
-[#module-2.quiz]
+[.quiz]
 == Check your understanding
+
 === Question 1
 
 [.statement]
