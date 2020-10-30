@@ -17,7 +17,8 @@ In this module, you will:
 [square]
 * Set up Neo4j Desktop on your system.
 * Install APOC and GDSL for your database.
-* Connect to the Citations database with Neo4j Browser.
+* Set up Jupyter Notebook on your system.
+* Download the course notebooks.
 * Launch a Jupyter Notebook and connect to the Citations database.
 
 == Step 1: Set up Neo4j Desktop on your system
@@ -84,35 +85,61 @@ endif::[]
 
 image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
 
-=== Using Neo4j Browser
+//=== Using Neo4j Browser
+//
+//Neo4j Browser is a tool that enables you to access a Neo4j Database by executing Cypher statements to create or update data in the graph and to query the graph to return data.
+//The data returned is typically visualized as nodes and relationships in a graph, but can also be displayed as tables.
+//In addition to executing Cypher statements, you can execute a number of system calls that are related to the database being accessed by the Browser.
+//For example, you can retrieve the list of queries that are currently running in the server.
+//
+//You can use Neo4j Browser functionality via the web interface.
+//
 
-Neo4j Browser is a tool that enables you to access a Neo4j Database by executing Cypher statements to create or update data in the graph and to query the graph to return data.
-The data returned is typically visualized as nodes and relationships in a graph, but can also be displayed as tables.
-In addition to executing Cypher statements, you can execute a number of system calls that are related to the database being accessed by the Browser.
-For example, you can retrieve the list of queries that are currently running in the server.
+=== Step 3: Set up Jupyter Notebook on your system
 
-You can use Neo4j Browser functionality via the web interface.
+You can install Jupyter Notebook on your system via pip or conda package managers.
 
-=== Step 3: Download the zip package
+==== conda
 
-=== Step 4: Open a Jupyter Notebook and connect to the Citations database
+If you use conda package manager, you can install Jupyter Notebook with:
+
+----
+conda install -c conda-forge notebook
+----
+
+==== pip
+
+If you use conda package manager, you can install Jupyter Notebook with:
+
+----
+pip install notebook
+----
+
+If you successfuly installed Jupyter Notebook, you can run the following command at the Terminal (Mac/Linux) or Command Prompt (Windows) to open Jupyter Notebook:
+
+----
+jupyter notebook
+----
+
+Consult the https://jupyter.org/install[official Jupyter documentation] for more information.
+
+=== Step 4: Download the course notebooks
+
+Download the zip from xxx and unpack it.
+
+=== Step 5: Open a Jupyter Notebook and connect to the Neo4j database
 
 In this course you will use Jupyter Notebook.
 All the notebooks in this course require a connection to your Neo4j Desktop instance, so you will test that now.
 
-Launch the notebook by clicking below. This will open a tab for the Jupyter Notebook where you will set it up to connect to the Neo4j Sandbox.
+Open the 00_Environment.ipynb notebook to test you connection to Neo4j instance.
 
 == Summary
 
 You should now have set up your development environment by:
 [square]
-* Install Neo4j Desktop for learning Neo4j.
-* Connecting to the Citations database with Neo4j Browser.
-* Launching a Jupyter Notebook and connecting to the Citations database.
-
-
-== Continue
-
-++++
-<a class="next-section medium button" href="../part-2/">Continue to Module 2</a>
-++++
+* Set up Neo4j Desktop on your system.
+* Install APOC and GDSL for your database.
+* Set up Jupyter Notebook on your system.
+* Download the course notebooks.
+* Launching a Jupyter Notebook and connecting to the Neo4j database.
