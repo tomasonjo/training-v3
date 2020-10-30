@@ -1,0 +1,135 @@
+= Predictions
+:slug: 04-gdsds-predictions
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Summary
+
+== About this module
+
+In this module you will learn how to build a machine learning classifier to predict co-authorships in the citation graph.
+
+At the end of this module, you should be able to:
+[square]
+* Describe what link prediction is
+* Use the link prediction functions in Neo4j
+* Understand the challenges when building machine learning models on graph data
+* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Graph Data Science library
+
+== The Link Prediction problem
+
+Link Prediction has been around for a long time, but was popularised by a paper written by Jon Kleinberg and David Liben-Nowell in 2004, titled https://www.cs.cornell.edu/home/kleinber/link-pred.pdf[The Link Prediction Problem for Social Networks^].
+
+image::LinkPrediction.png[Link Prediction,width=600]
+
+Kleinberg and Liben-Nowell approach this problem from the perspective of social networks, asking this question:
+
+Given a snapshot of a social network, can we infer which new interactions among its members are likely to occur in the near future?
+
+We formalize this question as the Link Prediction problem, and develop approaches to Link Prediction based on measures for analyzing the “proximity” of nodes in a network.
+
+For example, we could predict future associations between:
+
+* People in a terrorist network
+* Associations between molecules in a biology network
+* Potential co-authorships in a citation network
+* Interest in an artist or artwork
+
+In each these examples, predicting a link means that we are *predicting some future behaviour*.
+For example in a citation network, we’re actually predicting the action of two people collaborating on a paper.
+
+== Link Prediction Algorithms
+
+Kleinberg and Liben-Nowell describe a set of methods that can be used for Link Prediction.
+These methods compute a score for a pair of nodes, where the score could be considered a *measure of proximity* or “similarity” between those nodes based on the graph topology.
+The closer two nodes are, the more likely there will be a relationship between them.
+
+== Exercise 1: Running Link Prediction algorithms
+
+You will gain some experience running the Link Prediction algorithms.
+In the query edit pane of Neo4j Browser, execute the browser command: kbd:[:play gds-data-science-exercises] and follow the instructions for the Link Prediction exercise.
+
+== Applying Link Prediction Algorithms
+
+Now that you have learned how to execute the link prediction algorithms, you will learn what to do with the results.
+There are two approaches:
+
+=== Using the measures directly
+
+You can use the scores from the link prediction algorithms directly.
+With this approach you set a threshold value above which the algorithm would predict that a pair of nodes will have a link.
+
+For example, you might say that every pair of nodes that has a preferential attachment score above 3 would have a link, and any with 3 or less would not.
+
+=== Supervised learning
+
+You can take a supervised learning approach where you use the scores as features to train a binary classifier.
+The binary classifier then predicts whether a pair of nodes will have a link.
+
+In the next part of this module you will use the supervised learning approach.
+
+
+== Exercise 2: Building a binary classifier
+
+In this exercise, you will build a binary classifier to predict co-authorships using a notebook.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/04_Predictions.ipynb">Exercise 2</a>
+++++
+
+[#module-4.quiz]
+== Check your understanding
+=== Question 1
+[.statement]
+Which link prediction algorithm "captures the notion that two strangers who have a common friend may be introduced by that friend."?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answer]
+- [ ] Adamic Adar
+- [x] Common Neighbors
+- [ ] PageRank
+- [ ] Preferential Attachment
+
+=== Question 2
+[.statement]
+Which of these challenges do we need to address when building a binary classifier for link prediction?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answer]
+- [x] Class Imbalance
+- [ ] Clustering cut-off
+- [x] Data Leakage
+- [ ] Damping factor
+
+=== Question 3
+[.statement]
+Which feature is the most important in our final model?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answer]
+- [ ] Preferential Attachment
+- [ ] Triangles (min)
+- [x] Common neighbors
+- [ ] Louvain
+
+
+== Summary
+
+You should now be able to:
+[square]
+* Describe what link prediction is
+* Use the link prediction functions in Neo4j
+* Understand the challenges when building machine learning models on graph data
+* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Graph Algorithms library
+
+== Grade Quiz and Continue
+
+++++
+<a class="next-section medium button" href="../part-5/">Continue to Module 5</a>
+++++

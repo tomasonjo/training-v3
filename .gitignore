@@ -14,3 +14,7 @@ node_modules/
 tokens/*
 !tokens/credentials.json
 /public/
+
+# Ignore python notebook checkpoints
+
+.ipynb_checkpoints/
