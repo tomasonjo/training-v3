@@ -72,10 +72,11 @@ In the next part of this module you will use the supervised learning approach.
 == Exercise 2: Building a binary classifier
 
 In this exercise, you will build a binary classifier to predict co-authorships using a notebook.
+Launch the 04_Predictions.ipynb notebook.
 
-++++
-<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/04_Predictions.ipynb">Exercise 2</a>
-++++
+//++++
+//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/04_Predictions.ipynb">Exercise 2</a>
+//++++
 
 [#module-4.quiz]
 == Check your understanding
@@ -126,10 +127,4 @@ You should now be able to:
 * Describe what link prediction is
 * Use the link prediction functions in Neo4j
 * Understand the challenges when building machine learning models on graph data
-* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Graph Algorithms library
-
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-5/">Continue to Module 5</a>
-++++
+* Build a link prediction classifier using scikit-learn with features derived from the Neo4j Data Science library

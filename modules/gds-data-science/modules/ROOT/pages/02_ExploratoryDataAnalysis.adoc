@@ -52,18 +52,19 @@ You will then be able to use this knowledge to help build a recommendation engin
 
 In this course you use the Jupyter notebook you set up previously.
 
-Click the button below to launch the notebook and perform the steps for exploring the data. When you launch this notebook, you will enter the same credentials you entered when you tested your connection to the Neo4j Sandbox.
+Open the 02_EDA.ipynb notebook to complete the first exercise.
 
-++++
-<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA.ipynb">Exercise 1</a>
-<br />
-++++
+//Click the button below to launch the notebook and perform the steps for exploring the data. When you launch this notebook, you will enter the same credentials you entered when you tested your connection to the Neo4j Sandbox.
+//++++
+//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA.ipynb">Exercise 1</a>
+//<br />
+//++++
 
-Once you have attempted the exercises, you can see the answers by launching the following notebook:
+Once you have attempted the exercises, you can see the answers by launching the 02_EDA_Exercises.ipynb notebook.
 
-++++
-<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA_Exercises.ipynb">See answers</a>
-++++
+//++++
+//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/02_EDA_Exercises.ipynb">See answers</a>
+//++++
 
 [#module-2.quiz]
 == Check your understanding
@@ -114,9 +115,3 @@ You should now be able to:
 * Query a database for its schema.
 * Return and chart the number of node labels and relationship types using matplotlib.
 * Build and plot a histogram of papers and their citations using pandas and matplotlib.
-
-== Grade Quiz and Continue
-
-++++
-<a class="next-section medium button" href="../part-3/">Continue to Module 3</a>
-++++
