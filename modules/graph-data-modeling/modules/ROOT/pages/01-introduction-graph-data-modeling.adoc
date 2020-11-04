@@ -31,6 +31,67 @@ Stakeholders are:
 * Managers
 * Project leaders
 
+[.instructor-notes]
+--
+Let's define what we mean -
+
+* when we talk about the task of graph data modeling.
+
+Graph data modeling - is best done as a - *collaborative effort* -
+
+* where the *application domain* is *analyzed* by all *stakeholders*, -
+* in order to *create* the best model for the specific problems to be solved.
+
+Stakeholders need to - *agree upon* - the *basic form* - of the *data model*.
+
+* This involves these two areas: -
+** (1) First, the semantics - defining what the data means, -
+*** along with a - structure  - that represents those semantics.
+** (2) Second, is a structure - that can be used -
+*** to resolve the questions - that need to be answered.
+
+There is no such thing as an *optimal*. +
+As you’ll see today, -
+
+* a *model* is created based on
+** our *current knowledge* of the *application domain*, -
+** and the *questions* - that we want to answer for that domain.
+
+It’s common for both the *domain* - and the *questions* - to evolve and change over time.
+
+* These changes - inevitably - will also - change the data model.
+
+The key point here - is that you *SHOULD* expect - the model to change.
+
+* One of the *strengths* - of *Neo4j* -
+** is that it is - much *more malleable* - than *traditional* databases.
+
+*So, what are stakeholders?*
+
+* Stakeholders - is a *broad term* - that includes anybody -
+** that has a *vested interest* -
+** in the problem - and the solution - being sought in the data model.
+
+*Stakeholders* are defined as
+
+* *business analyst*, *architects*, *managers*, *project leaders*, *developers*,  and sometimes others.
+* Including all the stakeholders - in the process of modeling -
+** has the advantage - of melding together - multiple perspectives.
+* It brings - different perspectives together,
+** Which nurtures a common understanding between the different disciplines.
+* This in turn - *increases* - the success rate of projects -
+** due to a more thought out model,
+** including - the set of questions - guiding developers.
+
+_<NEXT>_
+
+Stakeholder perspectives include
+
+* architects and developers that to build it,
+* analysts the use the graph to answer questions,
+* managers who need to act upon information derived from the graph.
+--
+
 == How does Neo4j support graph data modeling?
 
 [square]

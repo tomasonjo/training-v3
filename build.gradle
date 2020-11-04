@@ -46,7 +46,7 @@ subprojects {
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
     asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.3.1'
-    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.30")
+    asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.31")
   }
 
   def stage = project.findProperty('stage')
@@ -602,6 +602,7 @@ subprojects {
       outputs.upToDateWhen { false }
 
       asciidoctorj {
+        requires "${rootProject.projectDir}/resources/googleslides_extensions.rb"
         // must be a web accessible location
         attributes 'imagesdir': "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/",
           'env-slides': '',
