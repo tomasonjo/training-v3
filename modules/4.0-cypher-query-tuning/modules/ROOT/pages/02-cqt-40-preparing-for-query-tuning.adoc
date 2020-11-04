@@ -238,7 +238,7 @@ You can execute this statement to get a list of all valid property names in the 
 [source,cypher,role=noplay]
 ----
 CALL db.propertyKeys() YIELD propertyKey
-propertyKey ORDER BY propertyKey
+RETURN propertyKey ORDER BY propertyKey
 ----
 
 image::propertyKeys.png[propertyKeys,width=800,align=center]

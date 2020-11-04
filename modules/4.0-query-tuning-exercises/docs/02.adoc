@@ -87,7 +87,7 @@ Here is a query that you may be tuning. Check it out to make sure that it will p
 
 [source,cypher]
 ----
-MATCH (m:Movie)-[:ACTED_IN]->(a)
+MATCH (m:Movie)<-[:ACTED_IN]-(a)
 WHERE m.name = $title
 RETURN collect(a.name) AS Actors
 ----
@@ -104,7 +104,7 @@ Here is a query that you may be tuning. Check it out to make sure that it will p
 
 [source,cypher]
 ----
-MATCH (m:Movie)-[:ACTED_IN]->(a)
+MATCH (m:Movie)<-[:ACTED_IN]-(a)
 WHERE m.name = $title
 RETURN collect(a.name) AS Actors
 ----
@@ -123,7 +123,7 @@ Here is what the query should be:
 
 [source,cypher]
 ----
-MATCH (m:Movie)-[:ACTED_IN]->(a)
+MATCH (m:Movie)<-[:ACTED_IN]-(a)
 WHERE m.title = $title
 RETURN collect(a.name) AS Actors
 ----
