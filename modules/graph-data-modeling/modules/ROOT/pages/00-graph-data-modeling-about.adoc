@@ -33,6 +33,36 @@ endif::[]
 
 This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
 
+[.instructor-notes]
+--
+Welcome to this course on - +
+an *introduction to - Graph Data Modeling - for Neo4j*. +
+*Please* let me know if you cannot see my screen?
+
+My name is ----. I’ll be the instructor for this course.
+
+I'm looking forward to our time together as you learn how to *model data* for your Neo4j graph applications.
+
+* This course is made up of roughly equal parts of *presentation* and *hands-on exercises*.
+* I'm looking forward to a good discussion throughout the course, -
+** since it enhances the learning experience.
+* With that in mind, -
+** please feel free to interrupt me at any time with whatever questions you might have.
+
+In the *Introduction to Neo4j* course covered information on -
+
+* *graph theory*, -
+* how *graph databases* differ from *traditional databases*, -
+* and how to work with *Cypher* to add objects to a graph and to extract data from the graph.
+
+This course focuses primarily on concepts.
+
+* We'll work on *understanding* data modeling and the *value* that they provide.
+* We'll also look at data modeling *workflow*, -
+** do some *white boarding* of data models, -
+** and explore how to *evaluate data models*.
+--
+
 == Lesson Overview
 
 Here are the lessons of this course:
