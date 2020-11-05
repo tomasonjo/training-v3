@@ -19,7 +19,7 @@ MERGE (n1)-[:FRIENDS]-(n2)
 
 image::link-pred.png[link-pred,width=300]
 
-In this guide, we will execute some of the link predictions in the Neo4j Graph Algorithms Library:
+In this guide, we will execute some of the link predictions in the Neo4j Graph Data Science Library:
 
 * *Common Neighbors*
 * *Adamic Adar*
