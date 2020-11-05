@@ -17,13 +17,7 @@ MERGE (n1)-[:FRIENDS]-(n2)
 
 == Overview
 
-[subs=attributes]
-++++
-<div style="float:right">
-    <img src="{guides}/img/link-pred.png" height="200px" />
-</div>
-++++
-
+image::link-pred.png[link-pred,width=300]
 
 In this guide, we will execute some of the link predictions in the Neo4j Graph Algorithms Library:
 
@@ -35,13 +29,8 @@ Go to the next page to get started.
 
 == Common Neighbors (Overview)
 
-[subs=attributes]
-++++
-<div style="float:right">
-    <img src="{guides}/img/common-neighbors.png" height="200px" />
-</div>
-++++
 
+image::common-neighbors.png[common-neighbors,width=300]
 
 One of the simplest measures that we can compute is common neighbors, as http://be.amazd.com/link-prediction/[described by Ahmad Sadraei^]:
 
@@ -83,13 +72,8 @@ RETURN gds.alpha.linkprediction.commonNeighbors(a, d) AS score
 
 == Adamic Adar (Overview)
 
-[subs=attributes]
-++++
-<div style="float:right">
-    <img src="{guides}/img/adamic-adar.png" height="200px" />
-</div>
-++++
 
+image::adamic-adar.png[adamic-adar,width=300]
 
 This algorithm was introduced in 2003 by Lada Adamic and Eytan Adar while researching how to predict links in a social network.
 
@@ -117,12 +101,8 @@ Which pair of nodes are most likely to have a link created between them?
 
 == Preferential Attachment (Overview)
 
-[subs=attributes]
-++++
-<div style="float:right">
-    <img src="{guides}/img/pref-attach.png" height="200px" />
-</div>
-++++
+
+image::pref-attach.png[pref-attach,width=300]
 
 This is one of the most well known concepts amongst network scientists, having been popularised by Albert-László Barabási and Réka Albert through their work on scale-free networks.
 

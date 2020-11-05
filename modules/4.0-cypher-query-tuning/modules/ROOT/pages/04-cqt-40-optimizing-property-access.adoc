@@ -141,7 +141,7 @@ From this we can infer that the streaming time was 15 ms.
 If the client were on a different system, this streaming time would be greater.
 --
 
-[.one-third=two-thirds-column]
+[.one-third-two-thirds-column]
 === Returning less data to the client
 
 [.notes]

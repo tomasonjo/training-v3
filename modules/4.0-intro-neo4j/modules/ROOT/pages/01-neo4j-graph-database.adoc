@@ -1,3 +1,4 @@
+[.slide-start-title]
 = Neo4j is a Graph Database
 :slug: 01-neo4j-graph-database
 :doctype: book
@@ -10,12 +11,15 @@
 :page-layout: training
 :page-quiz:
 
+ifndef::env-slides[]
 == About this module
+
 
 [.notes]
 --
 Neo4j enables developers to create applications that are best architected as graph-powered systems that are built upon the rich connectedness of data.
 --
+
 
 At the end of this module, you should be able to:
 [square]
@@ -25,13 +29,43 @@ At the end of this module, you should be able to:
 * Describe the Neo4j property graph model.
 * Whiteboard a graph data model.
 
+endif::[]
+
+ifdef::env-slides[]
+== In this module you'll learn ...
+
+[square]
+* What is a *graph*
+* What is a *graph database*
+* The *Neo4j property graph model*
+
+[.instructor-notes]
+--
+Neo4j enables developers to create graph applications
+
+[square]
+* It is utilized for sets of data that are best architected as graph-powered systems.
+* Neo4j takes advantage of the connectedness of data to quickly answer questions.
+
+As we go through this course I’ll expand on what this means.
+
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== What is a graph?
+endif::[]
+
+[.one-sixth-five-sixths-row]
 == What is a graph?
 
+A graph is set of discrete objects, each of which has some set of relationships with the other objects
 
-A graph is a collection of objects, each of which has links with the other objects.
-
+ifndef::env-slides[]
 Graphs are a useful way to model data for the purposes of mathematical analysis, and they have been around for quite a long time.
 The first use of graphs was by Leonhard Euler in 1735; he used graph theory to prove that the famous *Seven Bridges of Konigsberg* problem had no solution.
+endif::[]
 
 image::SevenBridges.png[SevenBridges,width=700,align=center]
 
@@ -58,6 +92,63 @@ Based on the above observations, the problem has no solution, because all four o
 
 --
 
+ifdef::env-slides[]
+[.instructor-notes]
+--
+First of all ... what is a graph?
+
+A *graph* is a collection of *objects*,
+
+* each of which has a set of binary links with other objects in a graph.
+*Graphs* are a useful way to - *model data* - for the purposes of *mathematical analysis*.
+
+As depicted here, *working with graphs* has been around for a long time.
+
+* The first recorded use of graphs was by *Leonhard (‘Oiler’) Euler* in *1735*.
+* He used graph theory to prove
+** the famous *Seven Bridges of Konigsberg* problem had no solution.
+
+*Konigsberg*, Prussia (now *Kaliningrad*, Russia) is a city spanning the Pregel River.
+* It includes two large islands,
+** which are connected to one another -
+** and to the riverbanks by seven bridges, as shown in the map of the city, shown on the left.
+
+The *Seven Bridges problem* asks -
+
+* is there any *route* through the city that *crosses* every bridge exactly *once*?
+
+Some pen-and-paper *experimentation* will quickly suggest that there is *no such route*.
+
+* However, *PROVING* that there is no solution is much more difficult.
+* (Oiler) Euler invented *Graph Theory* as a tool to aid in this proof.
+** The graph representation of the problem is on the *right*.
+* The *four landmasses*, are each represented by a *node*,
+** and *seven bridges*, each represented by a *relationship*.
+
+(Oiler) Euler *observed* the following:
+
+* The route taken within each landmass is irrelevant.
+** Only the sequence of crossing bridges matters.
+* Whenever you enter a landmass by a bridge, you must leave it by a different bridge, -
+** except at the start (where you leave but do not enter) -
+*** and at the end (where you enter but do not leave)
+* For the problem to have a *solution*, every *landmass* -
+** except the start and end, -
+** *must* be touched by an *even number of bridges*.
+
+Based on the above observations, this problem has *no solution*.
+
+* This is because all *four of the landmasses* (nodes) -
+* are touched by an *odd number of bridges* (relationships).
+
+Therefore there’s no possible way to draw a path -
+
+* that crosses every connection only once.
+* We now have method to solve this problem.
+
+So why do we care about this?
+--
+endif::[]
 
 === Anything can be a graph
 
@@ -69,19 +160,18 @@ We care because any dataset can be represented as a graph.
 Any structure or concept, no matter how simple or complex, can be broken down into a set constituent parts that have some relationship to one another.
 --
 
-[.is-half.left-column]
---
+ifndef::env-slides[]
 For example, the Internet can be modeled as a network of computers.
+endif::[]
 
 image::TheInternetAsAGraph.png[TheInternetAsAGraph,width=400,align=center]
---
 
-[.is-half.right-column]
---
+ifndef::env-slides[]
 At the other extreme of complexity, a single molecule can be represented as a graph of its constituent atoms--or an atom represented as a graph of subatomic particles.
+endif::[]
 
 image::AWaterMoleculeAsAGraph.png[AWaterMoleculeAsAGraph,width=200,align=center]
---
+
 
 [.notes]
 --
@@ -91,103 +181,576 @@ But mainly, graphs are uniquely useful when answering a question that  involves 
 
 You will frequently hear Neo4j people refer to such questions as graph problems--and they are surprisingly common in the real world.
 --
-== Graph concepts - nodes and relationships
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+As we’ve seen - *graphs* can be *abstracted* from *real world information*.
+
+* But why do we care about them?
+
+We care because ... *any dataset* can be *represented* as a graph.
+
+* In fact - have a saying at Neo4j ... *Graphs are everywhere*.
+
+*Any structure* or concept, no matter how *simple* or *complex*, -
+
+* can be broken down into a set *constituent parts* -
+* that have some relationship to one another.
+
+For example, the *internet* can be modeled as a *network* of computers.
+
+* At the *other extreme* of complexity,
+** a *single molecule* can be represented as a graph of *atoms*.
+* (Or an atom represented as a graph of subatomic particles.)
+
+As *(‘Oiler’) Euler showed*, there are some clear *benefits* to representing data in this way.
+
+* We’ll discuss some of these as we go through this course.
+
+Mainly, *we care about graphs* -
+
+* because *graphs* are *uniquely* useful when answering a question -
+* that  involves - *following a path along a chain of related items*.
+
+You’ll hear *Neo4j people* refer to such questions as *graph problems* –
+
+* and you’ll start to see that graph problems -
+* are surprisingly common in the real world.
+
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== Graph concepts
+
+[.instructor-notes]
+--
+Next, let’s discuss some of the *core concepts* of *graph theory*.
+--
+endif::[]
+
+== Neo4j's property graph
+
+The components of A Neo4j graph include:
+
+[square]
+* Nodes
+* Relationships
+* Labels
+* Properties
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+It’s time to get *specific* about the *components* of a graph.
+
+Here we see the terminology - for the *four objects* we’ll use in our models.
+
+* These are
+** nodes,
+** relationships,
+** labels and
+** properties.
+
+Over the next few slides -
+
+* I’ll be defining each of these terms -
+* and how they relate to each other.
+
+--
+endif::[]
+
+[.half-column]
+=== Graph terminology and Neo4j's property graph
+
+[square]
+* Node = Vertex
+* Relationship = Edge
+
+image::EdgeVertex.png[EdgeVertex,width=700,align=center]
+
+ifndef::env-slides[]
+Let’s start by defining the terms vertex and edge.
+A vertex is an object in a graph.
+An edge is a connection between two vertices which could be an ordered pair of vertices
+
+Node and Relationship are the Neo4j terms for vertex and edge.
+
+We use these nodes and relationships in Neo4j since we find them more intuitive in representing and communicating -
+how vertices and edges are used in a property graph.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Let’s start by defining the terms *vertex* and *edge*.
+
+* A *vertex* is an object in a graph
+* An *edge* is a connection between two vertices
+** An ordered pair of vertices
+
+*Node* and *Relationship* are the Neo4j terms -
+for *vertex* and *edge*.
+
+We use these terms in Neo4j since we find them more intuitive -
+
+* in representing and communicating -
+* how vertices and edges are used in a property graph.
+
+--
+endif::[]
+
+[.half-column]
+=== Nodes
+
+image::PropertyGraphNodes.png[PropertyGraphNodes,width=700,align=center]
+
+[square]
+* Represent objects or entities.
+* Can be labeled.
 
 [.notes]
 --
-We will begin by defining the components that make up a graph in Neo4j.
-Note that these are the Neo4j terms for these objects; the original mathematical terms are Vertex and Edge.
-We’ve chosen our nomenclature because it more intuitively describes what the objects represent.
+There are two kinds of data that can be associated a node,
+labels and properties.
+
+Labels provide categorical information.
+For example, here we have two Person nodes and one Car node.
+
+These labels categorizes these nodes, as a Person or a Car,
+but they don’t provide any specific information about a given node.
+
+Specific information for a node is represented as a properties which you will learn about soon.
 --
 
-Here we see two nodes.
-These two nodes are related to each other which is why we have a line or link connecting them.
-
-image::GraphComponents.png[GraphComponents,width=400,align=center]
-
-== Nodes
-
-First, let’s define a node in Neo4j.
-Nodes are the main objects of a graph.
-
-[.notes]
+ifdef::env-slides[]
+[.instructor-notes]
 --
-We say this not because nodes contain more data than relationships--although they usually do--but because it is perfectly acceptable to have nodes without any relationships.
-Conversely,  is is [.underline]#not# possible to have a relationship without any nodes.
+*Nodes* are used to represent objects.
+
+There are *two kinds* of data that can be associated a *node*,
+
+* *labels* and *properties*.
+
+*Labels* provide *categorical* information.
+
+* For example, here we have *two Person* nodes and *one Car* node.
+
+These *labels categorizes* these nodes, as a Person or a Car,
+
+* but they *don’t provide* any *specific information* about a given node.
+
+Specific information for a node is represented as a properties which you will learn about soon.
 --
+endif::[]
 
-Here we see that each node has a different color, perhaps to differentiate its type from another node.
-For example, the blue node represents a person and that person node has a name of Jane.
-The green node represents a vehicle and that vehicle node has a type of car.
+[.half-column]
+=== Node properties
 
-image::GraphConcepts-Nodes.png[GraphConcepts-Nodes,width=400,align=center]
+image::PropertyGraphNodesWithProperties.png[PropertyGraphNodesWithProperties,width=700,align=center]
 
-[.notes]
+[square]
+* Represent objects or entities.
+* Can be labeled.
+* May have properties.
+
+ifndef::env-slides[]
+Properties are used to associate specific information with individual nodes.
+
+As shown here, the Person nodes now each have _name_ property,
+One node has a name property with a value, Dan, and the other Person node has a name property with a value, Ann.
+The name property provides a way to differentiate the nodes.
+And the Car node has several properties providing details about this particular car.
+
+Nodes do not need to have a label or any properties.
+However, in practice, a node almost always has at least one label and one or more properties.
+
+This is why we call Neo4j a property graph since it associates data with nodes.
+As we’ll see, having properties in the graph provides value to our application.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
 --
+*Properties* are used to *associate specific information* with *individual nodes*.
+
+For example, as shown here -
+
+* The *Person nodes* now each have *name property*, -
+** as seen here with … *Dan* and *Ann* … that provides a way to differentiate the nodes
+* The *Car node* - now has several properties providing details about this particular car.
+
+Nodes *don’t need* to have a label or any properties.
+However, in practice -
+a node *almost always* has at least one label and one or more properties.
+
+This is known as a property graph, -
+
+* since it associates data with nodes.
+* As we’ll see, having properties in the graph provides value.
+--
+endif::[]
+
+[.half-column]
+=== Relationships
+
+image::PropertyGraphRelationships.png[PropertyGraphRelationships,width=700,align=center]
+
+[square]
+* Must have a type.
+* Must have a direction.
+
+ifndef::env-slides[]
+Next, let’s talk about relationships. Relationships must have both a type and a direction.
+
+Types are similar to labels since types provide a general category for each relationship.
+
+For example, as we see here, the relationships have the types - DRIVES, OWNS, and LOVES.
+Each of these types captures how a relationship is used to relate two nodes.
+
+Again, along with a type, each Neo4j relationship must have a direction.
+
+Following the direction shown in this graph we see that “Ann owns a Volvo”.
+If the relationship direction were reversed, it relays a VERY different concept,
+which is “The Volvo owns Ann.”
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Next, let’s talk about *relationships*.
+
+* Relationships have both a *type* and a *direction*.
+* To be clear, each relationship - *must* - have a type and direction.
+
+
+Types are similar to labels -
+
+* since *types* provide a *general category* for each relationship.
+
+For example, as we see here, -
+
+* the relationships have the types - *DRIVES*, *OWNS*, and *LOVES*.
+* Each of these types -
+** captures how a relationship is used to relate two nodes.
+
+Again, along with a type, each Neo4j *relationship must* have a *direction*.
+
+Following the *direction* shown in this graph we see that -
+
+* “Ann owns a Volvo”
+
+If the relationship direction were reversed -
+
+* it relays a VERY different concept -
+* which is  “The Volvo owns Ann.”
+
+The Direction captures information on how nodes are related.
+
+--
+endif::[]
+
+[.half-column]
+=== Relationship properties
+
+image::PropertyGraphRelationshipProperties.png[PropertyGraphRelationshipProperties,width=700,align=center]
+
+[square]
+* Must have a type.
+* Must have a direction.
+* May have properties.
+
+ifndef::env-slides[]
+Just like nodes, relationships can have properties that express specific attributes.
+
+Here we see the property ‘since’ - for the DRIVES relationship.
+This indicates how long Dan has been driving this particular car.
+
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Just like nodes, relationships can have *properties* that express specific attributes.
+
+Here we see the *property ‘since’* - for the DRIVES relationship.
+
+* This indicates how long Dan has been driving this particular car.
+
+In summary for Relationships
+
+* They *must* always have a type and direction.
+* They can *optionally* have properties.
+--
+endif::[]
+
+[.half-column]
+=== Multiple relationships
+
+image::PropertyGraphMultiRelationships.png[PropertyGraphMultiRelationships,width=700,align=center]
+
+[square]
+* Must have a type.
+* Must have a direction.
+* May have properties.
+* Nodes can share multiple relationships.
+
+ifndef::env-slides[]
+Because relationships are specific, each node can have many relationships with other nodes to fully capture their context.
+
+This is a good thing, otherwise Ann would love Dan, but not vice versa!
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Because *relationships* are *specific*, -
+
+* each *node* can have *many relationships* with other nodes -
+**to fully capture their context.
+
+This is a good thing,
+
+* otherwise Ann would love Dan, but not vice versa!
+--
+endif::[]
+
+[.half-column]
+=== A property graph model
+
+image::PropertyGraphSimpleModel.png[PropertyGraphSimpleModel,width=700,align=center]
+
+[square]
+* Nodes
+** Represent objects or entities.
+** Can be labeled.
+** May have properties.
+* Relationships
+** Must have a type.
+** Must have a direction.
+** May have properties.
+* Nodes can share multiple relationships.
+
+ifndef::env-slides[]
+Here’s complete, although very simple,
+property graph for this example.
+
 Mathematically, a node is defined as “a point where two or more edges (relationships) meet.”
+
 This is not at all intuitive!
-However, it provides important insight into how graphs are used.
-Since the entire point of modeling data as a graph is to traverse a chain of linked nodes, one useful way of thinking about nodes is that they are waypoints along the traversal route.
-They contain information and you need to decide which links are good ones to follow, and which should be ignored.
+However, it does provide an important insight into how graphs are used.
+
+Since the entire point of modeling data as a graph is to traverse a chain of linked nodes.
+One useful way of thinking about nodes is that they are waypoints along the traversal route.
+They contain the information needed to decide which links are good ones to follow, and which should be ignored.
 Relationships are those links.
+
+The support for properties on both nodes and relationships is what makes Neo4j a property graph.
+This provides a flexible way of defining varying amounts of data.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
 --
+Here’s complete, although very simple,
 
-== Relationships
+* *property graph* example.
 
-[.notes]
+Mathematically, a node is defined as -
+“a *point* where two or more *edges* (relationships) meet.”
+
+This is not at all intuitive!
+
+* However, it does provide an important insight into how graphs are used.
+
+Since the entire point of modeling data as a graph -
+
+* is to traverse a chain of linked nodes, -
+* one useful way of thinking about nodes -
+** is that they’re waypoints along the traversal route.
+* They contain the information needed
+** to decide which links are good ones to follow,
+** and which should be ignored.
+* Relationships are those links.
+
+Again, the *support for properties* on both nodes and relationships -
+
+* is what makes Neo4j a property graph.
+* This provides a flexible way of defining varying amounts of data.
 --
-Next, let’s define a relationship in Neo4j.
+endif::[]
 
-Relationships are the links between nodes.
-In their simplest form, relationships need not contain any information other than which two nodes they link.
-But they can (and in Neo4j always do) contain much more.
---
-
-image::GraphConcepts-Relationships.png[GraphConcepts-Relationships,width=400,align=center]
-
-[.notes]
---
-For example, relationships can include a direction.
-"Jane owns a car" is a very different relationship than "A car owns Jane", and the direction of the relationship between Jane and her car captures this.
-Relationship directions are required in Neo4j.
-
-In addition, relationships can contain any amount of additional data, such as weight or relationship type.
-For example, the relationship between Jane and her car is of the type OWNS.
-Like direction, type is a required element of Neo4j relationships, although all other data is optional.
-
-In Neo4j, the purpose of the data attached to a relationship is to reduce the need to "gather and inspect", where you follow all relationships from a given node, then scan the target node data to determine which hops were “good” ones and then discard the rest.
-This does not scale well.
-Instead, we can use the data attached to a relationship to preemptively filter which links to follow during traversal.
---
 
 == Traversing a graph
 
-[.notes]
+ifndef::env-slides[]
+A very important concept within graph theory is traversal.
+An important feature of graphs is to follow a chain of nodes and relationships.
+
+The process of finding such routes is the definition of traversal.
+
+We’ll be looking at 3 different ways that traversal can be done:
+endif::[]
+
+[square]
+* Walk
+* Trail
+* Path
+
+ifdef::env-slides[]
+[.instructor-notes]
 --
-As mentioned before, the main point of graphs is to follow a chain of nodes and relationships; the process of finding such routes is the definition of traversal.
-There are many ways a graph can be traversed and there are graph algorithms that perform traversals of all types from random, to shortest path, to longest path.
+A very important concept within graph theory is *Traversal*.
+As mentioned earlier, the *main point of graphs* -
+is to *follow* a chain of nodes and relationships.
 
-In Neo4j traversal is optimized since that is how one performs queries in the graph.
-
+The process of finding such routes is the *definition* of *traversal*.
+This is straightforward concept.
+However, for our purposes we need to go deeper -
+ to think about how a graph can be traversed.
+We’ll be looking at *3 different way*s that this can be done.
 --
+endif::[]
 
-During traversal of a Neo4j graph, nodes may be visited more than once, but a relationship is only traversed once.
-This is called a *path* in Neo4j.
+[.half-column]
+=== Traversing a graph: Walk
 
-[.is-half.left-column]
+A walk is an ordered, alternating sequence of nodes and relationships where the nodes and relationships can be repeated.
+
+image::TraverseWalk.png[TraverseWalk,width=300,align=center]
+
+ifndef::env-slides[]
+A walk is the most basic type of traversal.
+A walk is an ordered alternating list of nodes and relationships.
+For example, in the graph shown here, we could define a walk starting at node 1, hopping to 2, then 3, back to 2, on to 6, and back to 2.
+There are no restrictions here.
+
+You can traverse relationships multiple times and visit the same node as many times as you wish.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
 --
-image::GraphConcepts-Traversal.png[GraphConcepts-Traversal,width=400,align=center]
---
+A *walk* is the most basic of these.
 
-[.is-half.right-column]
---
-[.statement]
-Relationships have direction, as well as types so you can identify which relationship you want to traverse.
+* A walk is an *ordered alternating* list of nodes and relationships.
+* For example, in the graph shown here,
+** we could define a walk starting at node 1,
+** hopping to 2, then 3, back to 2, on to 6, and back to 2.
+* There are no restrictions here.
 
-[.statement]
-In this example, although the "2" node is visited multiple times, no relationship between the nodes is traversed more than once.
---
+You can use relationships multiple times
 
+* and visit the same node as many times as you wish.
+--
+endif::[]
+
+[.half-column]
+=== Traversing a graph: Trail
+
+A trail is a walk where no relationships are repeated, but nodes can be visited more than once.
+
+
+image::TraverseTrail.png[TraverseTrail,width=300,align=center]
+
+ifndef::env-slides[]
+
+For example, remember the Seven Bridges problem?
+It uses a trail.
+You can visit each landmass as many times as you’d like, but you can only cross each bridge once.
+
+The walk we just performed (1-2-3-2-6-2) is not a valid trail,
+because we traversed the relationship between 2 and 3 twice.
+
+Instead, a valid trail, as shown here, could start at 1, go to 2, 6, and back to 2.
+This is permitted since there are two relationships between 6 and 2, and we use each of them once.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+A *trail* is a *walk* in which *NO relationships* are *repeated*.
+
+* You can still visit a node as many times as you want, -
+** but each link - can only be used once!
+
+For *example,* remember the *Seven Bridges* problem?
+
+* It uses a trail.
+* You can visit each *landmass* as many times as you’d like -
+** but you can only *cross* each *bridge once*.
+
+The *walk* we just performed (1-2-3-2-6-2) is *not* a valid trail,
+
+* because we traversed the relationship between 2 and 3 twice.
+
+Instead, a valid trail, as shown here, could start at 1, go to 2, 6, and back to 2.
+
+* This is permitted since there are TWO relationships -
+** between 6 and 2, and we use each of them once.
+--
+endif::[]
+
+[.half-column]
+=== Traversing a graph: Path
+
+A path is a trail where no nodes are repeated. That is, all items are unique.
+
+image::TraversePath.png[TraversePath,width=300,align=center]
+
+ifndef::env-slides[]
+
+The trail we just followed (1-2-6-2) is not a valid path because it visits node 2 twice.
+By dropping that last hop, it becomes a valid path.
+
+The problems we solve with Neo4j are almost exclusively done by traversing trails and paths.
+Each of these terms mean something very specific in the context of graphs.
+
+For example, there are several special kinds of paths that are extremely useful for solving certain problems.
+Shortest path (the path containing the fewest elements) is the most common of these.
+A couple of more esoteric examples include:
+
+[square]
+* Longest path, Hamiltonian path (visits every node in the graph)
+* Cycle (“path” that ends at the same node it started on)
+
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+A *path* is a trail in which *no nodes* are *repeated*.
+
+* Stated another way, - a path is a walk
+** in which all items are unique,
+** for both nodes and relationships.
+
+The trail we just followed (1-2-6-2)
+
+* is *not* a valid path because it visits node 2 twice.
+* By dropping that last hop, it becomes a valid path.
+
+The problems we solve with Neo4j are *almost exclusively* done by traversing *trails* and *paths*.
+
+* It’s important to understand that each of these terms -
+* means something very specific in the context of graphs, -
+* and that the implications are important.
+
+For example, there are several special kinds of paths that are extremely useful for solving certain problems.
+
+* *Shortest path* (the path containing the fewest elements) -
+** is the most common of these.
+* A couple of more esoteric examples include:
+** *Longest path*, *Hamiltonian path* (visits every node in the graph),
+** *Cycle* (“path” that ends at the same node it started on) .
+
+Making use of these requires a strong understanding of paths.
+--
+endif::[]
+
+ifndef::env-slides[]
 == What is a graph database?
 
 image::GraphDatabaseInEnterprise.png[GraphDatabaseInEnterprise,width=800,align=center]
@@ -204,14 +767,17 @@ This means your application doesn't have to infer data connections using foreign
 By assembling the simple abstractions of nodes and relationships into connected structures, graph databases enable us to build sophisticated models that map closely to our problem domain.
 Data scientists can use the relationships in a data model to help enterprises make important business decisions.
 --
+endif::[]
 
+ifndef::env-slides[]
 === Neo4j is a native graph database
+endif::[]
 
 ifdef::backend-html5,backend-pdf[]
 In this video, you will see the benefits of using the native graph database, Neo4j.
 endif::[]
 
-ifdef::backend-html5,env-slides[]
+ifdef::backend-html5[]
 [.center]
 video::GM9bB4ytGao[youtube,width=560,height=315]
 endif::[]
@@ -220,23 +786,17 @@ ifdef::backend-pdf[]
 https://youtu.be/GM9bB4ytGao
 endif::[]
 
-ifdef::env-slides[]
-kbd:[https://youtu.be/GM9bB4ytGao]
-endif::[]
-
-=== Querying a graph is intuitive in Cypher
+=== Querying using Cypher is intuitive
 
 [.notes]
 --
 If you have ever tried to write a SQL statement with a large number of JOINs, you know that you quickly lose sight of what the query actually does, due to the number of tables that are required to connect the data.
 --
 
-[%unbreakable]
---
 [.statement]
-For example, in an organizational domain, here is what a SQL statement that lists the employees in the IT Department would look like:
+SQL statement - listing the employees in the IT Department:
 
-[source,cypher,role=nocopy noplay]
+[source,SQL,role=nocopy noplay]
 ----
 SELECT name FROM Person
 LEFT JOIN Person_Department
@@ -247,7 +807,7 @@ WHERE Department.name = "IT Department"
 ----
 
 [.statement]
-In contrast, Cypher syntax stays clean and focused on domain concepts since queries are expressed visually:
+Cypher statement - clean and focused since queries are expressed visually:
 
 [source,cypher,role=nocopy noplay]
 ----
@@ -255,8 +815,37 @@ MATCH (p:Person)<-[:EMPLOYEE]-(d:Department)
 WHERE d.name = "IT Department"
 RETURN p.name
 ----
---
 
+ifdef::env-slides[]
+[.instructor-notes]
+--
+If you have written SQL statements -
+
+* with a large number of JOINs, you know how easy it is -
+** to lose sight of what the query actually does.
+* This is due to the many tables -
+** that are required to connect the data.
+
+Here we see an example of an equivalent statement, relative to the data sought,
+
+* for both SQL and Cypher.
+
+This query is trying to find people who work in the IT department.
+
+We can see from this example how much easier and faster it is to interpret -
+
+* the purpose of the query when using Cypher,
+** unless of course your a SQL guru.
+* The benefit of Cypher in this example, is that it’s going to be faster.
+
+
+(Q): Where is the join key in Cypher?
+
+(A): In Cypher there are no join keys.
+--
+endif::[]
+
+ifndef::env-slides[]
 == Use cases for graph databases
 
 [.notes]
@@ -273,57 +862,16 @@ Here are some of them:
 image::UseCases.png[UseCases,width=800,align=center]
 
 You can read more about how customers are using Neo4j https://neo4j.com/use-cases[here].
+endif::[]
 
-== The Neo4j property graph model
-
-A graph is composed of two elements: *nodes* and *relationships*.
-Neo4j allows you to identify nodes and relationships and add properties to them to further define the data in the graph.
-
-=== Nodes
-
-[.notes]
---
-Each node represents an entity (a person, place, thing, category or other piece of data). With Neo4j, nodes can have **labels** that are used to define types for nodes. 
-For example, a _Location_ node is a node with the label _Location_. 
-That same node can also have a label, _Residence_. Another _Location_ node can also have a label, _Business_. 
-A label can be used to group nodes of the same type. For example, you may want to retrieve all of the _Business_ nodes.
---
-
-image::Nodes.png[Nodes,width=400,align=center]
-
-=== Relationships
-
-[.notes]
---
-Each relationship represents how two nodes are connected. 
-For example, the two nodes _Person_ and _Location_, might have the relationship _LIVES_AT_ pointing from a _Person_ node to _Location_ node.
-A relationship represents the verb or action between two entities. The _MARRIED_ relationship is defined from one _Person_ node to another _Person_ node.
-Although the relationship is created as directional, it can be queried in a non-directional manner. That is, you can query if two _Person_ nodes have a _MARRIED_ relationship, regardless of the direction of the relationship. For some data models, the direction of the relationship is significant. For example, in Facebook, using the _IS_FRIEND_ relationship is used to indicate which _Person_ invited the other _Person_ to be a friend.
---
-
-image::Relationships.png[Relationships,width=400,align=center]
-
-==== Property graph model
-
-The Neo4j database is a property graph. 
-You can add **properties** to nodes and relationships to further enrich the graph model. 
-
-image::Properties.png[Properties,width=500,align=center]
-
-[.notes]
---
-This enables you to closely align data and connections in the graph to your real-world application. 
-For example, a _Person_ node might have a property, _name_ and a _Location_ node might have a property, _address_. In addition, a relationship, _MARRIED_ , might have a property, _since_.
---
-
-== Training data model
+ifndef::env-slides[]
+== Training data model for this course
 
 [.notes]
 --
 For this training, we will use a Movies graph to get you started with accessing the data in a Neo4j database.
 --
-[.is-half.left-column]
---
+
 The data model is very simple, it includes entities such as:
 
 [square]
@@ -331,9 +879,7 @@ The data model is very simple, it includes entities such as:
 * Person/Actor/Director
 
 that are implemented as nodes in the graph.
---
-[.is-half.right-column]
---
+
 People are related to Movies using these relationships:
 
 [square]
@@ -343,8 +889,51 @@ People are related to Movies using these relationships:
 * REVIEWED
 
 People, who have reviewed movies, are related to each other using the FOLLOWS relationships.
---
 
+endif::[]
+
+ifdef::env-slides[]
+[.half-column]
+== Data model used in this training
+
+Node entities:
+
+[square]
+** Movie
+** Person
+
+Relationships relate People to Movies:
+
+[square]
+* ACTED_IN
+* DIRECTED
+* REVIEWED
+* PRODUCED
+* WROTE
+
+Relationship relate People to People:
+
+[square]
+* FOLLOWS
+
+image::TrainingModel.png[TrainingModel,width=800,align=center]
+
+[.instructor-notes]
+--
+As we learn about Neo4j, we’ll be using the *Movies graph*.
+
+Our data model in the Movies graph,  which is shown here,
+is kept simple for learning purposes.
+
+It’s composed of 2 nodes, *Movie* and *Person*, -
+and *6 relationships*.
+
+In the next module we’ll be creating this data model.
+
+--
+endif::[]
+
+ifndef::env-slides[]
 === Initial whiteboard the data model
 
 [.notes]
@@ -358,7 +947,6 @@ image::Whiteboard1.png[Whiteboard1,width=500,align=center]
 Here we see that people such as Tom Hanks and Hugo Weaving have acted in the movie, Cloud Atlas.
 
 === Implementation of the graph data model
-
 
 image::Whiteboard2.png[Whiteboard2,width=500,align=center]
 
@@ -413,6 +1001,7 @@ image::graphgists2.png[Graphgists2,width=500,align=center]
 As you gain experience with Cypher and think about modeling your application, you should check out some of these graphgists for ideas for how to model your data.
 We recommend that you take our training course, _Graph Data Modeling for Neo4j_, which introduces you to the best practices for modeling data and implementing graph data models in Neo4j.
 --
+endif::[]
 
 [.quiz]
 == Check your understanding
@@ -466,6 +1055,10 @@ You should now be able to:
 [square]
 * Describe what a graph is.
 * Describe what a graph database is.
+ifndef::env-slides[]
 * Describe some common use cases for using a graph database.
+endif::[]
 * Describe the Neo4j property graph model.
+ifndef::env-slides[]
 * Whiteboard a graph data model.
+endif::[]
