@@ -89,7 +89,7 @@ Which Link Prediction algorithm "captures the notion that two strangers who have
 [.statement]
 Select the correct answer.
 
-[%interactive.answer]
+[%interactive.answers]
 - [ ] Adamic Adar
 - [x] Common Neighbors
 - [ ] PageRank
@@ -102,7 +102,7 @@ Which of these challenges do we need to address when building a binary classifie
 [.statement]
 Select the correct answers.
 
-[%interactive.answer]
+[%interactive.answers]
 - [x] Class Imbalance
 - [ ] Clustering cut-off
 - [x] Data Leakage
@@ -115,7 +115,7 @@ Which feature is the most important in our final model?
 [.statement]
 Select the correct answer.
 
-[%interactive.answer]
+[%interactive.answers]
 - [ ] Preferential Attachment
 - [ ] Triangles (min)
 - [x] Common neighbors

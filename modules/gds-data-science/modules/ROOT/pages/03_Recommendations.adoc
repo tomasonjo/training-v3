@@ -60,7 +60,7 @@ How many of Brian Fitzgerald's potential collaborators have collaborated with Br
 [.statement]
 Select the correct answer.
 
-[%interactive.answer]
+[%interactive.answers]
 - [ ] 12
 - [ ] 8
 - [ ] 0
@@ -73,7 +73,7 @@ If we wanted to create a full text search on the 'name' property of nodes with t
 [.statement]
 Select the correct answers.
 
-[%interactive.answer]
+[%interactive.answers]
 - [x] CALL db.index.fulltext.createNodeIndex('authors', ['Author'], ['name'])
 - [ ] CALL db.index.fulltext.createNodeIndex('authors', ['name'], ['Author'])
 - [x] CALL db.index.fulltext.createNodeIndex('authorName', ['Author'], ['name'])
@@ -86,7 +86,7 @@ Which statement describes the Personalized PageRank algorithm?
 [.statement]
 Select the correct answer.
 
-[%interactive.answer]
+[%interactive.answers]
 - [ ] Personalized PageRank measures the number of incoming and outgoing relationships from a node.
 - [x] Personalized PageRank is a variant of PageRank that allows us to find influential nodes based on a set of source nodes.
 - [ ] Personalized PageRank counts the number of neighbors within 2 hops of a node
