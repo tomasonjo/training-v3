@@ -1,0 +1,3 @@
+:includedir: ../docs
+
+include::{includedir}/01_SlideTypes.adoc[]
