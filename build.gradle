@@ -622,7 +622,10 @@ subprojects {
           'google-slides-layout-half-column': "CUSTOM_5", // half column
           'google-slides-layout-one-third-two-thirds-column': "CUSTOM_6", // one third + two thirds column
           'google-slides-layout-five-sixths-one-sixth-row': "CUSTOM_7", // five sixths one sixth row
-          'google-slides-layout-two-thirds-one-third-column': "CUSTOM_8" // two thirds + one third column
+          'google-slides-layout-two-thirds-one-third-column': "CUSTOM_8", // two thirds + one third column
+          'google-slides-layout-guided-exercise': "CUSTOM_9", // Title green with body
+          'google-slides-layout-section-break': "CUSTOM_11", // Title green
+          'google-slides-layout-slide-start-title': "TITLE" // Title slide
       }
 
       inProcess "IN_PROCESS"

@@ -87,9 +87,9 @@ image::WebNeo4jBrowser.png[align=center,role="stretch"]
 [.center]
 video::Sz2C618QKN8[youtube,height=500,width=900]
 
-== Two-columns layout
+[.half-column]
+== Half column
 
-[.is-half.left-column]
 --
 * Declarative query language
 * Focuses on _what_, not how to retrieve
@@ -98,22 +98,12 @@ video::Sz2C618QKN8[youtube,height=500,width=900]
 * ASCII art to represent nodes and relationships
 --
 
-[.is-half.right-column]
-image::overview.svg[Overview,align=center]
+image::overview.png[Overview,align=center]
 
-== Column sizes
+[.one-third-two-thirds-column]
+== One third, two-thirds
 
-[.is-one-third.left-column]
 --
-[.underline]#One third#
-
-image::FollowsRelationships.png[width=350px,align=center]
---
-
-[.is-two-thirds.right-column]
---
-[.underline]#Two thirds#
-
 Find all people who follow _Angela Scope_, returning the nodes:
 
 [source,cypher]
@@ -121,33 +111,18 @@ Find all people who follow _Angela Scope_, returning the nodes:
 MATCH (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
 RETURN p
 ----
-
-image::AngelaFollowers.png[width=600,align=center,role=border]
 --
 
-[.slide-section-title]
-== Section title (default: green + node)
+image::FollowsRelationships.png[width=350px,align=center]
 
-[.slide-section-title.has-green-background.has-team-background]
-== Section title (green + team)
+// first slide of a new lesson
+[.slide-start-title]
+== Community Detection Algorithms
 
-[.slide-section-title.has-gold-background]
-== Section title (gold)
+[.section-break]
+== Section break
 
-[.slide-section-title.has-gold-background.has-team-background]
-== Section title (gold + team)
-
-[.slide-section-title.has-purple-background]
-== Section title (purple)
-
-[.slide-section-title.has-purple-background.has-puzzle-background]
-== Section title (purple + puzzle)
-
-[.slide-title]
-== Title (default: green + puzzle)
-
-[.slide-title.has-green-background]
-== Title (green)
+== Section title
 
 [.student-exercise]
 == Exercise #1: Install a plugin
@@ -158,26 +133,22 @@ kbd:[:play intro-neo4j-exercises]
 
 Then follow instructions for Exercise 1.
 
-[.section-title.has-purple-background.has-puzzle-background]
+[.guided-exercise]
+== Guided Exercise: Getting Started with the Weakly Connected Component algorithm
+
+[.student-exercise]
 == Task: Create a new database called `stackoverflow` and switch to it
 
-[.slide-title.has-purple-background.has-node-background]
-== Title (purple + node)
+[.half-column]
+== Half column
 
-[.half.left.green,transition="fade-in fade-out"]
-== !
-
-[.is-half.left-column.has-dark-background]
 --
-Some authors
+*Modeling relational to graph*
 
-[circle]
-- Edgar Allen Poe
-- Sheri S. Tepper
-- Bill Bryson
+Many applications' data is modeled as relational data. +
+There are some similarities between a relational model and a graph model
 --
 
-[.is-half.right-column]
 --
 A normal paragraph.
 Line breaks are not preserved.
@@ -186,18 +157,8 @@ Line breaks are not preserved.
 A blank line separates paragraphs.
 --
 
-[.half.left.gold,transition="fade-in fade-out"]
-== !
+== Table
 
-[.is-half.left-column.has-dark-background]
---
-*Modeling relational to graph*
-
-Many applications' data is modeled as relational data. +
-There are some similarities between a relational model and a graph model
---
-
-[.is-half.right-column]
 --
 [cols="<.^,<.^", options="header",stripes="none"]
 |====
@@ -218,29 +179,9 @@ There are some similarities between a relational model and a graph model
 |====
 --
 
-[.half.right.purple,transition="fade-in fade-out"]
-== !
-
-[.is-half.left-column]
---
-video::Nb9tSFVrQuc[youtube,width=560,height=315,pdfwidth=100%]
---
-
-[.is-half.right-column.has-dark-background]
---
-Ordered list
-
-. Step 1
-. Step 2
-.. Step 2a
-.. Step 2b
-. Step 3
---
-
 [.quiz]
 == Check your understanding (quiz)
 
-[transition="fade-in"]
 == Quiz
 
 [.statement]
@@ -249,8 +190,6 @@ _Customer_ nodes can have other relationships with _Product_ nodes.
 A _Customer_ node has a property named _customerName_.
 A _Product_ node has a property named _productName_.
 What Cypher query do you execute to return all of the products (by name) bought by customer 'ABCCO'.
-
-Select the correct answer.
 
 [%interactive.answers]
 - [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
