@@ -79,10 +79,6 @@ In this exercise, you will build a binary classifier to predict co-authorships u
 
 Launch the *04_Predictions.ipynb* notebook and follow the steps in this exercise.
 
-//++++
-//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/04_Predictions.ipynb">Exercise 2</a>
-//++++
-
 [.quiz]
 == Check your understanding
 

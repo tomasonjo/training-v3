@@ -34,23 +34,14 @@ You will write recommendation queries to *suggest potential collaborators*.
 
 Open the *03_Recommendations_Part1.ipynb* notebook and perform the steps of the exercise.
 
-//++++
-//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/03_Recommendations_Part1.ipynb">Exercise 1</a>
-//++++
-
 Once you have attempted the exercises, you can see the answers by launching the *03_Recommendations_Part1_Solutions.ipynb* notebook.
-
-//++++
-//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/03_Recommendations_Part1_Exercises.ipynb">See answers</a>
-//++++
-
 
 == PageRank and Personalized PageRank
 
-PageRank is an algorithm that measures the *transitive* influence or connectivity of nodes.
+https://neo4j.com/docs/graph-data-science/current/algorithms/page-rank/[PageRank] is an algorithm that measures the *transitive* influence or connectivity of nodes.
 It can be computed by either iteratively distributing one node's rank (originally based on degree) over its neighbors or by randomly traversing the graph and counting the frequency of hitting each node during these walks.
 
-Personalized PageRank (PPR) is a variant of this algorithm that is biased towards a set of source nodes.
+https://neo4j.com/docs/graph-data-science/current/algorithms/page-rank/#algorithms-page-rank-examples-personalised[Personalized PageRank (PPR)] is a variant of this algorithm that is biased towards a set of source nodes.
 It is often used as part of building recommendation systems.
 
 == Exercise 2: Article recommendations with Personalized PageRank
@@ -58,10 +49,6 @@ It is often used as part of building recommendation systems.
 In this exercise, you will gain experience using the PageRank algorithm, understand the difference between PageRank and PPR, and use PPR to *suggest relevant articles* to an author.
 
 Launch the *03_Recommendations_Part2.ipynb* notebook and perform the steps of the exercise.
-
-//++++
-//<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v2/blob/master/Courses/DataScience/notebooks/03_Recommendations_Part2.ipynb">Exercise 2</a>
-//++++
 
 [.quiz]
 == Check your understanding
