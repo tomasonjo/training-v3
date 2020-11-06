@@ -9,16 +9,14 @@
 :page-layout: training
 :page-quiz:
 
+ifndef::env-slides[]
 == About this module
 
-[.notes]
---
 Cypher is the query language you use to retrieve data from the Neo4j Database, as well as create and update the data.
---
+
 
 At the end of this module, you should be able to write Cypher statements to:
-[.small]
---
+
 [square]
 * Retrieve nodes from the graph.
 * Filter nodes retrieved using labels and property values of nodes.
@@ -29,49 +27,170 @@ Throughout this training, you should refer to:
 [square]
 * https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
 * http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+
+endif::[]
+
+ifdef::env-slides[]
+== In this module you'll learn ...
+How to write Cypher statements to:
+
+[square]
+* Retrieve nodes from the graph.
+* Filter nodes retrieved using labels and node property values.
+* Retrieve node property values.
+* Filter retrieved nodes using relationships.
+
+Additional information is available from these sources:
+
+[square]
+* Neo4j Cypher Manual     (https://neo4j.com/docs/cypher-manual/current/)
+* Cypher Reference card   (https://neo4j.com/docs/cypher-refcard/current/)
+
+
+[.instructor-notes]
 --
+We’ll be starting slow and building up as we go.
+
+* We’ll be looking at how to *retrieve nodes* from a *graph*,
+* How to *filter* the *nodes* using *labels* and *properties*.
+* How to *retrieve* node *properties* as output.
+* And finally, how to use nodes and relationships together -
+** to retrieve - complex structures that can be narrowly define.
+
+Before we can do any of that,
+
+* we need to talk a little bit about *Cypher*.
+
+*<Show the students ...>*
+
+ Neo4j Developer Manual:  https://neo4j.com/docs/cypher-manual/current/
+ Cypher RefCard: https://neo4j.com/docs/cypher-refcard/current/
+
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== What is Cypher?
+endif::[]
 
 == What is Cypher?
 
-[.notes]
---
+ifndef::env-slides[]
 Cypher is a declarative query language that allows for expressive and efficient querying and updating of graph data.
 Cypher is a relatively simple and very powerful language.
 Complex database queries can easily be expressed through Cypher, allowing you to focus on your domain instead of getting lost in the syntax of database access.
 
 Cypher is designed to be a human-friendly query language, suitable for both developers and other professionals.
 The guiding goal is to make the simple things easy, and the complex things possible.
---
+endif::[]
 
 ifdef::env-slides[]
 [square]
-* Declarative query language.
-* Query the graph.
-* Update the graph.
-* Easily-understood syntax.
+* Declarative query language
+** Focus on what and not how to retrieve data
+* Used to:
+** Query the graph
+** Update the graph
+* Easily-understood syntax
+* Runs in the database instance
+
+[.instructor-notes]
+--
+*Cypher* is a relatively simple and very powerful language.
+
+* It’s used for querying and updating of graph data.
+* Cypher is designed to be a human-friendly query language,
+** suitable for both developers and other professionals.
+* Cypher runs in the Neo4j database instance.
+
+
+Cypher is a *declarative query language*.
+
+* That is, - it focuses on *what* to retrieve and *not* how it is retrieved.
+* By comparison to SQL, -
+** In SQL - you can ask the same question using the same functions in a couple of different variations, -
+** and you could get different performance and potentially a different answers.
+* This is not the case when using Cypher.
+
+Using Cypher ... you can ask the same question in three or four different ways;
+
+* and you will get - not only the the *same answer* -
+** but also *exactly the same processing steps*, which take place behind the scenes.
+* This makes Cypher a much friendlier language for the developers - relative to SQL.
+* We’ll see some examples of this as we go through the course.
+
+However, Cypher will not be entirely unfamiliar for those that have used SQL.
+
+* It uses a syntax that is broadly recognizable to those who use SQL.
+* It has keyword operators followed by arguments and some of those operators are the same.
+* For example, Cypher has *clauses* named *WHERE* and *WITH*.
+
+Complex database queries can easily be expressed through Cypher, -
+
+* allowing you to focus on your domain -
+* instead of getting lost in the syntax of database access.
+
+Cypher is a proprietary Neo4j language.
+
+* *Neo4j* is one of the interested parties in developing *ANSI standard* for *graph databases*.
+** (While it is not a available, it does have a name GQL (g-qual).)
+* Neo4j is pushing for *Cypher* to be - largely - the basis of that language.
+* However, for now it's just something that we provide as as part of Neo4j.
+
+(The guiding goal is to make the simple things easy, and the complex things possible.)
+
+--
 endif::[]
 
 === Cypher is ASCII art
 
+ifndef::env-slides[]
 Optimized for being read by humans, Cypher's construct uses English prose and iconography (called ASCII Art) to make queries more self-explanatory.
+endif::[]
+
+ifdef::env-slides[]
+Cypher's constructs use *English prose* and *iconography*.
+endif::[]
+
+image::AsciiArtImage.png[AsciiArtImage,width=150,align=center]
 
 image::AsciiArt.png[AsciiArt,width=600,align=center]
 
 
-=== Cypher to express what to retrieve not how
-
-[%unbreakable]
+ifdef::env-slides[]
+[.instructor-notes]
 --
-[.statement]
+Possibly - the most the most central feature of Cypher - is that it is highly visual.
+
+* Cypher is intentionally made to look like ASCII art.
+* It’s optimized for human readability.
+* It makes queries somewhat self-explanatory.
+
+Shown here are two different lines of Cypher that describe -
+
+* a *3 node* - *3 relationship* - graph.
+
+Without me telling you anything about Cypher -
+
+* I imagine that  just by looking at this -
+* you can see that the lines represent the sub-graph shown here.
+
+--
+endif::[]
+
+
+=== Cypher expresses what to retrieve, not how to retrieve it
+
+ifndef::env-slides[]
 Being a declarative language, Cypher focuses on the clarity of expressing *what* to retrieve from a graph, not on *how* to retrieve it.
 You can think of Cypher as mapping English language sentence structure to patterns in a graph.
 For example, the nouns are nodes of the graph, the verbs are the relationships in the graph, and the adjectives and adverbs are the properties.
+endif::[]
 
 image::Nouns.png[Nouns,width=700,align=center]
---
 
-[.notes]
---
+ifndef::env-slides[]
 This is in contrast to imperative, programmatic APIs for database access.
 This approach makes query optimization an implementation detail instead of a burden on the developer, removing the requirement to update all traversals just because the physical database structure has changed.
 
@@ -81,19 +200,80 @@ The pattern matching functionality of Cypher borrows concepts from SPARQL.
 And some of the collection semantics have been borrowed from languages such as Haskell and Python.
 
 The Cypher language has been made available to anyone to implement and use via openCypher (opencypher.org), allowing any database vendor, researcher or other interested party to reap the benefits of our years of effort and experience in developing a first class graph query language.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
 --
+When combining this *visual syntax*, -
 
-== Nodes
+* with *carefully* chosen names for *labels* and *properties* -
+* queries tend to be quite readable.
 
+For example if we read what is shown here - we see -
+
+* I want to find the person named Dan - who married on this date - the person named Ann.
+
+This is in contrast to imperative, programmatic APIs for database access.
+
+Are there any questions - about the abstract features of Cypher before we move on?
+
+*Additional information on Cypher:*
+
+* The pattern matching functionality of Cypher borrows concepts from SPARQL.
+* Some of the collection semantics have been borrowed from languages such as Haskell and Python.
+* The Cypher language has been made available to anyone to implement and use via openCypher (opencypher.org), allowing any database vendor, researcher or other interested party to reap the benefits of our years of effort and experience in developing a first class graph query language.
+
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== Cypher syntax
+endif::[]
+
+[.half-column]
+== Node syntax
+
+ifdef::env-slides[]
+( )
+(p)
+endif::[]
+
+ifndef::env-slides[]
 Cypher uses a pair of parentheses like `()`, `(n)` to represent a node, much like a circle on a whiteboard.
 
 When you specify `(n)` for a node, you are telling the query processor that for this query, use the variable _n_ to represent nodes that will be processed later in the query for further query processing or for returning values from the query.
 
-[.notes]
---
 Recall that a node typically represents an entity in your domain.
+endif::[]
+
+image::NodeSyntaxImage.png[NodeSyntaxImage,width=300,align=center]
+
 An anonymous node, `()`, represents one or more nodes during a query processing where there are no restrictions of the type of node or the properties of the node.
+
+endif::[]
+
+
+ifdef::env-slides[]
+[.instructor-notes]
 --
+Now let’s take a look at *node syntax* in Cypher.
+
+Whenever you are trying to *do something* with a *node* in Cypher.
+
+* The syntax - to *specify a node* - is an *open and closed parentheses*.
+** Two examples are shown here.
+* The parentheses represents a circle used for nodes in a whiteboard diagram -
+** Such as the nodes shown in the diagram here.
+
+Cypher uses a pair of parentheses like (), (n) to represent a node, much like a circle on a whiteboard.
+When you specify (n) for a node, you are telling the query processor that for this query, use the variable n to represent nodes that will be processed later in the query for further query processing or for returning values from the query.
+
+Recall that a node typically represents an entity in your domain. An anonymous node, (), represents one or more nodes during a query processing where there are no restrictions of the type of node or the properties of the node.
+
+--
+endif::[]
 
 == Labels
 
