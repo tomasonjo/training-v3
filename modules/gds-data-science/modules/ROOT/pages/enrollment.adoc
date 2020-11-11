@@ -1,6 +1,6 @@
 = Using a Machine Learning Workflow for Link Prediction
 :slug: gds-data-science
-:description: Learn how to use the Neo4j Graph Data Science Library in a Machine Learning workflow to link prediction
+:description: Learn how to use the Neo4j Graph Data Science Library in a Machine Learning workflow for link prediction
 :page-slug: {slug}
 :page-description: {description}
 :page-layout: training-enrollment
