@@ -13,11 +13,8 @@
 ifndef::env-slides[]
 == About this module
 
-
-[.notes]
---
 Neo4j enables developers to create applications that are best architected as graph-powered systems that are built upon the rich connectedness of data.
---
+
 
 
 At the end of this module, you should be able to:
@@ -59,7 +56,7 @@ endif::[]
 [.one-sixth-five-sixths-row]
 == What is a graph?
 
-A graph is set of discrete objects, each of which has some set of relationships with the other objects
+A *graph* is set of discrete objects, each of which has some set of relationships with the other objects.
 
 ifndef::env-slides[]
 Graphs are a useful way to model data for the purposes of mathematical analysis, and they have been around for quite a long time.
@@ -68,8 +65,7 @@ endif::[]
 
 image::SevenBridges.png[SevenBridges,width=700,align=center]
 
-[.notes]
---
+ifndef::env-slides[]
 Konigsberg, Prussia (now Kaliningrad, Russia) is a city spanning the Pregel River.
 It includes two large islands, which are connected to one another and to the river banks by seven bridges.
 A map of this arrangement is pictured here.
@@ -88,8 +84,7 @@ Euler observed the following:
 *Thus, for the problem to be solvable, every land mass (except the start and end) must be touched by an even number of bridges.
 
 Based on the above observations, the problem has no solution, because all four of the land masses are touched by an odd number of bridges.
-
---
+endif::[]
 
 ifdef::env-slides[]
 [.instructor-notes]
@@ -149,17 +144,21 @@ So why do we care about this?
 --
 endif::[]
 
+[.half-column]
 === Anything can be a graph
 
-[.notes]
---
+ifdef::env-slides[]
+The Internet
+
+A water molecule
+endif::[]
+
+ifndef::env-slides[]
 If graphs are an abstract mathematical tool, why do we care about them?
 
 We care because any dataset can be represented as a graph.
 Any structure or concept, no matter how simple or complex, can be broken down into a set constituent parts that have some relationship to one another.
---
 
-ifndef::env-slides[]
 For example, the Internet can be modeled as a network of computers.
 endif::[]
 
@@ -172,14 +171,13 @@ endif::[]
 image::AWaterMoleculeAsAGraph.png[AWaterMoleculeAsAGraph,width=200,align=center]
 
 
-[.notes]
---
+ifndef::env-slides[]
 And, as Euler showed, there are some clear benefits to representing data in this way.
 We will discuss many of these as we go.
 But mainly, graphs are uniquely useful when answering a question that  involves following a path along a chain of related items.
 
 You will frequently hear Neo4j people refer to such questions as graph problems--and they are surprisingly common in the real world.
---
+endif::[]
 
 ifdef::env-slides[]
 [.instructor-notes]
@@ -310,8 +308,7 @@ image::PropertyGraphNodes.png[PropertyGraphNodes,width=300,align=center]
 * Represent objects or entities.
 * Can be labeled.
 
-[.notes]
---
+ifndef::env-slides[]
 There are two kinds of data that can be associated a node,
 labels and properties.
 
@@ -322,7 +319,7 @@ These labels categorizes these nodes, as a Person or a Car,
 but they don’t provide any specific information about a given node.
 
 Specific information for a node is represented as a properties which you will learn about soon.
---
+endif::[]
 
 ifdef::env-slides[]
 [.instructor-notes]
@@ -756,8 +753,6 @@ image::GraphDatabaseInEnterprise.png[GraphDatabaseInEnterprise,width=800,align=c
 
 A graph database is an online database management system with Create, Read, Update, and Delete (CRUD) operations working on a graph data model.
 
-[.notes]
---
 Graph databases are often used as part of an Enterprise online transaction processing (OLTP) system.
 Accordingly, they are normally optimized for transactional performance, and engineered with transactional integrity and operational availability in mind.
 
@@ -765,7 +760,7 @@ Unlike other databases, relationships take first priority in graph databases.
 This means your application doesn't have to infer data connections using foreign keys or out-of-band processing, such as MapReduce.
 By assembling the simple abstractions of nodes and relationships into connected structures, graph databases enable us to build sophisticated models that map closely to our problem domain.
 Data scientists can use the relationships in a data model to help enterprises make important business decisions.
---
+
 endif::[]
 
 ifndef::env-slides[]
@@ -787,12 +782,10 @@ endif::[]
 
 === Querying using Cypher is intuitive
 
-[.notes]
---
+ifndef::env-slides[]
 If you have ever tried to write a SQL statement with a large number of JOINs, you know that you quickly lose sight of what the query actually does, due to the number of tables that are required to connect the data.
---
+endif::[]
 
-[.statement]
 SQL statement - listing the employees in the IT Department:
 
 [source,SQL,role=nocopy noplay]
@@ -805,10 +798,9 @@ LEFT JOIN Department
 WHERE Department.name = "IT Department"
 ----
 
-[.statement]
 Cypher statement - clean and focused since queries are expressed visually:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)<-[:EMPLOYEE]-(d:Department)
 WHERE d.name = "IT Department"
@@ -838,22 +830,19 @@ We can see from this example how much easier and faster it is to interpret -
 * The benefit of Cypher in this example, is that it’s going to be faster.
 
 
-(Q): Where is the join key in Cypher?
+*Q*: Where is the join key in Cypher?
 
-(A): In Cypher there are no join keys.
+*A*: In Cypher there are no join keys.
 --
 endif::[]
 
 ifndef::env-slides[]
 == Use cases for graph databases
 
-[.notes]
---
 The biggest value that graphs bring to an application is their ability to store relationships and connections as first-class entities.
 
 For instance, the early adopters of graph technology built their businesses around the value of data relationships.
 These companies have now become industry leaders: LinkedIn, Google, Facebook, and PayPal.
---
 
 There are many uses for graph databases in an enterprise.
 Here are some of them:
@@ -866,10 +855,8 @@ endif::[]
 ifndef::env-slides[]
 == Training data model for this course
 
-[.notes]
---
 For this training, we will use a Movies graph to get you started with accessing the data in a Neo4j database.
---
+
 
 The data model is very simple, it includes entities such as:
 
@@ -935,11 +922,8 @@ endif::[]
 ifndef::env-slides[]
 === Initial whiteboard the data model
 
-[.notes]
---
 You can use a whiteboard to better understand the graph data model.
 Stakeholders for an application typically communicate their ideas about how the data will be modeled by drawing bubbles for the entities and directed arrows for the relationships between the entities.
---
 
 image::Whiteboard1.png[Whiteboard1,width=500,align=center]
 
@@ -949,8 +933,6 @@ Here we see that people such as Tom Hanks and Hugo Weaving have acted in the mov
 
 image::Whiteboard2.png[Whiteboard2,width=500,align=center]
 
-[.notes]
---
 Once the graph data model has been agreed-upon, developers then create the nodes with the relationships.
 When nodes and relationships are added to the graph, additional properties are set for nodes and relationships using the property graph modeling capabilities of Neo4j.
 Some properties for nodes should be unique such as the name of a person or the title of a movie.
@@ -960,46 +942,28 @@ Notice that some nodes not only have a Person label, but also have a Actor or Di
 A Person node has a name property and some Person nodes have a born property.
 A Movie node has title and released properties.
 The ACTED_IN relationship has a roles property.
---
 
 As you learn Cypher in this course, you will explore all of these node and relationship types in the graph.
 
 == Exploring graphgists
 
-[.is-half.left-column]
---
-[.statement]
 As a developer just learning Neo4j and Cypher, you will use the very simple Movies graph data model.
 If, however, you are curious about how other developers have created graph data models for Neo4j, you can explore the https://neo4j.com/graphgists/[graphgists page].
---
-[.is-half.right-column]
---
-image::graphgists1.png[Graphgists1,width=500,align=center]
---
 
-[.notes]
---
+image::graphgists1.png[Graphgists1,width=500,align=center]
+
 Graphgists are developed by a wide range of developers from Neo4j and from the Neo4j user community.
 You can explore this site to see how other applications have modeled their data and get an appreciation for what can be done in Neo4j.
---
 
 === Example graphgist
 
-[.is-half.left-column]
---
-[.statement]
 For example, here is the _Exploring a Conference_ graphgist that has a description of the model, how to load the sample data, and how to query the data.
---
-[.is-half.right-column]
---
 
 image::graphgists2.png[Graphgists2,width=700,align=center]
---
-[.notes]
---
+
 As you gain experience with Cypher and think about modeling your application, you should check out some of these graphgists for ideas for how to model your data.
 We recommend that you take our training course, _Graph Data Modeling for Neo4j_, which introduces you to the best practices for modeling data and implementing graph data models in Neo4j.
---
+
 endif::[]
 
 [.quiz]

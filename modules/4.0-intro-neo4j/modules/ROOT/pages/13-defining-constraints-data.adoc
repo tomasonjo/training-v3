@@ -69,7 +69,7 @@ You add a uniqueness constraint to the graph by creating a constraint that asser
 Here is an example for ensuring that the _title_ for a node of type _Movie_ is unique:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT UniqueMovieTitleConstraint ON (m:Movie) ASSERT m.title IS UNIQUE
 ----
@@ -90,7 +90,7 @@ image::AddTitleConstraint.png[AddTitleConstraint,width=500,align=center]
 And if we attempt to create a _Movie_ with the _title_, _The Matrix_, the Cypher statement will fail because the graph already has a movie with that title:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE (:Movie {title: 'The Matrix'})
 ----
@@ -109,7 +109,7 @@ image::UniquenessFailed.png[UniquenessFailed,width=400,align=center]
 In addition, if you attempt to modify the value of a property where the uniqueness assertion fails, the property will not be updated.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie {title: 'The Matrix'})
 SET m.title = 'Top Gun'
@@ -133,7 +133,7 @@ You add an existence constraint to the graph by creating a constraint that asser
 Recall that in the _Movie_ graph, the movie, _Something's Gotta Give_ has no _tagline_ property:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title CONTAINS 'Gotta'
@@ -151,7 +151,7 @@ Here is an example for adding the existence constraint to the _tagline_ property
 
 [%unbreakable]
 --
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ExistsMovieTagline ON (m:Movie) ASSERT exists(m.tagline)
 ----
@@ -175,7 +175,7 @@ The constraint cannot be added to the graph because a node has been detected tha
 We know that in the _Movie_ graph, all _:REVIEWED_ relationships currently have a property, _rating_. We can create an existence constraint on that property as follows:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ExistsREVIEWEDRating
        ON ()-[rel:REVIEWED]-() ASSERT exists(rel.rating)
@@ -195,7 +195,7 @@ So after creating this constraint, if we attempt to create a _:REVIEWED_ relatio
 
 [%unbreakable]
 --
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person), (m:Movie)
 WHERE p.name = 'Jessica Thompson' AND
@@ -218,7 +218,7 @@ You will also see this error if you attempt to remove a property from a node or 
 
 [%unbreakable]
 --
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)-[rel:REVIEWED]-(m:Movie)
 WHERE p.name = 'Jessica Thompson'
@@ -236,7 +236,7 @@ image::ExistenceConstraintFailed2.png[ExistenceConstraintFailed2,width=800,align
 
 You can query for the set of constraints defined in the graph as follows:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL db.constraints()
 ----
@@ -256,7 +256,7 @@ You remove constraints defined for the graph with the `DROP CONSTRAINT` clause.
 Here we drop the existence constraint named _ExistsREVIEWEDRating_:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 DROP CONSTRAINT ExistsREVIEWEDRating
 ----
@@ -279,7 +279,7 @@ Suppose that in our Movie graph, we will not allow a _Person_ node to be created
 Here is an example to create this node key:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT UniqueNameBornConstraint
        ON (p:Person) ASSERT (p.name, p.born) IS NODE KEY
@@ -304,7 +304,7 @@ If we set these properties for all nodes in the graph that do not have _born_ pr
 --
 [.is-half.left-column]
 --
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person) 
 WHERE NOT exists(p.born)
@@ -336,7 +336,7 @@ Any subsequent attempt to create or modify an existing _Person_ node with _name_
 [.statement]
 For example, executing this Cypher statement will fail:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE (:Person {name: 'Jessica Thompson', born: 0})
 ----
@@ -359,7 +359,7 @@ Additionally, every node must contain the properties of the node key.
 [.statement]
 If you attempt to remove a property that is used for a node key:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person {name: 'Jessica Thompson', born: 0})
 REMOVE p.born

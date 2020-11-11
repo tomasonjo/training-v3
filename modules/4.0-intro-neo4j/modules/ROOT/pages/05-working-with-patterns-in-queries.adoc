@@ -33,7 +33,7 @@ ifndef::env-slides[]
 Here is the query to do this:
 endif::[]
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (follower:Person)-[:FOLLOWS]->(reviewer:Person)-[:REVIEWED]->(m:Movie)
 WHERE m.title = 'The Replacements'
@@ -83,7 +83,7 @@ This `MATCH` clause includes a pattern  specified by two paths separated by a co
 
 [.is-half.left-column]
 --
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie), 
       (m)<-[:DIRECTED]-(d:Person)
@@ -116,7 +116,7 @@ When multiple patterns are specified in a `MATCH` clause, no relationship is tra
 
 However, a better way to write this same query would be:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 WHERE m.released = 2000
@@ -143,7 +143,7 @@ To do this, we specify two paths for the `MATCH`:
 --
 
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (keanu:Person)-[:ACTED_IN]->(movie:Movie)<-[:ACTED_IN]-(n:Person),
      (hugo:Person)
@@ -186,7 +186,7 @@ Suppose we want to retrieve the movies that _Meg Ryan_ acted in and their respec
 Here is the query to do this:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (meg:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person),
       (other:Person)-[:ACTED_IN]->(m)
@@ -212,7 +212,7 @@ Here is an example query where multiple `MATCH` clauses are used:
 --
 
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (valKilmer:Person)-[:ACTED_IN]->(m:Movie)
 MATCH (actor:Person)-[:ACTED_IN]->(m)
@@ -252,7 +252,7 @@ image::ValKilmerCoActorsMultipleMatch.png[ValKilmerCoActorsMultipleMatch,width=6
 Here is the same example where multiple patterns are specified in a single `MATCH` clause:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (valKilmer:Person)-[:ACTED_IN]->(m:Movie),
       (actor:Person)-[:ACTED_IN]->(m)
@@ -309,7 +309,7 @@ Here is an example where we want to retrieve all _Person_ nodes that are exactly
 
 [.is-two-thirds.right-column]
 --
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (follower:Person)-[:FOLLOWS*2]->(p:Person)
 WHERE follower.name = 'Paul Blythe'
@@ -339,7 +339,7 @@ Here are simplified syntax examples for how varying length patterns are specifie
 Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_ and beyond:
 
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 (nodeA)-[:RELTYPE*]->(nodeB)
 ----
@@ -347,7 +347,7 @@ Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_
 [.statement]
 Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_ or from _nodeB_ to _nodeA_ and beyond. This is usually a very expensive query so you should place limits on how many nodes are retrieved:
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 (nodeA)-[:RELTYPE*]-(nodeB)
 ----
@@ -357,7 +357,7 @@ Retrieve [.underline]#all# paths of any length with the relationship, _:RELTYPE_
 [.statement]
 Retrieve the paths of length 3 with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_:
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 (node1)-[:RELTYPE*3]->(node2)
 ----
@@ -365,7 +365,7 @@ Retrieve the paths of length 3 with the relationship, _:RELTYPE_ from _nodeA_ to
 [.statement]
 Retrieve the paths of lengths 1, 2, or 3 with the relationship, _:RELTYPE_ from _nodeA_ to _nodeB_, _nodeB_ to _nodeC_, as well as, _nodeC_ to _nodeD) (up to three hops):
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 (node1)-[:RELTYPE*1..3]->(node2)
 ----
@@ -379,7 +379,7 @@ A built-in function that you may find useful in a graph that has many ways of tr
 In this example, we want to discover a shortest path between the movies _The Matrix_ and _A Few Good Men_. In our `MATCH` clause, we set the variable _p_ to the result of calling `shortestPath()`, and then return _p_. In the call to `shortestPath()`, notice that we specify `*` for the relationship. This means any relationship; for the traversal.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH p = shortestPath((m1:Movie)-[*]-(m2:Movie))
 WHERE m1.title = 'A Few Good Men' AND
@@ -427,7 +427,7 @@ In using `shortestPath()`, the return type is a path. A subgraph is essentially 
 For example, here is an example where we want a subgraph of all nodes connected to the movie, _The Replacements_:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH paths = (m:Movie)-[rel]-(p:Person)
 WHERE m.title = 'The Replacements'
@@ -489,7 +489,7 @@ The `OPTIONAL MATCH` is specified to include people who have reviewed movies:
 
 [.is-two-thirds.right-column]
 --
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person)
 WHERE p.name STARTS WITH 'James'
@@ -530,7 +530,7 @@ Estimated time to complete: 30 minutes.
 [.statement]
 Given this Cypher query:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (follower:Person)-[:FOLLOWS]->(reviewer:Person)-[:REVIEWED]->(m:Movie)
 WHERE m.title = 'The Replacements' RETURN follower.name, reviewer.name
@@ -554,7 +554,7 @@ Select the correct answer.
 We want a query that returns a list of people who acted in movies released later than 2005 and for those movies, also return title and released year of the movie, as well as the name of the writer.
 How can you correct this query?
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
       (m)<-[:WROTE]-(w:Person)

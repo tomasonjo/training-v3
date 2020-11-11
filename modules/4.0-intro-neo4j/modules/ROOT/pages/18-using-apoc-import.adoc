@@ -53,7 +53,7 @@ Here are the steps for adding the APOC library to your database server in Neo4j 
 You can confirm in Neo4j Browser that you have APOC available by executing this code:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL dbms.procedures()
 YIELD name WHERE name STARTS WITH "apoc"
@@ -72,7 +72,7 @@ Rather than creating a new database for each attempt, you can completely clear t
 [.statement]
 Here is one way that you can clear the database:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 // Delete all constraints and indexes
 CALL apoc.schema.assert({},{},true);
@@ -149,7 +149,7 @@ A better option might be to:
 Assuming that we will use the second option for importing the data and we have created the uniqueness constraints as before, here is the Cypher code to create the _Person_ and _Movie_ nodes:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT UniqueMovieIdConstraint ON (m:Movie) ASSERT m.id IS UNIQUE;
 CREATE CONSTRAINT UniquePersonIdConstraint ON (p:Person) ASSERT p.id IS UNIQUE;
@@ -197,7 +197,7 @@ APOC has a procedure that will allow you to perform conditional execution, based
 Here is the complete code that utilizes the `apoc.do.when()` procedure, assuming that we have cleared the data from the graph first, but the constraints are still defined.:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS FROM
      'https://data.neo4j.com/v4.0-intro-neo4j/movies2.csv' AS row
@@ -250,7 +250,7 @@ You use this procedure to load large datasets.
 Here is an example with an empty database, but with the constraints defined for the _Person.id_ and _Movie.id_ properties:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL apoc.periodic.iterate(
 "CALL apoc.load.csv('https://data.neo4j.com/v4.0-intro-neo4j/movies2.csv' )
@@ -308,7 +308,7 @@ Your first step should be to become familiar with the data that you want to load
 In this example we call `apoc.load.json` to return 10 questions from StackOverflow so we can view them:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 WITH "https://api.stackexchange.com/2.2/search?page=1&pagesize=5&order=asc&sort=creation&tagged=neo4j&site=stackoverflow&filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS uri
 CALL apoc.load.json(uri)
@@ -334,7 +334,7 @@ image::ExamineJSONData.png[ExamineJSONData,width=600,align=center]
 To help you understand the types of data available for each question, you can return the keys for each row:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 WITH "https://api.stackexchange.com/2.2/search?page=1&pagesize=5&order=asc&sort=creation&tagged=neo4j&site=stackoverflow&filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS uri
 CALL apoc.load.json(uri)
@@ -363,7 +363,7 @@ Here we have made a selection for the data we want to create in the graph and we
 --
 [%unbreakable]
 --
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 WITH "https://api.stackexchange.com/2.2/search?page=1&pagesize=5&order=asc&sort=creation&tagged=neo4j&site=stackoverflow&filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS uri
 CALL apoc.load.json(uri)
@@ -387,7 +387,7 @@ We will use all values, except _owner.display_name_ to create a _Question_ node.
 Here is the code to create the graph:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 WITH "https://api.stackexchange.com/2.2/search?page=1&pagesize=5&order=asc&sort=creation&tagged=neo4j&site=stackoverflow&filter=!5-i6Zw8Y)4W7vpy91PMYsKM-k9yzEsSC1_Uxlf" AS uri
 CALL apoc.load.json(uri)

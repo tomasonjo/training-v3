@@ -37,12 +37,12 @@ As you have learned in the previous lessons, when you query the graph, you often
 
 Here is the simplified syntax for creating a relationship between two nodes referenced by the variables _x_ and _y_:
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 CREATE (x)-[:REL_TYPE]->(y) 
 ----
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 CREATE (x)<-[:REL_TYPE]-(y)
 ----
@@ -61,7 +61,7 @@ In most cases, unless you are connecting nodes at creation time, you will retrie
 Here is an example. We want to connect the actor, _Michael Caine_ with the movie, _Batman Begins_. We first retrieve the nodes of interest, then we create the relationship:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Michael Caine' AND m.title = 'Batman Begins'
@@ -103,7 +103,7 @@ You can create multiple relationships at once by simply providing the pattern fo
 Here is an example where we have already created _Person_ nodes for an actor, _Liam Neeson_, and a producer, _Benjamin Melniker_. We create two relationships in this example, one for _:ACTED_IN_ and one for _:PRODUCED_.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie), (p:Person)
 WHERE a.name = 'Liam Neeson' AND 
@@ -132,7 +132,7 @@ When you create relationships based upon a `MATCH` clause, you must be certain t
 Just as you can create a node with inline properties, you can create a relationship with inline properties.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Katie Holmes' AND m.title = 'Batman Begins'
@@ -154,7 +154,7 @@ You have learned how to create nodes using the `CREATE` clause, and how to find 
 In Cypher, you can combine the creation of the nodes and relationships in a single execution.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
@@ -194,22 +194,22 @@ You can add properties to a relationship, just as you add properties to a node. 
 Here is the simplified syntax for adding properties to a relationship referenced by the variable _r_:
 --
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 SET r.propertyName = value
 ----
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 SET r.propertyName1 = value1 , r.propertyName2 = value2
 ----
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 SET r = {propertyName1: value1, propertyName2: value2}
 ----
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 SET r += {propertyName1: value1, propertyName2: value2}
 ----
@@ -227,7 +227,7 @@ When specify the JSON-style object for assignment to the relationship using `=`,
 Here is an example where we will add the _roles_ property to the _:ACTED_IN_ relationship from _Christian Bale_ to _Batman Begins_ right after we have created the relationship:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Christian Bale' AND m.title = 'Batman Begins'
@@ -255,7 +255,7 @@ If the relationship had multiple properties, we could have added them as a comma
 Alternatively, you can also add properties to a relationship when the relationship is created. Here is another way to create and add the properties for the relationship:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Christian Bale' AND m.title = 'Batman Begins'
@@ -274,7 +274,7 @@ This could be dangerous so in your code make sure that if you use `CREATE` to cr
 You can test to see if the relationship exists before you create it as follows:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person),(m:Movie)
 WHERE a.name = 'Christian Bale' AND
@@ -300,7 +300,7 @@ Suppose we have added the _:ACTED_IN_ relationship between _Christian Bale_ and 
 Here is an example where we remove the _roles_ property, yet keep the _:ACTED_IN_ relationship:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person)-[rel:ACTED_IN]->(m:Movie)
 WHERE a.name = 'Christian Bale' AND m.title = 'Batman Begins'
@@ -336,7 +336,7 @@ Suppose our graph has a _Person_ node for Tom Jones and a _Movie_ node for the m
 We want to connect these two nodes with the _ACTED_IN_ relationship.
 What is wrong with this code?
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'
@@ -357,7 +357,7 @@ Select the correct answer.
 [.statement]
 Given this code, what Cypher clause do you use to add the roles property to the relationship?
 
-[source,cypher]
+[source,Cypher]
 ----
 CREATE (p:Person {name: 'Jack Brown'})
 CREATE (m:Movie {title: 'The Goods'})
@@ -378,7 +378,7 @@ Select the correct answer.
 [.statement]
 Assuming the nodes are successfully retrieved, how many relationships are created?
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'

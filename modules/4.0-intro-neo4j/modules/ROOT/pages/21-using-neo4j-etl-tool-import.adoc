@@ -251,6 +251,7 @@ image::ImportSuccessful.png[ImportSuccessful,width=750,align=center]
 [.notes]
 --
 You will only be able to perform the steps of this exercise if you use Neo4j Desktop.
+
 Estimated time to complete: 10 minutes.
 --
 

@@ -97,7 +97,7 @@ You use the simple `MERGE` clause to:
 Here is the simplified syntax for the `MERGE` clause for creating a node:
 --
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 MERGE (variable:Label{nodeProperties})
 RETURN variable
@@ -115,7 +115,7 @@ Here is what we currently have in the graph for the _Person_, _Michael Caine_.
 This node has values for _name_ and _born_. Notice also that the label for the node is _Person_.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)
 WHERE p.name = 'Michael Caine'
@@ -131,7 +131,7 @@ image::MichaelCaine.png[MichaelCaine,width=500,align=center]
 In this example, we use `MERGE` to find a node with the _Actor_ label with the key property _name_ of _Michael Caine_, and we set the _born_ property to _1933_. Our data model has never used the label, _Actor_ so this is a new entity type in our graph.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MERGE (a:Actor {name: 'Michael Caine'})
 SET a.born = 1933
@@ -176,7 +176,7 @@ If we were to run `MERGE` code again:
 
 [.is-half.right-column]
 --
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MERGE (a:Actor {name: 'Michael Caine'})
 SET a.born = 1933
@@ -199,7 +199,7 @@ The `MERGE` found this node in the graph and did not create a new one.
 
 Here is the syntax for the `MERGE` clause for creating relationships:
 
-[source,syntax,role=nocopy noplay]
+[source,Syntax,role=nocopy noplay]
 ----
 MERGE (variable1:Label1 {nodeProperties1})-[:REL_TYPE]->
 (variable2:Label2 {nodeProperties2})
@@ -216,7 +216,7 @@ If there is an existing node with  _Label1_ and _nodeProperties1_  with the _:RE
 [.statement]
 Here is an example. We currently have the _Person_ node with the _:ACTED_IN_ relationship, but we do not have this relationship with the _Actor_ node.
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p {name: 'Michael Caine'})-[*0..1]-(m)
 RETURN p, m
@@ -233,7 +233,7 @@ image::MichaelCainesAndOneRel.png[MichaelCainesAndOneRel,width=600,align=center]
 [.statement]
 Here is code where we want to create the _:ACTED_IN_ relationship between _Michael Caine_ and the movie _Batman Begins_.
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p {name: 'Michael Caine'}),(m:Movie {title:'Batman Begins'})
 MERGE (p)-[:ACTED_IN]->(m)
@@ -266,7 +266,7 @@ You can use the `MERGE` clause, along with `ON CREATE` to assign specific values
 Here is an example where create a new node, specifying property values for the new node:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MERGE (a:Person {name: 'Sir Michael Caine'})
 ON CREATE SET a.birthPlace = 'London',
@@ -289,7 +289,7 @@ image::CreateSirMichaelCaine.png[CreateSirMichaelCaine,width=1000,align=center]
 [.statement]
 Here is the code to display the nodes that have anything to do with _Michael Caine_.
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p)-[*0..1]-(m)
 WHERE p.name CONTAINS 'Caine'
@@ -309,7 +309,7 @@ You can also specify an `ON MATCH` clause during merge processing.
 If the exact node is found, you can update its properties or labels. Here is an example:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MERGE (a:Person {name: 'Sir Michael Caine'})
 ON CREATE SET a.born = 1934, 
@@ -334,7 +334,7 @@ Using `MERGE` to create relationships is expensive and you should only do it whe
 In this example, we use the `MATCH` clause to find all _Person_ nodes that represent _Michael Caine_ and we find the movie, _Batman Begins_ that we want to connect to all of these nodes. We already have a connection between one of the _Person_ nodes and the _Movie_ node. We do not want this relationship to be duplicated. This is where we can use `MERGE` as follows:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person), (m:Movie)
 WHERE m.title = 'Batman Begins' AND p.name ENDS WITH 'Caine'
@@ -363,7 +363,7 @@ Only if you intentionally want to create a node within the context of another (l
 
 For example:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (fromDate:Date {year: 2018})
 MERGE (toDate:Date {month: 'January'})-[:IN_YEAR]->(fromDate)
@@ -390,7 +390,7 @@ Estimated time to complete: 45 minutes.
 [.statement]
 Given this `MERGE` clause, what is the most important thing you should make sure of?
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MERGE (p:Person {name: 'Jane Doe'})
 SET p.born = 1990
@@ -413,7 +413,7 @@ Given this `MERGE` clause.
 Suppose that the _p_ and _m_ nodes exist in the graph.
 What does this code do?
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p {name: 'Jane Doe'}),(m:Movie {title:'The Good One'})
 MERGE (p)-[:ACTED_IN]->(m)
@@ -435,7 +435,7 @@ Given this `MERGE` clause.
 Suppose that the _p_ and _m_ nodes exist in the graph, but you do not know whether the relationship exists.
 What are your options to process this `MERGE` clause?
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p {name: 'Jane Doe'}),(m:Movie {title:'The Good One'})
 MERGE (p)-[rel:ACTED_IN]->(m)

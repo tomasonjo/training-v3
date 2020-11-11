@@ -30,7 +30,7 @@ At the end of this module, you should be able to write Cypher statements to:
 [.statement]
 Here is an example where we return each actor, the number of movies they acted in, and the titles of the movies:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 RETURN a.name, count(a) AS numMovies,
@@ -63,7 +63,7 @@ All other actors and the aggregated results are filtered out. This type of query
 The `WITH` clause does the counting and collecting, and the intermediate result is used in the subsequent `WHERE` clause to test.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 WITH  a, count(a) AS numMovies, collect(m.title) as movies
@@ -97,7 +97,7 @@ If you have collected a subset of nodes in a query, you can use `UNWIND` to retu
 
 Here is an example:
 --
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
 WITH collect(p) AS actors,
@@ -131,7 +131,7 @@ Here is an example where we retrieve all movies reviewed by a person.
 For a particular movie found, we want the list of directors of the movie so we do a second query, a subquery as follows:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)<-[rv:REVIEWED]-(r:Person)
 WITH m, rv, r
@@ -159,7 +159,7 @@ image::WITH2MATCHES.png[WITH2MATCHES,width=800,align=center]
 Here is another example where we want to find all actors who have acted in at least five movies, and find (optionally) the movies they directed and return the person and those movies.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person)
 WITH p, size((p)-[:ACTED_IN]->()) AS movies
@@ -192,7 +192,7 @@ The set of nodes returned in the `CALL` clause can be used for a subsequent quer
 Here is an example:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL
 {MATCH (p:Person)-[:REVIEWED]->(m:Movie)
@@ -231,7 +231,7 @@ Estimated time to complete: 15 minutes.
 [.statement]
 Given this code snippet, what variables can you use in the `RETURN` clause?
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[r:ACTED_IN]->(m:Movie)
 WITH  a, count(a) AS numMovies
@@ -268,7 +268,7 @@ Select the correct answers.
 [.statement]
 Given this Cypher query, what Cypher clause do you use here to turn the list of movies into rows?
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
 WITH collect(m) AS movies,count(m) AS movieCount, p

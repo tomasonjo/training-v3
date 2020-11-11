@@ -49,7 +49,7 @@ In your Cypher statements, a parameter name begins with the `$` symbol.
 [.statement]
 Here is an example where we have parameterized the query:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = $actorName
@@ -68,7 +68,7 @@ You can set values for Cypher parameters that will be in effect during your sess
 You can set the value of a single parameter in the query editor pane as shown in this example where the value _Tom Hanks_ is set for the parameter `actorName`:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :param actorName => 'Tom Hanks'
 ----
@@ -120,7 +120,7 @@ image::TomCruiseParameter.png[TomCruiseParameter,width=800,align=center]
 You can also use the JSON-style syntax to set [.underline]#all# of the parameters in your Neo4j Browser session. The values you can specify in this object are numbers, strings, and booleans. In this example we set two parameters for our session:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :params {actorName: 'Tom Cruise', movieName: 'Top Gun'}
 ----
@@ -136,7 +136,7 @@ image::SetAllParameters.png[SetAllParameters,width=500,align=center]
 [.statement]
 Here is a different query that uses both of these parameters:
 
-[source,cypher,role= noplay]
+[source,Cypher,role= noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = $actorName AND m.title = $movieName
@@ -156,7 +156,7 @@ If you want to remove an existing parameter from your session, you do so by usin
 
 If you want to clear all parameters, you can simply type:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :params {}
 ----
@@ -198,7 +198,7 @@ Here is an example.
 We have set the _actorName_ and _year_ parameters for our session:
 --
 
-[source,cypher,role=oplay]
+[source,Cypher,role=oplay]
 ----
 :params {actorName: 'Hugo Weaving', year: 2000}
 ----
@@ -215,7 +215,7 @@ image::ActorYearParams.png[ActorYearParams,width=500,align=center]
 Then we execute this Cypher code:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 EXPLAIN MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = $actorName AND
