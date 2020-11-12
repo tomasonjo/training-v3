@@ -121,5 +121,5 @@ Now let's update the application to use this new information.
 Instead of showing reviews based on the date they were written, we want to boost the reviews written by our trusted users.
 
 ifdef::env-guide[]
-pass:a[<a play-topic='{guides}/05.html'>Continue to Exercise 5: Photo recommendations</a>]
+pass:a[<a play-topic='{guides}/05.html'>Continue to Exercise 5: Photo Recommendations</a>]
 endif::[]
