@@ -73,7 +73,7 @@ Update the following query to do this:
 [source, cypher]
 ----
 CALL gds.labelPropagation.write({
-    nodeProjection:<nodel-label>, 
+    nodeProjection:<node-label>, 
     relationshipProjection:<relationship-type>, 
     writeProperty:'partition'})
 ----
@@ -89,7 +89,6 @@ CALL gds.labelPropagation.write({
    nodeProjection:"Photo",
    relationshipProjection:{
       SIMILAR_PHOTO:{
-         type:"SIMILAR_PHOTO",
          orientation:"UNDIRECTED"
       }
    }

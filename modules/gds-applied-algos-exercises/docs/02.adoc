@@ -30,7 +30,7 @@ WITH [
   {item: 9, categories: [11,12,13,14,15]}
 ] AS data
 CALL gds.alpha.similarity.overlap.stream({
-  data:data, nodeProjection:'*', relationshipProjection:'*'})
+  data:data})
 YIELD item1, item2, similarity
 RETURN item1, item2, similarity
 ORDER BY similarity DESC
@@ -49,7 +49,6 @@ Update the query (copied from the documentation) to:
 
 * Compute similarity between categories based on the business tagged with that category (Hint: you'll need to use the `IN_CATEGORY` relationship)
 * Choose a similarity cut off value (Hint: look at the `similarityCutOff` parameter)
-* Define the node and relationship projection (Hint: look at the `nodeProjection` and `relationshipProjection` parameters)
 
 [source,cypher]
 ----
@@ -81,8 +80,7 @@ WITH collect(userData) as data
 
 CALL gds.alpha.similarity.overlap.write({
   data: data, writeRelationshipType: 'NARROWER_THAN',
-  similarityCutoff: 0.75, nodeProjection:'*',
-  relationshipProjection:'*'
+  similarityCutoff: 0.75
 })
 
 YIELD nodes, similarityPairs, p50, p75, p90, p99
@@ -113,7 +111,7 @@ RETURN path
 LIMIT 10
 ----
 
-Now that we've computed relationships between categories, let's go back to the CodeSandbox and update the application to only return top level categories.
+Now that we've computed relationships between categories, let's go back and update the React application to only return top level categories.
 
 NOTE: Top level categories don't have an outgoing `NARROWER_THAN` relationship.
 
