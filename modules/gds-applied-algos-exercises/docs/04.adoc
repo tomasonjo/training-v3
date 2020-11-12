@@ -1,62 +1,124 @@
-= Ordering Search Results
+= Finding relevant reviews
 
-== Ordering Search Results
+== Finding relevant reviews
 
-We want to work out which users are similar to each other so that we can show more appropriate businesses at the top of the list.
-In this section we'll learn how to use the Pearson Similarity algorithm to do this.
+We want to return relevant reviews for a business based on the user's context.
+In this section we'll learn how to use the Personalized PageRank algorithm to do this.
 
-The Pearson Similarity algorithm takes into account not only the overall similarity between users, but also their relative similarity.
+The Personalized PageRank allows us to find influential nodes in a certain part of our graph.
+We'll be using it to find influential users so that we can boost the reviews written by those users.
 
-== User Similarity
+== Pre-load reviews graph
 
-The query below provides a template for computing the Pearson Similarity of users based on the businesses that they've reviewed.
-Update the query to:
+We're going to run the algorithm on a projected graph of users that have written reviews about the same businesses.
 
-* Compute similarity between users based on the common businesses they've reviewed (Hint: you'll need to use the `WROTE` and `REVIEWS` relationships)
-* Choose a similarity cut off value (Hint: look at the `similarityCutOff` parameter)
-* Choose a topK value (Hint: look at the `topK` parameter)
-* Define the node and relationship projection (Hint: look at the `nodeProjection` and `relationshipProjection` parameters)
-
-[source,cypher]
-----
-CALL gds.alpha.similarity.pearson(
-  {data: "MATCH (u:User)
-   WHERE size((u)-[:WROTE]->()) > 15
-   // Fill in this part of the query
-
-   RETURN id(u) AS item, id(business) AS category, review.stars AS weight",
-   graph: "cypher", skipValue: gds.util.NaN(),
-   writeRelationshipType:'SIMILAR'})
-----
-
-== Answer: User Similarity
-
-This is what the query should look like:
+First, we'll select only users who have written more than 10 reviews and add a `Reviewer` label to those nodes:
 
 [source, cypher]
 ----
-CALL gds.alpha.similarity.pearson.write({
-  data: "MATCH (u:User)
-  WHERE size((u)-[:WROTE]->()) > 15
-  MATCH (u)-[:WROTE]->(review)-[:REVIEWS]->(b)
-  RETURN id(u) AS item, id(b) AS category, review.stars as weight",
-  graph: "cypher", topK: 5, skipValue: gds.util.NaN(),
-  similarityCutoff: 0.1, writeRelationshipType:'SIMILAR',
-  nodeProjection:'*', relationshipProjection:'*'})
+MATCH (u:User) WHERE SIZE( (u)-[:WROTE]->() ) > 10
+SET u:Reviewer
 ----
 
-We want to use this similarity graph to improve the reviews that we show on our application.
-We can find similar users by following the `SIMILAR` relationship from a user:
+Then, we'll pre-load the in-memory named graph using the following query as we want to run the algorithm multiple times for different users:
+
+[source, cypher]
+----
+CALL gds.graph.create.cypher('review-graph',
+  'MATCH (u:Reviewer) RETURN id(u) AS id',
+  'MATCH (u:Reviewer)-[:WROTE]->()-[:REVIEWS]->()<-[:REVIEWS]-()<-[:WROTE]-(u2:Reviewer)
+   RETURN id(u) AS source, id(u2) AS target, count(*) AS weight');
+----
+
+When we run our algorithms procedures we'll need to pass in the first parameter `"review-graph"` to have the procedure run against this named graph.
+
+== Trusted users
+
+We're going to run the algorithm in the context of a specific user, so let's first define the `userId` parameter:
+
+[source, cypher]
+----
+:params userId => "Lk70TsLeGBYSXsnr5q-cXg"
+----
+
+The query below provides a template for computing Personalized PageRank for our user, where the `sourceNodes` are the users who have reviewed more than one same business as our user.
+Update the query to:
+
+* Run the algorithm against our `review-graph`
+* Use the source nodes computed in the first part of the query
+* Create a relationship between our user and the users returned from the procedure
 
 [source,cypher]
 ----
-MATCH (me:User {id: $userId})-[similarity:SIMILAR]->(other)
-RETURN other, similarity.score AS similarity
-ORDER BY similarity DESC
+// Compute source nodes
+MATCH (u:User {id: $userId})-[:WROTE]->()-[:REVIEWS]->()<-[:REVIEWS]-()<-[:WROTE]-(other)
+WITH u, other, count(*) AS count
+WHERE count > 1
+WITH u, collect(other) AS sourceNodes
+
+// Execute the PageRank algorithm
+CALL gds.pageRank.stream('review-graph', {
+  maxIterations:5,
+})
+
+// Only keep users that have a PageRank score bigger than the default
+YIELD nodeId, score
+WITH u, gds.util.asNode(nodeId) AS node, score
+WHERE score > 0.15 AND node <> u
+
+// Keep up to 50 users
+WITH u, node, score
+ORDER BY score DESC
+LIMIT 50
+
+// Create a relationship between our user (u) and the influential users (node)
+----
+
+== Answer: Trusted users
+
+This is what the answer should look like:
+
+[source,cypher]
+----
+// Compute source nodes
+MATCH (u:User {id: $userId})-[:WROTE]->()-[:REVIEWS]->()<-[:REVIEWS]-()<-[:WROTE]-(other)
+WITH u, other, count(*) AS count
+WHERE count > 1
+WITH u, collect(other) AS sourceNodes
+
+// Execute the PageRank algorithm
+CALL gds.pageRank.stream('review-graph', {
+  maxIterations:5, sourceNodes: sourceNodes
+})
+
+// Only keep users that have a PageRank score bigger than the default
+YIELD nodeId, score
+WITH u, gds.util.asNode(nodeId) AS node, score
+WHERE score > 0.15 AND node <> u
+
+// Keep up to 50 users
+WITH u, node, score
+ORDER BY score DESC
+LIMIT 50
+
+// Create a relationship between our user (u) and the influential users (node)
+MERGE (u)-[trust:TRUSTS]->(node)
+SET trust.score = score
+----
+
+== Find trusted users
+
+Now we can find the other users that our user trusts by executing the following query:
+
+[source,cypher]
+----
+MATCH (u:User {id: $userId})-[trusts:TRUSTS]->(other)
+RETURN other.name, other.id, trusts.score AS score
+ORDER BY score DESC
 ----
 
 Now let's update the application to use this new information.
-Instead of selecting our businesses based on the opinions of users unrelated to `user-name`, we'll show ones reviewed by similar users.
+Instead of showing reviews based on the date they were written, we want to boost the reviews written by our trusted users.
 
 ifdef::env-guide[]
 pass:a[<a play-topic='{guides}/05.html'>Continue to Exercise 5: Photo Recommendations</a>]
