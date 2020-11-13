@@ -1,6 +1,6 @@
 = Basic Neo4j 4.0 Administration
 :slug: basic-neo4j-admin-40
-:description: Learn how create a database for a graph data model and evolve the graph.
+:description: Learn basic Neo4j administration to manage Neo4j instances
 :page-slug: {slug}
 :page-description: {description}
 :page-layout: training-enrollment

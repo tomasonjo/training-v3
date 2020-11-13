@@ -124,7 +124,7 @@ You can install Jupyter Notebook with:
 pip install notebook
 ----
 
-If you successfuly installed Jupyter Notebook, you can run the following command at the Terminal (Mac/Linux) or Command Prompt (Windows) to open Jupyter Notebook:
+If you successfully installed Jupyter Notebook, you can run the following command at the Terminal (Mac/Linux) or Command Prompt (Windows) to open Jupyter Notebook:
 
 [source,shell,role=noplay]
 ----
