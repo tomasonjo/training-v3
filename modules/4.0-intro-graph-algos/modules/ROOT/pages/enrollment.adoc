@@ -6,6 +6,7 @@
 :page-layout: training-enrollment
 :page-course-duration: 5 hrs
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroGraphAlgos-40.jpg
+:page-course-label: New
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroGraphAlgos-40_withTitle.jpg[]
 
