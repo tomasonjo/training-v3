@@ -145,7 +145,7 @@ Select the correct answer.
 How is the Jaccard similarity score calculated?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [x] intersection of two sets divided by the union of sets

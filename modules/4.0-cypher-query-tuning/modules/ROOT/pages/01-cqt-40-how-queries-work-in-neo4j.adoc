@@ -1034,7 +1034,7 @@ Select the correct answer.
 By default, when is the index selectivity information for a graph updated?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [ ] Whenever a node is added to the graph.
