@@ -1,6 +1,6 @@
 = Data Science with Neo4j
 :slug: data-science
-:description: Learn about doing Data Science and Machine Learning with Neo4j
+:description: Learn about doing Data Science and Machine Learning with Neo4j 3.5
 :page-slug: {slug}
 :page-description: {description}
 :page-layout: training-enrollment
