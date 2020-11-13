@@ -24,8 +24,8 @@ At the end of this module, you should be able to write Cypher statements to:
 * Delete a relationship.
 * Delete a node and its relationships.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Deleting nodes
 

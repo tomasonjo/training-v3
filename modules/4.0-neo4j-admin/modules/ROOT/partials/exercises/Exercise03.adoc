@@ -44,7 +44,7 @@ image::ShowInitialDatabasesDocker.png[ShowInitialDatabasesDocker,width=1000,alig
 :use neo4j
 ----
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CREATE (:Person {name: '<your name'});
 ----
@@ -55,7 +55,7 @@ image::CreatePersonDocker.png[CreatePersonDocker,width=1000,align=center]
 [start=7]
 . Enter this Cypher statement to retrieve the node you just created:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person) RETURN p;
 ----
@@ -65,7 +65,7 @@ image::FindPersonDocker.png[FindPersonDocker,width=1000,align=center]
 [start=8]
 . Enter this Cypher statement to delete the node you just created:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person) DELETE p;
 ----
@@ -130,7 +130,7 @@ type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell -u n
 
 . Execute these statements to confirm that the data was loaded into the user database:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL db.schema.visualization();
 MATCH (p:Person) WHERE p.name = 'Tom Hanks' RETURN p;

@@ -11,7 +11,7 @@ image::AfterExercise3.png[AfterExercise3,width=300,role=left]
 
 *If your database does not have the same nodes and relationships, you can execute these Cypher statements to reset your graph to what it should be before you start this exercise:*
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise_3.cypher[]
 ----
@@ -41,7 +41,7 @@ Go to the next page to start this exercise.
 
 *Write and execute the Cypher code to profile the query to retrieve all flights  that land in Las Vegas (LAS)?*
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (origin:Airport)-
@@ -66,7 +66,7 @@ This query does return 13 nodes and 268 relationships so getting the number of d
 
 *Write and execute the Cypher code to profile the query to retrieve all flights for airline 'WN' with flight number '1016'?*
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)

@@ -120,7 +120,7 @@ image::{imagedir}/extending-neo4j.png[Extending Neo4j]
 
 == Procedures - Usage
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.labels()
 ----
@@ -135,32 +135,32 @@ CALL db.labels()
 == Procedures - Usage
 
 .Shortcut for non-arg procedures
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.labels;
 ----
 
 .Arguments in parentheses
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.labels();
 ----
 
 .Deal with results
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.labels() YIELD label RETURN count(label);
 ----
 
 .Filter results
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.labels() YIELD label WHERE label START WITH 'db.' RETURN *;
 ----
 
 == Listing procedures
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL dbms.procedures()
 YIELD name, signature, description
@@ -360,7 +360,7 @@ https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
 == Answer: Use Text Functions
 
 .Return movie titles in ALL CAPS
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m:Movie)
 return m.title, apoc.text.toUpperCase(m.title)
@@ -369,7 +369,7 @@ return m.title, apoc.text.toUpperCase(m.title)
 == Answer: Use Text Functions
 
 .Find the top 10 people with similar names based on Levenshtein distance
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p1:Person), (p2:Person)
 WHERE p1 <> p2 AND id(p1) < id(p2)
@@ -381,7 +381,7 @@ LIMIT 10
 == Answer: Use Text Functions
 
 .Return a `;` delimited list of all people whose name starts with "Tom"
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)
 WHERE p.name STARTS WITH "Tom"
@@ -409,7 +409,7 @@ https://neo4j.com/docs/labs/apoc/current/misc/text-functions/
 
 Starting from this query:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
 WHERE movie.title CONTAINS "Matrix"
@@ -426,7 +426,7 @@ RETURN movie.title, collect(person) AS people
 == Answer: Use Collection Functions
 
 .Sort the `people` collection by the `name` property, in descending order
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
 WHERE movie.title CONTAINS "Matrix"
@@ -436,7 +436,7 @@ RETURN movie.title, apoc.coll.sortNodes(collect(person), "name")
 == Answer: Use Collection Functions
 
 .Sort the `people` collection by the `born` property, in ascending order
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
 WHERE movie.title CONTAINS "Matrix"
@@ -446,7 +446,7 @@ RETURN movie.title, apoc.coll.sortNodes(collect(person), "^born")
 == Answer: Use Collection Functions
 
 .Remove `movie.title` and make the `people` collection unique. Once you've done that break the collection up into sub lists of size 2.
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
 WHERE movie.title CONTAINS "Matrix"
@@ -474,7 +474,7 @@ https://neo4j.com/docs/labs/apoc/current/data-structures/map-functions/
 
 Starting from this query:
 
-[source,cypher]
+[source,Cypher]
 ----
 :param document =>  ({
   title: "Frozen",
@@ -495,7 +495,7 @@ Starting from this query:
 == Answer: Use Collection Functions
 
 .Clean the `$document` map to remove the `budget` property
-[source,cypher]
+[source,Cypher]
 ----
 RETURN apoc.map.clean($document, ["budget"], [])
 ----
@@ -503,7 +503,7 @@ RETURN apoc.map.clean($document, ["budget"], [])
 == Answer: Use Collection Functions
 
 .Create a `Movie` node, but remove the `budget` property
-[source,cypher]
+[source,Cypher]
 ----
 WITH apoc.map.clean($document, ["budget"], []) AS properties
 CREATE(m:Movie)
@@ -514,7 +514,7 @@ RETURN m
 == Answer: Use Collection Functions
 
 .Return the list of values in the map for the `title`, `released`, and `tagline` properties
-[source,cypher]
+[source,Cypher]
 ----
 RETURN apoc.map.values($document, ["released", "title", "tagline"])
 ----
@@ -522,7 +522,7 @@ RETURN apoc.map.values($document, ["released", "title", "tagline"])
 == Answer: Use Collection Functions
 
 .Create a `Movie` node, keeping only the `title`, `released`, and `tagline` properties
-[source,cypher]
+[source,Cypher]
 ----
 WITH ["released", "title", "tagline"] AS keys
 WITH keys, apoc.map.values($document, keys) AS values
@@ -564,12 +564,12 @@ https://neo4j.com/docs/labs/apoc/current/import/load-json/
 
 == Data Import: StackOverflow
 
-[source,cypher]
+[source,Cypher]
 ----
 :param url => ("http://example-data.neo4j.org/so/so_neo4j_1.json")
 ----
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.load.json($url) YIELD value
 UNWIND value.items AS item
@@ -619,7 +619,7 @@ MERGE (tag:Tag {name:tagName}) MERGE (q)-[:TAGGED]->(tag));
 
 == Temporal Data Formatting
 
-[source,cypher]
+[source,Cypher]
 ----
 RETURN apoc.temporal.format(
 datetime(),
@@ -627,7 +627,7 @@ datetime(),
 )
 ----
 
-[source,cypher]
+[source,Cypher]
 ----
 RETURN apoc.temporal.formatDuration(
 duration.between(datetime(),date()),
@@ -648,7 +648,7 @@ https://neo4j.com/docs/labs/apoc/current/temporal/temporal-conversions/
 == Answer: Querying StackOverflow
 
 .Return the following properties of `Question` nodes: `title`, `lastActivityDate`, and `creationDate`, with dates formatted in `yyyy/MM/dd HH:mm:ss` format
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (q:Question)
 RETURN q.title,
@@ -659,7 +659,7 @@ RETURN q.title,
 == Answer: Querying StackOverflow
 
 .Calculate the duration between `lastActivityDate` and `creationDate`, and return it in `HH:mm` format
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (q:Question)
 WITH q, duration.between(q.creationDate,q.lastActivityDate) AS duration
@@ -670,26 +670,26 @@ RETURN q.title,
 == Conditional Cypher execution
 
 .Read Only Queries
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.when(condition, ifQuery, elseQuery, paramMap)
 YIELD value
 ----
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.case([condition, query, condition, query, ... ], elseQuery, paramMap)
 YIELD value
 ----
 
 .Write Queries
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.do.when(condition, ifQuery, elseQuery, paramMap)
 YIELD value
 ----
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.do.case([condition, query, condition, query, ... ], elseQuery, paramMap)
 YIELD value
@@ -766,7 +766,7 @@ apoc.date.expireIn(node, time, unit)
 
 Background job (every 60s - configurable) that runs:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (n:TTL)
 WHERE n.ttl > timestamp()
@@ -776,7 +776,7 @@ DETACH DELETE n
 
 == Background Operations
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.trigger.add(name, statement,{phase:before/after})
 yield name, statement, installed
@@ -821,7 +821,7 @@ https://neo4j.com/docs/labs/apoc/current/export/
 
 == Data Export - CSV
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.export.csv.all("all.csv", {})
 ----
@@ -869,35 +869,35 @@ Customized path expansion from start node(s)
 
 [.small]
 .The original, when you don’t need much customization
-[source,cypher]
+[source,Cypher]
 ----
 expand(startNode(s), relationshipFilter, labelFilter, minLevel, maxLevel) YIELD path
 ----
 
 [.small]
 .Most flexible, rich configuration map
-[source,cypher]
+[source,Cypher]
 ----
 expandConfig(startNode(s), configMap) YIELD path
 ----
 
 [.small]
 .Only distinct nodes, don't care about paths
-[source,cypher]
+[source,Cypher]
 ----
 subgraphNodes(startNode(s), configMap) YIELD node
 ----
 
 [.small]
 .Only one distinct path to each node
-[source,cypher]
+[source,Cypher]
 ----
 spanningTree(startNode(s), configMap) YIELD path
 ----
 
 [.small]
 .Only distinct nodes and all rels between them
-[source,cypher]
+[source,Cypher]
 ----
 subgraphAll(startNode(s), configMap) YIELD nodes, relationships
 ----
@@ -977,7 +977,7 @@ What if we already have the nodes that should end the expansion?
 
 [.small]
 .get all connected nodes reachable from Keanu Reeves
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (k:Person {name:'Keanu Reeves'})
 CALL apoc.path.subgraphNodes(k, {}) YIELD node
@@ -986,7 +986,7 @@ RETURN node
 
 [.small]
 .now see the paths used to obtain those results
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (k:Person {name:'Keanu Reeves'})
 CALL apoc.path.spanningTree(k, {}) YIELD path
@@ -995,7 +995,7 @@ RETURN path
 
 [.small]
 .just get the movies reachable from Keanu Reeves
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (k:Person {name:'Keanu Reeves'})
 CALL apoc.path.subgraphNodes(k, {labelFilter:'>Movie'}) YIELD node as movie
@@ -1004,7 +1004,7 @@ RETURN movie
 
 [.small]
 .get the local subgraph of all nodes and rels within 3 hops of Keanu Reeves, actors only
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (k:Person {name:'Keanu Reeves'})
 CALL apoc.path.subgraphAll(k, {maxLevel:3, relationshipFilter:'ACTED_IN'}) YIELD nodes, relationships
@@ -1016,7 +1016,7 @@ RETURN nodes, relationships
 
 Switch back to the default database and add `Reviewer` labels:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (rev:Person)
 WHERE (rev)-[:REVIEWED]->()

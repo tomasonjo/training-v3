@@ -19,7 +19,7 @@ Next, you must populate your graph.
 
 Execute this Cypher code to populate the database:
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/initialDatabase.cypher[]
 ----
@@ -94,7 +94,7 @@ image::params.png[params,width=500]
 
 Produce the execution plan for this query:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
 WHERE a.name = $actorName
@@ -109,7 +109,7 @@ How many operators are used?
 
 Produce the execution plan for this query:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
@@ -127,7 +127,7 @@ Answer: 8
 
 Produce the execution plan for this query:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (g:Genre)-[]-(m:Movie)
 WHERE m.title STARTS WITH $lookup
@@ -141,7 +141,7 @@ Are there any eager operators used?
 
 Produce the execution plan for this query:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (g:Genre)-[]-(m:Movie)

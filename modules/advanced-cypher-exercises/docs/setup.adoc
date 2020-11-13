@@ -127,7 +127,7 @@ In Neo4j Browser where you are connected to the database and have loaded the mov
 
 Execute this Cypher statement:
 
-[source,cypher-syntax]
+[source,Cypher-syntax]
 ----
 MATCH (n) RETURN count(n)
 ----
@@ -138,7 +138,7 @@ Next, enter this statement in Neo4j Browser to empty the database as you will st
 
 Execute this Cypher statement:
 
-[source,cypher-syntax]
+[source,Cypher-syntax]
 ----
 MATCH (n) DETACH DELETE n
 ----

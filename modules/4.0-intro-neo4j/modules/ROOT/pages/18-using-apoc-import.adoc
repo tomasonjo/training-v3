@@ -27,8 +27,8 @@ At the end of this module, you should be able to:
 * Use APOC for importing a CSV file.
 * Use APOC for importing a JSON file.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 
 == Installing APOC for use with your graph(s)
@@ -104,7 +104,7 @@ you must do the same when using APOC for the import.
 [.statement]
 Here is an example of the various types of loading procedures you can use in APOC:
 
-image::APOCLOADProcedures.png[APOCLOADProcedures,width=800,align=center]
+image::APOCLOADProcedures.png[APOCLOADProcedures,width=1000,align=center]
 
 == Using APOC for conditional processing
 
@@ -180,7 +180,7 @@ Then the _personData_ collection is unwound so that each element in a row can be
 Everything is in the graph, except for the relationships.
 --
 
-image::APOC-noRelationships.png[APOC-noRelationships,width=400,align=center]
+image::APOC-noRelationships.png[APOC-noRelationships,width=600,align=center]
 
 [.notes]
 --
@@ -190,7 +190,7 @@ This is where APOC can help  you.
 APOC has a procedure that will allow you to perform conditional execution, based upon a value.
 --
 
-== Using APOC for conditional processing
+=== Example: Using APOC for conditional processing
 
 [.notes]
 --
@@ -237,7 +237,7 @@ Certain `apoc` calls cannot end a Cypher query so we place a `RETURN count(*)` a
 Here is the result:
 --
 
-image::DoWhenAPOC.png[DoWhenAPOC,width=400,align=center]
+image::DoWhenAPOC.png[DoWhenAPOC,width=600,align=center]
 
 == Using APOC to import from CSV
 

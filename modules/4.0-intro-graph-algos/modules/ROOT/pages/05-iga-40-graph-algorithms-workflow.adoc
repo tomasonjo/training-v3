@@ -231,7 +231,7 @@ Read more about it in the https://neo4j.com/docs/graph-data-science/current/mana
 Here is a simple example of using Native projection to project a named graph:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL gds.graph.create('graph','Person','HELPS', 
     {nodeProperties:['seed']
@@ -252,7 +252,7 @@ In relationship projection, we define a single relationship type _HELPS_ with it
 Here is a more complex example:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL gds.graph.create('graph',
   ['Person', 'Organization'],
@@ -310,7 +310,7 @@ Using the _labels_ column in return allows you to filter node labels at algorith
 
 Here is an example node query describing all _Person_ and _Organization_ nodes, and returning the internal node id, its label, and the seed property:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (n) WHERE n:Person OR n:Organization
 RETURN id(n) as id, labels(n) as labels, n.seed as seedProperty
@@ -329,7 +329,7 @@ Instead, we have to represent an undirected relationship as two directed relatio
 
 The following relationship query reduces a 2-hop path to a single relationship, effectively representing undirected co-authorship network:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p1:Author)-[:WROTE]->(a:Article)<-[:WROTE]-(p2:Author)
 RETURN id(p1) AS source, id(p2) AS target, 'COWORKER' as type, count(*) AS weight
@@ -344,7 +344,7 @@ Because we use the _count()_ aggregation in the relationship query, we effective
 
 Putting all this information together, we would use the following syntax to project the undirected coauthorship network:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL gds.graph.create.cypher(
     'coauthorship-graph',
@@ -371,7 +371,7 @@ This way, we can find the most influential Twitter users and their community str
 
 ==== Example: Using Cypher projection
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL gds.graph.create.cypher(
     'troll-graph',
@@ -388,7 +388,7 @@ CALL gds.graph.create.cypher(
 If in your analysis you have created named graphs, you can view existing named graphs with the following procedure:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL gds.graph.list()
 ----
@@ -451,7 +451,7 @@ CALL gds.<algo>.<mode>(
 Here is an example of executing the PageRank graph algorithm using the anonymous graph with Native projection:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL gds.pageRank.stream(
   {
@@ -488,7 +488,7 @@ CALL gds.<algo>.<mode>(
 Here is an example of executing the PageRank graph algorithm using the anonymous graph with Cypher projection:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL gds.pageRank.stream(
   {

@@ -33,8 +33,8 @@ At the end of this module, you should be able to:
 ** Drop a full-text schema index.
 --
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Indexes in Neo4j
 
@@ -349,7 +349,7 @@ ifndef::env-slides[]
 With the result:
 endif::[]
 
-image::ManagingIndexes2.png[ManagingIndexes2,width=900,align=center]
+image::ManagingIndexes2.png[ManagingIndexes2,width=400,align=center]
 
 == Dropping a full-text schema index
 
@@ -369,7 +369,7 @@ ifndef::env-slides[]
 With the result:
 endif::[]
 
-image::ManagingIndexes3.png[ManagingIndexes3,width=900,align=center]
+image::ManagingIndexes3.png[ManagingIndexes3,width=400,align=center]
 --
 
 === Confirming dropped indexes

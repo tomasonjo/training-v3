@@ -9,7 +9,7 @@ Before you begin this exercise, you should have this environment:
 
 . If you have not populated the database yet, execute this Cypher code to populate the database:
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/initialDatabase.cypher[]
 ----
@@ -29,7 +29,7 @@ image::InitialDatabase.png[InitialDatabase,width=300]
 [start=4]
 . If using Neo4j Aura, confirm that your settings are at least as large by running this:
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL dbms.listConfig() YIELD name, value
 WHERE name STARTS WITH 'dbms.memory'

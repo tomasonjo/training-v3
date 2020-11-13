@@ -9,7 +9,7 @@ Before you begin this exercise, you should have this environment:
 
 . If you have not populated the database yet, execute this Cypher code to populate the database:
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise4.cypher[]
 ----
@@ -29,7 +29,7 @@ image::InitialDatabase.png[InitialDatabase.,width=300]
 [start=4]
 . If using Neo4j Aura, confirm that your settings are at least as large by running this:
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL dbms.listConfig() YIELD name, value
 WHERE name STARTS WITH 'dbms.memory'
@@ -234,7 +234,7 @@ It finds all movies that are up to three hops away. We don't want any duplicate 
 We also find the directors who directed the movie that is up to 3 hops away from _$actorName_.
 It then returns the data and sorts the data by movie title.
 
-[source,cypher]
+[source,Cypher]
 ----
 :params actorName=>"Keanu Reeves"
 ----

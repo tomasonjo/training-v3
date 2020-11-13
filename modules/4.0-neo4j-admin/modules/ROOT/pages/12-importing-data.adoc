@@ -280,7 +280,6 @@ Select the correct answer.
 [.statement]
 Suppose that part of the import command that you issue to `neo4j-admin` looks like this:
 
-[source]
 ----
 --nodes products_header.csv,products.csv
 ----

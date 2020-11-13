@@ -36,12 +36,12 @@ dbms.backup.listen_address=localhost:6362
 [start=6]
 . Confirm that the movies database has 171 nodes:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :USE movies
 ----
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
@@ -77,7 +77,7 @@ image::BackupSystemDocker.png[BackupSystemDocker,width=1000,align=center]
 . In `cypher-shell` create the _movies_ database that was just restored.
 . Confirm that the _movies_ database has 171 nodes.
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
@@ -102,7 +102,7 @@ type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --da
 [start=15]
 . In `cypher-shell` confirm that the database contains 342 nodes:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----
@@ -136,7 +136,7 @@ type files\movies.cypher | docker exec --interactive neo4j bin/cypher-shell --da
 [start=18]
 . In `cypher-shell` confirm that the database contains 513 nodes:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (n) RETURN count(n);
 ----

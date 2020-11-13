@@ -11,7 +11,7 @@ image:InitialDatabase.png[InitialDatabase,width=300]
 
 If your database does not have this number of nodes and relationships, you can use the script below to reset it:
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/initialDatabase.cypher[]
 ----

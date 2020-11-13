@@ -143,7 +143,7 @@ In addition, weights on nodes and relationships can also be considered.
 The idea is that a single label can quickly become dominant in a densely-connected group of nodes, but it will have trouble crossing a sparsely connected region.
 --
 
-image::label-propagation-explanation.png[Label propagation explanation,width=500, align=center]
+image::label-propagation-explanation.png[Label propagation explanation,width=800, align=center]
 
 [.notes]
 --

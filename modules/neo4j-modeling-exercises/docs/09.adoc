@@ -11,7 +11,7 @@ image::AfterExercise8.png[AfterExercise8,width=150,role=left]
 
 *If your database does not have the same nodes and relationships, you can execute these Cypher statements to reset your graph to what it should be before you start this exercise.*
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise_8.cypher[]
 ----
@@ -39,7 +39,7 @@ Go to the next page to start this exercise.
 
 *Execute this Cypher code to find flights in January, 2019 using general relationships*:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->(originDay:AirportDay),
 (originDay)<-[:ORIGINATES_FROM]-(flight:Flight)
@@ -59,7 +59,7 @@ The query produces 47847 db hits.
 
 *Execute this Cypher code to find flights in January, 2019 using specific relationships*:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})-[:`ON_2019-1-1`|
                 :`ON_2019-1-2`|
@@ -122,7 +122,7 @@ You want to add February, 2019 flight data to the graph.
 
 The file containing the data is *'https://r.neo4j.com/flights_2019_february'*, or copied to your import folder.
 
-[source,cypher]
+[source,Cypher]
 ----
 LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_february' AS row
 
@@ -176,7 +176,7 @@ image::Ex9_LoadFebFlights.png[Ex9_LoadFebFlights,width=1000]
 
 *Write and execute a query to find all flights in February, 2019*
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (originDay:AirportDay)<-[:ORIGINATES_FROM]-(flight:Flight)
 WHERE originDay.date STARTS WITH '2019-2'
@@ -208,7 +208,7 @@ At some point during your application lifecycle, you will want to archive data, 
 
 *1. Export flights with the date of '2019-1-1'.*
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.export.csv.query("MATCH (f:Flight {date: '2019-1-1'})
 RETURN  f.airline AS Airline, f.arrival AS Arrival, f.date AS Date, f.departure AS Departure, f.flightId AS `Flight ID`, f.number AS FlightNumber",'/tmp/flights.csv', {})
@@ -226,7 +226,7 @@ image::Ex9_flights.csv.png[Ex9_flights.csv,width=800]
 
 *2. Delete these flights from the graph*
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (airportDay:AirportDay {date: '2019-1-1'})
 DETACH DELETE airportDay;

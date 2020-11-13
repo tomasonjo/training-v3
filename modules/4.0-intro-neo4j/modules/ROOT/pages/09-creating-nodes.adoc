@@ -25,8 +25,8 @@ At the end of this module, you should be able to write Cypher statements to:
 * Add and remove node properties.
 * Update node properties.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Syntax: Creating nodes
 
@@ -40,7 +40,7 @@ In virtually all cases, the nodes that you create in a graph will be connected t
 
 Here is the simplified syntax for creating a node:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 CREATE (optionalVariable optionalLabels {optionalProperties})
 ----
@@ -174,12 +174,12 @@ You may not know ahead of time what label or labels you want for a node when it 
 Here is the simplified syntax for adding labels to a node:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x:Label         // adding one label to node referenced by the variable x
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x:Label1:Label2	// adding two labels to node referenced by the variable x
 ----
@@ -223,7 +223,7 @@ Perhaps your data model has changed or the underlying data for a node has change
 Here is the simplified syntax for removing a label from a node:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 // remove the label from the node referenced by the variable x
 REMOVE x:Label
@@ -234,7 +234,7 @@ REMOVE x:Label
 Here is the simplified syntax for removing multiple labels from a node:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 // remove the two labels from the node referenced by the variable x
 REMOVE x:Label1, x:Label2
@@ -273,22 +273,22 @@ After you have created a node and have a reference to the node, you can add prop
 Here are simplified syntax examples for adding properties to a node referenced by the variable _x_:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x.propertyName = value
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x.propertyName1 = value1	, x.propertyName2 = value2 
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x = {propertyName1: value1, propertyName2: value2}
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x += {propertyName1: value1, propertyName2: value2}
 ----
@@ -423,12 +423,12 @@ There are two ways that you can remove a property from a node. One way is to use
 Here are simplified syntax examples for removing properties from a node referenced by the variable _x_:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 REMOVE x.propertyName
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET x.propertyName = null
 ----

@@ -217,7 +217,7 @@ All of the above commands are executed as Cypher commands, and the database name
 In particular, the - (dash) character is not legal in Cypher variables, and therefore names with dashes need to be escaped by enclosing with back-ticks.
 For example,
 
-[source,cypher,role= nocopy noplay]
+[source,Cypher,role= nocopy noplay]
 ----
 CREATE DATABASE `main-db`.
 ----

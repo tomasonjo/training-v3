@@ -950,7 +950,7 @@ endif::[]
 [.half-column]
 == Accessing Neo4j Browser
 
-image::StartNeo4jBrowser.png[StartNeo4jBrowser,width=700,align=center]
+image::StartNeo4jBrowser.png[StartNeo4jBrowser,width=500,align=center]
 
 Runs as a graph app from Neo4j Desktop.
 
@@ -985,7 +985,7 @@ endif::[]
 [.half-column]
 == Neo4j Browser
 
-image::Neo4jBrowserFollows.png[Neo4jBrowserFollows,width=700,align=center]
+image::Neo4jBrowserFollows.png[Neo4jBrowserFollows,width=500,align=center]
 
 ifndef::env-slides[]
 Neo4j Browser is a Neo4j-supported tool that enables you to access a Neo4j Database by executing Cypher statements to create or update data in the graph and to query the graph to return data.

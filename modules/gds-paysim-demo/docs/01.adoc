@@ -48,7 +48,7 @@ This module includes the following exercises:
 . Transaction Type Frequency
 
 == Exercise 1: Database Schema
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.schema.visualization();
 ----
@@ -56,31 +56,31 @@ CALL db.schema.visualization();
 image::schema.png[Schema,width=600,align=center]
 
 == Exercise 2: Graph Size
-[source,cypher]
+[source,Cypher]
 ----
 CALL apoc.meta.stats();
 ----
 
 == Exercise 3: Node Label Frequency
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/nodeFrequency.cypher[]
 ----
 
 == Exercise 4: Relationship Type Frequency
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/relationshipFrequency.cypher[]
 ----
 
 == Exercise 5: Nodes & Relationship Properties
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/nodeRelationshipProperties.cypher[]
 ----
 
 == Exercise 6: Transaction Type Frequency
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/transactionFrequency.cypher[]
 ----
@@ -119,12 +119,12 @@ This exercise is composed of the following tasks:
 
 Identifying pairs of clients sharing PII
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/sharingPIIQuery.cypher[]
 ----
 Number of unique clients sharing PII
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/sharingPIIUniqueQuery.cypher[]
 ----
@@ -133,19 +133,19 @@ include::scripts/sharingPIIUniqueQuery.cypher[]
 
 Create a Cypher parameter with a single pair of client sharing PII
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/sharingParam.cypher[]
 ----
 Visualizing their PII
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/sharingPIIExample.cypher[]
 ----
 Calculating the Jaccard Similarity Score
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/onePairSimilarity.cypher[]
 ----
@@ -182,55 +182,55 @@ This exercise is composed of the following tasks:
 . Visualize these big clusters
 
 == Exercise 1, Task 1: WCC Memory Estimation
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/memoryEstimation.cypher[]
 ----
 
 == Exercise 1, Task 2: Loading WCC graph to the Graph Catalog
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/loadWCCNamedGraph.cypher[]
 ----
 
 == Exercise 1, Task 3: Listing graphs in the Graph Catalog
-[source,cypher]
+[source,Cypher]
 ----
 CALL gds.graph.list();
 ----
 
 == Exercise 1, Task 4: WCC Memory Estimating
-[source,cypher]
+[source,Cypher]
 ----
 CALL gds.wcc.stream.estimate('WCC');
 ----
 
 == Exercise 1, Task 5: WCC Descriptive Statistics
-[source,cypher]
+[source,Cypher]
 ----
 CALL gds.wcc.stats('WCC');
 ----
 
 == Exercise 1, Task 6: Using WCC to identify clusters of clients sharing PII
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/wccStream.cypher[]
 ----
 
 == Exercise 1, Task 7: Writing the clusters the database.
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/wccWrite.cypher[]
 ----
 
 == Exercise 1, Task 8: Identifying and saving big clusters in a Cypher Parameter
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/wccParams.cypher[]
 ----
 
 == Exercise 1, Task 9: Big Clusters Visualization
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/wccDisplay.cypher[]
 ----
@@ -246,31 +246,31 @@ This exercise is composed of the following tasks:
 . Visualize the results
 
 == Exercise 2, Task 1: Loading the Similarity Graph to the Graph Catalog
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/loadSimilarityNamedGraph.cypher[]
 ----
 
 == Exercise 2, Task 2: Streaming the Similarity Results
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/similarityStream.cypher[]
 ----
 
 == Exercise 2, Task 3: Saving the Similarity Results to the In-memory Graph
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/similarityMutate.cypher[]
 ----
 
 == Exercise 2, Task 4: Writing the In-memory Graph Edges to the Database
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/similarityWrite.cypher[]
 ----
 
 == Exercise 2, Task 5: Similarity Results Visualization
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/similarityDisplay.cypher[]
 ----
@@ -285,13 +285,13 @@ This exercise is composed of the following tasks:
 . Labeling clients as first-party fraudsters
 
 == Exercise 3, Task 1: Looking at the Degree Centrality Results
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/degreeStream.cypher[]
 ----
 
 == Exercise 3, Task 2: Writing the Degree Centrality to the database
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/degreeWrite.cypher[]
 ----
@@ -299,25 +299,25 @@ include::scripts/degreeWrite.cypher[]
 == Exercise 3, Task 3: Setting a Threshold for the First-party Fraud Score
 Setting the threshold
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudScoreParam.cypher[]
 ----
 
 Exploring the clients with first-party fraud score grater than the threshold
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudScoreStream.cypher[]
 ----
 
 == Exercise 3, Task 4: Identifying First-party Fraudsters
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudScoreWrite.cypher[]
 ----
 
 == Exercise 4: Removing all graphs in the Graph Catalog
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/removeNamedGraphs.cypher[]
 ----
@@ -351,31 +351,31 @@ This module consists of the following exercises:
 . Remove all Named Graph loaded in this module
 
 == Exercise 1: Identifying Transactions Between First-party Fraudsters and Client
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudstersTransactions.cypher[]
 ----
 
 == Exercise 2: What are the types of Transactions Between First-party Fraudsters and Clients?
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudstersTransactionsType.cypher[]
 ----
 
 == Exercise 3: Creating TRANSFER_TO Relationships Between First-party Fraudsters and Clients
 From first-party fraudsters to client
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudstersTransferTo.cypher[]
 ----
 From clients to first-party fraudsters
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/firstPartyFraudstersTransferFrom.cypher[]
 ----
 
 == Exercise 4: Visualizing the TRANSFER_TO Relationships
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudDisplay.cypher[]
 ----
@@ -394,55 +394,55 @@ This exercise is composed of the following tasks:
 . Visualize the Second-party Fraud Network
 
 == Exercise 5, Task 1: Loading Second-party Fraud Network In-memory Graph
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudNamedGraph.cypher[]
 ----
 
 == Exercise 5, Task 2: Identifying Potential Second-party Fraud Clusters
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudWccStream.cypher[]
 ----
 
 == Exercise 5, Task 3: Writing the Potential Second-party Fraud Clusters to the Database
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudWccWrite.cypher[]
 ----
 
 == Exercise 5, Task 4: Identifying Second-party Fraudsters
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudPageRankStream.cypher[]
 ----
 
 == Exercise 5, Task 5: Writing the Second-party Fraudsters Identification Results to the Database
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudPageRankWrite.cypher[]
 ----
 
 == Exercise 5, Task 6: Visualizing the Second-party Fraud Network
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/secondPartyFraudDisplay.cypher[]
 ----
 
 == Exercise 5, Task 7: Using Louvain to Identify Clusters in the Second-party Fraud Network
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/louvainStream.cypher[]
 ----
 
 == Exercise 5, Task 8: Storing Second-party Fraud Network Louvain Clusters to the Database
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/louvainWrite.cypher[]
 ----
 
 == Exercise 6: Removing all graphs in the Graph Catalog
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/removeNamedGraphs.cypher[]
 ----

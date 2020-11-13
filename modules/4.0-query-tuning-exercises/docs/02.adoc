@@ -8,7 +8,7 @@ That is, you must  have a database that has access to the APOC library.
 
 If you have not populated the database yet, execute this Cypher code to populate the database:
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/initialDatabase.cypher[]
 ----
@@ -85,7 +85,7 @@ Here is a query that you may be tuning. Check it out to make sure that it will p
 
 *Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
 WHERE m.name = $title
@@ -102,7 +102,7 @@ Here is a query that you may be tuning. Check it out to make sure that it will p
 
 *Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
 WHERE m.name = $title
@@ -121,7 +121,7 @@ If so, correct the query.
 
 Here is what the query should be:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
 WHERE m.title = $title
@@ -138,7 +138,7 @@ Here is another query that you may be tuning. Check it out to make sure that it 
 
 *Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m)-[IS_GENRE]->(g)
 RETURN collect(m.title) AS Movies, g.name
@@ -154,7 +154,7 @@ Here is another query that you may be tuning. Check it out to make sure that it 
 
 *Hint*: You may need to view the DB Stats, propertyKeys,  or indexes to confirm the expected behavior.
 
-[source,cypher]
+[source,Cypher]
 ----
 EXPLAIN
 MATCH (m)-[IS_GENRE]->(g)
@@ -172,7 +172,7 @@ It then does the expansion to 81,094 rows. We know that this graph has 17,304 _I
 
 Correct the problem and rerun.
 
-[source,cypher]
+[source,Cypher]
 ----
 EXPLAIN
 MATCH (m)-[:IS_GENRE]->(g:Genre)

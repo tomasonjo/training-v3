@@ -13,7 +13,7 @@ image::AfterExercise5.png[AfterExercise5,width=300,role=left]
 
 *Note*: To execute this Cypher code, you [.underline]#must# have the APOC library installed for your database.
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise_5.cypher[]
 ----
@@ -50,7 +50,7 @@ image::Ex6_Model.png[Ex6_Model,600]
 
 *Hint*: Use apoc.create.relationship().
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (origin:Airport)-[hasDay:HAS_DAY]->(ad:AirportDay)
 CALL apoc.create.relationship(startNode(hasDay),
@@ -69,7 +69,7 @@ image::Ex6_AddSpecificRelationships.png[Ex6_AddSpecificRelationships,width=600]
 
 Previously, we used this query to look for all flights that go from Las Vegas (LAS) to Chicago (MDW) on January 3, 2019 (2019-1-3).
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->(:AirportDay
       {date: '2019-1-3'})<-[:ORIGINATES_FROM]-(flight:Flight),
@@ -84,7 +84,7 @@ RETURN origin, destination, flight
 
 *Modify this query to use the refactored graph and execute the query.*
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (origin:Airport {code: 'LAS'})-
@@ -113,7 +113,7 @@ Execute these previous two queries to see if the refactoring to specific relatio
 
 Previously, this query showed 199 db hits:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -124,7 +124,7 @@ WHERE flight.airline = 'WN' AND
 
 Previously, this query showed 704 db hits:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (f:Flight)

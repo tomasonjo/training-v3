@@ -48,7 +48,7 @@ Update the query to:
 * Use the source nodes computed in the first part of the query
 * Create a relationship between our user and the users returned from the procedure
 
-[source,cypher]
+[source,Cypher]
 ----
 // Compute source nodes
 MATCH (u:User {id: $userId})-[:WROTE]->()-[:REVIEWS]->()<-[:REVIEWS]-()<-[:WROTE]-(other)
@@ -78,7 +78,7 @@ LIMIT 50
 
 This is what the answer should look like:
 
-[source,cypher]
+[source,Cypher]
 ----
 // Compute source nodes
 MATCH (u:User {id: $userId})-[:WROTE]->()-[:REVIEWS]->()<-[:REVIEWS]-()<-[:WROTE]-(other)
@@ -110,7 +110,7 @@ SET trust.score = score
 
 Now we can find the other users that our user trusts by executing the following query:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (u:User {id: $userId})-[trusts:TRUSTS]->(other)
 RETURN other.name, other.id, trusts.score AS score

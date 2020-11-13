@@ -25,7 +25,7 @@ At the end of this module, you should be able to:
 * Access Neo4j resources.
 
 [NOTE]
-Because some of the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+Because some of the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Cypher parameters
 
@@ -37,7 +37,7 @@ In your Cypher statements, a parameter name begins with the `$` symbol.
 
 Here is an example where we have parameterized the query:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = $actorName
@@ -50,7 +50,7 @@ In Neo4j Browser, you can set values for Cypher parameters that will be in effec
 
 You can set the value of a single parameter in the query editor pane as shown in this example where the value _Tom Hanks_ is set for the parameter `actorName`:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :param actorName => 'Tom Hanks'
 ----
@@ -76,7 +76,7 @@ image::TomCruiseParameter.png[TomCruiseParameter,width=800]
 
 You can also use the JSON-style syntax to set [.underline]#all# of the parameters in your Neo4j Browser session. The values you can specify in this object are numbers, strings, and booleans. In this example we set two parameters for our session:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :params {actorName: 'Tom Cruise', movieName: 'Top Gun'}
 ----
@@ -93,7 +93,7 @@ image::ViewParams.png[ViewParams,width=500]
 
 If you want to clear all parameters, you can simply type:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :params {}
 ----
@@ -120,7 +120,7 @@ The `EXPLAIN` option provides the Cypher query plan. You can compare different C
 
 Here is an example where we have set the _actorName_ and _year_ parameters for our session and we execute this Cypher statement:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 EXPLAIN MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WHERE p.name = $actorName AND
@@ -214,7 +214,7 @@ You add a uniqueness constraint to the graph by creating a constraint that asser
 
 Here is an example for ensuring that the _title_ for a node of type _Movie_ is unique:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE
 ----
@@ -228,7 +228,7 @@ image::AddTitleConstraint.png[AddTitleConstraint,width=500]
 
 And if we attempt to create a _Movie_ with the _title_, _The Matrix_, the Cypher statement will fail because the graph already has a movie with that title:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE (:Movie {title: 'The Matrix'})
 ----
@@ -253,7 +253,7 @@ image::NoTaglineSomething.png[NoTaglineSomething,width=600]
 
 Here is an example for adding the existence constraint to the _tagline_ property of all _Movie_ nodes in the graph:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT exists(m.tagline)
 ----
@@ -267,7 +267,7 @@ The constraint cannot be added to the graph because a node has been detected tha
 
 We know that in the _Movie_ graph, all _:REVIEWED_ relationships currently have a property, _rating_. We can create an existence constraint on that property as follows:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON ()-[rel:REVIEWED]-() ASSERT exists(rel.rating)
 ----
@@ -280,7 +280,7 @@ image::CreateRatingExistenceConstraint.png[CreateRatingExistenceConstraint,width
 
 So after creating this constraint, if we attempt to create a _:REVIEWED_ relationship without setting the _rating_ property:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person), (m:Movie)
 WHERE p.name = 'Jessica Thompson' AND
@@ -301,7 +301,7 @@ You can run the browser command `:schema` to view existing indexes and constrain
 
 Just as you have used other _db_ related methods to query the schema of the graph, you can query for the set of constraints defined in the graph as follows:
 
-[source,cypher,role= nocopy noplay]
+[source,Cypher,role= nocopy noplay]
 ----
 CALL db.constraints()
 ----
@@ -320,7 +320,7 @@ You use similar syntax to drop an existence or uniqueness constraint, except tha
 
 Here we drop the existence constraint for the _rating_ property for all _REVIEWED_ relationships in the graph:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 DROP CONSTRAINT ON ()-[rel:REVIEWED]-() ASSERT exists(rel.rating)
 ----
@@ -338,7 +338,7 @@ Suppose that in our _Movie_ graph, we will not allow a _Person_ node to be creat
 
 Here is an example to create this node key:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON (p:Person) ASSERT (p.name, p.born) IS NODE KEY
 ----
@@ -352,7 +352,7 @@ This attempt to create the constraint failed because there are _Person_ nodes in
 
 If we set these properties for all nodes in the graph that do not have _born_ properties with:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)
 WHERE NOT exists(p.born)
@@ -368,7 +368,7 @@ Any subsequent attempt to create or modify an existing _Person_ node with _name_
 
 For example, executing this Cypher statement will fail:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE (:Person {name: 'Jessica Thompson', born: 0})
 ----
@@ -414,7 +414,7 @@ When you add an index for a property of a node, it can greatly reduce the number
 
 In this query we are testing the value of the _released_ property of a _Movie_ node using ranges:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE 1990 < m.released < 2000
@@ -431,7 +431,7 @@ You create an index to improve graph engine performance. A unique constraint on 
 
 Here is an example of how we would create a single-property index on the _released_ property of all nodes of type _Movie_:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE INDEX ON :Movie(released)
 ----
@@ -447,7 +447,7 @@ If, however, there can be duplication for a set of property values, but you want
 
 Suppose we added the property, _videoFormat_ to every _Movie_ node and set its value, based upon the released date of the movie as follows:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (m:Movie)
 WHERE m.released >= 2000
@@ -467,7 +467,7 @@ Notice that in the above Cypher statements we use the semi-colon `;` to separate
 
 Now that the graph has _Movie_ nodes with both the properties, _released_ and _videoFormat_, we can create a composite index on these properties as follows:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE INDEX ON :Movie(released, videoFormat)
 ----
@@ -481,7 +481,7 @@ image::CreateCompositeIndex.png[CreateCompositeIndex,width=500]
 
 Just as you can retrieve the constraints defined for the graph using `:schema` or `CALL db.constraints()`, you can retrieve the indexes:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL db.indexes()
 ----
@@ -499,7 +499,7 @@ You can drop an existing index that you created with  `CREATE INDEX`.
 
 Here is an example of dropping the composite index that we just created:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 DROP INDEX ON :Movie(released, videoFormat)
 ----
@@ -584,7 +584,7 @@ Before you load data from CSV files into your graph, you should first confirm th
 
 For example you can execute this Cypher statement to get a count of the data to be loaded from the *movies_to_load.csv* file so you have an idea of how much data will be loaded:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'http://data.neo4j.com/intro-neo4j/movies_to_load.csv'
@@ -599,7 +599,7 @@ image::countOfMoviesToLoad.png[countOfMoviesToLoad,width=900]
 
 You might even want to visually inspect the data before you load it to see if it is what you were expecting:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/intro-neo4j/movies_to_load.csv'
@@ -616,7 +616,7 @@ Notice here that the _summary_ column's data has an extra space before the data 
 
 You may want to format the data before it is loaded to confirm it matches what you want in your graph:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'http://data.neo4j.com/intro-neo4j/movies_to_load.csv'
@@ -631,7 +631,7 @@ image::FormatMovieDataBeforeLoad.png[FormatMovieDataBeforeLoad,width=900]
 
 The following query creates the _Movie_ nodes using some of the data from *movies_to_load.csv* as properties:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/intro-neo4j/movies_to_load.csv'
@@ -662,7 +662,7 @@ In case you already have people in your database, you will want to avoid creatin
 That's why instead of just creating them, we use `MERGE` to ensure unique entries after the import.
 We use the `ON CREATE` clause to set the values for _name_ and _born_.
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/intro-neo4j/persons_to_load.csv'
@@ -695,7 +695,7 @@ personId,movieId,role
 The query below matches the entries of _line.personId_ and _line.movieId_ to their respective _Movie_ and _Person_ nodes, and creates an _ACTED_IN_ relationship between the person and the movie.
 This model includes a relationship property of _role_, which is passed via _line.role_.
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/intro-neo4j/roles_to_load.csv'
@@ -727,7 +727,7 @@ Back to the Future;1985;17 year old Marty McFly got home early last night. 30 ye
 
 Here are the Cypher statements to load this data:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/intro-neo4j/movie_actor_roles_to_load.csv'

@@ -33,7 +33,7 @@ Here are some examples.
 In the code below, the _title_ property is accessed for the query and the _releaseYear_ property is accessed when returning the query results:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie {title: $movieTitle})
 RETURN m.title, m.releaseYear
@@ -41,7 +41,7 @@ RETURN m.title, m.releaseYear
 
 This query is the same:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = $movieTitle
@@ -70,7 +70,7 @@ You cannot define a "regular" index on a relationship property so for this query
 This can be very expensive which is why full-text schema indexes are useful.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (actor:Person)-[r:ACTED_IN]->(movie:Movie)
 WHERE r.primaryRole CONTAINS $characterString OR r.secondaryRole CONTAINS $characterString
@@ -84,7 +84,7 @@ Here is how the previous query could use the full-text schema index that you lea
 In order to perform the query, only the index is used, and then because so few rows are found, the access to the _name_, _title_, and _roles_ for a small set of rows is not that expensive.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL db.index.fulltext.queryRelationships(
      'ActedInRoleIndex', $testString) YIELD relationship
@@ -109,7 +109,7 @@ You should always aim to return the minimum amount of data to the client.
 
 This query will return all properties of all nodes and relationships retrieved for the query:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (actor)-[:ACTED_IN]->(movie:Movie)
@@ -149,7 +149,7 @@ If the client were on a different system, this streaming time would be greater.
 Contrast the previous query with this one:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (actor)-[:ACTED_IN]->(movie:Movie)
@@ -177,7 +177,7 @@ In addition, you should strive to limit the number of rows returned as accessing
 Here we limit the number of rows returned by only returning movies that have greater than _$maxActors_ actors.
 This will be a subset of all movies.
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
@@ -190,7 +190,7 @@ RETURN  m.title, m.releaseYear, actors
 
 Here is another example where we want to only return 10 values.
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a)
@@ -222,7 +222,7 @@ The type of the data used in the query specification will determine how the data
 
 With this query, the results are returned in ascending order:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (p:Person)
@@ -247,7 +247,7 @@ Contrast this to a query where an index cannot be used.
 With this query:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (p:Actor)
@@ -267,7 +267,7 @@ image::retrieveTomsAsActor.png[retrieveTomsAsActor,width=800,align=center]
 
 And if we want the results sorted, there is an additional step:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (p:Actor)
@@ -288,7 +288,7 @@ You can perform operations such as `min()` and `max()` without needing to aggreg
 
 Here is an example where we do not have an index on the _Movie.releaseYear_ property.
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -311,7 +311,7 @@ In the execution plan, we see that we need to aggregate all _Movie_ nodes to per
 If we had a query that used an index, the aggregation would be avoided because we can get the data we need to find the alphabetically earliest movie title because it is in the index without needing the collect all of the titles in the graph.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -336,7 +336,7 @@ In a query where a property value is used to order and provide a top or bottom o
 
 We want to return the 100 most recent movies and their actors, ordered by the release year:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(actor)
@@ -355,7 +355,7 @@ Here is the revised query. We move `ORDER BY` and `LIMIT` to earlier in the quer
 Even though we are accessing the _releaseYear_ property earlier, it helps us to limit the number of rows processed.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -382,7 +382,7 @@ If you are doing a query that requires the same value to be repeated for multipl
 Here is an example of this:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -415,7 +415,7 @@ This is an improvement in the query planner for 4.x.
 If you were using an earlier release of Neo4j, a slightly better way to do this would be to project the movie title when you know that node is unique, then do the expansion to retrieve the _Actor_ nodes:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -441,7 +441,7 @@ As stated earlier in this course, with every release of Neo4j, you must measure 
 
 Here is an example where we aggregate by a node property:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (p:Person)
@@ -462,7 +462,7 @@ Depending on the graph, it is better to aggregate by node, rather than by proper
 When you aggregate by node, you do not have to read any properties or node details, it simply get the id for the node.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (p:Person)
@@ -492,7 +492,7 @@ This is a variation of getting at the property value before expansion.
 Here is an example:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
@@ -515,7 +515,7 @@ image::NonDistinctPropertyAccess.png[NonDistinctPropertyAccess,width=800,align=c
 Ideally, you want to access the node property once, so making it distinct helps:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)-[:ACTED_IN]-(a:Actor)
@@ -539,7 +539,7 @@ image::DistinctPropertyAccess.png[DistinctPropertyAccess,width=800,align=center]
 Another example is where aggregation is performed for some of the nodes and the property access is done before the aggregation:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a:Actor)
@@ -558,7 +558,7 @@ image::PropertyAccessBeforeAggregation.png[PropertyAccessBeforeAggregation,width
 When we aggregate the actor nodes, the movie nodes are distinct so it is much more efficient to rewrite this query to:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)<-[:ACTED_IN]-(a:Actor)
@@ -597,7 +597,7 @@ Estimated time to complete: 15 minutes.
 [.statement]
 Given this query:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)
 WHERE m.title = $movieTitle
@@ -635,7 +635,7 @@ Select the correct answers.
 [.statement]
 Suppose you have an index on the _Movie.releaseYear_ property. With this code:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)
 WHERE m.releaseYear > $year

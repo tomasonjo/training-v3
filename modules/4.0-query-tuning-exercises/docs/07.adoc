@@ -9,7 +9,7 @@ Before you begin this exercise, you should have this environment:
 
 . If you have not populated the database yet, execute this Cypher code to populate the database:
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise4.cypher[]
 ----

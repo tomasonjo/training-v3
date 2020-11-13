@@ -31,7 +31,7 @@ In this Exercise, you will gain experience scripting with `cypher-shell`. You wi
 .. Copy the following text to your clipboard:
 +
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CREATE CONSTRAINT TitleConstraint ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT NameConstraint ON (p:Person) ASSERT p.name IS UNIQUE;

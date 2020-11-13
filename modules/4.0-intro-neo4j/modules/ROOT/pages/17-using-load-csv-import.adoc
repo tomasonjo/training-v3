@@ -31,8 +31,8 @@ At the end of this module, you should be able to:
 * Import the data with `LOAD CSV`.
 * Create indexes for newly-loaded data.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Loading data with Cypher
 
@@ -301,28 +301,28 @@ Here are the steps to create a new database, _Movies_:
 
 ifndef::env-slides[]
 
-image::CreateMoviesDB1.png[CreateMoviesDB1,width=900,align=center]
+image::CreateMoviesDB1.png[CreateMoviesDB1,width=400,align=center]
 endif::[]
 
 . Create the new movies database in the query edit pane with `CREATE DATABASE Movies`
 +
 ifndef::env-slides[]
 
-image::CreateMoviesDB2.png[CreateMoviesDB2,width=900,align=center]
+image::CreateMoviesDB2.png[CreateMoviesDB2,width=400,align=center]
 endif::[]
 
 . Enter the browser command `:dbs` in the query edit pane to see the list of existing databases.
 +
 ifndef::env-slides[]
 
-image::CreateMoviesDB3.png[CreateMoviesDB3,width=900,align=center]
+image::CreateMoviesDB3.png[CreateMoviesDB3,width=400,align=center]
 endif::[]
 
 . Enter the browser command `:use movies` to switch to this newly created, empty database.
 
 ifndef::env-slides[]
 
-image::CreateMoviesDB4.png[CreateMoviesDB4,width=900,align=center]
+image::CreateMoviesDB4.png[CreateMoviesDB4,width=400,align=center]
 endif::[]
 
 [.notes]

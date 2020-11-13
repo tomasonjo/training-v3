@@ -189,7 +189,7 @@ image::EC2TerminalFromPuTTY.png[EC2TerminalFromPuTTY,width=600,align=center]
 sudo docker ps -a
 ----
 
-image::DockerInstanceStartedEC2.png[DockerInstanceStarted,width=600,align=center]
+image::DockerInstanceStartedEC2.png[DockerInstanceStarted,width=1000,align=center]
 
 endif::[]
 

@@ -22,7 +22,7 @@ Let's do some exploratory analysis to get a feel for the data.
 
 We'll start by seeing which cities have the most reviews:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (c:City)
 RETURN c.name, size((c)<-[:IN_CITY]-(:Business)<-[:REVIEWS]-(:Review)) AS numberOfReviews
@@ -36,7 +36,7 @@ The Yelp Public dataset contains data from a sampling of cities, but we'll conta
 
 We can find the most reviewed restaurants in Phoenix by executing the following query:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (b:Business)-[:IN_CITY]->(:City {name: "Phoenix"})
 WHERE (b)-[:IN_CATEGORY]->(:Category {name: "Restaurants"})
@@ -51,7 +51,7 @@ LIMIT 10;
 
 And who are some interesting people?
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (u:User)-[:WROTE]->()-[:REVIEWS]-(business:Business)
 WHERE (business:Business)-[:IN_CITY]->(:City {name: "Phoenix"})
@@ -70,7 +70,7 @@ ORDER BY totalReviews DESC;
 Let's store some of those interesting users for later.
 Run the following query to store them in the `userIds` parameter:
 
-[source,cypher]
+[source,Cypher]
 ----
 :param userIds => ["FiKaWcORiTyKi4I7pJp3tQ", "d_TBs6J3twMy9GChqUEXkg", "NwPnvTALYMNZgdiwHHkuAQ"]
 ----
@@ -79,7 +79,7 @@ Run the following query to store them in the `userIds` parameter:
 
 What places have these users been reviewing?
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (u:User)-[:WROTE]->()-[:REVIEWS]->(business:Business)-[:IN_CATEGORY]->(category)
 WHERE u.id IN $userIds AND (business)-[:IN_CITY]->(:City {name: "Phoenix"})

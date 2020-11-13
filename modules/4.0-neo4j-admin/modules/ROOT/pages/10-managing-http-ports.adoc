@@ -22,7 +22,7 @@ The Neo4j instance uses https://neo4j.com/docs/operations-manual/3.5/configurati
 The ports frequently used are the connector ports:
 --
 
-[cols="10,10,80", options="header",stripes="none"]
+[cols="10,15,75", options="header",stripes="none"]
 |====
 | *Name*
 | *Port Number*
@@ -66,7 +66,7 @@ For most Neo4j instances, you can view the *neo4j.conf* file.
 Another way that you can view the current configuration values for a Neo4j instance is with a Cypher call:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 // return all configuration values
 CALL dbms.listConfig() YIELD name, value RETURN name, value;
@@ -85,7 +85,7 @@ image::listConfigDocker.png[listConfigDocker,width=800,align=center]
 If you want to query the current Neo4j instance for particular configuration values, you can use Cypher's WHERE clause to specify the filter.
 In this example, we want all configuration properties in the instance that contains the string "http":
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 // return specific configuration values
 CALL dbms.listConfig() YIELD name, value WHERE name CONTAINS "http" RETURN name,value;

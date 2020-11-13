@@ -47,7 +47,7 @@ Suppose that we create 3 files to make changes:
 *1. AddConstraintsMovies.cypher* that contains the Cypher statements to execute in `cypher-shell`:
 
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;

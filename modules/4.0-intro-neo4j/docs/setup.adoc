@@ -133,7 +133,7 @@ In Neo4j Browser where you are connected to the database and have loaded the mov
 
 Execute this Cypher statement:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (n) RETURN count(n)
 ----

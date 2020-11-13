@@ -60,7 +60,7 @@ Press kbd:[m] to open the menu.
 
 Find all people who acted in the movie, The Matrix, returning the nodes and relationships found:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'The Matrix'})
 RETURN p, rel, m
@@ -106,7 +106,7 @@ image::overview.png[Overview,align=center]
 --
 Find all people who follow _Angela Scope_, returning the nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
 RETURN p

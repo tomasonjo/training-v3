@@ -26,8 +26,8 @@ At the end of this module, you should be able to write Cypher statements to:
 ** Creating nodes.
 ** Creating relationships.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Creating data in the graph
 [.notes]
@@ -97,7 +97,7 @@ You use the simple `MERGE` clause to:
 Here is the simplified syntax for the `MERGE` clause for creating a node:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MERGE (variable:Label{nodeProperties})
 RETURN variable
@@ -164,7 +164,7 @@ At this point, however, we have two _Michael Caine_ nodes in the graph, one of t
 
 [.is-half.left-column]
 --
-image::TwoMichaelCaines.png[TwoMichaelCaines,width=800,align=center]
+image::TwoMichaelCaines.png[TwoMichaelCaines,width=600,align=center]
 --
 
 [.notes]
@@ -199,7 +199,7 @@ The `MERGE` found this node in the graph and did not create a new one.
 
 Here is the syntax for the `MERGE` clause for creating relationships:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MERGE (variable1:Label1 {nodeProperties1})-[:REL_TYPE]->
 (variable2:Label2 {nodeProperties2})

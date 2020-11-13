@@ -81,7 +81,7 @@ For example, the nouns are nodes of the graph, the verbs are the relationships i
 
 [.two-columns]
 --
-[source,cypher-syntax]
+[source,Cypher-syntax]
 ----
 ()
 (p)
@@ -96,7 +96,7 @@ image::cypher-nodes.svg[Nodes,width=700,align=center]
 
 [.is-one-third.left-column]
 --
-[source,cypher]
+[source,Cypher]
 ----
 (:Person)
 (p:Person)
@@ -114,7 +114,7 @@ image::Labels.svg[Nodes,75%,align=center]
 
 === Comments in Cypher
 
-[source,cypher]
+[source,Cypher]
 ----
 ()                  // anonymous node not be referenced later in the query
 (p)                 // variable p, a reference to a node used later
@@ -129,13 +129,13 @@ image::call_db.schema.png[Schema,width=700,align=center,role=border]
 
 === Using MATCH to retrieve nodes
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (n) // returns all nodes in the graph
 RETURN n
 ----
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person) // returns all Person nodes in the graph
 RETURN p
@@ -162,7 +162,7 @@ image::Properties.png[width=700,align=center]
 
 === Examining property keys
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.propertyKeys
 ----
@@ -186,7 +186,7 @@ image::MatchPersonBorn1970.png[height=250,align=center,role=border]
 Find all _movies_ released in _2003_ with the tagline, +
 _Free your mind_, returning the nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (m:Movie {released: 2003, tagline: 'Free your mind'})
 RETURN m
@@ -198,7 +198,7 @@ image::MatchTaglineFreeYourMind.png[height=225,align=center,role=border]
 
 Find all people born in _1965_ and return their names:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person {born: 1965})
 RETURN p.name, p.born
@@ -208,7 +208,7 @@ image::MatchPersonBorn1965.png[width=700,align=center,role=border]
 
 === Specifying aliases
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person {born: 1965})
 RETURN p.name AS name, p.born AS `birth year`
@@ -231,7 +231,7 @@ image::Relationships.svg[width=700,align=center]
 
 === ASCII art for nodes and relationships
 
-[source,cypher]
+[source,Cypher]
 ----
 ()          // a node
 ()--()	    // 2 nodes have some type of relationship
@@ -243,13 +243,13 @@ image::Relationships.svg[width=700,align=center]
 
 image::Relationships.svg[height=350,align=center]
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[:LIVES_AT]->(h:Residence)
 RETURN p.name, h.address
 ----
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)--(h:Residence) // any relationship
 RETURN p.name, h.address
@@ -257,7 +257,7 @@ RETURN p.name, h.address
 
 === Examining relationships
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.schema
 ----
@@ -268,7 +268,7 @@ image::call_db.schema.png[width=645,align=center,role=border]
 
 Find all people who acted in the movie, _The Matrix_, returning the nodes and relationships found:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'The Matrix'})
 RETURN p, rel, m
@@ -280,7 +280,7 @@ image::MatchRelationshipActedIn.png[height=300,align=center,role=border]
 
 Find all movies that _Tom Hanks_ acted in or directed and return the title of the move:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN |:DIRECTED]->(m:Movie)
 RETURN p.name, m.title
@@ -292,7 +292,7 @@ image::TomHanksActedDirected.png[height=300,align=center,role=border]
 
 Find all people who acted in the movie, _The Matrix_ and return their names:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[:ACTED_IN]->(:Movie {title: 'The Matrix'})
 RETURN p.name
@@ -304,7 +304,7 @@ image::AnonymousMovieNode.png[height=300,align=center,role=border]
 
 Find all people who have any type of relationship to the movie, _The Matrix_ and return the nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-->(m:Movie {title: 'The Matrix'})
 RETURN p, m
@@ -319,7 +319,7 @@ Connect result nodes enabled in Neo4j Browser
 
 Find all people who have any type of relationship to the movie, _The Matrix_ and return the name of the person and their relationship type:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[rel]->(:Movie {title:'The Matrix'})
 RETURN p.name, type(rel)
@@ -335,7 +335,7 @@ image::REVIEWEDProperties.svg[width=880,align=center]
 
 Find all people who gave the movie, _The Da Vinci Code_, a rating of _65_, returning their names:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[:REVIEWED {rating: 65}]->(:Movie {title: 'The Da Vinci Code'})
 RETURN p.name
@@ -352,7 +352,7 @@ image::FollowsRelationships.png[width=350px,align=center]
 --
 Find all people who follow _Angela Scope_, returning the nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
 RETURN p
@@ -370,7 +370,7 @@ image::FollowsRelationships.png[width=350px,align=center]
 --
 Find all people who _Angela Scope_ follows, returning the nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p:Person)<-[:FOLLOWS]-(:Person {name:'Angela Scope'})
 RETURN p
@@ -388,7 +388,7 @@ image::FollowsRelationships.png[width=350px,align=center]
 --
 Find all people who _Angela Scope_ follows, returning the nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (p1:Person)-[:FOLLOWS]-(p2:Person {name:'Angela Scope'})
 RETURN p1, p2
@@ -406,7 +406,7 @@ image::FollowsRelationships.png[width=350px,align=center]
 --
 Find all people who follow anybody who follows _Jessica Thompson_ returning the people as nodes:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->
        (:Person {name:'Jessica Thompson'})
@@ -425,7 +425,7 @@ image::FollowsRelationships.png[width=350px,align=center]
 --
 Find  the path that includes all people who follow anybody who follows _Jessica Thompson_ returning the path:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH   path = (:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->
                (:Person {name:'Jessica Thompson'})
@@ -442,7 +442,7 @@ Sub-graph
 
 Find all people that acted in a movie and the directors for that same movie, returning the name of the actor, the movie title, and the name of the director:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, m.title, d.name
@@ -468,7 +468,7 @@ Here are the *Neo4j recommended* Cypher coding standards that we use in this tra
 * Place named nodes and relationships (that use variables) before anonymous nodes and relationships in your `MATCH` clauses when possible.
 * Specify anonymous relationships with `+-->+`, `--`, or `+<--+`
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (:Person {name: 'Diane Keaton'})-[movRel:ACTED_IN]->
 (:Movie {title:"Something's Gotta Give"})

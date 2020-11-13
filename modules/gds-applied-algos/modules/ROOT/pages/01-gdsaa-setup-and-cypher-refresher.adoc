@@ -37,7 +37,7 @@ Neo4j Browser Guides are documents that embed text, images, and Cypher queries i
 
 You can access the guides for this course by running this command in Neo4j Browser.
 
-[source,cypher]
+[source,Cypher]
 ----
 :play gds-applied-graph-algos-exercises
 ----

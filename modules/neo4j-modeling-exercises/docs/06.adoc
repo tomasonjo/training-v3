@@ -11,7 +11,7 @@ image::AfterExercise5.png[AfterExercise5,width=300,role=left]
 
 *If your database does not have the same nodes and relationships, you can execute these Cypher statements to reset your graph to what it should be before you start this exercise.*
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise_5.cypher[]
 ----
@@ -42,7 +42,7 @@ Go to the next page to start this exercise.
 
 *Execute this Cypher statement to add 10k flights to the graph.*
 
-[source,cypher]
+[source,Cypher]
 ----
 LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_10k' AS row
 MERGE (origin:Airport {code: row.Origin})
@@ -76,7 +76,7 @@ Suppose you are looking for all flights that go from Las Vegas (LAS) to Chicago 
 
 *Using the current model in the graph, write and execute the query to find those flights.*
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})
     <-[:ORIGINATES_FROM]-(flight:Flight)-[:LANDS_IN]->
@@ -102,7 +102,7 @@ We will give it a try and create the `AirportDay` node where each `Airport` will
 
 *Write and execute the Cypher statement to add a unique constraint to the `AirportDay` nodes based upon the `airportDayId` property.*
 
-[source,cypher]
+[source,Cypher]
 ----
 CREATE CONSTRAINT ON (a:AirportDay)
 ASSERT a.airportDayId IS UNIQUE
@@ -134,7 +134,7 @@ image::Ex6_Model.png[Ex6_Model,width=600]
 
 *Write and execute the Cypher statement to go through all `Flights` and how they are connected to `Airports` to create the `AirportDay` nodes.*
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (origin:Airport)<-[:ORIGINATES_FROM]-(flight:Flight)-
        [:LANDS_IN]->(destination:Airport)
@@ -159,7 +159,7 @@ image::Ex6_Refactor.png[Ex6_Refactor,width=600]
 
 *Execute this query again with the refactored graph*:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (f:Flight)
@@ -179,7 +179,7 @@ This query now has 1408 db hits, but we have increased the number of flights by 
 
 *Execute this query again with the refactored graph*:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE
 MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -200,7 +200,7 @@ This query now has 100 db hits, but we have increased the number of flights by a
 
 Our original query to find  all flights that fly from Las Vegas (LAS) to Chicago (MDW) on January 3, 2019 (2019-1-3) was:
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})
     <-[:ORIGINATES_FROM]-(flight:Flight)-[:LANDS_IN]->
@@ -215,7 +215,7 @@ RETURN origin, destination, flight
 
 *Use the refactored model to rewrite this query and execute it against the graph.*
 
-[source,cypher]
+[source,Cypher]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->(:AirportDay
       {date: '2019-1-3'})<-[:ORIGINATES_FROM]-(flight:Flight),

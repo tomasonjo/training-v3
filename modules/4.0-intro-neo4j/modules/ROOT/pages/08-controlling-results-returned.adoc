@@ -381,7 +381,7 @@ Select the correct answer.
 We want to retrieve the names of the five oldest persons in our dataset. What code will do this?
 
 [.statement]
-Select the correct answers.
+Select the correct answer.
 
 [%interactive.answers]
 - [ ] `MATCH (p:Person)-[:ACTED_IN]->()`

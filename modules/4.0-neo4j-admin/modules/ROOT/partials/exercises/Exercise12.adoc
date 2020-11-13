@@ -62,12 +62,12 @@ image::ImportCrimesDocker1.png[ImportCrimesDocker1,width=500]
 . In `cypher-shell` create the _crimes_ database.
 . Enter the following Cypher statements to view the schema of the database and return the number of nodes.
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :use crimes
 ----
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL db.schema.visualization();
 MATCH (n) RETURN count(n);

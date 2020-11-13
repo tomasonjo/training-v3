@@ -24,9 +24,8 @@ At the end of this module, you should be able to write Cypher statements to:
 * Create nodes and relationships together.
 * Add properties to a relationship.
 * Remove properties from a relationship.
-
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Syntax: Creating relationships
 
@@ -37,12 +36,12 @@ As you have learned in the previous lessons, when you query the graph, you often
 
 Here is the simplified syntax for creating a relationship between two nodes referenced by the variables _x_ and _y_:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 CREATE (x)-[:REL_TYPE]->(y) 
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 CREATE (x)<-[:REL_TYPE]-(y)
 ----
@@ -194,22 +193,22 @@ You can add properties to a relationship, just as you add properties to a node. 
 Here is the simplified syntax for adding properties to a relationship referenced by the variable _r_:
 --
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET r.propertyName = value
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET r.propertyName1 = value1 , r.propertyName2 = value2
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET r = {propertyName1: value1, propertyName2: value2}
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 SET r += {propertyName1: value1, propertyName2: value2}
 ----
@@ -336,7 +335,7 @@ Suppose our graph has a _Person_ node for Tom Jones and a _Movie_ node for the m
 We want to connect these two nodes with the _ACTED_IN_ relationship.
 What is wrong with this code?
 
-[source,Cypher]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'
@@ -357,7 +356,7 @@ Select the correct answer.
 [.statement]
 Given this code, what Cypher clause do you use to add the roles property to the relationship?
 
-[source,Cypher]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE (p:Person {name: 'Jack Brown'})
 CREATE (m:Movie {title: 'The Goods'})
@@ -378,7 +377,7 @@ Select the correct answer.
 [.statement]
 Assuming the nodes are successfully retrieved, how many relationships are created?
 
-[source,Cypher]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'

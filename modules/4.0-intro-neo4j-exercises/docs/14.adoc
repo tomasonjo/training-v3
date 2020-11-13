@@ -110,7 +110,7 @@ image::DropIndex.png[DropIndex,width=500]
 
 *Create a full-text schema index for the _tagline_ property of the _Movie_ nodes named _MovieTaglineFTIndex_.*
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.index.fulltext.createNodeIndex('MovieTaglineFTIndex',['Movie'], ['tagline'])
 ----
@@ -148,7 +148,7 @@ image::ViewIndexes2.png[ViewIndexes2,width=800]
 . *Write and execute a query to find all movies with taglines that contain the strings "real" or "world".*
 +
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.index.fulltext.queryNodes('MovieTaglineFTIndex', 'real OR world') YIELD node
 RETURN node.title, node.tagline
@@ -161,7 +161,7 @@ image::UseFTIndex.png[UseFTIndex,width=600]
 
 . *Write and execute a query to find all movies with taglines that contain the strings "real" and "world".*
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL db.index.fulltext.queryNodes('MovieTaglineFTIndex', 'real AND world') YIELD node
 RETURN node.title, node.tagline

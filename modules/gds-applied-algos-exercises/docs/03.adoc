@@ -16,7 +16,7 @@ Update the query to:
 * Choose a similarity cut off value (Hint: look at the `similarityCutOff` parameter)
 * Choose a topK value (Hint: look at the `topK` parameter)
 
-[source,cypher]
+[source,Cypher]
 ----
 CALL gds.alpha.similarity.pearson(
   {data: "MATCH (u:User)
@@ -46,7 +46,7 @@ CALL gds.alpha.similarity.pearson.write({
 We want to use this similarity graph to improve the reviews that we show on our application.
 We can find similar users by following the `SIMILAR` relationship from a user:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (me:User {id: $userId})-[similarity:SIMILAR]->(other)
 RETURN other, similarity.score AS similarity

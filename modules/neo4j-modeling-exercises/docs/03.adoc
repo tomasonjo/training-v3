@@ -11,7 +11,7 @@ image::AfterExercise2.png[Empty_database,width=300,role=left]
 
 *If your database does not have the same nodes and relationships, you can execute these Cypher statements to reset your graph to what it should be before you start this exercise:*
 
-[source,cypher]
+[source,Cypher]
 ----
 include::scripts/AfterExercise_2.cypher[]
 ----
@@ -42,7 +42,7 @@ Let's preview what the data we will be loading looks like.
 
 *Execute  the following query to retrieve the first five rows of data to see what data we've got to work with:*
 
-[source,cypher]
+[source,Cypher]
 ----
 LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_1k' AS row
 RETURN row
@@ -51,7 +51,7 @@ LIMIT 5
 
 *Note*: If your course data files are placed in the *import* folder for the database, then you would use the following syntax to perform the query without needing to use the URL for the data:
 
-[source,cypher]
+[source,Cypher]
 ----
 LOAD CSV WITH HEADERS FROM  'file:///flights_2019_1k.csv' AS row
 RETURN row
@@ -74,7 +74,7 @@ We have many different fields in this CSV file, but the ones that will be helpfu
 
 *Execute the following query to create nodes and relationships for these connections:*
 
-[source,cypher]
+[source,Cypher]
 ----
 LOAD CSV WITH HEADERS FROM 'https://r.neo4j.com/flights_2019_1k' AS row
 MERGE (origin:Airport {code: row.Origin})
@@ -88,7 +88,7 @@ ON CREATE SET connection.departure = toInteger(row.CRSDepTime), connection.arriv
 
 *Note*: If your course data files are placed in the *import* folder for the database, then you would use the following syntax to perform the query without needing to use the URL for the data:
 
-[source,cypher]
+[source,Cypher]
 ----
 LOAD CSV WITH HEADERS FROM  'file:///flights_2019_1k.csv' AS row
 MERGE (origin:Airport {code: row.Origin})

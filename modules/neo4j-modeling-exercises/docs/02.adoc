@@ -7,7 +7,7 @@ You will now work with the airport graph data model.
 
 *Execute the following Cypher statement to delete nodes and relationships in the graph:*
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (n) DETACH DELETE n
 ----

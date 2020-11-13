@@ -186,7 +186,7 @@ If we were to attempt to access the database for the first time, we would receiv
 
 While logged into the database in `cypher-shell`, you execute the procedure to change the password:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL dbms.changePassword('newPassword');
 ----
@@ -562,7 +562,7 @@ As a database administrator, you may need to automate changes to the database. T
 Suppose that we use _bash_. We create 3 files:
 
 *1. AddConstraints.cypher* that contains the Cypher statements to execute in `cypher-shell`:
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;
@@ -616,7 +616,7 @@ image::L03-Ex6-StartCypher-shell.png[Ex6-StartCypher-shell,width=1000,align=cent
 [start=3]
 . Enter some simple Cypher statements to confirm that you can access the database. For example:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL db.schema();
 CALL db.constraints();
@@ -624,7 +624,7 @@ CALL db.constraints();
 . Exit Cypher-shell by typing `:exit`.
 . Create a Cypher script in the */usr/local/work* folder named *AddConstraints.cypher* with the following statements:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CREATE CONSTRAINT ON (m:Movie) ASSERT m.title IS UNIQUE;
 CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE;

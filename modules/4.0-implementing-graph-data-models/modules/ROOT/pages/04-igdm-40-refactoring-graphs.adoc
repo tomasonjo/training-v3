@@ -21,8 +21,8 @@ At the end of this module, you should be able to:
 * Refactor a graph by specializing relationships.
 * Perform batch processing to refactor a large graph.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 [.half-row]
 == Evolving the model
@@ -103,7 +103,7 @@ The _Flight.flightId_ property will contain the following data which will be uni
 
 Before we perform the refactoring of the existing graph, we add the uniqueness constraint:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT Flight_flightId_constraint ON (f:Flight)
        ASSERT f.flightId IS UNIQUE
@@ -113,7 +113,7 @@ CREATE CONSTRAINT Flight_flightId_constraint ON (f:Flight)
 
 Here is the code to refactor the graph:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)
 MERGE (newFlight:Flight {flightId: connection.airline + connection.flightNumber +
@@ -162,7 +162,7 @@ This is because index maintenance is expensive and you do not want a large refac
 Here is the code to create the index on the flight number property:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE INDEX Flight_number_index FOR (f:Flight) ON (f.number)
 ----
@@ -180,7 +180,7 @@ Recall that the query is: What are the airports and flight information for fligh
 Here is the original query:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE
 MATCH  (origin:Airport)-[connection:CONNECTED_TO]->(destination:Airport)
@@ -193,7 +193,7 @@ RETURN origin.code, destination.code, connection.date, connection.departure, con
 We must change the query to work with the new model as follows:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE
 MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -204,13 +204,8 @@ WHERE flight.airline = 'WN' AND
 
 === Result of the profile
 
-ifndef::env-slides[]
-image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=300,align=center]
-endif::[]
 
-ifdef::env-slides[]
-image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=120,align=center]
-endif::[]
+image::ProfileAfterRefactor.png[ProfileAfterRefactor,width=250, align=center]
 
 [.notes]
 --
@@ -230,7 +225,7 @@ Relationships, especially those with properties take up unnecessary space in the
 
 image::DeleteConnected_to.png[DeleteConnected_to,width=1000,align=center]
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH ()-[connection:CONNECTED_TO]->()
 DELETE connection
@@ -279,7 +274,7 @@ endif::[]
 Here is the query:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (origin:Airport {code: 'LAS'})
     <-[:ORIGINATES_FROM]-(flight:Flight)-[:LANDS_IN]->
@@ -367,7 +362,7 @@ That way we do not have to go through the _Flight_ nodes to find a date.
 Just like the _Flight_ nodes, it will have a unique ID, _AirportDay.airportDayId_ so that it can used it in the query.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CREATE CONSTRAINT AirportDay_airportDayId_constraint ON (a:AirportDay)
        ASSERT a.airportDayId IS UNIQUE
@@ -392,7 +387,7 @@ Then, you will want to:
 
 == Refactor implementation
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (origin:Airport)<-[:ORIGINATES_FROM]-(flight:Flight)-
       [:LANDS_IN]->(destination:Airport)
@@ -423,7 +418,7 @@ After a refactor, you should check that all queries perform OK. Here is our firs
 [.is-two-thirds.left-column]
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE
 MATCH (origin)<-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -443,7 +438,7 @@ endif::[]
 
 ifndef::env-slides[]
 ////
-image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=400,align=center]
+image::FirstQueryAfterRefactor4.png[FirstQueryAfterRefactor4,width=450,align=center]
 //endif::[]
 
 [.notes]
@@ -462,7 +457,7 @@ Then we want to profile our second query after the refactor: Find all the flight
 [.is-two-thirds.left-column]
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})
     <-[:ORIGINATES_FROM]-(flight:Flight)-
@@ -481,7 +476,7 @@ image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,w
 endif::[]
 
 ifndef::env-slides[]
-image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=400,align=center]
+image::OriginalSecondQueryAfterRefactor4.png[OriginalSecondQueryAfterRefactor4,width=450,align=center]
 endif::[]
 
 [.notes]
@@ -502,7 +497,7 @@ Due to the change in the model, we must rewrite the  query as:
 [.is-two-thirds.left-column]
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE MATCH (origin:Airport {code: 'LAS'})-
     [:HAS_DAY]->(:AirportDay {date: '2019-1-3'})<-
@@ -515,7 +510,7 @@ RETURN origin, destination, flight
 --
 
 ifndef::env-slides[]
-image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=400,align=center]
+image::SecondQueryAfterRefactor4.png[SecondQueryAfterRefactor4,width=450,align=center]
 endif::[]
 
 ifdef::env-slides[]
@@ -589,7 +584,7 @@ To answer this question with the current model our query would be:
 [.is-two-thirds.left-column]
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE
 MATCH (origin:Airport {code: 'LAS'})-[:HAS_DAY]->
@@ -607,7 +602,7 @@ ORDER BY flight.date, flight.departure
 --
 
 ifndef::env-slides[]
-image::LASToMDWBad.png[LASToMDWBad,width=400,align=center]
+image::LASToMDWBad.png[LASToMDWBad,width=350,align=center]
 endif::[]
 
 ifdef::env-slides[]
@@ -645,7 +640,7 @@ With APOC, you can create relationships based upon data in the graph.
 Here is the syntax:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 apoc.create.relationship(startNode(<relationship-variable>),
                          '<new-relationship-value>',
@@ -665,7 +660,7 @@ Calling this procedure where _rel_ is returned enables you to either return the 
 
 Here is the code to transform the _HAS_DAY_ relationships to specific relationships:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (origin:Airport)-[hasDay:HAS_DAY]->(ad:AirportDay)
 CALL apoc.create.relationship(startNode(hasDay),
@@ -691,7 +686,7 @@ Since the model has changed, we need to rewrite the query:
 [.is-three-quarters.left-column]
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE
 MATCH (origin:Airport {code: 'LAS'})-[:`ON_2019-1-3`]->
@@ -770,7 +765,7 @@ Here is one way that you can control how much work is done for a refactoring:
 --
 . Tag all the nodes we need to process with a temporary label (for example _Process_).
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (f:Flight)
 SET f:Process
@@ -792,7 +787,7 @@ SET f:Process
 Here is code that will process all nodes with the label _Process_:
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (flight:Process)
 WITH flight LIMIT 500
@@ -835,7 +830,7 @@ We will focus on using _apoc.periodic.commit()_.
 == Batching with APOC
 
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL apoc.periodic.commit('
 MATCH (flight:Process)

@@ -207,7 +207,7 @@ WHERE Department.name = "IT Department"
 [.statement]
 Cypher is the language for accessing data in the Neo4j database. In contrast to SQL, Cypher syntax stays clean and focused on domain concepts since queries are expressed visually:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 MATCH (p:Person)<-[:EMPLOYEE]-(d:Department)
 WHERE d.name = "IT Department"

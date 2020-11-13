@@ -76,7 +76,7 @@ There may be data that is duplicated in many nodes in your graph.
 In this example the type of currency is a property of a node.
 --
 
-image::ExtractNodeFromPropertyBefore.png[ExtractNodeFromPropertyBefore,width=700,align=center]
+image::ExtractNodeFromPropertyBefore.png[ExtractNodeFromPropertyBefore,width=500,align=center]
 
 [.notes]
 --
@@ -127,7 +127,7 @@ Previously in this training, you learned that intermediate nodes is sometimes a 
 Here is the example we saw earlier with the content of the email as a property for the relationship.
 --
 
-image::ExtractIntermediateNodesBefore.png[ExtractIntermediateNodesBefore,width=600,align=center]
+image::ExtractIntermediateNodesBefore.png[ExtractIntermediateNodesBefore,width=500,align=center]
 
 === Refactor: Extract nodes from relationship properties
 

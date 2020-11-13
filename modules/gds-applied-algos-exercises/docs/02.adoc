@@ -50,7 +50,7 @@ Update the query (copied from the documentation) to:
 * Compute similarity between categories based on the business tagged with that category (Hint: you'll need to use the `IN_CATEGORY` relationship)
 * Choose a similarity cut off value (Hint: look at the `similarityCutOff` parameter)
 
-[source,cypher]
+[source,Cypher]
 ----
 // Change this part of the query
 MATCH (book:Book)-[:HAS_GENRE]->(genre)
@@ -71,7 +71,7 @@ RETURN nodes, similarityPairs, p50, p75, p90, p99;
 
 This is what the query should look like:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (category:Category)<-[:IN_CATEGORY]-(business)
 WITH {item:id(category), categories: collect(id(business))} AS userData
@@ -92,7 +92,7 @@ RETURN nodes, similarityPairs, p50, p75, p90, p99;
 The algorithm will create relationships between nodes that aren't strictly adjacent in the hierarchy.
 Let's remove those transitive relationships by running the following query:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH (g1:Category)-[:NARROWER_THAN*2..]->(g3:Category),
       (g1)-[d:NARROWER_THAN]->(g3)
@@ -104,7 +104,7 @@ DELETE d;
 Let's have a look at the hierarchy that we've created.
 The following query will find 10 of these paths:
 
-[source,cypher]
+[source,Cypher]
 ----
 MATCH path = (category:Category)-[:NARROWER_THAN*]->(superCategory:Category)
 RETURN path

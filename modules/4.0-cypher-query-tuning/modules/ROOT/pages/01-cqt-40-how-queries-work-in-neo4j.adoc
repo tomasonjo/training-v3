@@ -179,7 +179,7 @@ Later in this course, you will see how the page cache is used in the steps of an
 
 You use the `:sysinfo` Neo4j Browser command to examine the usage of the Page Cache:
 
-image::Sysinfo.png[Sysinfo,width=800,align=center]
+image::Sysinfo.png[Sysinfo,width=600,align=center]
 
 [.notes]
 --
@@ -265,7 +265,7 @@ The anchor for a query will be based upon the fewest number of nodes that need t
 
 Here are three simple queries for a graph that has 6231 _Movie_ nodes and 18,776 _Person_ nodes:
 
-image::Anchoring.png[Anchoring,width=800,align=center]
+image::Anchoring.png[Anchoring,width=500,align=center]
 
 [.notes]
 --
@@ -286,7 +286,7 @@ In some cases you may have more than one set of anchor nodes.
 For example, you can specify:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p1:Person)-[:ACTED_IN]->(m)
 MATCH (n)<-[:ACTED_IN]-(p2:Person)
@@ -314,7 +314,7 @@ This is where specificity in the relationship types is important in your data mo
 For example:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
 WHERE p.name = $name
@@ -323,7 +323,7 @@ RETURN  m.title
 
 This query will expand to fewer _Movie_ nodes  than this next statement which retrieves _Movie_ nodes with both the _ACTED_IN_ and _DIRECTED_ relationships:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (m:Movie)<--(p:Person)
 WHERE p.name = $name
@@ -347,7 +347,7 @@ Cypher queries with multiple `MATCH` statements may execute differently than wha
 Here is a simple example rendered in Neo4j Browser where we use `PROFILE` to display the execution plan and execute the query:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
 WHERE p.name = $name
@@ -415,7 +415,7 @@ Here is the Cypher code where the graph contains _Movie_ nodes with a _genres_ p
 This code extracts the genre information from the _Movie_ nodes, creates the _Genre_ nodes and the _:IS_GENRE_ relationships between _Movie_ nodes and _Genre_ nodes.
 --
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 PROFILE MATCH (m:Movie)
 UNWIND m.genres AS name
@@ -503,7 +503,7 @@ image::EagerGraphic.png[EagerGraphic,width=800,align=center]
 Here is an example where the execution plan is created operate "eagerly" to prevent infinite processing.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (p:Person)
 CREATE (p2:Person {name:p.name})
@@ -523,7 +523,7 @@ Sometimes the query planner forces eager operations, just to be safe.
 Here is another example.
 A `FOREACH` clause requires that all rows have been retrieved before it processes the rows used in the `FOREACH` clause.
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH p = (a:Actor)-[:ACTED_IN]-(m:Movie)
@@ -562,7 +562,7 @@ You will learn about aggregation and how it can be controlled for tune your quer
 Here is an example of eager aggregation in an execution plan where the call to `avg()` requires that all movie nodes are retrieved before the next step in the execution plan.
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -611,7 +611,7 @@ Here is an example where we want to return the titles of the movies directed by 
 _$actor1_ is 'Tom Hanks' and _$actor2_ is 'Clint Eastwood':
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)
@@ -633,7 +633,7 @@ You should strive to eliminate SLOTTED from your (read-only) execution plans by 
 For example, this query can be rewritten to:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE
 MATCH (m:Movie)<-[:DIRECTED]-(p:Person)
@@ -759,7 +759,7 @@ One of the procedures is to retrieve high-level meta-data from the graph.
 To inspect how nodes and relationships are used in the graph you simply execute:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL apoc.meta.graph()
 ----
@@ -786,7 +786,7 @@ You must understand what indexes exist for the properties in the graph. The inde
 As a starting point, you should query to graph to learn about all of the indexes defined:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 :schema
 ----
@@ -808,7 +808,7 @@ You can certainly perform Cypher queries to retrieve information about the numbe
 You can retrieve count store information with this statement:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL apoc.meta.stats()
 ----
@@ -882,7 +882,7 @@ Relationship counts with labels on the start and end nodes are not recorded in t
 
 Here is a query where the count store will [underline]#never# be used because direction is not specified in the relationship:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE MATCH ()-[:ACTED_IN]-()
 RETURN count(*)
@@ -900,7 +900,7 @@ We see a retrieval of all nodes (24,992 rows), as well as a total of 169954 db h
 
 Here is a query where the count store is used, rather than retrieving the nodes and incurring db hits:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE MATCH ()-[:ACTED_IN]->()
 RETURN count(*)
@@ -921,7 +921,7 @@ Seeing the _RelationshipCountFromCountStore_ is a good thing for your execution 
 The count store is very useful, but not in all cases. Here is a query where we hoped to get some leverage from using the count store, but  because we also need to retrieve the name of the person, there is a high db hit overhead:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE MATCH (a:Actor)-[:ACTED_IN]->()
 RETURN a.name, count(*) AS count
@@ -942,7 +942,7 @@ Here we see 143,980 db hits.
 Here is an example we execute the same type of query,but the count store is not be used. We use `size()` to retrieve the number of relationships from each _Actor_ node:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 PROFILE MATCH (a:Actor)
 RETURN a.name, size((a)-[:ACTED_IN]->()) AS count
@@ -986,7 +986,7 @@ That is, if more than 5% of the indexes have changes, then the index selectivity
 You can also force the update to the DB Stats with these calls:
 --
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 /update DB Stats for a specific index
 CALL db.resampleIndex(':Person(name)')

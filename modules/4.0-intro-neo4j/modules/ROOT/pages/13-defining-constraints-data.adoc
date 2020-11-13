@@ -28,8 +28,8 @@ At the end of this module, you should be able to:
 * Create a uniqueness constraint for a set of node properties in the graph.
 * Manage constraints in the graph.
 
-[NOTE]
-Because the code examples in this lesson modify the database, it is recommended that you do not execute them against your database as you will be doing so in the hands-on exercises.
+[IMPORTANT]
+Because the code examples in this lesson modify the database, it is recommended that you [.underline]#do not# execute them against your database as you will be doing so in the hands-on exercises.
 
 == Uniqueness and existence in the graph
 
@@ -265,7 +265,7 @@ ifndef::env-slides[]
 With the result:
 endif::[]
 
-image::DropConstraint.png[DropConstraint,width=600,align=center]
+image::DropConstraint.png[DropConstraint,width=400,align=center]
 
 == Creating multi-property uniqueness/existence constraint: node key
 
@@ -315,7 +315,7 @@ ifndef::env-slides[]
 With this result:
 endif::[]
 
-image::SetBorn0.png[SetBorn0,width=800,align=center]
+image::SetBorn0.png[SetBorn0,width=600,align=center]
 --
 
 [.is-half.right-column]

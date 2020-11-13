@@ -26,7 +26,7 @@ image::neo4j-for-graph-data-science.png[Neo4j for graph data science,width=500,a
 This toolbox aims to provide support and ease of use for all the steps in Graph Data Science analysis.
 --
 
-image::gds-steps.png[Graph data science steps,width=500,align=center]
+image::gds-steps.png[Graph data science steps,width=600,align=center]
 
 [.half-row]
 === Neo4j Database

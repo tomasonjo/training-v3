@@ -148,7 +148,7 @@ image::L06-Ex1-LogQueriesTooLong.png[L06-Ex1-LogQueriesTooLong,width=600,align=c
 . Open a new terminal window and log in to `cypher-shell` with the _reader/reader_ credentials. (*Suggestion*: specify --format plain)
 . In this `cypher-shell` session, enter the following statement which will execute a query that runs for longer than 1000 ms:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a), (b), (c), (d) RETURN count(id(a));
 ----
@@ -169,7 +169,7 @@ image::L06-Ex1-QueryLog.png[L06-Ex1-QueryLog,width=1000,align=center]
 [start=7]
 . In `cypher-shell` session for _reader_, enter a query that will execute for an even longer period of time:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 MATCH (a), (b), (c), (d), (e) RETURN count(id(a));
 ----
@@ -192,7 +192,7 @@ image::L06-Ex1-KillQuery.png[L06-Ex1-KillQuery,width=1000,align=center]
 
 Some queries against the Neo4j instance are not simply queries, but are Cypher statements that load data from CSV files. These types of Cypher statements could take a considerable amount of time to complete. One option for you to help automate the killing of long-running queries is to create a script that executes a Cypher statement such as the following:
 
-[source,cypher,role=nocopy noplay]
+[source,Cypher,role=nocopy noplay]
 ----
 CALL dbms.listQueries() YIELD query, elapsedTimeMillis, queryId, username
 WHERE  NOT query CONTAINS toLower('LOAD')
@@ -247,7 +247,7 @@ For this exercise, you will be using the stand-alone Neo4j instance that you use
 . In a terminal window, log in to `cypher-shell` with the credentials _publisher/publisher_.
 . Enter this Cypher statement which will attempt to execute a write transaction to create a million _Person_ nodes:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 FOREACH (i IN RANGE(1,1000000) | CREATE (:Person {name:'Person' + i}));
 ----
@@ -492,7 +492,7 @@ In this Exercise, you will execute a query that exhausts memory, then you will c
 . In `cypher-shell`, connect to the Neo4j instance as _publisher/publisher_.
 . Enter the following Cypher statement that will attempt to create 1.3 million _Person_ nodes:
 +
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 FOREACH (i IN RANGE(1,1300000) | CREATE (:Person {name:'Person' + i}));
 ----
@@ -596,7 +596,7 @@ Neo4j supports the use of JMX in Cypher queries. This is something that is safe 
 
 For example, here is a rather long Cypher statement that retrieves the same information that you would expect to see when you run the `:sysinfo` command in Neo4j Browser:
 
-[source,cypher,role=noplay]
+[source,Cypher,role=noplay]
 ----
 CALL dbms.queryJmx("org.neo4j:instance=kernel#0,name=Store file sizes") YIELD attributes
        WITH  keys(attributes) AS k , attributes

@@ -245,7 +245,7 @@ Cypher uses a pair of parentheses like `()`, `(n)` to represent a node, much lik
 
 Here is the simplified syntax for specifying a node:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 ()
 (<variable>)
@@ -340,7 +340,7 @@ In this example, the node labels are _Person_, _Location_, and _Residence_.
 
 Here are examples for specifying nodes with labels using the the above image:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 (:Person)
 (p:Person)
@@ -362,7 +362,7 @@ ifndef::env-slides[]
 In Cypher, you can place a comment (starts with `//`) anywhere in your Cypher to specify that the rest of the line is interpreted as a comment.
 endif::[]
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 // anonymous node not be referenced later in the query
 ()
@@ -520,13 +520,13 @@ First, you will learn how to simply return nodes.
 
 Syntax examples for a query:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable)
 RETURN variable
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label)
 RETURN variable
@@ -888,25 +888,25 @@ Any node that matches the value will be retrieved.
 
 Here are  simplified syntax examples for a query where we specify one or more values for  properties that will be used to filter the query results and return a subset of the graph:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {propertyKey: propertyValue})
 RETURN variable
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {propertyKey: propertyValue})
 RETURN variable
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {propertyKey1: propertyValue1, propertyKey2: propertyValue2})
 RETURN variable
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {propertyKey: propertyValue, propertyKey2: propertyValue2})
 RETURN variable
@@ -1035,25 +1035,25 @@ You can use the `RETURN` clause to return property values of nodes retrieved.
 
 Here are simplified syntax examples for returning property values, rather than nodes:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {prop1: value})
 RETURN variable.prop2
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {prop1: value})
 RETURN variable.prop2
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {prop1: value, prop2: value})
 RETURN variable.prop3
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable {prop1:value})
 RETURN variable.prop2, variable.prop3
@@ -1117,7 +1117,7 @@ If you want to customize the headings for a table containing property values, yo
 
 Here is the simplified syntax for specifying an alias for a property value:
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (variable:Label {propertyKey1: propertyValue1})
 RETURN variable.propertyKey2 AS alias2
@@ -1261,7 +1261,7 @@ You can specify nodes and their relationships to traverse the graph and quickly 
 Here is how Cypher uses ASCII art to specify the path used for a query:
 endif::[]
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 ()          // a node
 ()--()      // 2 nodes have some type of relationship
@@ -1314,13 +1314,13 @@ ifdef::env-slides[]
 == Using relationships in a query
 endif::[]
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (node1)-[:REL_TYPE]->(node2)
 RETURN node1, node2
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (node1)-[:REL_TYPEA | REL_TYPEB]->(node2)
 RETURN node1, node2
@@ -1345,13 +1345,13 @@ endif::[]
 
 
 ifdef::env-slides[]
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (p:Person)-[:LIVES_AT]->(h:Residence)
 RETURN p.name, h.address
 ----
 
-[source,Syntax,role=nocopy noplay]
+[source,syntax,role=nocopy noplay]
 ----
 MATCH (p:Person)--(h:Residence)  // any relationship
 RETURN p.name, h.address
