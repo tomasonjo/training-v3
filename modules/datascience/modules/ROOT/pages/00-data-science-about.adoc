@@ -1,4 +1,4 @@
-= Data Science with Neo4j
+= Data Science with Neo4j 3.5
 :slug: 00-data-science-about
 :neo4j-version: 3.4.4
 :imagesdir: ../images

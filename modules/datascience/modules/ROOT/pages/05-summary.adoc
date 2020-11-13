@@ -1,4 +1,4 @@
-= Summary: Data Science with Neo4j
+= Summary: Data Science with Neo4j 3.5
 :slug: 05-summary
 :neo4j-version: 3.4.4
 :imagesdir: ../images
