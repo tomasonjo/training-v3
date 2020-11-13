@@ -1,5 +1,5 @@
 name: training-data-science
-title: Data Science with Neo4j
+title: Data Science with Neo4j 3.5
 version: 'master'
 start_page: enrollment.adoc
 nav:
