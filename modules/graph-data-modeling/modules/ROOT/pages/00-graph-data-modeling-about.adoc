@@ -33,6 +33,7 @@ endif::[]
 
 This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
 
+ifdef::env-slides[]
 [.instructor-notes]
 --
 Welcome to this course on - +
@@ -62,6 +63,7 @@ This course focuses primarily on concepts.
 ** do some *white boarding* of data models, -
 ** and explore how to *evaluate data models*.
 --
+endif::[]
 
 == Lesson Overview
 

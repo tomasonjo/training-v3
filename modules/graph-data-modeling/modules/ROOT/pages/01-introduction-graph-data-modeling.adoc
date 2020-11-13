@@ -31,6 +31,7 @@ Stakeholders are:
 * Managers
 * Project leaders
 
+ifdef::env-slides[]
 [.instructor-notes]
 --
 Let's define what we mean -
@@ -83,7 +84,7 @@ The key point here - is that you *SHOULD* expect - the model to change.
 ** due to a more thought out model,
 ** including - the set of questions - guiding developers.
 
-_<NEXT>_
+<NEXT>
 
 Stakeholder perspectives include
 
@@ -91,6 +92,7 @@ Stakeholder perspectives include
 * analysts the use the graph to answer questions,
 * managers who need to act upon information derived from the graph.
 --
+endif::[]
 
 == How does Neo4j support graph data modeling?
 
