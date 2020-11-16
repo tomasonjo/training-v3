@@ -153,32 +153,11 @@ How the execution plan is created depends upon the DB Stats as well as the index
 You should always:
 --
 
-ifndef::env-slides[]
 [square]
 * Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
 * Understand the data model with `CALL apoc.meta.graph()`
 * Understand the DB Stats with `CALL apoc.meta.stats()`
 * Understand the indexes in the graph with `:schema`
-endif::[]
-
-
-ifdef::env-slides[]
-[square]
-* Ensure the data is loaded into the database you will be testing against and it represents a realistic number of nodes and relationships for your real dataset.
-* Understand the data model with
-
-  `CALL apoc.meta.graph()`
-
-[square]
-* Understand the DB Stats with
-
-  `CALL apoc.meta.stats()`
-
-[square]
-* Understand the indexes in the graph with
-
-  `:schema
-endif::[]
 
 == Pre-test all queries
 
