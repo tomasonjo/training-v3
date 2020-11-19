@@ -21,7 +21,7 @@ We will start with an existing web application (a simple business reviews websit
 Don't worry if you're not familiar with React or web development in general, to enhance our application we'll just be changing the Cypher queries used by the already existing application. But feel free to modify the application if you'd like to add more advanced features!
 --
 
-video::32-FYC07-dU[youtube,width=560,height=315]
+video::VzvNuW7iKls[youtube,width=560,height=315]
 
 _Introduction to Graph Data Science in Neo4j and overview of this course_
 

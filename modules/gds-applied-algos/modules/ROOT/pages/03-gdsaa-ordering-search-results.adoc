@@ -9,7 +9,7 @@
 :page-layout: training
 :page-quiz:
 
-video::FtVQ9iUjA0Q[youtube,width=560,height=315]
+video::v4vRYecKqDM[youtube,width=560,height=315]
 
 _Pearson similarity overview and problem statement_
 

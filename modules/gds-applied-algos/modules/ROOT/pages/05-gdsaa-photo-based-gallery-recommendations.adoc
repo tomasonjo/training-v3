@@ -9,7 +9,7 @@
 :page-layout: training
 :page-quiz:
 
-video::DQ7fH0QUg6A[youtube,width=560,height=315]
+video::CJksYzO7zl0[youtube,width=560,height=315]
 
 _Similarity algorithms and Label Propagation overview_
 

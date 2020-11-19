@@ -9,7 +9,7 @@
 :page-layout: training
 :page-quiz:
 
-video::N5LoaXY1Ip0[youtube,width=560,height=315]
+video::4pLJcltWjfw[youtube,width=560,height=315]
 
 _Category Hierarchy Algorithm Overview_
 

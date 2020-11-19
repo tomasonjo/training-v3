@@ -9,7 +9,7 @@
 :page-layout: training
 :page-quiz:
 
-video::jpFJqwVg4qE[youtube,width=560,height=315]
+video::HAyOIeQG2gI[youtube,width=560,height=315]
 
 _PageRank overview and problem statement_
 
