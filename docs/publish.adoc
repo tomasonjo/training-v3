@@ -7,6 +7,8 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:toc:
+:toclevels: 1
 
 == Publish to WordPress
 
@@ -167,3 +169,74 @@ nav:
   previous:
     slug: "neo4j-graph-database"
 ----
+
+== Publish to Antora
+
+=== Slugs & File Names
+
+All pages must have a `slug` attribute.
+The `slug` attribute must only contains lowercase alphanumeric characters and hyphens to make it a good URL.
+No spaces, no uppercase, no leading, trailing or double hyphens.
+
+The file name must be the same as the `slug` attribute. It must only contains lowercase alphanumeric characters and hyphens, e.g. `00-cqt-40-about.adoc`.
+
+=== Required attributes
+
+==== Component descriptor
+
+You must defined the following attributes in the file named _antora.yml_:
+
+`name`:: A unique name prefixed by `training-`, for example: `training-cqt-40`.
+`title`:: The title of the course. It must be the same as the enrollment page title.
+`version`:: `'master'` (unversioned)
+`start_page`:: `'enrollment.adoc'`
+`asciidoc.attributes.page-course-name`:: A unique slug, for example: `4.0-cypher-query-tuning`. For consitency, it should be the same as the directory name.
+`asciidoc.attributes.page-theme`:: `'training'`
+`asciidoc.attributes.page-toclevels`:: `1`
+`asciidoc.attributes.page-pagination`:: `'@'`
+`asciidoc.attributes.toc`:: `~`
+
+Here's a complete example:
+
+[source,yaml]
+----
+title: Cypher Query Tuning in Neo4j 4.0
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: '4.0-cypher-query-tuning'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~
+----
+
+==== Enrollment page
+
+`description`:: A short description of the course
+`page-slug`:: You can use the value `{slug}` to avoid duplicating the value of the `slug` attribute.
+`page-description`:: You can use the value `{description}` to avoid duplicating the value of the `description` attribute
+`page-layout`:: `training-enrollment`
+`page-course-duration`:: The course duration, for instance: "4 hrs". The value will be shown on the course card.
+`page-illustration`:: An absolute URL to an image to illustrate the course. The image will be shown on the course card.
+
+==== Course pages
+
+`page-slug`:: You can use the value `{slug}` to avoid duplicating the value of the `slug` attribute.
+`page-layout`:: `training`
+
+===== First module
+
+`page-type`:: `training-course-index`
+`page-pagination`:: `next`
+
+===== Module with a quiz
+
+`page-quiz`:: Indicates that the page contains a quiz (do not set a value, i.e. `:page-quiz:`).
+
+===== Last module (certificate page)
+
+`page-certificate`:: Indicates that the page should display an action to download the certificate (do not set a value, i.e. `:page-certificate:`).
