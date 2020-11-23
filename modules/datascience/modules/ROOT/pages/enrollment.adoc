@@ -4,7 +4,7 @@
 :page-slug: {slug}
 :page-description: {description}
 :page-layout: training-enrollment
-:page-course-duration: 4 hrs
+:page-course-duration: 5 hrs
 :page-illustration: https://dist.neo4j.com/wp-content/courseLogos/DataScienceWithNeo4j-3.5.jpg
 
 image::https://cdn.neo4jlabs.com/graphacademy/data-science/img/datascience.png[]

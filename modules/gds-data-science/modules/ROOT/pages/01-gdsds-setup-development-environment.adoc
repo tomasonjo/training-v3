@@ -8,7 +8,7 @@
 :module-next-title: Exploratory Data Analysis
 :page-slug: {slug}
 :page-layout: training
-
+:page-module-duration-minutes: 30
 
 == About this module
 

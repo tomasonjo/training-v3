@@ -9,6 +9,7 @@
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:page-module-duration-minutes: 30
 
 ifndef::env-slides[]
 == About this module

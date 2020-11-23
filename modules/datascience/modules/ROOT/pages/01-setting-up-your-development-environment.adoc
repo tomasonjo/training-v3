@@ -4,6 +4,7 @@
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training
+:page-module-duration-minutes: 30
 
 == About this module
 

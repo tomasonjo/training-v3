@@ -8,6 +8,7 @@
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:page-module-duration-minutes: 45
 
 == Centrality algorithms
 

@@ -5,6 +5,7 @@
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:page-module-duration-minutes: 60
 
 == About this module
 

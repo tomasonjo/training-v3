@@ -6,6 +6,7 @@
 :page-type: training-course-index
 :page-pagination: next
 :page-layout: training
+:page-module-duration-minutes: 5
 
 == About this course
 

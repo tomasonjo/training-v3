@@ -7,7 +7,7 @@
 :page-slug: {slug}
 :page-layout: training
 :page-certificate:
-
+:page-module-duration-minutes: 5
 
 == Course Summary
 
