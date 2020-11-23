@@ -6,6 +6,9 @@
 :toclevels: 4
 :imagesdir: ../images
 :module-next-title: Exploratory Data Analysis
+:page-slug: {slug}
+:page-layout: training
+
 
 == About this module
 
