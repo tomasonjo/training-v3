@@ -89,6 +89,9 @@ subprojects {
       case "gds-data-science":
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}gds-data-science/"
         break
+      case "4.0-importing-data":
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}4.0-importing-data"
+        break
       default:
         "https://neo4j.com/"
     }
@@ -132,6 +135,9 @@ subprojects {
       case "gds-data-science":
         "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-gdsds-about-this-course/"
         break
+      case "4.0-importing-data":
+        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-import-40-about/"
+        break     
       default:
         "https://neo4j.com/"
     }

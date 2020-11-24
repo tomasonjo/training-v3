@@ -76,7 +76,7 @@ When CSV files are created from your relational database, you must determine:
 
 [square]
 * Whether the CSV file will have header information, describing the names of the fields.
-* What the delimeter will be for the fields in each row.
+* What the delimiter will be for the fields in each row.
 
 [.notes]
 --
@@ -485,7 +485,7 @@ ON CREATE SET person:Director
 --
 From each row that is read, we find the _Movie_ node and the _Person_ node.
 Then we create the _:DIRECTED_ relationship between them.
-An finally, we add the _Director_ label to the node.
+And finally, we add the _Director_ label to the node.
 --
 
 == Add indexes

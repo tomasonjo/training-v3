@@ -1,0 +1,73 @@
+= Importing Data with Neo4j 4.0
+:slug: 00-import-40-about
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Overview of Importing Data
+:page-slug: {slug}
+:page-type: training-course-index
+:page-pagination: next
+:page-layout: training
+:page-module-duration-minutes: 5
+
+== About this course
+
+ifndef::env-slides[]
+This course introduces you to the many ways that you can import data into a Neo4j database.
+endif::[]
+
+This course is intended for developers, administrators, and data scientists who have basic Cypher experience with:
+
+[square]
+* Querying the database
+* Creating nodes and relationships
+* Creating indexes
+
+ifndef::env-slides[]
+In this course, you complete hands-on exercises to gain experience with importing data into Neo4j.
+You can complete the hands-on exercises in one of three ways, using:
+
+[square]
+[.statement]
+* Neo4j Desktop
+* Neo4j Sandbox
+* Neo4j Aura
+endif::[]
+
+ifdef::backend-html5[]
+At the end of each lesson are a set of questions that you must answer correctly to mark the lesson as completed.
+If you complete all lessons, you will receive a _Certificate of Completion_.
+
+If you perform the hands-on exercises, this course will take you approximately 4 hours to complete.
+endif::[]
+
+This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+
+== Lesson Overview
+
+Here are the lessons of this course:
+
+. Overview of Importing Data with Neo4j
+. Using LOAD CSV to Import Data
+. Using APOC to Import Data
+. Using the `neo4j-admin` tool to Import Data
+. Using an Application to Import Data
+. Using the ETL Tool for Import
+
+== Resources
+
+We have set up a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
+You should register on the community site where you can view other questions and answers for students taking our online training courses.
+The Neo4j Community Site is an excellent resource for answering many types of questions posed by other users of Neo4j.
+
+Here are some resources you will use as you learn about Neo4j and Cypher for this course:
+
+
+[square]
+* https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual]
+* https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard]
+* https://neo4j.com/docs/labs/apoc/current/[APOC Documentation]
+* https://neo4j.com/docs/driver-manual/current/[Neo4j Drivers Manual]
+* https://community.neo4j.com/c/general/online-training[Neo4j Community Site]
+

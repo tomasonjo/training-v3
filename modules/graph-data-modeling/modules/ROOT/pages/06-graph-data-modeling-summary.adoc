@@ -95,5 +95,5 @@ ifndef::env-slides[]
 
 == Course feedback
 
-We want your feedback on this course. Please provide your https://forms.gle/SzK3ssDRyDG31SL17[feedback] so we can improve this course.
+We want your feedback on this course. Please provide your https://forms.gle/k6nhzMXiYFyUYUNs7[feedback] so we can improve this course.
 endif::[]

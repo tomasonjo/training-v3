@@ -1,0 +1,32 @@
+= Importing Data with Neo4j 4.0
+:slug: importing-neo4j-40
+:description: Learn how to import data into Neo4j.
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 2 hrs
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0.jpg
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/ImportingDataWithNeo4j4.0_withTitle.jpg[]
+
+== About the Course
+
+This online course is a collection of lessons and and hands-on exercises that will help you learn the many ways that you can import data into a Neo4j database.
+
+== Prerequisites
+
+You should have Cypher experience with querying, creating nodes and relationships, and creating and using indexes.
+
+== Duration
+
+If you perform all of the hands-on exercises in this course,
+it will take you four hours to complete the course.
+
+== What you will learn
+
+* Overview of your options for importing data into Neo4j
+* Using LOAD CSV to load data
+* Using APOC for loading data
+* Using the neo4j-admin tool for loading data
+* Using an application for loading data
+* Using the Neo4j ETL Tool to load data from an RDBMS
