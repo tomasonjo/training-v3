@@ -17,27 +17,16 @@ In this section you will use the Label Propagation algorithm to recommend photos
 
 == Exercise
 
-. In Neo4j Browser, perform the steps in the  Neo4j Browser guide section *Photo Recommendations*. (:play gds-applied-graph-algos-exercises/05_photo_recommendations.html)
-. In CodeSandbox, edit the `FETCH_PHOTO_RECOMMENDATIONS` Cypher query in `src/exercises/exercise4.js` to recommend businesses whose photos belong to the same community.
+. In Neo4j Browser, perform the steps in the  Neo4j Browser guide section *Photo Recommendations*. (:play gds-applied-algos-exercises/05.html)
+. In React application code, edit the `FETCH_PHOTO_RECOMMENDATIONS` Cypher query in `src/exercises/exercise4.js` to recommend businesses whose photos belong to the same community.
 . Save this file.
-. In the CodeSandbox Browser, click *Photos* and select five random photos. Then the application presents restaurants based upon the photos selected.
+. In React web application, click *Photos* and select five random photos. Then the application presents restaurants based upon the photos selected.
 
 ====
 .Useful Resources
 
 * https://neo4j.com/docs/graph-data-science/current/algorithms/label-propagation/[Label Propagation^]
 ====
-
-== Solution
-
-If you get stuck, watch this video for a walk-through of the solution:
-
-++++
-<div style="position: relative; overflow: hidden; padding-top: 56.25%; width: 90%;">
-  <iframe src="https://www.youtube.com/embed/FV0LznTB364" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-</div>
-++++
-_Photo based recommendations solution_
 
 [.quiz]
 == Check your understanding

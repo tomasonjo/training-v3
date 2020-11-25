@@ -16,15 +16,15 @@ _PageRank overview and problem statement_
 
 In this section you will use the Personalized PageRank algorithm to identify "trusted" users, and present reviews from those users when viewing reviews of businesses.
 
-image::codesandbox5.png[,width=700,align=center]
+image::reactapp4.png[,width=700,align=center]
 
 == Exercise
 
-. In Neo4j Browser, perform the steps in the Neo4j Browser guide section *Relevant Reviews*. (:play gds-applied-graph-algos-exercises/04_relevant_reviews.html)
-. In CodeSandbox, edit the Cypher query in `src/exercises/exercise3.js` to return reviews ordered by whether or not the business has been reviewed by a "trusted" user.
+. In Neo4j Browser, perform the steps in the Neo4j Browser guide section *Relevant Reviews*. (:play gds-applied-algos-exercises/04.html)
+. In React application code, edit the Cypher query in `src/exercises/exercise3.js` to return reviews ordered by whether or not the business has been reviewed by a "trusted" user.
 . Save this file.
-. In CodeSandbox Browser:
-.. Perform a search on behalf of as user by first selecting a user.
+. In React web application:
+.. Perform a search on behalf of as user by first selecting the Layne user.
 .. Select the *Restaurant* category.
 .. In the search pane, specify the string *Mamma* for the name of the restaurant. This will search for restaurants that start with that name and have reviews that are  most relevant to the user. The remaining reviews are in chronological order.
 .. You can select a restaurant to see the reviews.
@@ -35,17 +35,6 @@ image::codesandbox5.png[,width=700,align=center]
 
 * https://neo4j.com/docs/graph-data-science/current/algorithms/similarity/[Similarity Algorithms^]
 ====
-
-== Solution
-
-If you get stuck, watch this video for a walk-through of the solution:
-
-++++
-<div style="position: relative; overflow: hidden; padding-top: 56.25%; width: 90%;">
-  <iframe src="https://www.youtube.com/embed/wIFQmX14jb8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-</div>
-++++
-_Most relevant reviews exercise solution_
 
 [.quiz]
 == Check your understanding

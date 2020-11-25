@@ -3,7 +3,7 @@
 == Ordering Search Results
 
 We want to work out which users are similar to each other so that we can show more appropriate businesses at the top of the list.
-In this section we'll learn how to use the Pearson Similarity algorithm to do this.
+In this section we'll learn how to use the https://neo4j.com/docs/graph-data-science/current/alpha-algorithms/pearson/[Pearson Similarity algorithm] to do this.
 
 The Pearson Similarity algorithm takes into account not only the overall similarity between users, but also their relative similarity.
 
@@ -13,8 +13,8 @@ The query below provides a template for computing the Pearson Similarity of user
 Update the query to:
 
 * Compute similarity between users based on the common businesses they've reviewed (Hint: you'll need to use the `WROTE` and `REVIEWS` relationships)
-* Choose a similarity cut off value (Hint: look at the `similarityCutOff` parameter)
-* Choose a topK value (Hint: look at the `topK` parameter)
+* Choose a similarity cut off value of 0.1 (Hint: look at the `similarityCutOff` parameter)
+* Choose a topK value of 3 (Hint: look at the `topK` parameter)
 
 [source,Cypher]
 ----
@@ -39,7 +39,7 @@ CALL gds.alpha.similarity.pearson.write({
     WHERE size((u)-[:WROTE]->()) > 15
     MATCH (u)-[:WROTE]->(review)-[:REVIEWS]->(b)
     RETURN id(u) AS item, id(b) AS category, review.stars as weight",
-  graph: "cypher", topK: 5, skipValue: gds.util.NaN(),
+  graph: "cypher", topK: 3, skipValue: gds.util.NaN(),
   similarityCutoff: 0.1, writeRelationshipType:'SIMILAR'})
 ----
 
@@ -48,8 +48,8 @@ We can find similar users by following the `SIMILAR` relationship from a user:
 
 [source,Cypher]
 ----
-MATCH (me:User {id: $userId})-[similarity:SIMILAR]->(other)
-RETURN other, similarity.score AS similarity
+MATCH (me:User {id: "fVILhIglx6RNOXQba5t4kQ"})-[similarity:SIMILAR]->(other)
+RETURN other.id as other, similarity.score AS similarity
 ORDER BY similarity DESC
 ----
 

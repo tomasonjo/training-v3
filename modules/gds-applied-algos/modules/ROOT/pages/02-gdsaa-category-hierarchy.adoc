@@ -16,7 +16,7 @@ _Category Hierarchy Algorithm Overview_
 In this module, you will improve navigation for business categories.
 Let's first have a look at the part of the application that you will enhance.
 
-image::codesandbox3.png[,width=700,align=center]
+image::reactapp2.png[,width=700,align=center]
 
 We can search for businesses by name and category, but at the moment we have a list of over 100 categories to choose from!
 One way that we could make things easier for our user is if we let them navigate a taxonomy of categories, starting at the top-level. To do this we'll use the Overlap Similarity algorithm to identify a category hierarchy in the data. We'll need to run the algorithm and make some updates to our data in Neo4j, then update the query used in the application to populate the category drop-down.
@@ -24,11 +24,11 @@ One way that we could make things easier for our user is if we let them navigate
 
 == Exercise
 
-. In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. You should see a very long list of categories. You will use the Overlap Similarity algorithm to create relationships in the graph that will be used to identify the top-level categories.
-. In Neo4j Browser, complete the steps for *Category Hierarchy* (:play gds-applied-graph-algorithms-exercises/02_category_hierarchy.html) to add category hierarchy to the graph using the Overlap Similarity algorithm.
-. In CodeSandbox, edit the Cypher query in `src/exercises/exercise1.js` to return only top-level categories to populate the Category drop down in Business Search.
-. Save your changes to *exercise1.js*.
-. In CodeSandbox Browser, click *Business Search* and then click the pane for selecting a category. Is the list of categories smaller?
+. In your React web application, click *Business Search* and then click the pane for selecting a category. You should see a very long list of categories. You will use the Overlap Similarity algorithm to create relationships in the graph that will be used to identify the top-level categories.
+. In Neo4j Browser, complete the steps for *Category Hierarchy* (:play gds-applied-algos-exercises/02.html) to add category hierarchy to the graph using the Overlap Similarity algorithm.
+. In React application code, edit the Cypher query in `src/exercises/exercise1.js` to return only top-level categories to populate the Category drop down in Business Search.
+. Save this file.
+. In React web application, click *Business Search* and then click the pane for selecting a category. Is the list of categories smaller?
 
 [NOTE]
 --
@@ -42,19 +42,6 @@ In your new query, be sure to keep the same return structure, or otherwise the c
 
 * https://neo4j.com/docs/graph-data-science/current/alpha-algorithms/overlap/[Overlap Similarity^]
 ====
-
-
-
-== Solution
-
-If you get stuck, watch this video for a walk-through of the solution:
-
-++++
-<div style="position: relative; overflow: hidden; padding-top: 56.25%; width: 90%;">
-  <iframe src="https://www.youtube.com/embed/621it6d-AxE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-</div>
-++++
-_Category Hierarchy exercise solution_
 
 [.quiz]
 == Check your understanding
