@@ -48,15 +48,15 @@ The query below provides a template for computing the https://neo4j.com/docs/gra
 Update the query (copied from the documentation) to:
 
 * Compute similarity between categories based on the business tagged with that category (Hint: you'll need to use the `IN_CATEGORY` relationship)
-* Choose a similarity cut off value (Hint: look at the `similarityCutOff` parameter)
+* Choose a similarity cut off value of 0.75 (Hint: look at the `similarityCutOff` parameter)
 
 [source,Cypher]
 ----
 // Change this part of the query
 MATCH (book:Book)-[:HAS_GENRE]->(genre)
-WITH {item:id(genre), categories: collect(id(book))} as userData
+WITH {item:id(genre), categories: collect(id(book))} as categoryData
 
-WITH collect(userData) as data
+WITH collect(categoryData) as data
 
 // Fill in the configuration in this part of the query
 CALL gds.alpha.similarity.overlap.write({
@@ -74,9 +74,9 @@ This is what the query should look like:
 [source,Cypher]
 ----
 MATCH (category:Category)<-[:IN_CATEGORY]-(business)
-WITH {item:id(category), categories: collect(id(business))} AS userData
+WITH {item:id(category), categories: collect(id(business))} AS categoryData
 
-WITH collect(userData) as data
+WITH collect(categoryData) as data
 
 CALL gds.alpha.similarity.overlap.write({
   data: data, writeRelationshipType: 'NARROWER_THAN',

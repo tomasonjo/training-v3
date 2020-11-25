@@ -49,7 +49,7 @@ LIMIT 10;
 
 == Cypher Refresher: Interesting People
 
-And who are some interesting people?
+And who are some interesting people with the most reviews?
 
 [source,Cypher]
 ----

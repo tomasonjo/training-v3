@@ -66,9 +66,9 @@ LIMIT 20
 
 == Clustering photos
 
-Now we're going to cluster photos based on the `SIMILAR_PHOTO` relationships.
+Now we're going to cluster photos with Label Propagation algorithm based on the `SIMILAR_PHOTO` relationships.
 Project the `SIMILAR_PHOTO` relationships as undirected.
-Update the following query to do this:
+Update the following query:
 
 [source, cypher]
 ----

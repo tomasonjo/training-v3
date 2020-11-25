@@ -15,7 +15,7 @@ In this course, you have learned how to use the:
 [square]
 * Pearson Similarity graph algorithm
 * Personalized PageRank graph algorithm
-* Jaccard similarity algorithm
+* Node similarity algorithm
 * Label Propagation Community Detection algorithm
 
 ifndef::env-slides[]

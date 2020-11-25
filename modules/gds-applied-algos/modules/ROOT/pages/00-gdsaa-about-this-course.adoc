@@ -31,9 +31,9 @@ _Introduction to Graph Data Science in Neo4j and overview of this course_
 
 [square]
 * Review of the dataset used in this course.
-* Accessing the Yelp Neo4j Sandbox.
-* Overview of the CodeSandbox React application used in the course.
-* Connecting the React application to your Neo4j Sandbox instance.
+* Setting up the Yelp dataset in Neo4j Desktop.
+* Overview of the React application used in the course.
+* Connecting the React application to your Neo4j Desktop instance.
 * Verifying configuration and querying the dataset.
 
 Estimated time: _15 minutes_
@@ -67,7 +67,7 @@ Estimated time: _30 minutes_
 [square]
 * Learn more about Similarity algorithms in Neo4j.
 * Learn about Community Detection and the Label Propagation algorithm.
-* Use Jaccard Similarity and Label Propagation to build a photo based business recommendation feature.
+* Use Node Similarity and Label Propagation to build a photo based business recommendation feature.
 
 Estimated time: _30 minutes_
 

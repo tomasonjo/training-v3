@@ -23,7 +23,7 @@ As of Round 12 of the challenge, the open dataset contained:
 * 10 metropolitan areas.
 
 The https://www.yelp.com/dataset[Yelp dataset^] represents real data that is very well structured and highly interconnected.
-It’s a great showcase for graph algorithms that you can also download and explore. You will use a Neo4j Sandbox already loaded with this data.
+It’s a great showcase for graph algorithms that you can also download and explore. You will setup a Neo4j Desktop instance and load this data.
 
 == The Neo4j Graph Data Science Plugin
 
@@ -34,7 +34,7 @@ image::gdsplugin.png[Neo4j Graph Data Science plugin,width=500,align=center]
 
 [.is-half.right-column]
 --
-The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Plugin. The plugin implements four types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity. The first three are classic graph algorithms and the fourth can be used on its own or in combination with the other three.
+The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Plugin. The plugin implements five types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity, Embeddings. The first three are classic graph algorithms and the last two can be used on its own or in combination with the other three.
 --
 
 == Setting up the Yelp dataset in Neo4j Desktop
@@ -81,26 +81,20 @@ You can access the guides for this course by running this command in Neo4j Brows
 
 [source,Cypher]
 ----
-:play gds-applied-graph-algos-exercises
+:play gds-applied-algos-exercises
 ----
 
+== React Web Application
 
-////
-== CodeSandbox React Application
+Since this an applied course, we want to see how to enhance features of an actual application.
+You will use an existing React application for this part of the course. 
+The application is available as a https://github.com/neo4j-graph-analytics/data-science-course-react-app[GitHub repository].
+To set it up locally, you will need to follow this five steps.
 
-[.is-half.left-column]
---
-image::codesandbox2.png[CodeSandbox,width=500,align=center]
---
-
-[.is-half.right-column]
---
-Since this an applied course, we want to see how to enhance features of an actual application. You will use an existing React application for this part of the course. CodeSandbox is a hosted environment that allows you to edit, run, and preview JavaScript applications, all in the browser.
---
-
-This CodeSandbox contains all the client code for the application that you will build. You will want to have CodeSandbox open in another tab as you work through the application for each module of this course.
-
-////
+. Clone the github repository by running `git clone https://github.com/neo4j-graph-analytics/data-science-course-react-app.git`.
+. Run `npm install` inside the repository folder.
+. Edit the *.env* file by replacing the default environment variables with the credentials for your Yelp Neo4j Desktop instance.
+. Run `npm start` to start the application.
 
 === Building a business reviews application
 
@@ -116,23 +110,14 @@ The rest of the course will follow this structure:
 
 == Exercise
 
-Your exercise for this module is to get all the tools up and running and talking to each other.
+By now, you should have all the tools up and running and talking to each other.
 
-. Create a https://sandbox.neo4j.com/?usecase=yelp[Yelp Neo4j Sandbox instance^].
-    *Note*: You must log in to the Neo4j Sandbox site. This may require you to register with Neo4j.
-. In Yelp Sandbox you just created, click the *Open Neo4j Browser* button to open a Neo4j Browser for the Yelp database. You will be using this Neo4j Browser window throughout this course.
-. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play gds-applied-graph-algos-exercises), *Cypher Refresher*.
-. Open the https://codesandbox.io/s/github/neo4j-contrib/training-v2/tree/master/Courses/AppliedGraphAlgorithms/react-app[React application in CodeSandbox^]. This is the initial version of our business reviews application. You will be using this Code Sandbox window throughout this course.
-. In CodeSandbox:
-.. Sign in to CodeSandbox with your github credentials.
-.. Click Fork.
-.. Edit the *.env* file by replacing the default environment variables with the credentials for your Yelp Neo4j Sandbox. The URL and credentials are available to you from your Yelp sandbox pane if you open the details of the pane by selecting arrow to the right of the *Open Neo4j Browser* button.
-... Replace the value for REACT_APP_NEO4J_URI with the value of *Websocket Bolt URL* from the *Connection Details* tab of the Yelp Sandbox.
-... Replace the value for REACT_APP_NEO4J_PASSWORD with the *Password* in the *Connection Details* tab of the Yelp Sandbox.
-.. Save this file.
-.. Click the refresh icon to connect the CodeSandbox Browser (on the right) to the database.
-.. Confirm that you can now view data in the database by selecting a name in the drop down (initially selected with Dolores). Data should be retrieved for each user.
+. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play gds-applied-algos-exercises), *Cypher Refresher*.
+. In the React web application, confirm that you can now view data in the database by selecting a name in the drop-down (initially selected with Dolores). Data should be retrieved for each user.
 
+The data for Dolores should look like the following:
+
+image::reactapp1.png[,width=400,align=center]
 
 ====
 .Useful Resources
@@ -140,21 +125,12 @@ Your exercise for this module is to get all the tools up and running and talking
 * https://neo4j.com/docs/cypher-refcard/current/[Cypher Cheatsheet^]
 ====
 
-If you get stuck, watch this video to see how it all fits together.
-
-++++
-<div style="position: relative; overflow: hidden; padding-top: 56.25%; width: 90%;">
-    <iframe src="https://www.youtube.com/embed/cG5oaywCTFg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
-</div>
-++++
-_Overview of the application and connecting it to your Neo4j Sandbox instance_
-
 [.quiz]
 == Check your understanding
 === Question 1
 
 [.statement]
-Verify your CodeSandbox React application is connected to Neo4j Sandbox.
+Verify your React application is connected to Neo4j Desktop instance.
 Which of the following users appear in the User Profile dropdown?
 
 Select the correct answers.
@@ -167,7 +143,7 @@ Select the correct answers.
 === Question 2
 
 [.statement]
-Using the Neo4j Browser for your Yelp Neo4j Sandbox instance write a Cypher query to find all the businesses connected to the Category "Breweries". How many breweries are there in the dataset?
+Using the Neo4j Browser for your Yelp Neo4j Desktop instance write a Cypher query to find all the businesses connected to the Category "Breweries". How many breweries are there in the dataset?
 
 [.statement]
 Select the correct answer.
@@ -183,8 +159,8 @@ Select the correct answer.
 
 You should now have:
 [square]
-* Created a Yelp Neo4j Sandbox instance.
+* Created a Yelp Neo4j Desktop instance.
 * Opened a Neo4j Browser for the Yelp database.
 * Completed the Cypher Refresher section in the Neo4j Browser Guide.
-* Opened the businesses reviews application in CodeSandbox.
-* Connected your React CodeSandbox application to your Neo4j Sandbox instance.
+* Downloaded and installed the React application.
+* Connected your React application to your Neo4j Desktop instance.
