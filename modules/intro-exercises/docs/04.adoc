@@ -235,7 +235,7 @@ The result returned should be:
 [.thumb]
 image::ReviewsWithFun.png[ReviewsWithFun,width=700]
 
-== Exercise 4.9: Retrieve all all _REVIEW_ relationships from the graph where the _summary_ of the review contains the string _fun_ (Taking it further - optional)
+== Exercise 4.9: Retrieve all _REVIEW_ relationships from the graph where the _summary_ of the review contains the string _fun_ (Taking it further - optional)
 
 * Retrieve all movies in the database that have _love_ in their _tagline_ and return the movie titles 
 * Retrieve movies in the database, specifying a regular expression for the content of the _tagline_.
