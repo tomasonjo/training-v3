@@ -6,6 +6,7 @@
 :page-layout: training-enrollment
 :page-course-duration: 12 hrs
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-3.5.jpg
+:page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-3.5_withTitle.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-3.5_withTitle.jpg[]
 

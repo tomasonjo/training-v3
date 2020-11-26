@@ -7,6 +7,7 @@
 :page-course-duration: 4 hrs
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/MLWorkflowLinkPrediction-40.jpg
 :page-course-label: New
+:page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/MLWorkflowLinkPrediction-40_withTitle.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/MLWorkflowLinkPrediction-40_withTitle.jpg[]
 
