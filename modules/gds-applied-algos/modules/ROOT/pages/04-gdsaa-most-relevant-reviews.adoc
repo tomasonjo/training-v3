@@ -1,13 +1,11 @@
 = Most Relevant Reviews
 :slug: 04-gdsaa-most-relevant-reviews
-:doctype: book
-:toc: left
-:toclevels: 4
 :imagesdir: ../images
 :module-next-title: Photo Based Gallery Recomendations
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:page-module-duration-minutes: 60
 
 video::HAyOIeQG2gI[youtube,width=560,height=315]
 

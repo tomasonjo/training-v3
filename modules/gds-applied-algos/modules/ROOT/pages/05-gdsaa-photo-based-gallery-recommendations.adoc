@@ -1,13 +1,11 @@
 = Photo Based Gallery Recomendations
 :slug: 05-gdsaa-photo-based-gallery-recommendations
-:doctype: book
-:toc: left
-:toclevels: 4
 :imagesdir: ../images
 :module-next-title: Summary: Applied Graph Data Science for Web Applications
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:page-module-duration-minutes: 60
 
 video::CJksYzO7zl0[youtube,width=560,height=315]
 

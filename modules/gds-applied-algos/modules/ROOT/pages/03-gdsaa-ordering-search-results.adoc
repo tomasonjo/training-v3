@@ -1,13 +1,12 @@
 = Ordering Search Results
 :slug: 03-gdsaa-ordering-search-results
-:doctype: book
-:toc: left
-:toclevels: 4
 :imagesdir: ../images
 :module-next-title: Most Relevant Reviews
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:page-module-duration-minutes: 30
+
 
 video::v4vRYecKqDM[youtube,width=560,height=315]
 

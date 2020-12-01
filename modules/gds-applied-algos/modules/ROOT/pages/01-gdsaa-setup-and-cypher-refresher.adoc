@@ -1,13 +1,13 @@
 = Setup and Cypher Refresher
 :slug: 01-gdsaa-setup-and-cypher-refresher
-:doctype: book
-:toc: left
-:toclevels: 4
 :imagesdir: ../images
 :module-next-title: Category Hierarchy
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
+:uri-yelp-dataset-agreement-pdf: https://s3-media3.fl.yelpcdn.com/assets/srv0/engineering_pages/bea5c1e92bf3/assets/vendor/yelp-dataset-agreement.pdf
+:page-module-duration-minutes: 30
+
 
 == The Yelp Public Dataset
 

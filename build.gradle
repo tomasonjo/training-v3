@@ -90,7 +90,7 @@ subprojects {
         "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}gds-data-science/"
         break
       case "4.0-importing-data":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}4.0-importing-data"
+        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}importing-data-40"
         break
       default:
         "https://neo4j.com/"
