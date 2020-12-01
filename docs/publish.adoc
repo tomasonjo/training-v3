@@ -221,7 +221,9 @@ asciidoc:
 `page-description`:: You can use the value `{description}` to avoid duplicating the value of the `description` attribute
 `page-layout`:: `training-enrollment`
 `page-course-duration`:: The course duration, for instance: "4 hrs". The value will be shown on the course card.
-`page-illustration`:: An absolute URL to an image to illustrate the course. The image will be shown on the course card.
+`page-illustration`:: An absolute image URL to illustrate the course. The image will be shown on the course card.
+`page-ogimage`:: An absolute image URL used when a link is shared on social media: https://ogp.me/.
+We recommend using an image with the course title on it.
 
 ==== Course pages
 

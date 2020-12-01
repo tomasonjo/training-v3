@@ -6,6 +6,7 @@
 :page-layout: training-enrollment
 :page-course-duration: 1 day
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/BasicNeo4jAdministration-4.0.jpg
+:page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/BasicNeo4jAdministration-4.0_withTitle.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/BasicNeo4jAdministration-4.0_withTitle.jpg[]
 
