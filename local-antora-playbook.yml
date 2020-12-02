@@ -36,6 +36,7 @@ asciidoc:
     experimental: ''
     page-component: training
     page-theme: training
+    page-disabletracking: true
     page-breadcrumbs:
       - name: Neo4j Training
         url: /online-training
