@@ -1,5 +1,5 @@
 const bs = require("browser-sync").create()
-const generator = require('../site-generator')
+const generator = require('@neo4j/developer-site-generator')
 
 const antoraArgs = ['--playbook', 'local-antora-playbook.yml']
 
