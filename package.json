@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node resources/tasks/start.js",
     "watch": "node resources/tasks/watch.js",
-    "build": "antora local-antora-playbook.yml --generator ./resources/site-generator"
+    "build": "antora local-antora-playbook.yml --generator @neo4j/developer-site-generator"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/neo4j-contrib/training-v3#readme",
   "devDependencies": {
     "@antora/cli": "^2.3.4",
-    "@antora/site-generator-default": "^2.3.4",
+    "@neo4j/developer-site-generator": "git+https://github.com/neo4j-documentation/developer-site-generator.git#v0.4.2",
     "browser-sync": "^2.26.12",
     "cheerio": "^1.0.0-rc.3",
     "chokidar": "^3.4.2",
