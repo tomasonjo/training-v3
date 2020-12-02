@@ -19,7 +19,9 @@ This course takes an applied approach - covering not just how to use the graph a
 == Prerequisites
 
 * Cypher programming.
+* Experience with Neo4j Desktop and Neo4j Browser.
 * JavaScript for Web applications programming experience.
+* Github account so you can clone the React application code base.
 
 == Duration
 

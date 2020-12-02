@@ -34,7 +34,7 @@ image::gdsplugin.png[Neo4j Graph Data Science plugin,width=500,align=center]
 
 [.is-half.right-column]
 --
-The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Plugin. The plugin implements five types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity, Embeddings. The first three are classic graph algorithms and the last two can be used on its own or in combination with the other three.
+The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Library. The plugin implements five types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity, Embeddings. The first three are classic graph algorithms and the last two can be used on its own or in combination with the other three.
 --
 
 == Setting up the Yelp dataset in Neo4j Desktop
@@ -45,7 +45,7 @@ Click here to review and agree to the terms and conditions of using the Yelp dat
 
 /// need to add button here for showing the PDF.
 
-Here are the steps for setting up the Yelp dataset in your Neo4j Desktop environment:
+Perform these steps to set up the Yelp dataset in your Neo4j Desktop environment:
 
 . Download the dump file: https://neo4j-sandbox-usecase-datastores.s3.amazonaws.com/dump/yelp-40.dump
 . Ensure that you have no databases started or connected to in Neo4j Desktop.
@@ -61,7 +61,7 @@ Here are the steps for setting up the Yelp dataset in your Neo4j Desktop environ
 . Connect to the database with Neo4j Browser.
 . Verify that the nodes and relationships exist in the graph.
 
-Follow along with this video for setting up the Yelp dataset in your Neo4j Desktop environment.
+You can also follow along with this video for setting up the Yelp dataset in your Neo4j Desktop environment.
 
 video::cYaK-X8KLQI[youtube,width=560,height=315]
 
@@ -89,7 +89,8 @@ You can access the guides for this course by running this command in Neo4j Brows
 Since this an applied course, we want to see how to enhance features of an actual application.
 You will use an existing React application for this part of the course. 
 The application is available as a https://github.com/neo4j-graph-analytics/data-science-course-react-app[GitHub repository].
-To set it up locally, you will need to follow this five steps.
+
+Perform these five steps to set up your development environment:
 
 . Clone the github repository by running `git clone https://github.com/neo4j-graph-analytics/data-science-course-react-app.git`.
 . Run `npm install` inside the repository folder.
@@ -105,7 +106,7 @@ The rest of the course will follow this structure:
 
 * Introduction to an algorithm.
 * Learn how to execute the algorithm using Cypher in Neo4j Browser.
-* Use the Cypher and updated graph to improve the application in Code Sandbox.
+* Use the Cypher and updated graph to improve the React application.
 
 
 == Exercise

@@ -85,8 +85,8 @@ Estimated time: _10 minutes_
 
 This course focuses on using graph algorithms with Neo4j in an applied environment to enhance functionality of an application. To be successful you should:
 
-* Have completed Introduction to Neo4j course or have equal Cypher proficiency.
-* Have a GitHub account as you will need it to log in to CodeSandbox.
+* Have completed Introduction to Neo4j 4.0 course or have equal Cypher proficiency.
+* Have a GitHub account as you will need it to clone the React application code base.
 * Be familiar with Neo4j Browser.
 * Be familiar with the concepts of a web application.
 

@@ -22,7 +22,7 @@ image::reactapp4.png[,width=700,align=center]
 . In React application code, edit the Cypher query in `src/exercises/exercise3.js` to return reviews ordered by whether or not the business has been reviewed by a "trusted" user.
 . Save this file.
 . In React web application:
-.. Perform a search on behalf of as user by first selecting the Layne user.
+.. Perform a search on behalf of as user by first selecting the *Layne* user.
 .. Select the *Restaurant* category.
 .. In the search pane, specify the string *Mamma* for the name of the restaurant. This will search for restaurants that start with that name and have reviews that are  most relevant to the user. The remaining reviews are in chronological order.
 .. You can select a restaurant to see the reviews.
