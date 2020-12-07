@@ -235,7 +235,7 @@ Here is a simple example of using Native projection to project a named graph:
 [source,Cypher,role=noplay]
 ----
 CALL gds.graph.create('graph','Person','HELPS', 
-    {nodeProperties:['seed']
+    {nodeProperties:['seed'],
      relationshipProperties: ['weight', 'cost']
       })
 ----
