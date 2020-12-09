@@ -2,7 +2,6 @@
 :doctype: book
 :toc: left
 :toclevels: 4
-:imagesdir: ../images
 :includedir: ../modules/ROOT/pages
 
 include::{includedir}/00-graph-data-modeling-about.adoc[leveloffset=+1]

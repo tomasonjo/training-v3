@@ -20,6 +20,7 @@ Next, you will learn how to add data to a graph by creating nodes.
 --
 
 At the end of this module, you should be able to write Cypher statements to:
+
 [square]
 * Create a node.
 * Add and remove node labels.
@@ -99,7 +100,6 @@ Here is what you see in Neo4j Browser when you create a node for the movie, _Bat
 
 [.is-half.left-column]
 --
-
 image::CreateBatmanBegins.png[CreateBatmanBegins,width=600,align=center]
 --
 
@@ -131,8 +131,6 @@ You can create multiple nodes by simply separating the nodes specified with comm
 Here is an example, where we create some _Person_ nodes that will represent some of the people associated with the movie _Batman Begins_:
 --
 
-[.is-two-thirds.left-column]
---
 [source,Cypher,role=nocopy noplay]
 ----
 CREATE 
@@ -141,7 +139,7 @@ CREATE
 (:Person {name: 'Katie Holmes', born: 1978}),
 (:Person {name: 'Benjamin Melniker', born: 1913})
 ----
---
+
 
 ifndef::env-slides[]
 Here is the result of running this Cypher statement:
@@ -362,6 +360,7 @@ Once a property key is added to the graph, it is [.underline]#never# removed.
 --
 image::AllPropertyKeys1.png[AllPropertyKeys1,width=250,align=center]
 --
+
 [.notes]
 --
 When you examine the property keys in the database (by executing `CALL db.propertyKeys()`, you will see all property keys created for the graph, regardless of whether they are currently used for nodes and relationships.

@@ -1,6 +1,5 @@
 :includedir: ../modules/ROOT/pages
 
-////
 [.title.slide-start-title]
 include::{includedir}/00-intro-neo4j-about.adoc[]
 
@@ -10,16 +9,8 @@ include::{includedir}/01-neo4j-graph-database.adoc[leveloffset=+1]
 [.title.slide-start-title]
 include::{includedir}/02-neo4j-graph-platform.adoc[leveloffset=+1]
 
-////
-[.title.slide-start-title]
-include::{includedir}/junk.adoc[leveloffset=+1]
-
-////
-
 [.title.slide-start-title]
 include::{includedir}/03-introduction-to-cypher.adoc[leveloffset=+1]
-
-slides done through lesson 3
 
 [.title.slide-start-title]
 include::{includedir}/04-using-where-to-filter-queries.adoc[leveloffset=+1]
@@ -48,12 +39,12 @@ include::{includedir}/11-deleting-nodes-and-relationships.adoc[leveloffset=+1]
 [.title.slide-start-title]
 include::{includedir}/12-merging-data.adoc[leveloffset=+1]
 
-
 [.title.slide-start-title]
 include::{includedir}/13-defining-constraints-data.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
 include::{includedir}/14-using-indexes.adoc[leveloffset=+1]
+
 
 [.title.slide-start-title]
 include::{includedir}/15-using-query-best-practices.adoc[leveloffset=+1]
@@ -79,4 +70,3 @@ include::{includedir}/21-using-neo4j-etl-tool-import.adoc[leveloffset=+1]
 [.title.slide-start-title]
 include::{includedir}/22-intro-neo4j-summary.adoc[leveloffset=+1]
 
-////
