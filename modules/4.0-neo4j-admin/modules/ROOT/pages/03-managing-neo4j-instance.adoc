@@ -215,12 +215,12 @@ Instead, you can view the log to check the status which is what you will be doin
 
 image::Neo4j_started-docker.png[Neo4j_started_docker,width=1200,align=center]
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,env-slides,backend-pdf[]
 [.student-exercise]
 == Exercise #2: Managing the Neo4j instance
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

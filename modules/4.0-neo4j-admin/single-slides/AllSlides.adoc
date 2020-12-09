@@ -1,42 +1,42 @@
-:includedir: ../docs
+:includedir: ../modules/ROOT/pages
 
-include::{includedir}/00_AboutThisCourse.adoc[]
-
-[.title.slide-start-title]
-include::{includedir}/01_IntroToNeo4j.adoc[leveloffset=+1]
+include::{includedir}/00-basic-neo4j-admin-about.adoc[]
 
 [.title.slide-start-title]
-include::{includedir}/02_OverviewOfNeo4jAdministration.adoc[leveloffset=+1]
+include::{includedir}/01-admin-intro-neo4j.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/03_ManagingANeo4jInstance.adoc[leveloffset=+1]
+include::{includedir}/02-overview-neo4j-admin.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/04_UsingCypherShellToManageDatabases.adoc[leveloffset=+1]
+include::{includedir}/03-managing-neo4j-instance.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/05_CopyingDatabases.adoc[leveloffset=+1]
+include::{includedir}/04-using-cypher-shell-manage-databases.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/06_ChangingTheDatabaseLocation.adoc[leveloffset=+1]
+include::{includedir}/05-copying-databases.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/07_CheckingDatabaseConsistency.adoc[leveloffset=+1]
+include::{includedir}/06-changing-database-location.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/08_ScriptingToManageDatabases.adoc[leveloffset=+1]
+include::{includedir}/07-checking-database-consistency.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/09_ConfiguringPlugIns.adoc[leveloffset=+1]
+include::{includedir}/08-scripting-manage-databases.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/10_ManagingHTTPPorts.adoc[leveloffset=+1]
+include::{includedir}/09-configuring-plugins.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/11_ManagingBackups.adoc[leveloffset=+1]
+include::{includedir}/10-managing-http-ports.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/12_ImportingData.adoc[leveloffset=+1]
+include::{includedir}/11-managing-backups.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/13_Summary.adoc[leveloffset=+1]
+include::{includedir}/12-importing-data.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/13-basic-neo4j-admin-summary.adoc[leveloffset=+1]

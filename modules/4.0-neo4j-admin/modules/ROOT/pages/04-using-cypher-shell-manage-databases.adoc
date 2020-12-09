@@ -167,12 +167,12 @@ We simply use these Cypher statements as input when we start the `cypher-shell` 
 They are automatically executed against the default database, _neo4j_.
 --
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,env-slides,backend-pdf[]
 [.student-exercise]
 == Exercise #3: Using `cypher-shell`
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 
@@ -323,12 +323,12 @@ CREATE <database> IF NOT EXISTS;
 [NOTE]
 You cannot use `CREATE OR REPLACE` together with `IF NOT EXISTS`.
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,env-slides,backend-pdf[]
 [.student-exercise]
 == Exercise #4: Creating and deleting a database
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

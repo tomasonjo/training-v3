@@ -220,12 +220,12 @@ And here is some of what was produced in the report:
 
 image::APOCProcedures.png[APOCProcedures,width=200,align=center]
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,backend-pdf,env-slides[]
 [.student-exercise]
 == Exercise #9: Install a plugin
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

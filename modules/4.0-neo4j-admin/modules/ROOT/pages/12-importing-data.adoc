@@ -245,12 +245,12 @@ Here is the what you will be doing in the next exercise to use the `import` comm
 
 image::ImportCrimes1.png[ImportCrimes1,width=1200,align=center]
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,backend-pdf,env-slides[]
 [.student-exercise]
 == Exercise 12: Importing data with the import command of neo4j-admin
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

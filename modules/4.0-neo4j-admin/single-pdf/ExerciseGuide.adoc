@@ -1,20 +1,19 @@
 = Basic Neo4j 4.0 Administration: Exercise Guide
 :doctype: book
 :toc: left
-:toclevels: 3
-:experimental:
+:toclevels: 4
 :imagesdir: ../images
-:includedir: ../docs
+:partialsdir: ../modules/ROOT/partials
 
-include::{includedir}/exercises/Exercise01.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise02.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise03.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise04.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise05.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise06.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise07.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise08.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise09.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise10.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise11.adoc[leveloffset=+1]
-include::{includedir}/exercises/Exercise12.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise01.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise02.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise03.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise04.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise05.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise06.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise07.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise08.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise09.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise10.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise11.adoc[leveloffset=+1]
+include::{partialsdir}/exercises/Exercise12.adoc[leveloffset=+1]

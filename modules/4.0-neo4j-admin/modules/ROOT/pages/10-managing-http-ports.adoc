@@ -118,12 +118,12 @@ But another level of security for a system is to use non-default ports. In this 
 You should consult the https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL documentation] for details in your real, production environment.
 --
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,backend-pdf,env-slides[]
 [.student-exercise]
 == Exercise #10: Modify the HTTP port
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

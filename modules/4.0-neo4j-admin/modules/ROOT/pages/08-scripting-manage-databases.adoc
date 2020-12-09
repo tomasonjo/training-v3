@@ -93,12 +93,12 @@ When the *PrepareDB.sh* script runs its scripts, all output will be written to t
 Using the Cypher file, together with the run scripts, you can perform something like this to automate changes to a database or set of databases.
 --
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,backend-pdf,env-slides[]
 [.student-exercise]
 == Exercise #8: Scripting changes to the database
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

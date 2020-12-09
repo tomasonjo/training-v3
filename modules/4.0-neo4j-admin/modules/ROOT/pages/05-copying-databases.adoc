@@ -155,12 +155,12 @@ Then, if you want to create a database from any dump file (offline backup) to us
 CREATE DATABASE <targetDB>;
 ----
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,env-slides,backend-pdf[]
 [.student-exercise]
 == Exercise #5: Copying databases
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

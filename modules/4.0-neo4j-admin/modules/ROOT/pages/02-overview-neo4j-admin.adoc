@@ -372,12 +372,12 @@ There are many common administrative tasks for a server mode deployment:
 [NOTE]
 This training covers basic Neo4j 4.0 administration using Enterprise Edition. Tasks highlighted in *bold* are covered in this training.
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,env-slides,backend-pdf[]
 [.student-exercise]
 == Exercise 1: Setting up the Docker instance for this course
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::env-slides,backend-pdf[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 

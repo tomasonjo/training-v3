@@ -75,12 +75,12 @@ If inconsistencies are found, a report is generated and placed in the directory 
 Inconsistencies in a database are a serious matter that should be looked into with the help of Neo4j Technical Support.
 --
 
-ifdef::backend-revealjs,backend-pdf[]
+ifdef::backend-revealjs,backend-pdf,env-slides[]
 [.student-exercise]
 == Exercise #7: Checking consistency of a database
 endif::[]
 
-ifdef::backend-pdf[]
+ifdef::backend-pdf,env-slides[]
 Refer to the *Exercise Guide* for instructions.
 endif::[]
 
