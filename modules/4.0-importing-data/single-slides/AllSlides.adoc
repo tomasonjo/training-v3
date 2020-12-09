@@ -1,82 +1,26 @@
 :includedir: ../modules/ROOT/pages
 
-////
 [.title.slide-start-title]
-include::{includedir}/00-intro-neo4j-about.adoc[]
-
-[.title.slide-start-title]
-include::{includedir}/01-neo4j-graph-database.adoc[leveloffset=+1]
+include::{includedir}/00-import-40-about.adoc[]
 
 [.title.slide-start-title]
-include::{includedir}/02-neo4j-graph-platform.adoc[leveloffset=+1]
-
-////
-[.title.slide-start-title]
-include::{includedir}/junk.adoc[leveloffset=+1]
-
-////
+include::{includedir}/01-import-40-overview-importing.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/03-introduction-to-cypher.adoc[leveloffset=+1]
-
-slides done through lesson 3
+include::{includedir}/02-import-40-using-load-csv-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/04-using-where-to-filter-queries.adoc[leveloffset=+1]
+include::{includedir}/03-import-40-using-apoc-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/05-working-with-patterns-in-queries.adoc[leveloffset=+1]
+include::{includedir}/04-import-40-using-neo4j-admin-tool-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/06-working-with-cypher-data.adoc[leveloffset=+1]
+include::{includedir}/05-import-40-using-application-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/07-controlling-query-chain.adoc[leveloffset=+1]
+include::{includedir}/06-import-40-using-neo4j-etl-tool-import.adoc[leveloffset=+1]
 
 [.title.slide-start-title]
-include::{includedir}/08-controlling-results-returned.adoc[leveloffset=+1]
+include::{includedir}/07-import-40-summary.adoc[leveloffset=+1]
 
-[.title.slide-start-title]
-include::{includedir}/09-creating-nodes.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/10-creating-relationships.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/11-deleting-nodes-and-relationships.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/12-merging-data.adoc[leveloffset=+1]
-
-
-[.title.slide-start-title]
-include::{includedir}/13-defining-constraints-data.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/14-using-indexes.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/15-using-query-best-practices.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/16-overview-importing-data.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/17-using-load-csv-import.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/18-using-apoc-import.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/19-using-neo4j-admin-tool-import.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/20-using-application-import.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/21-using-neo4j-etl-tool-import.adoc[leveloffset=+1]
-
-[.title.slide-start-title]
-include::{includedir}/22-intro-neo4j-summary.adoc[leveloffset=+1]
-
-////

@@ -236,7 +236,6 @@ Neo4j 4.0 Enterprise Edition supports multiple databases per Neo4j instance.
 In this exercise, you will create a new database that will be served by the started Neo4j instance.
 
 Here are the steps to create a new database, _Movies_:
---
 
 . In Neo4j Browser, select the system database.
 +

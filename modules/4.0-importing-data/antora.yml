@@ -1,12 +1,12 @@
-name: training-intro-40
-title: Introduction to Neo4j 4.0
+name: training-importing-data-40
+title: Importing Data with Neo4j 4.0
 version: 'master'
 start_page: enrollment.adoc
 nav:
   - modules/ROOT/nav.adoc
 asciidoc:
   attributes:
-    page-course-name: '4.0-intro-neo4j'
+    page-course-name: '4.0-importing-data'
     page-theme: 'training'
     page-toclevels: 1
     page-pagination: '@'

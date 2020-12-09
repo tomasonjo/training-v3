@@ -1,5 +1,5 @@
 = Overview of Importing Data into Neo4j
-:slug: 01-import-40-overview-importing-data
+:slug: 01-import-40-overview-importing
 :doctype: book
 :toc: left
 :toclevels: 4

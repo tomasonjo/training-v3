@@ -51,6 +51,7 @@ subprojects {
 
   def stage = project.findProperty('stage')
 
+  // this is obsolete now!
   def enrollmentUrl = {
     switch (project.name) {
       case "4.0-intro-neo4j":
@@ -97,6 +98,8 @@ subprojects {
     }
   }
 
+  // this is obsolete now!
+  
   def courseUrl = {
     switch (project.name) {
       case "4.0-intro-neo4j":
