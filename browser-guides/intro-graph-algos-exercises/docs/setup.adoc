@@ -5,7 +5,7 @@
 :toclevels: 3
 :imagesdir: ../images
 :manual-cypher: {manual}/cypher
-:setup-guides-dir: ../../setup-guides/docs
+:setup-guides-dir: ../../../modules/setup-guides/docs
 
 :imagedir: https://s3-us-west-1.amazonaws.com/data.neo4j.com/intro-neo4j/img
 :imagedir2: https://graphacademy.neo4j.com/setup/img
