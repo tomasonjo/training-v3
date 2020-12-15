@@ -3,8 +3,6 @@ import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorGenerateTask
 import com.neo4j.gradle.asciidoctor.AsciidoctorModuleDescriptorPlugin
 import com.neo4j.gradle.s3.S3Plugin
 import com.neo4j.gradle.s3.S3UploadTask
-import com.neo4j.gradle.wordpress.WordPressPlugin
-import com.neo4j.gradle.wordpress.WordPressUploadTask
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.asciidoctor.gradle.jvm.pdf.AsciidoctorPdfTask
 import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
@@ -16,7 +14,6 @@ plugins {
   id 'org.asciidoctor.jvm.pdf' version '3.1.0' apply false
   id 'org.asciidoctor.jvm.revealjs' version '3.1.0' apply false
   id 'org.kordamp.gradle.livereload' version '0.2.1' apply false
-  id 'com.neo4j.gradle.wordpress.WordPressPlugin' version '0.0.4' apply false
   id 'com.neo4j.gradle.s3.S3Plugin' version '0.1.1' apply false
 }
 
@@ -25,7 +22,6 @@ subprojects {
   apply plugin: 'org.asciidoctor.jvm.gems'
   apply plugin: 'org.asciidoctor.jvm.revealjs'
   apply plugin: S3Plugin
-  apply plugin: WordPressPlugin
   apply plugin: AsciidoctorModuleDescriptorPlugin
 
   configurations {
@@ -51,111 +47,9 @@ subprojects {
 
   def stage = project.findProperty('stage')
 
-  // this is obsolete now!
-  def enrollmentUrl = {
-    switch (project.name) {
-      case "4.0-intro-neo4j":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}introduction-to-neo4j-40/"
-        break
-      case "4.0-neo4j-admin":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}basic-neo4j-admin-40/"
-        break
-      case "graph-data-modeling":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}graph-data-modeling/"
-        break
-      case "4.0-implementing-graph-data-models":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}implementing-graph-data-models-40/"
-        break
-      case "gds-applied-algos":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}applied-gds-web-apps/"
-        break
-      case "online-training-v2":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}introduction-to-neo4j/"
-        break
-      case "neo4j-administration":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}neo4j-administration/"
-        break
-      case "4.0-cypher-query-tuning":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}cypher-query-tuning-40/"
-        break
-      case "4.0-intro-graph-algos":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}intro-graph-algos-40/"
-        break
-      case "datascience":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}data-science/"
-        break
-      case "applied-algos":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}applied-graph-algorithms/"
-        break
-      case "gds-data-science":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}gds-data-science/"
-        break
-      case "4.0-importing-data":
-        "https://neo4j.com/graphacademy/online-training/${stage != 'production' ? '_testing_' : ''}importing-data-40"
-        break
-      default:
-        "https://neo4j.com/"
-    }
-  }
-
-  // this is obsolete now!
-  
-  def courseUrl = {
-    switch (project.name) {
-      case "4.0-intro-neo4j":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-intro-neo4j-about/"
-        break
-      case "4.0-neo4j-admin":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-basic-neo4j-admin-about/"
-        break
-      case "graph-data-modeling":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-graph-data-modeling-about/"
-        break
-      case "4.0-implementing-graph-data-models":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-igdm-40-implementing-graph-data-models-about/"
-        break
-      case "gds-applied-algos":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-gdsaa-about-this-course/"
-        break
-      case "online-training-v2":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-introneo-3-5-about/"
-        break
-      case "neo4j-administration":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-neo4jadmin-3-5-about/"
-        break
-      case "4.0-cypher-query-tuning":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-cqt-40-about/"
-        break
-      case "4.0-intro-graph-algos":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}01-iga-40-about-this-course/"
-        break
-      case "datascience":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-data-science-about/"
-        break
-      case "applied-algos":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-applied-graph-algos-about/"
-        break
-      case "gds-data-science":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-gdsds-about-this-course/"
-        break
-      case "4.0-importing-data":
-        "https://neo4j.com/graphacademy/online-training/v4/${stage != 'production' ? '_testing_' : ''}00-import-40-about/"
-        break     
-      default:
-        "https://neo4j.com/"
-    }
-  }
-
   s3 {
     profile = project.hasProperty('s3-profile') ? project.property('s3-profile') : 'default'
     region = project.hasProperty('s3-region') ? project.property('s3-region') : 'us-east-1'
-  }
-
-  wordpress {
-    username = project.hasProperty('wordpress-username') ? project.property('wordpress-username') : 'neo'
-    password = project.hasProperty('wordpress-password') ? project.property('wordpress-password') : ''
-    host = project.hasProperty('wordpress-host') ? project.property('wordpress-host') : 'localhost'
-    scheme = 'https'
   }
 
   asciidoctorj {
@@ -172,7 +66,6 @@ subprojects {
       'experimental': '',
       'manual': 'http://neo4j.com/docs/developer-manual/current',
       'manual-cypher': '{manual}/cypher',
-      'module-enrollment-url': enrollmentUrl,
       'document-metadata-attrs-include': 'author,slug,parent-path,categories*,tags*,taxonomies*<>',
       'module-descriptor-path': "${projectDir}/build/online/asciidoctor-module-descriptor.yml"
   }
@@ -313,68 +206,6 @@ subprojects {
           }
         }
       }
-    }
-
-    task convertOnlineHtml(type: AsciidoctorTask) {
-      dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
-
-      inputs.dir "${rootProject.projectDir}/resources/templates/course"
-
-      asciidoctorj {
-        def imagesdir = {
-          switch (stage) {
-            case 'production':
-              return "https://s3.amazonaws.com/dev.assets.neo4j.com/course/${project.name}/images/"
-            case 'testing':
-              return "https://s3.amazonaws.com/dev.assets.neo4j.com/test-course/${project.name}/images/"
-            default:
-              return './images'
-          }
-        }
-        requires "${rootProject.projectDir}/resources/extensions.rb"
-        options template_dirs: ["${rootProject.projectDir}/resources/templates/course"]
-        attributes 'imagesdir': imagesdir,
-          'sectanchors': '',
-          'intercom-app-id': 'dt0ig5ab'
-      }
-
-      if (stage != 'production' && stage != 'testing') {
-        resources {
-          from(sourceImagesDirPath) {
-            include '**'
-            into 'images'
-          }
-        }
-      }
-
-      baseDir file(sourceDocsRootPath)
-      sourceDir file(sourceDocsRootPath)
-      sources {
-        excludes.addAll(['enrollment.adoc', 'setup.adoc'])
-      }
-      outputDir file("${projectDir}/build/online")
-    }
-
-    task convertEnrollmentHtml(type: AsciidoctorTask) {
-      dependsOn asciidoctorGemsPrepare, generateModuleDescriptor
-
-      inputs.dir "${rootProject.projectDir}/resources/templates/enrollment"
-
-      asciidoctorj {
-        requires "${rootProject.projectDir}/resources/extensions.rb"
-        options template_dirs: ["${rootProject.projectDir}/resources/templates/enrollment"]
-        attributes 'parent-path': '/graphacademy/online-training',
-          'document-metadata-attrs-include': 'author,slug,parent-path',
-          'module-course-url': courseUrl,
-          'module-id': stage != 'production' ? "_testing_${project.name}" : project.name
-      }
-
-      baseDir file(sourceDocsRootPath)
-      sourceDir file(sourceDocsRootPath)
-      sources {
-        include 'enrollment.adoc'
-      }
-      outputDir file("${projectDir}/build/enrollment")
     }
 
     task convertSetupHtml(type: AsciidoctorTask) {
@@ -649,8 +480,6 @@ subprojects {
     convertGoogleSlides.configurations 'asciidoctorgoogleslides'
 
     task convert {
-      dependsOn convertOnlineHtml
-      dependsOn convertEnrollmentHtml
       dependsOn convertSetupHtml
       dependsOn convertOnlinePdf
       dependsOn convertSlides
@@ -688,23 +517,6 @@ subprojects {
           bucket = "graphacademy.neo4j.com"
           destination = "setup"
           acl.set(CannedAccessControlList.PublicRead)
-        }
-        task wordPressUploadCourse(type: WordPressUploadTask) {
-          dependsOn convertOnlineHtml
-          source = convertOnlineHtml.outputs.files
-          type = "course"
-          status = stage == 'production' ? "publish" : "private"
-        }
-        task wordPressUploadEnrollment(type: WordPressUploadTask) {
-          dependsOn convertEnrollmentHtml
-          source = convertEnrollmentHtml.outputs.files
-          type = "page"
-          status = stage == 'production' ? "publish" : "private"
-          template = "page-inner-100-mkto.php"
-        }
-        task wordPressUpload {
-          dependsOn wordPressUploadCourse
-          dependsOn wordPressUploadEnrollment
         }
       }
     }
