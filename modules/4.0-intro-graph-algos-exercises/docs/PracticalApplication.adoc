@@ -246,7 +246,7 @@ Here is the solution code:
 
 [source, cypher]
 ----
-CALL gds.graph.writeRelationship('ingredient', 'COMMONLY_USED_TOGETHER')
+CALL gds.graph.writeRelationship('ingredient', 'COMMONLY_USED_TOGETHER', 'score')
 ----
 
 You should see these results:
@@ -393,6 +393,7 @@ YIELD nodeId,score
 WITH community, communitySize, nodeId, score
 ORDER BY score DESC
 RETURN community, communitySize, collect(gds.util.asNode(nodeId).name)[..3] as representatives
+ORDER BY communitySize DESC
 ----
 
 The results returned should look like this:
