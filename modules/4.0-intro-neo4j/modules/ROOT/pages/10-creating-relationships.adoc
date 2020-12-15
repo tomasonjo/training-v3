@@ -160,7 +160,7 @@ MATCH (m:Movie)
 WHERE m.title = 'Batman Begins'
 CREATE (a:Person)-[:ACTED_IN]->(m)
 SET a.name = 'Gary Oldman', a.born=1958
-RETURN a, m, p
+RETURN a, m
 ----
 
 ifndef::env-slides[]
