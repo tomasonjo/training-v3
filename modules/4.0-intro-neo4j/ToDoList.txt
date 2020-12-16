@@ -3,5 +3,7 @@ make section headers conditional for vertical navigation for optional slides??
 
 The google slide build fails, but it seems to create the gslides OK????
 
+------
 
+Add notify steps for docs-refresh
 
