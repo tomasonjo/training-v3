@@ -136,7 +136,7 @@ Just as you can create a node with inline properties, you can create a relations
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Katie Holmes' AND m.title = 'Batman Begins'
-CREATE (a)-[rel:ACTED_IN {roles: ['Rachel','Rachel Dawes']}->(m)
+CREATE (a)-[rel:ACTED_IN {roles: ['Rachel','Rachel Dawes']}]->(m)
 RETURN a.name, rel, m.title
 ----
 
