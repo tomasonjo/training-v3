@@ -134,7 +134,7 @@ Nodes should have labels to categorize entities.
 Relationships must have direction and type.
 Nodes and relationships can have properties.
 A label is used to categorize a set of nodes.
-Properties are used to provide specific values to a node or relatiobship.
+Properties are used to provide specific values to a node or relationship.
 endif::[]
 
 [.half-row]
