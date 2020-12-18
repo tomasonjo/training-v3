@@ -1,0 +1,15 @@
+:includedir: ../modules/ROOT/pages
+
+[.title.slide-start-title]
+include::{includedir}/00-overview40-about.adoc[]
+
+[.title.slide-start-title]
+include::{includedir}/01-overview40-neo4j-graph-database.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/02-overview40-neo4j-graph-platform.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/03-overview40-summary.adoc[leveloffset=+1]
+
+

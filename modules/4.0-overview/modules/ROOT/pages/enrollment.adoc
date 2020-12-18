@@ -1,0 +1,36 @@
+= Overview of Neo4j 4.0
+:slug: overview-neo4j-40
+:description: Learn about Neo4j and the Neo4j Graph Platform
+:page-slug: {slug}
+:page-description: {description}
+:page-layout: training-enrollment
+:page-course-duration: 2 hours
+:page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0.jpg
+:page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/Overview_Neo4j_40_withTitle.jpg
+:page-course-label: New
+
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/Overview_Neo4j_40_withTitle.jpg[]
+
+== About the Course
+
+This online course introduces you to Neo4j 4.0 and the Neo4j Graph Platform.
+You will learn what a graph database is and how it is supported with Neo4j.
+You will learn about the features of Neo4j and the many ways you can access a Neo4j instance.
+In this course, you will also have an opportunity to get started using Neo4j using Neo4j Desktop and Neo4j Browser for accessing the Neo4j instance.
+
+[NOTE]
+This course is a subset of first two lessons from the _Introduction to Neo4j 4.0_ course (_Neo4j is a Graph Database, The Neo4j Graph Platform_). If you have completed these lessons of the _Introduction to Neo4j 4.0_ course, you need not enroll in this course.
+
+== Prerequisites
+
+You need not have any programming experience to take this course.
+
+== Duration
+
+If you perform the guided exercises in this course,
+it will take you two hours to complete the course.
+
+== What you will learn
+
+* What is a Graph Database
+* The Neo4j Graph Platform

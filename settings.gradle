@@ -110,3 +110,6 @@ project(':training_NLPWithHume').projectDir = file('modules/training_NLPWithHume
 
 include '4.0-importing-data'
 project(':4.0-importing-data').projectDir = file('modules/4.0-importing-data')
+
+include '4.0-overview'
+project(':4.0-overview').projectDir = file('modules/4.0-overview')

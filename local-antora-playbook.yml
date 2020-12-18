@@ -21,6 +21,7 @@ content:
       - 'modules/neo4j-administration'
       - 'modules/datascience'
       - 'modules/applied-algos'
+      - 'modules/4.0-overview'
 
 output:
   dir: ./public/
