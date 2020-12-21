@@ -1,0 +1,3 @@
+Suggestion from Nicholas Rouyer:
+
+Slide 13: why not propose a treksit.com graph game to capture how difficult it can be to understand the structure of very simple graphs (hence the need for graph algorithms on larger graphs)

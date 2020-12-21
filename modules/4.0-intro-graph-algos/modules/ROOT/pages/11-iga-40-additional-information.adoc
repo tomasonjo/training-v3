@@ -53,7 +53,7 @@ ifdef::env-slides[]
 
 [square]
 * Community Detection and Centrality algorithms are for monopartite graphs.
-* You can always  use Similarity algorithms or Cypher projects to infer a monopartite graph from a bipartate graph.
+* You can always  use Similarity algorithms or Cypher projects to infer a monopartite graph from a bipartite graph.
 * Always start your analysis with Weakly Connected Components.
 * Directed versus Undirected relationships can greatly affect the results.
 * Relationship weights can also greatly affect the results.
@@ -107,7 +107,7 @@ ifdef::env-slides[]
 * Alternatives for storing results:
 ** Import CSV to the leader.
 ** Use Kafka to stream results back.
-* Create and detach a read replica from the cluster and us that for analysis.
+* Create and detach a read replica from the cluster and use that for analysis.
 endif::[]
 
 === Common concerns
@@ -148,7 +148,7 @@ Select the correct answers.
 === Question 2
 
 [.statement]
-Community detection and Centrality algorithms are designed primarly for what types of graphs?
+Community detection and Centrality algorithms are designed primarily for what types of graphs?
 
 [.statement]
 Select the correct answer.

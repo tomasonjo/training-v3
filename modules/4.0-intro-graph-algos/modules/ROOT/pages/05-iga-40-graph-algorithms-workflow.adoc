@@ -293,7 +293,7 @@ The general syntax for using Cypher projection to load a named graph is:
 CALL gds.graph.create.cypher(
     '<graph-name>',
     '<node-query>',
-    '<relatonship-query>'
+    '<relationship-query>'
 )
 ----
 
