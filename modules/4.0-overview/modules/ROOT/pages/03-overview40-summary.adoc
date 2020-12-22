@@ -58,12 +58,12 @@ ifdef::env-slides[]
 == Resources - 3
 endif::[]
 
-Become a Neo4j certified developer:
+Become a Neo4j Certified Professional:
 
 https://neo4j.com/graphacademy/neo4j-certification/
 
 [NOTE]
-The certification exam tests you on content from this course.
+This certification exam tests you on content from courses, _Introduction to Neo4j 4.0_ or _Introduction to Neo4j 3.5_.
 You can take the certification exam multiple times until you pass!
 
 GitHub repository:
