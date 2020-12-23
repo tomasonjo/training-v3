@@ -1,4 +1,4 @@
-= Cypher Query Tuning with Neo4j 4.0
+= Cypher Query Tuning with Neo4j 4.x
 :slug: 00-cqt-40-about
 :doctype: book
 :toc: left

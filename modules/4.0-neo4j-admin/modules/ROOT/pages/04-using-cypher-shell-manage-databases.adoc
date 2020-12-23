@@ -185,7 +185,7 @@ endif::[]
 
 [.notes]
 --
-In Neo4j 4.0 Enterprise Edition, a Neo4j instance can host multiple user databases. To create a database, you connect to a started Neo4j instance with `cypher-shell`.
+In Neo4j 4.x Enterprise Edition, a Neo4j instance can host multiple user databases. To create a database, you connect to a started Neo4j instance with `cypher-shell`.
 
 Here are the commands to create a database:
 --

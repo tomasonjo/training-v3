@@ -224,7 +224,7 @@ The Community Edition is free to download and use and is available from the http
 --
 
 [NOTE]
-Many of the Neo4j 4.0 features covered in this training such as multi-database instances and online backup are only supported in Neo4j Enterprise Edition.
+Many of the Neo4j 4.x features covered in this training such as multi-database instances and online backup are only supported in Neo4j Enterprise Edition.
 
 === Enterprise Edition
 
@@ -370,7 +370,7 @@ There are many common administrative tasks for a server mode deployment:
 * *Importing data*
 
 [NOTE]
-This training covers basic Neo4j 4.0 administration using Enterprise Edition. Tasks highlighted in *bold* are covered in this training.
+This training covers basic Neo4j 4.x administration using Enterprise Edition. Tasks highlighted in *bold* are covered in this training.
 
 ifdef::backend-revealjs,env-slides,backend-pdf[]
 [.student-exercise]

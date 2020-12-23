@@ -1,4 +1,4 @@
-= Basic Neo4j 4.0 Administration
+= Basic Neo4j 4.x Administration
 :slug: basic-neo4j-admin-40
 :description: Learn basic Neo4j administration to manage Neo4j instances
 :page-slug: {slug}

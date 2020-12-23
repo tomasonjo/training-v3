@@ -279,7 +279,7 @@ The *system* database stores metadata about the databases for the installation, 
 The *default* database (named neo4j by default) is the "user" database where you typically implement your graph data model.
 
 
-== Neo4j 4.0 DBMS
+== Neo4j 4.x DBMS
 
 [.small]
 --

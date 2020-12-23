@@ -79,7 +79,7 @@ Assuming that you have an agreed-upon data model, here are the basic steps you s
 . Add indexes to the graph.
 
 [NOTE]
-These steps are covered in the course _Introduction to Neo4j 4.0: Using LOAD CSV for Import_.
+These steps are covered in the course _Importing Data with Neo4j 4.x: Using LOAD CSV for Import_.
 --
 
 == Review: Using `LOAD CSV`

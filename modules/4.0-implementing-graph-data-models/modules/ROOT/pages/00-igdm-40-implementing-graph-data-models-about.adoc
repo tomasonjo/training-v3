@@ -1,4 +1,4 @@
-= Implementing Graph Data Models in Neo4j 4.0
+= Implementing Graph Data Models in Neo4j 4.x
 :slug: 00-igdm-40-implementing-graph-data-models-about
 :doctype: book
 :toc: left
@@ -27,7 +27,7 @@ In this course, you complete hands-on exercises to gain experience with developi
 To complete the hands-on exercises for this course, you need:
 
 [square]
-* Neo4j 4.0 Instance that is started with one of:
+* Neo4j 4.x Instance that is started with one of:
 ** Neo4j Desktop
 ** Neo4j Sandbox
 ** Neo4j Aura

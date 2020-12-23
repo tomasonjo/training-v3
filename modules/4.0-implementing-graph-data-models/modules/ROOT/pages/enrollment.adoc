@@ -1,4 +1,4 @@
-= Implementing Graph Data Models in Neo4j 4.0
+= Implementing Graph Data Models in Neo4j 4.x
 :slug: implementing-graph-data-models-40
 :description: Learn how to create a database for a graph data model and evolve the graph.
 :page-slug: {slug}

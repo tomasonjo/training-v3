@@ -1,4 +1,4 @@
-= Introduction to Graph Algorithms with Neo4j 4.0
+= Introduction to Graph Algorithms with Neo4j 4.x
 :slug: 01-iga-40-about-this-course
 :doctype: book
 :toc: left
@@ -232,7 +232,7 @@ This course focuses on using graph algorithms with Neo4j in an applied environme
 --
 
 [square]
-* Have completed the Introduction to Neo4j 4.0 course or have equal Cypher proficiency.
+* Have completed the Introduction to Neo4j 4.x courses or have equal Cypher proficiency.
 * Be familiar with using Neo4j Desktop and Neo4j Browser.
 
 This course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].

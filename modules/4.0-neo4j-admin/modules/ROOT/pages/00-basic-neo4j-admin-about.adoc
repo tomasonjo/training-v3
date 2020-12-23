@@ -1,4 +1,4 @@
-= Basic Neo4j 4.0 Administration
+= Basic Neo4j 4.x Administration
 :slug: 00-basic-neo4j-admin-about
 :doctype: book
 :toc: left

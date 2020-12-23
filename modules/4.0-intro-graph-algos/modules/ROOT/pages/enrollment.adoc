@@ -1,6 +1,6 @@
-= Introduction to Graph Algorithms in Neo4j 4.0
+= Introduction to Graph Algorithms in Neo4j 4.x
 :slug: intro-graph-algos-40
-:description: Learn how to use Graph Algorithms of the Graph Data Science Library for Neo4j 4.0.
+:description: Learn how to use Graph Algorithms of the Graph Data Science Library for Neo4j 4.x.
 :page-slug: {slug}
 :page-description: {description}
 :page-layout: training-enrollment
