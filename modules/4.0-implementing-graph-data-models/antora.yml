@@ -1,5 +1,5 @@
 name: training-igdm-40
-title: Implementing Graph Data Models in Neo4j 4.0
+title: Implementing Graph Data Models in Neo4j 4.x
 version: 'master'
 start_page: enrollment.adoc
 nav:

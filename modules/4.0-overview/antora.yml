@@ -1,5 +1,5 @@
 name: training-overview-40
-title: Overview of Neo4j 4.0
+title: Overview of Neo4j 4.x
 version: 'master'
 start_page: enrollment.adoc
 nav:

@@ -22,6 +22,7 @@ content:
       - 'modules/datascience'
       - 'modules/applied-algos'
       - 'modules/4.0-overview'
+      - 'modules/4.0-querying'
 
 output:
   dir: ./public/

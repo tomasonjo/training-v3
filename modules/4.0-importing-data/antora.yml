@@ -1,5 +1,5 @@
 name: training-importing-data-40
-title: Importing Data with Neo4j 4.0
+title: Importing Data with Neo4j 4.x
 version: 'master'
 start_page: enrollment.adoc
 nav:

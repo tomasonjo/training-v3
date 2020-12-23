@@ -113,3 +113,6 @@ project(':4.0-importing-data').projectDir = file('modules/4.0-importing-data')
 
 include '4.0-overview'
 project(':4.0-overview').projectDir = file('modules/4.0-overview')
+
+include '4.0-querying'
+project(':4.0-querying').projectDir = file('modules/4.0-querying')

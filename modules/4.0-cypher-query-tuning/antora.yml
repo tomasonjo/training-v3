@@ -1,5 +1,5 @@
 name: training-cqt-40
-title: Cypher Query Tuning in Neo4j 4.0
+title: Cypher Query Tuning in Neo4j 4.x
 version: 'master'
 start_page: enrollment.adoc
 nav:
