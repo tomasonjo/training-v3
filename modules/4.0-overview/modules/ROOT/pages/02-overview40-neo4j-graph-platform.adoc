@@ -160,10 +160,10 @@ or a set of Neo4j instances that form a cluster.
 endif::[]
 
 ifndef::env-slides[]
-== Neo4j 4.0 DBMS
+== Neo4j 4.x DBMS
 
 [.statement]
-In Neo4j Enterprise Edition 4.0, you may have more than one "user" database.
+In Neo4j Enterprise Edition 4.x, you may have more than one "user" database.
 
 image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
 
@@ -175,7 +175,7 @@ endif::[]
 
 ifdef::env-slides[]
 [.half-column]
-== Neo4j 4.0 DBMS
+== Neo4j 4.x DBMS
 
 Neo4j DBMS comes in two editions:
 
@@ -183,7 +183,7 @@ Neo4j DBMS comes in two editions:
 * Community Edition
 * Enterprise Edition
 
-Neo4j Enterprise Edition 4.0 supports *multiple "user"* databases
+Neo4j Enterprise Edition 4.x supports *multiple "user"* databases
 
 [square]
 * For example: These three "user" databases hold different types of application data
@@ -1244,7 +1244,7 @@ Just as there are graph applications written by Neo4j engineers and Neo4j commun
 A library is also called a plug-in as it is used to extend what you can do in Cypher.
 Some libraries are available in Neo4j Desktop, while you must download and install other libraries.
 
-Functions and procedures from the  Neo4j 3.5 Graph Algorithms Library are officially supported by Neo4j as the Graph Data Science Library (GDS) in Neo4j 4.0.
+Functions and procedures from the  Neo4j 3.5 Graph Algorithms Library are officially supported by Neo4j as the Graph Data Science Library (GDS) in Neo4j 4.x.
 
 One of the most popular libraries that is used by most developers is Awesome Procedures of Cypher (APOC).
 This library has close to 500 procedures and functions that extend Cypher in ways that make your programming in Cypher much easier for complex tasks.
@@ -1524,7 +1524,7 @@ Select the correct answers.
 [%interactive.answers]
 - [x] APOC
 - [ ] JGraph
-- [x] Graph Algorithms (Neo4j 3.5) or Graph Data Science (Neo4j 4.0)
+- [x] Graph Algorithms (Neo4j 3.5) or Graph Data Science (Neo4j 4.x)
 - [x] GraphQL
 
 === Question 3

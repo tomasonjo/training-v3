@@ -1,4 +1,4 @@
-= Importing Data with Neo4j 4.0
+= Importing Data with Neo4j 4.x
 :slug: importing-neo4j-40
 :description: Learn how to import data into Neo4j.
 :page-slug: {slug}

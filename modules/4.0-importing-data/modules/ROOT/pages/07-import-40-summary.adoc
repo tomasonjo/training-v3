@@ -1,4 +1,4 @@
-= Importing Data with Neo4j 4.0: Summary
+= Importing Data with Neo4j 4.x: Summary
 :slug: 07-import-40-summary
 :doctype: book
 :toc: left

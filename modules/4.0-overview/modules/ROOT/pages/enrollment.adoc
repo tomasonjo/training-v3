@@ -1,4 +1,4 @@
-= Overview of Neo4j 4.0
+= Overview of Neo4j 4.x
 :slug: overview-neo4j-40
 :description: Learn about Neo4j and the Neo4j Graph Platform
 :page-slug: {slug}
@@ -13,7 +13,7 @@ image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/Over
 
 == About the Course
 
-This online course introduces you to Neo4j 4.0 and the Neo4j Graph Platform.
+This online course introduces you to Neo4j 4.x and the Neo4j Graph Platform.
 You will learn what a graph database is and how it is supported with Neo4j.
 You will learn about the features of Neo4j and the many ways you can access a Neo4j instance.
 In this course, you will also have an opportunity to get started using Neo4j using Neo4j Desktop and Neo4j Browser for accessing the Neo4j instance.

@@ -1,4 +1,4 @@
-= Importing Data with Neo4j 4.0
+= Importing Data with Neo4j 4.x
 :slug: 00-import-40-about
 :doctype: book
 :toc: left

@@ -1,4 +1,4 @@
-= Overview of Neo4j 4.0: Summary
+= Overview of Neo4j 4.x: Summary
 :slug: 03-overview40-summary
 :doctype: book
 :toc: left

@@ -79,7 +79,7 @@ CALL apoc.periodic.iterate(
 image::ClearDatabase.png[ClearDatabase,width=900,align=center]
 
 [NOTE]
-In Neo4j 4.0, another way that you can clear the graph in Neo4j Browser is to use the _system_ database and then type `CREATE OR REPLACE DATABASE <database-name>`.
+In Neo4j 4.x, another way that you can clear the graph in Neo4j Browser is to use the _system_ database and then type `CREATE OR REPLACE DATABASE <database-name>`.
 
 == Using APOC during import
 
