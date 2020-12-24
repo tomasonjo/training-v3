@@ -138,7 +138,7 @@ Consult the https://jupyter.org/install[official Jupyter documentation] for more
 
 === Step 5: Download the course notebooks
 
-The notebooks are available on the (https://github.com/neo4j-graph-analytics/ml-link-prediction-notebooks)[GitHub repository].
+The notebooks are available on the (https://github.com/neo4j-graph-analytics/ml-link-prediction-notebooks[GitHub repository]).
 If you are familiar with Git technology, you can either clone or fork this repository.
 Otherwise, you can prepare the notebooks on your system by downloading and extracting the https://github.com/neo4j-graph-analytics/ml-link-prediction-notebooks/raw/main/ml-link-prediction-notebooks.zip
 [following package].
