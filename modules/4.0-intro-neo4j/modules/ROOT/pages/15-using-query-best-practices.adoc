@@ -384,7 +384,7 @@ Here is a very high-level list of some of the best practices you should aim for 
 --
 
 [square]
-* Create an use indexes effectively.
+* Create and use indexes effectively.
 * Use parameters rather than literals in your queries.
 * Specify node labels in `MATCH` clauses.
 * Reduce the number of rows passed processed.
