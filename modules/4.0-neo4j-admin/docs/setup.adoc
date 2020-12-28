@@ -1,4 +1,4 @@
-= Setting up your Neo4j training environment for the course, Basic Neo4j 4.0 Administration
+= Setting up your Neo4j training environment for the course, Basic Neo4j 4.x Administration
 :doctype: book
 :toc: left
 :toclevels: 4

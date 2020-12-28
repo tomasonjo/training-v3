@@ -1,11 +1,11 @@
-= Implementing Graph Data Models in Neo4j 4.0: Exercises
+= Implementing Graph Data Models in Neo4j 4.x: Exercises
 :doctype: book
 :toclevels: 4
 :guides: https://guides.neo4j.com/4.0-neo4j-modeling-exercises
 :includedir: ../docs
 :toc:
 
-== Implementing Graph Data Models in Neo4j 4.0: Exercises
+== Implementing Graph Data Models in Neo4j 4.x: Exercises
 
 include::{includedir}/index.adoc[leveloffset=+1]
 include::{includedir}/01.adoc[leveloffset=+1]

@@ -1,4 +1,4 @@
-= Introduction to Neo4j 4.0
+= Querying with Neo4j 4.x
 :slug: 00-intro-neo4j-about
 :doctype: book
 :toc: left

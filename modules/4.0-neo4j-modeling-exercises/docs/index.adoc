@@ -1,6 +1,6 @@
 = Implementing Graph Data Models in Neo4j
 
-== Course: Implementing Graph Data Models in Neo4j 4.0 -- Exercises image:neo4j-icon.png[width=50]
+== Course: Implementing Graph Data Models in Neo4j -- Exercises image:neo4j-icon.png[width=50]
 
 Welcome to _Browser Guides_!
 This is the interface for performing exercises to this Neo4j course.

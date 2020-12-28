@@ -1,4 +1,4 @@
-= Setting up your Neo4j training environment for the course, Implementing Graph Data Models in Neo4j 4.0
+= Setting up your Neo4j training environment for the course, Implementing Graph Data Models in Neo4j 4.x
 :doctype: book
 :toc: left
 :toclevels: 3

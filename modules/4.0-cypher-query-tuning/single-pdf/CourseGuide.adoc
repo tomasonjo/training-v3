@@ -1,4 +1,4 @@
-= Cypher Query Tuning in Neo4j 4.0: Course Guide
+= Cypher Query Tuning in Neo4j 4.x: Course Guide
 :doctype: book
 :toc: left
 :toclevels: 4

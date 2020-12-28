@@ -1,4 +1,4 @@
-= Overview of Neo4j 4.0: Course Guide
+= Overview of Neo4j 4.x: Course Guide
 :doctype: book
 :toc: left
 :toclevels: 4

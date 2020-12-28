@@ -18,7 +18,7 @@ You have learned most of the basics for using Cypher to query the graph.
 As you gain more experience with Cypher and use it to create your application graph, there are some best practices that you should use.
 Next, you will learn some of these best practices for using Cypher for your application.
 
-The training course, _Cypher Query Tuning in Neo4j 4.0_ goes into greater depth about Cypher best practices and query tuning.
+The training course, _Cypher Query Tuning in Neo4j 4.x_ goes into greater depth about Cypher best practices and query tuning.
 --
 
 At the end of this module, you should be able to:

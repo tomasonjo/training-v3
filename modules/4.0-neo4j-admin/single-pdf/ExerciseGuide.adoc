@@ -1,4 +1,4 @@
-= Basic Neo4j 4.0 Administration: Exercise Guide
+= Basic Neo4j 4.x Administration: Exercise Guide
 :doctype: book
 :toc: left
 :toclevels: 4

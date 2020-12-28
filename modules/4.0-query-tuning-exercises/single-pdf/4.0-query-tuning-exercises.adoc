@@ -1,11 +1,13 @@
-= Introduction to Neo4j 4.0: Exercises
+= Query Tuning in Neo4j 4.x: Exercises
 :doctype: book
 :toclevels: 4
-:guides: https://guides.neo4j.com/4.0-intro-neo4j-exercises
+:guides: https://guides.neo4j.com/4.0-query-tuning-exercises
 :includedir: ../docs
 :toc:
 
-== Introduction to Neo4j 4.0: Exercises
+// this is obsolete???
+
+== Query Tuning with Neo4j 4.x: Exercises
 
 include::{includedir}/index.adoc[leveloffset=+1]
 include::{includedir}/01.adoc[leveloffset=+1]
@@ -16,14 +18,3 @@ include::{includedir}/05.adoc[leveloffset=+1]
 include::{includedir}/06.adoc[leveloffset=+1]
 include::{includedir}/07.adoc[leveloffset=+1]
 include::{includedir}/08.adoc[leveloffset=+1]
-include::{includedir}/09.adoc[leveloffset=+1]
-include::{includedir}/10.adoc[leveloffset=+1]
-include::{includedir}/11.adoc[leveloffset=+1]
-include::{includedir}/12.adoc[leveloffset=+1]
-include::{includedir}/13.adoc[leveloffset=+1]
-include::{includedir}/14.adoc[leveloffset=+1]
-include::{includedir}/15.adoc[leveloffset=+1]
-include::{includedir}/16.adoc[leveloffset=+1]
-include::{includedir}/17.adoc[leveloffset=+1]
-include::{includedir}/18.adoc[leveloffset=+1]
-include::{includedir}/19.adoc[leveloffset=+1]

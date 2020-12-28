@@ -1,10 +1,11 @@
-= Introduction to Neo4j 4.0: Course Guide
+= Querying with Neo4j 4.x: Course Guide
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
 :includedir: ../modules/ROOT/pages
 
+// TBD
 include::{includedir}/00-intro-neo4j-about.adoc[leveloffset=+1]
 include::{includedir}/01-neo4j-graph-database.adoc[leveloffset=+1]
 include::{includedir}/02-neo4j-graph-platform.adoc[leveloffset=+1]
