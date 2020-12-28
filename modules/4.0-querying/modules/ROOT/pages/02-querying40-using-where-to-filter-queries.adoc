@@ -1,5 +1,5 @@
 = Using WHERE to Filter Queries
-:slug: 04-using-where-to-filter-queries
+:slug: 02-querying40-using-where-to-filter-queries
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -6,6 +6,7 @@ content:
   sources:
     - url: .
       branches: 'HEAD'
+
       start_paths:
       - 'modules/home'
       - 'modules/4.0-intro-neo4j'

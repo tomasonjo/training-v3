@@ -1,5 +1,5 @@
-= Introduction to Neo4j: Summary
-:slug: 22-intro-neo4j-summary
+= Querying with Cypher in Neo4j 4.x: Summary
+:slug: 07-querying40-summary
 :doctype: book
 :toc: left
 :toclevels: 3
@@ -14,13 +14,12 @@
 In this course, you have learned how to:
 
 [square]
-* Describe what a graph database is.
-* Describe the Neo4j Graph Platform and its components.
-* Write Cypher code to query the database.
-* Write Cypher code to modify the database.
-* Use some Cypher query best practices.
-* Create and use indexes.
-* Import data into Neo4j.
+* Write basic Cypher queries
+* Use the WHERE clause to filter queries
+* Work with patterns in Cypher queries
+* Work with different types of Cypher data
+* Control the query chain of processing
+* Control how results are returned
 
 ifdef::env-slides[]
 == Resources - 1
@@ -68,7 +67,7 @@ Become a Neo4j certified developer:
 https://neo4j.com/graphacademy/neo4j-certification/
 
 [NOTE]
-The certification exam tests you on content from this course.
+The certification exam tests you on content from this course, as well as other courses related to development with Neo4j 4.x.
 You can take the certification exam multiple times until you pass!
 
 GitHub repository:

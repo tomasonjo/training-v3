@@ -1,10 +1,10 @@
 = Controlling Results Returned
-:slug: 08-controlling-results-returned
+:slug: 06-querying40-controlling-results-returned
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Creating Nodes
+:module-next-title: Summary
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

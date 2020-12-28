@@ -1,5 +1,5 @@
 = Working with Patterns in Queries
-:slug: 05-working-with-patterns-in-queries
+:slug: 03-querying40-working-with-patterns-in-queries
 :doctype: book
 :toc: left
 :toclevels: 4
