@@ -1,5 +1,5 @@
 = Working with Patterns in Queries
-:slug: 03-querying40-working-with-patterns-in-queries
+:slug: 05-working-with-patterns-in-queries
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -129,7 +129,7 @@ RETURN a.name, m.title, d.name
 There are, however, some queries where you will need to specify two or more patterns. 
 Multiple patterns are used when a query is complex and cannot be satisfied with a single pattern. 
 This is useful when you are looking for a specific node in the graph and want to connect it to a different node. 
-You can learn about creating nodes and relationships in the course, _Creating Nodes and Relationships in Neo4j 4.x_.
+You will learn about creating nodes and relationships later in this training. 
 --
 
 === Example: Using two patterns in a `MATCH`

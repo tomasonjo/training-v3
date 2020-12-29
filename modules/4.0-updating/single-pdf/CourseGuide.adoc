@@ -1,0 +1,14 @@
+= Creating Nodes and Relationships in Neo4j 4.x: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../modules/ROOT/pages
+
+include::{includedir}/00-updating40-about.adoc[leveloffset=+1]
+include::{includedir}/01-updating40-creating-nodes.adoc[leveloffset=+1]
+include::{includedir}/02-updating40-creating-relationships.adoc[leveloffset=+1]
+include::{includedir}/03-updating40-deleting-nodes-and-relationships.adoc[leveloffset=+1]
+include::{includedir}/04-updating40-merging-data.adoc[leveloffset=+1]
+include::{includedir}/05-updating40-summary.adoc[leveloffset=+1]
+

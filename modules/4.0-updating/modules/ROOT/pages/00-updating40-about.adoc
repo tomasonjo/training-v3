@@ -1,10 +1,10 @@
-= Querying with Cypher in Neo4j 4.x
-:slug: 00-querying40-about
+= Creating Nodes and Relationships in Neo4j 4.x
+:slug: 00-updating40-about
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Introduction to Cypher
+:module-next-title: Creating Nodes
 :page-slug: {slug}
 :page-type: training-course-index
 :page-pagination: next
@@ -14,14 +14,14 @@
 == About this course
 
 ifndef::env-slides[]
-This course introduces you to using Cypher to query a Neo4j database.
+This course teaches you how to update a Neo4j 4.x database.
 endif::[]
 
 This course is intended for developers, administrators, architects, data scientists, and data analysts.
-You need not have programming experience to take this training, but you should have a basic understanding of what a graph database is and the Neo4j Graph Platform.
+You need not have programming experience to take this training.
 
 ifndef::env-slides[]
-In this course, you complete hands-on exercises to gain experience with querying a Neo4j database.
+In this course, you complete hands-on exercises to gain experience with Neo4j.
 You can complete the hands-on exercises in one of three ways, using:
 
 [square]
@@ -35,17 +35,15 @@ ifdef::backend-html5[]
 At the end of each lesson are a set of questions that you must answer correctly to mark the lesson as completed.
 If you complete all lessons, you will receive a _Certificate of Completion_.
 
-If you perform the hands-on exercises, this course will take you approximately five hours to complete.
+If you perform the hands-on exercises, this course will take you approximately three hours to complete.
 endif::[]
 
 ifdef::env-slides[]
 [square]
-* Introduction to Cypher
-* Using the WHERE clause to filter queries
-* Working with patterns in Cypher queries
-* Working with different types of Cypher data
-* Controlling the query chain of processing
-* Controlling how results are returned
+* Creating Nodes
+* Creating Relationships
+* Deleting Nodes and Relationships
+* Merging Nodes and Relationships
 * Do *hands-on exercises* working with Neo4j
 endif::[]
 
@@ -57,13 +55,18 @@ ifndef::env-slides[]
 Here are the lessons of this course:
 endif::[]
 
+ifdef::env-slides[]
+[.half-column]
+== Specific Areas of Study
+endif::[]
 
-* Introduction to Cypher
-* Using the WHERE clause to filter queries
-* Working with patterns in Cypher queries
-* Working with different types of Cypher data
-* Controlling the query chain of processing
-* Controlling how results are returned
+[.small]
+--
+* Creating Nodes
+* Creating Relationships
+* Deleting Nodes and Relationships
+* Merging Data in the Graph
+--
 
 [IMPORTANT]
 Prior to taking this course, you should have set up your development environment to use one of the following, which is covered in the course, _Overview of Neo4j 4.x_.

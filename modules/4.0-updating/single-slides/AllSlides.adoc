@@ -1,0 +1,20 @@
+:includedir: ../modules/ROOT/pages
+
+[.title.slide-start-title]
+include::{includedir}/00-updating40-about.adoc[]
+
+[.title.slide-start-title]
+include::{includedir}/01-updating40-creating-nodes.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/02-updating40-creating-relationship.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/03-updating40-deleting-nodes-and-relationships.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/04-updating40-merging-data.adoc[leveloffset=+1]
+
+[.title.slide-start-title]
+include::{includedir}/05-updating40-summary.adoc[leveloffset=+1]
+

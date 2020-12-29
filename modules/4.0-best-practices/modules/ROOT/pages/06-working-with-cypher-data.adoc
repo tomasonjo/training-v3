@@ -1,5 +1,5 @@
 = Working with Cypher Data
-:slug: 04-querying40-working-with-cypher-data
+:slug: 06-working-with-cypher-data
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -445,7 +445,7 @@ Here are some of the built-in conversion functions:
 * `toUpper( )`
 * `toString()`
 
-Consult the https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
+Consult the https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual] for more information about the built-in functions available for working with data of all types.
 
 [.student-exercise]
 == Exercise 6: Working with Cypher data

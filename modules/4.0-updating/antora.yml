@@ -1,0 +1,13 @@
+name: training-updating-40
+title: Creating Nodes and Relationships in Neo4j 4.x
+version: 'master'
+start_page: enrollment.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    page-course-name: '4.0-updating'
+    page-theme: 'training'
+    page-toclevels: 1
+    page-pagination: '@'
+    toc: ~

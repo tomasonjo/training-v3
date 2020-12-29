@@ -116,3 +116,9 @@ project(':4.0-overview').projectDir = file('modules/4.0-overview')
 
 include '4.0-querying'
 project(':4.0-querying').projectDir = file('modules/4.0-querying')
+
+include '4.0-updating'
+project(':4.0-updating').projectDir = file('modules/4.0-updating')
+
+include '4.0-best-practices'
+project(':4.0-best-practices').projectDir = file('modules/4.0-best-practices')

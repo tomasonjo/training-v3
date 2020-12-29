@@ -1,0 +1,1549 @@
+= The Neo4j Graph Platform
+:slug: 02-neo4j-graph-platform
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Introduction to Cypher Queries
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes: 45
+
+ifndef::env-slides[]
+== About this module
+
+The Neo4j Graph Platform enables developers to create applications that are best architected as graph-powered systems that are built upon the rich connectedness of data.
+
+At the end of this module, you should be able to:
+[square]
+* Describe the components and benefits of the Neo4j Graph Platform.
+
+== Neo4j Graph Platform
+
+The Neo4j Graph Platform includes components that enable you to develop your graph-enabled application.
+
+image::Neo4jPlatform.png[Neo4jPlatform,width=700,align=center]
+
+It is used by developers, administrators, data analysts, and data scientists to access application data.
+Developers create the data in the graph by either importing it into the graph or using the Cypher language to implement the data model. In addition, developers are responsible for integrating the graph with other systems and database management system (DBMS) installations.
+Admins manage the processes and files related to the Neo4j installation.
+Data scientists and data analysts typically use a combination Cypher queries, as well as tools to analyze the data.
+End-users typically use applications written by developers to access the graph data.
+
+
+== Components of the Neo4j Graph Platform
+
+To better understand the Neo4j Graph Platform, you will learn about these components and the benefits they provide.
+
+[square]
+* Neo4j DBMS
+* Neo4j Aura
+* Neo4j Sandbox
+* Neo4j Desktop
+* Neo4j graph applications
+** Neo4j Browser
+** Neo4j Bloom
+* Neo4j libraries
+* Neo4j drivers
+* Neo4j integration
+* Neo4j administration tools
+** cypher-shell
+
+endif::[]
+
+ifdef::env-slides[]
+
+== In this module you'll learn ...
+
+
+At the end of this module, you should be able to:
+
+[square]
+* Describe the components and benefits of the Neo4j Graph Platform:
+
+[square]
+* Neo4j DBMS
+* Neo4j Aura
+* Neo4j Sandbox
+* Neo4j Desktop
+* Neo4j graph applications
+** Neo4j Browser
+** Neo4j Bloom
+* Neo4j libraries
+* Neo4j drivers
+* Neo4j integration
+* Neo4j administration tools
+** cypher-shell
+
+[.instructor-notes]
+--
+In this module you’ll learn about the Neo4j Graph Platform *components*.
+
+* A list of the components can be seen on the right.
+
+Our *goal* - as we go through this section - is to gain an understanding
+
+* of the *functionality* and the *benefits* provided by these components.
+--
+
+[.section-break]
+== Neo4j DBMS
+
+endif::[]
+
+ifndef::env-slides[]
+== Neo4j DBMS
+
+The heart of the Neo4j Graph Platform is the Neo4j DBMS.
+The Neo4j DBMS includes processes and resources needed to manage a single Neo4j instance or a set of Neo4j instances that form a cluster.
+A Neo4j instance is a single process that runs the Neo4j server code.
+A Neo4j instance at a minimum contains two databases, the system database and the default database, neo4j.
+
+
+image::Neo4jDBMS.png[Neo4jDBMS,width=300,align=center]
+
+The *system* database stores metadata about the databases for the installation, as well as security configuration.
+The *default* database (named neo4j by default) is the "user" database where you implement your graph data model.
+endif::[]
+
+ifdef::env-slides[]
+[.half-column]
+== Neo4j DBMS
+
+image::Neo4jDBMS.png[Neo4jDBMS,width=300,align=center]
+
+A Neo4j instance at a minimum contains two databases:
+
+The *system* database:
+
+* Stores *metadata* about the databases
+** Installation data
+** Security configuration
+
+The *default* database:
+
+* Default name is *neo4j*
+* The *"user" database*
+* Where you implement your graph data model
+
+[.instructor-notes]
+--
+The heart of the Neo4j Graph Platform is the *Neo4j DBMS*.
+
+* As of Neo4j 4.0
+** A *Neo4j instance* - at a minimum - contains two databases.
+
+One is the *system database* -
+
+* which holds *installation* data and *security configuration*
+
+The other one is known as the *default* or *“user” database*.
+
+* By default it’s named *neo4j*.
+* This is where all of the graph information (data) is kept.
+
+You can also have other user databases that you add to these two to
+
+* hold additional graph information.
+
+A *Neo4j instance* is a *single process* that -
+
+* runs the Neo4j server code.
+
+The Neo4j DBMS - includes the processes and resources -
+which are needed to manage a single Neo4j instance -
+or a set of Neo4j instances that form a cluster.
+
+--
+endif::[]
+
+ifndef::env-slides[]
+== Neo4j 4.0 DBMS
+
+[.statement]
+In Neo4j Enterprise Edition 4.0, you may have more than one "user" database.
+
+image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
+
+[.statement]
+Here we have three "user" databases that hold the application data. You specify one of the databases as the default database.
+
+Next, you will learn about some features of Neo4j DBMS that make it different from traditional relational database management system (RDBMS).
+endif::[]
+
+ifdef::env-slides[]
+[.half-column]
+== Neo4j 4.0 DBMS
+
+Neo4j DBMS comes in two editions:
+
+[squuare]
+* Community Edition
+* Enterprise Edition
+
+Neo4j Enterprise Edition 4.0 supports *multiple "user"* databases
+
+[square]
+* For example: These three "user" databases hold different types of application data
+* One of the databases is designated as the default database
+
+
+image::MultipleDatabases.png[MultipleDatabases,width=500,align=center]
+
+[.instructor-notes]
+--
+Here we have three user databases.
+
+* One that contains information we're going to use for sales.
+* One that contains information we use mastering marketing questions.
+* and One that we use for answering HR questions.
+
+Whenever you execute a query against Neo4j, -
+
+* you’ll specify in Cypher -
+* which of these databases that query will use.
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== Index-free adjacency
+
+[.instructor-notes]
+--
+One of key features that makes graph databases -
+
+* different from traditional databases -
+* is that they use a *paradigm* called *index-free adjacency*.
+*
+This is different from an *RDBMS* that uses tables to implement *index adjacency*.
+--
+endif::[]
+
+=== Neo4j DBMS: Index-free adjacency (IFA)
+
+image::IFA-1.png[IFA-1,width=300,align=center]
+
+Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
+
+ifndef::env-slides[]
+Most people would follow these simple steps:
+
+. Leave my house.
+. Point myself towards Anne’s house.
+. Walk to Anne’s house.
+
+Here is an example of how index-free adjacency (IFA) works.
+Suppose you bake a pie for your friend Anne.
+You want to delivery it quickly, so she can enjoy it while it is still warm.
+How would you go about delivering it?
+
+This takes maybe 30 seconds, and the pie is piping hot when you get there.
+No wasted time or effort.
+This is how index-free adjacency operates.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Let us begin by making a *‘real-life’ analogy* for *Index-free Adjacency*.
+
+Suppose you bake a pie for your friend Anne.
+
+* You want to delivery it quickly, so she can enjoy it while it is still warm.
+* How would you go about delivering it?
+
+Most people would follow these simple steps:
+
+. Leave my house
+. Point myself towards Anne’s house
+. Walk to Anne’s house
+
+This takes maybe 30 seconds, and the pie is piping hot when you get there.
+
+* No wasted time or effort.
+* This is how Index-Free adjacency operates.
+
+Note: Image credit: Dan McCreary - https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager
+--
+endif::[]
+
+=== Contrast index-free adjacency with RDBMS
+
+ifndef::env-slides[]
+By contrast, a traditional RDBMS cannot do this.
+It must use a central index.
+endif::[]
+
+image::IFA-2.png[IFA-2,width=800,align=center]
+
+Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
+
+ifndef::env-slides[]
+In a RDBMS world, the pie-delivery process would go like this:
+
+. Leave my house.
+. Walk to the town hall.  It contains a Central Index containing the addresses of everyone in town.
+Stand in line.  Everyone looking for an address needs to do the same thing you are, so there is a wait.
+. Tell the search agent whom you’re looking for.  They will look up Anne’s address in the index (note that the larger the town, the longer it takes to do the search).  The agent gives you Anne’s address.
+. Enter the address into the map app on your phone, and follow the directions to Anne’s house.
+
+This is obviously inefficient.
+You needed to walk twice as far, had to wait in line, and had to wait for a search process to complete.
+But to make matters even worse, there is no concept of "learning the route", no matter how many times you take it.
+Every single time you want to visit Anne’s house, you need to follow these same steps!
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+By contrast, traditional a *Relational Database Management System* (RDBMS) *cannot* do this.
+
+* In an RDBMS world, the pie-delivery process would go like this:
+
+. You leave your house.
+. Walk to the *town hall*.
+.. It contains a *Central Index* containing the *addresses* of everyone in town.
+. You stand in *line*.
+.. Many others are also looking for an addresses so there is a *wait*.
+. You tell the *search agent* whom you’re looking for.
+.. They will *look up* Anne’s address in the index
+... Note that the larger the town, the longer it takes to do the search.
+... The *agent* gives you Anne’s *address*.
+. You enter the *address* into the *map app* on your phone, -
+.. and follow the directions to Anne’s house.
+
+This is obviously *inefficient*.
+
+* You needed to *walk* twice as far, had to *wait* in line,
+** and then had to *wait* for a search process to complete.
+* But to make matters even *worse*, there is *no concept* of *“learning the route”*, -
+** no matter how many times you take it.
+* *Every single time* you want to visit Anne’s house, you need to follow these *same steps*!
+
+
+*Q*: Do  you have to explicitly create the indexes for Neo4j, or is it automatically created for any property?
+
+*A*: In Neo4j which uses *index-free adjacency*, -
+
+* so there is *no such thing* as an index in the way that you are thinking of it.
+* That’s why it’s called *index-free*.
+
+* The way that this works - is that every node and relationships -
+** has *pointers* to all of the things to which it is connected.
+* Each pointer - points to an actual *physical location*.
+* There is going to be a pointer *directly* to Ann’s house.
+* Since we have pointers that point directly to what is needed, -
+** it doesn’t need to be looked up using an index.
+* Also, using pointers is always *very fast*.
+* This makes a *graph native database* particularly well suited -
+** to graph problems, since these types of problems are often traversing long sequences.
+* Every hop from one item to another in a sequence is going to involve some kind of this traversal.
+* If you can do that via pointers -
+** rather than having to go to an index every time, -
+** you're going to save an enormous amount of resources in time.
+
+--
+endif::[]
+
+=== Benefits of Neo4j's index-free adjacency
+
+IFA uses pointers to directly access the target address:
+
+image::Neo4j-IFA.png[Neo4j-IFA,width=800,align=center]
+
+[square]
+* No index lookups or table scans
+* Reduced duplication of foreign keys
+
+ifndef::env-slides[]
+With index-free adjacency, when a node or relationship is written to the database, it is stored in the database as connected, and any subsequent access to the data is done using pointer navigation which is [.underline]#very fast#.
+Nodes are linked using pointers.
+For example,  Person 1 (Anne) is linked to Address 5 (Germany).
+
+Index free adjacency eliminates 3 of the 4 steps required in an RDBMS.
+You still need to do some work to identify the starting pointer for traversal, but once you know which set of records to start from, hopping from one link to the next
+is a trivial matter of reading the location specified.
+That is, no more lookup tables or index searches.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Instead of using indexing lookups in a Relational database, -
+
+* In a Neo4j graph database -
+** data and pointers are stored as diagrammed here.
+
+The most important way - that *Index-Free Adjacency* differs -
+
+* from traditional *RDBMS* - is in how *relationships* are *expressed*.
+* Instead of using a *Document ID* as a *relationship key*, -
+** objects are linked using *pointers*.
+* In other words, rather than *Person 1* (Anne) -
+** being linked to *Address 5* (Germany) -
+** using an index (As in abn RDBMS),
+* Using *Index-Free Adjacency* - it has item at location 1 (Anne) -
+** linked to the item at location 5 (Germany) using a stored pointer 5.
+
+This immediately *eliminates* 3 of the 4 steps in the RDBMS model.
+
+* You still need to do some work to identify the starting pointer for traversal, -
+** but once you know which set of records to start from, -
+** hopping from one link to the next -
+** is a trivial matter of reading the location specified.
+* No more lookup tables or index searches.
+
+An additional *benefit* of *Index-free Adjacency* using a *direct link* -
+
+* is the reduction of stored data.
+
+*Lookup tables* and *foreign keys* do not require a great deal of storage.
+
+* However, in a highly relational dataset, -
+** particularly one that is not especially well optimized -
+* the added data storage used for *lookup table*s and *foreign keys* -
+** adds up to a great deal of *duplicated information*.
+* *Index-free adjacency* eliminates the need for this *storage space*.
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== Neo4j DBMS
+endif::[]
+
+=== Neo4j DBMS: Graph engine
+
+image::Neo4jDatabase.png[Neo4jDatabase,width=300,align=center]
+
+The heart of the Neo4j Graph Platform is the Neo4j Database.
+
+The Neo4j graph engine interprets Cypher statements to:
+
+[square]
+* Execute kernel-level code for optimal performance.
+* Optimize data access on disk and cached in memory.
+
+ifndef::env-slides[]
+The graph engine has been improved with every release of Neo4j to provide the most efficient access to an application's graph data. There are many ways that you can tune the performance of the engine to suit your particular application needs.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+The first, and arguably the most important piece, of the Neo4j platform is the the Neo4j database.
+
+* The database of course is where the graph data is going to be stored.
+
+Neo4j continually focuses on improving the graph engine -
+
+* in order to provide the most efficient and fastest access to graph application data
+--
+endif::[]
+
+=== Neo4j DBMS: ACID transactions
+
+ifdef::env-slides[]
+Transactional consistency - all updates either succeed or fail.
+endif::[]
+
+image::ACID.png[ACID,width=800,align=center]
+
+[square]
+* Atomicity
+* Consistency
+* Isolation
+* Durability
+
+ifndef::env-slides[]
+Transactionality is very important for robust applications that require an ACID (atomicity, consistency, isolation, and durability) guarantees for their data.
+If a relationship between nodes is created, not only is the relationship created, but the nodes are updated as connected. 
+All of these updates to the database must [.underline]#all# succeed or fail.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+The Neo4j database also supports full acid compliance.
+
+* This means that - *transactions* are *atomic*, *consistent*, *isolated*, and *durable*.
+* *ACID guarantees* a *consistent state* -
+** assuring that the database has *transactional consistency*.
+
+*ACID compliance* sounds like something -
+
+* that every single data management paradigm would offer.
+* But, if you dive into it, it turns out that, - that isn't true.
+
+Most data management paradigms do not offer not full acid compliance.
+
+* Instead they offer *eventual consistency*.
+* The idea is that if you have multiple copies of the data,
+** all of them will eventually agree.
+*Although you might have *midpoints* for a short amounts of time where they differ.
+* Neo4j does not do this.
+** Neo4j guarantees consistency across all copies of it at all times.
+
+This is important since - true *ACID compliance* is *rare* - in the *No-SQL* data management world.
+
+* What you are likely to encounter there - is *eventual consistency*, - which is usually good enough.
+* But – *eventual consistency* - leaves you open to problems -
+** in cases where communication is lost -
+** for whatever reason ( between different nodes in the cluster).
+--
+endif::[]
+
+[.half-column]
+=== Neo4j DBMS: Clusters
+
+image::Clustering.png[Clustering,width=600,align=center]
+
+ifndef::env-slides[]
+Neo4j supports clusters that provide high availability, scalability for read access to the data, and failover which is important to many enterprises.
+Neo4j clusters also maintain ACID transactions across all locations.
+Neo4j clusters are only available with Neo4j Enterprise Edition.
+endif::[]
+
+ifdef::env-slides[]
+Neo4j clusters support:
+
+[square]
+* *ACID* across all locations
+* Available in *Neo4j Enterprise Edition*
+
+Cluster provide:
+
+[square]
+* *High availability*
+* *Scalability*
+** For read access to data
+* *Failover*
+** A vital requirement for many enterprises
+
+[.instructor-notes]
+--
+A Neo4j database can also be clustered.
+
+* You can have many different copies of it, -
+** in different physical locations -
+** all working together to offer
+*** high availability and fault tolerance
+
+The Neo4j database gives *ACID compliant transactions*.
+
+* This is true even in *fully clustered systems* where there are -
+** *multiple copies* of the data -
+** and *multiple instances* of Neo4j -
+** all working together as part of the same solution.
+
+You can find out more about this is in the *Neo4j Operations Manual*.
+--
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== Neo4j Development Environments
+endif::[]
+
+== Neo4j Aura
+
+image::Aura.png[Aura,width=700,align=center]
+
+Neo4j Aura is the simplest way to run the Neo4j DBMS in the cloud.
+
+[square]
+* The Neo4j team manages the administration of Neo4j.
+* Developers focus on creating Neo4j applications.
+
+ifndef::env-slides[]
+Completely automated and fully-managed, Neo4j Aura delivers the world’s most flexible, reliable and developer-friendly graph database as a service.
+With Neo4j Aura, you leave the day-to-day management of your database to the same engineers who built Neo4j, freeing you to focus on building rich graph-powered applications.
+Backups are done automatically for you and the database is available 24x7.
+In addition,  the Neo4j Aura team will ensure that the database instance is always up-to-date with the latest version of Neo4j.
+To use Neo4j Aura, you must pay a monthly subscription fee which is based upon the size of your graph.
+
+Once you create a Neo4j Database at the https://neo4j.com/aura/[Neo4j Aura site], it will be managed by Neo4j.
+endif::[]
+
+ifdef::backend-html5,backend-pdf[]
+Here is a short video that shows how to create a database in Neo4j Aura:
+endif::[]
+
+ifdef::backend-html5[]
+video::lnoxoAsWguM[youtube,width=560,height=315]
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/lnoxoAsWguM
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+There are 3 environments where you can develop and work on Neo4j applications.
+
+Let’s start with Aura.
+
+*Neo4j Aura* is a flexible, reliable and developer-friendly *graph database as a service*.
+
+An *advantage* of using Aura is that *day-to-day management* of the Neo4j environment, -
+
+* including the databases, - is done by Neo4j.
+* This *frees up developer time* to focus on building graph-powered applications.
+
+Some of the highlights provided by Aura include that:
+
+* The *database* is available *24x7*.
+* *Backups* are done *automatically*.
+* Aura is *automatically* and *transparently kept up-to-date* with the latest Neo4j version.
+
+Usage of Neo4j Aura is based on a monthly subscription fee.
+
+--
+endif::[]
+
+[.half-column]
+== Neo4j Sandbox
+
+ifndef::env-slides[]
+The Neo4j Sandbox is way that you can begin development with Neo4j.
+It is a free, temporary, and cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser. The database in a Sandbox may be blank or it may be pre-populated. It is started automatically for you when you create the Sandbox.
+endif::[]
+
+image::BlankSandbox.png[BlankSandbox,width=600,align=center]
+
+ifndef::env-slides[]
+By default, the Neo4j Sandbox is available for three days, but you can extend it for up to 10 days.
+If you do not want to install Neo4j Desktop on your system, consider creating a Neo4j Sandbox. You must make sure that you extend your lease of the Sandbox, otherwise you will lose your graph and any saved Cypher scripts you have created in the Sandbox. However, you can use Neo4j Browser Sync to save Cypher scripts from your Sandbox.
+We recommend you use the Neo4j Desktop or Neo4j Aura for a real development project.
+The Sandbox is intended as a temporary environment or for learning about the features of Neo4j as well as specific graph use-cases.
+
+You create a Sandbox by creating an account at the https://sandbox.neo4j.com/?ref=graph-academy[Neo4j Sandbox site].
+endif::[]
+
+ifdef::backend-html5,backend-pdf[]
+Here is a video that shows how to create a Neo4j Sandbox account and a Neo4j Sandbox instance:
+endif::[]
+
+ifdef::backend-html5[]
+video::OSk1ePl2PUM[youtube,width=560,height=315]
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/OSk1ePl2PUM
+endif::[]
+
+ifdef::env-slides[]
+Provides a temporary environment for learning about Neo4j.
+
+[square]
+* Go to sandbox.neo4j.com
+* Defaults to 3 days
+* Extendable to 10 days
+
+For this course, select the *Blank Sandbox*.
+
+[.instructor-notes]
+--
+Another way to develop Neo4j is using the Neo4j Sandbox.
+
+* It is much more limited that Aura.
+
+Neo4j Sandbox is a temporary environment or for learning about the features of Neo4j -
+
+* as well looking looking at specific some graph use-cases that are available.
+
+If you are unable to install Neo4j Desktop on your system, -
+
+* for example do to security issues, this is a good alternative.
+* Using Sandbox eliminates the need to install Neo4j on your machine/
+
+Sandbox is a temporary environment that’s typically used for a short evaluation or for training.
+
+* The environment is deleted automatically after 3 days, but can be extended for upto 10 days.
+** All of your work is lost when the environment is deleted.
+
+For an actual development project either use *Neo4j Desktop* or* Neo4j Aura*.
+
+*Additional information:*
+
+* Choose whether the database is *blank* or one of  the *pre-populated* DBs
+* Sandbox starts automatically when selecting a graph.
+* The associated graph is accessed from a web browser
+* It will may not work if there is an *ad blocker* , VPN, or something else on your system
+* You *must accept* tracking *cookies* to use Sandbox.
+* You can save Cypher scripts for use in other sandboxes or Neo4j projects.
+--
+endif::[]
+
+[.half-column]
+== Neo4j Desktop
+
+ifndef::env-slides[]
+Neo4j Desktop is intended for developers who want to develop a Neo4j application and test it on their local machine.
+It is free to use.
+Neo4j Desktop is a UI that enables you to create projects, each with their own Neo4j DBMS instances where you can easily add or remove graph applications and libraries for use with your Neo4j DBMS.
+It includes an application called  Neo4j Browser which is the UI you use to access the started database using Cypher queries.
+endif::[]
+
+image::Neo4jDesktop.png[Neo4jDesktop,width=550,align=center]
+
+ifndef::env-slides[]
+The Neo4j Desktop runs on OS X, Linux, and Windows. You can download it from our https://neo4j.com/download[download page].
+endif::[]
+
+ifdef::backend-html5,backend-pdf[]
+These videos show how to install and get started using Neo4j Desktop.
+endif::[]
+
+ifdef::backend-html5[]
+.If using OS X
+[%collapsible%open]
+====
+video::cTZ_Z3KfLyE[youtube,width=560,height=315]
+====
+
+.If using Linux
+[%collapsible]
+====
+video::pvjsxc_MdIw[youtube,width=560,height=315]
+====
+
+.If using Windows
+[%collapsible]
+====
+video::RSbhmVF_ccs[youtube,width=560,height=315]
+====
+endif::[]
+
+ifdef::backend-pdf[]
+If using OS X:
+
+https://youtu.be/cTZ_Z3KfLyE
+
+If using Linux:
+
+https://youtu.be/pvjsxc_MdIw
+
+If using Windows:
+
+https://youtu.be/RSbhmVF_ccs
+endif::[]
+
+ifdef::backend-html5,backend-pdf[]
+[NOTE]
+Before you install on Windows, make sure you have the latest version of PowerShell installed.
+endif::[]
+
+
+ifdef::env-slides[]
+[square]
+* Use to develop and test Neo4j applications on local machine
+* Supports creating projects
+* Supports Neo4j DBMS instances
+* Add / remove graph applications and libraries
+* Includes:
+** Neo4j Browser
+** Neo4j Bloom
+** Neo4j ETL Tool
+
+[.instructor-notes]
+--
+Neo4j Desktop, along with Neo4j Browser, is the 3rd development environment for Neo4j.
+
+* This option provides full control over Neo4j.
+
+Some of the features that Neo4j Desktop provides include -
+
+* Support to *create* local databases; -
+* to *manage* multiple projects; -
+* and *manage* a Database Server.
+
+With Desktop you can also start Neo4j Browser instances -
+
+* and install plugins (libraries) for use with a project;
+
+Neo4j Desktop is supported on *OS X*, *Linux*, and *Windows*.
+--
+endif::[]
+
+== Neo4j graph applications
+
+ifndef::env-slides[]
+Graph applications provide specific functionality to users that make their roles as developers, administrators, data scientists, or data analysts easier.
+Some of them are Web browser-based and some run in their own JVM.
+Graph applications are written by Neo4j engineers or Neo4j community members.
+Many of the graph applications supported by Neo4j are the work of https://neo4j.com/labs/[Neo4j Labs].
+Some graph applications are supported by Neo4j and some are not, so you must be aware of the type of support you can receive for a particular graph application.
+You typically install graph applications from your Neo4j Desktop environment from https://install.graphapp.io/.
+
+Here are some Neo4j graph applications:
+endif::[]
+
+image::GraphApps.png[GraphApps,width=700,align=center]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+There are a number of *Neo4j Graph Applications* that are available.
+
+* Shown here is partial list of available Graph Applications.
+
+*Graph applications* are end user tools.
+
+* There are *Graph Apps* that will be of interest
+** to developers, administrators, data scientists, and data analysts.
+* Each one provides specific functionality that makes performing tasks easier.
+* Some of them are *Web browser-based*, -
+** while some run in their own *JVM*.
+
+*Graph Apps* are written by *Neo4j engineers* or by *Neo4j community members*.
+
+* Some graph applications are supported by Neo4j
+** and some are not.
+* For the Graph Apps that you’re planning to use -
+** it’s recommended that you take time to find out how it is support.
+* Many of the graph applications which are supported by Neo4j -
+** are the work of *Neo4j Labs*.
+
+Typically, graph applications are installed from your Neo4j Desktop environment.
+
+* (from *https://install.graphapp.io/*.)
+
+--
+endif::[]
+
+=== Some Neo4j graph applications
+
+ifndef::env-slides[]
+Here are [.underline]#some# of the graph applications you can use:
+endif::[]
+
+[square]
+* *Neo4j Browser*
+** UI for testing Cypher queries and visualizing the graph.
+* *Neo4j Bloom*
+** A tool for exploring graphs and generating Cypher code.
+* *Neo4j ETL Tool*
+** UI for connecting to a data source to import into the graph.
+* *Halin*
+** Monitor your Neo4j DBMS.
+* *Query Log Analyzer*
+** Analyze queries that executed on your system.
+* *Neo4j Cloud Tool*
+** Tools for working with Neo4j Aura.
+* *Data Science Playground*
+** Run graph algorithms and generate code for them.
+
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Listed here are a few of the graph applications.
+
+We will not be spending time on these in this course,
+
+* with the exception of *Neo4j Browser*.
+
+*Neo4j Browser* is a UI for testing Cypher and graph visualization.
+
+* I’ll be providing information on Neo4j Browser as we go through the course.
+
+*Neo4j Bloom* - is similar to Browser, in that it also has a UI for exploring graphs.
+
+* However, you don’t need to know any Cypher to use it.
+* It allows you to explore a graph with just keywords and clicking.
+
+The *Neo4j ETL tool* is used for connecting Neo4j data sources and importing data into a graph.
+
+* This method of import is used somewhat less than others, -
+** since there are certain 3rd party graph apps that are also available that work with Cypher.
+* They have a cost, but are more powerful.
+
+*Halin* (hay-lin) is a *Neo4j monitoring tool*.
+
+There is a  *Query Log Analyzer tool*.
+
+There’s the *Neo4j Cloud Tool* - which is specific for *Aura*.
+
+The *Graph Data Science Playground* is designed to help you do data science -
+
+* and to work with graph algorithms against the Neo4j database.
+
+These are just the ones that we supply and support as part of our ecosystem.
+
+* You can also attach a number of other third party tools to Neo4j.
+
+--
+endif::[]
+
+ifdef::env-slides[]
+[.guided-exercise]
+== Guided Exercise: Getting Started with Neo4j Desktop
+
+Note: You must either install Neo4j Desktop, create a Neo4j Sandbox,
+or create a Database in Neo4j Aura to perform the hands-on exercises.
+
+[.instructor-notes]
+--
+*< DEMO Neo4j Desktop>*
+
+A Guided Exercise means that you do the steps -
+
+* and the students follow along and perform the same steps on their laptops.
+Some students may choose to use a Neo4j Sandbox.
+
+* They need not follow along on their laptops since they will not be installing the Desktop.
+
+(Video on steps shown to the class: https://youtu.be/8yWhuUnPapw )
+
+Steps to show (### updated) :
+
+. In this Guided Exercise, I am going to show you how easy it is to download, install, and start using the Neo4j Desktop.
+. You go to the Neo4j Web site.
+. At the top, you click the download button which brings you to the download page.
+. You want to install the Desktop, so you click the big button here for downloading the Desktop.
+. At this point, you must provide Neo4j with some identifying information before you can begin the download.
+. So we do that and we click Download Desktop.
+. Now it detects what kind of system you are on and it presents you with a page with the installation and getting started with the Desktop guide which we will be going through in this video.
+. Once the download completes, you simply click the installer.
+. The installer asks you to move it to your Applications folder on the MAC.
+. Once that is done, you simply go to the Applications folder and you open the Desktop.
+. There are some preliminary questions you must answer when you first open the Desktop, the license agreement, and if you have an activation key. We are just going to be using the evaluation version right now. Anonymous reporting is a good thing so click that.
+. Here we are in the Desktop.
+. The Neo4j Desktop is where you manage your projects, your databases, and the settings you use at runtime.
+. The settings view allows you to change some switches about your particular environment, including proxy settings.
+. The user profile is where you would enter your activation keys.
+. And this is simply the version of the software.
+. The projects view enables you to define a project for accessing a particular graph or database.
+. So you have a graph which is your database, and optionally you can install plugins that will work in your application environment for this database.
+. We’re going to change the name of the project. Give it a name called TestMovies and then, we are going to want to create our first graph.
+. In the beginning, you will be creating a local graph.
+. You must provide a password that you remember because you might be accessing the database from your application.
+. And the graph is created. From this window you can either manage or start the database.
+. If we click the manage button, it gives you information about the database. It’s currently not running.
+. The settings page allows you to view and modify the configuration information for your particular project.
+. We click the start button to start the database.
+. And here we see that the database is now active in the TestMovies project.
+. You can stop the database by simply clicking the stop button.
+. And here we’re going to see that we no longer have an active database.
+. We don’t like the name graph, so we are going to customize the name of our database in this Desktop to be Movies.
+. And now, we’re going to want to start the database again. So we start the database and it’s started.
+. Here in the manage area, we see that our database is running for this project.
+. The bolt port is a very important port. That’s the port that is used for binary communication to access the database from applications and from the Neo4j Browser application.
+. The HTTP port is used for accessing the Web interface to the Neo4j Browser.
+. Here we see in the logs that our database is started. So this is where you would look for information about problems with accessing the database.
+. Now in the project view, we see that we have one project, but we want to add a new project.
+. We’re going to call this project TestCustomers.
+. When we create the project, we will have our own graph that is used for this project.
+. We enter the password.
+. At this point, we want to change the name of the database from graph to customers.
+. So now we have two projects, each with their own graph. And we see that the Movies database is currently running. In the Desktop, you can only have one database active at a time.
+. So we are going to stop the Movies database, and then we can start the TestCustomer’s project’s database, which is called Customers.
+. Now we see that we have our Customers database that is started and can be used from the TestCustomers applications.
+. So that’s all you need to do to get started with the Neo4j Desktop.
+--
+
+endif::[]
+
+[.half-column]
+== Accessing Neo4j Browser
+
+image::StartNeo4jBrowser.png[StartNeo4jBrowser,width=500,align=center]
+
+Runs as a graph app from Neo4j Desktop.
+
+Web browser interface can also be used for connecting to:
+
+[square]
+* Neo4j Desktop instance that is started
+* Neo4j Sandbox instance
+* Neo4j Aura instance
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Now let’s talk about the Neo4j Browser.
+The Neo4j Browser is where we’ll be spending most of our time in this course.
+
+You can run Neo4j Browser either locally or -
+
+* from the cloud through a web browser interface.
+
+To access it locally you must have a local install of Neo4j Desktop.
+
+* The image shown here shows how to start the Browser from the Desktop.
+
+Accessing Neo4j Desktop from the cloud can be done in one of 3 ways.
+
+* From Aura, from sandbox, or from the Desktop.
+
+--
+endif::[]
+
+[.half-column]
+== Neo4j Browser
+
+image::Neo4jBrowserFollows.png[Neo4jBrowserFollows,width=500,align=center]
+
+ifndef::env-slides[]
+Neo4j Browser is a Neo4j-supported tool that enables you to access a Neo4j Database by executing Cypher statements to create or update data in the graph and to query the graph to return data.
+The data returned is typically visualized as nodes and relationships in a graph, but can also be displayed as tables.
+In addition to executing Cypher statements, you can execute a number of system calls that are related to the database being accessed by the Browser.
+For example, you can retrieve the list of queries that are currently running in the server.
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* Graphical UI  connects to Neo4j instance.
+* Send Cypher queries to Neo4j instance.
+* Visualize returned data.
+* Execute built-in procedures and commands.
+
+[.instructor-notes]
+--
+Here we see the Neo4j Browser interface,
+
+* along with  some of the key features that it provides.
+
+The Neo4j Browser provides access Neo4j Databases through a Neo4j Server instance.
+
+Neo4j Browser is a Neo4j-supported tool.
+
+* Browser enables you to access a Neo4j Database -
+** by executing Cypher statements.
+* You can create or update data in the graph.
+* You can also query the graph to return data.
+
+The data returned is typically visualized as graph nodes and relationships.
+
+* You can also  display the data returned as tables.
+
+In addition to executing Cypher statements, -
+
+* you can execute a number of system calls -
+** that are related to the database being accessed by the Browser.
+* For example,
+** you can retrieve the list of queries that are currently running in the server.
+
+You can save your queries using the favorites option.
+
+* You may choose to download your code so that it can be reused in other places -
+** (like in your application code).
+
+In addition, when using the Web browser interface to Neo4j Browser, -
+
+* you can use Browser Sync to keep your favorites in the Cloud.
+--
+endif::[]
+
+ifndef::env-slides[]
+=== 1. Open  Neo4j Browser from Neo4j Desktop
+
+Neo4j Browser is a graph application that comes with Neo4j Desktop.
+You typically use it to access a database that is running locally, but you can use it to access a remote database.
+
+If you save your frequently-used Cypher code in *favorites*, you can download them so you can use them elsewhere (like in your application code).
+
+image::Neo4jBrowser.png[Neo4jBrowser,width=600,align=center]
+
+=== 2. Use Neo4j Browser Web browser interface
+
+You can use the Web interface to access to access a local Neo4j DBMS, or a database in Neo4j Aura or Neo4j Sandbox.
+
+image::WebNeo4jBrowser.png[WebNeo4jBrowser,width=600,align=center]
+
+Just as in the Neo4j Browser application, you can save frequently-used Cypher code in *favorites*, then you can download them so you can use them elsewhere (like in your application code).
+In addition, when using the Web browser interface to Neo4j Browser, you can use Browser Sync to keep your favorites in the Cloud.
+endif::[]
+
+[.guided-exercise]
+== Guided Exercise: Getting Started with Neo4j Browser
+
+ifdef::env-slides[]
+
+Note: Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
+
+In this exercise you will populate the database that will be used for the hands-on exercises.
+
+[.instructor-notes]
+--
+*< DEMO Neo4j Browser>*
+
+A Guided Exercise means that you do the steps -
+
+* and the students follow along and perform the same steps on their laptops.
+
+This is a LONG Guided Exercise.
+
+* It is important since it introduces students to using the Neo4j Browser effectively.
+* During this Guided Exercise, students populate the database which is required prior to any hands-on exercises.
+
+( Video  https://youtu.be/rQTximyaETA)
+
+Here are the script of the video:
+
+. In this Guided Exercise, I am going to show you how to use Neo4j Browser in your development environment.
+. If you are using the Neo4j Desktop, you can start the Neo4j Browser application from the project, provided the database for that project has been started.
+. You simply click on the Neo4j Browser icon here in the applications area to start it.
+. Recall that when you start the Neo4j database, it provides you with information about the ports for accessing the database. The HTTP port on a local server is used for accessing the Neo4j Database from a Web Browser.
+. In our Web browser, we simply specify localhost with the port, 7474 to access the database.
+. Notice that the UI for the Neo4j Browser application and the UI for the Web browser interface if pretty much identical. The only difference is the cloud area here which you will learn about later in this video.
+. You can also access the database running in a Sandbox by navigating to the Sandbox and clicking the link for the browser.
+. For this video, I will use the Web browser interface to the Database that is running locally.
+. In Neo4j Browser, you have various settings and information on the left that we will learn about later in this video after you have seen how to execute some commands and Cypher statements in the Browser.
+. Notice that here, when we access the database for the first time, the command :play start is executed. A command begins with a colon. A Cypher statement does not.
+. We type the command :help commands and press the enter or return key. This executes the command and displays the result in the newly created result pane.
+. If we type :help keys, information is displayed in the result pane about keyboard shortcuts.
+. You can see quick help on Cypher keywords. A very common Cypher keyword you will use is the MATCH keyword for retrieving data from the graph. If we type :help MATCH, we see a brief description of the syntax for using this Cypher keyword.
+. The most recent result is always displayed under the edit pane.
+. The exception to this is if you pin the pane. If a pane is pinned, it will always stay at its position.
+. Let’s pin the pane with the result of executing :help MATCH.
+. Here we type a different command, :sysinfo. Notice that the result of executing this command is placed after the pinned pane.
+. Let’s unpin this pane and now execute the last command, :sysinfo again. You can use the ctrl/cmd+up/down arrows to select from the command and statement history. Here I am recalling the previously executed command. I can press the enter or return key, or I can select the run icon here to run that command.
+. The :history command will display all of the commands and statements that were entered and executed.
+. Rather than navigating up/down to find the command or statement you want to execute, you can simply click on a block shown in the history result.
+. When you do so, it brings the command or statement into the edit pane so you can optionally modify it and then execute the command or statement.
+. Here we recall the :help commands command and modify it in the edit pane to be :help server.
+. You can expand and collapse result panes.
+. You can also delete result panes if they are not useful to you.
+. A setting in the Browser that may be useful for you is the number of result panes to display and the size of the command/statement history.
+. You can adjust these here in settings where you can modify the maximum number of result frames and the maximum command or statement history to keep.
+. You click the settings icon to collapse that part of the display.
+. If you have many result panes displayed and you don’t want to manually delete them, you can use the :clear command to delete all of them.
+. Even though you have cleared all of the result panes, you still have access to your command or statement history.
+. Up to now, we have seen the execution of commands. Now let’s execute a Cypher statement to show you how the Neo4j Browser executes against the database.
+. When we first opened the Neo4j Browser, the first command to execute was the :play start command.
+. The :play command is used to execute a browser guide that can be used to step you through some content that may help you learn about Neo4j.
+. The :play movie graph command enables you to learn some things about Cypher using the movie database. For this demonstration, I will play the movies browser guide.
+. In a browser guide such as this, you can step through the pages of the guide.
+. Here on page 2 is what we are interested in. You have not learned Cypher yet, but this large code block can be used to populate the movie database. In many of the guides, if you simply click on the code block, the Cypher statements are then placed in the edit pane.
+. You need not understand this long block of Cypher code. We simply run this Cypher statement to load the movie database.
+. The Cypher statement executes and displays a graph containing some of the Person and Movie nodes that are connected by relationships.
+. When a Cypher statement returns a graph, it can be exported as an image or a CSV file.
+. This result is displaying 17 nodes, 9 Person nodes and 8 Movie nodes, along with their corresponding relationships. This is just a subset of the data in the database.
+. We can see information about the database by clicking the database icon here.
+. The database contains a total of 171 nodes of type Movie and Person. It also contains 253 relationships between the nodes with these types.
+. If you click one of these node labels, it automatically returns a sample of at most 25 nodes of the node type from the graph.
+. If you click a relationship, it returns a subset of nodes associated with that relationship.
+. In addition, the property keys specified here are the properties for the nodes and relationships.
+. The Nodes of a graph are displayed with a color coding. Here we see that all Person nodes will be displayed in blue and all Movie nodes will be displayed in green.
+. If you click on a type of Node, you can modify the color of the node, the size of the node and which property will be displayed as a caption in the visualization of the graph.
+. If you click on a relationship type, you can modify the color and size of the connection.
+. In this graph mode, you can also select nodes and rearrange them in this result pane.
+. If you want to focus on a particular node, you can select it and do things like expand all of its relationships in an out of the node.
+. Or you can remove the node from the display. These actions do not modify the database, simply the display.
+. Another way that you can view the results is as a table where a for actors, m for movies, and d for directors has been returned by the Cypher statement.
+. Another form of the result is as plain text.
+. And of course you can always view the code that was executed.
+. Some Cypher statements when executed will return values that are not a graph.
+. Here I type the simple Cypher statement MATCH (p:Person) RETURN p.name LIMIT 5. The result is not a graph, but simply a table or plain text of the five names of Person nodes in the database.
+. We can rerun the last statement, modifying it to return 10 names.
+. If you execute a statement or command that has a syntax error, the Browser will display the error in the result pane.
+. You can delete the last result pane once you have identified the error, recall the last command, correct it, and execute it.
+. Now when your browser session ends, all of the commands and statements that you executed are cached in the Web browser’s local store. How the local store for your browser is managed is up to you,  but you cannot rely on the cache being available for your use, especially if you switch browsers or systems.
+. As you are executing Browser commands and Cypher statements, you can save them to your favorites.
+. If you click the favorites icon on the left, the Favorites pane is visible. This pane contains some starter Cypher code that you can adapt for your needs. In your development environment, you will most likely want to create and maintain a set of Cypher scripts that you can reuse.
+. For example, you may want to save the Cypher script for creating the movie database. In our training development environment, we will use the movie database.
+. First, we create a folder called Movies in Favorites. This will enable us to place all scripts related to the Movies database in this folder. If we decide to create scripts for a different database, for example, Customers, we would create a folder for those scripts.
+. Now we have the huge Cypher script that we previously ran to create the database in our history so we recall it and place it in our edit pane.
+. If we were to execute this script again, it would create duplicates of the existing data in the movies database. To prevent this from happening, we place the following statement at the beginning of the script: MATCH (n) DETACH DELETE n;. You must place the semicolon after this statement because we want to execute two Cypher statements, one to delete all nodes in the database and the next statement to create the data in the database. Note that if you are using the Neo4j Browser application, you must specify that you will allow the multi-statement query editor in settings.
+. We execute these statements which will delete all data in the the database and recreate the data.
+. If we look at the database, we see that we have the correct number of nodes and relationships.
+. Now we want to prepare this script as a favorite. At the beginning of the script in the edit pane, you add a comment which will be interpreted as the name of the script, Here we add the comment //Reset database
+. Next we click the favorite icon to add it to the favorites.
+. Here we see it in favorites.
+. We simply drag the script so that it is placed under the Movies folder.
+. We are not done with saving our favorites. The Neo4j Browser when run from a Web browser has access to Browser Sync in the cloud. This enables you to save settings and scripts in the cloud that that you can reuse them in different browsers and systems.
+. To perform the Browser Sync, you must sign in to the cloud using an existing account or by creating a new account.
+. Once we are connected, any additions to scripts or changes in Neo4j Browser settings will be saved or synced in the cloud. If you remove a script from favorites, it’s removal will be applied in the cloud when you sign out of Browser Sync.
+. Here we see the Clear local data button. This is useful sometimes when you need to clear the favorites/settings data in your Web browser cache.
+. If you open a Web browser that does not have any cached data for accessing Neo4j, you can simply connect to the cloud to load your scripts and settings into your current browser session. This Neo4j Browser Sync is only available to the Web interface and is not available in the Neo4j Browser application that runs as part of the Neo4j Desktop. For this reason, a best practice is to use the Web interface for the Neo4j Browser as it gives you the most flexibility. In future releases of Neo4j, the Neo4j Browser application will include more functionality to manage resources.
+. So that’s a quick tour of using the Neo4j Browser in your development environment. If you want to read more about some tips and tricks when using the Neo4j Browser, visit the Neo4j User Interface Guide in neo4j.com/developer.
+--
+endif::[]
+
+
+ifdef::backend-html5,backend-pdf[]
+Follow along with this video to become familiar with common tasks in Neo4j Browser.
+endif::[]
+
+ifdef::backend-pdf[]
+https://youtu.be/oHo-lQ79zf0
+endif::[]
+
+ifdef::backend-html5[]
+[.center]
+video::oHo-lQ79zf0[youtube,width=560,height=315]
+endif::[]
+
+
+ifndef::env-slides[]
+[NOTE]
+Before you perform the tasks shown in this video, you must have either created and started the database in the Neo4j Desktop, created a Database in Neo4j Aura, or created a Neo4j Sandbox.
+endif::[]
+
+ifdef::env-slides[]
+[.section-break]
+== More Neo4j features
+endif::[]
+
+[.half-column]
+== Neo4j Bloom
+
+ifndef::env-slides[]
+Neo4j Bloom is a Neo4j-supported graph application where you can experience:
+
+[square]
+* Visual presentation of your graph data tangibly reveals non-obvious connections.
+* Easy-to-understand visualizations explain data connectedness to every colleague.
+* Codeless search tools let you quickly explore your data without technical expertise.
+* Browsing tools make it easy for you to discover new insights from your data.
+endif::[]
+
+image::Bloom.png[Bloom,width=600,align=center]
+
+ifndef::env-slides[]
+Visit the https://neo4j.com/bloom/[Bloom page] to learn more about Neo4j Bloom.
+
+Another way that you can try Neo4j Bloom is to create a Bloom Visual Discovery Sandbox that you can use for up to 10 days.
+endif::[]
+
+ifdef::env-slides[]
+[square]
+* A codeless search tool to quickly explore data
+* Visual presentation of graph data
+* It can reveal non-obvious connections
+* Browsing tools make it easy to discover new insights from the data
+* Can only connect to Enterprise Edition Neo4j instances
+
+[.instructor-notes]
+--
+*Neo4j Bloom* is a Neo4j-supported graph application.
+
+Bloom is a *codeless* search tool providing a way to to quickly explore data.
+Bloom provides a *visual presentation* of graph data -
+
+* that can *reveal non-obvious connections* between data  in a graph.
+
+One way that you can try Neo4j Bloom is to create a Bloom Visual Discovery Sandbox that you can use for up to 10 days.
+
+Neo4j Bloom is only supported for connecting to Enterprise Edition Neo4j instances.
+
+--
+endif::[]
+
+[.half-column]
+== Libraries
+
+ifndef::env-slides[]
+Just as there are graph applications written by Neo4j engineers and Neo4j community members, there are libraries you can incorporate into your application.
+A library is also called a plug-in as it is used to extend what you can do in Cypher.
+Some libraries are available in Neo4j Desktop, while you must download and install other libraries.
+
+In early 2020, some functions and procedures from the Graph Algorithms Library will be officially supported by Neo4j as the Graph Data Science Library (GDS).
+Before that, support for this library has come from and will continue to come from Neo4j Labs for the algorithms that are not officially supported by Neo4j.
+
+One of the most popular libraries that is used by most developers is Awesome Procedures of Cypher (APOC).
+This library has close to 500 procedures and functions that extend Cypher in ways that make your programming in Cypher much easier for complex tasks.
+Since APOC is so widely-used by developers, it comes already-installed in a Neo4j Sandbox and Neo4j Aura.
+
+Another library that also comes with Neo4j Desktop is GraphQL.
+GraphQL is an open-source query language for querying parts of a graph. It is not as flexible or powerful as Cypher, but it is used by some applications.
+
+A very popular library for graph visualization is neoviz.js, another project of Neo4j Labs.
+
+
+Here are the plugins that come with Neo4j Desktop:
+endif::[]
+
+image::Plugins.png[Plugins,width=700,align=center]
+
+
+ifdef::env-slides[]
+*Plugins* included with Neo4j Desktop
+[.instructor-notes]
+--
+Just as there are graph applications
+
+* written by Neo4j engineers and Neo4j community members,
+* there are *libraries* you can incorporate into your application.
+
+A library is also called a plug-in , since it’s used to extend what you can do in Cypher.
+
+Some libraries are available in Neo4j Desktop,
+
+* while other libraries must be download and installed.
+
+One of the most popular libraries that is *used* by *most developers* is -
+
+* *Awesome Procedures of Cypher* (APOC).
+** This library has close to *500 procedures* and functions that extend Cypher.
+** It can make programming in Cypher much easier for complex tasks.
+** Since APOC is widely-used by developers,
+*** it comes *already-installed* in a *Neo4j Sandbox* and *Neo4j Aura*.
+
+Some functions and procedures from the *Graph Data Science Library* -
+
+* are supported as the *Graph Data Science Library* (GDSL).
+** This library comes from *Neo4j engineering* and *Neo4j Labs*.
+
+Another library that also comes with Neo4j Desktop is *GraphQL*.
+
+* GraphQL is an *open-source query language* for querying parts of a graph.
+* It is not as flexible or powerful as Cypher, but it is used by some applications.
+
+A very popular library for *graph visualization* is *neoviz.js*.
+
+* This is another project of Neo4j Labs.
+
+--
+endif::[]
+
+== Drivers and language support
+
+ifndef::env-slides[]
+Here are some drivers that Neo4j supports:
+endif::[]
+
+image::Drivers.png[Drivers,width=600,align=center]
+
+ifndef::env-slides[]
+Because Neo4j is open source, you can delve into the details of how the Neo4j Database is accessed, but most developers simply use Neo4j without needing a deeper understanding of the underlying code.
+Neo4j provides a full stack that implements all levels of access to the database and clustering layer where you can use our published APIs.
+The language used for querying the Neo4j database is Cypher, an open source language.
+
+In addition, Neo4j supports Java, JavaScript, Python, C#, and Go drivers out-of-the box that use Neo4j's bolt protocol for binary access to the database layer.
+Bolt is an efficient binary protocol that compresses data sent over the wire as well as encrypting the data.
+For example, you can write a Java application that uses the Bolt driver to access the Neo4j database, and the application may use other packages that allow data integration between Neo4j and other data stores or uses as common framework such as spring.
+You download drivers from the https://neo4j.com/download-center/#drivers[Neo4j driver download page].
+
+It is also possible for you to develop your own server-side extensions in Java that access the data in the database directly without using Cypher.
+The Neo4j community has developed drivers for a number of languages including Ruby, PHP, and R.
+
+You can also extend the functionality of Neo4j by creating user defined functions and procedures that are callable from Cypher.
+endif::[]
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+You also can interact with the graph engine - using a number of other programming languages.
+
+* There are 5 that Neo4j supports as part of the core product.
+* These are Java, JavaScript, Python, C#, and Go.
+
+Also, since Neo4j is an open source technology -
+
+* there are other drivers that are available in our community, -
+** some of these have been vetted by Neo4j.
+
+If you have an application that speaks a certain language, -
+
+* rather than having to convert everything into Cypher, -
+* you can instead use that programming language, -
+** by using the appropriate driver as your interface.
+
+You  can find these drivers by going to the site listed here -
+
+https://neo4j.com/download-center/#drivers
+
+<more details>
+
+Because Neo4j is open source, you can delve into the details of how the Neo4j Database is accessed, but most developers simply use Neo4j without needing a deeper understanding of the underlying code. Neo4j provides a full stack that implements all levels of access to the database and clustering layer where you can use our published APIs. The language used for querying the Neo4j database is Cypher, an open source language. In addition, Neo4j supports Java, JavaScript, Python, C#, and Go drivers out-of-the box that use Neo4j’s bolt protocol for binary access to the database layer. Bolt is an efficient binary protocol that compresses data sent over the wire as well as encrypting the data. For example, you can write a Java application that uses the Bolt driver to access the Neo4j database, and the application may use other packages that allow data integration between Neo4j and other data stores or uses as common framework such as spring. You download drivers from the Neo4j driver download page. It is also possible for you to develop your own server-side extensions in Java that access the data in the database directly without using Cypher. The Neo4j community has developed drivers for a number of languages including Ruby, PHP, and R. You can also extend the functionality of Neo4j by creating user defined functions and procedures that are callable from Cypher.
+
+--
+endif::[]
+
+[.half-column]
+== Neo4j integration
+
+ifdef::env-slides[]
+[square]
+* GRANDstack
+* Kettle
+* Docker
+* Kafka
+
+Discussions:
+
+[square]
+* Neo4j User slack channel
+* Neo4j Community
+* Stack overflow
+* Github
+
+[.instructor-notes]
+--
+Neo4j has integrations with many systems in the *internet of things* (IOT) ecosystem.
+
+Neo4j can be part of a system that uses -
+
+* *GRANDstack*, *Kettle*, *Docker*, and many others.
+
+How you integrate Neo4j into a larger system will depend on how you intend to use Neo4j.
+
+*Neo4j engineers* and *Community members* -
+
+* have worked through some of the challenges of integration.
+
+Their discussions and work can be found on -
+
+* the *Neo4j User slack* channel, the *Neo4j Community*, *stack overflow*, and on *Github*.
+
+One Neo4j-supported integration that you can download -
+
+* enables data to be streamed to/from *Kafka*.
+--
+endif::[]
+
+ifndef::env-slides[]
+Neo4j has integrations with many systems in the IOT ecosystem. Neo4j can be part of a system that uses GRANDstack, Kettle, Docker, and many others.
+How you integrate Neo4j into a larger system will depend on how you intend to use Neo4j.
+Neo4j engineers and Community members have worked through some of the challenges of integration and their discussions and work can be found on the http://neo4j.com/slack[Neo4j User slack channel], the https://community.neo4j.com[Neo4j online forum], https://stackoverflow.com/questions/tagged/neo4j[stack overflow], and on https://github.com/neo4j-contrib[Github].
+
+One Neo4j-supported integration that you can download enables data to be streamed to/from https://neo4j.com/docs/labs/neo4j-streams/current/[Kafka].
+endif::[]
+
+== Administration tools
+
+ifndef::env-slides[]
+Developers and administrators use command-line tools for managing the Neo4j DBMS. The three main tools used that are part of the Neo4j installation (located in the *bin* directory) include:
+endif::[]
+
+
+{set:cellbgcolor:white}
+[frame="none",grid=none,width="90%"cols="30,70",stripes=none]
+|===
+h|Tool
+h|Description
+|cypher-shell
+|Create, start, stop, and drop a particular database as well as query the "user" database.
+|neo4j
+|Start, stop and retrieve the status of the Neo4j DBMS instance.
+|neo4j-admin
+|Create, copy, remove, backup, restore and perform other administrative tasks.
+|===
+{set:cellbgcolor!}
+
+
+[NOTE]
+Neo4j Desktop also supports creating, starting, and stopping databases.
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Developers and administrators use command-line tools
+
+* for managing the Neo4j DBMS.
+
+Each of these is included in the install of Neo4j -
+
+* and can be found in the bin directory.
+
+The three primary tools are listed here.
+
+* *neo4j* can be used to *start*, *stop* and retrieve the *status* of a Neo4j instance.
+* *neo4j-admin* - can be used to things like *create*, *copy*, and *backup* a database,
+** along with other administrative tasks.
+* *cypher-shell* - is used to query the *“user” database* and also supports -
+** *create*, *start*, *stop*, and *drop* for a database.
+--
+endif::[]
+
+[.half-column]
+== cypher-shell
+
+ifdef::env-slides[]
+Common use cases:
+
+[square]
+* Automate database scripts
+* Advanced query tuning
+
+[.instructor-notes]
+--
+Here is a little bit *more* on *cypher-shell*.
+
+From the *command line* you can use *cypher-shell* to *connect* to a Neo4j database instance.
+
+* It’s great for executing Cypher queries against the database.
+
+It’s common to use cypher-shell for -
+
+* creating and then scheduling scripts to be automatically run against a database.
+
+Another common use case is to use cypher-shell for advanced query tuning.
+
+If you *haven’t installed* Neo4j *locally*, but still want to work with cypher-shell,  -
+
+* it can be download and installed - as a stand-alone application.
+
+--
+endif::[]
+
+
+image::cypher-shell.png[cypher-shell,width=500,align=center]
+
+ifndef::env-slides[]
+`cypher-shell` is part of the Neo4j installation and is located in the *bin* directory.
+It is a command-line tool that you can use to connect to a Neo4j DBMS instance and run Cypher statements against the database.
+
+It is useful if you want to create scripts that automatically run against the database(s).
+It is commonly used for advanced query tuning.
+
+Even if you have not installed Neo4j, you can download and install cypher-shell as a stand-alone application if you want to connect to a running database and execute Cypher queries.
+endif::[]
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What are some of the benefits provided by the Neo4j DBMS?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Clustering
+- [x] ACID
+- [x] Index-free adjacency
+- [x] Optimized graph engine
+
+=== Question 2
+
+[.statement]
+What libraries are available in Neo4j Desktop for developing your application?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] APOC
+- [ ] JGraph
+- [x] Graph Algorithms
+- [x] GraphQL
+
+=== Question 3
+
+[.statement]
+What are some of the language drivers that come with Neo4j out of the box?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] Java
+- [ ] Ruby
+- [x] Python
+- [x] JavaScript
+
+[.summary]
+== Summary
+
+You should now be able to:
+[square]
+* Describe the components and benefits of the Neo4j Graph Platform.

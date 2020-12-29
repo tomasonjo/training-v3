@@ -1,0 +1,6 @@
+* xref:00-updating40-about.adoc[]
+* xref:01-updating40-creating-nodes.adoc[]
+* xref:02-updating40-creating-relationships.adoc[]
+* xref:03-updating40-deleting-nodes-and-relationships.adoc[]
+* xref:04-updating40-merging-data.adoc[]
+* xref:05-updating40-summary.adoc[]

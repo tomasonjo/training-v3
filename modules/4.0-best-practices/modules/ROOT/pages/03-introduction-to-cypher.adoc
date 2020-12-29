@@ -1,5 +1,5 @@
 = Introduction to Cypher
-:slug: 01-querying40-introduction-to-cypher
+:slug: 03-introduction-to-cypher
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -515,7 +515,7 @@ The `MATCH` clause performs a pattern match against the data in the graph.
 During the query processing, the graph engine traverses the graph to find all nodes that match the graph pattern.
 As part of query, you can return nodes or data from the nodes using the `RETURN` clause.
 The `RETURN` clause must be the last clause of a query to the graph.
-In the course, _, you will learn how to use `MATCH` to select nodes and data for updating the graph.
+Later in this training, you will learn how to use `MATCH` to select nodes and data for updating the graph.
 First, you will learn how to simply return nodes.
 
 
@@ -576,7 +576,7 @@ Again, It *returns* the *entire graph*
 
 <more details>
 
-The most widely used Cypher clause is MATCH. The MATCH clause performs a pattern match against the data in the graph. During the query processing, the graph engine traverses the graph to find all nodes that match the graph pattern. As part of query, you can return nodes or data from the nodes using the RETURN clause. The RETURN clause must be the last clause of a query to the graph. In the course _Creating Nodes and Relationships in Neo4j 4.x_, you will learn how to use MATCH to select nodes and data for updating the graph. First, you will learn how to simply return nodes.
+The most widely used Cypher clause is MATCH. The MATCH clause performs a pattern match against the data in the graph. During the query processing, the graph engine traverses the graph to find all nodes that match the graph pattern. As part of query, you can return nodes or data from the nodes using the RETURN clause. The RETURN clause must be the last clause of a query to the graph. Later in this training, you will learn how to use MATCH to select nodes and data for updating the graph. First, you will learn how to simply return nodes.
 Notice that the Cypher keywords MATCH and RETURN are upper-case. This coding convention is described in the Cypher Style Guide and will be used in this training. This MATCH clause returns all nodes in the graph, where the optional Label is used to return a subgraph if the graph contains nodes of different types. The variable must be specified here, otherwise the query will have nothing to return.
 
 --
@@ -674,13 +674,6 @@ endif::[]
 [.student-exercise]
 == Exercise 1: Retrieving nodes
 
-[IMPORTANT]
-Prior to performing this exercise, you should have set up your development environment to use one of the following, which is covered in the course, _Overview of Neo4j 4.x_.
-[square]
-* Neo4j Desktop
-* Neo4j Sandbox
-* Neo4j Aura
-
 In the query edit pane of Neo4j Browser, execute the browser command:
 
 kbd:[:play 4.0-intro-neo4j-exercises]
@@ -696,7 +689,7 @@ ifdef::env-slides[]
 --
 Note: Show students how to  *:play 4.0-intro-exercises* and how to navigate to *Exercise 1*.
 
-They should have already populated the database from the *Neo4j Guided Exercise* in the course, _Overview of Neo4j 4.x_,
+They should have already populated the database from the *Neo4j Guided Exercise* in the previous lesson,
 but if they have not, there is a script at the beginning of each Exercise to delete all nodes and re-populate the database.
 *Note*: If students are using a *Sandbox*, they could run into access issues if they have an ad blocker, or on a VPN, or if certain ports are blocked.
 
