@@ -1,31 +1,12 @@
-= Introduction to Neo4j 4.0: Course Guide
+= Using Indexes and Query Best Practices in Neo4j 4.x: Course Guide
 :doctype: book
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
 :includedir: ../modules/ROOT/pages
 
-include::{includedir}/00-intro-neo4j-about.adoc[leveloffset=+1]
-include::{includedir}/01-neo4j-graph-database.adoc[leveloffset=+1]
-include::{includedir}/02-neo4j-graph-platform.adoc[leveloffset=+1]
-include::{includedir}/03-introduction-to-cypher.adoc[leveloffset=+1]
-include::{includedir}/04-using-where-to-filter-queries.adoc[leveloffset=+1]
-include::{includedir}/05-working-with-patterns-in-queries.adoc[leveloffset=+1]
-include::{includedir}/06-working-with-cypher-data.adoc[leveloffset=+1]
-include::{includedir}/07-controlling-query-chain.adoc[leveloffset=+1]
-include::{includedir}/08-controlling-results-returned.adoc[leveloffset=+1]
-include::{includedir}/09-creating-nodes.adoc[leveloffset=+1]
-include::{includedir}/10-creating-relationships.adoc[leveloffset=+1]
-include::{includedir}/11-deleting-nodes-and-relationships.adoc[leveloffset=+1]
-include::{includedir}/12-merging-data.adoc[leveloffset=+1]
-include::{includedir}/13-defining-constraints-data.adoc[leveloffset=+1]
-include::{includedir}/14-using-indexes.adoc[leveloffset=+1]
-include::{includedir}/15-using-query-best-practices.adoc[leveloffset=+1]
-include::{includedir}/16-overview-importing-data.adoc[leveloffset=+1]
-include::{includedir}/17-using-load-csv-import.adoc[leveloffset=+1]
-include::{includedir}/18-using-apoc-import.adoc[leveloffset=+1]
-include::{includedir}/19-using-neo4j-admin-tool-import.adoc[leveloffset=+1]
-include::{includedir}/20-using-application-import.adoc[leveloffset=+1]
-include::{includedir}/21-using-neo4j-etl-tool-import.adoc[leveloffset=+1]
-include::{includedir}/22-intro-neo4j-summary.adoc[leveloffset=+1]
-
+include::{includedir}/00-best-practices40-about.adoc[leveloffset=+1]
+include::{includedir}/01-best-practices40-defining-constraints-data.adoc[leveloffset=+1]
+include::{includedir}/02-best-practices40-using-indexes.adoc[leveloffset=+1]
+include::{includedir}/03-best-practices40-using-query-best-practices.adoc[leveloffset=+1]
+include::{includedir}/04-best-practices40-summary.adoc[leveloffset=+1]
