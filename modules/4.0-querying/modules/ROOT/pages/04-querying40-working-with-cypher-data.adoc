@@ -3,7 +3,8 @@
 :doctype: book
 :toc: left
 :toclevels: 4
-:imagesdir: ../images
+//:imagesdir: ../images
+:imagesdir: ../../../../4.0-intro-neo4j/modules/ROOT/images
 :module-next-title: Controlling the Query Chain
 :page-slug: {slug}
 :page-layout: training
