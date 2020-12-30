@@ -20,7 +20,13 @@ This course is a subset of the importing lessons from the _Introduction to Neo4j
 
 == Prerequisites
 
-You should have Cypher experience with querying, creating nodes and relationships, and creating and using indexes.
+You should have completed the courses:
+
+[square]
+* _Overview of Neo4j 4.x_
+* _Querying with Neo4j 4.x_
+* _Creating Nodes and Relationships with Neo4j 4.x_
+* _Using Indexes and Query Best Practices with Neo4j 4.x_
 
 == Duration
 

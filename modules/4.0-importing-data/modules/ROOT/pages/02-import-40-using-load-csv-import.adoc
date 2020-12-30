@@ -98,9 +98,7 @@ Notice that the *people.csv* file has a unique ID for every person and the *movi
 The *roles.csv* file is used to relate a person to a movie and provide the characters.
 This is the data that could be used to create the _:ACTED_IN_ relationship that you have see in the Movie graph.
 
-
 == Denormalized data
-
 
 Here is an example where we have denormalized data for the same type of data:
 
@@ -396,6 +394,14 @@ These indexes are not unique indexes.
 
 [.student-exercise]
 == Exercise: Using LOAD CSV for import
+
+
+[IMPORTANT]
+Prior to performing this exercise, you should have set up your development environment to use one of the following, which is covered in the course, _Overview of Neo4j 4.x_.
+[square]
+* Neo4j Desktop
+* Neo4j Sandbox
+* Neo4j Aura
 
 In the query edit pane of Neo4j Browser, execute the browser command:
 

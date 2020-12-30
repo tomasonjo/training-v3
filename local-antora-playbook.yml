@@ -10,7 +10,6 @@ content:
       start_paths:
       - 'modules/home'
       - 'modules/4.0-intro-neo4j'
-      - 'modules/4.0-importing-data'
       - 'modules/graph-data-modeling'
       - 'modules/4.0-implementing-graph-data-models'
       - 'modules/4.0-neo4j-admin'
@@ -24,6 +23,9 @@ content:
       - 'modules/applied-algos'
       - 'modules/4.0-overview'
       - 'modules/4.0-querying'
+      - 'modules/4.0-updating'
+      - 'modules/4.0-best-practices'
+      - 'modules/4.0-importing-data'
 
 output:
   dir: ./public/

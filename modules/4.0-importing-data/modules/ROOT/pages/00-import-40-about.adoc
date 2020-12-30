@@ -55,6 +55,13 @@ Here are the lessons of this course:
 . Using an Application to Import Data
 . Using the ETL Tool for Import
 
+[IMPORTANT]
+Prior to taking this course, you should have set up your development environment to use one of the following, which is covered in the course, _Overview of Neo4j 4.x_.
+[square]
+* Neo4j Desktop
+* Neo4j Sandbox
+* Neo4j Aura
+
 == Resources
 
 We have set up a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.

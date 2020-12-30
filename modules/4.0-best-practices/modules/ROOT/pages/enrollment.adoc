@@ -7,6 +7,7 @@
 :page-course-duration: 2 hrs
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0.jpg
 :page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/UsingIndexesAndQueryBestPracticesInNeo4j4.0_withTitle.jpg
+:page-course-label: New
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/UsingIndexesAndQueryBestPracticesInNeo4j4.0_withTitle.jpg[]
 
@@ -19,7 +20,6 @@ You will also learn some best practices in querying the database. Most query bes
 This course is a subset of the lessons from the _Introduction to Neo4j 4.0_ course that teach you how to use indexes and some query best practices. If you have completed these lessons of the _Introduction to Neo4j 4.0_ course, you need not enroll in this course.
 
 == Prerequisites
-
 
 You should have completed the courses:
 

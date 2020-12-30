@@ -3,7 +3,8 @@
 :doctype: book
 :toc: left
 :toclevels: 4
-:imagesdir: ../images
+//:imagesdir: ../images
+:imagesdir: ../../../../4.0-intro-neo4j/modules/ROOT/images
 :module-next-title: Defining Constraints
 :page-slug: {slug}
 :page-type: training-course-index
@@ -65,6 +66,14 @@ endif::[]
 * Creating and using indexes
 * Using query best practices
 --
+
+[IMPORTANT]
+Prior to taking this course, you should have set up your development environment to use one of the following, which is covered in the course, _Overview of Neo4j 4.x_.
+[square]
+* Neo4j Desktop
+* Neo4j Sandbox
+* Neo4j Aura
+
 == Resources
 
 ifndef::env-slides[]
