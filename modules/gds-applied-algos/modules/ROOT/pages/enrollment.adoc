@@ -6,7 +6,7 @@
 :page-layout: training-enrollment
 :page-course-duration: 4 hrs
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/AppliedGDSForWebApps.jpg
-:page-course-label: New
+
 :page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/AppliedGDSForWebApps_withTitle.jpg
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/AppliedGDSForWebApps_withTitle.jpg[]
