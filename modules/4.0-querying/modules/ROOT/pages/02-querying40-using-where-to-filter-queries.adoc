@@ -135,7 +135,7 @@ endif::[]
 [.statement]
 For example, these two Cypher queries:
 
-[[source,cypher,role=noplay]
+[source,cypher,role=noplay]
 ----
 MATCH (p:Person) 
 RETURN p.name
