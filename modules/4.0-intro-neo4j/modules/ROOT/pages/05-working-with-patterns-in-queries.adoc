@@ -177,6 +177,11 @@ endif::[]
 image::KeanuFriendsForHugo.png[KeanuFriendsForHugo,width=500,align=center]
 --
 
+[.notes]
+--
+The actors _Laurence Fishburne_, _Carrie-Anne Moss_, _Emil Eifrem_ (and of course _Hugo Weaving_ and _Keanu Reeves_) do not appear in the results list, because these actors were in the same movie (_The Matrix_) as _Huge Weaving_ and _Keanu Reeves_.
+--
+
 === Example: Two patterns in a `MATCH` required
 
 [.notes]

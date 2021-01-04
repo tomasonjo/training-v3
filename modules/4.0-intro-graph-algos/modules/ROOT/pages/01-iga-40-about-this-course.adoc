@@ -248,7 +248,7 @@ endif::[]
 Here are some resources you may use as you go through this course:
 
 [square]
-* https://neo4j.com/docs/cypher-manual/currrent/[Neo4j Cypher Manual]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual]
 * https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard]
 * https://neo4j.com/docs/graph-data-science/current/[Graph Data Science Library Documentation]
 * https://neo4j.com/developer/resources/[Neo4j Developer Resources]
