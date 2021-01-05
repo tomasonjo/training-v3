@@ -101,7 +101,7 @@ Write Cypher code to perform a basic statistical analysis of the relationship we
 ----
 UNWIND ['distance','inverse_distance'] as property
 MATCH (:Place)-[r:EROAD]->(:Place)
-RETURN property, apoc.agg.statistics(r[property]) as stats
+RETURN property, apoc.agg.statistics(r[property], [0.5,0.75,0.9,0.95,0.99])
 ----
 
 The results returned should look like this:
