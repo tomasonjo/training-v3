@@ -98,6 +98,9 @@ Note how the Louvain Modularity community size distribution is more evenly distr
 In the unweighted LPA results, the largest community contains 219 members, and the second-largest group has only 63 members.
 However, this is not a golden rule that will always hold, so it is recommended to try out both the LPA and Louvain Modularity algorithm to see what works best for your use case.
 
+The *communityDistribution* value consists of a map containing min, max, mean as well as p50, p75, p90, p95, p99 and p999 percentile values of community size for the last level.
+For example, the p99 value of 75 represents that 99% of communities have the community size of 75 or less and 1% of communities have the community size greater than or equal to 75.
+
 == Part 2: Inspect the results of the algorithm. (Instructions)
 
 Next, you will retrieve the members of the largest 10 communities uncovered by the Louvain Modularity algorithm.
