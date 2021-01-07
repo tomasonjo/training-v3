@@ -1,4 +1,4 @@
-= Introduction to Neo4j 4.0 (deprecated)
+= Introduction to Neo4j 4.x Series
 :slug: introduction-to-neo4j-40
 :description: Learn about Graph Databases, Neo4j and Cypher – the Graph Query Language.
 :page-slug: {slug}
@@ -6,23 +6,22 @@
 :page-layout: training-enrollment
 :page-course-duration: 2 days
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0.jpg
-:page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0_withTitle.jpg
+:page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroNeo4j4.xSeries_withTitle.jpg
+:page-disable-enrollment:
+image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroNeo4j4.xSeries_withTitle.jpg[]
 
-image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0_withTitle.jpg[]
+== About this series
 
-== About the Course
+The *Introduction to Neo4j 4.0*  course has been replaced by these courses that we recommend you take in this order:
 
-This course has been replaced by these courses that we recommend you take in this order:
+. https://neo4j.com/graphacademy/training-overview-40/enrollment/[Overview of Neo4j 4.x^]
+. https://neo4j.com/graphacademy/training-querying-40/enrollment/[Querying with Cypher in Neo4j 4.x^]
+. https://neo4j.com/graphacademy/training-updating-40/enrollment/[Creating Nodes and Relationships in Neo4j 4.x^]
+. https://neo4j.com/graphacademy/training-best-practices-40/enrollment/[Using Indexes and Query Best Practices in Neo4j 4.x^]
+. https://neo4j.com/graphacademy/training-importing-data-40/enrollment/[Importing Data with Neo4j 4.x^]
 
-. Overview of Neo4j 4.x
-. Querying with Cypher in Neo4j 4.x
-. Creating Nodes and Relationships in Neo4j 4.x
-. Using Indexes and Query Best Practices in Neo4j 4.x
-. Importing Data with Neo4j 4.x
+If you have already started the *Introduction to Neo4j 4.0* course (already enrolled), you can continue with it by clicking the *Continue* button as it contains all of the content from these above-mentioned courses.
 
-If you have already started this course (already enrolled), you can continue with it as it contains all of the content from these courses.
-
-We recommend that you do [.underline]#not# enroll in this course, but rather enroll in the courses outlined above.
 
 == Prerequisites
 
