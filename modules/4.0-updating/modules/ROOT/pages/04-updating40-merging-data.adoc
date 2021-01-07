@@ -4,8 +4,7 @@
 :toc: left
 :toclevels: 4
 :experimental:
-//:imagesdir: ../images
-:imagesdir: ../../../../4.0-intro-neo4j/modules/ROOT/images
+:imagesdir: ../images
 :module-next-title: Summary
 :page-slug: {slug}
 :page-layout: training

@@ -4,8 +4,7 @@
 :toc: left
 :toclevels: 4
 :module-next-title: Working with Patterns in Queries
-//:imagesdir: ../images
-:imagesdir: ../../../../4.0-intro-neo4j/modules/ROOT/images
+:imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

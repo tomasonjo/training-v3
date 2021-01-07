@@ -3,8 +3,7 @@
 :doctype: book
 :toc: left
 :toclevels: 3
-//:imagesdir: ../images
-:imagesdir: ../../../../4.0-intro-neo4j/modules/ROOT/images
+:imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training
 :page-certificate:
