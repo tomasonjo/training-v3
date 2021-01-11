@@ -251,7 +251,7 @@ image::CastList1.png[CastList1,width=500,align=center]
 
 [.notes]
 --
-Notice that when viewing nodes in table view, each node is shown with {} notation and key value pairs. This structure is called a map in Cypher,
+Notice that when viewing nodes in table view, each node is shown with {} notation and key value pairs. This structure is called a map in Cypher.
 --
 
 === Using strings in lists
