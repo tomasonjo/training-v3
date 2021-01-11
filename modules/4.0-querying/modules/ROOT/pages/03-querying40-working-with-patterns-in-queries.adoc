@@ -95,7 +95,7 @@ RETURN a.name, m.title, d.name
 
 [.notes]
 --
-It returns a _Person_ nodes for people who acted in these three movies and using that same movie node, _m_  it retrieves the _Person_ node who is the director for that movie, _m_.
+It returns all _Person_ nodes for people who acted in these three movies and using that same movie node, _m_  it retrieves the _Person_ node who is the director for that movie, _m_.
 --
 
 ifndef::env-slides[]
