@@ -1429,7 +1429,7 @@ endif::[]
 == Examining relationships
 
 ifndef::env-slides[]
-You can run `CALL db.schema.visualizaton()` to view the relationship types in the graph.
+You can run `CALL db.schema.visualization()` to view the relationship types in the graph.
 In the _Movie_ graph, we see these relationships between the nodes.
 
 Here we see that this graph has a total of 6 relationship types between the nodes. Some _Person_ nodes are connected to other _Person_ nodes using the _FOLLOWS_ relationship type.
