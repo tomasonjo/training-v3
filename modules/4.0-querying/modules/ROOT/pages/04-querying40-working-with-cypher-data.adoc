@@ -382,7 +382,7 @@ You can learn more about map projections in the _Cypher Reference Manual_.
 In your application, you may need to decide how you will store date/time information in the graph.
 
 Neo4j has these several basic formats for storing date/time data.
-There are a number of other types of data such as _Time_, _LocalTime_, _LocalDataTime_, and _Duration_ which are described in the documentation.
+There are a number of other types of data such as _Time_, _LocalTime_, _LocalDateTime_, and _Duration_ which are described in the documentation.
 --
 
 [source,Cypher,role=noplay]
