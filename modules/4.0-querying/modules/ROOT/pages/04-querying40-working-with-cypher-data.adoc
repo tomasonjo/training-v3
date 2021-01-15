@@ -83,7 +83,7 @@ image::AggregationWithCountm.png[AggregationWithCountm,width=700,align=center]
 [.notes]
 --
 The query engine processed all nodes and relationships in the pattern so that it could perform a count of all movies for a particular actor/director pair in the graph.
-Then the results returned grouped the results by the name of the director.
+Then, it returned the results grouped by the name of the director.
 
 Aggregation in Cypher is different from aggregation in SQL. In Cypher, you need not specify a grouping key. As soon as an aggregation function is used, all non-aggregated result columns become grouping keys.
 The grouping is implicitly done, based upon the fields in the `RETURN` clause.
