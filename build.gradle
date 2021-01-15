@@ -244,7 +244,7 @@ subprojects {
       }
     }
 
-    if (project.hasProperty("browserGuides")) {
+    if (project.projectDir.parentFile.getName() == "browser-guides") {
       task convertBrowserGuideHtml(type: AsciidoctorTask) {
         dependsOn asciidoctorGemsPrepare
 
@@ -660,7 +660,7 @@ subprojects {
       docRoot "${projectDir}/build"
     }
 
-    if (!project.hasProperty("browserGuides")) {
+    if (project.projectDir.parentFile.getName() != "browser-guides") {
       if (new File(sourceImagesDirPath).exists()) {
         if (stage == 'production') {
           task s3UploadImages(type: S3UploadTask) {

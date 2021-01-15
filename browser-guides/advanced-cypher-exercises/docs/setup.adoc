@@ -5,7 +5,7 @@
 :toclevels: 3
 :imagesdir: ../images
 :manual-cypher: {manual}/cypher
-:setup-guides-dir: ../../setup-guides/docs
+:setup-guides-dir: ../../../modules/setup-guides/docs
 
 == Overview
 
