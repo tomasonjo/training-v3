@@ -196,7 +196,7 @@ You can either use `count()` to count the number of rows, or alternatively, you 
 The `size()` function returns the number of elements in a list.
 --
 
-Here is an alternative to using `count()` that returns the same results, but with using `size()`:
+Here is an alternative to using `count()` that returns the same results, but using `size()`:
 
 [source,Cypher,role=noplay]
 ----
