@@ -78,11 +78,11 @@ image::TomCruiseCoActors.png[TomCruiseCoActors,width=600]
 
 Next, you will count results retrieved.
 
-*Retrieve all people who reviewed a movie, returning the list of reviewers and how many reviewers reviewed the movie.*
+*Retrieve all people who reviewed a movie, returning the name of the movie, the list of reviewers, and how many reviewers reviewed the movie.*
 
 == Exercise 6.3: Collect and count data (Solution)
 
-*Retrieve all people who reviewed a movie, returning the list of reviewers and how many reviewers reviewed the movie.*
+*Retrieve all people who reviewed a movie, returning the name of the movie, the list of reviewers, and how many reviewers reviewed the movie.*
 
 [source, cypher]
 ----
