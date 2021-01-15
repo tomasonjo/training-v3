@@ -28,7 +28,7 @@ At the end of this module, you should be able to:
 You sometimes find cases where you need to connect more data to a relationship than can be fully captured in the properties.
 In other words, you want a relationship that connects more than two nodes.
 Mathematics allows this, with the concept of a hyperedge.
-This is impossible in Neo4j
+This is impossible in Neo4j.
 --
 
 [.small]
