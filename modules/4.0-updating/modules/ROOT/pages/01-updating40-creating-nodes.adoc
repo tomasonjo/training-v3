@@ -299,7 +299,7 @@ If the property does not exist, it is added to the node. If the property exists,
 Note that the type of data for a property is not enforced.  
 That is, you can assign a string value to a property that was once a numeric value and visa versa.
 
-When specify the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if _propertyNnameX_ exists for the node. If  _propertyNameX_ does not exist for the node, then the property is added to the node.
+When specifying the JSON-style object for assignment (using `=`) of the property values for the node, the object must include all of the properties and their values for the node as the existing properties for the node are overwritten. However, if you specify `+=` when assigning to a property, the value at _valueX_ is updated if _propertyNnameX_ exists for the node. If  _propertyNameX_ does not exist for the node, then the property is added to the node.
 --
 
 === Example: Adding properties to a node
