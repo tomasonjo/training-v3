@@ -126,6 +126,8 @@ image::ActorsWithMoreThan5Movies1.png[ActorsWithMoreThan5Movies1,width=800]
 In this view, we are examining the table view where we can see the actor name and the list of movies for each actor.
 The actors should be _Tom Hanks_ and _Keanu Reeves_.
 
+*Note:* If you are using a Neo4j 4.1 or later database, you will see some additional values for the nodes that include the _identity_ and _labels_.
+
 == Exercise 7.5: Unwinding a list in the query chain (Instructions)
 
 *Modify the query you just wrote so that before the query processing ends, you unwind the list of movies and then return the name of the actor and the title of the associated movie*

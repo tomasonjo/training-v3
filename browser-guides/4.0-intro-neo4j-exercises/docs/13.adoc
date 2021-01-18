@@ -299,6 +299,7 @@ The result returned should be:
 [.thumb]
 image::listConstraints.png[listConstraints,width=600]
 
+*Note:* In Neo4j 4.2 and later you can use `SHOW CONSTRAINTS`.
 
 == Exercise 13.14: Drop an existence constraint (Instructions)
 

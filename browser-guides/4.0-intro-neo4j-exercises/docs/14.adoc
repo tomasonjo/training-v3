@@ -84,6 +84,8 @@ The result returned should be:
 [.thumb]
 image::ViewIndexes.png[ViewIndexes,width=800]
 
+*Note:* In Neo4j 4.2 and later you can use `SHOW INDEXES`.
+
 == Exercise 14.3: Drop an index (Instructions)
 
 *Drop the single-property index you just created for the _born_ property of the _Person_ nodes.*
@@ -137,6 +139,8 @@ The result returned should be:
 
 [.thumb]
 image::ViewIndexes2.png[ViewIndexes2,width=800]
+
+*Note:* In Neo4j 4.2 and later you can use `SHOW INDEXES`.
 
 == Exercise 14.6: Perform a query that uses the full-text schema index (Instructions)
 

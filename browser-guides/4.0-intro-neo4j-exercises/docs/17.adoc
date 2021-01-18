@@ -5,14 +5,22 @@
 If you are using Neo4j Desktop:
 
 You will start with a new database named importwithapoc. Execute these commands in Neo4j Browser to create the database.
+
 [source, cypher]
 ----
 :USE system
+----
+
+[source, cypher]
+----
 CREATE DATABASE importwithapoc
+----
+[source, cypher]
+----
 :USE importwithapoc
 ----
 
-If you are using Neo4j Sandbox or Neo4j Aura, you will need to:
+*Note:* If you are using Neo4j Sandbox or Neo4j Aura you cannot create new databases. You will need to clear everything from your active database and reuse it:
 
 . Drop all indexes and constraints in the graph.
 . Execute `MATCH (n) DETACH DELETE n`
@@ -35,9 +43,7 @@ Go to the next page to start this exercise.
 *Note:* If you are using a Neo4j Sandbox or Neo4j Aura, you already have APOC installed and you can skip this step.
 
 . Stop the Neo4j instance.
-. For the project you are working with, select "+" in the Add Plugin panel.
-. Select APOC to install.
-. Close the install panel.
+. For the project you are working with, select the APOC plugin to install.
 . Start the Neo4j instance.
 . In Neo4j Browser ensure that you have selected the importwithapoc database
 
@@ -72,7 +78,7 @@ https://data.neo4j.com/v4.0-intro-neo4j/movies2.csv
 
 . In Neo4j Desktop Click Manage > Open Folder for the Neo4j instance you are using.
 . Copy the CSV files you previously downloaded to the import folder.
-. Adapt the code above to read from the filesystem: file:///movies2.csv'
+. You will adapt the code to read from the filesystem: file:///movies2.csv'
 
 *Note:* If you are using Neo4j Sandbox or Neo4j Aura, you must use the URL for the file at *data.neo4j.com*.
 
@@ -125,6 +131,7 @@ image::APOCLoadConstraints.png[APOCLoadConstraints,width=500]
 *Since APOC is new to you, examine this code and simply execute this code to load the data:*
 
 *Note*: Depending on your network speed, this code will take up to 10 minutes to execute.
+
 [source, cypher]
 ----
 CALL apoc.periodic.iterate(

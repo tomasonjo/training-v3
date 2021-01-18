@@ -241,6 +241,9 @@ You can query for the set of constraints defined in the graph as follows:
 CALL db.constraints()
 ----
 
+[NOTE]
+In Neo4j 4.2 and later you can use `SHOW CONSTRAINTS`.
+
 ifndef::env-slides[]
 And here is what is returned from the graph:
 endif::[]

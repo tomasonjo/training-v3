@@ -3,7 +3,7 @@
 
 == Exercise 18: Importing data with the import command of neo4j-admin (Preparations)
 
-*Note:* If you are using Neo4j Sandbox or Neo4j Aura, you cannot perform the steps of this exercise.
+*Note:* If you are using Neo4j Sandbox or Neo4j Aura, you cannot perform the steps of this exercise as these cloud-based instances do not provide access to the neo4j-admin tool.
 
 For this exercise, you will be creating a new database with the neo4j-admin tool.
 Make sure that the database instance is running.
@@ -112,7 +112,7 @@ The database files have been created, but you must use the *system* database to 
 
 *Using the system domain, create the _crimes_ database and then view its nodes and relationships.*
 
-== Exercise 18.5: Verify that you can access APOC procecdures (Solution)
+== Exercise 18.5: View the database after import  (Solution)
 
 The database files have been created, but you must use the *system* database to add the crimes data base to your environment.
 

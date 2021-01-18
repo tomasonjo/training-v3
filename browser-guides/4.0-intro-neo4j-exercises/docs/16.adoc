@@ -9,11 +9,20 @@ You will start with a new database named importcsv. Execute these commands in Ne
 [source, cypher]
 ----
 :USE system
-CREATE DATABASE importcsv
-:USE importcsv
 ----
 
-If you are using Neo4j Sandbox or Neo4j Aura, you will need to:
+[source, cypher]
+----
+CREATE DATABASE importcsv
+----
+
+[source, cypher]
+----
+:use importcsv
+----
+
+
+*Note:* If you are using Neo4j Sandbox or Neo4j Aura you cannot create new databases. You will need to clear everything from your active database and reuse it:
 
 . Drop all indexes and constraints in the graph.
 . Execute `MATCH (n) DETACH DELETE n`

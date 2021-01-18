@@ -235,6 +235,8 @@ And here we see our newly-created full-text schema index:
 image::CreateFullTextIndex2.png[CreateFullTextIndex2,width=1300,align=center]
 --
 
+[NOTE]
+In Neo4j 4.2 and later you can use `SHOW INDEXES`.
 [.notes]
 --
 Just as you can create a full-text schema index on properties of nodes, you can create a full-text schema index on properties of relationships.
@@ -334,6 +336,9 @@ endif::[]
 
 image::ManagingIndexes1.png[ManagingIndexes1,width=1300,align=center]
 
+[NOTE]
+In Neo4j 4.2 and later you can use `SHOW INDEXES`.
+
 == Dropping an index
 
 [.notes]
@@ -388,6 +393,9 @@ Here is what is returned:
 endif::[]
 
 image::ManagingIndexes4.png[ManagingIndexes4,width=1300,align=center]
+
+[NOTE]
+In Neo4j 4.2 and later you can use `SHOW INDEXES`.
 
 [.student-exercise]
 == Exercise 14: Creating indexes
