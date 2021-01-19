@@ -370,9 +370,10 @@ There are many common administrative tasks for a server mode deployment:
 * *Importing data*
 
 [NOTE]
-This training covers basic Neo4j 4.x administration using Enterprise Edition. Tasks highlighted in *bold* are covered in this training.
+This training covers basic Neo4j 4.x administration using Enterprise Edition. Tasks highlighted above in *bold* are covered in this training.
 
 ifdef::backend-revealjs,env-slides,backend-pdf[]
+
 [.student-exercise]
 == Exercise 1: Setting up the Docker instance for this course
 endif::[]
@@ -388,7 +389,7 @@ endif::[]
 
 == References
 
-You should consult the https://neo4j.com/docs/operations-manual/current/installation/[Neo4J Operations Manual] for more information about the installation requirements and procedures for your target platform, as well as details for Neo4j administration tasks.
+You should consult the https://neo4j.com/docs/operations-manual/current/installation/[Neo4j Operations Manual] for more information about the installation requirements and procedures for your target platform, as well as details for Neo4j administration tasks.
 
 The https://neo4j.com/docs/java-reference/current/tutorials-java-embedded/[Java Developer Manual ] covers using embedded mode for Neo4j and is intended for developers.
 

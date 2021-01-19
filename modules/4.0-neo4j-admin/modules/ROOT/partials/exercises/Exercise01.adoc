@@ -18,6 +18,9 @@ ifndef::backend-pdf[]
 You must Install Docker on your local system from https://hub.docker.com before you can perform the exercises for this training.
 endif::[]
 
+[IMPORTANT]
+The screenshots in this course use the *neo4j:4.0.2-enterprise* docker image. We recommend that you use the latest version, which at this writing is *neo4j:4.2.2-enterprise*.
+
 == Using the Docker instance on your local system
 
 === Before you begin
@@ -40,10 +43,10 @@ image::DockerInstalled.png[DockerInstalled,width=600,align=center]
 +
 [source,shell,role=noplay]
 ----
-docker pull neo4j:4.0.2-enterprise
+docker pull neo4j:4.2.2-enterprise
 ----
 +
-. Confirm that the docker instance with the TAG, 4.0.2-enterprise is available:
+. Confirm that the docker instance with the TAG, 4.2.2-enterprise is available:
 +
 [source,shell,role=noplay]
 ----
@@ -72,7 +75,7 @@ docker run \
     --env NEO4J_dbms_memory_pagecache_size=512m \
     --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes \
     --detach \
-    neo4j:4.0.2-enterprise
+    neo4j:4.2.2-enterprise
 ----
 +
   *Note*: Make sure this script has execute permissions.
@@ -92,10 +95,10 @@ docker run^
     --env NEO4J_dbms_memory_pagecache_size=512m^
     --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes^
     --detach^
-    neo4j:4.0.2-enterprise
+    neo4j:4.2.2-enterprise
 ----
 +
-  *Note*: You may see a popup asking if you want Docker to access your local file system which you should respond yes to.
+*Note*: You may see a popup asking if you want Docker to access your local file system which you should respond yes to.
 +
 . Run the script to create the Neo4j instance and confirm that it creates the neo4j directory.
 . Run the Docker command to see the running instances.
@@ -106,9 +109,10 @@ docker ps -a
 ----
 +
 image::DockerInstanceStarted.png[DockerInstanceStarted,width=600,align=center]
-+
+
+
 ifdef::backend-pdf[]
-== Using the EC2 instance
+== Using the EC2 instance (instructor-led training)
 
 === Before you begin
 

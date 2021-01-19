@@ -12,7 +12,7 @@ In this Exercise, you will install the APOC library for use by your Neo4j instan
 == Exercise steps:
 
 . In a Web browser, go to the GitHub repository for the https://github.com/neo4j-contrib/neo4j-apoc-procedures[APOC library].
-. Find the latest release of the library that is compatible with Neo4j Enterprise Edition 4.0.
+. Find the latest release of the library that is compatible with the version of Neo4j Enterprise Edition you are working with.
 . Download the already-built *.jar* file into the *$HOME/docker-neo4j/neo4j/plugins* directory.
 +
 In OS X and Linux:
