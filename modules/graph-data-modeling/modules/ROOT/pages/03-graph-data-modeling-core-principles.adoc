@@ -58,7 +58,7 @@ Here is a solution where we have ensured that the Address and PostalCode nodes a
 
 We consider it a best practice to always have a property (or set of properties) that uniquely identify a node.
 Here, we have added a geolocation property to do so.
-The geolocation property will likely never be used in a query, but it can be used to differentiate nodes.
+The geolocation property will likely never be used in a read query, but it can be used to differentiate nodes, especially when loading the data.
 
 There is a trade-off, however as adding uniqueness to a node such Address as it is harder to anchor just on the Line1 value, and may be more difficult to modify the graph data later.
 --
