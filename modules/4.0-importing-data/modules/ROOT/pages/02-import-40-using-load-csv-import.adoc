@@ -176,6 +176,22 @@ RETURN line LIMIT 10
 
 image::InspectPeopleCSV2.png[InspectPeopleCSV2,width=700,align=center]
 
+== Loading or viewing a subset of the data in the CSV file
+
+If you know that you want to only inspect or load specific data from the CSV file, you can filter the data as follows:
+
+[source,Cypher,role=nocopy noplay]
+----
+LOAD CSV WITH HEADERS
+FROM 'https://data.neo4j.com/v4.0-intro-neo4j/people.csv'
+AS line
+WITH line WHERE line.birthYear > "1999"
+RETURN line LIMIT 10
+----
+
+image::FilterLOADCSV.png[FilterLOADCSV,width=700,align=center]
+
+
 == Determine if data needs transformation
 
 The data in the rows of a CSV file may not exactly match how you want field values to be placed into node or relationship property values.
