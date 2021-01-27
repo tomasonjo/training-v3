@@ -45,7 +45,7 @@ image::IntermediateNodesBefore.png[IntermediateNodesBefore,width=600,align=cente
 
 [.notes]
 --
-Here we have the _WORKED_AT_ relationship that has the from and to properties, but we need to associate the role with this period of work.
+Here we have the _WORKED_AT_ hyperedge that has the from and to properties, but we need to associate the role with this period of work.
 In Neo4j, there is no way to create a relationship that connects a relationship to a node.
 Relationships can only connect nodes.
 --
@@ -59,7 +59,7 @@ image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=600,align=center]
 The solution is to add a connection point in the middle of the relationship.
 Since nodes are connection points, you simply create a node in the middle of the relationship.
 
-In this example, we replace the _WORKED_AT_ relationship with an Employment intermediate node.
+In this example, we replace the _WORKED_AT_ hyperedge with an Employment intermediate node.
 This provides a connection point that allows us  connect any amount of information to Patrick’s term of employment at Acme.
 --
 
