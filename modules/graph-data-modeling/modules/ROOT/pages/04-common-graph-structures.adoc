@@ -47,7 +47,7 @@ image::IntermediateNodesBefore.png[IntermediateNodesBefore,width=600,align=cente
 --
 Here we have the _WORKED_AT_ hyperedge that has the from and to properties, but we need to associate the role with this period of work.
 In Neo4j, there is no way to create a relationship that connects a relationship to a node.
-Relationships can only connect nodes.
+Neo4j relationships can only connect nodes.
 --
 
 === Using intermediate nodes
@@ -56,11 +56,11 @@ image::IntermediateNodesAfter.png[IntermediateNodesAfter,width=600,align=center]
 
 [.notes]
 --
-The solution is to add a connection point in the middle of the relationship.
-Since nodes are connection points, you simply create a node in the middle of the relationship.
+The solution is to replace the hyperedge with a connection point node.
+Since nodes are connection points, you simply create a node in the middle of the hyperedge.
 
 In this example, we replace the _WORKED_AT_ hyperedge with an Employment intermediate node.
-This provides a connection point that allows us  connect any amount of information to Patrick’s term of employment at Acme.
+This provides a connection point that allows us connect any amount of information to Patrick’s term of employment at Acme.
 --
 
 === Intermediate nodes: sharing context
@@ -70,7 +70,7 @@ image::IntermediateNodesSharingContext.png[IntermediateNodesSharingContext,width
 [.notes]
 --
 This model allows different employment events to share contextual information.
-Person nodes can have a shared Role or Company, and allow us to very easily  trace either the full details of a single person’s career, or the overlap between different individuals.
+Person nodes can have a shared Role or Company, and allow us to very easily trace either the full details of a single person’s career, or the overlap between different individuals.
 --
 
 === Intermediate nodes: sharing data
