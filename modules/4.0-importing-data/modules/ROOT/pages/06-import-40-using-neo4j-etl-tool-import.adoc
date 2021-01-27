@@ -32,7 +32,7 @@ At the end of this module, you should be able to:
 
 == Steps for importing with the ETL Tool
 
-. Install the Neo4j ETL Tool into your Neo4j Desktop project.
+. If it is not already there, install the Neo4j ETL Tool into your Neo4j Desktop project.
 . Create and start the Neo4j database into which you will import the data.
 . Use the Neo4j ETL Tool to import the data:
 .. Specify and test the RDBMS connection.
