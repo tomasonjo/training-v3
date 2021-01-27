@@ -122,7 +122,13 @@ image::LinkedList1.png[LinkedList1,width=900,align=center]
 [.notes]
 --
 Linked lists are not unique to graphs.  They are a common pattern in lots of data modeling paradigms.
-In some of those paradigms, you see both the singly-linked list (above)  and the doubly-linked list (below).
+In some of those paradigms, you see both the singly-linked list (above) and the doubly-linked list (below).
+
+However, singly-linked lists in Computer Science are one-way: they have a destination but no soure information.
+Neo4J relationships tracks both from and to node, so they are different from Computer Science singly-linked lists.
+
+The power of a Graph Database is that the To-From relationship is maintained in the database,
+whereas in a Traditional Relational Database a row with a Primary Key has no information about who is pointing to it.
 
 ifndef::env-slides[]
 You should *never* use a doubly-linked list in Neo4j because doubly-linked lists use redundant symmetrical relationships.
