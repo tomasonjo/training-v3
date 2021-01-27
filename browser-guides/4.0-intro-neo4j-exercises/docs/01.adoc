@@ -96,8 +96,9 @@ The result returned should be:
 image::PersonNodes.png[PersonNodes,width=600]
 
 Here we use _p_ as the variable representing all nodes retrieved and what is returned for the query.
-Notice also, that no relationships are displayed.
+Notice also, that very few relationships are displayed.
 That is because most _Person_ nodes have no relationships with other _Person_ nodes.
+The movie reviewers _Person_ nodes do have the _FOLLOWS_ relationship with each other, but there are not many of these nodes in the graph.
 
 == Exercise 1.4: Retrieve all _Movie_ nodes (Instructions)
 

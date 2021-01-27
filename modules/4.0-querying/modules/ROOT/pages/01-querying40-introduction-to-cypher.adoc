@@ -1694,7 +1694,7 @@ In this example we want to find *all people* who have *ANY* type of relationship
 
 So we're going to use a *fully anonymous relationship* , which doesn’t have - a relationship type - specified.
 
-* *Any person* - with any r*elationship* - in the *direction* of the Movie node, with a movie called ‘The Matrix’,  is returned.
+* *Any person* - with any *relationship* - in the *direction* of the Movie node, with a movie called ‘The Matrix’,  is returned.
 * As shown here, a several *Person nodes* are returned.
 * You can see by *inspection* - that they have *different kinds* of relationships - including -
 ** *ACTED_IN*, *DIRECTED*, and *PRODUCED* .

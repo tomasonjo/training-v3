@@ -29,6 +29,7 @@ Finally, you will write a query to limit the number of results returned.
 * *Exercise 8.3*: Modify the query to eliminate more duplication.
 * *Exercise 8.4*: Sort results returned.
 * *Exercise 8.5*: Retrieve the top 5 ratings and their associated movies.
+* *Exercise 8.6*: Return the movies where an actor had the most roles.
 
 Go to the next page to start this exercise.
 
@@ -134,6 +135,25 @@ The result returned should be:
 
 [.thumb]
 image::Limit1.png[Limit1,width=500]
+
+== Exercise 8.6: Return the movies where an actor had the most roles (Instructions)
+
+*What movies did Tom Hanks act in? What roles did he play? Order the results by the movies where he played the most roles.*
+
+== Exercise 8.6: Return the movies where an actor had the most roles (Solution)
+
+*What movies did Tom Hanks act in? What roles did he play? Order the results by the movies where he played the most roles.*
+
+[source, cypher]
+----
+MATCH (m:Movie)<-[rel:ACTED_IN]-(:Person {name: 'Tom Hanks'})
+RETURN size(rel.roles) AS Size, m.title, rel.roles ORDER BY Size DESC
+----
+
+The result returned should be:
+
+[.thumb]
+image::TomHanksMostRoles.png[TomHanksMostRoles,width=500]
 
 == Exercise 8: Controlling results returned (Summary)
 
