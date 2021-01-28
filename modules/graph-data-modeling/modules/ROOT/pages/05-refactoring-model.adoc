@@ -98,15 +98,16 @@ With the Currency node label, we can easily answer questions such as how many Tr
 [.notes]
 --
 If many nodes in the model contain the same value for a property, another solution is the use the property value as a label.
+Remember, nodes can have multiple labels.
 --
 
 image::ExtractLabelFromPropertyBefore.png[ExtractLabelFromPropertyBefore,width=700,align=center]
 
 [.notes]
 --
-In this example, you see that the Project nodes have a property named _language_ where the property could contain multiple languages.
+In this example, you see that the Project nodes have a property named _language_ where the property is a list of computer languages.
 What if you wanted to query the graph to find all projects that are written in _java_?
-To do this, you would need to retrieve all of the Project nodes and look for _java_ in the language list for each node.
+To do this, you would need to retrieve all of the Project nodes and look for _java_ in the property language list for each node.
 This is an expensive query on a large graph.
 --
 
@@ -114,8 +115,10 @@ This is an expensive query on a large graph.
 
 [.notes]
 --
-In this scenario, we would go through all Project nodes in the graph and relabel the Project nodes based upon the values in the _language_ list.
+In this scenario, we take advantage that nodes can have multiple labels.
+We would go through all Project nodes in the graph and add language labels to the Project nodes for each value in the list contained in the _language_ property.
 Then we eliminate completely the _language_ property.
+After this refactoring, it is fast to gather the subset of project nodes with the _java_ label instead of scanning all projects and searching inside a list.
 --
 
 image::ExtractLabelFromPropertyAfter.png[ExtractLabelFromPropertyAfter,width=600,align=center]
