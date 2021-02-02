@@ -1,1 +1,4 @@
+// guide-importing-data-and-etl.adoc uses {img} as a prefix for images :|
+:img:
+
 include::https://raw.githubusercontent.com/neo4j-documentation/developer-guides/publish/modules/ROOT/pages/guide-importing-data-and-etl.adoc[]
