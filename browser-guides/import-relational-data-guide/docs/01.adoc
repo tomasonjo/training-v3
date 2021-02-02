@@ -1,4 +1,4 @@
-= Tutorial: Import Relational Data into Neo4j Aura
+= Tutorial: Import Relational Data into Neo4j
 :icons: font
 
 :level: Beginner
@@ -74,7 +74,7 @@ Determining how we want to structure tables and rows as nodes and relationships 
 
 [NOTE]
 --
-For more information on adapting your graph model to different scenarios, check out our link:/developer/modeling-designs/[modeling designs] guide.
+For more information on adapting your graph model to different scenarios, check out our https://neo4j.com/developer/modeling-designs/[modeling designs^] guide.
 --
 
 When deriving a graph model from a relational model, we should keep a couple of general guidelines in mind.
@@ -121,11 +121,11 @@ A common format that many systems can handle a flat file of comma-separated valu
 The PostgreSQL 'copy' command lets us execute a SQL query and write the result to a CSV file.
 We can assemble a short .sql script of these copy commands, as shown below.
 
-*Warning:*
-Do not execute these statements in Neo4j Browser. We already have these CSV files for you to use. This is just an example of how we created the CSV files.
+*Note:*
+Do not execute these SQL statements in Neo4j Browser. We already have these CSV files for you to use. This is just an example of how we created the CSV files.
 
-.export_csv.sql
-[source, sql,role=noplay]
+.export_csv.sql:
+
 ----
 COPY (SELECT * FROM customers) TO '/tmp/customers.csv' WITH CSV header;
 COPY (SELECT * FROM suppliers) TO '/tmp/suppliers.csv' WITH CSV header;
@@ -205,7 +205,7 @@ MERGE (c:Category {categoryID: row.CategoryID})
 
 You might notice that we have not imported all of the field columns in our CSV file.
 With our statements, we can choose which properties are needed on a node, which can be left out, and which might need imported to another node type or relationship.
-You might also notice that we used the {cyphermanual}/clauses/merge/[`MERGE` keyword^], instead of {cyphermanual}/clauses/create/[`CREATE`^].
+You might also notice that we used the https://neo4j.com/docs/cypher-manual/current/clauses/merge/[`MERGE` keyword^], instead of https://neo4j.com/docs/cypher-manual/current/clauses/create/[`CREATE`^].
 Though we feel pretty confident there are no duplicates in our CSV files, we can use `MERGE` as good practice for ensuring unique entities in our database.
 
 [NOTE]
@@ -213,7 +213,7 @@ Though we feel pretty confident there are no duplicates in our CSV files, we can
 For very large commercial or enterprise datasets, you may find out-of-memory errors, especially on smaller machines.
 To avoid these situations, you can prefix the statement with the `USING PERIODIC COMMIT` query hint to commit data in batches.
 This practice is not standard recommendation for smaller datasets, but is only recommended when memory issues are threatened.
-More information on this query hint can be found in the {cyphermanual}/query-tuning/using/#query-using-periodic-commit-hint[manual^].
+More information on this query hint can be found in the https://neo4j.com/docs/cypher-manual/current/query-tuning/using/#query-using-periodic-commit-hint[manual^].
 --
 
 == Creating the indexes and constraint for the data in the graph
@@ -223,7 +223,9 @@ Importing the relationships will mean looking up the nodes we just created and a
 To ensure the lookup of nodes is optimized, we will want to create indexes for any node properties we want to use in the lookups (often the id or another unique value).
 
 We also want to create a constraint (also creates an index with it) that will disallow orders with the same id from getting created, preventing duplicates.
-Finally, as the indexes are created after the nodes are inserted, their population happens asynchronously, so we use the `schema await` (a shell command) to block until they are populated.
+Finally, as the indexes are created after the nodes are inserted, their population happens asynchronously, so we call `db.awaitIndexes()` to block until they are populated.
+
+Execute this code block:
 
 [source, cypher]
 ----
@@ -233,6 +235,7 @@ CREATE INDEX supplier_id FOR (s:Supplier) ON (s.supplierID);
 CREATE INDEX employee_id FOR (e:Employee) ON (e.employeeID);
 CREATE INDEX category_id FOR (c:Category) ON (c.categoryID);
 CREATE CONSTRAINT order_id ON (o:Order) ASSERT o.orderID IS UNIQUE;
+CALL db.awaitIndexes();
 ----
 
 == Creating the relationships between the nodes
@@ -247,6 +250,8 @@ Next you will create relationships:
 
 With the initial nodes and indexes in place, we can now create the relationships for orders to products and orders to employees.
 
+Execute this code block:
+
 [source, cypher]
 ----
 // Create relationships between orders and products
@@ -256,6 +261,8 @@ MATCH (product:Product {productID: row.ProductID})
 MERGE (order)-[op:CONTAINS]->(product)
   ON CREATE SET op.unitPrice = toFloat(row.UnitPrice), op.quantity = toFloat(row.Quantity);
 ----
+
+Then, execute this code block:
 
 [source, cypher]
 ----
@@ -267,7 +274,10 @@ MERGE (employee)-[:SOLD]->(order);
 ----
 
 == Creating relationships between products and suppliers and between products and categories
+
 Next, create relationships between products, suppliers, and categories:
+
+Execute this code block:
 
 [source, cypher]
 ----
@@ -278,6 +288,8 @@ MATCH (product:Product {productID: row.ProductID})
 MATCH (supplier:Supplier {supplierID: row.SupplierID})
 MERGE (supplier)-[:SUPPLIES]->(product);
 ----
+
+Execute this code block:
 
 [source, cypher]
 ----
@@ -292,6 +304,8 @@ MERGE (product)-[:PART_OF]->(category);
 == Creating relationships between employees
 
 Lastly, we will create the 'REPORTS_TO' relationship between employees to represent the reporting structure:
+
+Execute this code block:
 
 [source, cypher]
 ----
@@ -308,7 +322,9 @@ Next, we will query the resulting graph to find out what it can tell us about ou
 == Querying the Graph
 
 We might start with a couple of general queries to verify that our data matches the model we designed earlier in the guide.
-Here are some example queries:
+Here are some example queries.
+
+Execute this code block:
 
 [source,cypher]
 ----
@@ -316,6 +332,8 @@ Here are some example queries:
 MATCH (e:Employee)-[rel:SOLD]->(o:Order)-[rel2:CONTAINS]->(p:Product)
 RETURN e, rel, o, rel2, p LIMIT 25;
 ----
+
+Execute this code block:
 
 [source, cypher]
 ----
@@ -328,6 +346,8 @@ Once we are comfortable that the data aligns with our data model and everything 
 
 == Which Employee had the Highest Cross-Selling Count of 'Chocolade' and Another Product?
 
+Execute this code block:
+
 [source, cypher]
 ----
 MATCH (choc:Product {productName:'Chocolade'})<-[:CONTAINS]-(:Order)<-[:SOLD]-(employee),
@@ -338,6 +358,7 @@ LIMIT 5;
 ----
 
 Looks like employee No. 4 was busy, though employee No. 1 also did well!
+Your results should look something like this:
 
 [format="csv", options="header"]
 |===
@@ -351,11 +372,15 @@ employee,otherProduct,count
 
 == How are Employees Organized? Who Reports to Whom?
 
+Execute this code block:
+
 [source, cypher]
 ----
 MATCH (e:Employee)<-[:REPORTS_TO]-(sub)
 RETURN e.employeeID AS manager, sub.employeeID AS employee;
 ----
+
+Your results should look something like this:
 
 [format="csv", options="header"]
 |===
@@ -376,6 +401,8 @@ Next, let's investigate that a bit more.
 
 == Which Employees Report to Each Other Indirectly?
 
+Execute this code block:
+
 [source, cypher]
 ----
 MATCH path = (e:Employee)<-[:REPORTS_TO*]-(sub)
@@ -383,6 +410,8 @@ WITH e, sub, [person in NODES(path) | person.employeeID][1..-1] AS path
 RETURN e.employeeID AS manager, path as middleManager, sub.employeeID AS employee
 ORDER BY size(path);
 ----
+
+Your results should look something like this:
 
 [format="dsv", options="header"]
 |===
@@ -402,6 +431,8 @@ manager:middleManager:employee
 
 == How Many Orders were Made by Each Part of the Hierarchy?
 
+Execute this code block:
+
 [source, cypher]
 ----
 MATCH (e:Employee)
@@ -409,6 +440,8 @@ OPTIONAL MATCH (e)<-[:REPORTS_TO*0..]-(sub)-[:SOLD]->(order)
 RETURN e.employeeID as employee, [x IN COLLECT(DISTINCT sub.employeeID) WHERE x <> e.employeeID] AS reportsTo, COUNT(distinct order) AS totalOrders
 ORDER BY totalOrders DESC;
 ----
+
+Your results should look something like this:
 
 [format="dsv", options="header"]
 |===
@@ -445,5 +478,5 @@ The Neo4j ETL Tool runs as a Neo4j Desktop app and is designed with a point-and-
 * https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV^]: Cypher's command for importing CSV files
 * https://neo4j.com/labs/apoc/[APOC library^]: Neo4j's utility library
 * https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool^]: Loading relational data without code
-* https://neo4j.com/developer/data-import/[Importing Data with Neo4j]
-* https://neo4j.com/developer/data-modeling/guide-data-modeling[Graph Data Modeling]
+* https://neo4j.com/developer/data-import/[Overview of Importing Data with Neo4j^]
+* https://neo4j.com/developer/data-modeling/guide-data-modeling[Graph Data Modeling^]
