@@ -124,9 +124,9 @@ image::Ex2_LoadFLights.png[Ex2_LoadFlights,width=600]
 
 [source, cypher]
 ----
-MATCH (a:Airport)-[:CONNECTED_TO]->()
-RETURN a.code, COUNT(*) AS outgoing
-ORDER BY outgoing DESC
+MATCH (a:Airport)
+RETURN a.code AS Code, size((a)-[:CONNECTED_TO]->()) AS Connections
+ORDER BY Connections DESC
 LIMIT 10
 ----
 
@@ -135,7 +135,7 @@ This query:
 * Finds every node with the `Airport` label.
 * Finds all outgoing `CONNECTED_TO` relationships.
 * Counts them up grouped by airport.
-* Returns the `Airport` nodes and the `outgoing` count in descending order by `outgoing`.
+* Returns the `Airport` nodes and the `outgoing` count in descending order by `Connections`.
 * Limits the number of airports returned to 10.
 
 The result returned should be:
