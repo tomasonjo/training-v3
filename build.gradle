@@ -46,6 +46,7 @@ subprojects {
   dependencies {
     asciidoctorGems 'rubygems:rouge:3.18.0'
     asciidoctorGems 'rubygems:neo4j-asciidoctor-extensions:0.3.1'
+    asciidoctorGems 'rubygems:asciidoctor-include-ext:0.3.1'
     asciidoctorgoogleslides("io.github.mogztter:asciidoctor-googleslides:0.0.31")
   }
 
@@ -273,6 +274,7 @@ subprojects {
         }
 
         asciidoctorj {
+          requires "${rootProject.projectDir}/resources/extensions/antora_include_resolver.rb"
           options template_dirs: ["${rootProject.projectDir}/resources/templates/browser-guide"]
           attributes 'imagesdir': imagesDir,
             'allow-uri-read': '',
