@@ -98,7 +98,7 @@ This type of connection is not covered in this course.
 
 == Using Drivers via Bolt
 
-If you already have an application that accesses your RDMBS that is written in Java, Javascript, Python, C# or Go, you can use Neo4j's supported drivers to add nodes and relationships to the graph.
+If you already have an application that accesses your RDBMS that is written in Java, Javascript, Python, C# or Go, you can use Neo4j's supported drivers to add nodes and relationships to the graph.
 These languages enable you to write code that is transactional, supports batching, and even supports parallel operations.
 If you are comfortable with these languages, then you can use them to import the data into your graph.
 
