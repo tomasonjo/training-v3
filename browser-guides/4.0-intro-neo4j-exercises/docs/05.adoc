@@ -144,11 +144,11 @@ image::JamesThompsonAllHops.png[JamesThompsonAllHops,width=500]
 
 == Exercise 5.6: Specify optional data to be retrieved during the query (Instructions)
 
-*Write a Cypher query to retrieve all people in the graph whose name begins with _Tom_ and optionally retrieve all people named _Tom_ who directed a movie.*
+*Write a Cypher query to return all persons who's name begins with Tom and optionally return the name of a movie that this person directed.*
 
 == Exercise 5.6: Specify optional data to be retrieved during the query (Solution)
 
-*Write a Cypher query to retrieve all people in the graph whose name begins with _Tom_ and optionally retrieve all people named _Tom_ who directed a movie.*
+*Write a Cypher query to return all persons who's name begins with Tom and optionally return the name of a movie that this person directed.*
 
 [source, cypher]
 ----

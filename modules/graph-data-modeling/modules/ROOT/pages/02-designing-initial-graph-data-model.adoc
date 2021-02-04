@@ -59,7 +59,7 @@ Every organization has their own standards for how requirements are documented. 
 No knowledge of the underlying implementation is required!
 
 
-=== Example domain: Bill of Materials
+=== Example domain: Bill Of Materials (BOM)
 
 image::BeyondPLM.png[BeyondPLM,width=900,align=center]
 

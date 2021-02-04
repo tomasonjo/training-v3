@@ -95,7 +95,8 @@ For modeling complex data, the previous example with all properties in a node an
 In general, you use fanout to do one of two things.
 
 . Reduce duplication of properties. Instead of having a repeated property on every node, you can instead have all of those nodes connected to a shared node with that property.  This can make data updates massively easier.
-. Reduce gather-and-inspect behavior during a traversal.  In the *one node* example, if we want to find every address in the city of Axebridge, we would need to check the properties on *every* Person node, then discard most of them.  This is grossly inefficient.  In the *multiple node* version, this is a simple matter of locating the singular Axebridge node, and traversing to every Address node connected to it.  This model has no “wasted” hops.
+. Reduce gather-and-inspect behavior during a traversal.  In the *one node* example, if we want to find every address in the city of Axebridge, we would need to check the properties on *every* Person node, then discard the irelevant nodes.  This is grossly inefficient.  In this multiple node case, this is a simple matter of locating the singular Axebridge node, and traversing to every Address node connected to it.  This model has no “wasted” hops.
+
 
 As a result, you generally use fanout for anchors and traversing the graph.
 You almost never see fanout used for output, unique identifier, or decorator properties, because it makes traversal a few hops longer for no real benefit.
@@ -225,9 +226,9 @@ image::AccessibilityOfData.png[AccessibilityOfData,width=900,align=center]
 [.notes]
 --
 Neo4j allows you to put data in labels, properties, and relationship types.
-In most cases, there is a way you can model your graph so that a given data item is in any one of these three locations.
+In most cases, there is a way you can model your graph so that data being queried is in any one of these three locations.
 
-When designing or refactoring a model, you can estimate performance by checking how “accessible” the data items are that represent the important queries of your application.
+When designing or refactoring a model, you can estimate performance by checking how “accessible” the data ia that represents the important queries of your application.
 --
 
 [.one-third-two-thirds-column]
@@ -237,7 +238,7 @@ image::HierarchyOfAccessibility.png[HierarchyOfAccessibility,width=500,align=cen
 
 --
 [.statement]
-_For each data object, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
+_For data in the query, how much work must Neo4j do to evaluate if this is a “good” path or a “bad” one?_
 
 [.small]
 . Anchor node label, indexed anchor node properties

@@ -1,0 +1,11 @@
+
+// guide-importing-data-and-etl.adoc uses {img} as a prefix for images :|
+:img:
+
+:link: https://neo4j.com/
+:img: https://dist.neo4j.com/wp-content/uploads/
+:link{github}: https://github.com/neo4j-contrib/developer-resources/tree/gh-pages/
+:cyphermanual: https://neo4j.com/docs/cypher-manual/current/
+:example: https://raw.githubusercontent.com/neo4j-documentation/developer-guides/publish/modules/ROOT/examples/
+
+include::https://raw.githubusercontent.com/neo4j-documentation/developer-guides/publish/modules/ROOT/pages/guide-importing-data-and-etl.adoc[]

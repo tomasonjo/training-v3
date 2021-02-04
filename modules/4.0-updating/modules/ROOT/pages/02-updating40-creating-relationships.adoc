@@ -383,9 +383,9 @@ Assuming the nodes are successfully retrieved, how many relationships are create
 ----
 MATCH (a:Person), (m:Movie)
 WHERE a.name = 'Tom Jones' AND m.title = 'Life is Wonderful'
-CREATE (a)-[rel:ACTED_IN]->(m)
-CREATE (a)-[rel:ACTED_IN {roles: ['The Villain']}]->(m)
-CREATE (a)-[rel:ACTED_IN {roles: ['The Villain','Joe']}]->(m)
+CREATE (a)-[:ACTED_IN]->(m)
+CREATE (a)-[:ACTED_IN {roles: ['The Villain']}]->(m)
+CREATE (a)-[:ACTED_IN {roles: ['The Villain','Joe']}]->(m)
 ----
 
 [.statement]
