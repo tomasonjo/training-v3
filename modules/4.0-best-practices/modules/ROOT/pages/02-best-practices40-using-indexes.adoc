@@ -192,7 +192,7 @@ A full-text schema index can be used for:
 Rather than using Cypher syntax to create a full-text schema index, you call a procedure to create the index.
 The index is not used implicitly when you query the graph.
 You must call a procedure to start a query that uses the index.
-By default, the underlying implementation of a full-text schema index is Lucene.
+By default, the underlying implementation of a full-text schema index is https://lucene.apache.org/[Lucene].
 You can change the underlying index provider of any index.
 --
 
@@ -261,7 +261,7 @@ RETURN node
 
 [.notes]
 --
-Notice that we specify `YIELD` after calling the procedure. This enables us to use return values from the procedure.
+Notice that we specify `YIELD node` after calling the procedure. This enables us to access the property values in the nodes that are returned by the procedure.
 In this case, we return all nodes that are found in the graph that have either a _title_ property or _name_ property containing the string, _Jerry_.
 --
 
