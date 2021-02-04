@@ -641,7 +641,7 @@ endif::[]
 ifndef::env-slides[]
 We can also view the nodes as table data where the nodes and their associated property values are shown in a JSON-style format.
 
-When nodes are displayed as table values, the node labels and ids are not shown, only the property values for the nodes. Node ids are unique identifiers and are set by the graph engine when a node is created.
+When nodes are displayed as table values, the node labels and ids are also shown if you are using version 4.1 or later. Node ids are unique identifiers and are set by the graph engine when a node is created.
 endif::[]
 
 image::PersonNodes-table.png[PersonNodes-table,width=700,align=center]
@@ -665,7 +665,7 @@ In general - *Graph* and *Text* - output are good for human users,
 
 <more details>
 
-We can also view the nodes as table data where the nodes and their associated property values are shown in a JSON-style format. When nodes are displayed as table values, the node labels and ids are not shown, only the property values for the nodes. Node ids are unique identifiers and are set by the graph engine when a node is created.null
+We can also view the nodes as table data where the nodes and their associated property values are shown in a JSON-style format. When nodes are displayed as table values, node labels and ids are also shown if you are using version 4.1 or later. Node ids are unique identifiers and are set by the graph engine when a node is created.null
 
 --
 endif::[]
