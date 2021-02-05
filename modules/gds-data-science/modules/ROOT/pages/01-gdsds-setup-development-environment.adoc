@@ -18,8 +18,8 @@ In this course you will learn how to setup the Neo4j Desktop for use in the rest
 
 In this module, you will:
 [square]
-* Set up Neo4j Desktop on your system and create a database.
-* Install APOC and GDSL for your database.
+* Set up Neo4j Desktop on your system and create a local DBMS.
+* Install APOC and GDSL for your DBMS.
 * Increase available heap memory.
 * Set up Jupyter Notebook on your system.
 * Download the course notebooks.
@@ -33,57 +33,38 @@ To perform the exercises of this course you must have downloaded and installed N
 ifdef::env-slides[]
 . Download the latest version of Neo4j Desktop.
 . Create a project in Neo4j Desktop named *Link Prediction*.
-. Create a local 4.1.x database in this Link Prediction project.
+. Create a local 4.1.x DBMS in this Link Prediction project.
 endif::[]
 
 
 ifdef::backend-html5,backend-pdf[]
-These videos show how to install and get started using Neo4j Desktop.
+This video shows how to get started using Neo4j Desktop.
 For your environment you should:
 
 . Download the latest version of Neo4j Desktop.
 . Create a project in Neo4j Desktop named *Graph Algos*.
-. Create a local 4.1.x database in this Graph Algos project.
+. Create a local 4.1.x DBMS in this Graph Algos project.
 endif::[]
 
 ifdef::backend-html5[]
-.If using OS X
+
 [%collapsible%open]
 ====
-video::cTZ_Z3KfLyE[youtube,width=560,height=315]
+video::uR9-NLxLzg4[youtube,width=560,height=315]
 ====
 
-.If using Linux
-[%collapsible]
-====
-video::pvjsxc_MdIw[youtube,width=560,height=315]
-====
-
-.If using Windows
-[%collapsible]
-====
-video::RSbhmVF_ccs[youtube,width=560,height=315]
-====
 endif::[]
 
 ifdef::backend-pdf[]
-If using OS X:
 
-https://youtu.be/cTZ_Z3KfLyE
+https://youtu.be/uR9-NLxLzg4
 
-If using Linux:
-
-https://youtu.be/pvjsxc_MdIw
-
-If using Windows:
-
-https://youtu.be/RSbhmVF_ccs
 endif::[]
 
 [.half-column]
 == Step 2: Install APOC and GDSL for your database
 
-. Click the *Manage* area for the database.
+. Click the *Details* area for the DBMS.
 . Select the *Plugins* tab.
 . Install the *APOC* plugin.
 . Install the *Graph Data Science* plugin.
@@ -95,15 +76,15 @@ image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
 The last exercise in this course will require more heap memory than allocated by default.
 You will increase the maximum heap memory size to 3gb.
 
-. Click the *Manage* area for the database.
-. Select the *Settings* tab.
+. Click the three dots to the right of the DBMS.
+. Select *Settings...*.
 . Scroll down to *dbms.memory.heap.max_size* settings.
 . Overwrite this setting with the following value:
 ----
 dbms.memory.heap.max_size=3G
 ----
 . Click apply.
-. Start or restart the database.
+. Start or restart the DBMS.
 
 === Step 4: Set up Jupyter Notebook on your system
 

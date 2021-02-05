@@ -54,15 +54,18 @@ Perform these steps to set up the Yelp dataset in your Neo4j Desktop environment
 . Drag the downloaded *yelp-40.dump* file to the *Files* location in your project.
 . Click the three dots to the right of the dump file name and select *Create DBMS from dump*.
 . Enter a password for the database and then click *Create*.
-. Click the three dots to the right of the database name and select *Manage*.
+. Open the details for the DBMS you are working with.
 . Click the *Plugins* tab.
 . Install *APOC*.
 . Install *Graph Data Science Library*.
-. Start the database.
-. Connect to the database with Neo4j Browser.
+. Start the DBMS.
+. Connect to the DBMS with Neo4j Browser.
 . Verify that the nodes and relationships exist in the graph.
 
 You can also follow along with this video for setting up the Yelp dataset in your Neo4j Desktop environment.
+
+[NOTE]
+This video is shown with an earlier version of Neo4j Desktop so you will need to adapt for the latest version of Neo4j Desktop.
 
 video::cYaK-X8KLQI[youtube,width=560,height=315]
 

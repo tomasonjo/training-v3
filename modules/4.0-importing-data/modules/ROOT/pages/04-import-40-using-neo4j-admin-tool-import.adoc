@@ -25,6 +25,9 @@ At the end of this module, you should be able to:
 
 == What is `neo4j-admin`?
 
+[IMPORTANT]
+`neo4j-admin` is a tool that can only be used if you are using Neo4j Desktop or Neo4j Server on a system that you manage. You cannot use `neo4j-admin` in a cloud-based Neo4j DBMS such as a Neo4j Sandbox or Neo4j Aura.
+
 A Neo4j installation includes a *bin* folder that contains some useful utilities that can be used by both developers and administrators.
 These include:
 

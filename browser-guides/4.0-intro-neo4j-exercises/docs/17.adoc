@@ -2,8 +2,6 @@
 
 == Exercise 17: Using APOC for importing data (Preparations)
 
-If you are using Neo4j Desktop:
-
 You will start with a new database named importwithapoc. Execute these commands in Neo4j Browser to create the database.
 
 [source, cypher]
@@ -20,16 +18,11 @@ CREATE DATABASE importwithapoc
 :USE importwithapoc
 ----
 
-*Note:* If you are using Neo4j Sandbox or Neo4j Aura you cannot create new databases. You will need to clear everything from your active database and reuse it:
-
-. Drop all indexes and constraints in the graph.
-. Execute `MATCH (n) DETACH DELETE n`
-
 == Exercise 17: Using APOC for importing data (Overview)
 
 In this exercise you execute Cypher statements to import data into your graph using the APOC library.
 
-* *Exercise 17.1*: Install APOC into your project in Neo4j Desktop.
+* *Exercise 17.1*: Install APOC into your project in Neo4j Desktop (if you are using Neo4j Desktop).
 * *Exercise 17.2*: Verify that you can access APOC procedures.
 * *Exercise 17.3*: Write Cypher code to examine the data.
 * *Exercise 17.4*: Create constraints.
@@ -76,7 +69,8 @@ https://data.neo4j.com/v4.0-intro-neo4j/movies2.csv
 
 *Note:* If you have previously downloaded the files for this course and are using Neo4j Desktop, you can place movies2.csv into the *import* folder:
 
-. In Neo4j Desktop Click Manage > Open Folder for the Neo4j instance you are using.
+. In Neo4j Desktop, click the 3 dots to the right of the DBMS.
+. Click *Open Folder > Import*.
 . Copy the CSV files you previously downloaded to the import folder.
 . You will adapt the code to read from the filesystem: file:///movies2.csv'
 
@@ -191,7 +185,7 @@ The result returned should be:
 [.thumb]
 image::ClearedDB.png[ClearedDB,width=800]
 
-Note: This is the same as doing the following in Neo4j Browser in a Neo4j Desktop installation where, for example, the name of the database is _neo4j_:
+Note: This is the same as doing the following in Neo4j Browser  where, for example, the name of the database is _neo4j_:
 
 [source, cypher]
 ----

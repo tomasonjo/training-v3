@@ -30,157 +30,180 @@ At the end of this module, you should be able to:
 * It enables you to control how much of the data in an existing RDBMS will be imported into the graph.
 * It also enables you to customize how nodes and relationships will be created in the graph.
 
-== Steps for importing with the ETL Tool
+[IMPORTANT]
+The Neo4j ETL Tool can only be used if you are using Neo4j Desktop to access the graph application.
+With Neo4j Desktop, you can connect to a Sandbox database or a Neo4j Aura database, but you need Neo4j Desktop to use the Neo4j ETL Tool.
 
-. If it is not already there, install the Neo4j ETL Tool into your Neo4j Desktop project.
-. Create and start the Neo4j database into which you will import the data.
-. Use the Neo4j ETL Tool to import the data:
-.. Specify and test the RDBMS connection.
-.. Prepare for mapping
-.. View the default mapping to be performed.
+== Guided Exercise: Importing with the ETL Tool
+
+Here are the steps you will follow:
+
+. Ensure the Neo4j DBMS is started.
+. Start the Neo4j ETL Tool.
+. Specify the target Neo4j database.
+. Specify and test the source RDBMS connection.
+. Prepare for mapping.
+. View the default mapping to be performed.
 .. Optionally, modify the default mapping.
-.. Perform the import.
+. Save the mapping.
+. Import the data.
 
-== Install the Neo4j ETL Tool
+== Step 1: Ensure the Neo4j DBMS is started
 
-In Neo4j Desktop, you either create or view a project that  you have created.
-Then you simply click the *Add Application* icon to add the Neo4j ETL Tool.
+* If your database will be hosted in the local DBMS, make sure that it is created and started in your Neo4j Desktop project.
 
-image::AddETLTool.png[AddETLTool,width=300,align=center]
+* If your database will be hosted in a Neo4j Sandbox or Neo4j Aura, make sure that you add a connection to it from your project in Neo4j Desktop and connect to it.
 
-Here is what your project should look like with the Neo4j ETL Tool added:
+=== Example: Create the database you will import data into
 
-image::ETLToolAdded.png[ETLToolAdded,width=200,align=center]
-
-[NOTE]
-Make sure that you have updated Neo4j Desktop so that it has the latest version of the ETL Tool.
-At this writing, the latest version is 1.5.0.
-
-== Create and start the Neo4j instance
-
-To import using the Neo4j ETL Tool, the Neo4j graph into which you will import the data must be started.
-For a new project, we simply click add graph and start a new Neo4j instance.
-
-image::CreateGraphForImport.png[CreateGraphForImport,width=400,align=center]
-
-[NOTE]
-You can skip this step if you plan to use an existing project that already has a Neo4j instance running.
-
-== Create the database you will import data into
-
-You will most likely be importing the data into a newly-created database.
+You will most likely be importing the data into a newly-created database. Here is how you create a database in the DBMS:
 
 [source,browser,role=nocopy noplay]
 ----
-create database customers;
-show databases
+CREATE DATABASE customers;
 ----
 
 image::DatabaseForImport.png[DatabaseForImport,width=700,align=center]
 
 Next, you are ready to use the Neo4j ETL Tool for import.
 
-== Starting the Neo4j ETL Tool
+== Step 2: Start the Neo4j ETL Tool
+
+For the started local DBMS or remote connection, open the ETL Tool by selecting it in the dropdown list for the *Open* button:
+
+image::StartETLTool.png[StartETLTool,width=800,align=center]
+
+[NOTE]
+Select *Allow* when asked if you want to allow background processes to execute.
 
 Here is the initial page you see when you start the Neo4j ETL tool:
 
 image::OpenETLTool.png[OpenETLTool,width=800,align=center]
 
-The first thing you should do is connect to the RDBMS.
+== Step 3: Specify target Neo4j database
 
-== Connecting to the RDBMS
+Next, you can select the Neo4j Desktop project and the local or remote DBMS that you will be importing into.
 
-Here is an example where we are providing the connection information for an existing RDBMS from which we will be retrieving data for the import.
+image::SelectTargetDB.png[SelectTargetDB,width=800,align=center]
+
+== Step 4: Specify and test the source RDBMS connection
+
+The next thing you should do is connect to the RDBMS.
+You click *ADD CONNECTION*.
+
+=== Specify the connection information
+
+Provide this information for the JDBC Connection:
+
+.Connection Name
+----
+Northwind
+----
+
+.Host
+----
+db-examples.cmlvojdj5cci.us-east-1.rcs.amazonaws.com
+----
+
+.Type
+----
+postgresql
+----
+
+.Database
+----
+northwind
+----
+
+.Username
+----
+n4examples
+----
+
+.Password
+----
+36gdOVABr3Ex
+----
+
+This is what your configuration should look like:
 
 image::JDBCConnection.png[JDBCConnection,width=700,align=center]
 
-== Connection tested and saved
+=== Test the connection to the RDBMS
 
-You must test and save the RDBMS connection to ensure the Neo4j ETL Tool will be able to access the RDBMS.
+Next, you must test and save the RDBMS connection to ensure the Neo4j ETL Tool will be able to access the RDBMS.
+Click the *TEST AND SAVE CONNECTION* button.
+
+You should see this message that you can then close:
 
 image::ConnectionSaved.png[ConnectionSaved,width=700,align=center]
 
-== Prepare for mapping
+== Step 5: Prepare for mapping
 
-After you have connected to the RDBMS, you must select the Neo4j Desktop project and the Neo4j instance to use for the mapping.
-
-image::PrepareForMapping.png[PrepareForMapping,width=800,align=center]
+In the Load Data Model window, ensure that both the source and target databases are selected as shown here.
 
 You then click *START MAPPING* to begin the  mapping.
 
-== Successful mapping
+image::ClickStartMapping.png[ClickStartMapping,width=700,align=center]
+
+=== Successful mapping
 
 If the Neo4j ETL Tool can successfully derive a mapping from the RDBMS, you will see a message that the mapping was successful.
-You can clear the message and then click *NEXT*.
 
 image::MappingSuccessful.png[MappingSuccessful,width=700,align=center]
 
-== Default node mapping
+You can clear the message and then click *NEXT*.
+
+== Step 6: Review the default mapping
 
 For the northwind RDBMS, here is the default mapping that could be used to import the nodes.
 
 image::DefaultNodeMapping.png[DefaultNodeMapping,width=800,align=center]
 
-== Default relationship mapping
-
 And here is the default relationship mapping.
 
 image::DefaultRelationshipMapping.png[DefaultRelationshipMapping,width=800,align=center]
 
-== Changing node labels and what data will be imported
+=== Optional: Changing node labels and what data will be imported
 
 In the node tab, you can change the name that node labels will have and also skip data to be imported.
 
 image::ChangeNodeLabels.png[ChangeNodeLabels,width=700,align=center]
 
-== Changing node properties
+== Optional: Changing node properties
 
 You can even change what properties will be imported, their names, and types by selecting the edit icon for a node.
 
 image::NodeProperties.png[NodeProperties,width=800,align=center]
 
-== Changing relationship types
+== Optional: Changing relationship types
 
 You can modify the names of relationships and if they will be skipped upon import.
 
 image::RelationshipMapping.png[RelationshipMapping,width=800,align=center]
 
-==  Saving the mapping
+==  Step 7: Save the mapping
 
-After your customization of the mapping, you should always save it.
+After your customization of the mapping, you should always save it by clicking the *SAVE MAPPING* button.
 
 image::SaveMapping.png[SaveMapping,width=800,align=center]
 
 Then you click *NEXT* to continue to the import.
 
-==  Select the database for import
+== Step 8: Import the data
 
-Before you import, you must select the currently started database that you want to import the data into.
+Next, on the Import your data into Neo4j window, you can review the import information displayed.
 
-image::PrepareToImport.png[PrepareToImport,width=800,align=center]
-
-== Import the data
+image::ImportData.png[ImportData,width=750,align=center]
 
 You then click *IMPORT DATA* to import the data.
 
 image::ImportSuccessful.png[ImportSuccessful,width=750,align=center]
 
-[.student-exercise]
-== Exercise: Importing data using Neo4j ETL Tool
+You can also confirm that the data is in the Neo4j database by viewing it in Neo4j Browser.
 
-. Create a new database in an existing project named northwind.
-. Install Neo4j ETL Tool for the project.
-. Restart the Neo4j instance.
-. Configure a JDBC connection with these guidelines:
-.. database name: northwind
-.. host: db-examples.cmlvojdj5cci.us-east-1.rds.amazonaws.com
-.. user: n4examples
-.. password: 36gdOVABr3Ex
-. Import the data into the northwind database.
+image::Imported.png[Imported,width=750,align=center]
 
-You will only be able to perform the steps of this exercise if you use Neo4j Desktop.
-
-Estimated time to complete: 10 minutes.
 
 [.quiz]
 == Check your understanding

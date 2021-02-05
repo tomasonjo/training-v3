@@ -27,7 +27,7 @@ image::InitialDatabase.png[InitialDatabase.,width=300]
 * dbms.memory.pagecache.size=1G
 
 [start=4]
-. If using Neo4j Aura, confirm that your settings are at least as large by running this:
+. If using Neo4j Sandbox or Neo4j Aura, confirm that your settings are at least as large by running this:
 
 [source,Cypher]
 ----

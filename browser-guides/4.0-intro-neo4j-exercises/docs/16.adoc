@@ -2,9 +2,6 @@
 
 == Exercise 16: Importing data (Preparations)
 
-
-If you are using Neo4j Desktop:
-
 You will start with a new database named importcsv. Execute these commands in Neo4j Browser to create the database.
 [source, cypher]
 ----
@@ -20,12 +17,6 @@ CREATE DATABASE importcsv
 ----
 :use importcsv
 ----
-
-
-*Note:* If you are using Neo4j Sandbox or Neo4j Aura you cannot create new databases. You will need to clear everything from your active database and reuse it:
-
-. Drop all indexes and constraints in the graph.
-. Execute `MATCH (n) DETACH DELETE n`
 
 == Exercise 16: Importing data (Overview)
 
@@ -71,7 +62,8 @@ image::LoadActorsToView.png[LoadActorsToView,width=600]
 
 *Note:* If you have previously downloaded the files for this course and are using Neo4j Desktop, you can place them into the *import* folder:
 
-. In Neo4j Desktop Click *Manage > Open Folder* for the Neo4j instance you are using.
+. In Neo4j Desktop Click the 3 dots to the right of the DBMS.
+. Select *Open Folder > Import*.
 . Copy the CSV files you previously downloaded to the *import* folder.
 . Adapt the code above to read from the filesystem:
 

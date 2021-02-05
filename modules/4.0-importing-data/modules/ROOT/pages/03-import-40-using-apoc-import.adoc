@@ -36,11 +36,10 @@ If you are using Neo4j Desktop, you must add the APOC library to your database s
 
 Here are the steps for adding the APOC library to your database server in Neo4j Desktop:
 
-. Stop the database server.
-. For the project you are working with, select "+" in the Add Plugin panel.
+. Open the details for DBMS you are working with, by clicking the DBMS.
+. Select the *Plugins* tab.
 . Select APOC to install.
-. Close the install panel.
-. Start the database server.
+. The DBMS should automatically restart.
 
 === Confirming APOC is available
 

@@ -26,8 +26,8 @@ WHERE name STARTS WITH 'apoc.'
 RETURN name ORDER BY name ASC
 ----
 
-If this code does not return the list of APOC procedures, then you must ensure that the APOC library is available by installing the plugin (Neo4j Desktop) and restarting the database.
-If you are using the *Blank Neo4j Sandbox*, you should have APOC.
+If this code does not return the list of APOC procedures, then you must ensure that the APOC library is available by installing the plugin (Neo4j Desktop) and restarting the DBMS.
+If you are using the a Neo4j Sandbox or Neo4j Aura, you should have APOC.
 
 == Exercise 1: Implementing your first model (Overview)
 

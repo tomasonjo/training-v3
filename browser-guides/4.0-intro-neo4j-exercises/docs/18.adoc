@@ -29,7 +29,8 @@ http://data.neo4j.com/v4.0-intro-neo4j/crimes-dataset.zip
 
 *Hint*: use `curl -O` or `wget`, or simply use the Web browser to download.
 
-. In Neo4j Desktop for the project's database you are using, select *Manage > Open Folder*.
+. In Neo4j Desktop for the project's DBMS you are using, select the 3 dots to the right of the DBMS.
+. Select *Open Folder > Import*.
 . Unzip the contents of the *crimes-dataset.zip* to the *import* folder. The *import* folder should contain six CSV files.
 
 [.thumb]
@@ -45,7 +46,8 @@ Make sure you understand the headers and how they will be used for the import.*
 
 In Neo4j Desktop for the project you are using, do the following:
 
-. For the project's database that should be running, select *Manage > Open Terminal*.
+. For the project's DBMS that should be running, select the 3 dots to the right of the DBMS.
+. Select *Open Terminal*.
 . Navigate to the *import* folder.
 
 [.thumb]

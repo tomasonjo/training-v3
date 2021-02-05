@@ -18,9 +18,6 @@ CREATE OR REPLACE DATABASE neo4j
 :USE neo4j
 ----
 
-*Note*: You can only use the above commands for a local database (using Neo4j Desktop, not Neo4j Sandbox or Neo4j Aura).
-Otherwise, you will need to execute Cypher code to drop all constraints before you run the script below.
-
 Then,  use the script below to populate it, including the constraints added in the previous exercise:
 
 [source, cypher]

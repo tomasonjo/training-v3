@@ -3,7 +3,6 @@
 
 == Exercise 19: Importing data from an RDBMS using an application (Preparations)
 
-If you are using Neo4j Desktop:
 
 You will start with a new database named products. Execute these commands in Neo4j Browser to create the database.
 [source, cypher]
@@ -20,12 +19,6 @@ CREATE DATABASE products
 ----
 :USE products
 ----
-
-
-*Note:* This exercise only works for Neo4j 4.x databases. If you are using Neo4j Sandbox or Neo4j Aura you cannot create new databases. You will need to clear everything from your active database and reuse it:
-
-. Drop all indexes and constraints in the graph.
-. Execute `MATCH (n) DETACH DELETE n`
 
 == Exercise 19: Importing data with an application (Overview)
 

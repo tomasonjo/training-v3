@@ -63,7 +63,7 @@ image::LOADCSVWorkflow.png[LOADCSVWorkflow,width=1000,align=center]
 
 Using Cypher and `LOAD CSV` is one of the easiest methods for importing data.
 It is commonly used for the initial import of data into the graph.
-To perform this type of import, the Neo4j Database must be started.
+To perform this type of import, the Neo4j DBMS must be started.
 With this type of import, the Cypher statement to load the data is a transaction.
 If your database is part of a Cluster, all servers are automatically updated also.
 
@@ -73,7 +73,7 @@ If your database is part of a Cluster, all servers are automatically updated als
 [square]
 * CSV files that have been extracted from an RDBMS.
 * Neo4j Browser or Cypher-shell.
-* Neo4j database running locally, in Neo4j Aura, in Neo4j Sandbox.
+* Neo4j DBMS running locally, in Neo4j Aura, in Neo4j Sandbox.
 * Optionally using a Neo4j Cluster.
 * Special handling if > 100K lines of data.
 
@@ -89,7 +89,7 @@ In addition to CSV, APOC procedures can be used to read other formats such as XM
 [square]
 * CSV, XML, or JSON files that have been extracted from an RDBMS.
 * Neo4j Browser or Cypher-shell.
-* Neo4j database running locally, in Neo4j Aura, in Neo4j Sandbox.
+* Neo4j DBMS running locally, in Neo4j Aura, in Neo4j Sandbox.
 * Optionally using a Neo4j Cluster.
 * No limit to size of data to import.
 
@@ -108,7 +108,7 @@ image::DriverWorkflow.png[DriverWorkflow,width=1000,align=center]
 
 [square]
 * Neo4j Browser or Cypher-shell.
-* Neo4j database running locally, in Neo4j Aura, in Neo4j Sandbox.
+* Neo4j DBMS running locally, in Neo4j Aura, in Neo4j Sandbox.
 * Optionally using a Neo4j Cluster.
 * Live RDBMS Server.
 * Application responsible for transaction scoping.
@@ -130,7 +130,7 @@ image::adminToolWorkflow.png[adminToolWorkflow,width=1000,align=center]
 
 [square]
 * CSV files that have been extracted from an RDBMS.
-* Neo4j database running locally.
+* Neo4j DBMS running locally ([underline]#cannot# use with Neo4j Sandbox or Neo4j Aura).
 * No limit to size of data to import.
 
 == Using the ETL tool to import data
@@ -147,7 +147,7 @@ image::ETLTool.png[ETLTool,width=1000,align=center]
 
 [square]
 * Neo4j Desktop with ETL tool installed.
-* Neo4j database running locally, in Neo4j Aura, in Neo4j Sandbox.
+* Neo4j DBMS running locally, in Neo4j Aura, in Neo4j Sandbox.
 * Optionally using a Neo4j Cluster.
 * Live RDBMS Server.
 * No limit to size of data to import.

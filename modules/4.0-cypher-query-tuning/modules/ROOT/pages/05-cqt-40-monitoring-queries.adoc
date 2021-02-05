@@ -241,6 +241,9 @@ Estimated time to complete: 15 minutes.
 --
 In addition to monitoring currently-running queries, you can also configure Neo4j to automatically kill queries that run too long or log information about queries.
 
+[NOTE]
+You cannot change configuration settings if you are using Neo4j Sandbox or Neo4j Aura.
+
 You can configure Neo4j to log an event if a query runs more than xx milliseconds. There is no
 standard for what a reasonable period of time is for a query, but in most databases, a query that
 runs for minutes is not a good thing! At a minimum, you should enable logging for queries and set a
@@ -266,7 +269,7 @@ dbms.track_query_allocation=true
 
 [.notes]
 --
-Upon restart of the Neo4j instance, these logging settings will take effect.
+Upon restart of the Neo4j DBMS, these logging settings will take effect.
 --
 
 [NOTE]
@@ -285,6 +288,9 @@ This tool is installed in Neo4j Desktop and enables you to examine the query log
 
 With this tool, you specify a query log file and then you can look at the metrics for all queries in the query log file.
 
+[NOTE]
+Since the Neo4j Query Log Analyzer is a graph app, it must be run in a Neo4j Desktop environment.
+You can have a remote connection to a Neo4j Sandbox or Neo4j Aura DBMS so you can monitor it.
 Here is an example of the query stats display in the tool:
 --
 
