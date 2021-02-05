@@ -666,7 +666,7 @@ subprojects {
       if (new File(sourceImagesDirPath).exists()) {
         if (stage == 'production') {
           task s3UploadImages(type: S3UploadTask) {
-            //overwrite = true
+            overwrite = true
             source = sourceImagesDirPath
             bucket = "dev.assets.neo4j.com"
             destination = "course/${project.name}/images"
@@ -674,7 +674,7 @@ subprojects {
           }
         } else if (stage == 'testing') {
           task s3UploadImages(type: S3UploadTask) {
-            //overwrite = true
+            overwrite = true
             source = sourceImagesDirPath
             bucket = "dev.assets.neo4j.com"
             destination = "test-course/${project.name}/images"
