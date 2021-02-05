@@ -2629,9 +2629,9 @@ Select the correct answer.
 
 [%interactive.answers]
 - [ ] [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
-- [ ] [src-cypher]`MATCH (:Customer 'ABCCO')-[:BOUGHT]->(p:Product) RETURN p.productName`
+- [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT]-(:Customer 'ABCCO') RETURN p.productName`
 - [ ] [src-cypher]`MATCH (p:Product)<-[:BOUGHT_BY]-(:Customer 'ABCCO') RETURN p.productName`
-- [x] [src-cypher]`MATCH (:Customer {customerName: 'ABCCO'})-[:BOUGHT]->(p:Product) RETURN p.productName`
+- [x] [src-cypher]`MATCH (p:Product)<-[:BOUGHT]-(:Customer {customerName: 'ABCCO'}) RETURN p.productName`
 
 
 ifdef::env-slides[]
@@ -2671,7 +2671,7 @@ endif::[]
 === Question 3
 
 [.statement]
-When [.underline]#must# you use a variable in a MATCH clause?
+Thus far, you have learned to use a simple MATCH clause to return values. When [.underline]#must# you use a variable in a simple MATCH clause?
 
 [.statement]
 Select the correct answer.
