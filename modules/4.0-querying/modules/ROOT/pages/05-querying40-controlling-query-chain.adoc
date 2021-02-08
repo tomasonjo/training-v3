@@ -34,7 +34,7 @@ Here is an example where we return each actor, the number of movies they acted i
 [source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
-RETURN a.name, count(a) AS numMovies,
+RETURN a.name, count(m) AS numMovies,
        collect(m.title) as movies
 ----
 
@@ -67,7 +67,7 @@ The `WITH` clause does the counting and collecting, and the intermediate result 
 [source,Cypher,role=noplay]
 ----
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
-WITH  a, count(a) AS numMovies, collect(m.title) as movies
+WITH  a, count(m) AS numMovies, collect(m.title) as movies
 WHERE 1 < numMovies < 4
 RETURN a.name, numMovies, movies
 ----
