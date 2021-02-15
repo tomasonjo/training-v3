@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node resources/tasks/start.js",
     "watch": "node resources/tasks/watch.js",
-    "build": "antora local-antora-playbook.yml --generator @neo4j/developer-site-generator"
+    "build": "antora local-antora-playbook.yml --generator @neo4j/developer-site-generator",
+    "build:jupyter": "node resources/tasks/jupyter.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,16 @@
   "homepage": "https://github.com/neo4j-contrib/training-v3#readme",
   "devDependencies": {
     "@antora/cli": "^2.3.4",
+    "@asciidoctor/core": "^2.2.1",
     "@neo4j/developer-site-generator": "git+https://github.com/neo4j-documentation/developer-site-generator.git#v0.4.2",
+    "asciidoctor-jupyter": "github:neo4j-documentation/asciidoctor-jupyter",
     "browser-sync": "^2.26.12",
     "cheerio": "^1.0.0-rc.3",
     "chokidar": "^3.4.2",
-    "express": "^4.17.1"
+    "debug": "^3.1.0",
+    "express": "^4.17.1",
+    "fs-extra": "^9.1.0",
+    "glob": "^6.0.4"
   },
   "private": true
 }
