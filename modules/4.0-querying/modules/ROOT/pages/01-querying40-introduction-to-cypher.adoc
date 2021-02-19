@@ -1541,7 +1541,7 @@ endif::[]
 == Querying by multiple relationships
 
 ifndef::env-slides[]
-Here is another example where we want to know the movies that _Tom Hanks_ acted in and directed:
+Here is another example where we want to know the movies that _Tom Hanks_ acted in or directed:
 endif::[]
 
 
