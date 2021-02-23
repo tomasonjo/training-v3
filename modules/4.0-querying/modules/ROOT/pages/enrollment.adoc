@@ -7,7 +7,6 @@
 :page-course-duration: 5 hrs
 :page-illustration: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/IntroductionToNeo4j-4.0.jpg
 :page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/QueryingWithCypherInNeo4j4.0_withTitle.jpg
-:page-course-label: New
 
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/QueryingWithCypherInNeo4j4.0_withTitle.jpg[]
 

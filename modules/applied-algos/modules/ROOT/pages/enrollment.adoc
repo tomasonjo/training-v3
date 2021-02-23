@@ -7,10 +7,13 @@
 :page-course-duration: 4 hrs
 :page-illustration: https://dist.neo4j.com/wp-content/courseLogos/AppliedGraphAlgorithms-3.5.jpg
 :page-ogimage: https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20190611154252/applied-graph-algorithms1.png
-
+:page-disable-enrollment:
+:page-course-label: Retired
 image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20190611154252/applied-graph-algorithms1.png[]
 
 == About the Course
+
+*Note*: This course has been deprecated as we no longer support Neo4j 3.5 in our Neo4j Sandboxes. If you are already enrolled in this course and have an active sandbox, you can use it until your sandbox expires, but you will no longer be able to create a Sandbox for this course.
 
 In this course you will learn how to use graph algorithms in Neo4j.
 This course takes an applied approach - covering not just how to use the graph algorithms in Neo4j, but also how to leverage graph algorithms to enhance the functionality of a web application.

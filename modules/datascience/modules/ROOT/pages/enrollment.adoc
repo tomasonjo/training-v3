@@ -7,10 +7,13 @@
 :page-course-duration: 5 hrs
 :page-illustration: https://dist.neo4j.com/wp-content/courseLogos/DataScienceWithNeo4j-3.5.jpg
 :page-ogimage: https://cdn.neo4jlabs.com/graphacademy/data-science/img/datascience.png
-
+:page-disable-enrollment:
+:page-course-label: Retired
 image::https://cdn.neo4jlabs.com/graphacademy/data-science/img/datascience.png[]
 
 == About the Course
+
+*Note*: This course has been deprecated as we no longer support Neo4j 3.5 in our Neo4j Sandboxes. If you are already enrolled in this course and have an active sandbox, you can use it until your sandbox expires, but you will no longer be able to create a Sandbox for this course.
 
 This course introduces you to using Neo4j as part of your Data Science and Machine Learning workflows.
 We're going to learn how to do this with the help of the aminer.org citation dataset.
