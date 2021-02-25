@@ -24,7 +24,7 @@ To prepare your laptop for this course, you must:
 
 You may not need all of these files for your course work, but it is a good idea to have them on your system. Download these files:
 
-https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files.zip[https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files.zip]
+https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files-v2.zip[https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files-v2.zip]
 
 == Getting help
 
