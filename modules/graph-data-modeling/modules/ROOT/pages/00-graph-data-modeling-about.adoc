@@ -87,6 +87,7 @@ endif::[]
 Here are some resources you may use as you go through this course:
 
 [square]
+* https://arrows.app/[Neo4j Arrows Tool]
 * https://neo4j.com/docs/cypher-manual/4.0/[Neo4j Cypher Manual]
 * https://neo4j.com/developer/resources/[Neo4j Developer Resources]
 ifndef::env-slides[]

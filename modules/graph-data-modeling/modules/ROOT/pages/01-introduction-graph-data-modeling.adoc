@@ -177,60 +177,44 @@ image::ArrowTool.png[ArrowTool,width=900,align=center]
 --
 There are many ways that developers and stakeholders can work together to build a graph data model for their application.
 Drawing it on a whiteboard may be done initially, but you will need to share your model with others so using a tool is recommended.
-The tool that we use in this course is the Arrow tool which integrates with Neo4j.
-With the Arrow tool, you can generate Cypher statements for creating code to implement the model.
+The tool that we use in this course is the Arrows tool which integrates with Neo4j.
+With the Arrows tool, you can generate Cypher statements for creating code to implement the model.
 --
 
 [.slide-title.has-green-background.has-team-background]
-== Guided Exercise: Using the Arrow tool
+== Guided Exercise: Using the Arrows tool
 
 ifdef::backend-html5,backend-pdf[]
-Follow along with this video to learn how to begin using the Arrow tool for graph data modeling.
+Follow along with this video to learn how to begin using the Arrows tool for graph data modeling.
 endif::[]
 
 ifdef::backend-pdf[]
-https://youtu.be/NB184T-S46w
+https://youtu.be/ZHJ-BrKJ8A4
 endif::[]
 
 ifdef::env-slides[]
-https://youtu.be/NB184T-S46w
+https://youtu.be/ZHJ-BrKJ8A4
 endif::[]
 
 ifdef::backend-html5[]
 [.center]
-video::NB184T-S46w[youtube,width=560,height=315]
+video::ZHJ-BrKJ8A4[youtube,width=560,height=315]
 endif::[]
 
 
 ifdef::env-slides[]
 [.notes]
 --
-Show the students how to get started with the Arrow tool and encourage them to follow along on their laptops:
+Show the students how to get started with the Arrows tool and encourage them to follow along on their laptops:
 
-. Go to http://www.apcjones.com/arrows/
-. Double-click the existing node and add a Caption to it of *Person*.
-. Add the properties: *name: "Tom Jones", birthyear: 1990*
-. Add another node by clicking the Node button.
-. Double-click the new node and add a Caption to it of *Person*.
-. Add the properties:  *name: "Mary Jones", birthyear: 1995*
-. Grab the edge of the Tom Jones node and drag it over to the Mary Jones node to create the relationship.
-. Double-click the relationship and add the Type *MARRIED".
-. Add the property:  *since: 2015*
-. Add another node by clicking the Node button.
-. Double-click the new node and add a Caption to it of *Location*
-. Add the property:  *address: "123 Main Street"*
-. Drag the edge of the Tom Jones node to the Location property to create the relationship.
-. Double-click the relationship and add a Caption to it of *LIVES_AT*.
-. Drag the edge of the Mary Jones node to the Location property to create the relationship.
-. Double-click the relationship and add a Caption to it of *LIVES_AT*.
-. Show them that they can download their model to an SVG file.
-. Show them that they can view the markup and save it into a text file.
+Go to https://arrows.app
 
-The resulting model should appear as follows:
+Create this simple model:
+
 
 image::ArrowsDemo.png[ArrowsDemo,width=500,align=center]
 
-Here is the video:  https://youtu.be/NB184T-S46w
+Show them how to export and import JSON.
 
 --
 endif::[]
@@ -288,7 +272,7 @@ Select the correct answer.
 [%interactive.answers]
 - [ ] Visio
 - [ ] Sketch
-- [x] Arrow Tool
+- [x] Arrows Tool
 - [ ] Neo4j Modeler
 
 [.summary]

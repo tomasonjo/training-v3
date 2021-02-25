@@ -278,10 +278,10 @@ Furthermore, the Employment events themselves are organized into linked lists fo
 --
 Given a description of the domain, sample data, and the application questions:
 
-. Create the model (entities and connections) using the Arrow tool.
+. Create the model (entities and connections) using the Arrows tool.
 ** Look for any use cases that will use some common patterns you have learned about.
 [start=2]
-. Add sample data to the model using the Arrow tool and confirm questions can be answered using the model.
+. Add sample data to the model using the Arrows tool and confirm questions can be answered using the model.
 --
 
 === Exercise 4 instructions: The domain
@@ -318,65 +318,14 @@ Ask students to share their model as soon as they have a working “prototype.�
 Emphasize that model-building is iterative.
 If their model is imperfect, rather than telling them the better model, ask them questions that expose the weaknesses of their model relative to the application questions.
 
-Here is the markup for the model:
+Here is the preliminary model:  *Exercise4Solution1.json*.
 
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.67" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-550.4655813128935" data-y="-1216.8149073094257">
-    <span class="caption">Student</span>
-  </li>
-  <li class="node" data-node-id="1" data-x="592.2255987630683" data-y="-808.4017464284152">
-    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>date</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="1530.5288281421945" data-y="-188.47328130455">
-    <span class="caption">Course</span>
-  </li>
-  <li class="node" data-node-id="3" data-x="696.1411792240782" data-y="475.60253854551536">
-    <span class="caption">Lesson</span>
-  </li>
-  <li class="node" data-node-id="4" data-x="1562.4419933343002" data-y="475.60253854551536">
-    <span class="caption">Lesson</span>
-  </li>
-  <li class="node" data-node-id="5" data-x="2419.99523773733" data-y="475.60253854551536">
-    <span class="caption">Lesson</span>
-  </li>
-  <li class="node" data-node-id="6" data-x="2459.771940162705" data-y="-808.4017464284152">
-    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>integer</dd></dl></li>
-  <li class="relationship" data-from="4" data-to="5">
-    <span class="type">NEXT_&lt;course&gt;</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="4">
-    <span class="type">NEXT_&lt;course&gt;</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="3">
-    <span class="type">FIRST</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="5">
-    <span class="type">LAST</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="1">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="6">
-    <span class="type">HAS_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="6">
-    <span class="type">EARNED_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="4">
-    <span class="type">COMPLETED</span>
-  </li>
-</ul>
-----
 --
 endif::[]
 
 === Exercise 4 solution:  Application model
 
-image::Ex4-Sol1.png[Ex4-Sol1,width=900,align=center]
+image::Exercise4Solution1.png[Ex4-Sol1,width=900,align=center]
 
 
 [.notes]
@@ -395,304 +344,22 @@ At this point, the certExpiration property will be populated by adding the term 
 This intermediate node allows us to keep track of students’ progress through different concurrent courses, and to differentiate multiple subsequent passes through the same course.
 --
 
-ifndef::env-slides[]
-Here is the markup for the model:
-
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.67" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-550.4655813128935" data-y="-1216.8149073094257">
-    <span class="caption">Student</span>
-  </li>
-  <li class="node" data-node-id="1" data-x="592.2255987630683" data-y="-808.4017464284152">
-    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>date</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="1530.5288281421945" data-y="-188.47328130455">
-    <span class="caption">Course</span>
-  </li>
-  <li class="node" data-node-id="3" data-x="696.1411792240782" data-y="475.60253854551536">
-    <span class="caption">Lesson</span>
-  </li>
-  <li class="node" data-node-id="4" data-x="1562.4419933343002" data-y="475.60253854551536">
-    <span class="caption">Lesson</span>
-  </li>
-  <li class="node" data-node-id="5" data-x="2419.99523773733" data-y="475.60253854551536">
-    <span class="caption">Lesson</span>
-  </li>
-  <li class="node" data-node-id="6" data-x="2459.771940162705" data-y="-808.4017464284152">
-    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>integer</dd></dl></li>
-  <li class="relationship" data-from="4" data-to="5">
-    <span class="type">NEXT_&lt;course&gt;</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="4">
-    <span class="type">NEXT_&lt;course&gt;</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="3">
-    <span class="type">FIRST</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="5">
-    <span class="type">LAST</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="1">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="6">
-    <span class="type">HAS_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="6">
-    <span class="type">EARNED_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="4">
-    <span class="type">COMPLETED</span>
-  </li>
-</ul>
-----
-endif::[]
 
 === Exercise 4 solution: Sample data
 
-image::Ex4-Sol2.png[Ex4-Sol2,width=1000,align=center]
+image::Exercise4Solution2.png[Ex4-Sol2,width=1000,align=center]
 
 ifdef::env-slides[]
 [.notes]
 --
-Here is the sample data fully fleshed out.  Use the below markup to get it into Arrows.
+Here is the sample data fully fleshed out.
 
 As a group, prompt students to trace the traversal for each of the application questions, in order to verify that the model serves the questions.
 
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.21" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-396.2973779224105" data-y="-1598.542651644388">
-    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="696.1411792240782" data-y="-775.5184522555546">
-    <span class="caption">Enrollment</span>
-  </li>
-  <li class="node" data-node-id="2" data-x="1562.4419933343002" data-y="-301.66353654081996">
-    <span class="caption">Course</span><dl class="properties"><dt>name</dt><dd>Introduction to Neo4j</dd></dl></li>
-  <li class="node" data-node-id="3" data-x="696.1411792240782" data-y="475.60253854551536">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Graph Theory</dd></dl></li>
-  <li class="node" data-node-id="4" data-x="1562.4419933343002" data-y="475.60253854551536">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Graph Databases</dd></dl></li>
-  <li class="node" data-node-id="5" data-x="2419.99523773733" data-y="475.60253854551536">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Basic Cypher</dd></dl></li>
-  <li class="node" data-node-id="6" data-x="2452.0596471356525" data-y="-970.0863461358005">
-    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>24</dd></dl></li>
-  <li class="node" data-node-id="7" data-x="879.8886791627793" data-y="-1253.5663862086055">
-    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>2020</dd></dl></li>
-  <li class="node" data-node-id="8" data-x="1124.3637964049385" data-y="-1683.353885999956">
-    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>2018</dd></dl></li>
-  <li class="node" data-node-id="9" data-x="-591.3704658622172" data-y="-2730.474279887639"></li>
-  <li class="node" data-node-id="10" data-x="-620.4774799631609" data-y="565.4384413761886">
-    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Dan</dd></dl></li>
-  <li class="node" data-node-id="11" data-x="1148.4184037393607" data-y="1678.755606466262">
-    <span class="caption">Course</span><dl class="properties"><dt>name</dt><dd>Neo4j for Developers</dd></dl></li>
-  <li class="node" data-node-id="12" data-x="1148.4184037393607" data-y="1015.6712674382908">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Property Graph</dd></dl></li>
-  <li class="node" data-node-id="13" data-x="-81.87263599082607" data-y="1955.3561577156422"></li>
-  <li class="node" data-node-id="14" data-x="61.062009896806536" data-y="-246.0263961108761">
-    <span class="caption">Enrollment</span>
-  </li>
-  <li class="node" data-node-id="15" data-x="181.74861463859963" data-y="1357.3756722976887">
-    <span class="caption">Enrollment</span>
-  </li>
-  <li class="node" data-node-id="16" data-x="2452.0596471356525" data-y="1507.105178106398">
-    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="4" data-to="5">
-    <span class="type">NEXT_INTRO</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="4">
-    <span class="type">NEXT_INTRO</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="3">
-    <span class="type">FIRST</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="5">
-    <span class="type">LAST</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="1">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="6">
-    <span class="type">HAS_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="7">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="8">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="8" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="8" data-to="6">
-    <span class="type">EARNED_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="6">
-    <span class="type">EARNED_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="12">
-    <span class="type">NEXT_DEV</span>
-  </li>
-  <li class="relationship" data-from="12" data-to="4">
-    <span class="type">NEXT_DEV</span>
-  </li>
-  <li class="relationship" data-from="11" data-to="3">
-    <span class="type">FIRST</span>
-  </li>
-  <li class="relationship" data-from="11" data-to="4">
-    <span class="type">LAST</span>
-  </li>
-  <li class="relationship" data-from="10" data-to="14">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="10" data-to="15">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="15" data-to="11">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="14" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="15" data-to="3">
-    <span class="type">COMPLETED</span>
-  </li>
-  <li class="relationship" data-from="14" data-to="4">
-    <span class="type">COMPLETED</span>
-  </li>
-  <li class="relationship" data-from="11" data-to="16">
-    <span class="type">HAS_CERTIFICATE</span>
-  </li>
-</ul>
-----
+The solution is in this file: *Exercise4Solution2.json*.
 --
 endif::[]
 
-ifndef::env-slides[]
-Here is the sample data fully fleshed out.  Use the below markup to get it into Arrows.
-
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.21" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-396.2973779224105" data-y="-1598.542651644388">
-    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Alice</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="696.1411792240782" data-y="-775.5184522555546">
-    <span class="caption">Enrollment</span>
-  </li>
-  <li class="node" data-node-id="2" data-x="1562.4419933343002" data-y="-301.66353654081996">
-    <span class="caption">Course</span><dl class="properties"><dt>name</dt><dd>Introduction to Neo4j</dd></dl></li>
-  <li class="node" data-node-id="3" data-x="696.1411792240782" data-y="475.60253854551536">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Graph Theory</dd></dl></li>
-  <li class="node" data-node-id="4" data-x="1562.4419933343002" data-y="475.60253854551536">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Graph Databases</dd></dl></li>
-  <li class="node" data-node-id="5" data-x="2419.99523773733" data-y="475.60253854551536">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Basic Cypher</dd></dl></li>
-  <li class="node" data-node-id="6" data-x="2452.0596471356525" data-y="-970.0863461358005">
-    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>24</dd></dl></li>
-  <li class="node" data-node-id="7" data-x="879.8886791627793" data-y="-1253.5663862086055">
-    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>2020</dd></dl></li>
-  <li class="node" data-node-id="8" data-x="1124.3637964049385" data-y="-1683.353885999956">
-    <span class="caption">Enrollment</span><dl class="properties"><dt>certExpiration</dt><dd>2018</dd></dl></li>
-  <li class="node" data-node-id="9" data-x="-591.3704658622172" data-y="-2730.474279887639"></li>
-  <li class="node" data-node-id="10" data-x="-620.4774799631609" data-y="565.4384413761886">
-    <span class="caption">Person</span><dl class="properties"><dt>name</dt><dd>Dan</dd></dl></li>
-  <li class="node" data-node-id="11" data-x="1148.4184037393607" data-y="1678.755606466262">
-    <span class="caption">Course</span><dl class="properties"><dt>name</dt><dd>Neo4j for Developers</dd></dl></li>
-  <li class="node" data-node-id="12" data-x="1148.4184037393607" data-y="1015.6712674382908">
-    <span class="caption">Lesson</span><dl class="properties"><dt>name</dt><dd>Property Graph</dd></dl></li>
-  <li class="node" data-node-id="13" data-x="-81.87263599082607" data-y="1955.3561577156422"></li>
-  <li class="node" data-node-id="14" data-x="61.062009896806536" data-y="-246.0263961108761">
-    <span class="caption">Enrollment</span>
-  </li>
-  <li class="node" data-node-id="15" data-x="181.74861463859963" data-y="1357.3756722976887">
-    <span class="caption">Enrollment</span>
-  </li>
-  <li class="node" data-node-id="16" data-x="2452.0596471356525" data-y="1507.105178106398">
-    <span class="caption">Certificate</span><dl class="properties"><dt>validForMonths</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="4" data-to="5">
-    <span class="type">NEXT_INTRO</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="4">
-    <span class="type">NEXT_INTRO</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="3">
-    <span class="type">FIRST</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="5">
-    <span class="type">LAST</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="1">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="2" data-to="6">
-    <span class="type">HAS_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="7">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="8">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="8" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="8" data-to="6">
-    <span class="type">EARNED_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="6">
-    <span class="type">EARNED_CERTIFICATE</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="12">
-    <span class="type">NEXT_DEV</span>
-  </li>
-  <li class="relationship" data-from="12" data-to="4">
-    <span class="type">NEXT_DEV</span>
-  </li>
-  <li class="relationship" data-from="11" data-to="3">
-    <span class="type">FIRST</span>
-  </li>
-  <li class="relationship" data-from="11" data-to="4">
-    <span class="type">LAST</span>
-  </li>
-  <li class="relationship" data-from="10" data-to="14">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="10" data-to="15">
-    <span class="type">HAS_ENROLLMENT</span>
-  </li>
-  <li class="relationship" data-from="15" data-to="11">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="14" data-to="2">
-    <span class="type">IN_COURSE</span>
-  </li>
-  <li class="relationship" data-from="15" data-to="3">
-    <span class="type">COMPLETED</span>
-  </li>
-  <li class="relationship" data-from="14" data-to="4">
-    <span class="type">COMPLETED</span>
-  </li>
-  <li class="relationship" data-from="11" data-to="16">
-    <span class="type">HAS_CERTIFICATE</span>
-  </li>
-</ul>
-----
-endif::[]
 [.quiz]
 == Check your understanding
 

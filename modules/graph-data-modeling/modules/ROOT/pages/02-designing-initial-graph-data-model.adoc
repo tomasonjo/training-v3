@@ -18,7 +18,7 @@ At the end of this module, you should be able to:
 * Describe the domain for a model.
 * Define the questions for the domain.
 * Identify entities from the questions for the domain.
-* Use the Arrow Tool to model the domain.
+* Use the Arrows Tool to model the domain.
 * Identify the connections between entities.
 * Describe how to test the initial model.
 
@@ -132,19 +132,19 @@ If you’ve done the work to properly understand the domain, it should not stron
 |Notes
 |Wood table 40"
 {set:cellbgcolor:white}
-|Wood top 40"
-|Leg assembly
-|Has 4 legs
-|Deluxe wood table 40"
 |Glass top 40"
 |Leg assembly
 |Has 4 legs
+|Deluxe wood table 40"
+|Wood top 40"
+|Leg assembly
+|Has 4 legs
 |Wood table 60"
-|Wood top 60"
+|Glass top 60"
 |Leg assembly
 |Has 6 legs, table brace
 |Deluxe wood table 60"
-|Glass top 60"
+|Wood top 60"
 |Leg assembly
 |Has 6 legs, table brace
 |
@@ -352,60 +352,36 @@ endif::[]
 
 
 [.student-exercise]
-== Exercise 2: Creating the BOM entity model in the Arrow tool
+== Exercise 2: Creating the BOM entity model in the Arrows tool
 
-Use the entities you identified earlier for the BOM application and create them in the Arrow tool.
+Use the entities you identified earlier for the BOM application and create them in the Arrows tool.
 
 Make sure you include properties for the nodes and specify the types for the properties, rather than values.
+
+[NOTE]
+If you get stuck, the solution JSON files can be downloaded here: https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files-v2.zip
 
 ifdef::env-slides[]
 [.notes]
 --
 
-The students should have downloaded the exercise files here which contain the markup for the Arrow tool:
+The students should have downloaded the exercise files here which contain the JSON solutions for the Arrows tool:
 
-https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files.zip
+https://data.neo4j.com/v4.0-graph-data-modeling/GraphDataModeling-40-files-v2.zip
 
-Invite everyone to create the BOM entities on their own in the Arrow tool.
+Invite everyone to create the BOM entities on their own in the Arrows tool.
 Do this yourself also.
 For Properties, encourage folks to use “expected data type” as property values; e.g., integer, String, decimal, etc.
 
-If you do not want to do all the clicking and typing, copy this markup:
+If you do not want to do all the clicking and typing, import the file *Exercise2Solution.json*  by clicking the --> and selecting import:
 
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-262.3812669868761" data-y="-40.13742460863777">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>productID</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-202.58837695145493" data-y="24.371374691303693">
-    <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-</ul>
-----
 --
 endif::[]
 
 [.one-sixth-five-sixths-row]
 === Exercise 2 solution
 
-ifndef::env-slides[]
-Here is the Arrow tool markup for the solution:
-
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-106.54309068746238" data-y="-40.13742460863777">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-262.3812669868761" data-y="-40.13742460863777">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>productID</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-202.58837695145493" data-y="24.371374691303693">
-    <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-</ul>
-----
-endif::[]
-
-Here is what it should look like in the UI of the Arrow tool:
+Here is what it should look like in the UI of the Arrows tool:
 
 image::Exercise2Solution.png[Exercise2Solution,width=1000,align=center]
 
@@ -537,12 +513,12 @@ Here are the questions we need to answer for our BOM application that you have a
 . What products require a table brace?
 . How much will the parts cost to make product Wood table 60"?
 
-Using the Arrow tool add the relationships between the entities.
+Using the Arrows tool add the relationships between the entities.
 
 And here is the entity model:
 --
 
-image::Exercise2Solution.png[Exercise2Solution,width=300,align=center]
+image::Exercise2Solution.png[Exercise2Solution,width=500,align=center]
 
 [.notes]
 --
@@ -560,26 +536,6 @@ image::Exercise3Solution.png[Exercise3Solution,width=1200,align=center]
 
 [.notes]
 --
-
-Here is the markup:
-
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="2.01" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="283.8195928886757" data-y="-6.306578837493484">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-333.52554559384123" data-y="-6.306578837493484">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>productID</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="9.793659703648462" data-y="191.47083299670058">
-    <span class="caption">Assembly, Part</span><dl class="properties"><dt>name</dt><dd>String</dd><dt>partNumber</dt><dd>integer</dd><dt>price</dt><dd>decimal</dd></dl></li>
-  <li class="relationship" data-from="1" data-to="0">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>integer</dd></dl></li>
-  <li class="relationship" data-from="1" data-to="2">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>integer</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="0">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>integer</dd></dl></li>
-</ul>
-----
 
 Again, your model need not exactly match this one.
 Remember, the first model is never perfect.
@@ -599,185 +555,14 @@ Just to fill in more details for the data model, here is more sample data that m
 This particular sample data is useful, especially when discussing how well the design addresses the questions and how well the application can scale.
 --
 
-ifndef::env-slides[]
-Here is the Arrow tool markup for the sample data for the BOM application:
-
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 60"'</dd><dt>productId</dt><dd>600</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-345.4412714640299" data-y="17.62464618682847">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 40"'</dd><dt>productId</dt><dd>401</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-345.4412714640299" data-y="199.74443022410088">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 40"'</dd><dt>productId</dt><dd>400</dd></dl></li>
-  <li class="node" data-node-id="3" data-x="-345.4412714640299" data-y="529.8155937194823">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 60"'</dd><dt>productId</dt><dd>601</dd></dl></li>
-  <li class="node" data-node-id="4" data-x="30.527327269315723" data-y="63.11414146423326">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 40"'</dd><dt>partNumber</dt><dd>100400</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="5" data-x="609.4605747858683" data-y="551.8277514775586">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 nut'</dd><dt>partNumber</dt><dd>220002</dd><dt>price</dt><dd>0.30</dd></dl></li>
-  <li class="node" data-node-id="6" data-x="30.527327269315723" data-y="605.0613317489621">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Table brace'</dd><dt>partNumber</dt><dd>100002</dd><dt>price</dt><dd>43.25</dd></dl></li>
-  <li class="node" data-node-id="7" data-x="188.62522285183277" data-y="310.58522319793684">
-    <span class="caption">Part, Assembly</span><dl class="properties"><dt>name</dt><dd>'Leg assembly'</dd><dt>parNumber</dt><dd>100001</dd><dt>price</dt><dd>40.44</dd></dl></li>
-  <li class="node" data-node-id="8" data-x="609.4605747858683" data-y="429.5683333079018">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 bolt'</dd><dt>partNumber</dt><dd>220001</dd><dt>price</dt><dd>0.55</dd></dl></li>
-  <li class="node" data-node-id="9" data-x="609.4605747858683" data-y="199.74443022410088">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg foot'</dd><dt>partNumber</dt><dd>101002</dd><dt>price</dt><dd>3.25</dd></dl></li>
-  <li class="node" data-node-id="10" data-x="609.4605747858683" data-y="98.58790914217629">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg plate'</dd><dt>partNumber</dt><dd>101001</dd><dt>price</dt><dd>4:50</dd></dl></li>
-  <li class="node" data-node-id="11" data-x="609.4605747858683" data-y="310.58522319793684">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg'</dd><dt>partNumber</dt><dd>100100</dd><dt>price</dt><dd>30.99</dd></dl></li>
-  <li class="node" data-node-id="12" data-x="30.527327269315723" data-y="678.7611147562659">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 60"'</dd><dt>partNumber</dt><dd>100601</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="13" data-x="30.527327269315723" data-y="-14.911466916402228">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 40"'</dd><dt>partNumber</dt><dd>100401</dd><dt>price</dt><dd>250.99</dd></dl></li>
-  <li class="node" data-node-id="14" data-x="30.527327269315723" data-y="529.8155937194823">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 60"'</dd><dt>partNumber</dt><dd>100600</dd><dt>price</dt><dd>800.00</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="13">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="12">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="11">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="10">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="9">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="8">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="5">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-</ul>
-----
-endif::[]
 
 [.small]
 --
-Here is what the sample data might look like in the UI of the Arrow tool:
+Here is what the sample data might look like in the UI of the Arrows tool:
 --
 
 image::SampleDataBOM.png[SampleDataBOM,width=800,align=center]
 
-ifdef::env-slides[]
-[.notes]
---
-Here is the markup for the sample data:
-
-[source,markup,role=noplay]
-----
-<ul class="graph-diagram-markup" data-internal-scale="0.75" data-external-scale="1">
-  <li class="node" data-node-id="0" data-x="-345.4412714640299" data-y="355.6422119140624">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 60"'</dd><dt>productId</dt><dd>600</dd></dl></li>
-  <li class="node" data-node-id="1" data-x="-345.4412714640299" data-y="17.62464618682847">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 40"'</dd><dt>productId</dt><dd>401</dd></dl></li>
-  <li class="node" data-node-id="2" data-x="-345.4412714640299" data-y="199.74443022410088">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Wood table 40"'</dd><dt>productId</dt><dd>400</dd></dl></li>
-  <li class="node" data-node-id="3" data-x="-345.4412714640299" data-y="529.8155937194823">
-    <span class="caption">Product</span><dl class="properties"><dt>name</dt><dd>'Deluxe wood table 60"'</dd><dt>productId</dt><dd>601</dd></dl></li>
-  <li class="node" data-node-id="4" data-x="30.527327269315723" data-y="63.11414146423326">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 40"'</dd><dt>partNumber</dt><dd>100400</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="5" data-x="609.4605747858683" data-y="551.8277514775586">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 nut'</dd><dt>partNumber</dt><dd>220002</dd><dt>price</dt><dd>0.30</dd></dl></li>
-  <li class="node" data-node-id="6" data-x="30.527327269315723" data-y="605.0613317489621">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Table brace'</dd><dt>partNumber</dt><dd>100002</dd><dt>price</dt><dd>43.25</dd></dl></li>
-  <li class="node" data-node-id="7" data-x="188.62522285183277" data-y="310.58522319793684">
-    <span class="caption">Part, Assembly</span><dl class="properties"><dt>name</dt><dd>'Leg assembly'</dd><dt>parNumber</dt><dd>100001</dd><dt>price</dt><dd>40.44</dd></dl></li>
-  <li class="node" data-node-id="8" data-x="609.4605747858683" data-y="429.5683333079018">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'M20 bolt'</dd><dt>partNumber</dt><dd>220001</dd><dt>price</dt><dd>0.55</dd></dl></li>
-  <li class="node" data-node-id="9" data-x="609.4605747858683" data-y="199.74443022410088">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg foot'</dd><dt>partNumber</dt><dd>101002</dd><dt>price</dt><dd>3.25</dd></dl></li>
-  <li class="node" data-node-id="10" data-x="609.4605747858683" data-y="98.58790914217629">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg plate'</dd><dt>partNumber</dt><dd>101001</dd><dt>price</dt><dd>4:50</dd></dl></li>
-  <li class="node" data-node-id="11" data-x="609.4605747858683" data-y="310.58522319793684">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Leg'</dd><dt>partNumber</dt><dd>100100</dd><dt>price</dt><dd>30.99</dd></dl></li>
-  <li class="node" data-node-id="12" data-x="30.527327269315723" data-y="678.7611147562659">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 60"'</dd><dt>partNumber</dt><dd>100601</dd><dt>price</dt><dd>450.99</dd></dl></li>
-  <li class="node" data-node-id="13" data-x="30.527327269315723" data-y="-14.911466916402228">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Glass top 40"'</dd><dt>partNumber</dt><dd>100401</dd><dt>price</dt><dd>250.99</dd></dl></li>
-  <li class="node" data-node-id="14" data-x="30.527327269315723" data-y="529.8155937194823">
-    <span class="caption">Part</span><dl class="properties"><dt>name</dt><dd>'Wood top 60"'</dd><dt>partNumber</dt><dd>100600</dd><dt>price</dt><dd>800.00</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="4">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="13">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="1" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="2" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>4</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="0" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="12">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="14">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="0" data-to="6">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="3" data-to="7">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>6</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="11">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="10">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="9">
-    <span class="type">CONTAINS</span>
-  </li>
-  <li class="relationship" data-from="7" data-to="8">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-  <li class="relationship" data-from="7" data-to="5">
-    <span class="type">CONTAINS</span><dl class="properties"><dt>quantity</dt><dd>2</dd></dl></li>
-</ul>
-----
---
-endif::[]
 
 == Step 6: Test the questions against the model
 
