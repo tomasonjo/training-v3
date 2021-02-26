@@ -210,6 +210,7 @@ endif::[]
 ifdef::env-slides[]
 [.section-break]
 endif::[]
+
 == Index-free adjacency
 
 One of key features that makes Neo4j graph databases different from an RDBMS is that Neo4j implements
