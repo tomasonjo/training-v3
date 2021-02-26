@@ -7,10 +7,10 @@ Before you perform the exercises for this course, complete the following steps:
 
 . Install Neo4j Desktop.
 . Create a Project named *Graph Algos*.
-. Create a local 4.1 database.
-. Install the APOC plugin for use with this database.
-. Install the Graph Data Science plugin for use with this database.
-. Install the Graph Data Science Playground Graph App.
+. Create a local 4.1 database or Neo4j Sandbox.
+. Install the APOC plugin for use with this database. (Only for local installation)
+. Install the Graph Data Science plugin for use with this database. (Only for local installation)
+. Install the Graph Data Science Playground Graph App. (Only for local installation)
 . Start the database.
 . Start the Graph Data Science Playground Graph App.
 
@@ -20,7 +20,7 @@ Go to the next page to load the data.
 
 In Graph Data Science Playground:
 
-. Click the yellow database icon in the lower part of the left panel.
+. Click the cog in the upper right part of the panel and select *Sample Graphs*.
 . Click *Select* , followed by *Yes, load it!* to load these datasets:
 .. Game of Thrones
 .. European Roads

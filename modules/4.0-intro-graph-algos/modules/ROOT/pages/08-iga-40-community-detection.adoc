@@ -1,5 +1,5 @@
 = Community Detection Algorithms
-:slug: 07-iga-40-community-detection
+:slug: 08-iga-40-community-detection
 :doctype: book
 :toc: left
 :toclevels: 4

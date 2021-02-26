@@ -1,5 +1,5 @@
 = Summary
-:slug: 12-iga-40-summary
+:slug: 13-iga-40-summary
 :doctype: book
 :toc: left
 :toclevels: 4

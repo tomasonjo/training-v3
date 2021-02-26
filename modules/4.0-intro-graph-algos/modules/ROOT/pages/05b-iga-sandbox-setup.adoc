@@ -1,0 +1,162 @@
+= Sandbox Setup
+:slug: 05a-iga-40-sandbox-setup
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:module-next-title: Graph Algorithms Workflow
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes: 45
+
+== Preparing your Neo4j Sandbox development environment
+
+To prepare your Neo4j Sandbox development environment you must:
+
+. Login into Neo4j Sandbox.
+. Launch a blank database project.
+. Start the Neo4j Browser and the Graph Data Science Playground.
+. Load some data into your database you will use for the hands-on exercises.
+
+== Step 1: Login into Neo4j Sandbox
+
+To perform the exercises of this course you must login into Neo4j Sandbox.
+Go to https://neo4j.com/sandbox/[Neo4j Sandbox website] and click on the *Launch the Free Sandbox* button.
+Next, you will need to create a new account or sign in into an existing account.
+
+[.half-column]
+== Step 2: Launch a blank database project
+
+After a successful login, select the *Blank Sandbox* and click on the *Launch project* to start a new empty database instance.
+
+image::blank-sandbox.png[Blank Sandbox,width=500, align=center]
+
+== Step 3: Start Graph Data Science Playground (NEuler)
+
+image::enter-neuler.png[local and global graph analytics,width=500, align=center]
+
+[.notes]
+--
+NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+--
+
+You can start it by clicking on the *Open* button dropdown and selecting NEuler.
+
+image::open-neuler.png[local and global graph analytics,width=500, align=center]
+
+
+== Datasets you will use in this course
+
+[square]
+* Game of Thrones (GOT)
+* European Roads
+* Recipes
+
+=== Game of Thrones
+
+image::got.png[Game of Thrones,width=500, align=center]
+
+[.notes]
+--
+The Game of Thrones network is a monopartite graph containing *Character* nodes and their interactions in the TV shows.
+Interactions between characters are grouped by TV shows seasons.
+For example, a relationship *INTERACTS_SEASON1* represents an interaction between characters in the first season, *INTERACTS_SEASON2* means interaction in the second season, and so on.
+The relationship weight represents the strength of the interaction, and because two characters can interact in more than a single season, we are dealing with a weighted multigraph.
+--
+
+=== European Roads
+
+image::european-roads.png[European Roads,width=500, align=center]
+
+[.notes]
+--
+The European Roads network is also a monopartite graph containing *Place* nodes and their road connections indicated by the *EROAD* relationship.
+The *Place* node has multiple properties, name and countryCode.
+The *EROAD* relationship has four properties, distance, inverse_distance, road_number, and watercrossing.
+We will assume that we can traverse each *EROAD* relationship in both directions, effectively treating the European Roads network as an undirected graph.
+--
+
+=== Recipes
+
+image::recipe.png[recipe,width=500, align=center]
+
+[.notes]
+--
+The Recipes network is a bipartite graph containing *Recipe* and *Ingredient* nodes.
+A *CONTAINS_INGREDIENT* relationships indicates that an ingredient was used in the particular recipe.
+This is a very simple data model where each node has only a name and there are no properties in the relationships.
+--
+
+[.half-row]
+== Step 4: Start the database and Graph Data Science Playground
+
+. In Neo4j Desktop, start the database.
+. Start the *Graph Data Science Graph Playground* Graph App:
+.. Double-click *Graph Data Science Graph Playground*  app in the left pane to start it.
+.. Once started, it should open a new window as follows:
+
+image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500, align=center]
+
+[.student-exercise]
+== Step 5: Load the data for the exercises
+
+Open Neo4j Browser for the started database.
+In the query edit pane of Neo4j Browser, execute the browser command:
+
+kbd:[:play 4.0-intro-graph-algos-exercises]
+
+and follow the instructions for *Load the Data for the Exercises*.
+
+[NOTE]
+Estimated time to complete: 10 minutes.
+
+[.quiz]
+== Check your understanding
+
+=== Question 1
+
+[.statement]
+What labels could we use to describe the Recipes network?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [ ] Food
+- [x] Ingredient
+- [x] Recipe
+- [ ] Category
+
+=== Question 2
+
+[.statement]
+What libraries do you use to perform analyses for Graph Data Science?
+
+[.statement]
+Select the correct answers.
+
+[%interactive.answers]
+- [x] GDSL
+- [ ] Graph Explorer
+- [ ] NEuler
+- [x] APOC
+
+=== Question 3
+
+[.statement]
+What Graph app do you use to help you run graph algorithms?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] Bloom
+- [ ] Cypher-shell
+- [x] Graph Data Science Playground
+- [ ] Linkurious
+
+[.summary]
+== Summary
+
+You have now prepared your system for performing the hands-on exercises for this course.
