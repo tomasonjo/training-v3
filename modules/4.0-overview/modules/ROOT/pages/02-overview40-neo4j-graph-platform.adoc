@@ -209,211 +209,80 @@ endif::[]
 
 ifdef::env-slides[]
 [.section-break]
+endif::[]
 == Index-free adjacency
 
-[.instructor-notes]
---
-One of key features that makes graph databases -
+One of key features that makes Neo4j graph databases different from an RDBMS is that Neo4j implements
+*index-free adjacency*.
 
-* different from traditional databases -
-* is that they use a *paradigm* called *index-free adjacency*.
-*
-This is different from an *RDBMS* that uses tables to implement *index adjacency*.
---
-endif::[]
+To better understand the benefit of index-free adjacency, let's look at how a query executes in an RDBMS.
+Suppose you have this table in the RDBMS:
+
+image::RelationalTable1.png[RelationalTable1,width=300,align=center]
+
+You execute this SQL query to find the third-degree parents of the group with the ID of 3:
+
+[source,SQL,role=noplay nocopy]
+----
+SELECT PARENT_ID
+FROM GROUPS
+WHERE ID = (SELECT PARENT_ID
+    FROM GROUPS
+    WHERE ID = (SELECT PARENT_ID
+        FROM GROUPS
+        WHERE ID = 3))
+----
+
+The result of this query is 1, but in order to determine this result, the query engine needed to:
+
+. Locate the innermost clause.
+. Build the query plan for the subclause.
+. Execute the query plan for the subclause.
+. Locate the next innermost clause.
+. Repeat Steps 2-4.
+
+Resulting in:
+
+* 3 planning cycles
+* 3 index lookups
+* 3 DB reads
 
 === Neo4j DBMS: Index-free adjacency (IFA)
 
-image::IFA-1.png[IFA-1,width=300,align=center]
+With index-free adjacency, Neo4j stores nodes and relationships as objects that are linked to each other.
+Conceptually, the graph looks as follows:
 
-Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
+image::IFA-1-new.png[IFA-1-new,width=400,align=center]
 
-ifndef::env-slides[]
-Most people would follow these simple steps:
+These nodes and relationships are stored as follows:
 
-. Leave my house.
-. Point myself towards Anne’s house.
-. Walk to Anne’s house.
+image::IFA-2-new.png[IFA-2-new,width=400,align=center]
 
-Here is an example of how index-free adjacency (IFA) works.
-Suppose you bake a pie for your friend Anne.
-You want to delivery it quickly, so she can enjoy it while it is still warm.
-How would you go about delivering it?
+Suppose we had this query in Cypher:
 
-This takes maybe 30 seconds, and the pie is piping hot when you get there.
-No wasted time or effort.
-This is how index-free adjacency operates.
-endif::[]
+[source,Cypher,role=noplay nocopy]
+----
+MATCH (n) <-- (:Group) <-- (:Group) <-- (:Group {id: 3})
+RETURN n.id
+----
 
-ifdef::env-slides[]
-[.instructor-notes]
---
-Let us begin by making a *‘real-life’ analogy* for *Index-free Adjacency*.
+Using IFA, the Neo4j query engine starts with the anchor of the query which is the Group node with the id of 3.
+Then it uses the links stored in the relationship and node objects to traverse the graph pattern.
 
-Suppose you bake a pie for your friend Anne.
-
-* You want to delivery it quickly, so she can enjoy it while it is still warm.
-* How would you go about delivering it?
-
-Most people would follow these simple steps:
-
-. Leave my house
-. Point myself towards Anne’s house
-. Walk to Anne’s house
-
-This takes maybe 30 seconds, and the pie is piping hot when you get there.
-
-* No wasted time or effort.
-* This is how Index-Free adjacency operates.
-
-Note: Image credit: Dan McCreary - https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager
---
-endif::[]
-
-=== Contrast index-free adjacency with RDBMS
-
-ifndef::env-slides[]
-By contrast, a traditional RDBMS cannot do this.
-It must use a central index.
-endif::[]
-
-image::IFA-2.png[IFA-2,width=800,align=center]
-
-Image credit: https://medium.com/@dmccreary/how-to-explain-index-free-adjacency-to-your-manager[Dan McCreary]
-
-ifndef::env-slides[]
-In a RDBMS world, the pie-delivery process would go like this:
-
-. Leave my house.
-. Walk to the town hall.  It contains a Central Index containing the addresses of everyone in town.
-Stand in line.  Everyone looking for an address needs to do the same thing you are, so there is a wait.
-. Tell the search agent whom you’re looking for.  They will look up Anne’s address in the index (note that the larger the town, the longer it takes to do the search).  The agent gives you Anne’s address.
-. Enter the address into the map app on your phone, and follow the directions to Anne’s house.
-
-This is obviously inefficient.
-You needed to walk twice as far, had to wait in line, and had to wait for a search process to complete.
-But to make matters even worse, there is no concept of "learning the route", no matter how many times you take it.
-Every single time you want to visit Anne’s house, you need to follow these same steps!
-endif::[]
-
-ifdef::env-slides[]
-[.instructor-notes]
---
-By contrast, traditional a *Relational Database Management System* (RDBMS) *cannot* do this.
-
-* In an RDBMS world, the pie-delivery process would go like this:
-
-. You leave your house.
-. Walk to the *town hall*.
-.. It contains a *Central Index* containing the *addresses* of everyone in town.
-. You stand in *line*.
-.. Many others are also looking for an addresses so there is a *wait*.
-. You tell the *search agent* whom you’re looking for.
-.. They will *look up* Anne’s address in the index
-... Note that the larger the town, the longer it takes to do the search.
-... The *agent* gives you Anne’s *address*.
-. You enter the *address* into the *map app* on your phone, -
-.. and follow the directions to Anne’s house.
-
-This is obviously *inefficient*.
-
-* You needed to *walk* twice as far, had to *wait* in line,
-** and then had to *wait* for a search process to complete.
-* But to make matters even *worse*, there is *no concept* of *“learning the route”*, -
-** no matter how many times you take it.
-* *Every single time* you want to visit Anne’s house, you need to follow these *same steps*!
+image::IFA-3-new.png[IFA-3-new,width=400,align=center]
 
 
-*Q*: Do  you have to explicitly create the indexes for Neo4j, or is it automatically created for any property?
+To perform this query, the Neo4j query engine needed to:
 
-*A*: In Neo4j which uses *index-free adjacency*, -
+* Plan the query based upon the anchor specified.
+* Use an index to retrieve the anchor node.
+* Follow pointers to retrieve the desired result node.
 
-* so there is *no such thing* as an index in the way that you are thinking of it.
-* That’s why it’s called *index-free*.
+Using IFA, there are:
 
-* The way that this works - is that every node and relationships -
-** has *pointers* to all of the things to which it is connected.
-* Each pointer - points to an actual *physical location*.
-* There is going to be a pointer *directly* to Ann’s house.
-* Since we have pointers that point directly to what is needed, -
-** it doesn’t need to be looked up using an index.
-* Also, using pointers is always *very fast*.
-* This makes a *graph native database* particularly well suited -
-** to graph problems, since these types of problems are often traversing long sequences.
-* Every hop from one item to another in a sequence is going to involve some kind of this traversal.
-* If you can do that via pointers -
-** rather than having to go to an index every time, -
-** you're going to save an enormous amount of resources in time.
-
---
-endif::[]
-
-=== Benefits of Neo4j's index-free adjacency
-
-IFA uses pointers to directly access the target address:
-
-image::Neo4j-IFA.png[Neo4j-IFA,width=800,align=center]
-
-[square]
-* No index lookups or table scans
+* Much fewer index lookups or table scans
 * Reduced duplication of foreign keys
 
-ifndef::env-slides[]
-With index-free adjacency, when a node or relationship is written to the database, it is stored in the database as connected, and any subsequent access to the data is done using pointer navigation which is [.underline]#very fast#.
-Nodes are linked using pointers.
-For example,  Person 1 (Anne) is linked to Address 5 (Germany).
-
-Index free adjacency eliminates 3 of the 4 steps required in an RDBMS.
-You still need to do some work to identify the starting pointer for traversal, but once you know which set of records to start from, hopping from one link to the next
-is a trivial matter of reading the location specified.
-That is, no more lookup tables or index searches.
-endif::[]
-
-ifdef::env-slides[]
-[.instructor-notes]
---
-Instead of using indexing lookups in a Relational database, -
-
-* In a Neo4j graph database -
-** data and pointers are stored as diagrammed here.
-
-The most important way - that *Index-Free Adjacency* differs -
-
-* from traditional *RDBMS* - is in how *relationships* are *expressed*.
-* Instead of using a *Document ID* as a *relationship key*, -
-** objects are linked using *pointers*.
-* In other words, rather than *Person 1* (Anne) -
-** being linked to *Address 5* (Germany) -
-** using an index (As in abn RDBMS),
-* Using *Index-Free Adjacency* - it has item at location 1 (Anne) -
-** linked to the item at location 5 (Germany) using a stored pointer 5.
-
-This immediately *eliminates* 3 of the 4 steps in the RDBMS model.
-
-* You still need to do some work to identify the starting pointer for traversal, -
-** but once you know which set of records to start from, -
-** hopping from one link to the next -
-** is a trivial matter of reading the location specified.
-* No more lookup tables or index searches.
-
-An additional *benefit* of *Index-free Adjacency* using a *direct link* -
-
-* is the reduction of stored data.
-
-*Lookup tables* and *foreign keys* do not require a great deal of storage.
-
-* However, in a highly relational dataset, -
-** particularly one that is not especially well optimized -
-* the added data storage used for *lookup table*s and *foreign keys* -
-** adds up to a great deal of *duplicated information*.
-* *Index-free adjacency* eliminates the need for this *storage space*.
---
-endif::[]
-
-ifdef::env-slides[]
-[.section-break]
-== Neo4j DBMS
-endif::[]
 
 === Neo4j DBMS: Graph engine
 
