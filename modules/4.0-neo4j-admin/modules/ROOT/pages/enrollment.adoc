@@ -14,6 +14,9 @@ image::https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/courseLogos/Basi
 
 This online course is a collection of lessons and and hands-on exercises which teach you how to manage a Neo4j 4.x DBMS.
 
+[IMPORTANT]
+This course is intended for users that need to manage a Neo4j instance that they own. If you are using Neo4j Aura, you cannot manage the Neo4j instance.
+
 == Prerequisites
 
 You need not have extensive programming experience to take this course.
