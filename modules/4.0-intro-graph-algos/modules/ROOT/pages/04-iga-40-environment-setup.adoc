@@ -1,14 +1,8 @@
 = Environment Setup
-:slug: 04-iga-40-environment-setup
-:doctype: book
-:toc: left
-:toclevels: 4
-:imagesdir: ../images
-:module-next-title: Graph Algorithms Workflow
-:page-slug: {slug}
+:page-slug: 04-iga-40-environment-setup
 :page-layout: training
-:page-quiz:
 :page-module-duration-minutes: 45
+:page-pagination: previous
 
 == Preparing your development environment
 
@@ -25,7 +19,6 @@ The Neo4j Sandbox is available for three days, but you can extend it for up to 1
 You must make sure that you extend your Sandbox lease as otherwise, you might lose your graph and any saved Cypher scripts you have created in the Sandbox.
 
 - xref:05b-iga-sandbox-setup.adoc[Sandbox environment setup,role=btn]
-
 
 == Local environment setup
 

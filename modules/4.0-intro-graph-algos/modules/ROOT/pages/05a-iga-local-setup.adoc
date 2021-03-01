@@ -1,14 +1,9 @@
 = Local Setup
-:slug: 05a-iga-40-local-setup
-:doctype: book
-:toc: left
-:toclevels: 4
-:imagesdir: ../images
-:module-next-title: Graph Algorithms Workflow
-:page-slug: {slug}
+:page-slug: 05a-iga-40-local-setup
 :page-layout: training
 :page-quiz:
 :page-module-duration-minutes: 45
+:page-pagination!:
 
 == Preparing your local development environment
 
@@ -228,4 +223,5 @@ Select the correct answer.
 [.summary]
 == Summary
 
-You have now prepared your system for performing the hands-on exercises for this course.
+You have now prepared your system for performing
+xref:06-iga-40-graph-algorithms-workflow.adoc[the hands-on exercises] for this course.
