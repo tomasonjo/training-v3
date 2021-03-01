@@ -1,5 +1,5 @@
 = Memory Requirements Estimation
-:slug: 07-iga-40-memory-requirements-estimation
+:slug: 08-iga-40-memory-requirements-estimation
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,5 +1,5 @@
 = Practical Application of Algorithms
-:slug: 11-iga-40-ingredient-analysis
+:slug: 12-iga-40-ingredient-analysis
 :doctype: book
 :toc: left
 :toclevels: 4
