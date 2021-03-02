@@ -3,7 +3,6 @@
 :doctype: book
 :toc: left
 :toclevels: 4
-:module-next-title: Using the neo4j-admin Tool for Import
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training

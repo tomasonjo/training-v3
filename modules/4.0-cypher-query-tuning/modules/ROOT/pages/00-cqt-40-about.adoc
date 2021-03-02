@@ -4,7 +4,6 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: How Queries Work in Neo4j
 :page-slug: {slug}
 :page-type: training-course-index
 :page-pagination: next

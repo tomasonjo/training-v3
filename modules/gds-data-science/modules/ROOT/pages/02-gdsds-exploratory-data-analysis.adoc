@@ -3,7 +3,6 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Recommendations
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

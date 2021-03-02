@@ -1,7 +1,6 @@
 = Ordering Search Results
 :slug: 03-gdsaa-ordering-search-results
 :imagesdir: ../images
-:module-next-title: Most Relevant Reviews
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

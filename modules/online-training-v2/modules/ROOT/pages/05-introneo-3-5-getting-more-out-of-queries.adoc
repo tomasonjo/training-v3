@@ -4,7 +4,6 @@
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
-:module-next-title: Creating Nodes and Relationships
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

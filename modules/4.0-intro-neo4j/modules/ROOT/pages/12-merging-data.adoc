@@ -5,7 +5,6 @@
 :toclevels: 4
 :experimental:
 :imagesdir: ../images
-:module-next-title: Defining Constraints for your Data
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

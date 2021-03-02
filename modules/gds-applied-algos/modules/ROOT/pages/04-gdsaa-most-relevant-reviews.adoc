@@ -1,7 +1,6 @@
 = Most Relevant Reviews
 :slug: 04-gdsaa-most-relevant-reviews
 :imagesdir: ../images
-:module-next-title: Photo Based Gallery Recomendations
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

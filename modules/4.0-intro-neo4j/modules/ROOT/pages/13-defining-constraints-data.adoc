@@ -3,9 +3,7 @@
 :doctype: book
 :toc: left
 :toclevels: 4
-:module-next-title:  Creating Indexes
 :imagesdir: ../images
-:module-next-title: Using Indexes
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

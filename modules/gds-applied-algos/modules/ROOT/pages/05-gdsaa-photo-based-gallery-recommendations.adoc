@@ -1,7 +1,6 @@
 = Photo Based Gallery Recomendations
 :slug: 05-gdsaa-photo-based-gallery-recommendations
 :imagesdir: ../images
-:module-next-title: Summary: Applied Graph Data Science for Web Applications
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

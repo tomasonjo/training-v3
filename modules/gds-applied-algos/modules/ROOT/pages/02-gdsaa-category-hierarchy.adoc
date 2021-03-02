@@ -1,7 +1,6 @@
 = Category Hierarchy
 :slug: 02-gdsaa-category-hierarchy
 :imagesdir: ../images
-:module-next-title: Ordering Search Results
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:

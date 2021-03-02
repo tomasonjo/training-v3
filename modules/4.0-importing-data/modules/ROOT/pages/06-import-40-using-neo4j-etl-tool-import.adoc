@@ -3,8 +3,7 @@
 :doctype: book
 :toc: left
 :toclevels: 4
-:imagesdir: ../images
-:module-next-title: Summary
+:imagesdir: ../image
 :page-slug: {slug}
 :page-layout: training
 :page-quiz:
