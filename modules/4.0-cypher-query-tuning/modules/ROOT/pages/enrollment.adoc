@@ -23,7 +23,7 @@ You must have Cypher programming experience to take this course.
 == Duration
 
 If you perform all of the hands-on exercises in this course,
-it will take you four hours to complete the course.
+it will take you six hours to complete the course.
 
 == What you will learn
 
