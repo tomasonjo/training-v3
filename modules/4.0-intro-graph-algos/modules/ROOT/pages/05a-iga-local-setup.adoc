@@ -1,7 +1,6 @@
 = Local Setup
 :page-slug: 05a-iga-40-local-setup
 :page-layout: training
-:page-quiz:
 :page-module-duration-minutes: 25
 :page-pagination!:
 
