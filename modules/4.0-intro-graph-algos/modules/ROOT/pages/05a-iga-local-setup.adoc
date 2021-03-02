@@ -111,4 +111,4 @@ endif::[]
 == Summary
 
 You have now prepared your development enviroment for performing
-xref:06-iga-40-graph-dataset-import.adoc[the dataset import] for this course.
+xref:06-iga-40-dataset-import.adoc[the dataset import] for this course.
