@@ -43,4 +43,4 @@ image::open-neuler.png[local and global graph analytics,width=500, align=center]
 == Summary
 
 You have now prepared your development enviroment for performing
-xref:06-iga-40-graph-dataset-import.adoc[the dataset import] for this course.
+xref:06-iga-40-dataset-import.adoc[the dataset import] for this course.
