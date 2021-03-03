@@ -1,0 +1,54 @@
+= Sandbox Setup
+:page-slug: 05b-iga-sandbox-setup
+:page-layout: training
+:page-module-duration-minutes: 15
+:page-pagination!:
+
+== Preparing your Neo4j Sandbox development environment
+
+To prepare your Neo4j Sandbox development environment you must:
+
+. Login into Neo4j Sandbox.
+. Launch a blank database project.
+
+== Step 1: Login into Neo4j Sandbox
+
+To perform the exercises of this course you must login into Neo4j Sandbox.
+Go to https://neo4j.com/sandbox/[Neo4j Sandbox website] and click on the *Launch the Free Sandbox* button.
+Next, you will need to create a new account or sign in into an existing account.
+
+[.half-column]
+== Step 2: Launch a blank database project
+
+After a successful login, select the *Blank Sandbox* and click on the *Launch project* to start a new empty database instance.
+
+image::blank-sandbox.png[Blank Sandbox,width=500, align=center]
+
+== Step 3: Open Neo4j Browser for the sandbox database
+
+Click the *Open* button dropdown and select Browser.
+
+image::open-neuler.png[local and global graph analytics,width=500, align=center]
+
+This will open a Web browser tab for Neo4j Browser.
+
+== Step 4: Start Graph Data Science Playground (NEuler)
+
+image::enter-neuler.png[local and global graph analytics,width=500, align=center]
+
+[.notes]
+--
+NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+--
+
+Click the *Open* button dropdown and select NEuler.
+
+image::open-neuler.png[local and global graph analytics,width=500, align=center]
+
+This will open a Web browser tab for NEuler. Then you must connect to the database for the sandbox.
+
+[.summary]
+== Summary
+
+You have now prepared your development enviroment for performing
+xref:06-iga-40-dataset-import.adoc[the dataset import] for this course.

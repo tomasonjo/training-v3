@@ -1,0 +1,115 @@
+= Local Setup
+:page-slug: 05a-iga-40-local-setup
+:page-layout: training
+:page-module-duration-minutes: 25
+:page-pagination!:
+
+== Preparing your local development environment
+
+To prepare your local development environment you must:
+
+. Set up Neo4j Desktop on your system.
+. Install the APOC and GDSL plugin libraries for your database.
+. Install the Graph Data Science Playground (NEuler).
+
+== Step 1: Set up Neo4j Desktop on your system
+
+To perform the exercises of this course you must have downloaded and installed Neo4j Desktop on your system.
+
+ifdef::env-slides[]
+. Download the latest version of Neo4j Desktop.
+. Create a project in Neo4j Desktop named *Graph Algos*.
+. Create a local 4.1.x database in this Graph Algos project.
+endif::[]
+
+
+ifdef::backend-html5,backend-pdf[]
+These videos show how to install and get started using Neo4j Desktop.
+For your environment you should:
+
+. Download the latest version of Neo4j Desktop.
+. Create a project in Neo4j Desktop named *Graph Algos*.
+. Create a local 4.1.x database in this Graph Algos project.
+endif::[]
+
+ifdef::backend-html5[]
+.If using OS X
+[%collapsible%open]
+====
+video::cTZ_Z3KfLyE[youtube,width=560,height=315]
+====
+
+.If using Linux
+[%collapsible]
+====
+video::pvjsxc_MdIw[youtube,width=560,height=315]
+====
+
+.If using Windows
+[%collapsible]
+====
+video::RSbhmVF_ccs[youtube,width=560,height=315]
+====
+endif::[]
+
+ifdef::backend-pdf[]
+If using OS X:
+
+https://youtu.be/cTZ_Z3KfLyE
+
+If using Linux:
+
+https://youtu.be/pvjsxc_MdIw
+
+If using Windows:
+
+https://youtu.be/RSbhmVF_ccs
+endif::[]
+
+[.half-column]
+== Step 2: Install APOC and GDSL for your database
+
+. Click the *Manage* area for the database.
+. Select the *Plugins* tab.
+. Install the *APOC* plugin.
+. Install the *Graph Data Science* plugin.
+
+image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
+
+== Step 3: Install Graph Data Science Playground (NEuler)
+
+image::enter-neuler.png[local and global graph analytics,width=500, align=center]
+
+[.notes]
+--
+NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
+--
+
+ifdef::env-slides[]
+[.half-column]
+=== Install Graph Data Science Playground
+endif::[]
+
+. Open the *Graph Apps* pane in the left panel.
+. Double-click *Graph Apps Gallery*, a new window opens.
+. Click the link for the Graph Data Science Playground install as shown here:
+
+image::GDSPlaygroundInstall.png[Graph Data Science Playground Install,width=500, align=center]
+
+ifdef::env-slides[]
+=== Install Graph Data Science Playground (2)
+endif::[]
+
+[start=4]
+. A new browser tab should open for this address.
+. Copy this address to your clipboard. It should be: https://neo.jfrog.io/neo/api/npm/npm/neuler.
+. In the left *Graph Apps* panel, paste this address in the *Install* field at the bottom.
+. Click *Install*.
+. The *Graph Data Science Graph Playground* Graph App should now appear in the left pane.
+
+
+[.summary]
+== Summary
+
+You have now prepared your development environment for performing
+xref:06-iga-40-dataset-import.adoc[the dataset import] for this course.

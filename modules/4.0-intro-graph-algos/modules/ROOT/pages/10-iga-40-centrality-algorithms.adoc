@@ -1,5 +1,5 @@
 = Centrality Algorithms
-:slug: 08-iga-40-centrality-algorithms
+:slug: 10-iga-40-centrality-algorithms
 :doctype: book
 :toc: left
 :toclevels: 4

@@ -1,230 +1,29 @@
 = Environment Setup
-:slug: 04-iga-40-environment-setup
-:doctype: book
-:toc: left
-:toclevels: 4
-:imagesdir: ../images
-:page-slug: {slug}
+:page-slug: 04-iga-40-environment-setup
 :page-layout: training
-:page-quiz:
-:page-module-duration-minutes: 45
+:page-module-duration-minutes: 5
+:page-pagination: previous
 
 == Preparing your development environment
 
-To prepare your development environment you must:
+In this course, you have the option to pick between two environment setups.
+You can use the cloud-hosted Neo4j Sandbox environment, or you can install the Neo4j Desktop application locally.
 
-. Set up Neo4j Desktop on your system.
-. Install the APOC and GDSL plugin libraries for your database.
-. Install the Graph Data Science Playground (NEuler).
-. Start the database and the Graph Data Science Playground.
-. Load some data into your database you will use for the hands-on exercises.
+== Sandbox environment setup
 
-== Step 1: Set up Neo4j Desktop on your system
+The Neo4j Sandbox is a great way that you can begin development with Neo4j.
+It is a temporary, cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser.
+The Sandbox database has all required plugins and applications installed for this course by default. 
 
-To perform the exercises of this course you must have downloaded and installed Neo4j Desktop on your system.
+The Neo4j Sandbox is available for three days, but you can extend it for up to 10 days.
+You must make sure that you extend your Sandbox lease as otherwise, you might lose your graph and any saved Cypher scripts you have created in the Sandbox.
 
-ifdef::env-slides[]
-. Download the latest version of Neo4j Desktop.
-. Create a project in Neo4j Desktop named *Graph Algos*.
-. Create a local 4.1.x database in this Graph Algos project.
-endif::[]
+- xref:05b-iga-sandbox-setup.adoc[Sandbox environment setup,role=btn]
 
+== Local environment setup
 
-ifdef::backend-html5,backend-pdf[]
-These videos show how to install and get started using Neo4j Desktop.
-For your environment you should:
+To setup you local environment setup, you will use the Neo4j Desktop.
+Neo4j Desktop is a convenient, free desktop application that allows developers to easily create, work with and manage local Neo4j databases.
+It also makes it easier to install plugins and applications with a single click.
 
-. Download the latest version of Neo4j Desktop.
-. Create a project in Neo4j Desktop named *Graph Algos*.
-. Create a local 4.1.x database in this Graph Algos project.
-endif::[]
-
-ifdef::backend-html5[]
-.If using OS X
-[%collapsible%open]
-====
-video::cTZ_Z3KfLyE[youtube,width=560,height=315]
-====
-
-.If using Linux
-[%collapsible]
-====
-video::pvjsxc_MdIw[youtube,width=560,height=315]
-====
-
-.If using Windows
-[%collapsible]
-====
-video::RSbhmVF_ccs[youtube,width=560,height=315]
-====
-endif::[]
-
-ifdef::backend-pdf[]
-If using OS X:
-
-https://youtu.be/cTZ_Z3KfLyE
-
-If using Linux:
-
-https://youtu.be/pvjsxc_MdIw
-
-If using Windows:
-
-https://youtu.be/RSbhmVF_ccs
-endif::[]
-
-[.half-column]
-== Step 2: Install APOC and GDSL for your database
-
-. Click the *Manage* area for the database.
-. Select the *Plugins* tab.
-. Install the *APOC* plugin.
-. Install the *Graph Data Science* plugin.
-
-image::APOCAndGDSLInstalled.png[APOC and GDSL installed,width=500, align=center]
-
-== Step 3: Install Graph Data Science Playground (NEuler)
-
-image::enter-neuler.png[local and global graph analytics,width=500, align=center]
-
-[.notes]
---
-NEuler is a project of Neo4j Labs and is an excellent way to explore smaller graphs.
---
-
-ifdef::env-slides[]
-[.half-column]
-=== Install Graph Data Science Playground
-endif::[]
-
-. Open the *Graph Apps* pane in the left panel.
-. Double-click *Graph Apps Gallery*, a new window opens.
-. Click the link for the Graph Data Science Playground install as shown here:
-
-image::GDSPlaygroundInstall.png[Graph Data Science Playground Install,width=500, align=center]
-
-ifdef::env-slides[]
-=== Install Graph Data Science Playground (2)
-endif::[]
-
-[start=4]
-. A new browser tab should open for this address.
-. Copy this address to your clipboard. It should be: https://neo.jfrog.io/neo/api/npm/npm/neuler.
-. In the left *Graph Apps* panel, paste this address in the *Install* field at the bottom.
-. Click *Install*.
-. The *Graph Data Science Graph Playground* Graph App should now appear in the left pane.
-
-== Datasets you will use in this course
-
-[square]
-* Game of Thrones (GOT)
-* European Roads
-* Recipes
-
-=== Game of Thrones
-
-image::got.png[Game of Thrones,width=500, align=center]
-
-[.notes]
---
-The Game of Thrones network is a monopartite graph containing *Character* nodes and their interactions in the TV shows.
-Interactions between characters are grouped by TV shows seasons.
-For example, a relationship *INTERACTS_SEASON1* represents an interaction between characters in the first season, *INTERACTS_SEASON2* means interaction in the second season, and so on.
-The relationship weight represents the strength of the interaction, and because two characters can interact in more than a single season, we are dealing with a weighted multigraph.
---
-
-=== European Roads
-
-image::european-roads.png[European Roads,width=500, align=center]
-
-[.notes]
---
-The European Roads network is also a monopartite graph containing *Place* nodes and their road connections indicated by the *EROAD* relationship.
-The *Place* node has multiple properties, name and countryCode.
-The *EROAD* relationship has four properties, distance, inverse_distance, road_number, and watercrossing.
-We will assume that we can traverse each *EROAD* relationship in both directions, effectively treating the European Roads network as an undirected graph.
---
-
-=== Recipes
-
-image::recipe.png[recipe,width=500, align=center]
-
-[.notes]
---
-The Recipes network is a bipartite graph containing *Recipe* and *Ingredient* nodes.
-A *CONTAINS_INGREDIENT* relationships indicates that an ingredient was used in the particular recipe.
-This is a very simple data model where each node has only a name and there are no properties in the relationships.
---
-
-[.half-row]
-== Step 4: Start the database and Graph Data Science Playground
-
-. In Neo4j Desktop, start the database.
-. Start the *Graph Data Science Graph Playground* Graph App:
-.. Double-click *Graph Data Science Graph Playground*  app in the left pane to start it.
-.. Once started, it should open a new window as follows:
-
-image::GDSPlaygroundStarted.png[Graph Data Science Playground Started,width=500, align=center]
-
-[.student-exercise]
-== Step 5: Load the data for the exercises
-
-Open Neo4j Browser for the started database.
-In the query edit pane of Neo4j Browser, execute the browser command:
-
-kbd:[:play 4.0-intro-graph-algos-exercises]
-
-and follow the instructions for *Load the Data for the Exercises*.
-
-[NOTE]
-Estimated time to complete: 10 minutes.
-
-[.quiz]
-== Check your understanding
-
-=== Question 1
-
-[.statement]
-What labels could we use to describe the Recipes network?
-
-[.statement]
-Select the correct answers.
-
-[%interactive.answers]
-- [ ] Food
-- [x] Ingredient
-- [x] Recipe
-- [ ] Category
-
-=== Question 2
-
-[.statement]
-What libraries do you use to perform analyses for Graph Data Science?
-
-[.statement]
-Select the correct answers.
-
-[%interactive.answers]
-- [x] GDSL
-- [ ] Graph Explorer
-- [ ] NEuler
-- [x] APOC
-
-=== Question 3
-
-[.statement]
-What Graph app do you use to help you run graph algorithms?
-
-[.statement]
-Select the correct answer.
-
-[%interactive.answers]
-- [ ] Bloom
-- [ ] Cypher-shell
-- [x] Graph Data Science Playground
-- [ ] Linkurious
-
-[.summary]
-== Summary
-
-You have now prepared your system for performing the hands-on exercises for this course.
+- xref:05a-iga-local-setup.adoc[Local environment setup,role=btn]
