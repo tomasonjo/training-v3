@@ -27,6 +27,13 @@ The screenshots in this course use the *neo4j:4.0.2-enterprise* docker image. We
 
 You must install Docker on your system from https://hub.docker.com.
 
+You can also use these resources as a reference:
+
+* https://neo4j.com/docs/operations-manual/current/docker/configuration/[Documentation]
+
+* https://neo4j.com/developer/docker-run-neo4j/[Developer Guide on using Docker]
+
+
 === Setup steps
 
 . Verify that you have access to docker on your system:
@@ -91,7 +98,7 @@ docker run^
     --volume=C:%HOMEPATH%\docker-neo4j\neo4j\logs\:/logs^
     --volume=C:%HOMEPATH%\docker-neo4j\neo4j\conf\:/conf^
     --volume=C:%HOMEPATH%\docker-neo4j\neo4j\plugins\:/plugins^
-    --volume=$C:%HOMEPATH%\docker-neo4j\neo4j\import\:/import^
+    --volume=C:%HOMEPATH%\docker-neo4j\neo4j\import\:/import^
     --env NEO4J_dbms_memory_pagecache_size=512m^
     --env=NEO4J_ACCEPT_LICENSE_AGREEMENT=yes^
     --detach^
