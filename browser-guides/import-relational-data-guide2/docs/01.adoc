@@ -18,6 +18,29 @@ This guide uses a specific data set, but the principles in this guide can be app
 //.Prerequisites
 //[abstract]
 
+== Prerequisites
+
+You need not have any prior experience with Cypher to perform the steps of this Guide.
+
+== Before you begin
+
+You should start with an empty database. Execute this code to clear the database:
+
+[source, cypher]
+----
+// Delete all constraints and indexes
+CALL apoc.schema.assert({},{},true);
+// Delete all nodes and relationships
+CALL apoc.periodic.iterate(
+  'MATCH (n) RETURN n',
+  'DETACH DELETE n',
+  { batchSize:500 }
+)
+----
+
+You should now have no nodes or relationships in the database:
+
+image::ClearedDB.png[ClearedDB,width=300]
 
 == What is a graph?
 
@@ -35,7 +58,7 @@ This guide uses a specific data set, but the principles in this guide can be app
 ** House
 ** Location
 
-image::Nodes.png[Nodes,width=300]
+image::Nodes.png[Nodes,width=500]
 
 == Relationships
 
@@ -47,7 +70,7 @@ image::Nodes.png[Nodes,width=300]
 ** OWNS
 * Have direction
 
-image::Relationships.png[Relationships,width=300]
+image::Relationships.png[Relationships,width=500]
 
 == Properties
 
@@ -59,7 +82,7 @@ image::Relationships.png[Relationships,width=300]
 ** Can be unique for nodes
 ** Have a type such as numeric, string, boolean, etc.
 
-image::Properties.png[Properties,width=300]
+image::Properties.png[Properties, width=500]
 
 // guide-importing-data-and-etl.adoc uses {img} as a prefix for images :|
 :img:
