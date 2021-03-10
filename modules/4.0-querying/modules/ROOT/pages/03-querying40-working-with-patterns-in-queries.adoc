@@ -400,7 +400,7 @@ When you specify this `MATCH` clause to use the `shortestPath()` function as sho
 
 [.is-half.left-column]
 --
-image::ShortestPathWarning.png[ShortestPathWarning,width=600,align=center]
+image::ShortestPathWarning.png[shortestPathWarning,width=600,align=center]
 --
 
 [.notes]
@@ -413,14 +413,14 @@ Here is the result returned:
 
 [.is-half.right-column]
 --
-image::ShortestPath1.png[ShortestPath1,width=500,align=center]
+image::ShortestPath1.png[shortestPath1,width=500,align=center]
 --
 
 [.notes]
 --
 Notice that the graph engine has traversed many types of relationships to get to the end node.
 
-When you use `ShortestPath()`, you can specify a upper limits for the shortest path. In addition, you should aim to provide the patterns for the from an to nodes that execute efficiently. For example, use labels and indexes.
+When you use `shortestPath()`, you can specify a upper limits for the shortest path. In addition, you should aim to provide the patterns for the from and to nodes that execute efficiently. For example, use labels and indexes.
 --
 
 == Returning a subgraph
