@@ -13,10 +13,11 @@ Make sure that the database instance is running.
 In this exercise you create a database from a set of CSV files using the import functionality of the neo4j-admin tool.
 
 * *Exercise 18.1*: Place the CSV files in the *import* folder.
-* *Exercise 18.2*: Examine the CSV files.
-* *Exercise 18.3*: Open a terminal window for the Neo4j instance.
-* *Exercise 18.4*: Use the neo4j-admin tool to import the CSV files.
-* *Exercise 18.5*: View the database after import.
+* *Exercise 18.2*: Increase memory for the DBMS.
+* *Exercise 18.3*: Examine the CSV files.
+* *Exercise 18.4*: Open a terminal window for the Neo4j instance.
+* *Exercise 18.5*: Use the neo4j-admin tool to import the CSV files.
+* *Exercise 18.6*: View the database after import.
 
 Go to the next page to start this exercise.
 
@@ -36,13 +37,21 @@ http://data.neo4j.com/v4.0-intro-neo4j/crimes-dataset.zip
 [.thumb]
 image::CSVFilesInImportFolder.png[CSVFilesInImportFolder,width=600]
 
-== Exercise 18.2: Examine the CSV files (Instructions/Solution)
+== Exercise 18.2: Increase Memory for the DBMS (Instructions/Solution)
+
+This import is large and will require more than  the default 1G of heap.
+
+. For your DBMS, open the settings.
+. Edit this property to be the following: *dbms.memory.heap.max_size=2G*.
+. Click *Apply* which will restart the DBMS.
+
+== Exercise 18.3: Examine the CSV files (Instructions/Solution)
 
 *In a text editor of your choice, examine the CSV files.
 Make sure you understand the headers and how they will be used for the import.*
 
 
-== Exercise 18.3: Open a terminal window for the Neo4j instance (Instructions/Solution)
+== Exercise 18.4: Open a terminal window for the Neo4j instance (Instructions/Solution)
 
 In Neo4j Desktop for the project you are using, do the following:
 
@@ -53,7 +62,7 @@ In Neo4j Desktop for the project you are using, do the following:
 [.thumb]
 image::TerminalImport.png[TerminalImport,width=700]
 
-== Exercise 18.4: Use the neo4j-admin tool to import the CSV files (Instructions)
+== Exercise 18.5: Use the neo4j-admin tool to import the CSV files (Instructions)
 
 *In the terminal window you just opened, use neo4j-admin tool to import the CSV files using these guidelines:*
 
@@ -67,7 +76,7 @@ image::TerminalImport.png[TerminalImport,width=700]
              --trim-strings=true
 ----
 
-== Exercise 18.4: Use the neo4j-admin tool to import the CSV files (Solution)
+== Exercise 18.5: Use the neo4j-admin tool to import the CSV files (Solution)
 
 *In the terminal window you just opened, use neo4j-admin tool to import the CSV files using these guidelines:*
 
@@ -85,8 +94,7 @@ This is what you should enter (ensure there are no newline characters):
 
 [source]
 ----
-../bin/neo4j-admin import --database crimes --nodes crimes_header.csv,crimes.csv --nodes beats.csv --nodes=PrimaryType=primaryTypes.csv -
--relationships crimesBeats.csv --relationships=PRIMARY_TYPE=crimesPrimaryTypes.csv --trim-strings=true > import.out
+../bin/neo4j-admin import --database crimes --nodes crimes_header.csv,crimes.csv --nodes beats.csv --nodes=PrimaryType=primaryTypes.csv --relationships crimesBeats.csv --relationships=PRIMARY_TYPE=crimesPrimaryTypes.csv --trim-strings=true > import.out
 ----
 
 *Note*: Depending on your system, it could take up to 10 minutes to load this data.
@@ -108,13 +116,13 @@ Here is what the end of *import.out* file should look like:
 [.thumb]
 image::importout2.png[importout2,width=600]
 
-== Exercise 18.5: View the database after import (Instructions)
+== Exercise 18.6: View the database after import (Instructions)
 
 The database files have been created, but you must use the *system* database to add the crimes data base to your environment.
 
 *Using the system domain, create the _crimes_ database and then view its nodes and relationships.*
 
-== Exercise 18.5: View the database after import  (Solution)
+== Exercise 18.6: View the database after import  (Solution)
 
 The database files have been created, but you must use the *system* database to add the crimes data base to your environment.
 
