@@ -101,7 +101,7 @@ Northwind
 
 .Host
 ----
-db-examples.cmlvojdj5cci.us-east-1.rcs.amazonaws.com
+db-examples.cmlvojdj5cci.us-east-1.rds.amazonaws.com
 ----
 
 .Type
