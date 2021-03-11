@@ -332,7 +332,7 @@ MERGE (question:Question {id: q.question_id})
                  question.tags = q.tags,
                  question.is_answered = q.is_answered
 MERGE (user:User {name: q.owner.display_name})
-MERGE (user)-[:ANSWERED]->(question)
+MERGE (user)-[:POSTED]->(question)
 ----
 
 Here is the result of querying the nodes in the graph after the load:
