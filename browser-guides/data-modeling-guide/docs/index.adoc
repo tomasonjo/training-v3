@@ -59,5 +59,4 @@ image::ClearedDB.png[ClearedDB,width=300]
 
 pass:a[<a play-topic='{guides}/01.html'>Guide: Graph Data Modeling for Neo4j</a>]
 
-
 This Browser Guide is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
