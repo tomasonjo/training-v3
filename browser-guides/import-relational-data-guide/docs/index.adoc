@@ -1,12 +1,12 @@
-= Importing Relational Data into Neo4j
+= Guide: Importing Relational Data into Neo4j
 
-== Tutorial: Importing Relational Data into Neo4j image:neo4j-icon.png[width=50]
+== Guide: Importing Relational Data into Neo4j image:neo4j-icon.png[width=50]
 
 Welcome to this _Browser Guide_!
 
 This is the interface for learning about importing relational data into Neo4j.
 
-Navigate through the tutorial by pressing the forward button at the right of the window.
+Navigate through the Guide by pressing the forward button at the right of the window.
 
 We start by walking you through some preparations and instructions.
 If you have used Neo4j Browser Guides before, you can skip to the last page.
@@ -38,11 +38,26 @@ Follow these steps in order to run the code in your database:
 You will notice that the code is copied into the code pane at the top of Neo4j Browser.
 . Click the _Run_ button image:run-button.png[width=25] in order to execute the code.
 
-== Click this link to continue to the tutorial:
+== Starting with a fresh database
+
+If you choose to run the Cypher code in  this guide, you should start with an empty database.
+
+Execute this code to clear the database (Neo4j 4.x required; here database name is *neo4j*):
+
+[source, cypher]
+----
+CREATE OR REPLACE DATABASE neo4j;
+----
+
+You should now have no nodes or relationships in the database:
+
+image::ClearedDB.png[ClearedDB,width=300]
+
+== Click this link to continue to the Guide:
 
 [cols=1, frame=none]
 |===
-| pass:a[<a play-topic='{guides}/01.html'>Tutorial: Importing Relational Data into Neo4j</a>]
+| pass:a[<a play-topic='{guides}/01.html'>Guide: Importing Relational Data into Neo4j</a>]
 |===
 
 This Browser Guide is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
