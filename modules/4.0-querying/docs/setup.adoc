@@ -1,4 +1,4 @@
-= Setting up your Neo4j training environment for the course, Introduction to Neo4j 4.x
+= Setting up your Neo4j training environment for the course, Querying with Cypher in Neo4j 4.x
 :doctype: book
 :toc: left
 :toclevels: 4

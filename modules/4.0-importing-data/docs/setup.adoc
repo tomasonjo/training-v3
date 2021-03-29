@@ -79,13 +79,21 @@ Here is an overview of the steps you will perform to set up your development env
 .. Download Neo4j Desktop.
 ... View/save the installation instructions.
 .. Install Neo4j Desktop.
-.. In a project, create a local graph (database (version 4.x or later) you will use for this course.
+.. In a project, create a local graph (database) you will use for this course.
 .. Start the graph.
-
+. *Download the exercise file.*
 
 === Getting Started with Neo4j Desktop
 
 include::{setup-guides-dir}/DesktopInstall.adoc[]
+
+=== Download the exercise file
+
+Download the PDF containing the exercise instructions:
+
+https://graphacademy.neo4j.com/setup/4.0-intro-neo4j-exercises[4.0-intro-neo4j-exercises.pdf]
+
+*Note:* This is only necessary if you must work without WiFi and need the instructions for the exercises which are accessed on the Internet.
 
 == Step 1: Option 2: Using Neo4j Aura
 
@@ -130,7 +138,7 @@ Execute this Cypher statement:
 MATCH (n) RETURN count(n)
 ----
 
-If this query returns 0, then your database has been set up properly and you are ready to start the training.
+If this query returns *171*, then your database has been set up properly and you are ready to start the training.
 
 == Getting help
 

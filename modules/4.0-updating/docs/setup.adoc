@@ -1,4 +1,4 @@
-= Setting up your Neo4j training environment for the course, Overview of Neo4j 4.x0
+= Setting up your Neo4j training environment for the course, Creating Nodes and Relationships in Neo4j 4.x
 :doctype: book
 :toc: left
 :toclevels: 4
@@ -91,7 +91,7 @@ include::{setup-guides-dir}/DesktopInstall.adoc[]
 
 Download the PDF containing the exercise instructions:
 
-https://r.neo4j.com/intro-exercises[intro-exercises.pdf]
+https://graphacademy.neo4j.com/setup/4.0-intro-neo4j-exercises[4.0-intro-neo4j-exercises.pdf]
 
 *Note:* This is only necessary if you must work without WiFi and need the instructions for the exercises which are accessed on the Internet.
 
