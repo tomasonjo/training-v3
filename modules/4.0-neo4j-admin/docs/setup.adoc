@@ -36,7 +36,7 @@ https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/4.0.0.5
 
 http://data.neo4j.com/admin-neo4j/crimes-dataset.zip
 
-http://data.neo4j.com/admin-neo4j/BasicNeo4jAdministration-40-ExerciseGuide.pdf
+http://data.neo4j.com/admin-neo4j/BasicNeo4jAdministration-4.x-ExerciseGuide.pdf
 
 === Getting help
 
