@@ -514,7 +514,7 @@ The `MATCH` clause performs a pattern match against the data in the graph.
 During the query processing, the graph engine traverses the graph to find all nodes that match the graph pattern.
 As part of query, you can return nodes or data from the nodes using the `RETURN` clause.
 The `RETURN` clause must be the last clause of a query to the graph.
-In the course, _, you will learn how to use `MATCH` to select nodes and data for updating the graph.
+In the course, _Creating Nodes and Relationships in Neo4j 4.x_, you will learn how to use `MATCH` to select nodes and data for updating the graph.
 First, you will learn how to simply return nodes.
 
 
