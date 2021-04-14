@@ -1,5 +1,5 @@
 = Summary: Using a Machine Learning Workflow for Link Prediction
-:slug: 05-gdsds-summary
+:slug: 06-gdsds-summary
 :doctype: book
 :toc: left
 :toclevels: 3
