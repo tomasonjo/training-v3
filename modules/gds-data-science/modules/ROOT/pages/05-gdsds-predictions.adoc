@@ -1,5 +1,5 @@
 = Predictions
-:slug: 04-gdsds-predictions
+:slug: 05-gdsds-predictions
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
@@ -81,6 +81,10 @@ In the next part of this module you will use the supervised learning approach.
 In this exercise, you will build a binary classifier to predict co-authorships using a notebook.
 
 Launch the *04_Predictions.ipynb* notebook and follow the steps in this exercise.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/04_Predictions.ipynb">Launch 04_Predictions notebook on Google Colab!</a>
+++++
 
 [.quiz]
 == Check your understanding

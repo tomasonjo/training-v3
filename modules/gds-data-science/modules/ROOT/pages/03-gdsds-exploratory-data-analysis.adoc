@@ -1,5 +1,5 @@
 = Exploratory Data Analysis
-:slug: 02-gdsds-exploratory-data-analysis
+:slug: 03-gdsds-exploratory-data-analysis
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
@@ -54,10 +54,22 @@ You will then be able to use this knowledge to help build a recommendation engin
 == Exercise 1: Exploring the data
 
 In this exercise you use the Jupyter notebook you set up previously.
+If you have the local Neo4j Desktop environment, you can open the mentioned Jupyter notebooks on your computer, otherwise follow the link to the Google Colaboratory instance of notebooks.
 
 Open the *02_EDA.ipynb* notebook to complete the first exercise.
 
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/02_EDA.ipynb">Launch 02_EDA notebook on Google Colab!</a>
+++++
+
+{nbsp} +
+{nbsp} +
+
 Once you have attempted the exercises, you can see the answers by launching the *02_EDA_Solutions.ipynb* notebook.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/02_EDA_Solutions.ipynb">Launch 02_EDA_Solutions notebook on Google Colab!</a>
+++++
 
 [.quiz]
 == Check your understanding

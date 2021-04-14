@@ -1,0 +1,95 @@
+= Sandbox Development Environment
+:slug: 02b-gdsds-setup-development-environment-sandbox
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-module-duration-minutes: 30
+:page-pagination!:
+
+== About this module
+
+As a data scientist, you will create Neo4j Databases, add and update data in them, and query the data.
+In this module you will learn how to setup the Neo4j Sandbox for use in the rest of the course, and connect to it from Jupyter notebooks hosted in Google Colaboratory.
+
+In this module, you will:
+[square]
+* Create a Neo4j Sandbox for learning Neo4j.
+* Connect to the Citations database with  Neo4j Browser.
+* Launch a Jupyter Notebook in Google Colaboratory and connect to the Citations database.
+
+== Neo4j Sandbox
+
+[frame="none", cols="^.^,<.^"]
+|===
+a|image::Neo4jSandbox.png[Neo4jSandbox,width=300,align=center]
+a|
+The Neo4j sandbox is another way that you can begin development with Neo4j.
+It is a temporary, cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser.
+The database in a Sandbox may be blank or it may be pre-populated.
+It is started automatically for you when you create the Sandbox.
+
+By default, the Neo4j sandbox is available for three days, but you can extend it for up to 10 days.
+You must make sure that you extend your lease of the sandbox, otherwise you will lose your graph and any saved Cypher scripts you have created in the sandbox.
+However, you can use Neo4j Browser Sync to save Cypher scripts from your sandbox.
+The Sandbox is intended as a temporary environment or for learning about the features of Neo4j as well as specific graph use-cases.
+|===
+
+=== *How to set up a Neo4j Sandbox*
+
+This video shows you how to create a Neo4j Sandbox. If you have never used or created a Neo4j Sandbox before, you might find it helpful to watch this video before you create your Citations Sandbox for this course.
+
+
+video::OSk1ePl2PUM[youtube,height=315,width=560]
+
+=== Step 1: Create the Citations Sandbox
+
+. Create a https://sandbox.neo4j.com/?usecase=citations[Citations Sandbox^] Note that this is a special sandbox that is not available on the public Neo4j Sandbox site.
+. Select *Launch Sandbox* button and then wait for it to start.
+
+The Sandbox has a Neo4j database with a pre-loaded Citations dataset.
+
+NOTE: You must create the Citations Sandbox with the above link and you must be signed in to the sandbox site. You *cannot* create it from the public Neo4j Sandbox site.
+
+=== Using Neo4j Browser
+
+Neo4j Browser is a tool that enables you to access a Neo4j Database by executing Cypher statements to create or update data in the graph and to query the graph to return data.
+The data returned is typically visualized as nodes and relationships in a graph, but can also be displayed as tables.
+In addition to executing Cypher statements, you can execute a number of system calls that are related to the database being accessed by the Browser.
+For example, you can retrieve the list of queries that are currently running in the server.
+
+You can use Neo4j Browser functionality via the web interface.
+
+=== Step 2: Connect to the Citations database with Neo4j Browser
+
+Open a Neo4j Browser connection to the Citations Sandbox by clicking the *Open Neo4j Browser* for the Sandbox.
+
+A new Web browser tab should open with a connection to the Citations Sandbox:
+
+image::Neo4jBrowser-DataScience.png[Neo4jBrowser-DataScience,width=800]
+
+If  you have never used Neo4j Browser before for a Sandbox, you might find the Guided Tour of the Sandbox helpful, otherwise, simply close it.
+
+=== Step 3: Open a Jupyter Notebook in Google Colaboratory and connect to the Citations database
+
+In this course you will use Jupyter Notebook hosted on the Google Colaboratory environment.
+All the notebooks in this course require a connection to your Neo4j Sandbox instance, so you will test that now.
+
+Launch the notebook by clicking below. This will open a tab for the Jupyter Notebook where you will set it up to connect to the Neo4j Sandbox.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/00_Environment.ipynb">Launch Notebook!</a>
+++++
+
+== Summary
+
+You should now have set up your development environment by:
+[square]
+* Creating a Neo4j Sandbox for learning Neo4j.
+* Connecting to the Citations database with  Neo4j Browser.
+* Launching a Jupyter Notebook in Google Colaboratory and connecting to the Citations database.
+
+You have now prepared your development environment for performing
+xref:03-gdsds-exploratory-data-analysis.adoc[the exploratory data analysis] for this course.

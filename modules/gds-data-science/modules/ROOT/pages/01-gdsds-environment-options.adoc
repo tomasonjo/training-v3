@@ -1,0 +1,38 @@
+
+= Setting Up your Development Environment
+:slug: 01-gdsds-environment-options
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-module-duration-minutes: 5
+:page-pagination: previous
+
+== Preparing your development environment
+
+In this course, you have the option to pick between two environment setups.
+You can use the cloud-hosted Neo4j Sandbox environment, or you can install the Neo4j Desktop application locally.
+
+== Sandbox environment setup
+
+The Neo4j Sandbox is a great way that you can begin development with Neo4j.
+It is a temporary, cloud-based instance of a Neo4j Server with its associated graph that you can access from any Web browser.
+The Sandbox database has all required plugins and applications installed for this course by default. 
+
+The Neo4j Sandbox is available for three days, but you can extend it for up to 10 days.
+You must make sure that you extend your Sandbox lease as otherwise, you might lose your graph and any saved Cypher scripts you have created in the Sandbox.
+
+If you choose to use the Neo4j Sandbox environment setup, you have the option to use the Google Colab platform to run Jupyter notebooks. 
+
+- xref:02b-gdsds-setup-development-environment-sandbox.adoc[Sandbox environment setup,role=btn]
+
+== Local environment setup
+
+To setup you local environment setup, you will use the Neo4j Desktop.
+Neo4j Desktop is a convenient, free desktop application that allows developers to easily create, work with and manage local Neo4j databases.
+It also makes it easier to install plugins and applications with a single click.
+
+If you choose to use the local Neo4j Desktop environment setup, you can only run Jupyter notebooks locally.
+
+- xref:02a-gdsds-setup-development-environment-local.adoc[Local environment setup,role=btn]
