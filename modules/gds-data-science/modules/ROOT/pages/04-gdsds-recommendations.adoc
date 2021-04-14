@@ -1,5 +1,5 @@
 = Recommendations
-:slug: 03-gdsds-recommendations
+:slug: 04-gdsds-recommendations
 :toc: left
 :toclevels: 4
 :imagesdir: ../images
@@ -37,7 +37,18 @@ You will write recommendation queries to *suggest potential collaborators*.
 
 Open the *03_Recommendations_Part1.ipynb* notebook and perform the steps of the exercise.
 
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/03_Recommendations_Part1.ipynb">Launch 03_Recommendations_Part1 notebook on Google Colab!</a>
+++++
+
+{nbsp} +
+{nbsp} +
+
 Once you have attempted the exercises, you can see the answers by launching the *03_Recommendations_Part1_Solutions.ipynb* notebook.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/03_Recommendations_Part1_Solutions.ipynb">Launch 03_Recommendations_Part1_Solutions notebook on Google Colab!</a>
+++++
 
 == PageRank and Personalized PageRank
 
@@ -52,6 +63,11 @@ It is often used as part of building recommendation systems.
 In this exercise, you will gain experience using the PageRank algorithm, understand the difference between PageRank and PPR, and use PPR to *suggest relevant articles* to an author.
 
 Launch the *03_Recommendations_Part2.ipynb* notebook and perform the steps of the exercise.
+
+++++
+<a class="medium button-notebook" target="_blank" href="https://colab.research.google.com/github/neo4j-contrib/training-v3/blob/master/modules/gds-data-science/supplemental/notebooks/03_Recommendations_Part2.ipynb">Launch 03_Recommendations_Part2 notebook on Google Colab!</a>
+++++
+
 
 [.quiz]
 == Check your understanding
