@@ -1,0 +1,156 @@
+= Examining the Data Model
+:slug:
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes:
+
+
+== About this topic
+
+Before you can query the graph, you must have a high-level understanding of the graph which includes:
+
+* node labels
+* relationship types
+* property keys
+* how many nodes and relationships are in the graph
+
+At the end of this topic, you should be able to:
+
+[square]
+* Write the Cypher statement to visualize the schema of the graph.
+* Examine the database information for the graph.
+
+This video summarizes the content of this topic:
+
+video::wb455GFklng[youtube,width=560,height=315]
+
+Throughout this training, you should refer to:
+[square]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
+* http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+
+
+== Examining the data model
+
+When you are first learning about the data (nodes, labels, etc.) in a graph, it is helpful to examine the data model of the graph.
+We use the Cypher clause, `CALL` to call the built-in procedure that returns the visualization of what is currently in the graph:
+
+//T: execute
+
+Run this Cypher code:
+
+[source,Cypher]
+----
+CALL db.schema.visualization()
+----
+
+This visualization shows some important information.
+There are 6 different labels defined for nodes in the graph.
+The Person node has the same relationships to the Movie node as the Director and Actor nodes.
+This means that a Person node can also have a label, Director and or Actor.
+All relationships are from Person, Director, Actor, and User nodes to Movie nodes.
+Furthermore, the only relationship from a Movie node to another node, is the IN_GENRE relationship to a Genre node.
+The relationship types and directions in the graph will help you to create your patterns for Cypher queries.
+
+Neo4j is a schema-free database. The data returned from `db.schema.visualization()` does not represent a schema that is defined for the graph, but rather what is in the graph.
+This procedure is very useful, especially in a development environment where nodes or relationships could be added or upated in the grapn.
+In a graph data modeling exercise, it is possible to refactor the structure or nodes in a graph to support a specific use case.
+
+*Q1: Comprehension (multiple choice)*
+// Which of the following are labels in the graph?
+//Person
+//Director
+//RATED
+//Genre
+//Title
+//Movie
+
+== Examining the database information
+
+In Neo4j Browser, you can click the Database Information sidebar to reveal information about the database.
+
+Click the Database icon in the Neo4j Browser sidebar:
+
+//T: click sidebar
+
+You should see the number of nodes and relationships in the graph.
+This helps you to confirm that the node labels and relationship types in the graph match those when you called `db.schema.visualization()`.
+The Database information provides no information about the number of nodes with each label or the number of relationships of each type, but it give you a high-level picture of how large the graph is.
+
+The Property Keys list is helpful for you to understand as it lists the names of all properties used in the graph.
+You cannot determine which properties are associated with specific nodes or relationship types.
+Neo4j allows you to use property names without restriction.
+That is, you could have a Genre node and a Person node, each with a property, name.
+
+*Q1: Comprehension (multiple choice)*
+// Which of the following are relationship types in the graph?
+//ACTED_IN
+//Director
+//RATED
+//Genre
+//DIRECTED
+//IN_GENRE
+
+== Examining property keys
+
+As you prepare to create Cypher queries that use property values to filter a query, you can view the values for property keys of a graph by simply clicking the Database icon in Neo4j Browser.
+Alternatively, you can execute  `CALL db.propertyKeys()`,  which calls the built-in procedure that returns the property keys for the graph.
+
+//T: execute
+
+Run this Cypher code:
+
+[source, Cypher]
+----
+CALL db.propertyKeys()
+----
+
+*Q1 Comprehension*
+//Q1: Comprehension
+// How many property keys are in the sample graph?
+//answer 26
+
+== Retrieving nodes
+
+You have already been introduced to a very simple `MATCH` clause that returns nodes in the graph.
+In the Neo4j sidebar for Database information, you can click on a node label and Neo4j Browser will send a Cypher query to the database to retrieve 25 nodes with that particular label.
+
+Click the Actor node label in the Database information sidebar:
+
+//T: click the Actor label
+
+You should now see 25 Actor nodes in the result pane.
+
+When you query the graph and return nodes, they are, by default displayed in the graph visualization format.
+
+A node is represented as a circle where the color is typically associated with the node label.
+
+Notice here that of the 25 Actor nodes, 25 of them are also labeled with the Person label. And two of them are also labeled with the Director label.
+
+== Viewing node properties
+
+Graph is an important view for visualizing the structure of the graph, but you may also want to view the properties of a node.
+In Neo4j Browser, you can click the *table* view to see the details of each node that was retrieved.
+
+Click the table view for the result pane:
+
+//T: click the table view
+
+You should now see 25 Actor nodes in the result pane, displayed as cells in a table.
+
+The identify of a node is generated by Neo4j and you should never change it.
+It is for internal use only and in fact, you should not rely on it from one version of a database to another. That is, if you upgrade your 4.x database to a 5.x database, there is no guarantee that the same node will use the same node id.
+With the table view, we see the labels for the node.
+Then we see the current properties for each node.
+These property keys match what you see in the left sidebar for the database information
+
+//T: scrolled down to see properties of some Actor nodes.
+
+Notice also that not all Actor nodes need to have the same set of properties.
+For example, some Actor nodes have a bio property and some don't.
+

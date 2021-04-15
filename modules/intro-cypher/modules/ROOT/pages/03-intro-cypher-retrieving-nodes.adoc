@@ -1,0 +1,255 @@
+= Retrieving Nodes
+:slug:
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes:
+
+
+== About this topic
+
+The `MATCH` clause is used to retrieve nodes(data) from the graph.
+In this topic, you will learn how to write simple queries to retrieve nodes from the graph.
+
+At the end of this topic, you should be able to:
+
+[square]
+* Retrieve nodes using simple node patterns.
+* Limit the number of nodes retrieved.
+* Retrieve nodes filtering by property values.
+* View results returned as a graph and as a table.
+* Return property values as a table.
+
+This video summarizes the content of this topic:
+
+video::cMSKmx6Pu7o[youtube,width=560,height=315]
+
+Throughout this training, you should refer to:
+[square]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
+* http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+
+
+== Uaing `MATCH` to query the graph
+
+The most widely used Cypher clause is `MATCH`.
+The `MATCH` clause performs a pattern match against the data in the graph.
+During the query processing, the graph engine traverses the graph to find all nodes that match the graph pattern.
+As part of query, you can return nodes or data from the nodes using the `RETURN` clause.
+The `RETURN` clause must be the last clause of a query to the graph.
+
+== Retrieving all nodes
+
+Here is the Cypher code to retrieve all nodes in the graph.
+Notice that the Cypher keywords `MATCH` and `RETURN` are upper-case.
+This coding convention is described in the https://neo4j.com/docs/cypher-manual/current/styleguide/[Cypher Style Guide] and will be used in this training.
+
+//T: execute
+
+Run this Cypher code:
+
+[source,Cypher]
+----
+MATCH (n) 			// returns all nodes in the graph
+RETURN n
+----
+
+
+This `MATCH` clause returns all nodes in the graph.
+For the sample graph, it will return _Person_ nodes, _Movie_ nodes, _Genre_ nodes, etc.
+The variable, _n_ must be specified here, otherwise the query will have nothing to return.
+
+One thing to notice in the result pane is that some of the displayed nodes are connected by relationships.
+The visualization shows the relationship between these nodes because  *Connect result nodes* is specified in the Neo4j Browser settings.
+
+[NOTE]
+It is recommended that you add `LIMIT nn` to the RETURN clause if you are accessing a large graph if you want a visualization of the graph in Neo4j Browser.
+
+//T: execute
+
+Run this Cypher code to retrieve 10 nodes from the graph:
+
+[source,Cypher]
+----
+MATCH (n)
+RETURN n LIMIT 10 // returns 10 nodes
+----
+
+When you limit the number of nodes returned, you see that the resulting visualization is easier to understand.
+Limiting the data returned to the client (Neo4j Browser) can also help to optimize queries because the graph engine does not have to stream as much data back to the client.
+
+== Retrieving nodes with a specific label
+
+In a graph that represents different entities in your domain, you will find that the queries you need to perform are specific to a particular entity.
+When you specify a node label in the pattern, you can retrieve nodes in that subset of the graph.
+You use the `:<label>` syntax to specify the subset of nodes to retrieve.
+
+//T: execute
+
+Run this Cypher code to retrieve all _Genre_ nodes from the graph:
+
+[source,Cypher]
+----
+MATCH (g:Genre) 	// returns all Genre nodes in the graph
+RETURN g
+----
+
+When you execute this Cypher code, the graph engine returns all nodes with the label _Genre_.
+And the variable _g_ is specified so that nodes can be returned to the client.
+
+[NOTE]
+When you specify a pattern for a `MATCH` clause, you should always specify a node label if possible. In doing so, the graph engine uses an index to retrieve the nodes which will perform better than not using a label for the `MATCH`.
+
+//Q3: More effort (modify Cypher)
+
+Modify this query to retrieve 10 _Movie_ nodes from the graph:
+
+[source,Cypher]
+----
+MATCH (g:Genre)
+RETURN g
+----
+
+//answer
+//MATCH (m:Movie)
+//RETURN m LIMIT 10
+
+== Viewing nodes as table data
+
+You can also view the nodes as table data where the nodes are rows in the table and their associated property values are shown in a JSON-style format.
+When nodes are displayed as table values, the node labels and the _identity_ value are also shown.
+Node identities are unique and are set by the graph engine when a node is created.
+
+[NOTE]
+You cannot change the _identity_ of a node. This internal _identity_ value could change from one release of Neo4j to another.
+
+
+//T: execute
+
+With this last query you executed, click the table view to see the nodes returned as table rows:
+
+[source,Cypher]
+----
+MATCH (m:Movie)
+RETURN m LIMIT 10
+----
+
+//Q1: Comprehension (multiple choice)
+//Select some properties you see in the Movie nodes:
+//title
+//year
+//name
+//imdbRating
+
+== Retrieving nodes with a specific property value
+
+In your node pattern, you can specify property key/value pairs in curly braces `{}`.
+When you specify a property key/value pair in the node, it tells the query processor to retrieve only nodes with the specified property values.
+
+How you specify the property key/value pairs will depend upon the type of data in the property.
+For example a numeric value will not have quotes around it, but a string value will.
+
+Here is an example where we want to retrieve all _Movie_ nodes in the graph that have a value of 1999 for the _year_ property, which is the release year of the movie.
+
+//T: execute
+
+Execute this query to return all movies released in 1999:
+
+[source,Cypher]
+----
+MATCH (m:Movie {year: 1999})
+RETURN m
+----
+
+This query returns 266 nodes.
+If you view the properties for these nodes returned in the table view, you should see that all _year_ values for these nodes is 1999.
+
+//Q4: Most effort (write Cypher from scratch)
+
+Write the query to retrieve all people born in Canada:
+
+//answer
+//MATCH (p:Person {bornIn: 'Canada'})
+//RETURN p
+
+If you look at the properties of these nodes retrieved, you will see that some of them have the label, _Director_.
+
+Modify the query to only return directors born in Canada:
+//Q3: More effort (modify Cypher)
+
+//answer
+//MATCH (p:Director {bornIn: 'Canada'})
+//RETURN p
+
+
+== Retrieving nodes with multiple property values
+
+Here is an example where we specify two property values for the query.
+
+//T: execute
+
+Execute this query:
+
+[source,Cypher]
+----
+MATCH (m:Movie {year: 1999, imdbRating: 5.0})
+RETURN m
+----
+
+//Q4: Most effort (write Cypher from scratch)
+
+Write the query to retrieve movies with a runtime of 90 that were released in 1995:
+
+//answer
+//MATCH (m:Movie {runtime: 90, year: 1995})
+//RETURN m
+
+== Returning property values as rows in a table
+
+If you want to return specific property values, rather than entire nodes, you can specify the names of the properties to return using the `<variable>.<propertyKey>` sytax.
+
+In this example, we use the _year_  and _imdbRating_ properties to filter the query, but rather than returning the nodes, we return the _title_  and _released_ values for every node that satisfies the query.
+
+//T: execute
+
+Execute this query:
+
+[source,Cypher]
+----
+MATCH (m:Movie {year: 1999, imdbRating: 5.0})
+RETURN m.title, m.released
+----
+
+
+//Q4: Most effort (write Cypher from scratch)
+
+Write the query to return the name and birth year of all people (Person nodes) born in Canada.
+//answer
+//MATCH (p:Person {bornIn: 'Canada'})
+//RETURN p.name, p.born
+
+
+== Customizing column headings for rows returned
+
+If you want to customize the headings for a table containing property values, you can specify *aliases* for column headers.
+You use the Cypher clause `AS` to specify an alias for the `variable.propertyKey` column heading that will be returned.
+
+//T: execute
+
+Execute this query:
+
+[source,Cypher]
+----
+MATCH (m:Movie {year: 1999, imdbRating: 5.0})
+RETURN m.title AS Title, m.released AS `Date Released`
+----
+
+[NOTE]
+If you want a heading to contain a space between strings, you must specify the alias with the back tick _`_ character, rather than a single or double quote character. In fact, you can specify any variable, label, relationship type, or property key with a space also by using the back tick _`_ character.
+endif::[]
+
+

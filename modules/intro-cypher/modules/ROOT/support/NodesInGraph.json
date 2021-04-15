@@ -1,0 +1,122 @@
+{
+  "style": {
+    "node-color": "#4C8EDA",
+    "border-width": 2,
+    "border-color": "#2870c2",
+    "radius": 25,
+    "node-padding": 5,
+    "outside-position": "auto",
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#ffffff",
+    "caption-font-size": 10,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-color": "#ffffff",
+    "label-background-color": "#808080",
+    "label-border-color": "#808080",
+    "label-border-width": 0,
+    "label-font-size": 10,
+    "label-padding": 2,
+    "label-margin": 2,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 1,
+    "arrow-color": "#A5ABB6",
+    "margin-start": 0,
+    "margin-end": 0,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 10,
+    "type-padding": 2,
+    "property-position": "outside",
+    "property-color": "#000000",
+    "property-font-size": 10,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n3",
+      "position": {
+        "x": 247.2764534045368,
+        "y": -181
+      },
+      "caption": "",
+      "labels": [
+        "Person",
+        "Actor",
+        "Director"
+      ],
+      "properties": {
+        "name": "\"Tom Hanks\""
+      },
+      "style": {
+        "label-background-color": "#808080",
+        "label-border-color": "#808080"
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 440.2764534045368,
+        "y": -181
+      },
+      "caption": "",
+      "labels": [
+        "Movie"
+      ],
+      "properties": {
+        "title": "\"Toy Story\""
+      },
+      "style": {
+        "node-color": "#d33115",
+        "border-color": "#d33115",
+        "label-border-color": "#d33115"
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 633.2764534045368,
+        "y": -181
+      },
+      "caption": "",
+      "labels": [
+        "Genre"
+      ],
+      "properties": {
+        "name ": "\"Children\""
+      },
+      "style": {
+        "node-color": "#68bc00",
+        "border-color": "#68bc00"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n3",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "ACTED_IN",
+      "properties": {
+        "role": "\"Woody (voice)\""
+      },
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "IN_GENRE",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+= Introduction to Cypher
+:slug:
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes:
+
+
+== About this topic
+
+Cypher is the query language you use to retrieve data from the Neo4j Database, as well as create and update the data.
+
+In this topic, you will learn the basics of Cypher syntax and how it uses patterns in a Neo4j graph.
+
+This video summarizes the content of this topic:
+
+video::o7Pz8XseQ4M[youtube,width=560,height=315]
+
+Throughout this training, you should refer to:
+[square]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
+* http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+
+== What is Cypher?
+
+Cypher is a declarative query language that allows for expressive and efficient querying and updating of graph data.
+Cypher is a relatively simple and very powerful language.
+Complex database queries can easily be expressed through Cypher, allowing you to focus on your domain instead of getting lost in the syntax of database access.
+
+Cypher is designed to be a human-friendly query language, suitable for both developers and other professionals.
+The guiding goal is to make the simple things easy, and the complex things possible.
+
+== Cypher is ASCII art
+
+Optimized for being read by humans, Cypher's construct uses English prose and iconography (called ASCII Art) to make queries more self-explanatory.
+
+Here is a simple graph that contains three _Person_ nodes with the _LIKES_ relationships between them:
+
+image::ascii_art.svg[ascii_art,width=300,align=center]
+
+[NOTE]
+This visualization was produced with the https://arrows.app/[Neo4j Arrows App].
+
+Here are some Cypher patterns that could be used to retrieve or find data from this graph:
+
+[source,Cypher,role=nocopy noplay]
+----
+(c)
+(a)-[LIKES]->(b)
+(b)-[LIKES]->(c)
+----
+
+The first pattern refers to the _Person_ node _c_.
+The second pattern refers to the Person nodes _a_ and _b_, as well as the _LIKES_ relationship from a to b.
+The third pattern refers to the Person nodes _b_ and _c_, as well as the _LIKES_ relationship from b to c.
+
+== Cypher expresses what to retrieve, not how to retrieve it
+
+Being a declarative language, Cypher focuses on the clarity of expressing *what* to retrieve from a graph, not on *how* to retrieve it.
+You can think of Cypher as mapping English language sentence structure to patterns in a graph.
+For example, the nouns are nodes of the graph, the verbs are the relationships in the graph, and the adjectives and adverbs are the properties.
+This is in contrast to imperative, programmatic APIs for database access.
+This approach makes query optimization an implementation detail instead of a burden on the developer, removing the requirement to update all traversals just because the physical database structure has changed.
+
+image::sentence.svg[sentence,width=700,align=center]
+
+In this example, the _Person_, named Tom Hanks acted in the _Movie_ with the title Toy Story, with the role of Woody.
+
+Cypher is inspired by a number of different approaches and builds upon established practices for expressive querying.
+Many of the Cypher keywords like `WHERE` and `ORDER BY` are inspired by SQL.
+The pattern matching functionality of Cypher borrows concepts from SPARQL.
+And some of the collection semantics have been borrowed from languages such as Haskell and Python.
+
+The Cypher language has been made available to anyone to implement and use via openCypher (opencypher.org), allowing any database vendor, researcher or other interested party to reap the benefits of our years of effort and experience in developing a first class graph query language.
+
+== Nodes
+
+Cypher uses a pair of parentheses like `()` or `(n)` to represent a node, much like a circle on a whiteboard.
+
+When you specify a variable `(n)` for a node, you are telling the query processor that for this query, use the variable _n_ to represent the nodes retrieved from the graph.
+Then you can use `n` to perform further query processing or return data from the query.
+
+If you do not need to do anything with the node, you can skip the use of the variable, `()`.
+This is called an anonymous node.
+
+Recall that a node typically represents an entity in your domain. Here is the whiteboard equivalent of part of our sample graph:
+
+image::NodesInGraph.svg[NodesInGraph,width=600,align=center]
+
+*Q1 question here*
+
+//Q1: comprehension (multiple choice)
+// How many nodes does this graph have?
+// Answer 3
+
+== Node labels
+
+Nodes in a graph are typically labeled. Labels are used to group nodes and filter queries against the graph.
+That is, labels can be used to optimize queries.
+
+image::NodesInGraph.svg[NodesInGraph,width=600,align=center]
+
+In this example, the node labels are _Person_, _Actor_, _Director_, Movie, and Genre. One node has three labels.
+
+Here is how you specify a node with a label in Cypher:
+
+[source,syntax,role=nocopy noplay]
+----
+(p:Person)
+(:Person)
+(x:Person:Actor)
+----
+
+Here we see a _Person_ node with the variable _p_ specified. We use p to represent nodes found in the graph so we can return them or process them later in the query.
+The second example shows a _Person_ node without a variable. This means that you refer to the node in the query, but you do not need it for further processing.
+In the last exampke, we see a node specified with the variable _x_ that is both a _Person_ and an _Actor_.
+If we used the last pattern where we specify two labels, the Tom Hanks node would be one of the nodes found because this node has these two labels.
+
+*Q2 question here*
+//Q2: Effort (build) with: (  m  :Movie  )
+// write the Cypher pattern to represent the _Movie_ nodes that are found and can be returned in the query.
+//answer
+//----
+//(m:Movie)
+//----
+
+== Relationships
+
+Relationships are what make Neo4j graphs such a powerful tool for connecting complex and deep data.
+A relationship is a *directed* connection between two nodes that has a *relationship type*.
+
+In a graph where you want to retrieve nodes, you can use relationships between nodes to filter a query.
+For example, rather than retrieving all _Movie_ nodes, you want to retrieve all _Movie_ nodes that have been rated by a _User_.
+That is, there is a _RATED_ relationship between the _Movie_ node and the _User_ node.
+
+image::RelationshipsInGraph.svg[RelationshipsInGraph,width=600,align=center]
+
+Here is how Cypher uses ASCII art to specify a pattern in the graph that is used for a query:
+
+[source,syntax,role=nocopy noplay]
+----
+()--()            // 2 nodes have some type of relationship
+()-[]-()          // 2 nodes have some type of relationship
+()-[:RATED]-()    // 2 nodes have the RATED relationship between them
+()-->()           // the first node has a relationship to the second node
+()<--()           // the second node has a relationship to the first node
+()-[:RATED]->()   // the first node has the RATED relationship to the second node
+----
+
+Here is a Cypher pattern where we want find all _Person_ nodes that have a relationship to a _Movie_ node:
+
+[source,syntax,role=nocopy noplay]
+----
+(p:Person)-->(:Movie)
+----
+
+Here Cypher some patterns where we want find all _Person_ nodes that have _DIRECTED_ relationship to any node:
+
+[source,syntax,role=nocopy noplay]
+----
+// explicitly specifying the relationship
+(p:Person)-[DIRECTED]->()
+(p:Director)-[DIRECTED]->()
+(p:Actor)-[DIRECTED]->()
+(p:Person:Director)-[DIRECTED]->()
+// relationship is implied because we know the data model
+(p:Director)--()
+(p:Director)
+(p:Person:Director)
+----
+
+Knowing the current data model for your graph is very important as it will help you to write more efficient queries.
+We know that only nodes with the label _Director_ have the outgoing _DIRECTED_ relationship with _Movie_ nodes.
+Notice here that we use anonymous nodes for the "to" side of the relationship because we only want to return _Person_ nodes and not _Movie_ nodes.
+
+
+Here is an example of a Cypher pattern where we want  to find all nodes with any type of relationship to or from a Movie node:
+
+[source,syntax,role=nocopy noplay]
+----
+(n)--(:Movie)
+----
+
+This pattern will return all _Person_ and _User_ nodes that have a relationship to _Movie_ nodes, but also _Genre_ nodes that have a relationship from _Movie_nodes.
+
+*Q2 question*
+
+//Q2: Effort (build) with: (u :User ) -[:RATED]->  ( :Movie )
+// write the Cypher pattern to find all _User_ nodes of people who rated movies
+//answer
+//----
+//(u:User)-[:RATED]->(:Movie)
+//----
+
+
+== Properties
+
+In Neo4j, nodes and relationships can have properties that are used to further define a node or relationship.
+A property is identified by its property key.
+Recall that nodes are used to represent the entities of your business model.
+A property is defined for a specific node instance.
+
+In this visualization of the sample graph, we see properties:
+
+image::RelationshipsInGraph.svg[RelationshipsInGraph,width=600,align=center]
+
+In this visualization, we see properties for each node instance and also for some of the relationships.
+
+All nodes of the same type need not have the same properties.
+For example, in the sample  graph, all _Movie_ nodes have _title_  and year properties as well as many other properties.
+However, it is not a requirement that every _Movie_ node has a property, _budget_.
+
+Properties are commonly used to filter queries  so that a subset of the graph is retrieved.
+
+
+== Comments in Cypher
+
+
+In Cypher, you can place a comment (starts with `//`) anywhere in your Cypher to specify that the rest of the line is interpreted as a comment.
+
+[source,syntax,role=nocopy noplay]
+----
+// anonymous node not be referenced later in the query
+()
+// variable p, a reference to a node used later
+(p)
+// anonymous node of type Person
+(:Person)
+// p, a reference to a node of type Person
+(p:Person)
+// p, a reference to a node of types Actor and Director
+(p:Actor:Director)
+----
+

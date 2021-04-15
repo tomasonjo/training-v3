@@ -1,0 +1,15 @@
+= Querying with Cypher in Neo4j 4.x: Course Guide
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:includedir: ../modules/ROOT/pages
+
+include::{includedir}/00-querying40-about.adoc[leveloffset=+1]
+include::{includedir}/01-querying40-introduction-to-cypher.adoc[leveloffset=+1]
+include::{includedir}/02-querying40-using-where-to-filter-queries.adoc[leveloffset=+1]
+include::{includedir}/03-querying40-working-with-patterns-in-queries.adoc[leveloffset=+1]
+include::{includedir}/04-querying40-working-with-cypher-data.adoc[leveloffset=+1]
+include::{includedir}/05-querying40-controlling-query-chain.adoc[leveloffset=+1]
+include::{includedir}/06-querying40-controlling-results-returned.adoc[leveloffset=+1]
+include::{includedir}/07-querying40-summary.adoc[leveloffset=+1]

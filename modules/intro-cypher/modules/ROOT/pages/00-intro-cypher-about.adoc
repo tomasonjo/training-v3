@@ -1,0 +1,49 @@
+= About this course: Introduction to Cypher
+:slug: 00-intro-cypher-about
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-type: training-course-index
+:page-pagination: next
+:page-layout: training
+:page-module-duration-minutes: 5
+
+== About this course
+
+
+This course introduces you to using Cypher to query a Neo4j database.
+
+This course is intended for developers, administrators, architects, data scientists, and data analysts.
+You need not have programming experience to take this training, but you should have a basic understanding of what a graph database is and the Neo4j Graph Platform.
+
+This Course is published by Neo4j per this https://neo4j.com/docs/license/[License for Use^].
+
+== Lesson Overview
+
+Here are the lessons of this course:
+
+[square]
+* Introduction to Cypher
+* Examining the Data Model
+* Retrieving Nodes
+* Retrieving Nodes with Relationships
+
+== Resources
+
+We have set up a discussion area in our https://community.neo4j.com/c/general/online-training[Neo4j Community Site], if you run into problems in the course and need assistance.
+You should register on the community site where you can view other questions and answers for students taking our online training courses.
+The Neo4j Community Site is an excellent resource for answering many types of questions posed by other users of Neo4j.
+
+Here are some resources you will use as you learn about Neo4j and Cypher for this course:
+
+[square]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual]
+* https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard]
+* https://neo4j.com/docs/labs/apoc/current/[APOC Documentation]
+* https://neo4j.com/docs/driver-manual/current/[Neo4j Drivers Manual]
+* https://community.neo4j.com/c/general/online-training[Neo4j Community Site]
+endif::[]
+
+

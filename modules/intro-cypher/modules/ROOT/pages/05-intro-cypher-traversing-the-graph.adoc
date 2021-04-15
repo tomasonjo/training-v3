@@ -1,0 +1,555 @@
+= Traversing the Graph
+:slug: 05-intro-cypher-traversing-the-graph
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes:
+
+== About this topic
+
+Now that you have gained experience with retrieving nodes and relationships, you will learn more about how the query processor traverses the graph to retrieve data.
+
+At the end of this topic, you should be able to:
+
+[square]
+* ??
+
+This video summarizes the content of this topic:
+
+//video::cMSKmx6Pu7o[youtube,width=560,height=315]
+
+Throughout this training, you should refer to:
+[square]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
+* http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+
+== Patterns in the graph
+
+Thus far, you have learned how to specify nodes, properties, and relationships in your Cypher queries.
+Since relationships are directional, it is important to understand how patterns are used in graph traversal during query execution.
+How a graph is traversed for a query depends on what directions are defined for relationships and how the pattern is specified in the `MATCH` clause.
+
+
+Here is an example of where the _FOLLOWS_ relationship is used in the _Movie_ graph.
+Notice that this relationship is directional.
+
+image::FollowsRelationships.png[FollowsRelationships,width=400,align=center]
+
+
+
+
+
+=== Using patterns for queries
+
+ifndef::env-slides[]
+We can perform a query that returns all _Person_ nodes who follow _Angela Scope_:
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH  (p:Person)-[:FOLLOWS]->(:Person {name:'Angela Scope'})
+RETURN p
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::AngelaFollowers.png[AngelaFollowers,width=600,align=center]
+
+ifndef::env-slides[]
+For this query the Person node for Angela Scope is the anchor of the query.
+It is the first node that is retrieved from the graph.
+Then the query engine looks for all relationships _into_ this node and retrieves them.
+In this case there is only one relationship that is defined that points to the Angela Scope node, Paul Blythe.
+endif::[]
+
+image::AngelaFollowersQueryTraversal.png[AngelaFollowers,width=400,align=center]
+
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Here we have a query that will return all Person nodes for people that FOLLOW Angela Scope.
+
+* We need to be careful to make sure that the arrow points in the correct direction.
+* As in the code shown here it points to the right,
+** since we are looking for nodes that point (follow) Angela.
+
+Let’s walk through how this query works.
+
+* For this query the *Person node* for *Angela Scope* is the *anchor* of the query.
+** The anchor is generally the node that is easiest to find, where we know more about the node.
+** In this case we have a filter on the Person node.
+* The anchor node is the first node that is retrieved from the graph.
+* Next the query engine looks for all relationships for this node and retrieves those relationships.
+* In this case there is only one relationship that is defined -
+** that points to the Angela Scope node, Paul Blythe.
+
+Are there any questions about this query or on how the anchor is identified?
+
+<more details>
+
+For this query the Person node for Angela Scope is the anchor of the query. It is the first node that is retrieved from the graph. Then the query engine looks for all relationships into this node and retrieves them. In this case there is only one relationship that is defined that points to the Angela Scope node, Paul Blythe.
+
+--
+endif::[]
+
+
+=== Reversing the traversal
+
+ifndef::env-slides[]
+If we reverse the direction in the pattern, the query returns different results:
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH  (p:Person)<-[:FOLLOWS]-(:Person {name:'Angela Scope'})
+RETURN p
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::FollowedByAngela.png[FollowedByAngela,width=700,align=center]
+
+ifndef::env-slides[]
+In this case the query engine found the Angela Scope node as the anchor and then looked for all relationships _out from_ the Angela Scope node.
+endif::[]
+
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+But if it *points* to the *left*, reversing the direction in the pattern ...
+
+* You're asking a *different* question.
+* You're not asking for all *people* that *follow* Angela.
+* Instead your asking who *Angela follows*, and you'll get a *different* answer.
+
+<more details>
+
+In this case the query engine found the Angela Scope node as the anchor and then looked for all relationships out from the Angela Scope node.
+
+--
+endif::[]
+
+
+=== Querying a relationship in both directions
+
+ifndef::env-slides[]
+We can also find out what _Person_ nodes are connected by the _FOLLOWS_ relationship in either direction by removing the directional arrow from the pattern.
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH  (p1:Person)-[:FOLLOWS]-(p2:Person {name:'Angela Scope'})
+RETURN p1, p2
+----
+
+ifndef::env-slides[]
+We also return the Angela Scope node so that we can see the relationships in the result. The result returned is:
+endif::[]
+
+image::AngelaFromTo.png[AngelaFromTo,width=700,align=center]
+
+
+ifndef::env-slides[]
+In this case the Angela Scope node is the anchor and the query engine traverses all _FOLLOWS_ relationships both in and out of the Angela Scope Node.
+endif::[]
+
+image::AngelaConnectionsQueryTraversal.png[AngelaConnectionsQueryTraversal,width=400,align=center]
+
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+Now, supposing you are interested in finding -
+
+* *both people* that *follow Angela*
+* and *people* that *Angela follows*.
+
+In the code - the query can be modified
+
+* to use a directionless query as shown here.
+* As you can see, there is no Arrowhead on either side.
+* This will RETURN - both the people she follows,
+** and the people that follow her.
+* Again, In this case we’re ignoring direction.
+
+Note that we are returning p2, in addition to p1, -
+
+* so that we can see the node for Angela in the returned nodes.
+* We see the result of querying in both directions in the lower left -
+** With one node for each direction.
+
+In summary, - be very careful with your arrow heads -
+
+* or you may not be returning the data that you expect.
+
+*Q*: - Why was James Thompson not found?
+
+*A*: This is answered on the next slide.
+
+<more details>
+
+We can also find out what Person nodes are connected by the FOLLOWS relationship in either direction by removing the directional arrow from the pattern.
+In this case the Angela Scope node is the anchor and the query engine traverses all FOLLOWS relationships both in and out of the Angela Scope Node.
+
+--
+endif::[]
+
+
+=== Traversing multiple relationships
+
+ifndef::env-slides[]
+Since we have a graph, we can traverse through nodes to obtain relationships further into the traversal.
+
+For example, we can write a Cypher query to return all followers of the followers of _Jessica Thompson_.
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH  (p:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
+RETURN p
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::FollowersOfJessicaFollowers.png[FollowersOfJessicaFollowers,width=800,align-center]
+
+
+ifndef::env-slides[]
+For this query the _Jessica Thompson_ node is the anchor.
+Then from the Jessica Thompson node, the query engine looks for any relationships into that node.
+It finds two, but then it must traverse more to find the next FOLLOWS relationship (if any) out of the found nodes.
+It finds only one node, _Paul Blythe_ that matches the query.
+endif::[]
+
+image::FollowersOfFollowersQueryTraversal.png[FollowersOfFollowersQueryTraversal,width=300,align=center]
+
+
+ifdef::env-slides[]
+Query to return all followers of the followers of Jessica Thompson
+[.instructor-notes]
+--
+(Answer to previous slide – *Q*: Why was James Thompson not found?)
+A:  The reason, James Thompson does not show up in the answer is based on how the query is written.
+
+* If we break down - what we’re looking for in the structure, ...
+* we're *looking for* - a *pattern* with -  *one* node, *one* relationship, and *another* node.
+* So the answer is in the pattern.
+* In order to RETURN - James Thompson - we need a *longer pattern*.
+
+<START HERE>
+
+So far, we've worked with *relatively simple patterns* -
+
+* where the structure we're looking for has - *two nodes* in *one relationship*.
+
+There is *no limitation* - on the *length of a pattern* - that you can request in Neo4j.
+
+* For example, here we're looking for - *second degree followers* - for Jessica Thompson.
+* That is - we’re *looking* for -
+** a *person* that follows a *person* - that follows a *person* ...,
+** where that last person's name - in this  pattern - is Jessica Thompson. .
+
+On the right - we see a visualization of the part of the graph being searched.
+
+* We're looking for person follows > person follows > Jessica Thompson.
+* We see that - there is one match - where *Paul* follows *Angela*, and *Angela* follows *Jessica*.
+* Therefore this query returns Paul Blythe
+
+After seeing this - it becomes clear that  you need to be very careful in your MATCH statement  ...
+
+* to code a pattern - that will return the answer to your question.
+* This requires that you precisely define the pattern, …
+** taking into account its length, its features,
+** the directions of the relationship.
+
+There’s no theoretical upper limit - to the complexity of the pattern.
+
+Are there any other questions about patterns at this time?
+
+Q: How do we know how deep we want to go in a pattern.
+
+A: That will depend on the question and the data model.
+
+* One thing that will help in this - we will be discussing soon - on how you can work with a variable length path.
+
+Since we have a graph, we can traverse through nodes to obtain relationships further into the traversal.
+
+<more details>
+
+For this query the Jessica Thompson node is the anchor. Then from the Jessica Thompson node, the query engine looks for any relationships into that node. It finds two, but then it must traverse more to find the next FOLLOWS relationship (if any) out of the found nodes. It finds only one node, Paul Blythe that matches the query.
+
+--
+endif::[]
+
+ifndef::env-slides[]
+=== Variation on the traversal
+
+This query could also be modified to return each person along the matched path by specifying variables for the nodes and returning them.
+For example:
+
+
+[source,Cypher,role=noplay]
+----
+MATCH  (p:Person)-[:FOLLOWS]->(p2:Person)-[:FOLLOWS]->(p3:Person {name:'Jessica Thompson'})
+RETURN p.name, p2.name, p3.name
+----
+
+For this query, although the query engine traverses the path from _Jessica Thompson_ to _James Thompson_, it finds that the _James Thompson_ node does not match the entire path specified.
+
+The result returned is:
+
+image::NodesInPathForFollowersOfJessicaFollowers.png[NodesInPathForFollowersOfJessicaFollowers,width=1000,align=center]
+endif::[]
+
+=== Using patterns to focus the query
+
+ifndef::env-slides[]
+As you gain more experience with Cypher, you will see how patterns in your queries enable you to focus on the relationships in the graph.
+For example, suppose we want to retrieve all unique relationships between an actor, a movie, and a director.
+This query will return many unique rows of information that provide this pattern in the graph:
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
+RETURN a.name, m.title, d.name
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::TraversalInTwoDirections.png[TraversalInTwoDirections,width=800,align=center]
+
+ifndef::env-slides[]
+In this query, notice that there are multiple records returned for a movie, each with its set of values for the actor and director.
+Each row is unique since the focal point of the query is the actor/director for a particular movie.
+endif::[]
+
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+This query shows an example of using a *longer pattern* ...
+
+* where the *Movie node* is in the *middle* -
+** and it locates Person nodes - that will *return* …
+** the *movie*, the *actors* in the movie, and the *directors* for the movie.
+
+The return values have duplication.
+
+* Later - we’ll look at how to remove duplication -
+* in the returned data set.
+
+(*Note*: Point out that there are duplicate rows returned - will learn about DISTINCT later.)
+
+<more details>
+
+As you gain more experience with Cypher, you will see how patterns in your queries enable you to focus on the relationships in the graph. For example, suppose we want to retrieve all unique relationships between an actor, a movie, and a director. This query will return many unique rows of information that provide this pattern in the graph:
+In this query, notice that there are multiple records returned for a movie, each with its set of values for the actor and director. Each row is unique since the focal point of the query is the actor/director for a particular movie.
+
+--
+endif::[]
+
+== Using anonymous nodes in a query
+
+ifndef::env-slides[]
+Suppose you wanted to retrieve the actors that acted in _The Matrix_, but you do not need any information returned about the _Movie_ node.
+You need not specify a variable for a node in a query if that node is not returned or used for later processing in the query.
+You can simply use the anonymous node in the query as follows:
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH (p:Person)-[:ACTED_IN]->(:Movie {title: 'The Matrix'})
+RETURN p.name
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::AnonymousMovieNode.png[AnonymousMovieNode,width=800,align=center]
+
+ifndef::env-slides[]
+[NOTE]
+A best practice is to place named nodes (those with variables) before anonymous nodes in a `MATCH` clause.
+endif::[]
+
+ifdef::env-slides[]
+Find all people who acted in the move 'The Matrix' and return their names.
+[.instructor-notes]
+--
+In this example we want to find all people who have an - *ACTED_IN - type* of - *relationship* with the movie *'The Matrix'*.
+
+A *best practice*  - is to place *named Nodes* - before *anonymous nodes* in a *MATCH* clause.
+
+* In this example *‘p’* is specified for Person node,  -
+** while there is *no variable* specified - for the *Movie* node.
+
+Another *best practice* - is to *not specify* any unused variables.
+
+A best practice is to place named nodes (those with variables) before anonymous nodes in a MATCH clause.
+
+<more details>
+
+Suppose you wanted to retrieve the actors that acted in The Matrix, but you do not need any information returned about the Movie node. You need not specify a variable for a node in a query if that node is not returned or used for later processing in the query. You can simply use the anonymous node in the query as follows:
+
+--
+endif::[]
+
+
+== Using an anonymous relationship for a query
+
+ifndef::env-slides[]
+Suppose you want to find all people who are in any way connected to the movie, _The Matrix_.
+You can specify an empty relationship type in the query so that all relationships are traversed and the appropriate results are returned.
+In this example, we want to retrieve all _Person_ nodes that have any type of connection to the _Movie_ node, with the _title_, _The Matrix_.
+This query returns more nodes with the relationships types, _DIRECTED_, _ACTED_IN_, and _PRODUCED_.
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH (p:Person)-->(m:Movie {title: 'The Matrix'})
+RETURN p, m
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::AllRelationshipsMatrix.png[AllRelationshipsMatrix,width=800,align=center]
+
+ifdef::env-slides[]
+Find all people who have any type of relationship to the movie ‘The Matrix’, and return the nodes and relationships.
+[.instructor-notes]
+--
+In this example we want to find *all people* who have *ANY* type of relationship with ‘The Matrix’.
+
+So we're going to use a *fully anonymous relationship* , which doesn’t have - a relationship type - specified.
+
+* *Any person* - with any *relationship* - in the *direction* of the Movie node, with a movie called ‘The Matrix’,  is returned.
+* As shown here, a several *Person nodes* are returned.
+* You can see by *inspection* - that they have *different kinds* of relationships - including -
+** *ACTED_IN*, *DIRECTED*, and *PRODUCED* .
+
+This type of graph inspection - is not something you could do - to feed data into a client application.
+
+* For example if this query is part of a broader solution - where you want to act upon the differences - in the relationship type -
+** you'd want to - *output* the *relationship types*.
+
+(*Note*: In this training, we will use `-->`, `--`, and `<--` to represent anonymous relationships as it is a Cypher best practice.)
+
+<more details>
+
+Suppose you want to find all people who are in any way connected to the movie, The Matrix. You can specify an empty relationship type in the query so that all relationships are traversed and the appropriate results are returned. In this example, we want to retrieve all Person nodes that have any type of connection to the Movie node, with the title, The Matrix. This query returns more nodes with the relationships types, DIRECTED, ACTED_IN, and PRODUCED.
+
+--
+endif::[]
+
+
+=== More anonymous relationships
+
+ifndef::env-slides[]
+Here are other examples of using the anonymous relationship:
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH (p:Person)--(m:Movie {title: 'The Matrix'})
+RETURN p, m
+----
+
+[source,Cypher,role=noplay]
+----
+MATCH (p:Person)-[]-(m:Movie {title: 'The Matrix'})
+RETURN p, m
+----
+
+[source,Cypher,role=noplay]
+----
+MATCH (m:Movie)<--(p:Person {name: 'Keanu Reeves'})
+RETURN p, m
+----
+
+ifndef::env-slides[]
+In this training, we will use `+-->+`, `--`, and `+<--+` to represent anonymous relationships as it is a Cypher best practice.
+endif::[]
+
+
+ifdef::env-slides[]
+It is recommended that empty brackets [] not be used
+[.instructor-notes]
+--
+Here are some additional examples of using the anonymous relationship.
+
+* These variations show a *double dash*, a *directed arrow* with a double dash,
+** and an *empty bracket* between dashes.
+
+It is recommended that empty brackets not be used, since they don’t add anything additional to the query.
+
+--
+endif::[]
+
+== Returning paths
+
+ifndef::env-slides[]
+In addition, you can assign a variable to the path and return the path as follows:
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH  path = (:Person)-[:FOLLOWS]->(:Person)-[:FOLLOWS]->(:Person {name:'Jessica Thompson'})
+RETURN  path
+----
+
+ifndef::env-slides[]
+The result returned is:
+endif::[]
+
+image::ReturnPath.png[ReturnPath,width=1100,align=center]
+
+
+ifdef::env-slides[]
+[.instructor-notes]
+--
+You can return the entire path by assigning a variable as shown here.
+--
+endif::[]
+
+
+=== Returning multiple paths
+
+ifndef::env-slides[]
+Here is another example where multiple paths are returned.
+The query is to return all paths from actors to a movie that was directed by Ron Howard
+endif::[]
+
+[source,Cypher,role=noplay]
+----
+MATCH  path = (:Person)-[:ACTED_IN]->(:Movie)<-[:DIRECTED]-(:Person {name:'Ron Howard'})
+RETURN  path
+----
+
+ifndef::env-slides[]
+Multiple paths are returned. Even if we set Neo4j Browser to not connect result nodes, the nodes are shown as connected in the visualization because we are returning paths, not nodes:
+endif::[]
+
+image::ReturnRonHowardPaths.png[ReturnRonHowardPaths,width=800,align=center]
+
+ifndef::env-slides[]
+[NOTE]
+A best practice is to specify direction in your `MATCH` statements. This will optimize queries, especially for larger graphs.
+

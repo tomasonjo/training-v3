@@ -1,0 +1,116 @@
+= Querying with Cypher in Neo4j 4.x: Summary
+:slug: 07-querying40-summary
+:doctype: book
+:toc: left
+:toclevels: 3
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-certificate:
+:page-module-duration-minutes: 5
+
+== Course Summary
+
+In this course, you have learned how to:
+
+[square]
+* Write basic Cypher queries
+* Use the WHERE clause to filter queries
+* Work with patterns in Cypher queries
+* Work with different types of Cypher data
+* Control the query chain of processing
+* Control how results are returned
+
+== Cypher style recommendations
+
+Here are the *Neo4j-recommended* Cypher coding standards that we use in our examples:
+
+[square]
+* Node labels are CamelCase and begin with an upper-case letter (examples: _Person_, _NetworkAddress_). Note that node labels are case-sensitive.
+* Property keys, variables, parameters, aliases, and functions are camelCase and begin with a lower-case letter (examples: _businessAddress_, _title_). Note that these elements are case-sensitive.
+* Relationship types are in upper-case and can use the underscore. (examples: _ACTED_IN_, _FOLLOWS_). Note that relationship types are case-sensitive and that you cannot use the "-" character in a relationship type.
+* Cypher keywords are upper-case (examples: `MATCH`, `RETURN`). Note that Cypher keywords are case-insensitive, but a best practice is to use upper-case.
+* String constants are in single quotes, unless the string contains a quote or apostrophe (examples: _'The Matrix'_, _"Something's Gotta Give"_). Note that  you can also escape single or double quotes within strings that are quoted with the same using a backslash character.
+* Specify variables only when needed for use later in the Cypher statement.
+* Place named nodes and relationships (that use variables) before anonymous nodes and relationships in your `MATCH` clauses when possible.
+* Specify anonymous relationships with `+-->+`, `--`, or `+<--+`.
+endif::[]
+
+ifdef::env-slides[]
+== Resources - 1
+endif::[]
+
+ifndef::env-slides[]
+== Resources
+endif::[]
+
+There are many resources available to you for learning more about Neo4j and Cypher.
+
+https://neo4j.com/developer/resources/
+
+Neo4j Community Site where you can ask or answer questions about Neo4j and discuss with other users:
+
+https://community.neo4j.com
+
+Neo4j documentation:
+
+https://neo4j.com/docs/
+
+ifdef::env-slides[]
+== Resources - 2
+endif::[]
+
+Neo4j Sandboxes for experimenting with graphs:
+
+https://
+sandbox.neo4j.com/?ref=graph-academy
+
+Videos on  the Neo4j YouTube channel:
+
+https://www.youtube.com/channel/UCvze3hU6OZBkB1vkhH2lH9Q
+
+Neo4j online and classroom training:
+
+https://neo4j.com/graphacademy/
+
+ifdef::env-slides[]
+== Resources - 3
+endif::[]
+
+Become a Neo4j certified developer:
+
+https://neo4j.com/graphacademy/neo4j-certification/
+
+[NOTE]
+The certification exam tests you on content from this course, as well as other courses related to development with Neo4j 4.x.
+You can take the certification exam multiple times until you pass!
+
+GitHub repository:
+
+https://github.com/neo4j-contrib
+
+Neo4j events all over the world:
+
+https://neo4j.com/events/world/all/
+
+ifdef::env-slides[]
+== Resources - 4
+endif::[]
+
+Graph Gists for learning more use cases for Neo4j:
+
+https://neo4j.com/graphgists/
+
+Attend a Neo4j meetup:
+
+https://www.meetup.com/topics/neo4j/
+
+View questions/answers raised about Neo4j:
+
+https://stackoverflow.com/tags/neo4j/hot
+
+ifndef::env-slides[]
+== Course feedback
+
+We want your feedback on this course. Please provide your https://forms.gle/k6nhzMXiYFyUYUNs7[feedback] so we can improve this course.
+endif::[]

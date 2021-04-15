@@ -1,0 +1,277 @@
+= Retrieving Nodes with Relationships
+:slug:
+:doctype: book
+:toc: left
+:toclevels: 4
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes:
+
+
+== About this topic
+
+You have learned how to retrieve nodes from the graph and how to filter what nodes are retrieved either by a node label or by property values.
+Nodes are related to other nodes in the graph and their relationships are an important part of the data model for your application.
+
+In topic, you will learn how to retrieve data from the graph where the relationships between nodes is significant.
+This is another way that you can filter what data is retrieved from the graph.
+
+At the end of this topic, you should be able to:
+
+[square]
+* Retrieve nodes based upon their relationship to other nodes in the graph.
+* Retrieve node patterns with multiple relationships.
+* Determine a relationship type between nodes retrieved.
+* Retrieve nodes filtering by property values in a relationship.
+
+This video summarizes the content of this topic:
+
+//video::cMSKmx6Pu7o[youtube,width=560,height=315]
+
+Throughout this training, you should refer to:
+[square]
+* https://neo4j.com/docs/cypher-manual/current/[Neo4j Cypher Manual^]
+* http://neo4j.com/docs/cypher-refcard/current/[Cypher Reference card^]
+
+== Relationship patterns in the graph
+
+In your `MATCH` clause, you specify how you want a relationship to be used to perform the query.
+
+Earlier you learned of how you can specify relationship patterns in the graph:
+
+[source,syntax,role=nocopy noplay]
+----
+()--()            // 2 nodes have some type of relationship
+()-[]-()          // 2 nodes have some type of relationship
+()-[:RATED]-()    // 2 nodes have the RATED relationship between them
+()-->()           // the first node has a relationship to the second node
+()<--()           // the second node has a relationship to the first node
+()-[:RATED]->()   // the first node has the RATED relationship to the second node
+----
+
+In a query, a relationship can be specified with or without direction.
+It can also be anonymous, meaning that the relationship type is not specified in the pattern.
+When an anonymous relationship pattern is used, any relationship is used for the retrieval.
+When a relationship type is specified, we use the `:<relationshipType>` syntax.
+
+
+== Examining relationships in the graph
+
+Recall that you can view the relationship types in the graph and how they are used to connect nodes.
+
+//T: execute
+
+Run this Cypher code to view the relationships in the sample graph:
+
+[source,Cypher]
+----
+CALL db.schema.visualization()
+----
+
+The Person node has the same relationships to the Movie node as the Director and Actor nodes.
+All relationships are from Person, Director, Actor, and User nodes to Movie nodes which include:
+
+[square]
+* ACTED_IN
+* DIRECTED
+* RATED
+
+The only relationship from a Movie node to another node, is the `IN_GENRE` relationship to a Genre node.
+
+== Using a relationship in a query
+
+Here is an example where we retrieve the _Person_ nodes that have the _ACTED_IN_ relationship to the _Movie_, _Toy Story_.
+In other words, show me the actors that acted in _Toy Story_.
+endif::[]
+
+//T: execute
+
+Run this Cypher code:
+
+[source,Cypher]
+----
+MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'Toy Story'})
+RETURN p, rel, m
+----
+
+//T: execute
+
+Click the graph view:
+
+In the graph view, you see the four _Person_ nodes and one _Movie_ node and their relationships.
+This query returns nodes and relationships.
+
+//T: execute
+
+Click the table view:
+
+In the table view, we see 4 records. Because we are returning _p, rel, m_, each row contains the data for each item returned.
+The _m_ cell is repeated for each row.
+
+//Q3: More effort (modify Cypher)
+
+Modify this query to retrieve the _Person_ nodes that have the _DIRECTED_ relationship to the _Movie_, _Toy Story_.
+//answer
+//MATCH (p:Person)-[rel:DIRECTED->(m:Movie {title: 'Toy Story'})
+//RETURN p, rel, m
+
+//Q3: More effort (modify Cypher)
+
+Modify this query to return the names of the people who acted in the movie, Toy Story:
+
+//answer
+//MATCH (p:Person)-[rel:ACTED_IN]->(m:Movie {title: 'Toy Story'})
+//RETURN p.name
+
+=== Specify labels whenever possible
+
+You specify node labels whenever possible in your queries as it optimizes the retrieval in the graph engine.
+That is, you should *not* specify the previous query as:
+
+[source,Cypher]
+----
+MATCH (p)-[rel:ACTED_IN]->(m {title:'Toy Story'})
+RETURN p,rel,m
+----
+
+This query returns the same results.
+But, in a large graph, this query will work, but it will not be as performant as the query where you specify the node label.
+
+== Querying by multiple relationships
+
+You can specify multiple relationships if you want to possibly expand the subgraph returned.
+For example, Tom Hanks acted in and directed movies.
+This query returns all of the titles of movies that Tom Hanks acted in or directed.
+
+//T: execute
+
+Run this Cypher code:
+
+[source,Cypher]
+----
+MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN|DIRECTED]->(m:Movie)
+RETURN  m.title
+----
+
+What this query is retrieving is the node/relationship/node triples that satisfy the pattern.
+That is, a Tom Hanks node that has an ACTED_IN relationship to movie nodes or a Tom Hanks node that has a _DIRECTED_ relationship to movie nodes.
+In the sample graph, there are 38 _ACTED_IN_ relationships from Tom Hanks and 2 _DIRECTED_ relationships from Tom Hanks.
+The pattern specifies `|` for the relationship so all of these relationships are retrieved.
+If we were to return p,m, we would find that there is duplication in the movie nodes.
+That is, Tom Hanks both acted in and directed the movie, Larry Crowne.
+This query returns 40 titles, with a title duplicated
+
+== Using DISTINCT to eliminate duplication
+
+You can eliminate this problem of duplication by pre-pending the Cypher keyword `DISTINCT` before the specification of the _m.title_ value in the `RETURN` clause.
+
+//T: execute
+
+Run this Cypher code to see that the duplicate title is eliminated:
+
+[source,Cypher]
+----
+MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN|DIRECTED]->(m:Movie)
+RETURN  DISTICT m.title
+----
+
+== Retrieving the relationship types
+
+
+There is a built-in function, `type()` that returns the type of a relationship.
+This function is useful if you want to be more introspective of your traversal in the graph and discover what the relationship is between nodes.
+You would generally use this when you return a variable for an anonymous relationship
+
+Here is an example where we use the _rel_ variable to hold the relationships retrieved.
+We then use this variable to return the relationship types.
+
+
+//T: execute
+
+Run this Cypher code to see the names of people associated with the movie, Toy Story and what their relationship is:
+
+[source,Cypher]
+----
+MATCH (p:Person)-[rel]->(:Movie {title:'Toy Story'})
+RETURN p.name, type(rel)
+----
+
+Notice also that we are not using a variable for the _Movie_ node since we are not returning it.
+
+//Q3: More effort (modify Cypher)
+
+Modify the previous query to return the names for any nodes in the graph (not just _Person_ nodes) with are relationship to the movie, Toy Story.
+
+//answer
+//MATCH (p)-[rel]->(:Movie {title:'Toy Story'})
+//RETURN p.name, type(rel)
+
+== Properties for relationships
+
+Recall that a node can have as set of properties, each identified by its property key.
+Relationships can also have properties.
+This enables your graph model to provide more data about the relationships between the nodes.
+
+Here is the next scenario you will be working with.
+The movie, Toy Story had several people rate it. These are _User_ nodes with the _RATED_ relationship to _Movie_ nodes.
+
+Write a query that returns the person's name and the relationship to the Toy Story movie.
+*Hint*: You should return the entire relationship so you can examine its properties.
+
+//Q4: Most effort (write Cypher)
+//answer
+//MATCH (u:User)-[rel:RATED]->(:Movie {title:'Toy Story'})
+//RETURN u.name, rel
+
+Examine the properties for the relationships returned.
+
+//Q3: More effort (modify Cypher)
+
+Modify the previous query to return the names for any nodes in the graph (not just _Person_ nodes) with are relationship to the movie, Toy Story.
+
+//answer
+//MATCH (u:User)-[rel:RATED]->(:Movie {title:'Toy Story'})
+//RETURN u.name, rel.rating
+
+== Ordering results returned
+
+For the last query, it might be useful to order the values returned in rating order.
+You can add the Cypher phrase `ORDER BY rel.rating` to to `RETURN` clause to order the results.
+
+//Q3: More effort (modify Cypher)
+
+Modify the previous query to return the names for any nodes in the graph (not just _Person_ nodes) with are relationship to the movie, Toy Story.
+
+//answer
+//MATCH (u:User)-[rel:RATED]->(:Movie {title:'Toy Story'})
+//RETURN u.name, rel.rating ORDER BY rel.rating
+
+[NOTE]
+You can specify `DESC` after the property to reverse the order.
+
+== Filtering using relationship properties
+
+
+Just as you can specify property values for filtering nodes for a query, you can specify property values for a relationship.
+
+This query returns the name of of the person who gave the movie, Toy Story a rating of _1.0_
+
+//T: execute
+
+Execute this query:
+
+[source,Cypher,role=noplay]
+----
+MATCH (u:User)-[:RATED {rating: 1.0}]->(:Movie {title:'Toy Story'})
+RETURN u.name AS `Rater name`
+----
+
+//Q3: More effort (modify Cypher)
+
+Modify the previous query to return the names of people who gave movies a rating of .5 and what movie they rated as such.
+
+//answer
+//MATCH (u:User)-[:RATED {rating: .5}]->(m:Movie)
+//RETURN u.name AS `Rater name`, m.title as Title
