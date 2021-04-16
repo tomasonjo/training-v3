@@ -1,0 +1,65 @@
+= Cypher refresher
+:slug: 03-gdsaa-cypher-refresher
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-quiz:
+:page-module-duration-minutes: 30
+
+
+== Exercise
+
+By now, you should have all the tools up and running and talking to each other.
+
+. In Neo4j Browser, complete the steps in the first Neo4j Browser Guide (:play gds-applied-algos-exercises), *Cypher Refresher*.
+. In the React web application, confirm that you can now view data in the database by selecting a name in the drop-down (initially selected with Dolores). Data should be retrieved for each user.
+
+The data for Dolores should look like the following:
+
+image::reactapp1.png[,width=400,align=center]
+
+====
+.Useful Resources
+
+* https://neo4j.com/docs/cypher-refcard/current/[Cypher Cheatsheet^]
+====
+
+[.quiz]
+== Check your understanding
+=== Question 1
+
+[.statement]
+Verify your React application is connected to Neo4j instance.
+Which of the following users appear in the User Profile dropdown?
+
+Select the correct answers.
+[%interactive.answers]
+- [ ] Bob Loblaw
+- [ ] William
+- [x] Dolores
+- [x] PrincessCandyEmpire
+
+=== Question 2
+
+[.statement]
+Using the Neo4j Browser for your Yelp Neo4j instance write a Cypher query to find all the businesses connected to the Category "Breweries". How many breweries are there in the dataset?
+
+[.statement]
+Select the correct answer.
+
+[%interactive.answers]
+- [ ] 10
+- [x] 38
+- [ ] 1142
+- [ ] 27455
+
+[.summary]
+== Summary
+
+You should now have:
+[square]
+* Created a Yelp Neo4j instance.
+* Opened a Neo4j Browser for the Yelp database.
+* Completed the Cypher Refresher section in the Neo4j Browser Guide.
+* Installed the React application.
+* Connected your React application to your Neo4j instance.

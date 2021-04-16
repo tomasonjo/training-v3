@@ -1,5 +1,5 @@
 = Summary: Applied Graph Data Science for Web Applications
-:slug: 06-gdsaa-summary
+:slug: 08-gdsaa-summary
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training

@@ -1,0 +1,67 @@
+= Environment Setup
+:slug: 01-gdsaa-environment-setup
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-module-duration-minutes: 5
+:page-pagination: previous
+
+== The Yelp Public Dataset
+
+https://www.yelp.com/[Yelp^] helps people find local businesses based on reviews, preferences, and recommendations.
+Over 163 million reviews have been written on the platform as of the middle of 2018.
+Yelp has been running the Yelp Dataset challenge 2 since 2013, a competition that encourages people to explore and research Yelp’s open dataset.
+
+As of Round 12 of the challenge, the open dataset contained:
+
+* Over 7 million reviews plus tips.
+* Over 1.5 million users and 280,000 pictures.
+* Over 188,000 businesses with 1.4 million attributes.
+* 10 metropolitan areas.
+
+The https://www.yelp.com/dataset[Yelp dataset^] represents real data that is very well structured and highly interconnected.
+It’s a great showcase for graph algorithms that you can also download and explore. You will setup a Neo4j Desktop instance and load this data.
+
+== The Neo4j Graph Data Science Plugin
+
+[.is-half.left-column]
+--
+image::gdsplugin.png[Neo4j Graph Data Science plugin,width=500,align=center]
+--
+
+[.is-half.right-column]
+--
+The focus of this course is on using the graph algorithms available in the Neo4j Graph Data Science Library. The plugin implements five types of graph algorithms: Path Finding, Centrality, Community Detection, Similarity, Embeddings. The first three are classic graph algorithms and the last two can be used on its own or in combination with the other three.
+--
+
+== Setting up your development environment
+
+You can pick between the following two options for your development environment.
+
+=== Neo4j Sandbox
+
+[frame="none", cols="^.^,<.^"]
+|===
+a|image::sandbox.png[Neo4j Sandbox,width=500,align=center]
+a|
+Neo4j Sandbox is a hosted Neo4j tool that allows you to run private instances of Neo4j without having to install Neo4j locally. You can choose Neo4j Sandbox usecases that come pre-loaded with datasets and your Neo4j Sandbox instances can be accessed over the internet, making them useful for building sample applications. While Neo4j Browser is the primary way to interact with Neo4j instances hosted by Neo4j Sandbox, for this course you will also connect your sandbox instance to a simple web application.
+
+- xref:02a-gdsaa-sandbox-environment.adoc[Choose Sandbox environment setup,role=btn]
+
+|===
+
+
+=== Neo4j Desktop
+
+[frame="none", cols="^.^,<.^"]
+|===
+a|image::desktop.png[Neo4j Sandbox,width=500,align=center]
+a|
+Neo4j Desktop is a Developer IDE or Management Environment for Neo4j instances similar to Enterprise Manager, but better. 
+You can manage as many projects and database servers locally as you like and also connect to remote Neo4j servers.
+Each database server managed through desktop can be configured, upgraded and maintained through the UI, no command line needed.
+
+- xref:02b-gdsaa-desktop-environment.adoc[Choose Desktop environment setup,role=btn]
+
+|===
+

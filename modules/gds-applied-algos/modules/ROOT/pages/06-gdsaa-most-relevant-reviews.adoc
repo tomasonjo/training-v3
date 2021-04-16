@@ -1,5 +1,5 @@
 = Most Relevant Reviews
-:slug: 04-gdsaa-most-relevant-reviews
+:slug: 06-gdsaa-most-relevant-reviews
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training

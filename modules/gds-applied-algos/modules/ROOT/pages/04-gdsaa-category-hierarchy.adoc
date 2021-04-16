@@ -1,5 +1,5 @@
 = Category Hierarchy
-:slug: 02-gdsaa-category-hierarchy
+:slug: 04-gdsaa-category-hierarchy
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training

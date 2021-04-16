@@ -1,0 +1,90 @@
+= Desktop environment
+:slug: 02b-gdsaa-desktop-environment
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-pagination!:
+:page-module-duration-minutes: 30
+:uri-yelp-dataset-agreement-pdf: https://s3-media3.fl.yelpcdn.com/assets/srv0/engineering_pages/bea5c1e92bf3/assets/vendor/yelp-dataset-agreement.pdf
+
+== Setting up the Yelp dataset in Neo4j Desktop
+
+To complete this course, you will use a combination of Neo4j Desktop for hosting the database and your Web application development environment.
+
+[#yelp-dataset-agreement]
+--
+Before downloading the Yelp data, you need to read and agree to the {uri-yelp-dataset-agreement-pdf}[Yelp Dataset License^].
+--
+
+Perform these steps to set up the Yelp dataset in your Neo4j Desktop environment:
+
+. https://neo4j-sandbox-usecase-datastores.s3.amazonaws.com/dump/yelp-41.dump[Download the dump file^,id=yelp-create-sandbox-link]
+. Ensure that you have no databases started or connected to in Neo4j Desktop.
+. Create a project
+. Drag the downloaded *yelp-40.dump* file to the *Files* location in your project.
+. Click the three dots to the right of the dump file name and select *Create DBMS from dump*.
+. Enter a password for the database and then click *Create*.
+. Open the details for the DBMS you are working with.
+. Click the *Plugins* tab.
+. Install *APOC*.
+. Install *Graph Data Science Library*.
+. Start the DBMS.
+. Connect to the DBMS with Neo4j Browser.
+. Verify that the nodes and relationships exist in the graph.
+
+You can also follow along with this video for setting up the Yelp dataset in your Neo4j Desktop environment.
+
+[NOTE]
+This video is shown with an earlier version of Neo4j Desktop so you will need to adapt for the latest version of Neo4j Desktop.
+
+video::cYaK-X8KLQI[youtube,width=560,height=315]
+
+
+== Neo4j Browser Guides
+
+[.is-half.left-column]
+--
+image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
+--
+
+[.is-half.right-column]
+--
+Neo4j Browser Guides are documents that embed text, images, and Cypher queries inside Neo4j Browser in a carousel-like series of slides. We use Neo4j Browser Guides to show how to use graph algorithms in Cypher and Neo4j. Each module will have a browser guide to help "guide" you through the content.
+--
+
+You can access the guides for this course by running this command in Neo4j Browser.
+
+[source,Cypher]
+----
+:play gds-applied-algos-exercises
+----
+
+== React Web Application
+
+Since this an applied course, we want to see how to enhance features of an actual application.
+You will use an existing React application for this part of the course. 
+The application is available as a https://github.com/neo4j-graph-analytics/data-science-course-react-app[GitHub repository].
+
+Perform these five steps to set up your development environment:
+
+. Clone the github repository by running `git clone https://github.com/neo4j-graph-analytics/data-science-course-react-app.git`.
+. Run `npm install` inside the repository folder.
+. Edit the *.env* file by replacing the default environment variables with the credentials for your Yelp Neo4j Desktop instance.
+. Run `npm start` to start the application.
+
+=== Building a business reviews application
+
+You will build your own version of yelp.com using this data.
+You will use graph algorithms to improve the quality of results in the application.
+
+The rest of the course will follow this structure:
+
+* Introduction to an algorithm.
+* Learn how to execute the algorithm using Cypher in Neo4j Browser.
+* Use the Cypher and updated graph to improve the React application.
+
+[.summary]
+== Summary
+
+You have now prepared your development enviroment for performing
+xref:03-gdsaa-cypher-refresher.adoc[Cypher refresher,role=btn] for this course.

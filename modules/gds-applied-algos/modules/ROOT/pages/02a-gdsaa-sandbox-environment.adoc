@@ -1,0 +1,79 @@
+= Sandbox environment
+:slug: 02a-gdsaa-sandbox-environment
+:imagesdir: ../images
+:page-slug: {slug}
+:page-layout: training
+:page-module-duration-minutes: 30
+:page-pagination!:
+:uri-yelp-dataset-agreement-pdf: https://s3-media3.fl.yelpcdn.com/assets/srv0/engineering_pages/bea5c1e92bf3/assets/vendor/yelp-dataset-agreement.pdf
+
+== Setting up the Yelp dataset in Neo4j Sandbox
+
+To complete this course, you will use a combination of Neo4j Sandbox for hosting the database and CodeSandbox to host your Web application development environment.
+
+[#yelp-dataset-agreement]
+--
+Before downloading the Yelp data, you need to read and agree to the {uri-yelp-dataset-agreement-pdf}[Yelp Dataset License^].
+--
+
+. Create a https://sandbox.neo4j.com/?usecase=yelp[Yelp Neo4j Sandbox instance^,id=yelp-create-sandbox-link].
+    *Note*: You must log in to the Neo4j Sandbox site. This may require you to register with Neo4j.
+. In Yelp Sandbox you just created, click the *Open Neo4j Browser* button to open a Neo4j Browser for the Yelp database. You will be using this Neo4j Browser window throughout this course.
+. Open the https://codesandbox.io/s/github/neo4j-graph-analytics/data-science-course-react-app[React application in CodeSandbox^]. This is the initial version of our business reviews application. You will be using this Code Sandbox window throughout this course.
+. In CodeSandbox:
+.. Sign in to CodeSandbox with your github credentials.
+.. Click Fork.
+.. Edit the *.env* file by replacing the default environment variables with the credentials for your Yelp Neo4j Sandbox. The URL and credentials are available to you from your Yelp sandbox pane if you open the details of the pane by selecting arrow to the right of the *Open Neo4j Browser* button.
+... Replace the value for REACT_APP_NEO4J_URI with the value of *Websocket Bolt URL* from the *Connection Details* tab of the Yelp Sandbox.
+... Replace the value for REACT_APP_NEO4J_PASSWORD with the *Password* in the *Connection Details* tab of the Yelp Sandbox.
+.. Save this file.
+.. Click the refresh icon to connect the CodeSandbox Browser (on the right) to the database.
+.. Confirm that you can now view data in the database by selecting a name in the drop down (initially selected with Dolores). Data should be retrieved for each user.
+
+
+== Neo4j Browser Guides
+
+[.is-half.left-column]
+--
+image::browserguide2.png[Neo4j Browser Guide,width=500,align=center]
+--
+
+[.is-half.right-column]
+--
+Neo4j Browser Guides are documents that embed text, images, and Cypher queries inside Neo4j Browser in a carousel-like series of slides. We use Neo4j Browser Guides to show how to use graph algorithms in Cypher and Neo4j. Each module will have a browser guide to help "guide" you through the content.
+--
+
+You can access the guides for this course by running this command in Neo4j Browser.
+
+[source,Cypher]
+----
+:play gds-applied-algos-exercises
+----
+
+== CodeSandbox React Application
+
+[frame="none", cols="^.^,<.^"]
+|===
+a|image::codesandbox2.png[CodeSandbox,width=500,align=center]
+a|
+Since this an applied course, we want to see how to enhance features of an actual application. You will use an existing React application for this part of the course. CodeSandbox is a hosted environment that allows you to edit, run, and preview JavaScript applications, all in the browser.
+|===
+
+This CodeSandbox contains all the client code for the application that you will build. You will want to have CodeSandbox open in another tab as you work through the application for each module of this course.
+
+=== Building a business reviews application
+
+You will build your own version of yelp.com using this data.
+You will use graph algorithms to improve the quality of results in the application.
+
+The rest of the course will follow this structure:
+
+* Introduction to an algorithm.
+* Learn how to execute the algorithm using Cypher in Neo4j Browser.
+* Use the Cypher and updated graph to improve the application in Code Sandbox.
+
+[.summary]
+== Summary
+
+You have now prepared your development enviroment for performing
+xref:03-gdsaa-cypher-refresher.adoc[Cypher refresher,role=btn] for this course.

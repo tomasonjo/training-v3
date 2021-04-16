@@ -1,5 +1,5 @@
 = Photo Based Gallery Recomendations
-:slug: 05-gdsaa-photo-based-gallery-recommendations
+:slug: 07-gdsaa-photo-based-gallery-recommendations
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training

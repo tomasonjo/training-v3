@@ -1,5 +1,5 @@
 = Ordering Search Results
-:slug: 03-gdsaa-ordering-search-results
+:slug: 05-gdsaa-ordering-search-results
 :imagesdir: ../images
 :page-slug: {slug}
 :page-layout: training
